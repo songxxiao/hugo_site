@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>宋骁的文章</title>
+      <link>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</guid>
+      <description>我写了一些技术文章，一些发表在了我的博客园账号里，另一些发表在了我的个人公众号里。后面会给出链接。</description>
+    </item>
+    
+    <item>
       <title>宋骁的简历</title>
       <link>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
@@ -53,22 +62,12 @@ Github：https://github.com/ECSTA7Y
     </item>
     
     <item>
-      <title>A Plain Markdown Post</title>
-      <link>/2016/12/30/a-plain-markdown-post/</link>
-      <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
-      
-      <guid>/2016/12/30/a-plain-markdown-post/</guid>
-      <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
- You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
-    </item>
-    
-    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/about/</guid>
-      <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+      <description>This is Song Xiao(a.k.a Malcolm Wallace)&amp;rsquo;s personal website</description>
     </item>
     
   </channel>
