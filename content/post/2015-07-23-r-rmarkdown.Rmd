@@ -13,6 +13,8 @@ tags: ["R Markdown", "plot", "regression"]
 
 Github：https://github.com/ECSTA7Y
 
+个人主页：https://hsiaosong.netlify.com/
+
 # 软件技能
 + R LaTeX Stata(熟练)
 + Python SQL SPSS(入门)
@@ -38,7 +40,8 @@ Github：https://github.com/ECSTA7Y
 
 + 土地流转的福利效应与社会不平等——来自CFPS的经验证据  
 
-国家大学生创新训练项目 独立作者 2018-2019
+国家大学生创新训练项目 独立作者 2018-2019  
+
 使用中国家庭追踪调查(CFPS)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。
 
 

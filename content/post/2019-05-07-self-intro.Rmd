@@ -1,10 +1,9 @@
 ---
-title: 自我介绍
-author: 宋骁
+title: "自我介绍"
+author: "宋骁"
 date: '2019-05-07'
 slug: self-intro
-categories: - R
-output: html_document
+categories: ["R"]
 tags: []
 ---
 
