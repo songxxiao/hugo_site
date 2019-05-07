@@ -1,9 +1,9 @@
 ---
 title: "宋骁的简历"
 author: " "
-date: " "
-slug: resume
+date: 2019-05-07
 categories: ["R"]
+slug: resume
 tags: ["R Markdown"]
 ---
 # 联系方式
@@ -15,6 +15,8 @@ tags: ["R Markdown"]
 + Github：[https://github.com/ECSTA7Y](https://github.com/ECSTA7Y)
 
 + 个人主页：[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)
+
++ 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
 # 软件技能
 + R  LaTeX  Stata(熟练)
@@ -52,5 +54,17 @@ tags: ["R Markdown"]
 + 2018 [第十二届本科生社会科学论坛](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm)，特等奖
 + 2018 华东师范大学优秀学生二等奖学金
 + 2017 华东师范大学优秀学生二等奖学金
+
+# 实践经历
+
++ [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362) 校园经理 2017/09-2018/01
+
+负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。完成平均每月1000 订单的目标。在华东师范大学内招募约10 位校园兼职早餐配送员。
+
++ 狗熊会 在线实习项目 [信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019/05
+
+
+
+
 
 
