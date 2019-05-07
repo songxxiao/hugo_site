@@ -2,6 +2,7 @@
 title: "宋骁的简历"
 author: " "
 date: " "
+slug: resume
 categories: ["R"]
 tags: ["R Markdown"]
 ---
