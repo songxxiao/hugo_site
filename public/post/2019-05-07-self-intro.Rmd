@@ -1,0 +1,23 @@
+---
+title: "自我介绍"
+author: "宋骁"
+date: '2019-05-07'
+slug: self-intro
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+# 宋骁
+
+喜欢听节奏感强的音乐。喜欢鼓捣R和Python(虽然啥都不会)。为了装逼平时不用Word而使用\LaTeX。
+
+为了找工作建了这个网站。此网站正在测试中。
+
+个人经历乏善可陈。
+
+
+
+
+
+
+
