@@ -4,6 +4,7 @@ author: 宋骁
 date: '2019-05-07'
 slug: self-intro
 categories: - R
+output: html_document
 tags: []
 ---
 
