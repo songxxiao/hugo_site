@@ -3,73 +3,85 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://example.com/post/</loc>
+    <loc>/categories/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/tags/r-markdown/</loc>
+    <loc>/post/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/tags/</loc>
+    <loc>/categories/r/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/</loc>
+    <loc>/tags/r-markdown/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/tags/plot/</loc>
+    <loc>/tags/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/tags/regression/</loc>
+    <loc>/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://example.com/post/2015-01-01-blog/</loc>
+    <loc>/tags/plot/</loc>
+    <lastmod>2019-05-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/regression/</loc>
+    <lastmod>2019-05-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/post/2016-12-30-message/</loc>
+    <loc>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/resume/</loc>
+    <loc>/resume/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/post/2019-05-07-resume/</loc>
+    <loc>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/post/self-intro/</loc>
+    <loc>/2019/05/07/self-intro/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://example.com/post/resume/</loc>
+    <loc>/1/01/01/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</loc>
   </url>
   
 </urlset>

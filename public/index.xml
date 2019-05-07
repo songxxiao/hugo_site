@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Xiao Song</title>
-    <link>https://example.com/</link>
-    <description>Recent content on Xiao Song</description>
+    <title>Xiao Song </title>
+    <link>/</link>
+    <description>Recent content on Xiao Song </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>宋骁的博客</title>
-      <link>https://example.com/post/2015-01-01-blog/</link>
+      <link>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E5%8D%9A%E5%AE%A2/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/2015-01-01-blog/</guid>
+      <guid>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E5%8D%9A%E5%AE%A2/</guid>
       <description>在我看来，“博客”这个词都快被淘汰了。以及台湾地区好像称之为不伦不类的“部落格”</description>
     </item>
     
     <item>
       <title>宋骁的文章</title>
-      <link>https://example.com/post/2016-12-30-message/</link>
+      <link>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/2016-12-30-message/</guid>
+      <guid>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E6%96%87%E7%AB%A0/</guid>
       <description>我写了一些技术文章，一些发表在了我的博客园账号里，另一些发表在了我的个人公众号里。后面会给出链接。
 如何提取R包中的小品文
 使用R Sweave运行LaTeX</description>
@@ -34,10 +33,10 @@
     
     <item>
       <title>宋骁的简历</title>
-      <link>https://example.com/resume/</link>
+      <link>/resume/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/resume/</guid>
+      <guid>/resume/</guid>
       <description>联系方式地址：上海市东川路500号华东师范大学法商北楼201室
 邮箱：xsong@stu.ecnu.edu.cn
 Github：https://github.com/ECSTA7Y
@@ -54,10 +53,10 @@
     
     <item>
       <title>宋骁的简历</title>
-      <link>https://example.com/post/2019-05-07-resume/</link>
+      <link>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/2019-05-07-resume/</guid>
+      <guid>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</guid>
       <description>联系方式地址：上海市东川路500号华东师范大学法商北楼201室
 邮箱：xsong@stu.ecnu.edu.cn
 Github：https://github.com/ECSTA7Y
@@ -75,10 +74,10 @@
     
     <item>
       <title>自我介绍</title>
-      <link>https://example.com/post/self-intro/</link>
+      <link>/2019/05/07/self-intro/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/self-intro/</guid>
+      <guid>/2019/05/07/self-intro/</guid>
       <description>宋骁喜欢听节奏感强的音乐。喜欢鼓捣R和Python(虽然啥都不会)。为了装逼平时不用Word而使用。
 为了找工作建了这个网站。此网站正在测试中。
 个人经历乏善可陈。
@@ -87,19 +86,19 @@
     
     <item>
       <title>About</title>
-      <link>https://example.com/about/</link>
+      <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
-      <guid>https://example.com/about/</guid>
+      <guid>/about/</guid>
       <description>This is Song Xiao(a.k.a Malcolm Wallace)&amp;rsquo;s personal website</description>
     </item>
     
     <item>
       <title>宋骁的简历</title>
-      <link>https://example.com/post/resume/</link>
+      <link>/1/01/01/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/resume/</guid>
+      <guid>/1/01/01/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</guid>
       <description>联系方式地址：上海市东川路500号华东师范大学法商北楼201室
 邮箱：xsong@stu.ecnu.edu.cn
 Github：https://github.com/ECSTA7Y
