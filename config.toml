@@ -13,6 +13,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
 
+[[menu.main]]
+    name = "Resume"
+    url = "/Resume/"
 
 [params]
     description = "A website built through Hugo and blogdown."

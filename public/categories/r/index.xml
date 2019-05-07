@@ -31,6 +31,26 @@
     
     <item>
       <title>宋骁的简历</title>
+      <link>/resume/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/resume/</guid>
+      <description>联系方式地址：上海市东川路500号华东师范大学法商北楼201室
+邮箱：xsong@stu.ecnu.edu.cn
+Github：https://github.com/ECSTA7Y
+个人主页：https://hsiaosong.netlify.com/
+软件技能R LaTeX Stata(熟练)Python SQL SPSS(入门)相关课程回归分析与Stata 应用、SPSS 应用、类别数据分析、概率与统计导论
+R数据分析、算法与程序设计基础(Python)
+教育背景华东师范大学 上海 社会学学士（GPA：3.64/4 | 前10%） 2016/09-至今
+中山大学 广州 学期交换 2018/02-2018/07
+北京大学-密歇根大学学院 暑期课程 北京 因果推论方法的研究设计和敏感性分析（总成绩：94/100） 2018/08
+科研经历土地流转的福利效应与社会不平等——来自CFPS的经验证据国家大学生创新训练项目 独立作者 2018-2019
+使用中国家庭追踪调查(CFPS)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。
+所获奖项2019 第二届全国高校数据驱动创新研究大赛 优秀奖2018 第十二届本科生社会科学论坛，特等奖2018 华东师范大学优秀学生二等奖学金2017 华东师范大学优秀学生二等奖学金</description>
+    </item>
+    
+    <item>
+      <title>宋骁的简历</title>
       <link>/2019/05/07/%E5%AE%8B%E9%AA%81%E7%9A%84%E7%AE%80%E5%8E%86/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
@@ -59,24 +79,6 @@
 为了找工作建了这个网站。此网站正在测试中。
 个人经历乏善可陈。
 </description>
-    </item>
-    
-    <item>
-      <title>如何提取R包中的小品文</title>
-      <link>/1/01/01/%E5%A6%82%E4%BD%95%E6%8F%90%E5%8F%96r%E5%8C%85%E4%B8%AD%E7%9A%84%E5%B0%8F%E5%93%81%E6%96%87/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/1/01/01/%E5%A6%82%E4%BD%95%E6%8F%90%E5%8F%96r%E5%8C%85%E4%B8%AD%E7%9A%84%E5%B0%8F%E5%93%81%E6%96%87/</guid>
-      <description>用R实现各种分析任务需要学习不同的R包。而学习R包实现方法的同时必须同时结合理论。因此仅仅看帮助文档和用户手册（Reference manual）是远远不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习数据分析的不可多得的好材料。下文将以rpart包为例讲解如何获取R包的官方小品文。
-在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
-rpart的官方主页如下所示：
-其中，Downloads下便有用户手册和小品文的下载按钮，电击即可下载。
-但，这种方法其实是多此一举了！
-因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
-&amp;gt; #install.packages(&amp;#39;utils&amp;#39;)#没安装先安装包&amp;gt; #library(utils)#加载包&amp;gt; vignette(, package = &amp;quot;rpart&amp;quot;)#提取rpart包的小品文名称输出结果如下所示：
-&amp;gt; Vignettes in package ‘rpart’:+ + longintro Introduction to Rpart + (source, pdf)+ usercode User Written Split+ Functions (source, pdf)## Error: &amp;lt;text&amp;gt;:1:11: 意外的&amp;#39;in&amp;#39;## 1: Vignettes in## ^可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
-&amp;gt; vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
-便可以阅读了。</description>
     </item>
     
   </channel>
