@@ -1,4 +1,4 @@
-﻿baseurl = "/"
+baseurl = "/"
 languageCode = "en-us"
 title = "A Hugo website"
 theme = "hugo-lithium"
@@ -10,11 +10,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/ECSTA7Y"
+    name = "About"
+    url = "/about/"
 [[menu.main]]
-    name = "简历"
-    url = "https://hsiaosong.netlify.com/2019/05/07/宋骁的简历/"
+    name = "GitHub"
+    url = "https://github.com/rstudio/blogdown"
+[[menu.main]]
+    name = "Twitter"
+    url = "https://twitter.com/rstudio"
 
 [params]
     description = "A website built through Hugo and blogdown."
