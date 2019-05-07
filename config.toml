@@ -7,8 +7,14 @@ googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
+
+
 [permalinks]
     post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+     name = "Xiao Song"
+    url = "https://hsiaosong.netlify.com/2019/05/07/resume/"
 
 [[menu.main]]
     name = "GitHub"
@@ -18,7 +24,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "https://hsiaosong.netlify.com/2019/05/07/resume/"
 
 [params]
-    description = "A website built through Hugo and blogdown."
+    description = "    "
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
