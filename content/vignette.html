@@ -13,17 +13,16 @@ tags: ["R Markdown", "plot", "regression"]
 <p>在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。</p>
 <p>rpart的官方主页如下所示：</p>
 <div class="figure">
-<img src="Capture.JPG" />
+<img src="Capture.png" />
 
 </div>
-<p>其中，Downloads下便有用户手册和小品文的下载按钮，电击即可下载。</p>
+<p>其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。</p>
 <div class="figure">
-<img src="Capture2.JPG" />
+<img src="Capture2.png" />
 
 </div>
 <p>但，这种方法其实是多此一举了！</p>
 <p>因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：</p>
-<p>setwd(‘C:’)</p>
 <pre class="r"><code>&gt; #install.packages(&#39;utils&#39;)#没安装先安装包
 &gt; #library(utils)#加载包
 &gt; vignette(, package = &quot;rpart&quot;)#提取rpart包的小品文名称</code></pre>
@@ -40,12 +39,12 @@ tags: ["R Markdown", "plot", "regression"]
 <p>可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：</p>
 <pre class="r"><code>&gt; vignette(&quot;longintro&quot;, package = &quot;rpart&quot;)</code></pre>
 <p>第一篇《Introduction to Rpart》的pdf便会自动跳出：<br />
-<img src="Capture3.JPG" /></p>
+<img src="Capture3.png" /></p>
 <p>便可以阅读了。</p>
 <p>很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：</p>
 <pre class="r"><code>&gt; vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)</code></pre>
 <div class="figure">
-<img src="Capture4.JPG" />
+<img src="Capture4.png" />
 
 </div>
 <p>看起来这个小品文是用R Markdown写的。</p>
