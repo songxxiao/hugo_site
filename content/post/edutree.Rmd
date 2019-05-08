@@ -1,12 +1,9 @@
 ---
-title: "CEPS鏁版嵁鍒嗘瀽"
+title: "CEPS数据分析"
 author: ' '
 date: '2019-05-08'
 slug: edutree
-tags:
-- R Markdown
-- plot
-- tree
+tags:["R"]
 categories: R
 ---
 
@@ -25,7 +22,7 @@ CART算法全称为分类与回归树（Classification and Regression Trees）�
 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
 
 
-```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = F,eval = F}
+```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
@@ -45,7 +42,7 @@ histogram(sdtotal,equal.widths = TRUE, nint = 70)
 
 
 
-```{r b ,message = F,prompt=T, comment = NA,warning = F,message = F, include = F,eval = F}
+```{r b ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 cltree <- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
 qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
@@ -61,7 +58,7 @@ printcp(cltree)
 rpart.plot(cltree)
 ```
 
-```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = F,eval = F}
+```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
 test <- ceps[sampled,]
 train <- ceps[-sampled,]
