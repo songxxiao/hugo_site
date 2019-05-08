@@ -13,7 +13,7 @@ tags: ["R Markdown", "plot", "regression"]
 
 [使用R Sweave运行LaTeX](https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A)
 
-
+[初中生学习成绩的影响因素——基于分类与回归树的方法](https://hsiaosong.netlify.com/edutree/)
 
 
 

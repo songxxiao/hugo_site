@@ -1,5 +1,5 @@
 ---
-title: "CEPS数据分析"
+title: "初中生学习成绩的影响因素——基于分类与回归树的方法"
 author: ' '
 date: '2019-05-08'
 slug: edutree
