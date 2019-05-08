@@ -59,6 +59,7 @@ rpart.plot(cltree)
 ```
 
 ```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+set.seed(1232)
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
 test <- ceps[sampled,]
 train <- ceps[-sampled,]

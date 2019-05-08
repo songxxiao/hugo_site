@@ -64,12 +64,13 @@ n=2084 (7124 observations deleted due to missingness)
 
         CP nsplit rel error  xerror       xstd
 1 0.021864      0   1.00000 1.00000 0.00072030
-2 0.012086      4   0.91254 0.95391 0.00071025
-3 0.011493      7   0.87269 0.93785 0.00070656
-4 0.010000      9   0.84970 0.93607 0.00070615</code></pre>
+2 0.012086      4   0.91254 0.93080 0.00070491
+3 0.011493      7   0.87269 0.92011 0.00070238
+4 0.010000      9   0.84970 0.92660 0.00070392</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
 <p><img src="/post/edutree_files/figure-html/b%20-1.png" width="672" /></p>
-<pre class="r"><code>&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
+<pre class="r"><code>&gt; set.seed(1232)
+&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
 &gt; test &lt;- ceps[sampled,]
 &gt; train &lt;- ceps[-sampled,]
 &gt; 
@@ -96,14 +97,19 @@ rpart(formula = matgreat ~ sex + onechi + maedu + faedu + drunk +
     method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
 
 Variables actually used in tree construction:
-character(0)
+ [1] bknum   chkhmwk clfee   clpre   drsmok  eduqua  futcfd  huko   
+ [9] money   net     qianzi  revitm  subject
 
-Root node error: 932846/1496 = 623.56
+Root node error: 918163/1478 = 621.22
 
-n=1496 (5009 observations deleted due to missingness)
+n=1478 (4969 observations deleted due to missingness)
 
-  CP nsplit rel error xerror xstd
-1  0      0         1      0    0</code></pre>
+        CP nsplit rel error xerror       xstd
+1 0.011674      0   1.00000 1.0000 0.00088319
+2 0.010601      4   0.93584 1.0510 0.00089624
+3 0.010528     11   0.84738 1.0510 0.00089624
+4 0.010133     12   0.83685 1.0475 0.00089538
+5 0.010000     16   0.79632 1.0489 0.00089571</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
 <p><img src="/post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test)
@@ -118,9 +124,10 @@ n=1496 (5009 observations deleted due to missingness)
 &gt; tab &lt;- table(yhat,matgreat) 
 &gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
 &gt; tab</code></pre>
-<pre><code>    matgreat
-yhat   0   1
-  No 948 405</code></pre>
+<pre><code>     matgreat
+yhat    0   1
+  No  784 341
+  Yes 141  82</code></pre>
 <pre class="r"><code>&gt; treeerror</code></pre>
-<pre><code>[1] 0.2993348</code></pre>
+<pre><code>[1] 0.3575668</code></pre>
 </div>

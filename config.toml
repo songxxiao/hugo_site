@@ -7,10 +7,12 @@ googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
-
-
 [permalinks]
     post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
 
 [[menu.main]]
      name = "Xiao Song"
@@ -24,7 +26,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/englishresume/"
 
 [params]
-    description = "    "
+    description = "Xiao Song's Website "
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
