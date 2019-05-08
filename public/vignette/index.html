@@ -10,7 +10,7 @@
 <meta property="og:title" content="如何提取R包中的小品文 - Xiao Song ">
 
 
-  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+  <link href='../favicon.ico' rel='icon' type='image/x-icon'/>
 
 
 
@@ -27,8 +27,8 @@
 
 
 
-<link rel="stylesheet" href="/css/fonts.css" media="all">
-<link rel="stylesheet" href="/css/main.css" media="all">
+<link rel="stylesheet" href="../css/fonts.css" media="all">
+<link rel="stylesheet" href="../css/main.css" media="all">
 
 
 
@@ -37,8 +37,8 @@
     <div class="wrapper">
       <header class="header">
         <nav class="nav">
-  <a href="/" class="nav-logo">
-    <img src="/images/logo.png"
+  <a href="../" class="nav-logo">
+    <img src="../images/logo.png"
          width="50"
          height="50"
          alt="Logo">
@@ -46,9 +46,9 @@
 
   <ul class="nav-links">
     
-    <li><a href="/">Home</a></li>
+    <li><a href="../">Home</a></li>
     
-    <li><a href="/englishresume/">Resume</a></li>
+    <li><a href="../englishresume/">Resume</a></li>
     
     <li><a href="https://hsiaosong.netlify.com/2019/05/07/resume/">Xiao Song</a></li>
     
@@ -70,58 +70,47 @@
     
 
     <div class="article-content">
-      <pre><code class="language-r">setwd('C:/Users/xsong/Desktop/table/new/vignette')
-</code></pre>
+      
+
 
 <p>用R实现各种分析任务需要学习不同的R包。而学习R包实现方法的同时必须同时结合理论。因此仅仅看帮助文档和用户手册（Reference manual）是远远不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习数据分析的不可多得的好材料。下文将以rpart包为例讲解如何获取R包的官方小品文。</p>
-
 <p>在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。</p>
-
 <p>rpart的官方主页如下所示：</p>
+<div class="figure">
+<img src="../img/Capture.png" />
 
-<p><img src="Capture.png" alt=" " /></p>
-
+</div>
 <p>其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。</p>
+<div class="figure">
+<img src="../img/Capture2.png" />
 
-<p><img src="Capture2.png" alt=" " /></p>
-
+</div>
 <p>但，这种方法其实是多此一举了！</p>
-
 <p>因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：</p>
-
-<pre><code class="language-r">#install.packages('utils')#没安装先安装包
-#library(utils)#加载包
-vignette(, package = &quot;rpart&quot;)#提取rpart包的小品文名称
-
-</code></pre>
-
+<pre class="r"><code>&gt; #install.packages(&#39;utils&#39;)#没安装先安装包
+&gt; #library(utils)#加载包
+&gt; vignette(, package = &quot;rpart&quot;)#提取rpart包的小品文名称</code></pre>
 <p>输出结果如下所示：</p>
-
-<pre><code class="language-r">Vignettes in package ‘rpart’:
-
-longintro   Introduction to Rpart 
-            (source, pdf)
-usercode    User Written Split
-            Functions (source, pdf)
-</code></pre>
-
-<p>可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为&rdquo;longintro&rdquo;和&rdquo;usercode&rdquo;。现在，就可以根据简称提取小品文了，输入：</p>
-
-<pre><code class="language-r">vignette(&quot;longintro&quot;, package = &quot;rpart&quot;)
-</code></pre>
-
+<pre class="r"><code>&gt; Vignettes in package ‘rpart’:
++ 
++ longintro   Introduction to Rpart 
++             (source, pdf)
++ usercode    User Written Split
++             Functions (source, pdf)</code></pre>
+<pre><code>## Error: &lt;text&gt;:1:11: 意外的&#39;in&#39;
+## 1: Vignettes in
+##               ^</code></pre>
+<p>可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：</p>
+<pre class="r"><code>&gt; vignette(&quot;longintro&quot;, package = &quot;rpart&quot;)</code></pre>
 <p>第一篇《Introduction to Rpart》的pdf便会自动跳出：<br />
-<img src="Capture3.png" alt=" " /></p>
-
+<img src="../img/Capture3.png" /></p>
 <p>便可以阅读了。</p>
-
 <p>很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：</p>
+<pre class="r"><code>&gt; vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)</code></pre>
+<div class="figure">
+<img src="../img/Capture4.png" />
 
-<pre><code class="language-r">vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)
-</code></pre>
-
-<p><img src="Capture4.png" alt=" " /></p>
-
+</div>
 <p>看起来这个小品文是用R Markdown写的。</p>
 
     </div>
@@ -135,10 +124,10 @@ usercode    User Written Split
       <footer class="footer">
         <ul class="footer-links">
           <li>
-            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+            <a href="../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
           </li>
           <li>
-            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
           </li>
         </ul>
       </footer>

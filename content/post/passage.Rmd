@@ -13,6 +13,8 @@ tags: ["R Markdown", "plot", "regression"]
 
 [如何提取R包中的小品文](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
+[如何提取R包中的小品文](https://hsiaosong.netlify.com/vignette/)
+
 [使用R Sweave运行LaTeX](https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A)
 
 [Python基础函数](https://www.cnblogs.com/malcolmwallace/p/10806367.html)
