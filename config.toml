@@ -5,7 +5,7 @@ author = "Xiao Song"
 theme = "hugo-lithium"
 googleAnalytics = ""
 disqusShortname = ""
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "\\.html$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
@@ -29,6 +29,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "\\.html$"]
 
 [params]
     description = "Xiao Song's Website "
+    footer = "&copy; [Xiao Song](https://hsiaosong.netlify.com/)  "
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
