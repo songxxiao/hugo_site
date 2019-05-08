@@ -15,6 +15,12 @@ tags: ["R Markdown", "plot", "regression"]
 
 rpart的官方主页如下所示：  
 
+``````{r pressure, echo=F, fig.cap="A caption", out.width = '20%'}
+knitr::include_graphics("/img/Capture.png")
+```
+
+
+
 ![ ](/img/Capture.png)
 
 
@@ -36,13 +42,13 @@ vignette(, package = "rpart")#提取rpart包的小品文名称
 输出结果如下所示：  
 
 
-```{r b,warning = F,prompt = T, include = T,error = T,echo = T,eval = T,results = 'hide'}
-Vignettes in package ‘rpart’:
+```{r bww,prompt = T, eval = FALSE}
+#Vignettes in package ‘rpart’:
 
-longintro   Introduction to Rpart 
-            (source, pdf)
-usercode    User Written Split
-            Functions (source, pdf)
+#longintro   Introduction to Rpart 
+#            (source, pdf)
+#usercode    User Written Split
+#            Functions (source, pdf)
 ```
 
 可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为"longintro"和"usercode"。现在，就可以根据简称提取小品文了，输入：
