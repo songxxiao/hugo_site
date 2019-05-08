@@ -1,0 +1,96 @@
+---
+title: "CEPS鏁版嵁鍒嗘瀽"
+author: ' '
+date: '2019-05-08'
+slug: edutree
+tags:
+- R Markdown
+- plot
+- tree
+categories: R
+---
+
+## 数据  
+
+本文采用中国教育追踪调查 (China Education Panel Survey, CEPS)2013-2014学年基线数据。
+采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
+
+## 模型与算法
+
+CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。
+回归树模型可表示为：
+\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
+ 
+其中，$x$是一系列输入特征（自变量），${R_1},{R_2},...,{R_m}$是输入空间被划分的M个区域。 是区域${R_m}$对应的最优值。$I$代表的是指示函数（indicator function），当输入变量$x$属于区域 ${R_m}$时，输出为1，否则输出为0。
+CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
+
+
+```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = F,eval = F}
+setwd("E:/edu/data2")
+library(haven)
+library(tidyverse)
+ceps <- read_dta("E:/edu/data2/ceps.dta")
+ceps <- lapply(ceps, unclass)
+ceps <- data.frame(ceps)
+
+ceps$schids <- as.factor(ceps$schids)
+library(rpart)
+library(rpart.plot)
+library(lattice)
+require(stats)
+attach(ceps)
+histogram(sdtotal,equal.widths = TRUE, nint = 70)
+
+```
+
+
+
+```{r b ,message = F,prompt=T, comment = NA,warning = F,message = F, include = F,eval = F}
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+cltree <- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
+subset(ceps,grade9 == 1),weights = sweight,method = "class",parms = 
+list(split="gini"),control=cont,na.action = na.omit)
+
+#cltree
+printcp(cltree)
+rpart.plot(cltree)
+```
+
+```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = F,eval = F}
+sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
+test <- ceps[sampled,]
+train <- ceps[-sampled,]
+
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+cltree3 <- rpart(matgreat ~  sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
+subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
+list(split="gini"),control=cont,na.action = na.omit)
+
+printcp(cltree3)
+rpart.plot(cltree3)
+
+test <- na.omit(test)
+y.pr <- predict(cltree3,test,type="prob")
+
+pr <- y.pr[,2] 
+test <- cbind(test,pr)
+
+
+test$yhat <- ifelse(test$pr >0.5,'Yes','No')
+attach(test)
+tab <- table(yhat,matgreat) 
+treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+tab
+treeerror
+```
+
