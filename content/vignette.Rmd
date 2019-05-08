@@ -13,14 +13,14 @@ tags: ["R Markdown", "plot", "regression"]
 
 rpart的官方主页如下所示：  
 
-``````{r pressure, echo=F, fig.cap=" ", out.width = '60%'}
+``````{r pressure, echo=F, fig.cap=" ", out.width = '100%'}
 knitr::include_graphics("/img/Capture.png")
 ```
 
 
 其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。  
 
-``````{r pressure2, echo=F, fig.cap=" ", out.width = '60%'}
+``````{r pressure2, echo=F, fig.cap=" ", out.width = '100%'}
 knitr::include_graphics("/img/Capture2.png")
 ```
 
@@ -55,7 +55,7 @@ vignette("longintro", package = "rpart")
 ```
 
 第一篇《Introduction to Rpart》的pdf便会自动跳出：  
-``````{r pressure3, echo=F, fig.cap=" ", out.width = '60%'}
+``````{r pressure3, echo=F, fig.cap=" ", out.width = '100%'}
 knitr::include_graphics("/img/Capture3.png")
 ```
 
@@ -69,7 +69,7 @@ knitr::include_graphics("/img/Capture3.png")
 vignette("ggplot2-specs", package = "ggplot2")
 ```
   
-``````{r pressure4, echo=F, fig.cap=" ", out.width = '50%'}
+``````{r pressure4, echo=F, fig.cap=" ", out.width = '100%'}
 knitr::include_graphics("/img/Capture4.png")
 ```
 
