@@ -15,18 +15,17 @@ tags: ["R Markdown", "plot", "regression"]
 
 rpart的官方主页如下所示：  
 
-``````{r pressure, echo=F, fig.cap="A caption", out.width = '20%'}
+``````{r pressure, echo=F, fig.cap=" ", out.width = '60%'}
 knitr::include_graphics("/img/Capture.png")
 ```
 
 
-
-![ ](/img/Capture.png)
-
-
 其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。  
 
-![ ](/img/Capture2.png)
+``````{r pressure2, echo=F, fig.cap=" ", out.width = '60%'}
+knitr::include_graphics("/img/Capture2.png")
+```
+
 
 但，这种方法其实是多此一举了！
 
@@ -58,8 +57,11 @@ vignette("longintro", package = "rpart")
 ```
 
 第一篇《Introduction to Rpart》的pdf便会自动跳出：  
-![ ](/img/Capture3.png)
-  
+``````{r pressure3, echo=F, fig.cap=" ", out.width = '60%'}
+knitr::include_graphics("/img/Capture3.png")
+```
+
+
 便可以阅读了。
 
 很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：  
@@ -69,8 +71,10 @@ vignette("longintro", package = "rpart")
 vignette("ggplot2-specs", package = "ggplot2")
 ```
   
-![ ](/img/Capture4.png)
-  
+``````{r pressure4, echo=F, fig.cap=" ", out.width = '50%'}
+knitr::include_graphics("/img/Capture4.png")
+```
+
 看起来这个小品文是用R Markdown写的。
 
 
