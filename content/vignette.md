@@ -17,11 +17,11 @@ setwd('C:/Users/xsong/Desktop/table/new/vignette')
 
 rpart的官方主页如下所示：  
 
-![ ](Capture.png)
+![ ](https://github.com/ECSTA7Y/Mysite/blob/master/content/Capture.png)
 
 其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。  
 
-![ ](Capture2.png)
+![ ](https://github.com/ECSTA7Y/Mysite/blob/master/content/Capture2.png)
 
 但，这种方法其实是多此一举了！
 
@@ -53,7 +53,7 @@ vignette("longintro", package = "rpart")
 ```
 
 第一篇《Introduction to Rpart》的pdf便会自动跳出：  
-![ ](Capture3.png)
+![ ](https://github.com/ECSTA7Y/Mysite/blob/master/content/Capture3.png)
   
 便可以阅读了。
 
@@ -64,7 +64,7 @@ vignette("longintro", package = "rpart")
 vignette("ggplot2-specs", package = "ggplot2")
 ```
   
-![ ](Capture4.png)
+![ ](https://github.com/ECSTA7Y/Mysite/blob/master/content/Capture4.png)
   
 看起来这个小品文是用R Markdown写的。
 
