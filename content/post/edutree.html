@@ -64,9 +64,9 @@ n=2084 (7124 observations deleted due to missingness)
 
         CP nsplit rel error  xerror       xstd
 1 0.021864      0   1.00000 1.00000 0.00072030
-2 0.012086      4   0.91254 0.93096 0.00070495
-3 0.011493      7   0.87269 0.93488 0.00070587
-4 0.010000      9   0.84970 0.94803 0.00070891</code></pre>
+2 0.012086      4   0.91254 0.95391 0.00071025
+3 0.011493      7   0.87269 0.93785 0.00070656
+4 0.010000      9   0.84970 0.93607 0.00070615</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
 <p><img src="/post/edutree_files/figure-html/b%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
@@ -96,16 +96,14 @@ rpart(formula = matgreat ~ sex + onechi + maedu + faedu + drunk +
     method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
 
 Variables actually used in tree construction:
-[1] bknum  buget  chidia futcfd net    revitm teainc
+character(0)
 
-Root node error: 943733/1453 = 649.51
+Root node error: 932846/1496 = 623.56
 
-n=1453 (4951 observations deleted due to missingness)
+n=1496 (5009 observations deleted due to missingness)
 
-        CP nsplit rel error  xerror       xstd
-1 0.015887      0   1.00000 1.00000 0.00086593
-2 0.013403      4   0.93645 0.99420 0.00086445
-3 0.010000      9   0.84395 0.97569 0.00085962</code></pre>
+  CP nsplit rel error xerror xstd
+1  0      0         1      0    0</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
 <p><img src="/post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test)
@@ -120,10 +118,9 @@ n=1453 (4951 observations deleted due to missingness)
 &gt; tab &lt;- table(yhat,matgreat) 
 &gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
 &gt; tab</code></pre>
-<pre><code>     matgreat
-yhat    0   1
-  No  895 348
-  Yes  66  45</code></pre>
+<pre><code>    matgreat
+yhat   0   1
+  No 948 405</code></pre>
 <pre class="r"><code>&gt; treeerror</code></pre>
-<pre><code>[1] 0.3057607</code></pre>
+<pre><code>[1] 0.2993348</code></pre>
 </div>
