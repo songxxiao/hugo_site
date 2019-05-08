@@ -5,7 +5,7 @@ author = "Xiao Song"
 theme = "hugo-lithium"
 googleAnalytics = ""
 disqusShortname = ""
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "\\.html$"]
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
