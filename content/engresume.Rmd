@@ -6,6 +6,8 @@ categories: ["R"]
 slug: englishresume
 tags: ["R Markdown"]
 ---
+Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resume/)
+
 # CONTACT
 
 + Adress：Room 201 North Fashang Building, Dongchuan Road 500, Shanghai
