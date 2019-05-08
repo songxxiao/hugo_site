@@ -3,7 +3,7 @@ title: "CEPS数据分析"
 author: ' '
 date: '2019-05-08'
 slug: edutree
-tags:["R"]
+tags: ["R"]
 categories: R
 ---
 

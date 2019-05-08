@@ -12,9 +12,18 @@
     
     
     <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R Markdown</title>
       <link>/tags/r-markdown/</link>
-      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/r-markdown/</guid>
       <description></description>
@@ -23,18 +32,9 @@
     <item>
       <title>plot</title>
       <link>/tags/plot/</link>
-      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/plot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tree</title>
-      <link>/tags/tree/</link>
-      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tree/</guid>
       <description></description>
     </item>
     

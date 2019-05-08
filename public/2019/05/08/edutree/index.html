@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>CEPS鏁版嵁鍒嗘瀽 - Xiao Song </title>
-<meta property="og:title" content="CEPS鏁版嵁鍒嗘瀽 - Xiao Song ">
+<title>CEPS数据分析 - Xiao Song </title>
+<meta property="og:title" content="CEPS数据分析 - Xiao Song ">
 
 
   <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -19,6 +19,11 @@
 
 
 
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
 
 
 
@@ -57,10 +62,10 @@
 
   <article class="article">
     
-    <span class="article-duration">1 min read</span>
+    <span class="article-duration">4 min read</span>
     
 
-    <h1 class="article-title">CEPS鏁版嵁鍒嗘瀽</h1>
+    <h1 class="article-title">CEPS数据分析</h1>
 
     
     <span class="article-date">2019-05-08</span>
@@ -78,6 +83,115 @@
 <h2>模型与算法</h2>
 <p>CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： <span class="math display">\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]</span></p>
 <p>其中，<span class="math inline">\(x\)</span>是一系列输入特征（自变量），<span class="math inline">\({R_1},{R_2},...,{R_m}\)</span>是输入空间被划分的M个区域。 是区域<span class="math inline">\({R_m}\)</span>对应的最优值。<span class="math inline">\(I\)</span>代表的是指示函数（indicator function），当输入变量<span class="math inline">\(x\)</span>属于区域 <span class="math inline">\({R_m}\)</span>时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。</p>
+<pre class="r"><code>&gt; setwd(&quot;E:/edu/data2&quot;)
+&gt; library(haven)
+&gt; library(tidyverse)
+&gt; ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
+&gt; ceps &lt;- lapply(ceps, unclass)
+&gt; ceps &lt;- data.frame(ceps)
+&gt; 
+&gt; ceps$schids &lt;- as.factor(ceps$schids)
+&gt; library(rpart)
+&gt; library(rpart.plot)
+&gt; library(lattice)
+&gt; require(stats)
+&gt; attach(ceps)
+&gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)</code></pre>
+<p><img src="/post/edutree_files/figure-html/a%20-1.png" width="672" /></p>
+<pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+&gt; cltree &lt;- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
++ qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
++ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
++ schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
++ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
++ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
++ subset(ceps,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
++ list(split=&quot;gini&quot;),control=cont,na.action = na.omit)
+&gt; 
+&gt; #cltree
+&gt; printcp(cltree)</code></pre>
+<pre><code>
+Classification tree:
+rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu + 
+    drunk + qurel + relation + desk + net + dialect + chkhmwk + 
+    chkcouse + classtm + clpre + revitm + subject + know + drsmok + 
+    commhr + schtype + schcsrm + comno + bknum + buget + eduqua + 
+    fight + brkpb + smok + drink + teainc + money + clfee + qianzi + 
+    lifetm + dial + chidia + futcfd + huko + eduy + dangy + houspro, 
+    data = subset(ceps, grade9 == 1), weights = sweight, na.action = na.omit, 
+    method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
+
+Variables actually used in tree construction:
+[1] clpre  futcfd maedu  net    revitm schids
+
+Root node error: 1359023/2084 = 652.12
+
+n=2084 (7124 observations deleted due to missingness)
+
+        CP nsplit rel error  xerror       xstd
+1 0.021864      0   1.00000 1.00000 0.00072030
+2 0.012086      4   0.91254 0.93096 0.00070495
+3 0.011493      7   0.87269 0.93488 0.00070587
+4 0.010000      9   0.84970 0.94803 0.00070891</code></pre>
+<pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
+<p><img src="/post/edutree_files/figure-html/b%20-1.png" width="672" /></p>
+<pre class="r"><code>&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
+&gt; test &lt;- ceps[sampled,]
+&gt; train &lt;- ceps[-sampled,]
+&gt; 
+&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+&gt; cltree3 &lt;- rpart(matgreat ~  sex + onechi +  maedu +  faedu + drunk + 
++ qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
++ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
++ schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
++ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
++ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
++ subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
++ list(split=&quot;gini&quot;),control=cont,na.action = na.omit)
+&gt; 
+&gt; printcp(cltree3)</code></pre>
+<pre><code>
+Classification tree:
+rpart(formula = matgreat ~ sex + onechi + maedu + faedu + drunk + 
+    qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
+    classtm + clpre + revitm + subject + know + drsmok + commhr + 
+    schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
+    brkpb + smok + drink + teainc + money + clfee + qianzi + 
+    lifetm + dial + chidia + futcfd + huko + eduy + dangy + houspro, 
+    data = subset(train, grade9 == 1), weights = sweight, na.action = na.omit, 
+    method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
+
+Variables actually used in tree construction:
+[1] bknum  buget  chidia futcfd net    revitm teainc
+
+Root node error: 943733/1453 = 649.51
+
+n=1453 (4951 observations deleted due to missingness)
+
+        CP nsplit rel error  xerror       xstd
+1 0.015887      0   1.00000 1.00000 0.00086593
+2 0.013403      4   0.93645 0.99420 0.00086445
+3 0.010000      9   0.84395 0.97569 0.00085962</code></pre>
+<pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
+<p><img src="/post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
+<pre class="r"><code>&gt; test &lt;- na.omit(test)
+&gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;)
+&gt; 
+&gt; pr &lt;- y.pr[,2] 
+&gt; test &lt;- cbind(test,pr)
+&gt; 
+&gt; 
+&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;)
+&gt; attach(test)
+&gt; tab &lt;- table(yhat,matgreat) 
+&gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
+&gt; tab</code></pre>
+<pre><code>     matgreat
+yhat    0   1
+  No  895 348
+  Yes  66  45</code></pre>
+<pre class="r"><code>&gt; treeerror</code></pre>
+<pre><code>[1] 0.3057607</code></pre>
 </div>
 
     </div>
@@ -101,6 +215,18 @@
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 <script src="/js/math-code.js"></script>
