@@ -64,7 +64,6 @@ knitr::include_graphics("/img/Capture3.png")
 
 很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：  
 
-
 ```{r d,message = F,prompt=T, include = T,error = T,echo = T,eval = F,results = 'hide'}
 vignette("ggplot2-specs", package = "ggplot2")
 ```

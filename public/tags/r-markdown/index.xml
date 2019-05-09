@@ -66,7 +66,8 @@ rpart的官方主页如下所示：
 如何提取R包中的小品文
 如何提取R包中的小品文
 使用R Sweave运行LaTeX
-Python基础函数</description>
+Python基础函数
+Python函数与模块的使用</description>
     </item>
     
     <item>
@@ -103,6 +104,15 @@ Python基础函数</description>
 喜欢听节奏感强的音乐，喜欢鼓捣R和Python,我会经常使用Github 平时完成作业、做幻灯片喜欢使用LaTeX。
 此网站正在测试中。我使用R Studio、Hugo、Netlify搭建了这个网站。
 </description>
+    </item>
+    
+    <item>
+      <title>Python函数与模块的使用</title>
+      <link>/pydef/</link>
+      <pubDate>Sun, 08 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/pydef/</guid>
+      <description>函数与模块的使用 实验范例6.7.2 #(1) def star(m,n): for i in range(m): print(&#39;*&#39;*n) star(3,2)  ** ** **  star(5,6)  ****** ****** ****** ****** ******  star(4,20)  ******************** ******************** ******************** ********************  #(2) def paint(m,s): print(s*m) paint(3,&#39;*&#39;)  ***  paint(8,&#39;%+&#39;)  %+%+%+%+%+%+%+%+  #(3) def check(a): if a&amp;gt;0: print(&#39;&amp;gt;0&#39;) elif a &amp;lt; 0: print(&#39;&amp;lt;0&#39;) else: print(&amp;quot;==0&amp;quot;) check(5)  &amp;gt;0  check(-2)  &amp;lt;0  check(0)  ==0  #(4) def avg(a,b): return(a+b)/2 c = avg(4,6) c  5.</description>
     </item>
     
   </channel>

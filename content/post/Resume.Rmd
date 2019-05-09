@@ -65,7 +65,15 @@ tags: ["R Markdown"]
 
 + 狗熊会 在线实习项目 [信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019/05
 
+# 标化成绩
 
++ GRE: 321 (Verbal:154,Quantity,167,Writing:3.5)
+
++ TOEFL: 92 (Reading:23, Listening:23, Speaking:20, Writing:26)
+
++ CET-6:549
+
++ CET-4: 614
 
 
 
