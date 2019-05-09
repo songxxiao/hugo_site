@@ -6,11 +6,11 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>CEPS数据分析 - Xiao Song </title>
-<meta property="og:title" content="CEPS数据分析 - Xiao Song ">
+<title>初中生学习成绩的影响因素——基于分类与回归树的方法 - Xiao Song </title>
+<meta property="og:title" content="初中生学习成绩的影响因素——基于分类与回归树的方法 - Xiao Song ">
 
 
-  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+  <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
 
 
 
@@ -27,8 +27,8 @@
 
 
 
-<link rel="stylesheet" href="/css/fonts.css" media="all">
-<link rel="stylesheet" href="/css/main.css" media="all">
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
 
 
 
@@ -37,8 +37,8 @@
     <div class="wrapper">
       <header class="header">
         <nav class="nav">
-  <a href="/" class="nav-logo">
-    <img src="/images/logo.png"
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
          width="50"
          height="50"
          alt="Logo">
@@ -46,13 +46,13 @@
 
   <ul class="nav-links">
     
-    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
+    <li><a href="../../../../">Home</a></li>
     
-    <li><a href="/">Home</a></li>
-    
-    <li><a href="/englishresume/">Resume</a></li>
+    <li><a href="../../../../englishresume/">Resume</a></li>
     
     <li><a href="https://hsiaosong.netlify.com/2019/05/07/resume/">Xiao Song</a></li>
+    
+    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
     
   </ul>
 </nav>
@@ -67,7 +67,7 @@
     <span class="article-duration">4 min read</span>
     
 
-    <h1 class="article-title">CEPS数据分析</h1>
+    <h1 class="article-title">初中生学习成绩的影响因素——基于分类与回归树的方法</h1>
 
     
     <span class="article-date">2019-05-08</span>
@@ -99,7 +99,7 @@
 &gt; require(stats)
 &gt; attach(ceps)
 &gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)</code></pre>
-<p><img src="/post/edutree_files/figure-html/a%20-1.png" width="672" /></p>
+<p><img src="../../../../edutree_files/figure-html/a%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 &gt; cltree &lt;- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
 + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
@@ -124,19 +124,20 @@ rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu +
     method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
 
 Variables actually used in tree construction:
-[1] clpre  futcfd maedu  net    revitm schids
+[1] futcfd  houspro revitm  schids 
 
-Root node error: 1359023/2084 = 652.12
+Root node error: 1039309/2084 = 498.71
 
 n=2084 (7124 observations deleted due to missingness)
 
         CP nsplit rel error  xerror       xstd
-1 0.021864      0   1.00000 1.00000 0.00072030
-2 0.012086      4   0.91254 0.93080 0.00070491
-3 0.011493      7   0.87269 0.92011 0.00070238
-4 0.010000      9   0.84970 0.92660 0.00070392</code></pre>
+1 0.066723      0   1.00000 1.00000 0.00086324
+2 0.037713      2   0.86655 0.88433 0.00082534
+3 0.021089      3   0.82884 0.86115 0.00081711
+4 0.010575      5   0.78666 0.85031 0.00081318
+5 0.010000      7   0.76551 0.86679 0.00081913</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
-<p><img src="/post/edutree_files/figure-html/b%20-1.png" width="672" /></p>
+<p><img src="../../../../edutree_files/figure-html/b%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; set.seed(1232)
 &gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
 &gt; test &lt;- ceps[sampled,]
@@ -165,21 +166,24 @@ rpart(formula = matgreat ~ sex + onechi + maedu + faedu + drunk +
     method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
 
 Variables actually used in tree construction:
- [1] bknum   chkhmwk clfee   clpre   drsmok  eduqua  futcfd  huko   
- [9] money   net     qianzi  revitm  subject
+ [1] bknum   buget   clpre   commhr  dial    futcfd  houspro huko   
+ [9] know    money   schcsrm
 
-Root node error: 918163/1478 = 621.22
+Root node error: 708112/1478 = 479.1
 
 n=1478 (4969 observations deleted due to missingness)
 
-        CP nsplit rel error xerror       xstd
-1 0.011674      0   1.00000 1.0000 0.00088319
-2 0.010601      4   0.93584 1.0510 0.00089624
-3 0.010528     11   0.84738 1.0510 0.00089624
-4 0.010133     12   0.83685 1.0475 0.00089538
-5 0.010000     16   0.79632 1.0489 0.00089571</code></pre>
+        CP nsplit rel error  xerror       xstd
+1 0.041402      0   1.00000 1.00000 0.00105028
+2 0.015621      3   0.87579 0.88630 0.00100440
+3 0.015390      4   0.86017 0.85205 0.00098937
+4 0.012753     12   0.70971 0.83263 0.00098058
+5 0.011357     13   0.69696 0.78472 0.00095804
+6 0.011354     14   0.68560 0.79168 0.00096140
+7 0.010089     15   0.67425 0.79658 0.00096374
+8 0.010000     16   0.66416 0.81500 0.00097244</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<p><img src="/post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
+<p><img src="../../../../edutree_files/figure-html/c%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test)
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;)
 &gt; 
@@ -194,10 +198,10 @@ n=1478 (4969 observations deleted due to missingness)
 &gt; tab</code></pre>
 <pre><code>     matgreat
 yhat    0   1
-  No  784 341
-  Yes 141  82</code></pre>
+  No  936 247
+  Yes  84  81</code></pre>
 <pre class="r"><code>&gt; treeerror</code></pre>
-<pre><code>[1] 0.3575668</code></pre>
+<pre><code>[1] 0.245549</code></pre>
 </div>
 
     </div>
@@ -211,10 +215,10 @@ yhat    0   1
       <footer class="footer">
         <ul class="footer-links">
           <li>
-            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
           </li>
           <li>
-            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
           </li>
         </ul>
       </footer>
@@ -235,7 +239,7 @@ yhat    0   1
 
 
     
-<script src="/js/math-code.js"></script>
+<script src="../../../../js/math-code.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 

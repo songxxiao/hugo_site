@@ -1,0 +1,10 @@
+---
+title: "使用R Sweave运行LaTeX"
+author: " "
+date: 2019-05-09
+categories: ["R"]
+slug: rsweave
+tags: ["R Markdown"]
+---
+
+公众号文章 《使用R Sweave运行LaTeX》请点击[这里](https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A)

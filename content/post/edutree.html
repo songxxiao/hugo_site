@@ -31,7 +31,7 @@ categories: R
 &gt; require(stats)
 &gt; attach(ceps)
 &gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)</code></pre>
-<p><img src="/edutree_files/figure-html/a%20-1.png" width="672" /></p>
+<p><img src="/post/edutree_files/figure-html/a%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 &gt; cltree &lt;- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
 + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
@@ -64,12 +64,12 @@ n=2084 (7124 observations deleted due to missingness)
 
         CP nsplit rel error  xerror       xstd
 1 0.066723      0   1.00000 1.00000 0.00086324
-2 0.037713      2   0.86655 0.88433 0.00082534
-3 0.021089      3   0.82884 0.86115 0.00081711
-4 0.010575      5   0.78666 0.85031 0.00081318
-5 0.010000      7   0.76551 0.86679 0.00081913</code></pre>
+2 0.037713      2   0.86655 0.89578 0.00082932
+3 0.021089      3   0.82884 0.87189 0.00082095
+4 0.010575      5   0.78666 0.83749 0.00080847
+5 0.010000      7   0.76551 0.85002 0.00081307</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
-<p><img src="/edutree_files/figure-html/b%20-1.png" width="672" /></p>
+<p><img src="/post/edutree_files/figure-html/b%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; set.seed(1232)
 &gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
 &gt; test &lt;- ceps[sampled,]
@@ -115,7 +115,7 @@ n=1478 (4969 observations deleted due to missingness)
 7 0.010089     15   0.67425 0.79658 0.00096374
 8 0.010000     16   0.66416 0.81500 0.00097244</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<p><img src="/edutree_files/figure-html/c%20-1.png" width="672" /></p>
+<p><img src="/post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test)
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;)
 &gt; 
