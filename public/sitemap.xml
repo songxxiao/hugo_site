@@ -59,18 +59,7 @@
   </url>
   
   <url>
-    <loc>/others/</loc>
-    <lastmod>2019-05-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/englishresume/</loc>
-    <lastmod>2019-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/others/englishresume/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -98,6 +87,11 @@
   
   <url>
     <loc>/resume/</loc>
+    <lastmod>2019-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2019/05/07/resume/</loc>
     <lastmod>2019-05-07T00:00:00+00:00</lastmod>
   </url>
   
