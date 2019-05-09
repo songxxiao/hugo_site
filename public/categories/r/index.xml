@@ -73,21 +73,6 @@ rpart的官方主页如下所示：
     </item>
     
     <item>
-      <title>宋骁的文章</title>
-      <link>/passage/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/passage/</guid>
-      <description>我写了一些技术性文章，一些发表在了我的博客园账号里，另一些发表在了我的个人微信公众号里。
-初中生学习成绩的影响因素——基于分类与回归树的方法
-如何提取R包中的小品文
-如何提取R包中的小品文
-使用R Sweave运行LaTeX
-Python基础函数
-Python函数与模块的使用</description>
-    </item>
-    
-    <item>
       <title>宋骁的简历</title>
       <link>/resume/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
