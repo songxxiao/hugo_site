@@ -1,12 +1,76 @@
----
-title: "初中生学习成绩的影响因素——基于分类与回归树的方法"
-author: ' '
-date: '2019-05-08'
-slug: edutree
-tags: ["R"]
-categories: R
----
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.5" />
 
+
+<title>初中生学习成绩的影响因素——基于分类与回归树的方法 - Xiao Song </title>
+<meta property="og:title" content="初中生学习成绩的影响因素——基于分类与回归树的方法 - Xiao Song ">
+
+
+  <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../" class="nav-logo">
+    <img src="../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../">Home</a></li>
+    
+    <li><a href="../../englishresume/">Resume</a></li>
+    
+    <li><a href="https://hsiaosong.netlify.com/2019/05/07/resume/">Xiao Song</a></li>
+    
+    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">初中生学习成绩的影响因素——基于分类与回归树的方法</h1>
+
+    
+
+    <div class="article-content">
+      
 
 
 <div class="section level2">
@@ -31,7 +95,7 @@ categories: R
 &gt; require(stats)
 &gt; attach(ceps)
 &gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)</code></pre>
-<p><img src="/edutree_files/figure-html/a%20-1.png" width="672" /></p>
+<p><img src="../../others/edutree_files/figure-html/a%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 &gt; cltree &lt;- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
 + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
@@ -64,12 +128,12 @@ n=2084 (7124 observations deleted due to missingness)
 
         CP nsplit rel error  xerror       xstd
 1 0.066723      0   1.00000 1.00000 0.00086324
-2 0.037713      2   0.86655 0.91735 0.00083669
-3 0.021089      3   0.82884 0.85165 0.00081366
-4 0.010575      5   0.78666 0.85722 0.00081569
-5 0.010000      7   0.76551 0.85822 0.00081605</code></pre>
+2 0.037713      2   0.86655 0.91163 0.00083475
+3 0.021089      3   0.82884 0.90061 0.00083099
+4 0.010575      5   0.78666 0.87985 0.00082377
+5 0.010000      7   0.76551 0.86054 0.00081689</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
-<p><img src="/edutree_files/figure-html/b%20-1.png" width="672" /></p>
+<p><img src="../../others/edutree_files/figure-html/b%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; set.seed(1232)
 &gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
 &gt; test &lt;- ceps[sampled,]
@@ -115,7 +179,7 @@ n=1478 (4969 observations deleted due to missingness)
 7 0.010089     15   0.67425 0.79658 0.00096374
 8 0.010000     16   0.66416 0.81500 0.00097244</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<p><img src="/edutree_files/figure-html/c%20-1.png" width="672" /></p>
+<p><img src="../../others/edutree_files/figure-html/c%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test)
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;)
 &gt; 
@@ -135,3 +199,47 @@ yhat    0   1
 <pre class="r"><code>&gt; treeerror</code></pre>
 <pre><code>[1] 0.245549</code></pre>
 </div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

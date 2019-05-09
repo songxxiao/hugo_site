@@ -13,7 +13,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [[menu.main]]
     name = "Home"
-    url = "/"
+    url = "https://hsiaosong.netlify.com/2019/05/07/self-intro/"
     weight = 1
 [[menu.main]]
     name = "Resume"
