@@ -1,9 +1,7 @@
 ---
 date: " "
-title: 个人简介
+title: '宋骁'
 ---
-
-# 宋骁
 
 男。生于1997年，[华东师范大学](https://www.ecnu.edu.cn/)本科在读。
 
