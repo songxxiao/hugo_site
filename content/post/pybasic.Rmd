@@ -1,0 +1,10 @@
+---
+title: "Python基础函数"
+author: ' '
+date: '2019-05-10'
+slug: pybasic
+tags: ["R"]
+categories: R
+---
+
+博客园文章《Python基础函数》请点击[这里](https://www.cnblogs.com/malcolmwallace/p/10806367.html)

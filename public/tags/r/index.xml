@@ -6,10 +6,19 @@
     <description>Recent content in R on Xiao Song </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python基础函数</title>
+      <link>/2019/05/10/pybasic/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/10/pybasic/</guid>
+      <description>博客园文章《Python基础函数》请点击这里</description>
+    </item>
     
     <item>
       <title>初中生学习成绩的影响因素——基于分类与回归树的方法</title>

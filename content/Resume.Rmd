@@ -60,6 +60,9 @@ tags: ["R Markdown"]
 
 + 狗熊会 在线实习项目 [信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019/05
 
+使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。并且通过交叉验证(Cross-Validation)的方法预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
+
+
 # 标化成绩
 
 + GRE: 321 (Verbal:154,Quantity,167,Writing:3.5)
