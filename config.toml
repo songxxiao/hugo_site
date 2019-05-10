@@ -21,6 +21,11 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
    weight = 2
  
 [[menu.main]]
+    name = "Chinese Resume"
+    url = "/chnresume/"
+   weight = 3
+
+[[menu.main]]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
     weight = 4

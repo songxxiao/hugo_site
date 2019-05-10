@@ -1,11 +1,12 @@
 ---
-title: "宋骁的简历"
+title: "宋骁"
 author: " "
-date: 2019-05-07 
+date: 2019-05-10 
 categories: ["R"]
-slug: resume
+slug: chnresume
 tags: ["R Markdown"]
 ---
+
 英文简历请点击[这里](https://hsiaosong.netlify.com/englishresume/)
 
 # 联系方式
@@ -67,6 +68,29 @@ tags: ["R Markdown"]
 + TOEFL: 92 (Reading:23, Listening:23, Speaking:20, Writing:26)
 + CET-6:549
 + CET-4: 614
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
