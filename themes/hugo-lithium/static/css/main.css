@@ -201,7 +201,7 @@ code {
 }
 
 .footer {
-  padding: 25px 0;
+  padding: 16px 0;
   text-align: center;
 }
 
@@ -248,7 +248,7 @@ code {
 
 @media (min-width: 600px) {
   .header {
-    padding: 25px 0;
+    padding: 16px 0;
   }
 
   .nav-logo {
@@ -282,7 +282,7 @@ code {
   }
 
   .archive-title {
-    font-size: 38px;
+    font-size: 20px;
   }
 
   .archive-item-date {
@@ -299,7 +299,7 @@ code {
   }
 
   .article-title {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .article-duration {
