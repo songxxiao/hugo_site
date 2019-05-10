@@ -1,6 +1,6 @@
 ---
 date: " "
-title: 'Xiao Song | 宋骁'
+title: 'Xiao Song | 宋 骁'
 ---
 
 My name is Song Xiao, you can call me Malcolm. I came from [East China Normal University](http://english.ecnu.edu.cn/).

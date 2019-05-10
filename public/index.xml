@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Xiao Song | 宋骁 on Xiao Song </title>
+    <title>Xiao Song | 宋 骁 on Xiao Song </title>
     <link>/</link>
-    <description>Recent content in Xiao Song | 宋骁 on Xiao Song </description>
+    <description>Recent content in Xiao Song | 宋 骁 on Xiao Song </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
@@ -41,7 +41,7 @@
       <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/05/09/rsweave/</guid>
-      <description>公众号文章 《使用R Sweave运行LaTeX》请点击这里</description>
+      <description>公众号文章《使用R Sweave运行LaTeX》请点击这里</description>
     </item>
     
     <item>

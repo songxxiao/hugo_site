@@ -7,4 +7,4 @@ slug: rsweave
 tags: ["R Markdown"]
 ---
 
-公众号文章 《使用R Sweave运行LaTeX》请点击[这里](https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A)
+公众号文章《使用R Sweave运行LaTeX》请点击[这里](https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A)

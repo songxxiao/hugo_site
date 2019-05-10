@@ -12,7 +12,7 @@ tags: ["R Markdown"]
 # 联系方式
 
 + 地址：上海市东川路500号华东师范大学法商北楼201室
-+ 邮箱：xsong@stu.ecnu.edu.cn
++ 邮箱：<xsong@stu.ecnu.edu.cn>
 + Github：[https://github.com/ECSTA7Y](https://github.com/ECSTA7Y)
 + 个人主页：[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
