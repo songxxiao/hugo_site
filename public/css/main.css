@@ -60,7 +60,7 @@ code {
 
 .nav-logo img {
   display: block;
-  max-height: 40px;
+  max-height: 45px;
   width: auto;
   border-radius: 50%;
 }
@@ -94,13 +94,13 @@ code {
   max-width: 700px;
   margin: 40px auto 10px;
   padding: 0 15px;
-  font-size: 15px;
+  font-size: 12px;
   line-height: 1.5;
   color: #333;
 }
 
 .article-title {
-  font-size: 28px;
+  font-size: 22px;
   color: #222;
   margin: 0;
   line-height: 1.3;
@@ -128,15 +128,15 @@ code {
 .article-content a {
   text-decoration: none;
   color: inherit;
-  border-bottom: 3px solid #CBF8DF;
-  box-shadow: inset 0 -4px 0 #fff;
+  border-bottom: 1px solid #ccc;
+  box-shadow: inset 0 -4px 0 transparent;
   background: transparent;
   transition: background 150ms ease;
 }
 
 .article-content a:hover,
 .article-content a:focus {
-  background: #CBF8DF;
+ border-bottom: 1px solid #222;
 }
 
 .article-content hr {
@@ -169,8 +169,8 @@ code {
 }
 
 .archive-title {
-  font-size: 32px;
-  margin-top: 60px;
+  font-size: 20px;
+  margin-top: 22px;
 }
 
 .archive-item {
@@ -299,7 +299,7 @@ code {
   }
 
   .article-title {
-    font-size: 42px;
+    font-size: 22px;
   }
 
   .article-duration {
