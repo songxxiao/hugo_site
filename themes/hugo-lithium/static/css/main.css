@@ -268,7 +268,7 @@ code {
   }
 
   .content {
-    font-size: 10px;
+    font-size: 16px;
     line-height: 1.8;
   }
 
@@ -286,7 +286,7 @@ code {
   }
 
   .archive-item-date {
-    font-size: 10px;
+    font-size: 16px;
     text-align: right;
     float: right;
   }
