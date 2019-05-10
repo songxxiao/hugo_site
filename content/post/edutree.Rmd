@@ -21,6 +21,13 @@ CART算法全称为分类与回归树（Classification and Regression Trees）�
 其中，$x$是一系列输入特征（自变量），${R_1},{R_2},...,{R_m}$是输入空间被划分的M个区域。 是区域${R_m}$对应的最优值。$I$代表的是指示函数（indicator function），当输入变量$x$属于区域 ${R_m}$时，输出为1，否则输出为0。
 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
 
+## 因变量
+
+本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
+
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所在班级前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。
+
+## 自变量
 
 ```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
 setwd("E:/edu/data2")
@@ -36,11 +43,21 @@ library(rpart.plot)
 library(lattice)
 require(stats)
 attach(ceps)
+library(ggplot2)
 histogram(sdtotal,equal.widths = TRUE, nint = 70)
+
+setwd("E:/edu/data2")
+ceps <- read_dta("E:/edu/data2/ceps.dta")
+ceps1 <- subset(ceps,schids<=30)
+ceps1$schids <- as.factor(ceps1$schids)
+ggplot(ceps1, aes(schids,tr_mat)) + geom_boxplot()
+
+ceps <- lapply(ceps, unclass)
+ceps <- data.frame(ceps)
 
 ```
 
-
+下面展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。R代码结果如下
 
 ```{r b ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
@@ -58,13 +75,18 @@ printcp(cltree)
 rpart.plot(cltree)
 ```
 
-```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
-set.seed(1232)
-sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE)
-test <- ceps[sampled,]
-train <- ceps[-sampled,]
+可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。
 
-cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+以下代码通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
+
+```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+set.seed(12123) #设置随机数种子
+sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
+test <- ceps[sampled,] #测试集
+train <- ceps[-sampled,] #训练集
+
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
+
 cltree3 <- rpart(matgreat ~  sex + onechi +  maedu +  faedu + drunk + 
 qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
 classtm +  clpre + revitm + subject + know + drsmok + commhr + 
@@ -89,6 +111,40 @@ attach(test)
 tab <- table(yhat,matgreat) 
 treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
 tab
-treeerror
+treeerror #验证集错误率
 ```
 
+接下来，我们对分类树进行剪枝。再次计算剪枝后的决策树的测试集错误率。
+
+```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.02) #设置参数
+
+cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
+subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
+list(split="gini"),control=cont,na.action = na.omit) #决策树
+
+printcp(cltree4)
+rpart.plot(cltree4)
+
+test <- na.omit(test) #删除缺失值
+y.pr <- predict(cltree4,test,type="prob") #预测验证集概率
+
+pr <- y.pr[,2] 
+test <- cbind(test,pr)
+
+
+test$yhat <- ifelse(test$pr >0.5,'Yes','No') #大于0.5设置为"是"
+attach(test)
+tab <- table(yhat,matgreat) 
+treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+tab
+treeerror #验证集错误率
+```
+
+在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。

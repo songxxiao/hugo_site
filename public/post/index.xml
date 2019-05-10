@@ -47,7 +47,9 @@
       <description>数据本文采用中国教育追踪调查 (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
 模型与算法CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： \[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
 其中，\(x\)是一系列输入特征（自变量），\({R_1},{R_2},...,{R_m}\)是输入空间被划分的M个区域。 是区域\({R_m}\)对应的最优值。\(I\)代表的是指示函数（indicator function），当输入变量\(x\)属于区域 \({R_m}\)时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
-&amp;gt; setwd(&amp;quot;E:/edu/data2&amp;quot;)&amp;gt; library(haven)&amp;gt; library(tidyverse)&amp;gt; ceps &amp;lt;- read_dta(&amp;quot;E:/edu/data2/ceps.dta&amp;quot;)&amp;gt; ceps &amp;lt;- lapply(ceps, unclass)&amp;gt; ceps &amp;lt;- data.frame(ceps)&amp;gt; &amp;gt; ceps$schids &amp;lt;- as.factor(ceps$schids)&amp;gt; library(rpart)&amp;gt; library(rpart.plot)&amp;gt; library(lattice)&amp;gt; require(stats)&amp;gt; attach(ceps)&amp;gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)&amp;gt; cont &amp;lt;- rpart.</description>
+因变量本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所在班级前25%(是=1，否=0)单独划分为一个分类变量建立分类树。
+自变量&amp;gt; setwd(&amp;quot;E:/edu/data2&amp;quot;)&amp;gt; library(haven)&amp;gt; library(tidyverse)&amp;gt; ceps &amp;lt;- read_dta(&amp;quot;E:/edu/data2/ceps.dta&amp;quot;)&amp;gt; ceps &amp;lt;- lapply(ceps, unclass)&amp;gt; ceps &amp;lt;- data.frame(ceps)&amp;gt; &amp;gt; ceps$schids &amp;lt;- as.factor(ceps$schids)&amp;gt; library(rpart)&amp;gt; library(rpart.plot)&amp;gt; library(lattice)&amp;gt; require(stats)&amp;gt; attach(ceps)&amp;gt; library(ggplot2)&amp;gt; histogram(sdtotal,equal.</description>
     </item>
     
     <item>
