@@ -114,37 +114,4 @@ tab
 treeerror #验证集错误率
 ```
 
-接下来，我们对分类树进行剪枝。再次计算剪枝后的决策树的测试集错误率。
-
-```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
-
-cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.02) #设置参数
-
-cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
-subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
-list(split="gini"),control=cont,na.action = na.omit) #决策树
-
-printcp(cltree4)
-rpart.plot(cltree4)
-
-test <- na.omit(test) #删除缺失值
-y.pr <- predict(cltree4,test,type="prob") #预测验证集概率
-
-pr <- y.pr[,2] 
-test <- cbind(test,pr)
-
-
-test$yhat <- ifelse(test$pr >0.5,'Yes','No') #大于0.5设置为"是"
-attach(test)
-tab <- table(yhat,matgreat) 
-treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
-tab
-treeerror #验证集错误率
-```
-
 在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
