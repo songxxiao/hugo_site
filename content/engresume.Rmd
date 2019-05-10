@@ -20,7 +20,7 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 + R  LaTeX  Stata 
 + Python  SQL  SPSS 
 
-### Relevant Courses
+### RELEVANT COURSES
 
 +  Regression Analysis and Stata Application、SPSS Application、Categorical Data Analysis、Social Simulation and NetLogo Application
 + R data Analysis、Algorithm and program design (Python)

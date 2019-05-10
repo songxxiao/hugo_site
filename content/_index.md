@@ -3,7 +3,7 @@ date: " "
 title: 'Xiao Song | 宋 骁'
 ---
 
-My name is Xiao Song, you can call me Malcolm. I came from [East China Normal University](http://english.ecnu.edu.cn/).
+My name is Xiao Song, you can call me Malcolm. I come from [East China Normal University](http://english.ecnu.edu.cn/).
 
 During my colleage years, I have learned basic and advanced statistical knowledge and I did several researches using econometric knowledge. 
 I have learned knowledge of data analysis. I can complete an integral data analysis report. Using Statistical software, such as Python and R, I can handle statistical models including Classic Statistics and marchine learning.
