@@ -8,7 +8,7 @@ tags: ["R Markdown"]
 ---
 Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resume/)
 
-# CONTACT
+## CONTACT
 
 + Adress：Room 201 North Fashang Building, Dongchuan Road 500, Shanghai
 + Email：<xsong@stu.ecnu.edu.cn>
@@ -16,17 +16,17 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 + Website：[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
-# SOFTWARE SKILLS
+## SOFTWARE SKILLS
 + R  LaTeX  Stata 
 + Python  SQL  SPSS 
 
-# Relevant Courses
+## Relevant Courses
 
 +  Regression Analysis and Stata Application、SPSS Application、Categorical Data Analysis、Social Simulation and NetLogo Application
 + R data Analysis、Algorithm and program design (Python)
 
 
-# EDUCATION
+## EDUCATION
 
 + East China Normal University Bachelor of Sociology (GPA：3.64/4 | Top10%) 2016/09-Today
 + Sun Yat-Sun University Exchange 2018/02-2018/07
@@ -34,7 +34,7 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 [General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)（Grade：94/100） 2018/08
 
 
-# ACADEMIC RESEARCH
+## ACADEMIC RESEARCH
 
 + Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS 
 
@@ -44,14 +44,14 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 
 
-# HONORS AND AWARDS 
+## HONORS AND AWARDS 
 
 + 2019 [The 2nd National University Data Driven Innovation Research Competition](http://opendata.pku.edu.cn/competition-2019.xhtml;jsessionid=200f6d0adbfa75292afed361235f) Excellence award
 + 2018 [12th Social Science Forum for Undergraduates](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm)，Highest Honor
 + 2018 Second Class Academic Honors (East China Normal University)
 + 2017 Second Class Academic Honors (East China Normal University)
 
-# WORK EXPERIENCE
+## WORK EXPERIENCE
 
 + [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362) Campus Manager 2017/09-2018/01
 
@@ -63,7 +63,7 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 
 
 
-# STANDARDIZED TEST
+## STANDARDIZED TEST
 
 + GRE: 321 (Verbal:154,Quantity,167,Writing:3.5)
 + TOEFL: 92 (Reading:23, Listening:23, Speaking:20, Writing:26)
