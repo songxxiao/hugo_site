@@ -30,16 +30,14 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 + East China Normal University, Bachelor of Sociology (GPA：3.64/4 | Top10%), 2016/09-Today
 + Sun Yat-Sun University, Exchange Student,  2018/02-2018/07
-+ University of Michigan-Peking University Joint Institute, Summer workshop,
++ University of Michigan-Peking University Joint Institute, Summer workshop    
 [General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)（Grade：94/100） 2018/08
 
 
 ### ACADEMIC RESEARCH
 
-+ Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS 
-
-National Innovation Training Program for College Students Independent author 2018-2019  
-
++ Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS   
+National Innovation Training Program for College Students Independent author 2018-2019   
 The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using ggplot2 software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. Click [here](https://raw.githubusercontent.com/ECSTA7Y/Landtransfer/master/%E5%AD%A6%E5%B9%B4%E8%AE%BA%E6%96%87.pdf) to download the passage.
 
 
@@ -53,8 +51,7 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### WORK EXPERIENCE
 
-+ [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362) Campus Manager 2017/09-2018/01
-
++ [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362) Campus Manager 2017/09-2018/01  
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
 
@@ -65,9 +62,11 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 
 ### STANDARDIZED TEST
 
-+ GRE: 321 (Verbal:154,Quantity,167,Writing:3.5)
-+ TOEFL: 92 (Reading:23, Listening:23, Speaking:20, Writing:26)
-+ CET-6:549
++ GRE: 321  
+(Verbal:154,Quantity,167,Writing:3.5)
++ TOEFL: 92  
+(Reading:23, Listening:23, Speaking:20, Writing:26)
++ CET-6: 549
 + CET-4: 614
 
 
