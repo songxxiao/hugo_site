@@ -19,8 +19,8 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
 ### 软件技能
-+ R, LaTeX, Stata &emsp; (熟练)
-+ Python, SQL, SPSS &emsp; (了解)
++ R, LaTeX, Stata &emsp;(熟练)
++ Python, SQL, SPSS &emsp;(了解)
 
 ### 相关课程
 
@@ -31,14 +31,14 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 ### 教育背景
 + 华东师范大学, 上海, 社会学学士 &emsp;2016年09月-至今
 + 中山大学, 广州, 学期交换 &emsp;2018年2月-2018年7月
-+ 北京大学-密歇根大学学院, 北京, 暑期课程  
-[因果推论方法的研究设计和敏感性分析](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm) (总成绩：94/100)&emsp;2018年8月
++ 北京大学-密歇根大学学院, 北京, 暑期课程 &emsp;2018年8月  
+[因果推论方法的研究设计和敏感性分析](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm) (总成绩：94/100)
 
 
 ### 科研经历
 
-+ 土地流转的福利效应与社会不平等——来自CFPS的经验证据  
-国家大学生创新训练项目 独立作者 2018年-2019年  
++ 土地流转的福利效应与社会不平等——来自CFPS的经验证据&emsp;2018年-2019年   
+国家大学生创新训练项目&emsp; 独立作者  
 使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Landtransfer/master/%E5%AD%A6%E5%B9%B4%E8%AE%BA%E6%96%87.pdf)下载全文。
 
 ### 所获奖项 

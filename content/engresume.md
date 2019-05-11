@@ -30,14 +30,14 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 + East China Normal University, Bachelor of Sociology (GPA：3.64/4 | Top10%), 2016/09-Today
 + Sun Yat-Sun University, Exchange Student,  2018/02-2018/07
-+ University of Michigan-Peking University Joint Institute, Summer workshop    
-[General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)（Grade：94/100） 2018/08
++ University of Michigan-Peking University Joint Institute, Summer workshop  2018/08 
+[General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)(Grade：94/100)
 
 
 ### ACADEMIC RESEARCH
 
-+ Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS   
-National Innovation Training Program for College Students Independent author 2018-2019   
++ Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS   2018-2019    
+National Innovation Training Program for College Students,  Independent author  
 The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using ggplot2 software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. Click [here](https://raw.githubusercontent.com/ECSTA7Y/Landtransfer/master/%E5%AD%A6%E5%B9%B4%E8%AE%BA%E6%96%87.pdf) to download the passage.
 
 
