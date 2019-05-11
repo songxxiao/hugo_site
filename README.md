@@ -1,4 +1,6 @@
 # Xiao Song's personal website
 
-[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)
+Click [https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/) to go.
+
+<p align="right">右对齐</p>
 
