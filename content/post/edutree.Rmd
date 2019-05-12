@@ -25,11 +25,10 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
 
-为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示的是标准成绩的直方图。
 
-## 自变量
 
-```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+```{r add ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center'}
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
@@ -45,13 +44,20 @@ require(stats)
 attach(ceps)
 library(ggplot2)
 library(pROC)
-histogram(sdtotal,equal.widths = TRUE, nint = 70)
+histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",type = "density",ylab = '密度')
+```
 
+
+为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
+
+```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center'}
 setwd("E:/edu/data2")
 ceps <- read_dta("E:/edu/data2/ceps.dta")
 ceps1 <- subset(ceps,schids<=30)
 ceps1$schids <- as.factor(ceps1$schids)
-ggplot(ceps1, aes(schids,tr_mat)) + geom_boxplot()
+ggplot(ceps1, aes(schids,tr_mat)) + 
+  geom_boxplot() +
+  xlab('学校代码') + ylab('数学原始成绩')
 
 ceps <- lapply(ceps, unclass)
 ceps <- data.frame(ceps)
@@ -60,7 +66,7 @@ ceps <- data.frame(ceps)
 
 下面展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
 
-```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
 set.seed(1212323) #设置随机数种子
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
 test <- ceps[sampled,] #验证集
@@ -77,7 +83,7 @@ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data =
 subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
 list(split="gini"),control=cont,na.action = na.omit,model=T) #决策树
 
-printcp(cltree3)
+knitr::kable(printcp(cltree3))
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值
@@ -96,7 +102,7 @@ tab
 treeerror #验证集错误率
 ```
 
-```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
 cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
@@ -108,7 +114,7 @@ dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data =
 subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
 list(split="gini"),control=cont,na.action = na.omit) #决策树
 
-printcp(cltree3)
+knitr::kable(printcp(cltree3))#复杂度参数表格
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值
