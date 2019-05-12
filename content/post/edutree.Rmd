@@ -66,7 +66,7 @@ ceps <- data.frame(ceps)
 
 下面展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
 
-```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',fig.cap="ROC曲线"}
 set.seed(1212323) #设置随机数种子
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
 test <- ceps[sampled,] #验证集
@@ -82,8 +82,7 @@ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +
 dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
 subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
 list(split="gini"),control=cont,na.action = na.omit,model=T) #决策树
-
-knitr::kable(printcp(cltree3))
+knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值
@@ -102,7 +101,7 @@ tab
 treeerror #验证集错误率
 ```
 
-```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',fig.cap="ROC曲线"}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
 cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
@@ -114,7 +113,7 @@ dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data =
 subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
 list(split="gini"),control=cont,na.action = na.omit) #决策树
 
-knitr::kable(printcp(cltree3))#复杂度参数表格
+knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值

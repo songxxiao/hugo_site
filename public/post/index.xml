@@ -48,8 +48,10 @@
 模型与算法CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： \[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
 其中，\(x\)是一系列输入特征（自变量），\({R_1},{R_2},...,{R_m}\)是输入空间被划分的M个区域。 是区域\({R_m}\)对应的最优值。\(I\)代表的是指示函数（indicator function），当输入变量\(x\)属于区域 \({R_m}\)时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
 因变量本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
-为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所在班级前25%(是=1，否=0)单独划分为一个分类变量建立分类树。
-自变量&amp;gt; setwd(&amp;quot;E:/edu/data2&amp;quot;)&amp;gt; library(haven)&amp;gt; library(tidyverse)&amp;gt; ceps &amp;lt;- read_dta(&amp;quot;E:/edu/data2/ceps.dta&amp;quot;)&amp;gt; ceps &amp;lt;- lapply(ceps, unclass)&amp;gt; ceps &amp;lt;- data.frame(ceps)&amp;gt; &amp;gt; ceps$schids &amp;lt;- as.factor(ceps$schids)&amp;gt; library(rpart)&amp;gt; library(rpart.plot)&amp;gt; library(lattice)&amp;gt; require(stats)&amp;gt; attach(ceps)&amp;gt; library(ggplot2)&amp;gt; library(pROC)&amp;gt; histogram(sdtotal,equal.</description>
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示的是标准成绩的直方图。
+为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
+下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
+&amp;gt; set.seed(1212323) #设置随机数种子&amp;gt; sampled &amp;lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集&amp;gt; test &amp;lt;- ceps[sampled,] #验证集&amp;gt; train &amp;lt;- ceps[-sampled,] #训练集&amp;gt; &amp;gt; cont &amp;lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数&amp;gt; &amp;gt; cltree3 &amp;lt;- rpart(matgreat ~ schids + sex + onechi + maedu + faedu + drunk + + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + + classtm + clpre + revitm + subject + know + drsmok + commhr + + schtype + schcsrm + comno + bknum + buget + eduqua + fight + + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm + + dial + chidia + futcfd + huko + eduy + dangy + houspro ,data = + subset(train,grade9 == 1),weights = sweight,method = &amp;quot;class&amp;quot;,parms = + list(split=&amp;quot;gini&amp;quot;),control=cont,na.</description>
     </item>
     
     <item>

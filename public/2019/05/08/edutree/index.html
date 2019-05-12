@@ -89,35 +89,10 @@
 <div class="section level2">
 <h2>因变量</h2>
 <p>本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。</p>
-<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所在班级前25%(是=1，否=0)单独划分为一个分类变量建立分类树。</p>
-</div>
-<div class="section level2">
-<h2>自变量</h2>
-<pre class="r"><code>&gt; setwd(&quot;E:/edu/data2&quot;)
-&gt; library(haven)
-&gt; library(tidyverse)
-&gt; ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
-&gt; ceps &lt;- lapply(ceps, unclass)
-&gt; ceps &lt;- data.frame(ceps)
-&gt; 
-&gt; ceps$schids &lt;- as.factor(ceps$schids)
-&gt; library(rpart)
-&gt; library(rpart.plot)
-&gt; library(lattice)
-&gt; require(stats)
-&gt; attach(ceps)
-&gt; library(ggplot2)
-&gt; library(pROC)
-&gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/a%20-1.png" width="672" /></p>
-<pre class="r"><code>&gt; setwd(&quot;E:/edu/data2&quot;)
-&gt; ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
-&gt; ceps1 &lt;- subset(ceps,schids&lt;=30)
-&gt; ceps1$schids &lt;- as.factor(ceps1$schids)
-&gt; ggplot(ceps1, aes(schids,tr_mat)) + geom_boxplot()</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/a%20-2.png" width="672" /></p>
-<pre class="r"><code>&gt; ceps &lt;- lapply(ceps, unclass)
-&gt; ceps &lt;- data.frame(ceps)</code></pre>
+<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示的是标准成绩的直方图。</p>
+<p><img src="../../../../post/edutree_files/figure-html/add%20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。</p>
+<p><img src="../../../../post/edutree_files/figure-html/a%20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。</p>
 <pre class="r"><code>&gt; set.seed(1212323) #设置随机数种子
 &gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
@@ -134,8 +109,7 @@
 + dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
 + subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
 + list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
-&gt; 
-&gt; printcp(cltree3)</code></pre>
+&gt; knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)</code></pre>
 <pre><code>
 Classification tree:
 rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu + 
@@ -166,8 +140,90 @@ n=1527 (4937 observations deleted due to missingness)
 7 0.010232     17   0.67817 0.86992 0.00094897
 8 0.010166     19   0.65771 0.88209 0.00095390
 9 0.010000     20   0.64754 0.88209 0.00095390</code></pre>
+<table>
+<caption>(#tab:c )复杂度参数表</caption>
+<thead>
+<tr class="header">
+<th align="right">CP</th>
+<th align="right">nsplit</th>
+<th align="right">rel error</th>
+<th align="right">xerror</th>
+<th align="right">xstd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.0331</td>
+<td align="right">0</td>
+<td align="right">1.0000</td>
+<td align="right">1.0000</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="even">
+<td align="right">0.0285</td>
+<td align="right">3</td>
+<td align="right">0.9006</td>
+<td align="right">0.9384</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0162</td>
+<td align="right">5</td>
+<td align="right">0.8437</td>
+<td align="right">0.8952</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="even">
+<td align="right">0.0137</td>
+<td align="right">6</td>
+<td align="right">0.8275</td>
+<td align="right">0.8983</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0136</td>
+<td align="right">11</td>
+<td align="right">0.7548</td>
+<td align="right">0.8863</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="even">
+<td align="right">0.0124</td>
+<td align="right">13</td>
+<td align="right">0.7276</td>
+<td align="right">0.8756</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0102</td>
+<td align="right">17</td>
+<td align="right">0.6782</td>
+<td align="right">0.8699</td>
+<td align="right">9e-04</td>
+</tr>
+<tr class="even">
+<td align="right">0.0102</td>
+<td align="right">19</td>
+<td align="right">0.6577</td>
+<td align="right">0.8821</td>
+<td align="right">1e-03</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0100</td>
+<td align="right">20</td>
+<td align="right">0.6475</td>
+<td align="right">0.8821</td>
+<td align="right">1e-03</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
+<div class="figure" style="text-align: center">
+<img src="../../../../post/edutree_files/figure-html/c%20-1.png" alt="ROC曲线" width="672" />
+<p class="caption">
+(#fig:c 1)ROC曲线
+</p>
+</div>
 <pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测验证集概率
 &gt; 
@@ -175,7 +231,12 @@ n=1527 (4937 observations deleted due to missingness)
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
 &gt; plot(modelroc) #ROC 曲线</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/c%20-2.png" width="672" /></p>
+<div class="figure" style="text-align: center">
+<img src="../../../../post/edutree_files/figure-html/c%20-2.png" alt="ROC曲线" width="672" />
+<p class="caption">
+(#fig:c 2)ROC曲线
+</p>
+</div>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 
@@ -198,7 +259,7 @@ yhat    0   1
 + subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
 + list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
 &gt; 
-&gt; printcp(cltree3)</code></pre>
+&gt; knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)</code></pre>
 <pre><code>
 Classification tree:
 rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu + 
@@ -222,8 +283,55 @@ n=1527 (4937 observations deleted due to missingness)
 2 0.028470      3   0.90059 0.96167 0.00098445
 3 0.016163      5   0.84366 0.92616 0.00097118
 4 0.014000      6   0.82749 0.97217 0.00098826</code></pre>
+<table>
+<caption>(#tab:d )复杂度参数表</caption>
+<thead>
+<tr class="header">
+<th align="right">CP</th>
+<th align="right">nsplit</th>
+<th align="right">rel error</th>
+<th align="right">xerror</th>
+<th align="right">xstd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.0331</td>
+<td align="right">0</td>
+<td align="right">1.0000</td>
+<td align="right">1.0000</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="even">
+<td align="right">0.0285</td>
+<td align="right">3</td>
+<td align="right">0.9006</td>
+<td align="right">0.9617</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="odd">
+<td align="right">0.0162</td>
+<td align="right">5</td>
+<td align="right">0.8437</td>
+<td align="right">0.9262</td>
+<td align="right">0.001</td>
+</tr>
+<tr class="even">
+<td align="right">0.0140</td>
+<td align="right">6</td>
+<td align="right">0.8275</td>
+<td align="right">0.9722</td>
+<td align="right">0.001</td>
+</tr>
+</tbody>
+</table>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/d%20-1.png" width="672" /></p>
+<div class="figure" style="text-align: center">
+<img src="../../../../post/edutree_files/figure-html/d%20-1.png" alt="ROC曲线" width="672" />
+<p class="caption">
+(#fig:d 1)ROC曲线
+</p>
+</div>
 <pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测验证集概率
 &gt; 
@@ -231,7 +339,12 @@ n=1527 (4937 observations deleted due to missingness)
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
 &gt; plot(modelroc) #ROC 曲线</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/d%20-2.png" width="672" /></p>
+<div class="figure" style="text-align: center">
+<img src="../../../../post/edutree_files/figure-html/d%20-2.png" alt="ROC曲线" width="672" />
+<p class="caption">
+(#fig:d 2)ROC曲线
+</p>
+</div>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 
