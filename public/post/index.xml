@@ -49,7 +49,7 @@
 其中，\(x\)是一系列输入特征（自变量），\({R_1},{R_2},...,{R_m}\)是输入空间被划分的M个区域。 是区域\({R_m}\)对应的最优值。\(I\)代表的是指示函数（indicator function），当输入变量\(x\)属于区域 \({R_m}\)时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
 因变量本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
 为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所在班级前25%(是=1，否=0)单独划分为一个分类变量建立分类树。
-自变量&amp;gt; setwd(&amp;quot;E:/edu/data2&amp;quot;)&amp;gt; library(haven)&amp;gt; library(tidyverse)&amp;gt; ceps &amp;lt;- read_dta(&amp;quot;E:/edu/data2/ceps.dta&amp;quot;)&amp;gt; ceps &amp;lt;- lapply(ceps, unclass)&amp;gt; ceps &amp;lt;- data.frame(ceps)&amp;gt; &amp;gt; ceps$schids &amp;lt;- as.factor(ceps$schids)&amp;gt; library(rpart)&amp;gt; library(rpart.plot)&amp;gt; library(lattice)&amp;gt; require(stats)&amp;gt; attach(ceps)&amp;gt; library(ggplot2)&amp;gt; histogram(sdtotal,equal.</description>
+自变量&amp;gt; setwd(&amp;quot;E:/edu/data2&amp;quot;)&amp;gt; library(haven)&amp;gt; library(tidyverse)&amp;gt; ceps &amp;lt;- read_dta(&amp;quot;E:/edu/data2/ceps.dta&amp;quot;)&amp;gt; ceps &amp;lt;- lapply(ceps, unclass)&amp;gt; ceps &amp;lt;- data.frame(ceps)&amp;gt; &amp;gt; ceps$schids &amp;lt;- as.factor(ceps$schids)&amp;gt; library(rpart)&amp;gt; library(rpart.plot)&amp;gt; library(lattice)&amp;gt; require(stats)&amp;gt; attach(ceps)&amp;gt; library(ggplot2)&amp;gt; library(pROC)&amp;gt; histogram(sdtotal,equal.</description>
     </item>
     
     <item>

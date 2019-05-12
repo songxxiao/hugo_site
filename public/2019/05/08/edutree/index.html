@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">4 min read</span>
+    <span class="article-duration">5 min read</span>
     
 
     <h1 class="article-title">初中生学习成绩的影响因素——基于分类与回归树的方法</h1>
@@ -107,6 +107,7 @@
 &gt; require(stats)
 &gt; attach(ceps)
 &gt; library(ggplot2)
+&gt; library(pROC)
 &gt; histogram(sdtotal,equal.widths = TRUE, nint = 70)</code></pre>
 <p><img src="../../../../post/edutree_files/figure-html/a%20-1.png" width="672" /></p>
 <pre class="r"><code>&gt; setwd(&quot;E:/edu/data2&quot;)
@@ -117,19 +118,24 @@
 <p><img src="../../../../post/edutree_files/figure-html/a%20-2.png" width="672" /></p>
 <pre class="r"><code>&gt; ceps &lt;- lapply(ceps, unclass)
 &gt; ceps &lt;- data.frame(ceps)</code></pre>
-<p>下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。R代码结果如下</p>
-<pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
-&gt; cltree &lt;- rpart(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + 
-+ qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
+<p>下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。</p>
+<pre class="r"><code>&gt; set.seed(1212323) #设置随机数种子
+&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
+&gt; test &lt;- ceps[sampled,] #验证集
+&gt; train &lt;- ceps[-sampled,] #训练集
+&gt; 
+&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
+&gt; 
+&gt; cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
++ qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
 + classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-+ schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
++ schtype + schcsrm + comno +  bknum + buget + eduqua + fight + 
 + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
 + dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-+ subset(ceps,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
-+ list(split=&quot;gini&quot;),control=cont,na.action = na.omit)
++ subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
++ list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
 &gt; 
-&gt; #cltree
-&gt; printcp(cltree)</code></pre>
+&gt; printcp(cltree3)</code></pre>
 <pre><code>
 Classification tree:
 rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu + 
@@ -138,91 +144,106 @@ rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu +
     commhr + schtype + schcsrm + comno + bknum + buget + eduqua + 
     fight + brkpb + smok + drink + teainc + money + clfee + qianzi + 
     lifetm + dial + chidia + futcfd + huko + eduy + dangy + houspro, 
-    data = subset(ceps, grade9 == 1), weights = sweight, na.action = na.omit, 
-    method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
-
-Variables actually used in tree construction:
- [1] bknum   classtm clpre   comno   fight   futcfd  maedu   qianzi 
- [9] schids  sex     smok   
-
-Root node error: 1039309/2084 = 498.71
-
-n=2084 (7124 observations deleted due to missingness)
-
-        CP nsplit rel error  xerror       xstd
-1 0.023875      0   1.00000 1.00000 0.00086324
-2 0.022719      6   0.84357 1.00843 0.00086581
-3 0.014687      7   0.82085 0.96655 0.00085280
-4 0.012641      9   0.79147 0.88574 0.00082583
-5 0.012076     11   0.76619 0.88371 0.00082512
-6 0.011216     12   0.75411 0.87212 0.00082103
-7 0.010000     13   0.74290 0.86466 0.00081836</code></pre>
-<pre class="r"><code>&gt; rpart.plot(cltree)</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/b%20-1.png" width="672" /></p>
-<p>可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。</p>
-<p>以下代码通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。</p>
-<pre class="r"><code>&gt; set.seed(12123) #设置随机数种子
-&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
-&gt; test &lt;- ceps[sampled,] #测试集
-&gt; train &lt;- ceps[-sampled,] #训练集
-&gt; 
-&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
-&gt; 
-&gt; cltree3 &lt;- rpart(matgreat ~  sex + onechi +  maedu +  faedu + drunk + 
-+ qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
-+ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-+ schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
-+ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-+ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-+ subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
-+ list(split=&quot;gini&quot;),control=cont,na.action = na.omit)
-&gt; 
-&gt; printcp(cltree3)</code></pre>
-<pre><code>
-Classification tree:
-rpart(formula = matgreat ~ sex + onechi + maedu + faedu + drunk + 
-    qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-    classtm + clpre + revitm + subject + know + drsmok + commhr + 
-    schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
-    brkpb + smok + drink + teainc + money + clfee + qianzi + 
-    lifetm + dial + chidia + futcfd + huko + eduy + dangy + houspro, 
     data = subset(train, grade9 == 1), weights = sweight, na.action = na.omit, 
-    method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
+    method = &quot;class&quot;, model = T, parms = list(split = &quot;gini&quot;), 
+    control = cont)
 
 Variables actually used in tree construction:
-[1] bknum   classtm clfee   clpre   futcfd  know    net     subject
+ [1] bknum    chidia   chkcouse chkhmwk  classtm  clpre    eduqua  
+ [8] eduy     futcfd   lifetm   qianzi   schids   sex      smok    
 
-Root node error: 703401/1454 = 483.77
+Root node error: 771957/1527 = 505.54
 
-n=1454 (4990 observations deleted due to missingness)
+n=1527 (4937 observations deleted due to missingness)
 
         CP nsplit rel error  xerror       xstd
-1 0.028391      0   1.00000 1.00000 0.00105512
-2 0.027922      3   0.91483 1.00352 0.00105646
-3 0.021204      4   0.88690 0.95616 0.00103798
-4 0.011068      6   0.84450 0.84334 0.00098976
-5 0.010082      7   0.83343 0.87389 0.00100343
-6 0.010000     10   0.80318 0.87799 0.00100523</code></pre>
+1 0.033135      0   1.00000 1.00000 0.00099815
+2 0.028470      3   0.90059 0.93843 0.00097583
+3 0.016163      5   0.84366 0.89519 0.00095913
+4 0.013742      6   0.82749 0.89830 0.00096036
+5 0.013573     11   0.75479 0.88627 0.00095558
+6 0.012367     13   0.72764 0.87563 0.00095130
+7 0.010232     17   0.67817 0.86992 0.00094897
+8 0.010166     19   0.65771 0.88209 0.00095390
+9 0.010000     20   0.64754 0.88209 0.00095390</code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
 <p><img src="../../../../post/edutree_files/figure-html/c%20-1.png" width="672" /></p>
-<pre class="r"><code>&gt; test &lt;- na.omit(test)
-&gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;)
+<pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
+&gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测验证集概率
 &gt; 
 &gt; pr &lt;- y.pr[,2] 
 &gt; test &lt;- cbind(test,pr)
-&gt; 
-&gt; 
-&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;)
+&gt; modelroc &lt;- roc(test$matgreat,test$pr)
+&gt; plot(modelroc) #ROC 曲线</code></pre>
+<p><img src="../../../../post/edutree_files/figure-html/c%20-2.png" width="672" /></p>
+<pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 
 &gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
 &gt; tab</code></pre>
 <pre><code>     matgreat
 yhat    0   1
-  No  934 245
-  Yes 114  65</code></pre>
+  No  875 183
+  Yes 138  85</code></pre>
 <pre class="r"><code>&gt; treeerror #验证集错误率</code></pre>
-<pre><code>[1] 0.2643594</code></pre>
+<pre><code>[1] 0.2505855</code></pre>
+<pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
+&gt; 
+&gt; cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
++ qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
++ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
++ schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
++ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
++ dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
++ subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
++ list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
+&gt; 
+&gt; printcp(cltree3)</code></pre>
+<pre><code>
+Classification tree:
+rpart(formula = matgreat ~ schids + sex + onechi + maedu + faedu + 
+    drunk + qurel + relation + desk + net + dialect + chkhmwk + 
+    chkcouse + classtm + clpre + revitm + subject + know + drsmok + 
+    commhr + schtype + schcsrm + comno + bknum + buget + eduqua + 
+    fight + brkpb + smok + drink + teainc + money + clfee + qianzi + 
+    lifetm + dial + chidia + futcfd + huko + eduy + dangy + houspro, 
+    data = subset(train, grade9 == 1), weights = sweight, na.action = na.omit, 
+    method = &quot;class&quot;, parms = list(split = &quot;gini&quot;), control = cont)
+
+Variables actually used in tree construction:
+[1] bknum   chidia  classtm smok   
+
+Root node error: 771957/1527 = 505.54
+
+n=1527 (4937 observations deleted due to missingness)
+
+        CP nsplit rel error  xerror       xstd
+1 0.033135      0   1.00000 1.00000 0.00099815
+2 0.028470      3   0.90059 0.96167 0.00098445
+3 0.016163      5   0.84366 0.92616 0.00097118
+4 0.014000      6   0.82749 0.97217 0.00098826</code></pre>
+<pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
+<p><img src="../../../../post/edutree_files/figure-html/d%20-1.png" width="672" /></p>
+<pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
+&gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测验证集概率
+&gt; 
+&gt; pr &lt;- y.pr[,2] 
+&gt; test &lt;- cbind(test,pr)
+&gt; modelroc &lt;- roc(test$matgreat,test$pr)
+&gt; plot(modelroc) #ROC 曲线</code></pre>
+<p><img src="../../../../post/edutree_files/figure-html/d%20-2.png" width="672" /></p>
+<pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
+&gt; attach(test)
+&gt; tab &lt;- table(yhat,matgreat) 
+&gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
+&gt; tab #混淆矩阵</code></pre>
+<pre><code>     matgreat
+yhat    0   1
+  No  875 183
+  Yes 138  85</code></pre>
+<pre class="r"><code>&gt; treeerror #验证集错误率</code></pre>
+<pre><code>[1] 0.2505855</code></pre>
+<p>可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。</p>
 <p>在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25%左右。</p>
 </div>
 
