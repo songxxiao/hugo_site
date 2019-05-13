@@ -1,5 +1,5 @@
 ---
-title: "初中生学习成绩的影响因素——基于分类与回归树的方法"
+title: "鍒濅腑鐢熷涔犳垚缁╃殑褰卞搷鍥犵礌鈥斺€斿熀浜庡垎绫讳笌鍥炲綊鏍戠殑鏂规硶"
 author: ' '
 date: '2019-05-08'
 slug: edutree
@@ -290,4 +290,61 @@ yhat    0   1
 <pre><code>[1] 0.2505855</code></pre>
 <p>可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。</p>
 <p>在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25%左右。</p>
+<div class="section level3">
+<h3>随机森林</h3>
+<pre class="r"><code>&gt; train$matgreat &lt;- as.factor(train$matgreat)
+&gt; train &lt;- na.omit(train)
+&gt; train &lt;- filter(train, is.na(matgreat)==F)
+&gt; 
+&gt; ratree &lt;- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
+&gt; 
+&gt; #ratree
+&gt; #summary(ratree)
+&gt; MDSplot(ratree,matgreat,palette=NULL)</code></pre>
+<p><img src="/post/edutree_files/figure-html/randomForest-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>&gt; importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
+<pre><code>         MeanDecreaseAccuracy
+schids             15.8079765
+sex                -1.1436013
+onechi              4.9067360
+maedu              -1.9834895
+faedu               3.7691257
+drunk              -1.5504492
+qurel              -0.1781571
+relation           -0.1456353
+desk                3.2705643
+net                 4.5125379
+dialect             4.7907267
+chkhmwk            -1.0885660
+chkcouse            1.5032324
+classtm            19.4422332
+clpre              14.1047252
+revitm             10.5477621
+subject            12.4271037
+know                8.0812284
+drsmok             13.3536686
+commhr             12.3985947
+schtype             4.1675248
+schcsrm            14.8336130
+comno              15.9875348
+bknum              20.7425997
+buget              18.8042500
+eduqua             18.0370464
+fight               6.5585319
+brkpb               7.5392667
+smok               15.0468939
+drink               1.8399370
+teainc             27.6905792
+money               4.9882468
+clfee               7.4162946
+qianzi              6.2598867
+lifetm             -1.2848707
+dial                9.9690394
+chidia              7.3747625
+futcfd             17.6419549
+huko                4.9797779
+eduy               -0.0509333
+dangy               1.4430383
+houspro             7.6867660</code></pre>
+</div>
 </div>

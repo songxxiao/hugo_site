@@ -1,5 +1,5 @@
 ---
-title: "初中生学习成绩的影响因素——基于分类与回归树的方法"
+title: "鍒濅腑鐢熷涔犳垚缁╃殑褰卞搷鍥犵礌鈥斺€斿熀浜庡垎绫讳笌鍥炲綊鏍戠殑鏂规硶"
 author: ' '
 date: '2019-05-08'
 slug: edutree
@@ -32,18 +32,19 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
-ceps <- read_dta("E:/edu/data2/ceps.dta")
-ceps <- lapply(ceps, unclass)
-ceps <- data.frame(ceps)
-
-ceps$schids <- as.factor(ceps$schids)
 library(rpart)
 library(rpart.plot)
 library(lattice)
 require(stats)
-attach(ceps)
 library(ggplot2)
 library(pROC)
+library(randomForest)
+
+ceps <- read_dta("E:/edu/data2/ceps.dta")
+ceps <- lapply(ceps, unclass)
+ceps <- data.frame(ceps)
+ceps$schids <- as.factor(ceps$schids)
+attach(ceps)
 histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",type = "density",ylab = '密度')
 ```
 
@@ -137,5 +138,21 @@ treeerror #验证集错误率
 
 在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
 
+### 随机森林
+```{r randomForest,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+
+train$matgreat <- as.factor(train$matgreat)
+train <- na.omit(train)
+train <- filter(train, is.na(matgreat)==F)
+
+ratree <- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
+
+#ratree
+#summary(ratree)
+MDSplot(ratree,matgreat,palette=NULL)
+
+importance(ratree, type=1, scale=T) #计算模型变量的重要性
+
+```
 
 
