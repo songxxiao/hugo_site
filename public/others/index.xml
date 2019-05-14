@@ -1,25 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Others on Xiao Song </title>
-    <link>/others/</link>
-    <description>Recent content in Others on Xiao Song </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/others/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Xiao Song</title>
-      <link>/others/englishresume/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/others/englishresume/</guid>
-      <description>Chinese Resume please click here
-CONTACTAdress：Room 201 North Fashang Building, Dongchuan Road 500, ShanghaiEmail：xsong@stu.ecnu.edu.cnGithub：https://github.com/ECSTA7YWebsite：https://hsiaosong.netlify.com/Wechat Official Account：ApocalypseNowSOFTWARE SKILLSR LaTeX StataPython SQL SPSSRelevant CoursesRegression Analysis and Stata Application、SPSS Application、Categorical Data Analysis、Social Simulation and NetLogo ApplicationR data Analysis、Algorithm and program design (Python)EDUCATIONEast China Normal University Bachelor of Sociology (GPA：3.64/4 | Top10%) 2016/09-Today</description>
-    </item>
-    
-  </channel>
-</rss>
