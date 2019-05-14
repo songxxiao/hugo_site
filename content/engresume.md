@@ -28,9 +28,9 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 ### EDUCATION
 
-+ East China Normal University, Bachelor of Sociology (GPA：3.64/4 | Top10%), 2016/09-Today
-+ Sun Yat-Sun University, Exchange Student,  2018/02-2018/07
-+ University of Michigan-Peking University Joint Institute, Summer workshop  2018/08 
++ East China Normal University, Bachelor of Sociology (GPA：3.64 /4 | Top10%), 2016-09~Today
++ Sun Yat-Sun University, Exchange Student,  2018-02~2018-07
++ University of Michigan-Peking University Joint Institute, Summer workshop  2018-08 
 [General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)(Grade：94/100)
 
 
@@ -51,11 +51,11 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### WORK EXPERIENCE
 
-+ [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362) Campus Manager 2017/09-2018/01  
++ [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362) Campus Manager 2017-09~2018-01  
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
 
-+ Gouxionghui Online internship [Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019/05
++ Gouxionghui Online internship [Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019-05
 
 
 
