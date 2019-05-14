@@ -12,7 +12,7 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 
 ### 联系方式
 
-+ 地址：上海市东川路500号华东师范大学法商北楼201室
++ 地址：上海市浦东新区芳华路53号
 + 邮箱：<xsong@stu.ecnu.edu.cn>
 + Github：[https://github.com/ECSTA7Y](https://github.com/ECSTA7Y)
 + 个人主页：[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)

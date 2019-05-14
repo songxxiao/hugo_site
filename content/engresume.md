@@ -10,7 +10,7 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 ### CONTACT
 
-+ Adress：Room 201 North Fashang Building, Dongchuan Road 500, Shanghai
++ Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai
 + Email：<xsong@stu.ecnu.edu.cn>
 + Github：[https://github.com/ECSTA7Y](https://github.com/ECSTA7Y)
 + Website：[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)
