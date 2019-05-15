@@ -56,6 +56,7 @@ Responsible for coordinating the business of breakfast campus manager in East Ch
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
 
 + Gouxionghui Online internship [Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019-05
+Use Python's Pandas, Numpy, and scikit-learn libraries for data cleansing and modeling. A credit card scoring model was built using a logistic model and a decision tree model. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis report.
 
 
 
