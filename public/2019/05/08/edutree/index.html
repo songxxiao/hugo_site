@@ -218,12 +218,7 @@ n=1527 (4937 observations deleted due to missingness)
 </tbody>
 </table>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../../../post/edutree_files/figure-html/c%20-1.png" alt="ROC曲线" width="672" />
-<p class="caption">
-(#fig:c 1)ROC曲线
-</p>
-</div>
+<p><img src="../../../../post/edutree_files/figure-html/c%20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测验证集概率
 &gt; 
@@ -231,12 +226,7 @@ n=1527 (4937 observations deleted due to missingness)
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
 &gt; plot(modelroc) #ROC 曲线</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../../../post/edutree_files/figure-html/c%20-2.png" alt="ROC曲线" width="672" />
-<p class="caption">
-(#fig:c 2)ROC曲线
-</p>
-</div>
+<p><img src="../../../../post/edutree_files/figure-html/c%20-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 
@@ -326,12 +316,7 @@ n=1527 (4937 observations deleted due to missingness)
 </tbody>
 </table>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../../../post/edutree_files/figure-html/d%20-1.png" alt="ROC曲线" width="672" />
-<p class="caption">
-(#fig:d 1)ROC曲线
-</p>
-</div>
+<p><img src="../../../../post/edutree_files/figure-html/d%20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测验证集概率
 &gt; 
@@ -339,12 +324,7 @@ n=1527 (4937 observations deleted due to missingness)
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
 &gt; plot(modelroc) #ROC 曲线</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../../../post/edutree_files/figure-html/d%20-2.png" alt="ROC曲线" width="672" />
-<p class="caption">
-(#fig:d 2)ROC曲线
-</p>
-</div>
+<p><img src="../../../../post/edutree_files/figure-html/d%20-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 
