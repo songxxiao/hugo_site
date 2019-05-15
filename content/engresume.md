@@ -22,21 +22,26 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 ### RELEVANT COURSES
 
-+  Regression Analysis and Stata Application, SPSS Application, Categorical Data Analysis, Social Simulation and NetLogo Application
-+ R data Analysis, Algorithm and program design (Python)
++ Data Analysis Using R
++ Algorithm and program design (Python)
++  Regression Analysis and Stata Application
++ SPSS Application
++ Categorical Data Analysis
++ Social Simulation and [NetLogo](http://ccl.northwestern.edu/netlogo/) Application
 
 
 ### EDUCATION
 
-+ East China Normal University, Bachelor of Sociology (GPA：3.64 /4 | Top10%), 2016-09~Today
-+ Sun Yat-Sun University, Exchange Student,  2018-02~2018-07
-+ University of Michigan-Peking University Joint Institute, Summer workshop  2018-08 
++ East China Normal University, Bachelor of Sociology (GPA：3.64 /4 | Top10%)&emsp;2016-09~Today
++ Sun Yat-Sun University&emsp;Exchange Student&emsp;2018-02~2018-07
++ University of Michigan-Peking University Joint Institute&emsp;2018-08  
+Summer workshop  
 [General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)(Grade：94/100)
 
 
 ### ACADEMIC RESEARCH
 
-+ Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS   2018-2019    
++ Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS&emsp;2018-2019    
 National Innovation Training Program for College Students,  Independent author  
 The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using ggplot2 software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. Click [here](https://raw.githubusercontent.com/ECSTA7Y/Landtransfer/master/%E5%AD%A6%E5%B9%B4%E8%AE%BA%E6%96%87.pdf) to download the passage.
 
@@ -51,11 +56,11 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### WORK EXPERIENCE
 
-+ [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362) Campus Manager 2017-09~2018-01  
++ [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362)&emsp;Campus Manager&emsp;2017-09~2018-01  
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
 
-+ Gouxionghui Online internship [Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q) 2019-05
++ Gouxionghui&emsp;Online internship&emsp;[Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)&emsp;2019-05   
 Use Python's Pandas, Numpy, and scikit-learn libraries for data cleansing and modeling. A credit card scoring model was built using a logistic model and a decision tree model. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis report.
 
 

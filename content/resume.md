@@ -24,9 +24,13 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 
 ### 相关课程
 
-+ 回归分析与Stata 应用、SPSS 应用、类别数据分析、概率与统计导论
-+ R数据分析、算法与程序设计基础(Python)
-
++ R语言数据分析
++ 算法与程序设计基础 (Python)
++ 回归分析与Stata应用
++ SPSS应用
++ 类别数据分析
++ 概率与统计导论
++ 社会模拟与[NetLogo](http://ccl.northwestern.edu/netlogo/)应用
 
 ### 教育背景
 + 华东师范大学, 上海, 社会学学士 &emsp;2016年09月-至今
