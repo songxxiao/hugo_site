@@ -32,7 +32,8 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 ### EDUCATION
 
-+ East China Normal University, Bachelor of Sociology (GPA：3.64 /4 | Top10%)&emsp;2016-09~Today
++ East China Normal University&emsp;Bachelor of Sociology&emsp;2016-09~Today  
+(Overall GPA：3.64 /4 | Top 10%)
 + Sun Yat-Sun University&emsp;Exchange Student&emsp;2018-02~2018-07
 + University of Michigan-Peking University Joint Institute&emsp;2018-08  
 Summer workshop  
