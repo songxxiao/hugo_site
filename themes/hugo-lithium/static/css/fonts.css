@@ -1,9 +1,10 @@
 @font-face {
-  font-family: ' texgyrepagella-regular';
+  font-family: 'Merriweather';
   font-style: normal;
   font-weight: 400;
-  src: local('texgyrepagella-regular'), local('texgyrepagella-regular'),
-       url('../fonts/texgyrepagella-regular.woff') format('woff');
+  src: local('Merriweather'), local('Merriweather-Regular'),
+       url('../fonts/merriweather-v13-latin-regular.woff2') format('woff2'),
+       url('../fonts/merriweather-v13-latin-regular.woff') format('woff');
 }
 @font-face {
   font-family: ' Source Han Sans CN';
