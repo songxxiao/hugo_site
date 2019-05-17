@@ -7,6 +7,7 @@ body {
 }
 
 body {
+font-family:' Source Han Sans CN'
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
