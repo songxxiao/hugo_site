@@ -96,19 +96,19 @@ knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值
-y.pr <- predict(cltree3,test,type="prob") #预测验证集概率
+y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-plot(modelroc,xlab ='特异度',ylab='灵敏度') #ROC 曲线
+plot(modelroc,xlab ='伪正类率',ylab='真正类率') #ROC 曲线
 
-test$yhat <- ifelse(test$pr >0.5,'Yes','No') #大于0.5设置为"是"
+test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
 tab <- table(yhat,matgreat) 
 treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
 tab
-treeerror #验证集错误率
+treeerror #测试集错误率
 ```
 
 ```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
@@ -124,22 +124,25 @@ subset(train,grade9 == 1),weights = sweight,method = "class",parms =
 list(split="gini"),control=cont,na.action = na.omit) #决策树
 
 knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
+cltree3$variable.importance #各个变量的重要性程度
+
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值
-y.pr <- predict(cltree3,test,type="prob") #预测验证集概率
+y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-plot(modelroc,xlab ='特异度',ylab='灵敏度') #ROC 曲线
+auc(modelroc) #计算AUC值
+plot(modelroc,xlab ='伪正类率',ylab='真正类率') #ROC 曲线
 
-test$yhat <- ifelse(test$pr >0.5,'Yes','No') #大于0.5设置为"是"
+test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
 tab <- table(yhat,matgreat) 
 treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
-tab #混淆矩阵
-treeerror #验证集错误率
+tab #混淆矩阵，行为测试集预测值，列为测试集观测值
+treeerror #测试集错误率
 ```
 
 
