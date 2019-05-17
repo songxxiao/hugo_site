@@ -33,7 +33,7 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + 社会模拟与[NetLogo](http://ccl.northwestern.edu/netlogo/)应用
 
 ### 教育背景
-+ 华东师范大学,  社会学学士 &emsp;2016年09月-至今
++ 华东师范大学,  社会发展学院 &emsp;2016年09月-至今
 + 中山大学,  学期交换 &emsp;2018年2月-2018年7月
 
 ### 培训经历
@@ -61,7 +61,7 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + 2018年 华东师范大学优秀学生二等奖学金
 + 2017年 华东师范大学优秀学生二等奖学金
 
-### 实践经历
+### 实习经历
 
 + [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362)&emsp;校园经理&emsp;2017年9月-2018年1月  
 负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。在华东师范大学内招募约10 位校园兼职早餐配送员。完成每位配送员平均每月1000 订单的目标。
