@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on Xiao Song </title>
+    <link>/zh/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on Xiao Song </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 10 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/zh/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>宋 骁</title>
+      <link>/zh/chnresume/</link>
+      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/chnresume/</guid>
+      <description>英文简历请点击这里
+PDF版本请点击这里下载
+联系方式  地址：上海市浦东新区芳华路53号 邮箱：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y 个人主页：https://hsiaosong.netlify.com/ 微信公众号：ApocalypseNow  软件技能  R, LaTeX, Stata &amp;emsp;(熟练) Python, SQL, SPSS &amp;emsp;(了解)  相关课程  R语言数据分析 算法与程序设计基础 (Python) 回归分析与Stata应用 SPSS应用 类别数据分析 概率与统计导论 社会模拟与NetLogo应用  教育背景  华东师范大学, 社会发展学院 &amp;emsp;2016年09月-至今 中山大学, 学期交换 &amp;emsp;2018年2月-2018年7月  培训经历  北京大学-密歇根大学学院 暑期课程 &amp;emsp;2018年8月
+课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
+ 上海大学 第6届·应用社会科学研究方法研修班 &amp;emsp;2017年7月
+课程：Stata与应用回归分析基础，类别数据分析
+ 狗熊会 在线实习项目 &amp;emsp;2019年5月&amp;emsp;
+课程：信用卡申请评分模型
+使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
+  科研经历  土地流转的福利效应与社会不平等——来自CFPS的经验证据&amp;emsp;2018年-2019年
+国家大学生创新训练项目&amp;emsp; 独立作者
+使用中国家庭追踪调查(CFPS)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。
+点击这里下载全文。  所获奖项  2019年 第二届全国高校数据驱动创新研究大赛&amp;emsp;优秀奖 2018年 第十二届本科生社会科学论坛&amp;emsp;特等奖 2018年 华东师范大学优秀学生二等奖学金 2017年 华东师范大学优秀学生二等奖学金  实习经历  俺来也 · 西游早餐&amp;emsp;校园经理&amp;emsp;2017年9月-2018年1月</description>
+    </item>
+    
+    <item>
+      <title>使用R Sweave运行LaTeX</title>
+      <link>/zh/2019/05/09/rsweave/</link>
+      <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/2019/05/09/rsweave/</guid>
+      <description>公众号文章《使用R Sweave运行LaTeX》请点击这里</description>
+    </item>
+    
+    <item>
+      <title>Python函数与模块的使用</title>
+      <link>/zh/2019/05/08/pydef/</link>
+      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/2019/05/08/pydef/</guid>
+      <description>函数与模块的使用 实验范例6.7.2 #(1) def star(m,n): for i in range(m): print(&#39;*&#39;*n) star(3,2)  ** ** **  star(5,6)  ****** ****** ****** ****** ******  star(4,20)  ******************** ******************** ******************** ********************  #(2) def paint(m,s): print(s*m) paint(3,&#39;*&#39;)  ***  paint(8,&#39;%+&#39;)  %+%+%+%+%+%+%+%+  #(3) def check(a): if a&amp;gt;0: print(&#39;&amp;gt;0&#39;) elif a &amp;lt; 0: print(&#39;&amp;lt;0&#39;) else: print(&amp;quot;==0&amp;quot;) check(5)  &amp;gt;0  check(-2)  &amp;lt;0  check(0)  ==0  #(4) def avg(a,b): return(a+b)/2 c = avg(4,6) c  5.</description>
+    </item>
+    
+    <item>
+      <title>Xiao Song</title>
+      <link>/zh/englishresume/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/englishresume/</guid>
+      <description>Chinese Resume please click here
+CONTACT  Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai Email：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y Website：https://hsiaosong.netlify.com/ Wechat Official Account：ApocalypseNow  SOFTWARE SKILLS  R, LaTeX, Stata Python, SQL, SPSS  RELEVANT COURSES  Data Analysis Using R Algorithm and program design (Python) Regression Analysis and Stata Application SPSS Application Categorical Data Analysis Social Simulation and NetLogo Application  EDUCATION  East China Normal University&amp;emsp;Bachelor of Sociology&amp;emsp;2016-09~Today
+(Overall GPA：3.</description>
+    </item>
+    
+    <item>
+      <title>如何提取R包中的小品文</title>
+      <link>/zh/2019/05/07/vignette/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/2019/05/07/vignette/</guid>
+      <description>公众号文章 《如何提取R包中的小品文》请点击这里
+用R实现各种分析任务需要学习不同的R包。而学习R包实现方法的同时必须同时结合理论。因此仅仅看帮助文档和用户手册（Reference manual）是远远不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习数据分析的不可多得的好材料。下文将以rpart包为例讲解如何获取R包的官方小品文。
+在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
+rpart的官方主页如下所示：
+其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。
+但，这种方法其实是多此一举了！
+因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
+&amp;gt; #install.packages(&amp;#39;utils&amp;#39;)#没安装先安装包&amp;gt; #library(utils)#加载包&amp;gt; vignette(, package = &amp;quot;rpart&amp;quot;)#提取rpart包的小品文名称输出结果如下所示：
+&amp;gt; #Vignettes in package ‘rpart’:&amp;gt; &amp;gt; #longintro Introduction to Rpart &amp;gt; # (source, pdf)&amp;gt; #usercode User Written Split&amp;gt; # Functions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
+&amp;gt; vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
+便可以阅读了。
+很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：
+&amp;gt; vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)看起来这个小品文是用R Markdown写的。</description>
+    </item>
+    
+  </channel>
+</rss>

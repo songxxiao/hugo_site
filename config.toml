@@ -5,7 +5,9 @@ title = "Xiao Song "
 author = "Xiao Song"
 theme = "hugo-lithium"
 googleAnalytics = ""
-disqusShortname = ""
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = true
+disqusShortname = "Xiao Song"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [permalinks]
@@ -20,15 +22,17 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/englishresume/"
    weight = 2
  
-[[menu.main]]
-    name = "Chinese Resume"
-    url = "/chnresume/"
-   weight = 3
+
 
 [[menu.main]]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
     weight = 4
+
+[[languages.zh.menu.main]]
+  name = "ÖÐÎÄ¼òÀú"
+  url =  "/chnresume/"
+  weight = 1
 
 [params]
     description = "Xiao Song's Website "
@@ -52,3 +56,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     height = 50
     alt = "Logo"
 
+[languages.en]
+  languageCode = "en-us"
+
+[languages.zh]
+  languageCode = "zh-cn"
