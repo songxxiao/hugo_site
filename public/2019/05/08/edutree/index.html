@@ -103,7 +103,7 @@
 <p>下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。</p>
 <pre class="r"><code>&gt; set.seed(1212323) #设置随机数种子
 &gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
-&gt; test &lt;- ceps[sampled,] #验证集
+&gt; test &lt;- ceps[sampled,] #测试集
 &gt; train &lt;- ceps[-sampled,] #训练集
 &gt; 
 &gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
@@ -364,9 +364,9 @@ yhat   0   1
 &gt; 
 &gt; #ratree
 &gt; #summary(ratree)
-&gt; MDSplot(ratree,matgreat,palette=NULL)</code></pre>
-<p><img src="../../../../post/edutree_files/figure-html/randomForest-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
+&gt; #MDSplot(ratree,matgreat,palette=NULL)
+&gt; 
+&gt; importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
 <pre><code>         MeanDecreaseAccuracy
 schids             15.8079765
 sex                -1.1436013

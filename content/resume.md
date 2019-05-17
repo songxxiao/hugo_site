@@ -33,11 +33,19 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + 社会模拟与[NetLogo](http://ccl.northwestern.edu/netlogo/)应用
 
 ### 教育背景
-+ 华东师范大学, 上海, 社会学学士 &emsp;2016年09月-至今
-+ 中山大学, 广州, 学期交换 &emsp;2018年2月-2018年7月
-+ 北京大学-密歇根大学学院, 北京, 暑期课程 &emsp;2018年8月  
-[因果推论方法的研究设计和敏感性分析](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm) (总成绩：94/100)
++ 华东师范大学,  社会学学士 &emsp;2016年09月-至今
++ 中山大学,  学期交换 &emsp;2018年2月-2018年7月
 
+### 培训经历
++ 北京大学-密歇根大学学院 暑期课程 &emsp;2018年8月  
+课程：[因果推论方法的研究设计和敏感性分析](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm) (总成绩：94/100)
+
++ 上海大学  [第6届·应用社会科学研究方法研修班](http://caser.ust.hk/?act=course_main&id=16) &emsp;2017年7月  
+课程：Stata与应用回归分析基础，类别数据分析
+
++ [狗熊会](http://www.xiong99.com.cn/about.php) 在线实习项目 &emsp;2019年5月&emsp;      
+课程：[信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)  
+使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
 
 ### 科研经历
 
@@ -56,10 +64,7 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 ### 实践经历
 
 + [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362)&emsp;校园经理&emsp;2017年9月-2018年1月  
-负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。完成平均每月1000 订单的目标。在华东师范大学内招募约10 位校园兼职早餐配送员。
-
-+ 狗熊会 在线实习项目 [信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)&emsp;2019年5月&emsp;      
-使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
+负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。在华东师范大学内招募约10 位校园兼职早餐配送员。完成每位配送员平均每月1000 订单的目标。
 
 ### 标化成绩
 

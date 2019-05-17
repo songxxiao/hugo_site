@@ -79,7 +79,7 @@ ceps <- data.frame(ceps)
 ```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
 set.seed(1212323) #设置随机数种子
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
-test <- ceps[sampled,] #验证集
+test <- ceps[sampled,] #测试集
 train <- ceps[-sampled,] #训练集
 
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
@@ -161,7 +161,7 @@ ratree <- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drun
 
 #ratree
 #summary(ratree)
-MDSplot(ratree,matgreat,palette=NULL)
+#MDSplot(ratree,matgreat,palette=NULL)
 
 importance(ratree, type=1, scale=T) #计算模型变量的重要性
 
