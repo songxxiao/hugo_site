@@ -13,10 +13,7 @@
   src: local('texgyrepagella'), local('texgyrepagella'),
        url('../fonts/texgyrepagella-regular.woff') format('woff');
 }
-body, .nav, .article-duration, .archive-item-link, .footer {
+body, .nav, .article-duration, .archive-item-link, .footer, h1, h2, h3, h4, h5, h6  {
   font-family: 'texgyrepagella', serif;
-}
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'texgyrepagella', sans-serif;
 }
 
