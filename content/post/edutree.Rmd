@@ -101,7 +101,7 @@ y.pr <- predict(cltree3,test,type="prob") #预测验证集概率
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-plot(modelroc) #ROC 曲线
+plot(modelroc,xlab ='特异度',ylab='灵敏度') #ROC 曲线
 
 test$yhat <- ifelse(test$pr >0.5,'Yes','No') #大于0.5设置为"是"
 attach(test)
@@ -132,7 +132,7 @@ y.pr <- predict(cltree3,test,type="prob") #预测验证集概率
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-plot(modelroc) #ROC 曲线
+plot(modelroc,xlab ='特异度',ylab='灵敏度') #ROC 曲线
 
 test$yhat <- ifelse(test$pr >0.5,'Yes','No') #大于0.5设置为"是"
 attach(test)

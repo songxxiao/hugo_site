@@ -232,7 +232,7 @@ n=1527 (4937 observations deleted due to missingness)
 &gt; pr &lt;- y.pr[,2] 
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
-&gt; plot(modelroc) #ROC 曲线</code></pre>
+&gt; plot(modelroc,xlab =&#39;特异度&#39;,ylab=&#39;灵敏度&#39;) #ROC 曲线</code></pre>
 <p><img src="../../../../post/edutree_files/figure-html/c%20-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
@@ -330,7 +330,7 @@ n=1527 (4937 observations deleted due to missingness)
 &gt; pr &lt;- y.pr[,2] 
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
-&gt; plot(modelroc) #ROC 曲线</code></pre>
+&gt; plot(modelroc,xlab =&#39;特异度&#39;,ylab=&#39;灵敏度&#39;) #ROC 曲线</code></pre>
 <p><img src="../../../../post/edutree_files/figure-html/d%20-2.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;Yes&#39;,&#39;No&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
