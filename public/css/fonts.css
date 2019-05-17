@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'Merriweather';
+  font-family: 'Lato';
   font-style: normal;
   font-weight: 400;
-  src: local('Merriweather'), local('Merriweather-Regular'),
-       url('../fonts/merriweather-v13-latin-regular.woff2') format('woff2'),
-       url('../fonts/merriweather-v13-latin-regular.woff') format('woff');
+  src: local('Lato Regular'), local('Lato-Regular'),
+       url('../fonts/lato-v11-latin-regular.woff2') format('woff2'),
+       url('../fonts/lato-v11-latin-regular.woff') format('woff');
 }
 @font-face {
   font-family: ' Source Han Sans CN';
