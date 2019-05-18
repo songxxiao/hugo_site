@@ -24,20 +24,32 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 
 + Data Analysis Using R
 + Algorithm and program design (Python)
-+  Regression Analysis and Stata Application
++ Regression Analysis and Stata Application
 + SPSS Application
 + Categorical Data Analysis
 + Social Simulation and [NetLogo](http://ccl.northwestern.edu/netlogo/) Application
 
-
 ### EDUCATION
 
-+ East China Normal University&emsp;Bachelor of Sociology&emsp;2016-09~Today  
-(Overall GPA：3.64 /4 | Top 10%)
++ East China Normal University&emsp;2016-09~Today    
+School of Social Development&emsp;(Overall GPA：3.64 /4 | Top 10%)
 + Sun Yat-Sun University&emsp;Exchange Student&emsp;2018-02~2018-07
-+ University of Michigan-Peking University Joint Institute&emsp;2018-08  
+
+
+### TRAINING EXPERIENCE
+
++ [Gouxionghui](http://www.xiong99.com.cn/about.php)&emsp;2019-05  
+Online internship&emsp;[Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)   
+Use Python's Pandas, Numpy, and scikit-learn libraries for data cleansing and modeling. A credit card scoring model was built using a logistic model and a decision tree model. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis report.
+
++ Peking University&emsp;2018-08  
 Summer workshop  
-[General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)(Grade：94/100)
+[General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)&emsp;(Grade：94/100)
+
++ Shanghai University&emsp;2017-07  
+[6th Training Workshop on Applied Social Science Research Methods](http://caser.ust.hk/?act=course_main&id=16)  
+Course: Regression Analysis and Stata Application,  Categorical Data Analysis
+
 
 
 ### ACADEMIC RESEARCH
@@ -51,7 +63,7 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 ### HONORS AND AWARDS 
 
 + 2019 [The 2nd National University Data Driven Innovation Research Competition](http://opendata.pku.edu.cn/competition-2019.xhtml;jsessionid=200f6d0adbfa75292afed361235f) Excellence award
-+ 2018 [12th Social Science Forum for Undergraduates](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm)，Highest Honor
++ 2018 [12th Social Science Forum for Undergraduates](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm) Highest Honor
 + 2018 Second Class Academic Honors (East China Normal University)
 + 2017 Second Class Academic Honors (East China Normal University)
 
@@ -61,8 +73,7 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
 
-+ Gouxionghui&emsp;Online internship&emsp;[Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)&emsp;2019-05   
-Use Python's Pandas, Numpy, and scikit-learn libraries for data cleansing and modeling. A credit card scoring model was built using a logistic model and a decision tree model. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis report.
+
 
 
 
