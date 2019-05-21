@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "http://xsong.ltd/"
 relativeurls = true
 languageCode = "en-us"
 title = "Xiao Song "
