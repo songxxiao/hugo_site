@@ -37,6 +37,9 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。
 
+班级变量：教师总课时hra07 (classtm)、
+备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)
+
 ```{r add ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center'}
 setwd("E:/edu/data2")
 library(haven)
