@@ -13,7 +13,7 @@ Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resu
 + Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai
 + Email：<xsong@stu.ecnu.edu.cn>
 + Github：[https://github.com/ECSTA7Y](https://github.com/ECSTA7Y)
-+ Website：[https://hsiaosong.netlify.com/](https://hsiaosong.netlify.com/)
++ Website：[https://xsong.ltd](https://xsong.ltd/)
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
 ### SOFTWARE SKILLS

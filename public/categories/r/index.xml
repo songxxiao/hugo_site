@@ -28,7 +28,7 @@
       <guid>/chnresume/</guid>
       <description>英文简历请点击这里
 PDF版本请点击这里下载
-联系方式  地址：上海市浦东新区芳华路53号 邮箱：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y 个人主页：https://hsiaosong.netlify.com/ 微信公众号：ApocalypseNow  软件技能  R, LaTeX, Stata &amp;emsp;(熟练) Python, SQL, SPSS &amp;emsp;(了解)  相关课程  R语言数据分析 算法与程序设计基础 (Python) 回归分析与Stata应用 SPSS应用 类别数据分析 概率与统计导论 社会模拟与NetLogo应用  教育背景  华东师范大学, 社会发展学院 &amp;emsp;2016年09月-至今 中山大学, 学期交换 &amp;emsp;2018年2月-2018年7月  培训经历  北京大学-密歇根大学学院 暑期课程 &amp;emsp;2018年8月
+联系方式  地址：上海市浦东新区芳华路53号 邮箱：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y 个人主页：https://xsong.ltd 微信公众号：ApocalypseNow  软件技能  R, LaTeX, Stata &amp;emsp;(熟练) Python, SQL, SPSS &amp;emsp;(了解)  相关课程  R语言数据分析 算法与程序设计基础 (Python) 回归分析与Stata应用 SPSS应用 类别数据分析 概率与统计导论 社会模拟与NetLogo应用  教育背景  华东师范大学, 社会发展学院 &amp;emsp;2016年09月-至今 中山大学, 学期交换 &amp;emsp;2018年2月-2018年7月  培训经历  北京大学-密歇根大学学院 暑期课程 &amp;emsp;2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
  上海大学 第6届·应用社会科学研究方法研修班 &amp;emsp;2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
@@ -74,6 +74,7 @@ PDF版本请点击这里下载
 家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。
 个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。
 学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。
+班级变量：教师总课时hra07 (classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)
 为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
 下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
 &amp;gt; set.seed(1212323) #设置随机数种子&amp;gt; sampled &amp;lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集&amp;gt; test &amp;lt;- ceps[sampled,] #测试集&amp;gt; train &amp;lt;- ceps[-sampled,] #训练集&amp;gt; &amp;gt; cont &amp;lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数&amp;gt; &amp;gt; cltree3 &amp;lt;- rpart(matgreat ~ schids + sex + onechi + maedu + faedu + drunk + + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + + classtm + clpre + revitm + subject + know + drsmok + commhr + + schtype + schcsrm + comno + bknum + buget + eduqua + fight + + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm + + dial + chidia + futcfd + huko + eduy + dangy + houspro ,data = + subset(train,grade9 == 1),weights = sweight,method = &amp;quot;class&amp;quot;,parms = + list(split=&amp;quot;gini&amp;quot;),control=cont,na.</description>
@@ -86,7 +87,7 @@ PDF版本请点击这里下载
       
       <guid>/englishresume/</guid>
       <description>Chinese Resume please click here
-CONTACT  Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai Email：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y Website：https://hsiaosong.netlify.com/ Wechat Official Account：ApocalypseNow  SOFTWARE SKILLS  R, LaTeX, Stata Python, SQL, SPSS  RELEVANT COURSES  Data Analysis Using R Algorithm and program design (Python) Regression Analysis and Stata Application SPSS Application Categorical Data Analysis Social Simulation and NetLogo Application  EDUCATION  East China Normal University&amp;emsp;2016-09~Today
+CONTACT  Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai Email：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y Website：https://xsong.ltd Wechat Official Account：ApocalypseNow  SOFTWARE SKILLS  R, LaTeX, Stata Python, SQL, SPSS  RELEVANT COURSES  Data Analysis Using R Algorithm and program design (Python) Regression Analysis and Stata Application SPSS Application Categorical Data Analysis Social Simulation and NetLogo Application  EDUCATION  East China Normal University&amp;emsp;2016-09~Today
 School of Social Development&amp;emsp;(Overall GPA：3.</description>
     </item>
     
