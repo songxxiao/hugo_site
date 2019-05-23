@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>生存分析</title>
+      <title>生存分析笔记</title>
       <link>/2019/05/23/survival/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
@@ -20,8 +20,9 @@
       <description>本文部分内容来源于聆听复旦大学人口学系张震老师的数据分析课程笔记。
 基本概念\(T\)为随机变量，上帝也不知道
 生存函数：\(S(t) = P(T &amp;gt; t)\)
-无条件的风险\(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。
-失效函数(Failure Function)：\(F(t)\), 即T的累积分布函数
+失效函数(Failure Function)：\(F(t)\),\(S(t) = 1 - F(t)\), \(F(t)\)是T的累积分布函数。
+\(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
+风险函数: \[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &amp;lt; t + \Delta t|T \ge t)}}{{\Delta t}}\]
 censor: 事件观测期内无法观测
 truncate: 样本选择问题
 </description>

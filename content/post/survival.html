@@ -1,5 +1,5 @@
 ---
-title: "生存分析"
+title: "生存分析笔记"
 author: ' '
 date: '2019-05-23'
 slug: survival
@@ -14,8 +14,9 @@ categories: R
 <h2>基本概念</h2>
 <p><span class="math inline">\(T\)</span>为随机变量，上帝也不知道</p>
 <p>生存函数：<span class="math inline">\(S(t) = P(T &gt; t)\)</span></p>
-<p>无条件的风险<span class="math inline">\(f(t) = \frac{{dF(t)}}{{dt}}\)</span>，即<span class="math inline">\(S(t)\)</span>的斜率。等价于生存时间的概率密度函数(直方图)。</p>
-<p>失效函数(Failure Function)：<span class="math inline">\(F(t)\)</span>, 即T的累积分布函数</p>
+<p>失效函数(Failure Function)：<span class="math inline">\(F(t)\)</span>,<span class="math inline">\(S(t) = 1 - F(t)\)</span>, <span class="math inline">\(F(t)\)</span>是T的累积分布函数。</p>
+<p><span class="math inline">\(f(t) = \frac{{dF(t)}}{{dt}}\)</span>，即<span class="math inline">\(S(t)\)</span>的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。</p>
+<p>风险函数: <span class="math display">\[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &lt; t + \Delta t|T \ge t)}}{{\Delta t}}\]</span></p>
 <p>censor: 事件观测期内无法观测<br />
 truncate: 样本选择问题</p>
 </div>
