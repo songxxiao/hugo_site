@@ -6,13 +6,17 @@ slug: survival
 tags: R
 categories: R
 ---
-本文部分内容来源于聆听复旦大学人口学系[张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html)老师的数据分析课程笔记。
+本文部分内容来源于复旦大学人口学系[张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html)老师的数据分析课程笔记。
 
 ## 基本概念
 
++ 社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。**在一个状态内待的时间和风险有着密切的关系**。
+
+
+
 $T$为随机变量，上帝也不知道
 
-生存函数：$S(t) = P(T > t)$
+生存函数：$S(t) = P(T > t)$。是存活概率也是存活百分比。
 
 失效函数(Failure Function)：$F(t)$,$S(t) = 1 - F(t)$, $F(t)$是T的累积分布函数。
 
@@ -20,7 +24,12 @@ $T$为随机变量，上帝也不知道
 
 $f(t) = \frac{{dF(t)}}{{dt}}$，即$S(t)$的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
 
-风险函数: $$h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T < t + \Delta t|T \ge t)}}{{\Delta t}}$$
+风险函数: $$h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T < t + \Delta t|T \ge t)}}{{\Delta t}},0 < h(t) <  + \infty $$
+
+
+
+$h(t)$不是密度也不是概率。
+
 
 censor: 事件观测期内无法观测  
 truncate: 样本选择问题
