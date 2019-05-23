@@ -6,15 +6,21 @@ slug: survival
 tags: R
 categories: R
 ---
-本文部分内容来源于聆听复旦大学人口学系 [张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html) 张震老师的数据分析课程笔记。
+本文部分内容来源于聆听复旦大学人口学系[张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html)老师的数据分析课程笔记。
 
 ## 基本概念
+
+$T$为随机变量，上帝也不知道
 
 生存函数：$S(t) = P(T > t)$
 
 
 
-censor: 事件观测期内无法观测
+无条件的风险$f(t) = \frac{{dF(t)}}{{dt}}$，即$S(t)$的斜率。等价于生存时间的概率密度函数(直方图)。
+
+失效函数(Failure Function)：$F(t)$, 即T的累积分布函数
+
+censor: 事件观测期内无法观测  
 truncate: 样本选择问题
 
 
