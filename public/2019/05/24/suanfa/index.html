@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.5" />
+
+
+<title>算法实现与性能分析 - Xiao Song </title>
+<meta property="og:title" content="算法实现与性能分析 - Xiao Song ">
+
+
+  <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../">Home</a></li>
+    
+    <li><a href="../../../../englishresume/">Resume</a></li>
+    
+    <li><a href="../../../../chnresume/">Chinese Resume</a></li>
+    
+    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">算法实现与性能分析</h1>
+
+    
+    <span class="article-date">2019-05-24</span>
+    
+
+    <div class="article-content">
+      
+
+<pre><code class="language-python">#实验范例（1）：折半查找算法
+def BinarySearch(a,target):
+    left = 0
+    right = len(a) - 1
+    while left &lt;= right:
+        mid = (left + right)//2
+        midVal = a[mid]
+        if midVal &lt;target:
+            left = mid + 1
+        elif midVal &gt; target:
+            right = mid - 1
+        else:
+            return mid
+    return - 1
+L = [5,7,13,25,32,46,54,62,78,83,88,91,99]
+BinarySearch(L,13)
+</code></pre>
+
+<pre><code>2
+</code></pre>
+
+<pre><code class="language-python">#冒泡排序法
+def bubble(List):
+    for j in range(len(List)-1,0,-1):
+        print(List)
+        for i in range(0,j):
+            if List[i]&gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]
+    return List
+testlist = [49,38,65,97,76,13,27,49]
+print('结果：',bubble(testlist))
+</code></pre>
+
+<pre><code>[49, 38, 65, 97, 76, 13, 27, 49]
+[38, 49, 65, 76, 13, 27, 49, 97]
+[38, 49, 65, 13, 27, 49, 76, 97]
+[38, 49, 13, 27, 49, 65, 76, 97]
+[38, 13, 27, 49, 49, 65, 76, 97]
+[13, 27, 38, 49, 49, 65, 76, 97]
+[13, 27, 38, 49, 49, 65, 76, 97]
+结果： [13, 27, 38, 49, 49, 65, 76, 97]
+</code></pre>
+
+<h3 id="实验内容">实验内容</h3>
+
+<pre><code class="language-python">#（1）找出最大最小值
+
+lst = [31,45,35,56,37,69,310,21,12]
+
+def max2(List):
+    for j in range(len(List)-1,0,-1):
+        for i in range(0,j):
+            if List[i]&gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]
+    return List[len(List)-1]
+
+max2(lst)        
+
+</code></pre>
+
+<pre><code>310
+</code></pre>
+
+<pre><code class="language-python"># 找出列表最小值
+def min2(List):
+    for j in range(len(List)-1,0,-1):
+        for i in range(0,j):
+            if List[i]&gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]
+    return List[0]
+min2(lst) 
+</code></pre>
+
+<pre><code>12
+</code></pre>
+
+<pre><code class="language-python"># 折半查找算法，有多个则返回第一个。
+def BinarySearch(a,target):
+    left = 0
+    right = len(a) - 1
+    while left &lt;= right:
+        mid = (left + right)//2 #整除，提取中点
+        midVal = a[mid]
+        if midVal &lt; target: #在中点右侧寻找
+            left = mid + 1
+        elif midVal &gt; target: #在中点左侧寻找
+            right = mid - 1
+        else:
+            return a.index(midVal) #返回第一个查找值
+    return - 1
+L = [32,32,32,32,32,46,54,62,78,83,88,91,99]
+L2 = [54,62,78,32,32,32,32,32,46,83,88,91,99]
+BinarySearch(L2,32)
+</code></pre>
+
+<pre><code>3
+</code></pre>
+
+<pre><code class="language-python">#顺序搜索算法
+Lst = [31,45,35,56,37,69,310,21,12]
+def sequen(lst,x):
+    i = 0
+    while i &lt; len(lst):
+        if lst[i] == x:
+            return i
+        i += 1
+    else: return -1
+sequen(Lst,56)
+</code></pre>
+
+<pre><code>3
+</code></pre>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
