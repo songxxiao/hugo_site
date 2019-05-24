@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.5" />
+
+
+<title>交叉验证 - Xiao Song </title>
+<meta property="og:title" content="交叉验证 - Xiao Song ">
+
+
+  <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../">Home</a></li>
+    
+    <li><a href="../../../../englishresume/">Resume</a></li>
+    
+    <li><a href="../../../../chnresume/">Chinese Resume</a></li>
+    
+    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">交叉验证</h1>
+
+    
+    <span class="article-date">2019-05-24</span>
+    
+
+    <div class="article-content">
+      
+
+
+<ul>
+<li><p>k折交叉验证 (K-fold cross-validation)</p></li>
+<li><p>简单交叉验证 (hold-out cross validation)</p></li>
+<li><p>留一交叉验证(leave-one-out cross validation)</p></li>
+</ul>
+<pre class="r"><code>&gt; #install.packages(&#39;mlbench&#39;)
+&gt; library(caret) #加载数据集</code></pre>
+<pre class="r"><code>&gt; #install.packages(&#39;mlbench&#39;)
+&gt; 
+&gt; 
+&gt; library(mlbench) #加载数据集
+&gt; data(BostonHousing)
+&gt; head(BostonHousing)</code></pre>
+<pre><code>     crim zn indus chas   nox    rm  age    dis rad tax ptratio      b
+1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90
+2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90
+3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83
+4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63
+5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90
+6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12
+  lstat medv
+1  4.98 24.0
+2  9.14 21.6
+3  4.03 34.7
+4  2.94 33.4
+5  5.33 36.2
+6  5.21 28.7</code></pre>
+<pre class="r"><code>&gt; nrow(BostonHousing) #样本量</code></pre>
+<pre><code>[1] 506</code></pre>
+<pre class="r"><code>&gt; rpartFit &lt;- train(medv ~ .,
++                   data = BostonHousing,
++                   method = &quot;rpart&quot;,
++                   tuneLength = 9)
+&gt; rpartFit</code></pre>
+<pre><code>CART 
+
+506 samples
+ 13 predictor
+
+No pre-processing
+Resampling: Bootstrapped (25 reps) 
+Summary of sample sizes: 506, 506, 506, 506, 506, 506, ... 
+Resampling results across tuning parameters:
+
+  cp           RMSE      Rsquared   MAE     
+  0.007265385  4.846986  0.7294235  3.251629
+  0.008245448  4.858799  0.7281600  3.271658
+  0.015851157  4.986091  0.7119619  3.401808
+  0.026613000  5.171214  0.6903611  3.545228
+  0.033369230  5.275111  0.6782521  3.631656
+  0.036164281  5.337963  0.6711948  3.698424
+  0.071657841  5.834650  0.6070970  4.129177
+  0.171172436  6.681214  0.4858422  4.880936
+  0.452744201  8.008460  0.3782596  5.859294
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.007265385.</code></pre>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

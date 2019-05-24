@@ -1,0 +1,93 @@
+---
+title: "交叉验证"
+author: ' '
+date: '2019-05-25'
+slug: cross
+tags: R
+categories: R
+---
+
++ 简单交叉验证 (hold-out cross validation)
+
++ k折交叉验证 (K-fold cross-validation)
+
++ 留一交叉验证(leave-one-out cross validation)
+
+```{r 1,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+#install.packages('mlbench')
+library(caret) #加载数据集
+
+```
+
+
+# 10折交叉验证 (K-fold cross-validation)
+```{r 2,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+#install.packages('mlbench')
+
+rfControl <-trainControl( #10折交叉验证
+method ="cv", 
+number =10 # Number of folds
+)
+
+library(mlbench) #加载数据集
+data(BostonHousing)
+head(BostonHousing)
+nrow(BostonHousing) #样本量
+
+rpartFit <- train(medv ~ .,
+                  data = BostonHousing,
+                  method = "rpart",
+                  trControl = rfControl)
+rpartFit
+```
+
+将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有"10次10 折交叉验证"。
+
+
+```{r cv,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'} 
+
+
+repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions
+=TRUE)
+rpartFit <- train(medv ~ .,
+                  data = BostonHousing,
+                  method = "rpart",
+                  trControl = repeatedcv)
+rpartFit
+```
+
+
+
+
+
+
+# 留一交叉验证(leave-one-out cross validation)
+```{r 3,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+rfControl <-trainControl(
+method ="LOOCV"
+) #留一交叉验证
+rpartFit <- train(medv ~ .,
+                  data = BostonHousing,
+                  method = "rpart",
+                  trControl = rfControl)
+rpartFit
+#summary(rpartFit)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

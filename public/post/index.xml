@@ -6,10 +6,22 @@
     <description>Recent content in Posts on Xiao Song </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 May 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>交叉验证</title>
+      <link>/2019/05/25/cross/</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/25/cross/</guid>
+      <description>简单交叉验证 (hold-out cross validation)
+k折交叉验证 (K-fold cross-validation)
+留一交叉验证(leave-one-out cross validation)
+&amp;gt; #install.packages(&amp;#39;mlbench&amp;#39;)&amp;gt; library(caret) #加载数据集10折交叉验证 (K-fold cross-validation)&amp;gt; #install.packages(&amp;#39;mlbench&amp;#39;)&amp;gt; &amp;gt; rfControl &amp;lt;-trainControl( #10折交叉验证+ method =&amp;quot;cv&amp;quot;, + number =10 # Number of folds+ )&amp;gt; &amp;gt; library(mlbench) #加载数据集&amp;gt; data(BostonHousing)&amp;gt; head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.</description>
+    </item>
     
     <item>
       <title>算法实现与性能分析</title>
