@@ -120,22 +120,15 @@ code {
   padding: 1px 5px;
   font-weight: bold;
   border-radius: 3px;
-  background: #bbb;
-  color: #fff
+  background: #f1f3ec;
+  color: #f1f3ec
 }
 
 .article-content p {
   margin: 15px 0 25px;
 }
 
-.article-content a {
-  text-decoration: none;
-  color: inherit;
-  border-bottom: 1.8px solid #7B7B7B;
-  box-shadow: inset 0 -4px 0 transparent;
-  background: transparent;
-  transition: background 150ms ease;
-}
+
 
 .article-content a:hover,
 .article-content a:focus {
@@ -190,6 +183,15 @@ code {
   display: block;
 }
 
+.article-content a {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1.6px solid #ADADAD;
+  box-shadow: inset 0 -4px 0 transparent;
+  background: transparent;
+  transition: background 150ms ease;
+}
+
 .archive-item-link {
   display: inline-block;
   text-decoration: none;
@@ -197,7 +199,7 @@ code {
   font-weight: bold;
   color: #222;
   padding: 5px 0;
-  border-bottom: 1.8px solid #ADADAD;
+  border-bottom: 1.6px solid #ADADAD;
   box-shadow: inset 0 -4px 0 transparent;
 }
 
