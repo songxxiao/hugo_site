@@ -131,7 +131,7 @@ code {
 .article-content a {
   text-decoration: none;
   color: inherit;
-  border-bottom: 1.8px solid #ADADAD;
+  border-bottom: 1.8px solid #7B7B7B;
   box-shadow: inset 0 -4px 0 transparent;
   background: transparent;
   transition: background 150ms ease;
@@ -148,7 +148,7 @@ code {
   height: 1px;
   overflow: hidden;
   border: none;
-  background: #D200D2;
+  background: #7B7B7B;
 }
 
 .highlight {

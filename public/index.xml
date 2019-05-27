@@ -33,21 +33,25 @@
     </item>
     
     <item>
-      <title>生存分析笔记</title>
+      <title>生存分析云笔记</title>
       <link>/2019/05/23/survival/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/05/23/survival/</guid>
-      <description>本文部分内容来源于复旦大学人口学系张震老师的数据分析课程笔记。
-基本概念社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道
+      <description>本文部分内容来源于复旦大学人口学系张震老师的数据分析课程笔记。
+第一讲: 基本概念社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道
 生存函数：\(S(t) = P(T &amp;gt; t)\)。是存活概率也是存活百分比。
 失效函数(Failure Function)：\(F(t)\),\(S(t) = 1 - F(t)\), \(F(t)\)是T的累积分布函数。
 \(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
 风险函数: \[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &amp;lt; t + \Delta t|T \ge t)}}{{\Delta t}},0 &amp;lt; h(t) &amp;lt; + \infty \]
 \(h(t)\)不是密度也不是概率。
-censor: 事件观测期内无法观测
-truncate: 样本选择问题
-能活到预期寿命者总是62%</description>
+censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。
+censor涉及到事件，truncate涉及到暴露量。
+能活到预期寿命者总是62%
+第二讲: 最大似然估计(MLE)Cox回归避开了模型分布假定的问题。
+假定数据独立同分布。
+似然函数：
+\[{\rm{L(}}\lambda {\rm{) = }}\prod\limits_{i = 1}^\pi {P(T = t)}\]</description>
     </item>
     
     <item>
@@ -67,7 +71,7 @@ truncate: 样本选择问题
       <guid>/chnresume/</guid>
       <description>英文简历请点击这里
 PDF版本请点击这里下载
-联系方式  地址：上海市浦东新区芳华路53号 邮箱：xsong@stu.ecnu.edu.cn Github：https://github.com/ECSTA7Y 个人主页：https://xsong.ltd 微信公众号：ApocalypseNow  软件技能  R, LaTeX, Stata &amp;emsp;(熟练) Python, SQL, SPSS &amp;emsp;(了解)  相关课程  R语言数据分析 算法与程序设计基础 (Python) 回归分析与Stata应用 SPSS应用 类别数据分析 概率与统计导论 社会模拟与NetLogo应用  教育背景  华东师范大学, 社会发展学院 &amp;emsp;2016年09月-至今 中山大学, 学期交换 &amp;emsp;2018年2月-2018年7月  培训经历  北京大学-密歇根大学学院 暑期课程 &amp;emsp;2018年8月
+联系方式  地址：上海市浦东新区芳华路53号 邮箱：malcolm@xsong.ltd Github：https://github.com/ECSTA7Y 个人主页：https://xsong.ltd 微信公众号：ApocalypseNow  软件技能  R, LaTeX, Stata &amp;emsp;(熟练) Python, SQL, SPSS &amp;emsp;(了解)  相关课程  R语言数据分析 算法与程序设计基础 (Python) 回归分析与Stata应用 SPSS应用 类别数据分析 概率与统计导论 社会模拟与NetLogo应用  教育背景  华东师范大学, 社会发展学院 &amp;emsp;2016年09月-至今 中山大学, 学期交换 &amp;emsp;2018年2月-2018年7月  培训经历  北京大学-密歇根大学学院 暑期课程 &amp;emsp;2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
  上海大学 第6届·应用社会科学研究方法研修班 &amp;emsp;2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
@@ -99,7 +103,7 @@ PDF版本请点击这里下载
     </item>
     
     <item>
-      <title>初中生学习成绩的影响因素——基于分类与回归树的分析</title>
+      <title>初中生学习成绩的影响因素: 基于分类与回归树的分析</title>
       <link>/2019/05/08/edutree/</link>
       <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
       

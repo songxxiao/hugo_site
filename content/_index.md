@@ -20,3 +20,5 @@ My Resume is [here](https://hsiaosong.netlify.com/englishresume/). My Chinese Re
 我的中文简历请点击[这里](https://hsiaosong.netlify.com/chnresume/)，英文简历请点击[这里](https://hsiaosong.netlify.com/englishresume/)
 
 在学习了基本的网页技术之后，我使用[R Studio](https://www.rstudio.com/)、[Hugo](https://themes.gohugo.io/)、[Netlify](https://www.netlify.com/)和[Github](https://github.com/ECSTA7Y/Mysite)搭建了这个网站。为了获得最佳的观看体验，推荐使用谷歌Chrome浏览器。此外，我写了一些技术博客，一些发表在我的博客园账号里，另一些发表在个人微信公众号[ApocalypseNow](https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A)里。文章列表见本页末。
+
+---

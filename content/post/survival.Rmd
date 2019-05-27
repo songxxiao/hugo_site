@@ -1,5 +1,5 @@
 ---
-title: "生存分析笔记"
+title: "生存分析云笔记" 
 author: ' '
 date: '2019-05-23'
 slug: survival
@@ -8,7 +8,7 @@ categories: R
 ---
 本文部分内容来源于复旦大学人口学系[张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html)老师的数据分析课程笔记。
 
-## 基本概念
+##第一讲: 基本概念
 
 + 社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。**在一个状态内待的时间和风险有着密切的关系**。
 
@@ -31,18 +31,42 @@ $f(t) = \frac{{dF(t)}}{{dt}}$，即$S(t)$的斜率。等价于生存时间的概
 $h(t)$不是密度也不是概率。
 
 
-censor: 事件观测期内无法观测  
-truncate: 样本选择问题
++ censor(删截):   知道事件发生，但不知道事件何时发生。事件观测期内无法观测。
++ truncate(截平):   只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。
+
+  + censor涉及到事件，truncate涉及到暴露量。
 
 + 能活到预期寿命者总是62\%
 
+---
+
+## 第二讲: 最大似然估计(MLE)
+
+ Cox回归避开了模型分布假定的问题。
+
++ 假定数据独立同分布。
+
+    似然函数：
+
+$${\rm{L(}}\lambda {\rm{) = }}\prod\limits_{i = 1}^\pi  {P(T = t)}$$  
+$\delta$是积分小区间
+
+$$P(T = t) \approx 2\delta f(t)$$
 
 
++ 发生风险率(Occurrence-exposure rate)
+$$\widehat \lambda  = \frac{1}{{\bar t }} = \frac{n}{{\sum\limits_{}^{} {{t_i}} }}$$
+$\sum\limits_{}^{} {{t_i}}$是历险人年数。$n$是事件发生数。  
+ $\lambda$是个概率估计。
+
+### 删截样本的似然函数
+
++ 40岁删截
 
 
+$$L(\lambda ) = \prod {f({t_i})} S(40)$$
 
-
-
+人口学、医学中最多的情况是left-truncated & right-cencored(LT-RC)数据。
 
 
 

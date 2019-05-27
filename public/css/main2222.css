@@ -86,7 +86,7 @@ code {
 
 .nav-links a {
   text-decoration: none;
-  color: #FFFFFF;
+  color: #111;
 }
 
 .nav-links a:hover {
@@ -148,7 +148,7 @@ code {
   height: 1px;
   overflow: hidden;
   border: none;
-  background: #7B7B7B;
+  background: #D200D2;
 }
 
 .highlight {
