@@ -13,7 +13,7 @@ categories: R
 
 + 留一交叉验证(leave-one-out cross validation)
 
-谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证。
+谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
 ```{r 1,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
 #install.packages('mlbench')
