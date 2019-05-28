@@ -14,6 +14,7 @@ categories: R
 <li><p>k折交叉验证 (K-fold cross-validation)</p></li>
 <li><p>留一交叉验证(leave-one-out cross validation)</p></li>
 </ul>
+<p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证。</p>
 <pre class="r"><code>&gt; #install.packages(&#39;mlbench&#39;)
 &gt; library(caret) #加载数据集</code></pre>
 <div id="-k-fold-cross-validation" class="section level1">
@@ -56,13 +57,13 @@ categories: R
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 455, 455, 455, 454, 456, ... 
+Summary of sample sizes: 455, 457, 454, 455, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.572965  0.6297610  3.993302
-  0.17117244  6.458040  0.5218963  4.780249
-  0.45274420  8.251349  0.3426400  6.045306
+  0.07165784  5.801059  0.6135633  4.184846
+  0.17117244  6.395935  0.5306302  4.728178
+  0.45274420  7.893928  0.4239645  5.724343
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -81,13 +82,13 @@ The final value used for the model was cp = 0.07165784.</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 454, 456, 457, 455, 456, ... 
+Summary of sample sizes: 455, 456, 456, 455, 456, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.786385  0.6085778  4.168951
-  0.17117244  6.591721  0.4809475  4.891796
-  0.45274420  8.315339  0.3276427  6.062502
+  0.07165784  5.701108  0.6211957  4.101921
+  0.17117244  6.514847  0.4934239  4.816207
+  0.45274420  8.410407  0.3332575  6.104783
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
