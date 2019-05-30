@@ -10,6 +10,12 @@ categories: R
 
 一个R生存分析应用的介绍网页[Survival Analysis with R](https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/)
 
+两篇重要的中文文献：
+
+李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
+
+李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.
+
 
 ##第一讲: 基本概念
 
@@ -51,7 +57,7 @@ $h(t)$不是密度也不是概率。
 
     似然函数：
 
-$${\rm{L(}}\lambda {\rm{) = }}\prod\limits_{i = 1}^\pi  {P(T = t)}$$  
+$${\rm{L}}(\lambda ){\rm{ = }}\prod\limits_{i = 1}^\pi  {P(T = t)}  = \prod {f({t_i})}$$  
 $\delta$是积分小区间
 
 $$P(T = t) \approx 2\delta f(t)$$
@@ -62,16 +68,29 @@ $$\widehat \lambda  = \frac{1}{{\bar t }} = \frac{n}{{\sum\limits_{}^{} {{t_i}} 
 $\sum\limits_{}^{} {{t_i}}$是历险人年数。$n$是事件发生数。  
  $\lambda$是个概率估计。
 
-### 删截样本的似然函数
+### 删截(Censored)样本的似然函数
+
++ 完全样本的似然函数是在该时点t的密度函数$f({t_i})$。右删截数据是生存函数$S({C_r})$。左删截数据为累计分布函数$1 - S({C_l})$。区间删截为在该时段内的发生概率$S(L) - S(R)$。
+
+右删截：
+$$P({t_i} > 40) = S(40)$$
 
 + 40岁删截
 
 
-$$L(\lambda ) = \prod {f({t_i})} S(40)$$
+$$L(\lambda ) = \prod\limits_{observed} {f({t_i})}  \cdot \prod\limits_{censored} {S(40)}$$
+
+Assume the first $d$ individuals died, $(n-d)$ ware alive at 40:
+
+$$\hat \lambda  = \frac{d}{{\sum {{t_i} - (n - d) \cdot 40} }}$$
+
+分子为事件发生数。
+
+
 
 人口学、医学中最多的情况是left-truncated & right-cencored(LT-RC)数据。
 
-
+非参数模型Aalen’s additive regression model可以替代Cox模型。R的```survival```包的```aareg```函数可以进行拟合。
 
 
 
