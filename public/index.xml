@@ -70,17 +70,13 @@
       <guid>/chnresume/</guid>
       <description>英文简历请点击这里
 PDF版本请点击这里下载
-联系方式  地址：上海市浦东新区芳华路53号 邮箱：malcolm@xsong.ltd Github：https://github.com/ECSTA7Y 个人主页：https://xsong.ltd 微信公众号：ApocalypseNow  软件技能  R, LaTeX, Stata &amp;emsp;(熟练) Python, SQL, SPSS &amp;emsp;(了解)  相关课程  R语言数据分析 算法与程序设计基础 (Python) 回归分析与Stata应用 SPSS应用 类别数据分析 概率与统计导论 社会模拟与NetLogo应用  教育背景  华东师范大学, 社会发展学院 &amp;emsp;2016年09月-至今 中山大学, 学期交换 &amp;emsp;2018年2月-2018年7月  培训经历  北京大学-密歇根大学学院 暑期课程 &amp;emsp;2018年8月
+联系方式地址：上海市浦东新区芳华路53号邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd微信公众号：ApocalypseNow软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)相关课程R语言数据分析算法与程序设计基础 (Python)回归分析与Stata应用SPSS应用类别数据分析概率与统计导论社会模拟与NetLogo应用教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
- 上海大学 第6届·应用社会科学研究方法研修班 &amp;emsp;2017年7月
+上海大学 第6届·应用社会科学研究方法研修班 2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
- 狗熊会 在线实习项目 &amp;emsp;2019年5月&amp;emsp;
-课程：信用卡申请评分模型
+狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
-  科研经历  土地流转的福利效应与社会不平等——来自CFPS的经验证据&amp;emsp;2018年-2019年
-国家大学生创新训练项目&amp;emsp; 独立作者
-使用中国家庭追踪调查(CFPS)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。
-点击这里下载全文。  所获奖项  2019年 第二届全国高校数据驱动创新研究大赛&amp;emsp;优秀奖 2018年 第十二届本科生社会科学论坛&amp;emsp;特等奖 2018年 华东师范大学优秀学生二等奖学金 2017年 华东师范大学优秀学生二等奖学金  实习经历  俺来也 · 西游早餐&amp;emsp;校园经理&amp;emsp;2017年9月-2018年1月</description>
+科研经历土地流转的福利效应与社会不平等——来自CFPS的经验证据 2018年-2019年</description>
     </item>
     
     <item>
@@ -129,8 +125,7 @@ PDF版本请点击这里下载
       
       <guid>/englishresume/</guid>
       <description>Chinese Resume please click here
-CONTACT  Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai Email：malcolm@xsong.ltd Github：https://github.com/ECSTA7Y Website：https://xsong.ltd Wechat Official Account：ApocalypseNow  SOFTWARE SKILLS  R, LaTeX, Stata Python, SQL, SPSS  RELEVANT COURSES  Data Analysis Using R Algorithm and program design (Python) Regression Analysis and Stata Application SPSS Application Categorical Data Analysis Social Simulation and NetLogo Application  EDUCATION  East China Normal University&amp;emsp;2016-09~Today
-School of Social Development&amp;emsp;(Overall GPA：3.</description>
+CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcolm@xsong.ltdGithub：https://github.com/ECSTA7YWebsite：https://xsong.ltdWechat Official Account：ApocalypseNowSOFTWARE SKILLSR, LaTeX, StataPython, SQL, SPSSRELEVANT COURSESData Analysis Using RAlgorithm and program design (Python)Regression Analysis and Stata ApplicationSPSS ApplicationCategorical Data AnalysisSocial Simulation and NetLogo ApplicationEDUCATIONEast China Normal University 2016-09~Today</description>
     </item>
     
     <item>
@@ -188,24 +183,6 @@ rpart的官方主页如下所示：
 我们并没有忽略造成“水沸腾”的任何一个原因。一旦所有造成“水沸腾”的条件全部满足，水必然会沸腾。由于并没有其他原因能造成水的沸腾，因此我们能从水沸腾必然地推出上述的三个条件。可见，我们找出了“水沸腾”的充分必要条件的因果关系。一旦其他相关条件被实现并且保持不变，那么其中任何一个相关条件的变化都可以成为“水沸腾”的充分必要的原因。比方说，当我们控制“持续加热”和“水在100℃”这两个条件，气压的变化同样能够成为水是否沸腾的充分必要的原因。而之所以我们通常不说“气压变化造成水的沸腾”是因为，气压通常是稳定的而且变化幅度不大。在自然状态下无法造成非常大的影响。而温度则在自然界中是一个相对于气压来说变化幅度较大的变量。 在相关条件被控制的情况下，其中的一个核心条件的变化都是结果变化的充分条件。比方说，当1）在标准大气压下（2）持续加热 这两个条件被满足的情况下，从“加热到100℃”我们必然能推出“水沸腾”。 而相关条件和核心条件共同构成结果的充分必要条件。比如（1）在标准大气压下（2）持续加热（3）加热到100℃ 是“水沸腾”的充分必要条件。
 事实上，休谟也曾以较为粗略的语言表述过关于多个原因的复杂事件的思想。但是密尔将其精细化了。密尔对于因果关系的另一个重要的贡献就是对负事件的表述。
 密尔认为，构成一个结果事件的原因往往包含着一些负事件。即一些事件的缺席。比方说：造成K因癌症而死的原因是K没有在肿瘤恶化之前做手术、K没有及时发现自己的症状。 Q能准时到达某地点是因为没有堵车，没有发生交通事故等等。尽管密尔并不承认负事件能够作为真正的原因。但是，一些哲学家（如Mackie）认为负事件可以是真正的原因。对于单称事件来说，纳入负事件作为原因将会使原因的合取枝趋于无穷。然而，笔者认为对于全称因果关系，负事件的影响将不是强决定的。在某种意义下，负事件甚至不是一个存在的事件(韩林合 2013)。</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/about/</guid>
-      <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/resume/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/resume/</guid>
-      <description>宋 骁code{white-space: pre;}pre:not([class]) {background-color: white;}if (window.hljs) {hljs.configure({languages: []});hljs.initHighlightingOnLoad();if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) {window.setTimeout(function() { hljs.initHighlighting(); }, 0);}}h1 {font-size: 34px;}h1.title {font-size: 38px;}h2 {font-size: 30px;}h3 {font-size: 24px;}h4 {font-size: 18px;}h5 {font-size: 16px;}h6 {font-size: 12px;}.</description>
     </item>
     
   </channel>
