@@ -82,10 +82,10 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 
 + GRE: 321  
 (Verbal:154,Quantity,167,Writing:3.5)
-+ TOEFL: 92  
-(Reading:23, Listening:23, Speaking:20, Writing:26)
++ TOEFL[^1]: 100   
+(Reading:29, Listening:24, Speaking:21, Writing:26)
 + CET-6: 549
 + CET-4: 614
 
-
+[^1]:Best Score
 

@@ -70,12 +70,12 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 
 + GRE: 321   
 (Verbal:154,Quantity,167,Writing:3.5)
-+ TOEFL: 92   
-(Reading:23, Listening:23, Speaking:20, Writing:26)
++ TOEFL[^1]: 100   
+(Reading:29, Listening:24, Speaking:21, Writing:26)
 + CET-6: 549
 + CET-4: 614
 
-
+[^1]:拼分后成绩
 
 
 
