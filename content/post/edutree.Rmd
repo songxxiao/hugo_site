@@ -22,13 +22,24 @@ CART算法全称为分类与回归树（Classification and Regression Trees）�
 其中，$x$是一系列输入特征（自变量），${R_1},{R_2},...,{R_m}$是输入空间被划分的M个区域。 是区域${R_m}$对应的最优值。$I$代表的是指示函数（indicator function），当输入变量$x$属于区域 ${R_m}$时，输出为1，否则输出为0。
 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
 
-## 因变量
+为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：
+
+\[{{\rm{C}}_\alpha }(T) = C(T) + \alpha \left| T \right|\]
+
+其中，$T$为任意子树。$C(T)$为对训练数据的预测误差（如基尼指数）， $\left| T \right|$为子树的叶结点个数，$\alpha  \ge 0$为参数，${{\rm{C}}_\alpha }(T)$是参数为$\alpha$时的子树$T$的整体损失。参数$\alpha$测量了模型的复杂度\cite{breiman2017}。
+
+##变量
+
+本研究依据以往教育学和社会学文献，选取了50个自变量进行预测。为了降低测量误差，本研究在变量选取的过程中遵循了以下两个原则：1.尽可能挑选“客观的”变量。2.尽可能挑选直观上对学习成绩有重要影响的变量。
+
+### 因变量
+
 
 本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
 
-为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示的是标准成绩的直方图。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了编号为1-30的学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。
 
-## 自变量
+### 自变量
 
 下面展示了自变量以及自变量在模型中的编码：
 
@@ -78,6 +89,32 @@ ceps <- data.frame(ceps)
 
 ```
 
+## 分析结果
+
+### 回归树
+
+首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析，并采用10折交叉验证计算模型的验证误差。
+
+```{r re,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
+subset(ceps,grade9 == 1),weights = sweight,method = "anova",parms = 
+list(split="gini"),control=cont,na.action = na.omit)
+
+```
+
+```{r sfff, fig=TRUE,pdf=TRUE,comment=NA,echo=T,warning=FALSE,out.width ='100%',fig.cap="总成绩的回归树",fig.align='center'}
+tree$cptable #复杂度参数表
+rpart.plot(tree)
+```
+
+
+
 下面展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
 
 ```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
@@ -96,7 +133,7 @@ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +
 dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
 subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
 list(split="gini"),control=cont,na.action = na.omit,model=T) #决策树
-knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
+#knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 rpart.plot(cltree3)
 
 test <- na.omit(test) #删除缺失值
@@ -127,7 +164,7 @@ dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data =
 subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
 list(split="gini"),control=cont,na.action = na.omit) #决策树
 
-knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
+#knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 cltree3$variable.importance #各个变量的重要性程度
 
 rpart.plot(cltree3)

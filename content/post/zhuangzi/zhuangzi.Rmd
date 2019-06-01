@@ -1,9 +1,8 @@
 ---
-title: "庄子和大卫·刘易斯"
+title: "Zhuangzi and David Lewis"
 author: ' '
 date: '2018-01-01'
 slug: zhuangzi 
-bibliography: bibfile.bib
 ---
 One day, [Zhuangzi](https://plato.stanford.edu/entries/zhuangzi/) is washing his feet. When he put his feet on the water, he was burned. Zhuangzi felt shocked and drop his hands to water to try the temperature. He felt it is just warm water. He cried: "Ay! Even my senses are so erratic and inexplicable. It seems that our feelings are cheating to us! If our feelings are deceptive, what is the meaning of our life's pain? What we called pain and suffering, maybe just like feet burned by hot water. As hands see, feet's pain just like happiness in warm water. Also, Happiness is like dreaming, with no meaning at all."
 
@@ -11,6 +10,9 @@ Next day, Zhuangzi and his friend, Huizi, are hanging out at a bridge of a river
 
 Ironically, 2200 years after, those two conversations are treated seriously. A professor called [David Lewis]((https://plato.stanford.edu/entries/david-lewis/)) said he fully understand thought of Zhuangzi and wrote a strange paper named *Mad Pain and Martian Pain*[^1]. 
 
+&emsp;
+
+# 庄子与大卫·刘易斯
 
 一天，[庄子](https://plato.stanford.edu/entries/zhuangzi/)在洗脚，他将脚搁到洗脚水中，居然被烫到了。庄子一惊，把手放到水里试了试，感觉这不过是温水啊。可是自己的脚感觉到的是滚烫的热水。庄子一声哀叹：“唉！连自己的感官都那么飘忽不定、莫名其妙, 可见感觉是会骗人的啊！如果自己的感觉都是不真实的，那么人世间的痛苦还有什么意义呢？所谓的痛苦，也许不过是脚沾到热水那样的幻象罢了。在手看来，脚的痛苦不过就是温水中的怡然自得。快乐亦如是，如梦幻泡影，没有任何意义。”
 

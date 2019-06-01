@@ -83,14 +83,20 @@
 <h2>模型与算法</h2>
 <p>CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： <span class="math display">\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]</span></p>
 <p>其中，<span class="math inline">\(x\)</span>是一系列输入特征（自变量），<span class="math inline">\({R_1},{R_2},...,{R_m}\)</span>是输入空间被划分的M个区域。 是区域<span class="math inline">\({R_m}\)</span>对应的最优值。<span class="math inline">\(I\)</span>代表的是指示函数（indicator function），当输入变量<span class="math inline">\(x\)</span>属于区域 <span class="math inline">\({R_m}\)</span>时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。</p>
+<p>为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：</p>
+<p><span class="math display">\[{{\rm{C}}_\alpha }(T) = C(T) + \alpha \left| T \right|\]</span></p>
+<p>其中，<span class="math inline">\(T\)</span>为任意子树。<span class="math inline">\(C(T)\)</span>为对训练数据的预测误差（如基尼指数）， <span class="math inline">\(\left| T \right|\)</span>为子树的叶结点个数，<span class="math inline">\(\alpha \ge 0\)</span>为参数，<span class="math inline">\({{\rm{C}}_\alpha }(T)\)</span>是参数为<span class="math inline">\(\alpha\)</span>时的子树<span class="math inline">\(T\)</span>的整体损失。参数<span class="math inline">\(\alpha\)</span>测量了模型的复杂度。</p>
 </div>
 <div class="section level2">
-<h2>因变量</h2>
+<h2>变量</h2>
+<p>本研究依据以往教育学和社会学文献，选取了50个自变量进行预测。为了降低测量误差，本研究在变量选取的过程中遵循了以下两个原则：1.尽可能挑选“客观的”变量。2.尽可能挑选直观上对学习成绩有重要影响的变量。</p>
+<div class="section level3">
+<h3>因变量</h3>
 <p>本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。</p>
-<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示的是标准成绩的直方图。</p>
+<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了编号为1-30的学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。</p>
 </div>
-<div class="section level2">
-<h2>自变量</h2>
+<div class="section level3">
+<h3>自变量</h3>
 <p>下面展示了自变量以及自变量在模型中的编码：</p>
 <p>家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。</p>
 <p>个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。</p>
@@ -99,6 +105,38 @@
 <p><img src="../../../../post/edutree_files/figure-html/add%20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。</p>
 <p><img src="../../../../post/edutree_files/figure-html/a%20-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div class="section level2">
+<h2>分析结果</h2>
+<div class="section level3">
+<h3>回归树</h3>
+<p>首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析，并采用10折交叉验证计算模型的验证误差。</p>
+<pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+&gt; tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
++ qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
++ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
++ schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
++ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
++ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
++ subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = 
++ list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
+<pre class="r"><code>tree$cptable </code></pre>
+<pre><code>          CP nsplit rel error    xerror         xstd
+1 0.07468185      0 1.0000000 1.0010953 0.0005638141
+2 0.03717668      1 0.9253181 0.9283205 0.0005276759
+3 0.01820999      2 0.8881415 0.9098368 0.0005350934
+4 0.01328867      3 0.8699315 0.9007228 0.0005427070
+5 0.01308371      4 0.8566428 0.8918870 0.0005424393
+6 0.01281814      5 0.8435591 0.8891342 0.0005423088
+7 0.01000000      6 0.8307410 0.8675524 0.0005378248</code></pre>
+<pre class="r"><code>rpart.plot(tree)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:sfff"></span>
+<img src="../../../../post/edutree_files/figure-html/sfff-1.png" alt="总成绩的回归树" width="100%" />
+<p class="caption">
+Figure 1: 总成绩的回归树
+</p>
+</div>
 <p>下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。</p>
 <pre class="r"><code>&gt; set.seed(1212323) #设置随机数种子
 &gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
@@ -353,6 +391,7 @@ yhat   0   1
 <pre><code>[1] 0.2505855</code></pre>
 <p>可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。</p>
 <p>在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25%左右。</p>
+</div>
 <div class="section level3">
 <h3>随机森林</h3>
 <pre class="r"><code>&gt; train$matgreat &lt;- as.factor(train$matgreat)
