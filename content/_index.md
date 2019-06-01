@@ -3,10 +3,10 @@ date: " "
 title: 'Xiao Song | 宋 骁'
 ---
 
-My name is Xiao Song, you can call me Malcolm. I come from [East China Normal University](http://english.ecnu.edu.cn/).During my college years, I have learned basic and advanced statistical knowledge and I did several researches using econometric knowledge. 
-I have learned knowledge of data analysis. I can complete an integral data analysis report. Using Statistical software, such as Python and R, I can handle statistical models including Classic Statistics and machine learning.
+My name is Xiao Song, you can call me Malcolm. I am a junior student from  [East China Normal University](http://english.ecnu.edu.cn/)(ECNU).  
+During my study at ECNU, I have mastered advanced statistical analysis and programming skills and am able to apply these skills in solving real world problems. In addition, I had solid research projects utilizing econometric knowledge. My data analytical capability also stood me out. I can independently complete an integral data analysis report using statistical software such as Python and R. I am also proficient in statistical models including Classic Statistics and machine learning.
 
-My Resume is [here](https://hsiaosong.netlify.com/englishresume/). My Chinese Resume is [here](https://hsiaosong.netlify.com/chnresume/).
+You can find my English resume attached [here](https://xsong.ltd/englishresume/), and my Chinese resume [here](https://xsong.ltd/chnresume/).
 
 &emsp;
 
