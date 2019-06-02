@@ -1,5 +1,5 @@
 ---
-title: "如何提取R包中的小品文"
+title: "如何提取R包中的小品文? "
 author: " "
 date: 2019-05-07
 slug: vignette
@@ -20,16 +20,16 @@ knitr::include_graphics("/img/Capture.png")
 ```
 
 
-其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。  
+其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。  
 
 ``````{r pressure2, echo=F, fig.cap=" ", out.width = '100%'}
 knitr::include_graphics("/img/Capture2.png")
 ```
 
 
-但，这种方法其实是多此一举了！
+但是，这种方法其实多此一举了！
 
-因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：  
+因为我们在下载R包时，已经将小品文下载下来了。我们可以使用`utils`包中的`vignette`函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：  
 
 ```{r a,message = F,prompt=T,warning = F, include = T,error = T,echo = T,eval = F}
 #install.packages('utils')#没安装先安装包
@@ -64,7 +64,7 @@ knitr::include_graphics("/img/Capture3.png")
 
 便可以阅读了。
 
-很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：  
+很多R包的小品文是pdf版本，当然还有很多是html形式的，如ggplot2的小品文：  
 
 ```{r d,message = F,prompt=T, include = T,error = T,echo = T,eval = F,results = 'hide'}
 vignette("ggplot2-specs", package = "ggplot2")

@@ -116,7 +116,7 @@ PDF版本请点击这里下载
 家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。
 个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。
 学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。
-班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)
+班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
 为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
 分析结果回归树首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析，并采用10折交叉验证计算模型的验证误差。</description>
     </item>
@@ -132,7 +132,7 @@ CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcol
     </item>
     
     <item>
-      <title>如何提取R包中的小品文</title>
+      <title>如何提取R包中的小品文? </title>
       <link>/2019/05/07/vignette/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
@@ -141,14 +141,14 @@ CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcol
 用R实现各种分析任务需要学习不同的R包。而学习R包实现方法的同时必须同时结合理论。因此仅仅看帮助文档和用户手册（Reference manual）是远远不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习数据分析的不可多得的好材料。下文将以rpart包为例讲解如何获取R包的官方小品文。
 在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
 rpart的官方主页如下所示：
-其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。
-但，这种方法其实是多此一举了！
+其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。
+但是，这种方法其实多此一举了！
 因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
 &amp;gt; #install.packages(&amp;#39;utils&amp;#39;)#没安装先安装包&amp;gt; #library(utils)#加载包&amp;gt; vignette(, package = &amp;quot;rpart&amp;quot;)#提取rpart包的小品文名称输出结果如下所示：
 &amp;gt; #Vignettes in package ‘rpart’:&amp;gt; &amp;gt; #longintro Introduction to Rpart &amp;gt; # (source, pdf)&amp;gt; #usercode User Written Split&amp;gt; # Functions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
 &amp;gt; vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
 便可以阅读了。
-很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：
+很多R包的小品文是pdf版本，当然还有很多是html形式的，如ggplot2的小品文：
 &amp;gt; vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)看起来这个小品文是用R Markdown写的。</description>
     </item>
     

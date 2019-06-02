@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>如何提取R包中的小品文 - Xiao Song </title>
-<meta property="og:title" content="如何提取R包中的小品文 - Xiao Song ">
+<title>如何提取R包中的小品文?  - Xiao Song </title>
+<meta property="og:title" content="如何提取R包中的小品文?  - Xiao Song ">
 
 
   <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -65,7 +65,7 @@
 
   <article class="article">
 
-    <h1 class="article-title">如何提取R包中的小品文</h1>
+    <h1 class="article-title">如何提取R包中的小品文? </h1>
 
     
     <span class="article-date">2019-05-07</span>
@@ -84,14 +84,14 @@
 <p class="caption">
 </p>
 </div>
-<p>其中，Downloads下便有用户手册和小品文的下载按钮，点击即可下载。</p>
+<p>其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。</p>
 <div class="figure">
 <img src="../../../../img/Capture2.png" alt=" " width="100%" />
 <p class="caption">
 </p>
 </div>
-<p>但，这种方法其实是多此一举了！</p>
-<p>因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：</p>
+<p>但是，这种方法其实多此一举了！</p>
+<p>因为我们在下载R包时，已经将小品文下载下来了。我们可以使用<code>utils</code>包中的<code>vignette</code>函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：</p>
 <pre class="r"><code>&gt; #install.packages(&#39;utils&#39;)#没安装先安装包
 &gt; #library(utils)#加载包
 &gt; vignette(, package = &quot;rpart&quot;)#提取rpart包的小品文名称</code></pre>
@@ -112,7 +112,7 @@
 </p>
 </div>
 <p>便可以阅读了。</p>
-<p>很多R包的小品文是pdf版本，当然还有很多是html版的，如ggplot2的小品文：</p>
+<p>很多R包的小品文是pdf版本，当然还有很多是html形式的，如ggplot2的小品文：</p>
 <pre class="r"><code>&gt; vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)</code></pre>
 <div class="figure">
 <img src="../../../../img/Capture4.png" alt=" " width="100%" />
