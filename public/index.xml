@@ -182,5 +182,14 @@ rpart的官方主页如下所示：
 事实上，相关条件的思想对应于科学实验中的随机分组与控制变量。当控制了“在标准大气压下”和 “持续加热”这两个条件不变时，“水在100℃”构成了“水沸腾”的强决定因果，“水沸腾”当且仅当“水在100℃”。 那么这条定律可以重新写成：</description>
     </item>
     
+    <item>
+      <title>Reward</title>
+      <link>/reward/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/reward/</guid>
+      <description>赞赏支付宝 (Alipay)微信 (Wechat)</description>
+    </item>
+    
   </channel>
 </rss>

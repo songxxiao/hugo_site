@@ -132,7 +132,7 @@ code {
 
 .article-content a:hover,
 .article-content a:focus {
- border-bottom: 1.8px solid #222;
+ border-bottom: 1.8px solid #ADADAD;
 }
 
 .article-content hr {

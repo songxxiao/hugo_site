@@ -80,12 +80,14 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 
 ### STANDARDIZED TEST
 
-+ GRE: 321  
-(Verbal:154,Quantity,167,Writing:3.5)
-+ TOEFL: 100   
-(Reading:29, Listening:24, Speaking:21, Writing:26)[^2]
-+ CET-6: 549
-+ CET-4: 614
++ **[GRE](https://www.ets.org/gre)**: 321   
+(*Verbal*: 154, *Quantity*: 167, *Writing*: 3.5)  
 
-[^2]: Best Score
++ **[TOEFL](https://www.ets.org/toefl)**: 100   
+(*Reading*: 29, *Listening*: 24, *Speaking*: 21, *Writing*: 26)[^toefl]
 
++ **[CET-6](http://cet.neea.edu.cn/)**[^cet] : 549
++ **[CET-4](http://cet.neea.edu.cn/)**: 614
+
+[^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
+[^cet]: [College English Test](http://www.cet.edu.cn/)
