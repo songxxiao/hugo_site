@@ -77,7 +77,7 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + **[CET-6](http://cet.neea.edu.cn/)**: 549
 + **[CET-4](http://cet.neea.edu.cn/)**: 614
 
-[^toefl]: [Best Score](https://www.ets.org/toefl/institutions/scores/)
+[^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
 
 
 
