@@ -135,17 +135,17 @@ head(km,100) #删截后面有+号
 
 km_fit <- survfit(km ~ 1, data=cwg)
 km_fit #生存分析概要
-summary(km_fit, times = c(1,30,60,90*(1:10))) #这个东西和生命表等价
+summary(km_fit, times = c(0.2*(1:35))) #这个东西和生命表等价
 autoplot(km_fit) #ggplot2风格KM图
 
-km_trt_fit <- survfit(km ~ female, data=cwg)
+km_trt_fit <- survfit(km ~ female, data=cwg)#分性别KM估计
 autoplot(km_trt_fit) #图中+号可能是"打结" ties?
 
 ```
 
 ## Cox比例风险模型
 
-
+$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
 
 
 
