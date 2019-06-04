@@ -126,6 +126,11 @@ cwg <- select(cwg,cen_r,event, los1,everything())
 #head(cwg)#数据
 ```
 
+## Kaplan–Meier estimator | 卡普兰迈耶法
+
+又称乘积极限法(Product-Limit Method)
+
+$${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}$$
 
 ```{r b,prompt=T, comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
 table(cwg$event)

@@ -79,6 +79,11 @@ categories: R
 <code>los1</code>:时间变量<br />
 <code>cen_r</code>:事件是否发生,被收养成功</li>
 </ul>
+</div>
+<div id="kaplanmeier-estimator-" class="section level2">
+<h2>Kaplan–Meier estimator | 卡普兰迈耶法</h2>
+<p>又称乘积极限法(Product-Limit Method)</p>
+<p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <pre class="r"><code>&gt; table(cwg$event)</code></pre>
 <pre><code>
   0   1 
