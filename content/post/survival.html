@@ -80,18 +80,11 @@ categories: R
 <code>cen_r</code>:事件是否发生,被收养成功</li>
 </ul>
 </div>
-<div class="section level2">
-<h2>生命表</h2>
-<div class="figure" style="text-align: center">
-<img src="/img/life.jpg" alt=" " width="100%" />
-<p class="caption">
-</p>
-</div>
-</div>
 <div id="kaplanmeier-estimator-" class="section level2">
 <h2>Kaplan–Meier estimator | 卡普兰迈耶法</h2>
 <p>又称乘积极限法(Product-Limit Method)</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
+<p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
 <pre class="r"><code>&gt; table(cwg$event)</code></pre>
 <pre><code>
   0   1 
@@ -119,6 +112,8 @@ categories: R
 
       n  events  median 0.95LCL 0.95UCL 
    1278     300      NA      NA      NA </code></pre>
+<pre class="r"><code>&gt; knitr::include_graphics(&quot;/img/life.jpg&quot;)</code></pre>
+<p><img src="/img/life.jpg" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; summary(km_fit, times = c(0.2*(1:25))) #这个东西和生命表等价</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
@@ -151,12 +146,15 @@ categories: R
 <pre class="r"><code>&gt; knitr::include_graphics(&quot;/img/life2.jpg&quot;)</code></pre>
 <p><img src="/img/life2.jpg" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; autoplot(km_fit) #ggplot2风格KM图</code></pre>
-<p><img src="/post/survival_files/figure-html/b-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/survival_files/figure-html/b-3.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
 &gt; autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
-<p><img src="/post/survival_files/figure-html/b-3.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/survival_files/figure-html/b-4.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cox" class="section level2">
 <h2>Cox比例风险模型</h2>
 <p><span class="math display">\[\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}\]</span></p>
+<ul>
+<li><span class="math inline">\({h_i}(t)\)</span>是个体i在时间t时的风险值。<span class="math inline">\({h_0}(t)\)</span>是所有个体在时间t时的非参数风险函数值。<span class="math inline">\({\beta_p}{X_p}\)</span>是对个体i的解释变量和系数。</li>
+</ul>
 </div>
