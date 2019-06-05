@@ -126,7 +126,7 @@ cwg <- select(cwg,cen_r,event, los1,everything())
 #head(cwg)#数据
 ```
 
-## Kaplan–Meier estimator | 卡普兰迈耶法
+### Kaplan–Meier estimator | 卡普兰迈耶法
 
 又称乘积极限法(Product-Limit Method)
 
@@ -139,12 +139,12 @@ $n_i$是在时间$t_i$中的历险人数，$d_i$是事件发生数。
 table(cwg$event)
 # Kaplan Meier Survival Curve
 km <- with(cwg, Surv(los1, event == 1))
-head(km,70) #删截后面有+号
+head(km,10) #删截后面有+号
 
 km_fit <- survfit(km ~ 1, data=cwg)
 km_fit #生存分析概要
 knitr::include_graphics("/img/life.jpg")
-summary(km_fit, times = c(0.2*(1:25))) #这个东西和生命表等价
+knitr::kable(summary(km_fit, times = c(0.2*(1:25)))) #这个表和生命表等价
 knitr::include_graphics("/img/life2.jpg")
 
 autoplot(km_fit) #ggplot2风格KM图

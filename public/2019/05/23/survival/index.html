@@ -147,9 +147,8 @@
 <code>los1</code>:时间变量<br />
 <code>cen_r</code>:事件是否发生,被收养成功</li>
 </ul>
-</div>
-<div id="kaplanmeier-estimator-" class="section level2">
-<h2>Kaplan–Meier estimator | 卡普兰迈耶法</h2>
+<div id="kaplanmeier-estimator-" class="section level3">
+<h3>Kaplan–Meier estimator | 卡普兰迈耶法</h3>
 <p>又称乘积极限法(Product-Limit Method)</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
@@ -218,6 +217,7 @@
 <pre class="r"><code>&gt; km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
 &gt; autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
 <p><img src="../../../../post/survival_files/figure-html/b-4.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="cox" class="section level2">
 <h2>Cox比例风险模型</h2>
