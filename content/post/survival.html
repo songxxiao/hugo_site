@@ -90,30 +90,22 @@ categories: R
 978 300 </code></pre>
 <pre class="r"><code>&gt; # Kaplan Meier Survival Curve
 &gt; km &lt;- with(cwg, Surv(los1, event == 1))
-&gt; head(km,70) #删截后面有+号</code></pre>
+&gt; head(km,10) #删截后面有+号</code></pre>
 <pre><code> [1]  4.30000000+  6.00000000  21.00000000+  0.03333333  10.63333333 
- [6]  4.43333333+  6.86666667+  4.46666667+  2.40000000+  9.00000000 
-[11]  6.10000000+ 10.73333333  11.46666667   8.60000000  28.53333333+
-[16] 17.96666667+ 21.16666667+ 12.16666667   4.70000000+  0.16666667+
-[21] 25.76666667+  2.73333333+  0.03333333  11.76666667+  2.26666667+
-[26]  2.26666667+ 23.36666667+  2.40000000+ 11.80000000+  2.40000000+
-[31] 13.90000000+ 11.30000000+  0.73333333+ 14.86666667+ 17.36666667+
-[36] 20.53333333+  5.96666667+  5.73333333+  6.03333333+ 24.36666667+
-[41] 24.36666667+  6.23333333  18.90000000+ 25.96666667+  5.23333333+
-[46]  4.43333333+  4.20000000   4.20000000  17.83333333+ 11.86666667 
-[51] 11.86666667  17.80000000+ 20.56666667+  6.00000000+  8.76666667+
-[56] 24.33333333+ 30.70000000+  2.63333333  11.23333333+ 21.96666667+
-[61] 20.60000000+ 20.60000000+ 10.56666667  10.56666667  28.70000000+
-[66] 31.63333333+ 23.16666667+  8.50000000+ 24.43333333+  7.13333333+</code></pre>
+ [6]  4.43333333+  6.86666667+  4.46666667+  2.40000000+  9.00000000 </code></pre>
 <pre class="r"><code>&gt; km_fit &lt;- survfit(km ~ 1, data=cwg)
 &gt; km_fit #生存分析概要</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
       n  events  median 0.95LCL 0.95UCL 
    1278     300      NA      NA      NA </code></pre>
-<pre class="r"><code>&gt; knitr::include_graphics(&quot;/img/life.jpg&quot;)</code></pre>
-<p><img src="/img/life.jpg" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; summary(km_fit, times = c(0.2*(1:25))) #这个东西和生命表等价</code></pre>
+<div class="figure" style="text-align: center">
+<img src="/img/life.jpg" alt=" " width="100%" />
+<p class="caption">
+</p>
+</div>
+<p>生存函数的Kaplan–Meier估计就是<span class="math inline">\(nPx\)</span>那一列的累乘。</p>
+<pre class="r"><code>&gt; summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
  time n.risk n.event survival std.err lower 95% CI upper 95% CI
@@ -142,13 +134,16 @@ categories: R
   4.6   1008       4    0.913 0.00821        0.897        0.929
   4.8    991       8    0.905 0.00853        0.889        0.922
   5.0    977       7    0.899 0.00881        0.882        0.916</code></pre>
-<pre class="r"><code>&gt; knitr::include_graphics(&quot;/img/life2.jpg&quot;)</code></pre>
-<p><img src="/img/life2.jpg" width="100%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center">
+<img src="/img/life2.jpg" alt=" " width="100%" />
+<p class="caption">
+</p>
+</div>
 <pre class="r"><code>&gt; autoplot(km_fit) #ggplot2风格KM图</code></pre>
-<p><img src="/post/survival_files/figure-html/b-3.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/survival_files/figure-html/cw-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
 &gt; autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
-<p><img src="/post/survival_files/figure-html/b-4.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/survival_files/figure-html/cw-2.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="cox" class="section level2">
