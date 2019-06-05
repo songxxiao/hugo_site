@@ -149,7 +149,7 @@
 </ul>
 <div id="kaplanmeier-estimator-" class="section level3">
 <h3>Kaplan–Meier estimator | 卡普兰迈耶法</h3>
-<p>又称乘积极限法(Product-Limit Method)</p>
+<p>又称乘积极限法(Product-Limit Method), 公式如下：</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
 <pre class="r"><code>&gt; table(cwg$event)</code></pre>
@@ -172,7 +172,7 @@
 <p class="caption">
 </p>
 </div>
-<p>生存函数的Kaplan–Meier估计就是<span class="math inline">\(nPx\)</span>那一列的累乘。</p>
+<p>生存函数的Kaplan–Meier estimator就是<span class="math inline">\(nPx\)</span>列的累乘。</p>
 <pre class="r"><code>&gt; summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
