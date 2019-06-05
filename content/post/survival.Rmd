@@ -126,6 +126,14 @@ cwg <- select(cwg,cen_r,event, los1,everything())
 #head(cwg)#数据
 ```
 
+## 生命表
+
+``````{r life, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+knitr::include_graphics("/img/life.jpg")
+```
+
+
+
 ## Kaplan–Meier estimator | 卡普兰迈耶法
 
 又称乘积极限法(Product-Limit Method)
@@ -136,11 +144,14 @@ $${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\li
 table(cwg$event)
 # Kaplan Meier Survival Curve
 km <- with(cwg, Surv(los1, event == 1))
-head(km,100) #删截后面有+号
+head(km,70) #删截后面有+号
 
 km_fit <- survfit(km ~ 1, data=cwg)
 km_fit #生存分析概要
-summary(km_fit, times = c(0.2*(1:35))) #这个东西和生命表等价
+summary(km_fit, times = c(0.2*(1:25))) #这个东西和生命表等价
+
+knitr::include_graphics("/img/life2.jpg")
+
 autoplot(km_fit) #ggplot2风格KM图
 
 km_trt_fit <- survfit(km ~ female, data=cwg)#分性别KM估计
