@@ -175,7 +175,7 @@ $$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdo
 
 $${{h(t|{X_i})} \over {h(t|{X_j})}} = {{{h_0}(t)\exp (X_i^T\beta )} \over {{h_0}(t)\exp (X_j^T\beta )}} = \exp [(X_i^T - X_j^T)\beta ]$$
 
-+ 两个分别具有协变量${x_i}$和${x_j}$的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）
++ 两个分别具有协变量${X_i}$和${X_j}$的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）
 
 + ${h_i}(t)$和${h_0}(t)$随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。
 
