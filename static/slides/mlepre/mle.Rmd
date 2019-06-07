@@ -73,62 +73,8 @@ ggplot(moto, aes(x,y),group=z)+
   
 $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 ]
----
-
-# 运行结果
-
-```python 
-. mixed logearn || geo: , variance
-
-Performing EM optimization: 
-
-Performing gradient-based optimization: 
-
-Iteration 0:   log likelihood = -7978.9487  
-Iteration 1:   log likelihood = -7978.9487  (backed up)
-
-Computing standard errors:
-
-Mixed-effects ML regression                     Number of obs     =     15,862
-Group variable: geo                             Number of groups  =         55
-
-                                                Obs per group:
-                                                              min =         80
-                                                              avg =      288.4
-                                                              max =      1,096
-
-                                                Wald chi2(0)      =          .
-Log likelihood = -7978.9487                     Prob > chi2       =          .
-
-```
-
----
-
-```python 
 
 
-
-------------------------------------------------------------------------------
-     logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-       _cons |   7.421528   .0254612   291.48   0.000     7.371625     7.47143
-------------------------------------------------------------------------------
-
-------------------------------------------------------------------------------
-  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
------------------------------+------------------------------------------------
-geo: Identity                |
-                  var(_cons) |   .0348887   .0068122      .0237949    .0511547
------------------------------+------------------------------------------------
-               var(Residual) |   .1579178   .0017763      .1544744     .161438
-------------------------------------------------------------------------------
-LR test vs. linear model: chibar2(01) = 2377.51       Prob >= chibar2 = 0.0000
-
-
-
-
-
-```
 
 
 ---
@@ -262,8 +208,62 @@ mixed LogY x1 z x1#z || geo: x1, variance
 
 
 ```
+---
+
+## 零模型运行结果
+
+```python 
+. mixed logearn || geo: , variance
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -7978.9487  
+Iteration 1:   log likelihood = -7978.9487  (backed up)
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =     15,862
+Group variable: geo                             Number of groups  =         55
+
+                                                Obs per group:
+                                                              min =         80
+                                                              avg =      288.4
+                                                              max =      1,096
+
+                                                Wald chi2(0)      =          .
+Log likelihood = -7978.9487                     Prob > chi2       =          .
+
+```
+
+---
+
+```python 
 
 
+
+------------------------------------------------------------------------------
+     logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       _cons |   7.421528   .0254612   291.48   0.000     7.371625     7.47143
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+geo: Identity                |
+                  var(_cons) |   .0348887   .0068122      .0237949    .0511547
+-----------------------------+------------------------------------------------
+               var(Residual) |   .1579178   .0017763      .1544744     .161438
+------------------------------------------------------------------------------
+LR test vs. linear model: chibar2(01) = 2377.51       Prob >= chibar2 = 0.0000
+
+
+
+
+
+```
 ---
 class: center, middle
 
