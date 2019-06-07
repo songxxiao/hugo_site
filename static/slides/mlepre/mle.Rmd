@@ -17,9 +17,9 @@ output:
 
 # 数据介绍
 
-+ 1988 年中国居民收入调查(CHIP)数据
++ 1988 年**中国居民收入调查**(CHIP)数据
 
-+ 研究了经济改革的成功与个人收入决定因素之间的关系
++ 研究经济改革的成功与个人收入决定因素之间的关系
 
 
 
@@ -105,17 +105,31 @@ LR test vs. linear model: chibar2(01) = 2377.51       Prob >= chibar2 = 0.0000
 
 
 ---
+class: center, middle
+
 # 模型
 
-+ 零模型
+---
+
+
+# 零模型(ANOVA)
 
  + 层一： 
  
 $${y_{ij}} = {\beta _{0j}} + {\varepsilon _{ij}}$$
-    + 层二：
+ + 层二：
  
 $${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$
+ + 组合模型
+ 
+$${y_{ij}} = {\gamma _{00}} + {\mu _{0j}} + {\varepsilon _{ij}}$$
 
+其中,
+${\beta _{0j}}$是第j个层2单位的平均值,
+
+$\gamma_{00}$表示样本整体中因变量的总平均值(grand mean) ,
+
+${\mu _{0j}}$是与第j个层2单位相联系的随机效应
 
 ---
 # 随机截距模型
@@ -133,6 +147,11 @@ $${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$
 + 组合模型
 
 $${{\rm{y}}_{ij}} = \underbrace {{\beta _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}})}_{fixed{\rm{ }}\ effect} + \underbrace {{\gamma _{00}} + {\mu _{0j}} + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$
+
+其中,
+$\gamma_{00}$表示层2 所有单位的回归截距的平均值。
+
+$\gamma_{10}$表示层2 所有单位的回归斜率的平均值。
 
 ---
 # 随机截距模型
@@ -175,6 +194,8 @@ knitr::include_graphics("random2.jpg")
 ---
 # 完全模型(引入层2解释变量)
 
+### 将截距和斜率作为结果的回归模型
+
  + 层一： 
  
 $${y_{ij}} = {\beta _{0j}} + {\beta _{1j}}{x_{ij}} + {\varepsilon _{ij}}$$
@@ -189,11 +210,33 @@ $${\beta _{1j}} = {\gamma _{10}} + {\gamma _{11}}{Z_j} + {\mu _{1j}}$$
 $${y_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{01}}{Z_j} + {\gamma _{10}}{x_{ij}} + {\gamma _{11}}{Z_j}{x_{ij}}}_{fixed{\rm{ }}\ effect} + \underbrace {{\mu _{0j}} + {\mu _{1j}}{x_{ij}} + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$
 
 ---
-# 完全模型(引入层2解释变量)
+# Stata 命令
+
++ **geo**为层2标识变量  
+
++ **z**为层2解释变量
+
+```sql
+
+/*零模型*/
+mixed LogY || geo: , variance
+
+/*随机系数模型*/
+mixed LogY x1 || geo: x1, variance
+
+/*随机截距模型*/
+mixed LogY x1 || geo: , variance
+
+/*完全模型*/
+mixed LogY x1 z x1#z || geo: x1, variance
 
 
+```
 
+---
+#增长曲线模型
 
++ 将时间变量纳入层1
 
 
 ---
@@ -201,7 +244,7 @@ class: center, middle
 
 # 谢谢!
 ``````{r end, echo=F, fig.cap=" ",out.width = '60%',fig.align='center'}
-knitr::include_graphics("chaoyue.gif")
+knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559921618412&di=f118b115bf4ab9ab74be09f366906204&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201809%2F12%2F20180912072220_qivjj.thumb.700_0.gif")
 ```
 
 
