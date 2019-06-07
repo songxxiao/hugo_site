@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>多层线性模型</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="宋骁 彭璟 吴迪雅 姜昱竹 宋虹玉" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="zh-CN.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# 多层线性模型
+## 数据分析
+### 宋骁 彭璟 吴迪雅 姜昱竹 宋虹玉
+### 2019/06/17
+
+---
+
+---
+
+# 数据介绍
+
++ 1988 年中国居民收入调查(CHIP)数据
+
++ 研究了经济改革的成功与个人收入决定因素之间的关系
+
+
+
+
+
+
+
+---
+# 变量
+
++ 因变量：
+  + 收入的自然对数值
+
++ 个人变量：
+  + 教育年限
+  + 工作年限(即工龄)
+  + 党员身份的虚拟变量(1=党员, 0=非党员)
+  + 性别的虚拟变量(1=女性, 0=男性)
+
++ 城市层面变量：
+  + 1985年和1988年之间各城市工业总产值(GPVI)的变化
+  
+`$${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$`
+
+---
+
+# 运行结果
+
+```python 
+. mixed logearn || geo: , variance
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -7978.9487  
+Iteration 1:   log likelihood = -7978.9487  (backed up)
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =     15,862
+Group variable: geo                             Number of groups  =         55
+
+                                                Obs per group:
+                                                              min =         80
+                                                              avg =      288.4
+                                                              max =      1,096
+
+                                                Wald chi2(0)      =          .
+Log likelihood = -7978.9487                     Prob &gt; chi2       =          .
+
+```
+
+---
+
+```python 
+
+
+
+------------------------------------------------------------------------------
+     logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+       _cons |   7.421528   .0254612   291.48   0.000     7.371625     7.47143
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+geo: Identity                |
+                  var(_cons) |   .0348887   .0068122      .0237949    .0511547
+-----------------------------+------------------------------------------------
+               var(Residual) |   .1579178   .0017763      .1544744     .161438
+------------------------------------------------------------------------------
+LR test vs. linear model: chibar2(01) = 2377.51       Prob &gt;= chibar2 = 0.0000
+
+
+
+
+
+```
+
+
+---
+# 模型
+
++ 零模型
+
+ + 层一： 
+ 
+`$${y_{ij}} = {\beta _{0j}} + {\varepsilon _{ij}}$$`
+    + 层二：
+ 
+`$${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$`
+
+
+---
+# 随机截距模型
+
++ 层1
+
+`$${{\rm{y}}_{ij}} = {\beta _{0j}} + {\beta _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}}) + {\varepsilon _{ij}}$$`
+
+
+
++ 层2
+
+`$${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$`
+
++ 组合模型
+
+`$${{\rm{y}}_{ij}} = \underbrace {{\beta _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}})}_{fixed{\rm{ }}\ effect} + \underbrace {{\gamma _{00}} + {\mu _{0j}} + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$`
+
+---
+# 随机截距模型
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="random.jpg" alt=" " width="70%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+
+---
+
+# 随机系数模型
+
++ 层1：
+
+`$${{\rm{y}}_{ij}} = {\beta _{0j}} + {\beta _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}}) + {\varepsilon _{ij}}$$`
+
++ 层2：
+
+`$${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$`
+`$${\beta _{1j}} = {\gamma _{10}} + {\mu _{1j}}$$`
+
+组合模型：
+`$${{\rm{y}}_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{10}}({x_{ij}} - {{\bar x}_{ \cdot j}})}_{fixed{\rm{ }}\ effect} + \underbrace {{\mu _{0j}} + {\mu _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}}) + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$`
+
+
+
+
+
+
+---
+# 随机系数模型
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="random2.jpg" alt=" " width="70%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+# 完全模型(引入层2解释变量)
+
+ + 层一： 
+ 
+`$${y_{ij}} = {\beta _{0j}} + {\beta _{1j}}{x_{ij}} + {\varepsilon _{ij}}$$`
+ + 层二：
+ 
+`$${\beta _{0j}} = {\gamma _{00}} + {\gamma _{01}}{Z_j} + {\mu _{0j}}$$`
+
+`$${\beta _{1j}} = {\gamma _{10}} + {\gamma _{11}}{Z_j} + {\mu _{1j}}$$`
+
++ 代入得到：
+
+`$${y_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{01}}{Z_j} + {\gamma _{10}}{x_{ij}} + {\gamma _{11}}{Z_j}{x_{ij}}}_{fixed{\rm{ }}\ effect} + \underbrace {{\mu _{0j}} + {\mu _{1j}}{x_{ij}} + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$`
+
+---
+# 完全模型(引入层2解释变量)
+
+
+
+
+
+
+---
+class: center, middle
+
+# 谢谢!
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="chaoyue.gif" alt=" " width="60%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
