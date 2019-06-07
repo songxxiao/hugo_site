@@ -13,6 +13,33 @@ output:
       countIncrementalSlides: false
       
 ---
+# Let's Start!
+
+```{r ols, echo=F, fig.cap=" ", out.width = '90%',fig.align='center',fig.asp = 0.618}
+library(ggplot2)
+set.seed(711)
+x = seq(0, 4, length = 100)
+y = -x + jitter(rep(1:5, each = 20), 2)
+z = rep(1:5, each = 20)
+z <- as.factor(z)
+moto <- data.frame(x,y,z)
+lm1 <- lm(y ~ z,moto)
+moto <- within(moto,res <- residuals(lm1))
+moto1 <- subset(moto,z==1)
+moto2 <- subset(moto,z==2)
+moto3 <- subset(moto,z==3)
+moto4 <- subset(moto,z==4)
+moto5 <- subset(moto,z==5)
+
+ggplot(moto, aes(x,y),group=z)+
+  geom_point(aes(color = z)) +
+  geom_smooth(data = moto1,method='lm',se=F)+
+  geom_smooth(data = moto2,method='lm',se=F)+
+  geom_smooth(data = moto3,method='lm',se=F)+
+  geom_smooth(data = moto4,method='lm',se=F)+
+  geom_smooth(data = moto5,method='lm',se=F)
+```
+
 ---
 
 # 数据介绍
@@ -114,10 +141,10 @@ class: center, middle
 
 ## 零模型(ANOVA)
 .mid[
- + 层一： 
+ + 层1： 
  
 $${y_{ij}} = {\beta _{0j}} + {\varepsilon _{ij}}$$
- + 层二：
+ + 层2：
  
 $${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$
  + 组合模型
@@ -134,13 +161,13 @@ ${\mu _{0j}}$是与第j个层2单位相联系的随机效应
 ---
 ## 随机截距模型
 .mid[
-+ 层1
++ 层1：
 
 $${{\rm{y}}_{ij}} = {\beta _{0j}} + {\beta _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}}) + {\varepsilon _{ij}}$$
 
 
 
-+ 层2
++ 层2：
 
 $${\beta _{0j}} = {\gamma _{00}} + {\mu _{0j}}$$
 
@@ -165,7 +192,7 @@ knitr::include_graphics("random.jpg")
 ---
 
 ## 随机系数模型
-
+.mid[
 + 层1：
 
 $${{\rm{y}}_{ij}} = {\beta _{0j}} + {\beta _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}}) + {\varepsilon _{ij}}$$
@@ -179,7 +206,7 @@ $${\beta _{1j}} = {\gamma _{10}} + {\mu _{1j}}$$
 $${{\rm{y}}_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{10}}({x_{ij}} - {{\bar x}_{ \cdot j}})}_{fixed{\rm{ }}\ effect} + \underbrace {{\mu _{0j}} + {\mu _{1j}}({x_{ij}} - {{\bar x}_{ \cdot j}}) + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$
 
 
-
+]
 
 
 
@@ -192,14 +219,14 @@ knitr::include_graphics("random2.jpg")
 
 
 ---
-## 完全模型(引入层2解释变量)
+### 完全模型(引入层2解释变量)
 
-### 将截距和斜率作为结果的回归模型
+#### 将截距和斜率作为结果的回归模型
 
- + 层一： 
+ + 层1： 
  
 $${y_{ij}} = {\beta _{0j}} + {\beta _{1j}}{x_{ij}} + {\varepsilon _{ij}}$$
- + 层二：
+ + 层2：
  
 $${\beta _{0j}} = {\gamma _{00}} + {\gamma _{01}}{Z_j} + {\mu _{0j}}$$
 
@@ -208,6 +235,9 @@ $${\beta _{1j}} = {\gamma _{10}} + {\gamma _{11}}{Z_j} + {\mu _{1j}}$$
 + 代入得到：
 
 $${y_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{01}}{Z_j} + {\gamma _{10}}{x_{ij}} + {\gamma _{11}}{Z_j}{x_{ij}}}_{fixed{\rm{ }}\ effect} + \underbrace {{\mu _{0j}} + {\mu _{1j}}{x_{ij}} + {\varepsilon _{ij}}}_{random{\rm{ }}\ effect}$$
+
+${Z_j}$
+为层2解释变量，为第j个城市的工业总产值(GPVI)的变化
 
 ---
 ## Stata 命令
