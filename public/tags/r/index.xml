@@ -13,10 +13,10 @@
     
     <item>
       <title>交叉验证</title>
-      <link>/2019/05/25/cross/</link>
+      <link>/cross/</link>
       <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/25/cross/</guid>
+      <guid>/cross/</guid>
       <description>简单交叉验证 (hold-out cross validation)
 k折交叉验证 (K-fold cross-validation)
 留一交叉验证(leave-one-out cross validation)
@@ -26,19 +26,19 @@
     
     <item>
       <title>Python算法实现</title>
-      <link>/2019/05/24/suanfa/</link>
+      <link>/suanfa/</link>
       <pubDate>Fri, 24 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/24/suanfa/</guid>
+      <guid>/suanfa/</guid>
       <description>7.7实验 #实验范例（1）：折半查找算法 def BinarySearch(a,target): left = 0 right = len(a) - 1 while left &amp;lt;= right: mid = (left + right)//2 midVal = a[mid] if midVal &amp;lt;target: left = mid + 1 elif midVal &amp;gt; target: right = mid - 1 else: return mid return - 1 L = [5,7,13,25,32,46,54,62,78,83,88,91,99] BinarySearch(L,13)  2  #冒泡排序法 def bubble(List): for j in range(len(List)-1,0,-1): print(List) for i in range(0,j): if List[i]&amp;gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i] return List testlist = [49,38,65,97,76,13,27,49] print(&#39;结果：&#39;,bubble(testlist))  [49, 38, 65, 97, 76, 13, 27, 49] [38, 49, 65, 76, 13, 27, 49, 97] [38, 49, 65, 13, 27, 49, 76, 97] [38, 49, 13, 27, 49, 65, 76, 97] [38, 13, 27, 49, 49, 65, 76, 97] [13, 27, 38, 49, 49, 65, 76, 97] [13, 27, 38, 49, 49, 65, 76, 97] 结果： [13, 27, 38, 49, 49, 65, 76, 97]  实验内容 #（1）找出最大最小值 lst = [31,45,35,56,37,69,310,21,12] def max2(List): for j in range(len(List)-1,0,-1): for i in range(0,j): if List[i]&amp;gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i] return List[len(List)-1] max2(lst)  310  # 找出列表最小值 def min2(List): for j in range(len(List)-1,0,-1): for i in range(0,j): if List[i]&amp;gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i] return List[0] min2(lst)  12  # 折半查找算法，有多个则返回第一个。 def BinarySearch(a,target): left = 0 right = len(a) - 1 while left &amp;lt;= right: mid = (left + right)//2 #整除，提取中点 midVal = a[mid] if midVal &amp;lt; target: #在中点右侧寻找 left = mid + 1 elif midVal &amp;gt; target: #在中点左侧寻找 right = mid - 1 else: return a.</description>
     </item>
     
     <item>
       <title>生存分析云笔记</title>
-      <link>/2019/05/23/survival/</link>
+      <link>/survival/</link>
       <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/23/survival/</guid>
+      <guid>/survival/</guid>
       <description>本文系复旦大学人口学系张震老师和华东师范大学人口研究所李强老师的数据分析课程笔记。
 一个R生存分析应用的介绍网页Survival Analysis with R
 两篇重要的中文文献：
@@ -55,19 +55,19 @@
     
     <item>
       <title>Python基础函数</title>
-      <link>/2019/05/10/pybasic/</link>
+      <link>/pybasic/</link>
       <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/10/pybasic/</guid>
+      <guid>/pybasic/</guid>
       <description>博客园文章《Python基础函数》请点击这里</description>
     </item>
     
     <item>
       <title>初中生学习成绩的影响因素: 基于分类与回归树的分析</title>
-      <link>/2019/05/08/edutree/</link>
+      <link>/edutree/</link>
       <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/08/edutree/</guid>
+      <guid>/edutree/</guid>
       <description>数据本文采用中国教育追踪调查 (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
 模型与算法CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： \[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
 其中，\(x\)是一系列输入特征（自变量），\({R_1},{R_2},...,{R_m}\)是输入空间被划分的M个区域。 是区域\({R_m}\)对应的最优值。\(I\)代表的是指示函数（indicator function），当输入变量\(x\)属于区域 \({R_m}\)时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。

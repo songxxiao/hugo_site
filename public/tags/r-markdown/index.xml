@@ -13,10 +13,10 @@
     
     <item>
       <title>使用R Studio运行LaTeX</title>
-      <link>/2019/06/08/rsweave/</link>
+      <link>/rsweave/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/06/08/rsweave/</guid>
+      <guid>/rsweave/</guid>
       <description>我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是MikTeX（虽然它常常因为简陋的功能为人诟病）。
 而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
 Figure 1: MikTeX界面然而，R Studio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？
@@ -51,10 +51,10 @@ PDF版本请点击这里下载
     
     <item>
       <title>Python函数与模块的使用</title>
-      <link>/2019/05/08/pydef/</link>
+      <link>/pydef/</link>
       <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/08/pydef/</guid>
+      <guid>/pydef/</guid>
       <description>函数与模块的使用 实验范例6.7.2 #(1) def star(m,n): for i in range(m): print(&#39;*&#39;*n) star(3,2)  ** ** **  star(5,6)  ****** ****** ****** ****** ******  star(4,20)  ******************** ******************** ******************** ********************  #(2) def paint(m,s): print(s*m) paint(3,&#39;*&#39;)  ***  paint(8,&#39;%+&#39;)  %+%+%+%+%+%+%+%+  #(3) def check(a): if a&amp;gt;0: print(&#39;&amp;gt;0&#39;) elif a &amp;lt; 0: print(&#39;&amp;lt;0&#39;) else: print(&amp;quot;==0&amp;quot;) check(5)  &amp;gt;0  check(-2)  &amp;lt;0  check(0)  ==0  #(4) def avg(a,b): return(a+b)/2 c = avg(4,6) c  5.</description>
     </item>
     
@@ -70,10 +70,10 @@ CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcol
     
     <item>
       <title>如何提取R包中的小品文? </title>
-      <link>/2019/05/07/vignette/</link>
+      <link>/vignette/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/05/07/vignette/</guid>
+      <guid>/vignette/</guid>
       <description>公众号文章 《如何提取R包中的小品文》请点击这里
 用R实现各种分析任务需要学习不同的R包。而学习R包实现方法的同时必须同时结合理论。因此仅仅看帮助文档和用户手册（Reference manual）是远远不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习数据分析的不可多得的好材料。下文将以rpart包为例讲解如何获取R包的官方小品文。
 在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
