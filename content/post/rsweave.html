@@ -12,7 +12,7 @@ tags: ["R Markdown"]
 <p>我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是<a href="https://miktex.org/">MikTeX</a>（虽然它常常因为简陋的功能为人诟病）。</p>
 <p>而之所以不使用<a href="http://www.xm1math.net/texmaker/">TeXmaker</a>或是<a href="http://www.ctex.org/HomePage">CTeX</a>是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。</p>
 <div class="figure" style="text-align: center"><span id="fig:sur22"></span>
-<img src="/img/sweave/mmk.jpg" alt="MikTeX界面" width="100%" />
+<img src="/img/sweave/mmk.jpg" alt="MikTeX界面" width="60%" />
 <p class="caption">
 Figure 1: MikTeX界面
 </p>
@@ -22,7 +22,7 @@ Figure 1: MikTeX界面
 <p>后续需要安装一些R包，如<code>Knitr</code>，<code>tinytex</code>等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。</p>
 <p>然后需要配置一下R Studio的环境:</p>
 <div class="figure" style="text-align: center"><span id="fig:sur1"></span>
-<img src="/img/sweave/tempsnip.png" alt="依次点击Tools - Global Options - Sweave配置Sweave环境" width="100%" />
+<img src="/img/sweave/tempsnip.png" alt="依次点击Tools - Global Options - Sweave配置Sweave环境" width="60%" />
 <p class="caption">
 Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境
 </p>
@@ -30,28 +30,28 @@ Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境
 <p>其中，<code>Weave Rnw files using</code>选<code>knitr</code>。想要写中文LaTeX文档必须选<code>XeLaTeX</code>环境。</p>
 <p>我们点击<code>Open File</code>打开一个LaTeX文档：</p>
 <div class="figure" style="text-align: center"><span id="fig:spdf"></span>
-<img src="/img/sweave/cut.JPG" alt="点击Open File打开一个LaTeX文档" width="100%" />
+<img src="/img/sweave/cut.JPG" alt="点击Open File打开一个LaTeX文档" width="70%" />
 <p class="caption">
 Figure 3: 点击Open File打开一个LaTeX文档
 </p>
 </div>
 <p>打开后，可以直接在R Studio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：</p>
 <div class="figure" style="text-align: center"><span id="fig:click"></span>
-<img src="/img/sweave/tempsnip2.png" alt="点击Complie PDF编译LaTeX文档" width="100%" />
+<img src="/img/sweave/tempsnip2.png" alt="点击Complie PDF编译LaTeX文档" width="70%" />
 <p class="caption">
 Figure 4: 点击Complie PDF编译LaTeX文档
 </p>
 </div>
 <p>编译成功的PDF文档（是我用于某课程pre的<a href="http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html">LaTeX Beamer</a>）如图：</p>
 <div class="figure" style="text-align: center"><span id="fig:click2"></span>
-<img src="/img/sweave/beamer.jpg" alt="编译好的PDF文档" width="100%" />
+<img src="/img/sweave/beamer.jpg" alt="编译好的PDF文档" width="70%" />
 <p class="caption">
 Figure 5: 编译好的PDF文档
 </p>
 </div>
 <p>编辑公式我使用<a href="http://www.mathtype.cn/">Mathtype</a>。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好<code>剪切和复制预置</code>选项)：</p>
 <div class="figure" style="text-align: center"><span id="fig:type"></span>
-<img src="/img/sweave/mathtype.jpg" alt="Mathtype编辑器" width="100%" />
+<img src="/img/sweave/mathtype.jpg" alt="Mathtype编辑器" width="80%" />
 <p class="caption">
 Figure 6: Mathtype编辑器
 </p>
@@ -65,7 +65,7 @@ Figure 6: Mathtype编辑器
 <p>R Sweave的主要功能并不是一个LaTeX编辑器，而是为了将R的运行结果嵌入PDF形成动态报告。等你能够成功地在R Sweave运行PDF时，嵌入代码就太简单了。R Markdown转换为PDF也是同样的道理。</p>
 <p>方法很简单，新建一个R Sweave文档，然后在里面编辑LaTeX，之后运行就可以了。</p>
 <div class="figure" style="text-align: center"><span id="fig:rnw"></span>
-<img src="/img/sweave/rnw.png" alt="新建一个R Sweave文档" width="30%" />
+<img src="/img/sweave/rnw.png" alt="新建一个R Sweave文档" width="25%" />
 <p class="caption">
 Figure 7: 新建一个R Sweave文档
 </p>
