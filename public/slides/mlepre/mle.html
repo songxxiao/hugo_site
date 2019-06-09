@@ -12,16 +12,15 @@
 class: center, middle, inverse, title-slide
 
 # 多层线性模型
-## 数据分析
+## 高级定量分析
 ### 宋骁 彭璟 吴迪雅 姜昱竹 宋虹玉
 ### 2019/06/17
 
 ---
 
 # Let's Start!
-
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="mle_files/figure-html/ols-1.png" alt=" " width="90%" /&gt;
+&lt;img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559987331910&amp;di=a089e476c808440db9f7a356b7096f51&amp;imgtype=0&amp;src=http%3A%2F%2Fpic4.zhimg.com%2Fv2-ea8103bf18ea17c1320dfceadf9f580f_b.gif" alt=" " width="55%" /&gt;
 &lt;p class="caption"&gt; &lt;/p&gt;
 &lt;/div&gt;
 
@@ -32,7 +31,6 @@ class: center, middle, inverse, title-slide
 + 1988 年**中国居民收入调查**(CHIP)数据
 
 + 研究经济改革的成功与个人收入决定因素之间的关系
-
 
 
 
@@ -63,7 +61,7 @@ class: center, middle, inverse, title-slide
 ---
 class: center, middle
 
-# 模型
+# 模 型
 
 ---
 
@@ -171,7 +169,11 @@ class: center, middle
 为层2解释变量，为第j个城市的工业总产值(GPVI)的变化
 
 ---
-## Stata 命令
+class: center, middle
+
+# Stata 命令
+---
+## 命令示例
 
 + **geo**为层2标识变量  
 
@@ -182,11 +184,11 @@ class: center, middle
 /*零模型*/
 mixed LogY || geo: , variance
 
-/*随机系数模型*/
-mixed LogY x1 || geo: x1, variance
-
 /*随机截距模型*/
 mixed LogY x1 || geo: , variance
+
+/*随机系数模型*/
+mixed LogY x1 || geo: x1, variance
 
 /*完全模型*/
 mixed LogY x1 z x1#z || geo: x1, variance
@@ -198,7 +200,7 @@ mixed LogY x1 z x1#z || geo: x1, variance
 ## 零模型运行结果
 
 ```python 
-. mixed logearn || geo: , variance
+*. mixed logearn || geo: , variance
 
 Performing EM optimization: 
 
@@ -209,8 +211,8 @@ Iteration 1:   log likelihood = -7978.9487  (backed up)
 
 Computing standard errors:
 
-Mixed-effects ML regression                     Number of obs     =     15,862
-Group variable: geo                             Number of groups  =         55
+*Mixed-effects ML regression                     Number of obs     =     15,862
+*Group variable: geo                             Number of groups  =         55
 
                                                 Obs per group:
                                                               min =         80
@@ -231,24 +233,186 @@ Log likelihood = -7978.9487                     Prob &gt; chi2       =          
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-       _cons |   7.421528   .0254612   291.48   0.000     7.371625     7.47143
+*      _cons |   7.421528   .0254612   291.48   0.000     7.371625     7.47143
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
   Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
 -----------------------------+------------------------------------------------
 geo: Identity                |
-                  var(_cons) |   .0348887   .0068122      .0237949    .0511547
+*                 var(_cons) |   .0348887   .0068122      .0237949    .0511547
 -----------------------------+------------------------------------------------
                var(Residual) |   .1579178   .0017763      .1544744     .161438
 ------------------------------------------------------------------------------
 LR test vs. linear model: chibar2(01) = 2377.51       Prob &gt;= chibar2 = 0.0000
 
+```
+---
+## 随机截距模型
 
+```sql
+*. mixed logearn edu || geo: , variance
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -7837.8866  
+Iteration 1:   log likelihood = -7837.8866  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =     15,862
+Group variable: geo                             Number of groups  =         55
+
+                                                Obs per group:
+                                                              min =         80
+                                                              avg =      288.4
+                                                              max =      1,096
+
+                                                Wald chi2(1)      =     284.65
+Log likelihood = -7837.8866                     Prob &gt; chi2       =     0.0000
+```
+---
+
+```sql
+
+------------------------------------------------------------------------------
+     logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+*        edu |   .0172523   .0010226    16.87   0.000     .0152481    .0192565
+*      _cons |   7.240438   .0274947   263.34   0.000     7.186549    7.294327
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+geo: Identity                |
+*                 var(_cons) |   .0344889   .0067317      .0235254    .0505615
+-----------------------------+------------------------------------------------
+               var(Residual) |   .1551306    .001745      .1517479    .1585887
+------------------------------------------------------------------------------
+LR test vs. linear model: chibar2(01) = 2413.85       Prob &gt;= chibar2 = 0.0000
+
+. 
+
+
+```
+---
+## 随机系数模型
+
+```sql
+*. mixed logearn edu || geo: edu, variance
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -7826.4879  
+Iteration 1:   log likelihood = -7826.4879  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =     15,862
+Group variable: geo                             Number of groups  =         55
+
+                                                Obs per group:
+                                                              min =         80
+                                                              avg =      288.4
+                                                              max =      1,096
+
+                                                Wald chi2(1)      =     125.03
+Log likelihood = -7826.4879                     Prob &gt; chi2       =     0.0000
+
+```
+---
+```sql
+------------------------------------------------------------------------------
+     logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+*        edu |   .0162482   .0014531    11.18   0.000     .0134001    .0190963
+*      _cons |   7.250421   .0280577   258.41   0.000     7.195429    7.305413
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+geo: Independent             |
+*                   var(edu) |    .000049    .000019       .000023    .0001046
+                  var(_cons) |    .035253   .0074605      .0232841    .0533744
+-----------------------------+------------------------------------------------
+               var(Residual) |   .1545404   .0017414      .1511647    .1579914
+------------------------------------------------------------------------------
+LR test vs. linear model: chi2(2) = 2436.65               Prob &gt; chi2 = 0.0000
 
 
 
 ```
+---
+## 完全模型
+
+```sql
+*. mixed logearn edu gross_d c.edu#c.gross_d || geo: edu, variance
+
+Performing EM optimization: 
+
+Performing gradient-based optimization: 
+
+Iteration 0:   log likelihood = -7816.5008  
+Iteration 1:   log likelihood = -7816.5008  
+
+Computing standard errors:
+
+Mixed-effects ML regression                     Number of obs     =     15,862
+Group variable: geo                             Number of groups  =         55
+
+                                                Obs per group:
+                                                              min =         80
+                                                              avg =      288.4
+                                                              max =      1,096
+
+                                                Wald chi2(3)      =     151.60
+Log likelihood = -7816.5008                     Prob &gt; chi2       =     0.0000
+
+```
+---
+
+
+```sql
+
+---------------------------------------------------------------------------------
+        logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+----------------+----------------------------------------------------------------
+*           edu |   .0205505   .0032625     6.30   0.000      .014156     .026945
+*       gross_d |   .5291661   .1099308     4.81   0.000     .3137058    .7446265
+                |
+*c.edu#c.gross_d |  -.0099389   .0064944    -1.53   0.126    -.0226677      .00279
+                |
+          _cons |   7.006117   .0562452   124.56   0.000     6.895878    7.116355
+---------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------
+  Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
+-----------------------------+------------------------------------------------
+geo: Independent             |
+*                   var(edu) |   .0000463   .0000183      .0000214    .0001004
+                  var(_cons) |   .0243682   .0053598      .0158343    .0375014
+-----------------------------+------------------------------------------------
+               var(Residual) |    .154535   .0017412      .1511597    .1579857
+------------------------------------------------------------------------------
+LR test vs. linear model: chi2(2) = 1814.48               Prob &gt; chi2 = 0.0000
+
+```
+
+
+---
+## 结论
+
+ 
+
+
+
+
 ---
 class: center, middle
 
