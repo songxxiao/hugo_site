@@ -41,8 +41,10 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
 ---
 
 ## 研究问题
-
+.large[
 + 研究经济改革的成功与个人收入决定因素之间的关系
+]
+---
 
 ## 变量
 .mid[
