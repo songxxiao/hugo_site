@@ -70,7 +70,7 @@ $$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdo
 另一个方案是使用[R Sweave](https://cosx.org/2010/11/reproducible-research-in-statistics)。
 
 
-R Sweave的主要功能并不是一个LaTeX编辑器，而是为了将R的运行结果嵌入PDF形成动态报告。等你能够成功地在R Sweave运行PDF时，嵌入代码就太简单了。R Markdown转换为PDF也是同样的道理。
+R Sweave的主要功能并不是一个写纯LaTeX文档，而是为了将R代码嵌入LaTeX形成动态PDF报告。当然，作为日常工作，使用R Sweave写文档而不运行代码是完全可以的(只不过有点大材小用)。
 
 方法很简单，新建一个R Sweave文档，然后在里面编辑LaTeX，之后运行就可以了。
 

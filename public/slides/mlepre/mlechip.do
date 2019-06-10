@@ -1,15 +1,22 @@
 cd "C:\Users\xsong\Desktop\table\highdata\mlepre"
-
 use chip88.dta,clear
+
+*组均值对中
+sort geo
+by geo:egen edumean=mean(edu) 
+g cen_edu = edu-edumean
+
+
 
 mixed logearn || geo: , variance
 
-mixed logearn edu || geo: , variance
+mixed logearn cen_edu || geo: , variance
 
-mixed logearn edu || geo: edu, variance
+mixed logearn cen_edu || geo: cen_edu, variance
 
-mixed logearn edu gross_d c.edu#c.gross_d || geo: edu, variance
+mixed logearn cen_edu gross_d c.cen_edu#c.gross_d || geo: cen_edu, variance
 
 
 
+mixed logearn cen_edu exp cpc sex gross_d c.cen_edu#c.gross_d || geo:exp cpc sex cen_edu, variance
 

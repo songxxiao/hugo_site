@@ -21,9 +21,13 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
 
 ---
 
-# 数据介绍
-.mid[
+## 数据介绍
+.large[
 + 1988 年**中国居民收入调查**(CHIP)数据
+
++ 1988年由中国社会科学院经济研究所主持的"中国居民收入分配"调查。
+
++ 此次调查采用分阶段抽样的方法：先从30 个省级行政单位中抽选出10 个省份，然后再从这10 个省份的434 个城市中抽选出55个城市作为代表。城市部分的调查在1988 年3 -4 月进行，共调查9009 户，调查问卷收集了每一户中所有家庭成员的资料，包括其基本情况、受教育情况和就业情况。在删除缺失数据和不完整观测个案之后，总共得到15862条居民个体的观测数据。
 
 + 研究经济改革的成功与个人收入决定因素之间的关系
 
@@ -39,7 +43,7 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
   + 收入的自然对数值
 
 + 个人变量：
-  + 教育年限
+  + <font color=#FF0000>教育年限</font>
   + 工作年限(即工龄)
   + 党员身份的虚拟变量(1=党员, 0=非党员)
   + 性别的虚拟变量(1=女性, 0=男性)
@@ -170,7 +174,7 @@ class: center, middle
 
 + **geo**为层2标识变量  
 
-+ **z**为层2解释变量
++ **z**为层2解释变量。1985年和1988年之间各城市工业总产值(GPVI)的变化，<font color=#FF0000> **z**越大，则该城市经济发展越快</font> 。
 
 ```sql
 
@@ -186,6 +190,16 @@ mixed LogY x1 || geo: x1, variance
 /*完全模型*/
 mixed LogY x1 z x1#z || geo: x1, variance
 
+
+```
+---
+## 对中
+
+```sql
+/*组均值对中*/
+sort geo
+*by geo: egen edumean = mean(edu) 
+g cen_edu = edu - edumean
 
 ```
 ---
@@ -244,14 +258,14 @@ LR test vs. linear model: chibar2(01) = 2377.51       Prob >= chibar2 = 0.0000
 ## 随机截距模型
 
 ```sql
-*. mixed logearn edu || geo: , variance
+*. mixed logearn cen_edu || geo: , variance
 
 Performing EM optimization: 
 
 Performing gradient-based optimization: 
 
-Iteration 0:   log likelihood = -7837.8866  
-Iteration 1:   log likelihood = -7837.8866  
+Iteration 0:   log likelihood = -7838.2144  
+Iteration 1:   log likelihood = -7838.2144  
 
 Computing standard errors:
 
@@ -263,31 +277,29 @@ Group variable: geo                             Number of groups  =         55
                                                               avg =      288.4
                                                               max =      1,096
 
-                                                Wald chi2(1)      =     284.65
-Log likelihood = -7837.8866                     Prob > chi2       =     0.0000
+                                                Wald chi2(1)      =     283.99
+Log likelihood = -7838.2144                     Prob > chi2       =     0.0000
+
 ```
 ---
 
 ```sql
-
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-*        edu |   .0172523   .0010226    16.87   0.000     .0152481    .0192565
-*      _cons |   7.240438   .0274947   263.34   0.000     7.186549    7.294327
+*    cen_edu |   .0172395    .001023    16.85   0.000     .0152345    .0192446
+*      _cons |   7.421519   .0254621   291.47   0.000     7.371614    7.471424
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
   Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
 -----------------------------+------------------------------------------------
 geo: Identity                |
-*                 var(_cons) |   .0344889   .0067317      .0235254    .0505615
+*                 var(_cons) |   .0349047   .0068124      .0238096    .0511699
 -----------------------------+------------------------------------------------
-               var(Residual) |   .1551306    .001745      .1517479    .1585887
+               var(Residual) |   .1551307    .001745       .151748    .1585888
 ------------------------------------------------------------------------------
-LR test vs. linear model: chibar2(01) = 2413.85       Prob >= chibar2 = 0.0000
-
-. 
+LR test vs. linear model: chibar2(01) = 2420.35       Prob >= chibar2 = 0.0000
 
 
 ```
@@ -295,14 +307,14 @@ LR test vs. linear model: chibar2(01) = 2413.85       Prob >= chibar2 = 0.0000
 ## 随机系数模型
 
 ```sql
-*. mixed logearn edu || geo: edu, variance
+*. mixed logearn cen_edu || geo: cen_edu, variance
 
 Performing EM optimization: 
 
 Performing gradient-based optimization: 
 
-Iteration 0:   log likelihood = -7826.4879  
-Iteration 1:   log likelihood = -7826.4879  
+Iteration 0:   log likelihood = -7823.6964  
+Iteration 1:   log likelihood = -7823.6964  
 
 Computing standard errors:
 
@@ -314,8 +326,8 @@ Group variable: geo                             Number of groups  =         55
                                                               avg =      288.4
                                                               max =      1,096
 
-                                                Wald chi2(1)      =     125.03
-Log likelihood = -7826.4879                     Prob > chi2       =     0.0000
+                                                Wald chi2(1)      =     106.60
+Log likelihood = -7823.6964                     Prob > chi2       =     0.0000
 
 ```
 ---
@@ -323,38 +335,30 @@ Log likelihood = -7826.4879                     Prob > chi2       =     0.0000
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-*        edu |   .0162482   .0014531    11.18   0.000     .0134001    .0190963
-*      _cons |   7.250421   .0280577   258.41   0.000     7.195429    7.305413
+*    cen_edu |    .016245   .0015734    10.32   0.000     .0131612    .0193288
+       _cons |   7.421517   .0254624   291.47   0.000     7.371612    7.471422
 ------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------
   Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
 -----------------------------+------------------------------------------------
 geo: Independent             |
-*                   var(edu) |    .000049    .000019       .000023    .0001046
-                  var(_cons) |    .035253   .0074605      .0232841    .0533744
+*               var(cen_edu) |   .0000667   .0000246      .0000323    .0001376
+                  var(_cons) |   .0349087   .0068126      .0238133     .051174
 -----------------------------+------------------------------------------------
-               var(Residual) |   .1545404   .0017414      .1511647    .1579914
+               var(Residual) |   .1544599   .0017402      .1510866    .1579085
 ------------------------------------------------------------------------------
-LR test vs. linear model: chi2(2) = 2436.65               Prob > chi2 = 0.0000
+LR test vs. linear model: chi2(2) = 2449.38               Prob > chi2 = 0.0000
 
-
+Note: LR test is conservative and provided only for reference.
 
 ```
 ---
 ## 完全模型
 
 ```sql
-*. mixed logearn edu gross_d c.edu#c.gross_d || geo: edu, variance
-
-Performing EM optimization: 
-
-Performing gradient-based optimization: 
-
-Iteration 0:   log likelihood = -7816.5008  
-Iteration 1:   log likelihood = -7816.5008  
-
-Computing standard errors:
+*. mixed logearn cen_edu exp cpc sex gross_d c.cen_edu#c.gross_d || geo:exp cpc sex cen_
+> edu, variance
 
 Mixed-effects ML regression                     Number of obs     =     15,862
 Group variable: geo                             Number of groups  =         55
@@ -364,45 +368,61 @@ Group variable: geo                             Number of groups  =         55
                                                               avg =      288.4
                                                               max =      1,096
 
-                                                Wald chi2(3)      =     151.60
-Log likelihood = -7816.5008                     Prob > chi2       =     0.0000
+                                                Wald chi2(6)      =    2628.79
+Log likelihood = -5403.8032                     Prob > chi2       =     0.0000
 
 ```
 ---
 
+## 完全模型：固定系数部分
 
 ```sql
 
----------------------------------------------------------------------------------
-        logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
-----------------+----------------------------------------------------------------
-*           edu |   .0205505   .0032625     6.30   0.000      .014156     .026945
-*       gross_d |   .5291661   .1099308     4.81   0.000     .3137058    .7446265
-                |
-*c.edu#c.gross_d |  -.0099389   .0064944    -1.53   0.126    -.0226677      .00279
-                |
-          _cons |   7.006117   .0562452   124.56   0.000     6.895878    7.116355
----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+            logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+--------------------+----------------------------------------------------------------
+*           cen_edu |   .0380013   .0032783    11.59   0.000     .0315759    .0444268
+                exp |   .0174375   .0004236    41.17   0.000     .0166074    .0182677
+                cpc |   .0822814   .0081615    10.08   0.000     .0662852    .0982776
+                sex |  -.1015378   .0097093   -10.46   0.000    -.1205677    -.082508
+*           gross_d |   .4608808   .1000528     4.61   0.000      .264781    .6569806
+                    |
+*c.cen_edu#c.gross_d |  -.0121546   .0064393    -1.89   0.059    -.0247754    .0004662
+                    |
+              _cons |   6.887406   .0521607   132.04   0.000     6.785173    6.989639
+-------------------------------------------------------------------------------------
+```
+---
+## 完全模型：随机系数部分
 
+```python
 ------------------------------------------------------------------------------
   Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
 -----------------------------+------------------------------------------------
 geo: Independent             |
-*                   var(edu) |   .0000463   .0000183      .0000214    .0001004
-                  var(_cons) |   .0243682   .0053598      .0158343    .0375014
+                    var(exp) |   3.89e-06   1.54e-06      1.79e-06    8.45e-06
+                    var(cpc) |   .0005872   .0005456       .000095    .0036279
+                    var(sex) |   .0030459   .0008939      .0017135    .0054142
+*               var(cen_edu) |   .0000554   .0000194      .0000279    .0001099
+                  var(_cons) |   .0255124   .0052168      .0170882    .0380897
 -----------------------------+------------------------------------------------
-               var(Residual) |    .154535   .0017412      .1511597    .1579857
+               var(Residual) |   .1130884   .0012793      .1106086    .1156238
 ------------------------------------------------------------------------------
-LR test vs. linear model: chi2(2) = 1814.48               Prob > chi2 = 0.0000
+LR test vs. linear model: chi2(5) = 2591.96               Prob > chi2 = 0.0000
+
+Note: LR test is conservative and provided only for reference.
+
 
 ```
 
 
 ---
 ## 结论
+.large[
++ 改革开放时期中国的地区异质性会影响中国的人力资本回报率。
 
- 
-
++ 交互项系数为负。经济发展水平越高的地区，教育回报率越低。
+]
 
 
 
