@@ -7,7 +7,7 @@ slug: chnresume
 tags: ["R Markdown"]
 ---
 
-英文简历请点击[这里](https://hsiaosong.netlify.com/englishresume/)  
+英文简历请点击[这里](/englishresume/)  
 PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/master/static/%E4%B8%AD%E6%96%87%E7%AE%80%E5%8E%86-%E5%AE%8B%E9%AA%81.pdf)下载
 
 ### 联系方式

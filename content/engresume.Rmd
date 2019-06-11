@@ -6,7 +6,7 @@ categories: ["R"]
 slug: englishresume
 tags: ["R Markdown"]
 ---
-Chinese Resume please click [here](https://hsiaosong.netlify.com/2019/05/07/resume/)
+Chinese Resume please click [here](/chnresume/)
 
 ### CONTACT
 
