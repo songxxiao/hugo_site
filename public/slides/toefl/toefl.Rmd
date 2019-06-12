@@ -119,6 +119,25 @@ prior 先
 posterior 后
 ---
 class: center, middle
+# 口语经验
+---
+## 地道的表达
+.mid[
+
+I feel this way because ...
+
+There's lot of advantages that
+
+I believe ...
+
+inapporiate to ...
+
+
+
+]
+
+---
+class: center, middle
 # 听力经验
 ---
 ##听力
