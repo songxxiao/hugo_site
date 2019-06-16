@@ -20,6 +20,11 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
 ```
 
 ---
+``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.align='center'}
+knitr::include_graphics("zhu.jpg")
+
+```
+---
 
 ## 数据介绍
 .mid[
@@ -70,6 +75,10 @@ $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 class: center, middle
 
 # 模 型
+
+```{r 3, echo=F, fig.cap=" ", out.width = '40%',fig.align='center'}
+knitr::include_graphics("diya.jpg")
+```
 
 ---
 
@@ -178,6 +187,10 @@ ${Z_j}$
 class: center, middle
 
 # Stata 命令
+```{r 4, echo=F, fig.cap=" ", out.width = '45%',fig.align='center'}
+knitr::include_graphics("xsong.jpg")
+
+```
 ---
 ## 命令示例
 
