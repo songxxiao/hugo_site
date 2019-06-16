@@ -20,7 +20,8 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
 ```
 
 ---
-``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.align='center'}
+class: center, middle
+``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.cap="姜昱竹 10171170149",fig.align='center'}
 knitr::include_graphics("zhu.jpg")
 
 ```
@@ -67,8 +68,19 @@ knitr::include_graphics("zhu.jpg")
   
 $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 ]
+---
+## 因变量
 
+```{r 512, echo=F, out.width = '75%',fig.align='center',message=F,warning=F,fig.cap="标准化总成绩的密度直方图",fig.asp = 0.75}
 
+library(haven)
+library(tidyverse)
+library(lattice)
+require(stats)
+chip <- read_dta("F:/Mysite/Mysite/static/slides/mlepre/chip88.dta")
+attach(chip)
+histogram(logearn,equal.widths = TRUE, nint = 70, xlab = "收入对数",type = "density",ylab = '密度')
+```
 
 
 ---
@@ -76,7 +88,7 @@ class: center, middle
 
 # 模 型
 
-```{r 3, echo=F, fig.cap=" ", out.width = '40%',fig.align='center'}
+```{r 3, echo=F, fig.cap="吴迪雅10161170121", out.width = '35%',fig.align='center'}
 knitr::include_graphics("diya.jpg")
 ```
 
@@ -187,7 +199,7 @@ ${Z_j}$
 class: center, middle
 
 # Stata 命令
-```{r 4, echo=F, fig.cap=" ", out.width = '45%',fig.align='center'}
+```{r 4, echo=F, fig.cap="宋骁 10161170106", out.width = '35%',fig.align='center'}
 knitr::include_graphics("xsong.jpg")
 
 ```
@@ -220,7 +232,9 @@ mixed LogY x1 z x1#z || geo: x1, variance
 ```sql
 /*组均值对中*/
 sort geo
+
 *by geo: egen edumean = mean(edu) 
+
 g cen_edu = edu - edumean
 
 ```

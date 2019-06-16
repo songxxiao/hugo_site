@@ -25,9 +25,10 @@ class: center, middle, inverse, title-slide
 &lt;/div&gt;
 
 ---
+class: center, middle
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="zhu.jpg" alt=" " width="55%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="zhu.jpg" alt="姜昱竹 10171170149" width="55%" /&gt;
+&lt;p class="caption"&gt;姜昱竹 10171170149&lt;/p&gt;
 &lt;/div&gt;
 ---
 
@@ -72,8 +73,13 @@ class: center, middle, inverse, title-slide
   
 `$${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$`
 ]
+---
+## 因变量
 
-
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="mle_files/figure-html/512-1.png" alt="标准化总成绩的密度直方图" width="75%" /&gt;
+&lt;p class="caption"&gt;标准化总成绩的密度直方图&lt;/p&gt;
+&lt;/div&gt;
 
 
 ---
@@ -82,8 +88,8 @@ class: center, middle
 # 模 型
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="diya.jpg" alt=" " width="40%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="diya.jpg" alt="吴迪雅10161170121" width="35%" /&gt;
+&lt;p class="caption"&gt;吴迪雅10161170121&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -196,8 +202,8 @@ class: center, middle
 
 # Stata 命令
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="xsong.jpg" alt=" " width="45%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="xsong.jpg" alt="宋骁 10161170106" width="35%" /&gt;
+&lt;p class="caption"&gt;宋骁 10161170106&lt;/p&gt;
 &lt;/div&gt;
 ---
 ## 命令示例
@@ -228,7 +234,9 @@ mixed LogY x1 z x1#z || geo: x1, variance
 ```sql
 /*组均值对中*/
 sort geo
+
 *by geo: egen edumean = mean(edu) 
+
 g cen_edu = edu - edumean
 
 ```

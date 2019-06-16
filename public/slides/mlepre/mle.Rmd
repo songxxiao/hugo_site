@@ -67,8 +67,19 @@ knitr::include_graphics("zhu.jpg")
   
 $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 ]
+---
+## 因变量
 
+```{r 512, echo=F, fig.cap=" ", out.width = '40%',fig.align='center',message=FALSE,warning=FALSE,fig.cap="标准化总成绩的密度直方图",fig.asp = 0.55}
 
+library(haven)
+library(tidyverse)
+library(lattice)
+require(stats)
+chip <- read_dta("F:/Mysite/Mysite/static/slides/mlepre/chip88.dta")
+attach(chip)
+histogram(logearn,equal.widths = TRUE, nint = 70, xlab = "收入对数",type = "density",ylab = '密度')
+```
 
 
 ---
