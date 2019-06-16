@@ -53,7 +53,7 @@ knitr::include_graphics("zhu.jpg")
 
 + 教育回报率
 
-+ Mincer
++ 对Mincer模型的改进
 ]
 ---
 
