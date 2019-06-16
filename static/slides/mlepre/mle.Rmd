@@ -21,6 +21,7 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
 
 ---
 class: center, middle
+# 数据与变量
 ``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.cap="姜昱竹 10171170149",fig.align='center'}
 knitr::include_graphics("zhu.jpg")
 
@@ -461,7 +462,6 @@ Note: LR test is conservative and provided only for reference.
 ]
 
 
-
 ---
 class: center, middle
 
@@ -469,5 +469,20 @@ class: center, middle
 ``````{r end, echo=F, fig.cap=" ",out.width = '60%',fig.align='center'}
 knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559921618412&di=f118b115bf4ab9ab74be09f366906204&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201809%2F12%2F20180912072220_qivjj.thumb.700_0.gif")
 ```
+
+---
+class: center, middle
+# 幻灯片制作
+```{r 99, echo=F, fig.cap="彭璟 10171170121", out.width = '30%',fig.align='center'}
+knitr::include_graphics("penjin.jpg")
+
+```
+---
+class: center, middle
+# 数据清理
+```{r 100, echo=F, fig.cap="宋虹玉 10171170131", out.width = '40%',fig.align='center'}
+knitr::include_graphics("songhongyu.jpg")
+```
+
 
 
