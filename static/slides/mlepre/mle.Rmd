@@ -76,7 +76,7 @@ $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 ---
 ## 因变量
 
-```{r 512, echo=F, out.width = '75%',fig.align='center',message=F,warning=F,fig.cap="标准化总成绩的密度直方图",fig.asp = 0.75}
+```{r 512, echo=F, out.width = '75%',fig.align='center',message=F,warning=F,fig.cap="收入对数的密度直方图",fig.asp = 0.75}
 
 library(haven)
 library(tidyverse)

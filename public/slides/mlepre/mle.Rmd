@@ -20,7 +20,9 @@ knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b99
 ```
 
 ---
-``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.align='center'}
+class: center, middle
+# 数据与变量
+``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.cap="姜昱竹 10171170149",fig.align='center'}
 knitr::include_graphics("zhu.jpg")
 
 ```
@@ -48,6 +50,10 @@ knitr::include_graphics("zhu.jpg")
 ## 研究问题
 .large[
 + 研究经济改革的成功与个人收入决定因素之间的关系
+
++ 教育回报率
+
++ 对Mincer模型的改进
 ]
 ---
 
@@ -70,7 +76,7 @@ $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 ---
 ## 因变量
 
-```{r 512, echo=F, fig.cap=" ", out.width = '40%',fig.align='center',message=FALSE,warning=FALSE,fig.cap="标准化总成绩的密度直方图",fig.asp = 0.55}
+```{r 512, echo=F, out.width = '75%',fig.align='center',message=F,warning=F,fig.cap="收入对数的密度直方图",fig.asp = 0.75}
 
 library(haven)
 library(tidyverse)
@@ -87,7 +93,7 @@ class: center, middle
 
 # 模 型
 
-```{r 3, echo=F, fig.cap=" ", out.width = '40%',fig.align='center'}
+```{r 3, echo=F, fig.cap="吴迪雅 10161170121", out.width = '35%',fig.align='center'}
 knitr::include_graphics("diya.jpg")
 ```
 
@@ -138,7 +144,7 @@ $\gamma_{10}$表示层2 所有单位的回归斜率的平均值。
 ---
 ## 随机截距模型
 
-```{r sur2, echo=F, fig.cap=" ", out.width = '70%',fig.align='center'}
+```{r sur2, echo=F, fig.cap="<font color=#FF0000>各回归直线平行，斜率相同，截距随层2随机变化</font>", out.width = '70%',fig.align='center'}
 knitr::include_graphics("random.jpg")
 ```
 
@@ -168,7 +174,7 @@ $${{\rm{y}}_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{10}}({x_{ij}} - {{\b
 ---
 ## 随机系数模型
 
-```{r sur1, echo=F, fig.cap=" ", out.width = '70%',fig.align='center'}
+```{r sur1, echo=F, fig.cap="<font color=#FF0000>各回归直线的截距和斜率均随层2随机变化</font>", out.width = '70%',fig.align='center'}
 knitr::include_graphics("random2.jpg")
 ```
 
@@ -198,7 +204,7 @@ ${Z_j}$
 class: center, middle
 
 # Stata 命令
-```{r 4, echo=F, fig.cap=" ", out.width = '45%',fig.align='center'}
+```{r 4, echo=F, fig.cap="宋骁 10161170106", out.width = '35%',fig.align='center'}
 knitr::include_graphics("xsong.jpg")
 
 ```
@@ -231,7 +237,9 @@ mixed LogY x1 z x1#z || geo: x1, variance
 ```sql
 /*组均值对中*/
 sort geo
+
 *by geo: egen edumean = mean(edu) 
+
 g cen_edu = edu - edumean
 
 ```
@@ -458,7 +466,6 @@ Note: LR test is conservative and provided only for reference.
 ]
 
 
-
 ---
 class: center, middle
 
@@ -466,5 +473,20 @@ class: center, middle
 ``````{r end, echo=F, fig.cap=" ",out.width = '60%',fig.align='center'}
 knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559921618412&di=f118b115bf4ab9ab74be09f366906204&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201809%2F12%2F20180912072220_qivjj.thumb.700_0.gif")
 ```
+
+---
+class: center, middle
+# 幻灯片制作
+```{r 99, echo=F, fig.cap="彭璟 10171170121", out.width = '30%',fig.align='center'}
+knitr::include_graphics("penjin.jpg")
+
+```
+---
+class: center, middle
+# 数据清理
+```{r 100, echo=F, fig.cap="宋虹玉 10171170131", out.width = '40%',fig.align='center'}
+knitr::include_graphics("songhongyu.jpg")
+```
+
 
 

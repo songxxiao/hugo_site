@@ -25,9 +25,11 @@ class: center, middle, inverse, title-slide
 &lt;/div&gt;
 
 ---
+class: center, middle
+# 数据与变量
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="zhu.jpg" alt=" " width="55%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="zhu.jpg" alt="姜昱竹 10171170149" width="55%" /&gt;
+&lt;p class="caption"&gt;姜昱竹 10171170149&lt;/p&gt;
 &lt;/div&gt;
 ---
 
@@ -53,6 +55,10 @@ class: center, middle, inverse, title-slide
 ## 研究问题
 .large[
 + 研究经济改革的成功与个人收入决定因素之间的关系
+
++ 教育回报率
+
++ Mincer
 ]
 ---
 
@@ -76,7 +82,7 @@ class: center, middle, inverse, title-slide
 ## 因变量
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="mle_files/figure-html/512-1.png" alt="标准化总成绩的密度直方图" width="40%" /&gt;
+&lt;img src="mle_files/figure-html/512-1.png" alt="标准化总成绩的密度直方图" width="75%" /&gt;
 &lt;p class="caption"&gt;标准化总成绩的密度直方图&lt;/p&gt;
 &lt;/div&gt;
 
@@ -87,8 +93,8 @@ class: center, middle
 # 模 型
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="diya.jpg" alt=" " width="40%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="diya.jpg" alt="吴迪雅 10161170121" width="35%" /&gt;
+&lt;p class="caption"&gt;吴迪雅 10161170121&lt;/p&gt;
 &lt;/div&gt;
 
 ---
@@ -139,8 +145,8 @@ class: center, middle
 ## 随机截距模型
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="random.jpg" alt=" " width="70%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="random.jpg" alt="&amp;lt;font color=#FF0000&amp;gt;各回归直线平行，斜率相同，截距随层2随机变化&amp;lt;/font&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;font color=#FF0000&gt;各回归直线平行，斜率相同，截距随层2随机变化&lt;/font&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -170,8 +176,8 @@ class: center, middle
 ## 随机系数模型
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="random2.jpg" alt=" " width="70%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="random2.jpg" alt="&amp;lt;font color=#FF0000&amp;gt;各回归直线的截距和斜率均随层2随机变化&amp;lt;/font&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;font color=#FF0000&gt;各回归直线的截距和斜率均随层2随机变化&lt;/font&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 
@@ -201,8 +207,8 @@ class: center, middle
 
 # Stata 命令
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="xsong.jpg" alt=" " width="45%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;img src="xsong.jpg" alt="宋骁 10161170106" width="35%" /&gt;
+&lt;p class="caption"&gt;宋骁 10161170106&lt;/p&gt;
 &lt;/div&gt;
 ---
 ## 命令示例
@@ -233,7 +239,9 @@ mixed LogY x1 z x1#z || geo: x1, variance
 ```sql
 /*组均值对中*/
 sort geo
+
 *by geo: egen edumean = mean(edu) 
+
 g cen_edu = edu - edumean
 
 ```
@@ -460,7 +468,6 @@ Note: LR test is conservative and provided only for reference.
 ]
 
 
-
 ---
 class: center, middle
 
@@ -468,6 +475,21 @@ class: center, middle
 &lt;div class="figure" style="text-align: center"&gt;
 &lt;img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559921618412&amp;di=f118b115bf4ab9ab74be09f366906204&amp;imgtype=0&amp;src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201809%2F12%2F20180912072220_qivjj.thumb.700_0.gif" alt=" " width="60%" /&gt;
 &lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+class: center, middle
+# 幻灯片制作
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="penjin.jpg" alt="彭璟 10171170121" width="30%" /&gt;
+&lt;p class="caption"&gt;彭璟 10171170121&lt;/p&gt;
+&lt;/div&gt;
+---
+class: center, middle
+# 数据清理
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="songhongyu.jpg" alt="宋虹玉 10171170131" width="40%" /&gt;
+&lt;p class="caption"&gt;宋虹玉 10171170131&lt;/p&gt;
 &lt;/div&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
