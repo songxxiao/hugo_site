@@ -1,0 +1,69 @@
+---
+title: "城市社会学复习"
+subtitle: " "
+author: "宋 骁"
+date: "2016/12/12"
+output:
+  xaringan::moon_reader:
+    css: [default, zh-CN.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+### 题型
+
+选择 16 $\times$ 3
+
+材料分析 15 $\times$ 2
+
+论述 22 $\times$ 1
+
+必考：城市性和城市化
+
+---
+class: center, middle
+# 第一讲
+
+
+---
+
+### 三个重要节点
+
++ 农业革命
+
++ 工业革命
+
++ 世界超过一半的人居于城市
+
+---
+
+### 中国正处于三重转型过程中
+
+---
+
+class: center, middle
+# 第二讲：城市社会学-思想源流
+---
+
+1. 防御堡垒
+2. 市场
+3. 独立法庭和至少部分自主的法律
+4. 结社的自由；
+5. 至少部分政治独立
+
+
+
+---
+
+帕克
+  + 人类生态学
+
+
+
+
+
+
+
+

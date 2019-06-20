@@ -13,10 +13,11 @@ mixed logearn || geo: , variance
 mixed logearn cen_edu || geo: , variance
 
 mixed logearn cen_edu || geo: cen_edu, variance
+estat icc
 
 mixed logearn cen_edu gross_d c.cen_edu#c.gross_d || geo: cen_edu, variance
+estat icc
 
 
-
-mixed logearn cen_edu exp cpc sex gross_d c.cen_edu#c.gross_d || geo:exp cpc sex cen_edu, variance
-
+mixed logearn cen_edu exp cpc sex gross_d c.cen_edu#c.gross_d || geo:exp cpc cen_edu, variance
+estat icc
