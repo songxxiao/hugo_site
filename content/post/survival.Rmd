@@ -179,5 +179,30 @@ $${{h(t|{X_i})} \over {h(t|{X_j})}} = {{{h_0}(t)\exp (X_i^T\beta )} \over {{h_0}
 
 + ${h_i}(t)$和${h_0}(t)$随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。
 
+```{r cox, prompt=T, comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+
+cwg$ec <- as.factor(cwg$ec)
+cwg$minc <- as.factor(cwg$minc)
+cwg$age <- as.factor(cwg$age)
+
+coxreg <- coxph(km ~ ec + age + female +black + minc, data = cwg)
+summary(coxreg)
+
+cox_fit <- survfit(coxreg)
+#plot(cox_fit, main = "cph model", xlab="Days")
+autoplot(cox_fit) #拟合值
+
+
+concordance(km ~ predict(coxreg), data = cwg)
+
+```
+
+#### additive hazards model of Aalen
+
+```{r areg, prompt=T, comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+aaregfit <-aareg(km ~ ec + age + female +black + minc, data = cwg)
+aaregfit
+autoplot(aaregfit)
+```
 
 

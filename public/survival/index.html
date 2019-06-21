@@ -226,6 +226,89 @@
 <li><p>两个分别具有协变量<span class="math inline">\({X_i}\)</span>和<span class="math inline">\({X_j}\)</span>的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）</p></li>
 <li><p><span class="math inline">\({h_i}(t)\)</span>和<span class="math inline">\({h_0}(t)\)</span>随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。</p></li>
 </ul>
+<pre class="r"><code>&gt; cwg$ec &lt;- as.factor(cwg$ec)
+&gt; cwg$minc &lt;- as.factor(cwg$minc)
+&gt; cwg$age &lt;- as.factor(cwg$age)
+&gt; 
+&gt; coxreg &lt;- coxph(km ~ ec + age + female +black + minc, data = cwg)
+&gt; summary(coxreg)</code></pre>
+<pre><code>Call:
+coxph(formula = km ~ ec + age + female + black + minc, data = cwg)
+
+  n= 1278, number of events= 300 
+
+           coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+ec2    -0.06402   0.93799  0.15623 -0.410   0.6820    
+ec3    -0.31251   0.73161  0.15042 -2.078   0.0377 *  
+age1    0.23566   1.26575  0.17845  1.321   0.1866    
+age2    0.12146   1.12915  0.18000  0.675   0.4998    
+age3    0.36410   1.43921  0.18088  2.013   0.0441 *  
+age4    0.18543   1.20374  0.19518  0.950   0.3421    
+female  0.05917   1.06095  0.11604  0.510   0.6101    
+black  -0.17321   0.84096  0.12882 -1.345   0.1788    
+minc2   0.86616   2.37777  0.12615  6.866 6.60e-12 ***
+minc3   0.90591   2.47418  0.21039  4.306 1.66e-05 ***
+minc4   1.54650   4.69499  0.30848  5.013 5.35e-07 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+       exp(coef) exp(-coef) lower .95 upper .95
+ec2       0.9380     1.0661    0.6906    1.2740
+ec3       0.7316     1.3669    0.5448    0.9825
+age1      1.2657     0.7900    0.8922    1.7957
+age2      1.1291     0.8856    0.7935    1.6068
+age3      1.4392     0.6948    1.0096    2.0516
+age4      1.2037     0.8307    0.8211    1.7647
+female    1.0610     0.9425    0.8451    1.3319
+black     0.8410     1.1891    0.6533    1.0825
+minc2     2.3778     0.4206    1.8569    3.0447
+minc3     2.4742     0.4042    1.6381    3.7369
+minc4     4.6950     0.2130    2.5648    8.5944
+
+Concordance= 0.648  (se = 0.016 )
+Likelihood ratio test= 79.58  on 11 df,   p=2e-12
+Wald test            = 83.79  on 11 df,   p=3e-13
+Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
+<pre class="r"><code>&gt; cox_fit &lt;- survfit(coxreg)
+&gt; #plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
+&gt; autoplot(cox_fit) #拟合值</code></pre>
+<p><img src="../post/survival_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>&gt; concordance(km ~ predict(coxreg), data = cwg)</code></pre>
+<pre><code>Call:
+concordance.formula(object = km ~ predict(coxreg), data = cwg)
+
+n= 1278 
+Concordance= 0.3518 se= 0.0164
+concordant discordant     tied.x     tied.y    tied.xy 
+     96999     179888       2803        246         19 </code></pre>
+<div id="additive-hazards-model-of-aalen" class="section level4">
+<h4>additive hazards model of Aalen</h4>
+<pre class="r"><code>&gt; aaregfit &lt;-aareg(km ~ ec + age + female +black + minc, data = cwg)
+&gt; aaregfit</code></pre>
+<pre><code>Call:
+aareg(formula = km ~ ec + age + female + black + minc, data = cwg)
+
+  n= 1278 
+    152 out of 152 unique event times used
+
+             slope      coef se(coef)      z        p
+Intercept  0.02740  8.65e-04 0.000222  3.900 9.64e-05
+ec2       -0.00728 -7.42e-05 0.000182 -0.406 6.84e-01
+ec3       -0.01410 -3.27e-04 0.000167 -1.960 5.01e-02
+age1       0.00411  1.92e-04 0.000176  1.090 2.77e-01
+age2       0.00114  6.14e-05 0.000167  0.367 7.13e-01
+age3       0.01330  3.32e-04 0.000199  1.670 9.50e-02
+age4       0.00431  1.31e-04 0.000198  0.663 5.07e-01
+female     0.00517  6.42e-05 0.000123  0.522 6.02e-01
+black     -0.00856 -1.81e-04 0.000151 -1.200 2.32e-01
+minc2      0.03100  1.02e-03 0.000177  5.740 9.66e-09
+minc3      0.02080  1.15e-03 0.000363  3.180 1.49e-03
+minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
+
+Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
+<pre class="r"><code>&gt; autoplot(aaregfit)</code></pre>
+<p><img src="../post/survival_files/figure-html/areg-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 
     </div>
