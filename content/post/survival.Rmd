@@ -192,14 +192,18 @@ cox_fit <- survfit(coxreg)
 #plot(cox_fit, main = "cph model", xlab="Days")
 autoplot(cox_fit) #拟合值
 
-
+##C-指数
 concordance(km ~ predict(coxreg), data = cwg)
 
 ```
 
-#### additive hazards model of Aalen
+[生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
 
-```{r areg, prompt=T, comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+[C-index/C-statistic 计算的5种不同方法及比较](https://blog.csdn.net/anshiquanshu/article/details/53438438)
+
+## [Aalen’s additive regression model](http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf)
+
+```{r areg, prompt=T, comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',fig.cap='协变量作用如何随时间变化'}
 aaregfit <-aareg(km ~ ec + age + female +black + minc, data = cwg)
 aaregfit
 autoplot(aaregfit)

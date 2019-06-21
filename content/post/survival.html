@@ -205,7 +205,8 @@ Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
 &gt; #plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
 &gt; autoplot(cox_fit) #拟合值</code></pre>
 <p><img src="/post/survival_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; concordance(km ~ predict(coxreg), data = cwg)</code></pre>
+<pre class="r"><code>&gt; ##C-指数
+&gt; concordance(km ~ predict(coxreg), data = cwg)</code></pre>
 <pre><code>Call:
 concordance.formula(object = km ~ predict(coxreg), data = cwg)
 
@@ -213,8 +214,11 @@ n= 1278
 Concordance= 0.3518 se= 0.0164
 concordant discordant     tied.x     tied.y    tied.xy 
      96999     179888       2803        246         19 </code></pre>
-<div id="additive-hazards-model-of-aalen" class="section level4">
-<h4>additive hazards model of Aalen</h4>
+<p><a href="https://blog.csdn.net/fjsd155/article/details/84669331">生存模型的C-index（C指数）</a></p>
+<p><a href="https://blog.csdn.net/anshiquanshu/article/details/53438438">C-index/C-statistic 计算的5种不同方法及比较</a></p>
+</div>
+<div id="aalens-additive-regression-model" class="section level2">
+<h2><a href="http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf">Aalen’s additive regression model</a></h2>
 <pre class="r"><code>&gt; aaregfit &lt;-aareg(km ~ ec + age + female +black + minc, data = cwg)
 &gt; aaregfit</code></pre>
 <pre><code>Call:
@@ -239,6 +243,10 @@ minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
 
 Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
 <pre class="r"><code>&gt; autoplot(aaregfit)</code></pre>
-<p><img src="/post/survival_files/figure-html/areg-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span id="fig:areg"></span>
+<img src="/post/survival_files/figure-html/areg-1.png" alt="协变量作用如何随时间变化" width="100%" />
+<p class="caption">
+Figure 1: 协变量作用如何随时间变化
+</p>
 </div>
 </div>
