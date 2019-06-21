@@ -106,7 +106,7 @@
 <p>班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
 <p><img src="../post/edutree_files/figure-html/add%20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。</p>
-<p><img src="../post/edutree_files/figure-html/a%20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="../post/edutree_files/figure-html/a%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div class="section level2">
@@ -125,13 +125,13 @@
 + list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
 <pre class="r"><code>tree$cptable #复杂度参数表</code></pre>
 <pre><code>          CP nsplit rel error    xerror         xstd
-1 0.07468185      0 1.0000000 1.0008657 0.0005638014
-2 0.03717668      1 0.9253181 0.9275852 0.0005273242
-3 0.01820999      2 0.8881415 0.9078682 0.0005350927
-4 0.01328867      3 0.8699315 0.8828689 0.0005394299
-5 0.01308371      4 0.8566428 0.8798805 0.0005441122
-6 0.01281814      5 0.8435591 0.8784931 0.0005426913
-7 0.01000000      6 0.8307410 0.8569560 0.0005397352</code></pre>
+1 0.07468185      0 1.0000000 1.0017065 0.0005642565
+2 0.03717668      1 0.9253181 0.9274270 0.0005278775
+3 0.01820999      2 0.8881415 0.8994869 0.0005249106
+4 0.01328867      3 0.8699315 0.8849835 0.0005341769
+5 0.01308371      4 0.8566428 0.8728256 0.0005405936
+6 0.01281814      5 0.8435591 0.8731229 0.0005406492
+7 0.01000000      6 0.8307410 0.8620292 0.0005392486</code></pre>
 <pre class="r"><code>rpart.plot(tree)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:sfff"></span>
 <img src="../post/edutree_files/figure-html/sfff-1.png" alt="总成绩的回归树" width="100%" />
@@ -157,7 +157,7 @@ Figure 1: 总成绩的回归树
 + list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
 &gt; #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
 &gt; rpart.plot(cltree3)</code></pre>
-<p><img src="../post/edutree_files/figure-html/c%20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="../post/edutree_files/figure-html/c%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
 &gt; 
@@ -165,7 +165,7 @@ Figure 1: 总成绩的回归树
 &gt; test &lt;- cbind(test,pr)
 &gt; modelroc &lt;- roc(test$matgreat,test$pr)
 &gt; plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
-<p><img src="../post/edutree_files/figure-html/c%20-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="../post/edutree_files/figure-html/c%20-2.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 
@@ -197,7 +197,7 @@ yhat   0   1
    chidia   schcsrm    teainc   chkhmwk 
  9999.162  9588.660  2283.551  2032.974 </code></pre>
 <pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
-<p><img src="../post/edutree_files/figure-html/d%20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="../post/edutree_files/figure-html/d%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
 &gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
 &gt; 
@@ -207,7 +207,7 @@ yhat   0   1
 &gt; auc(modelroc) #计算AUC值</code></pre>
 <pre><code>Area under the curve: 0.6951</code></pre>
 <pre class="r"><code>&gt; plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
-<p><img src="../post/edutree_files/figure-html/d%20-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="../post/edutree_files/figure-html/d%20-2.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
 &gt; attach(test)
 &gt; tab &lt;- table(yhat,matgreat) 

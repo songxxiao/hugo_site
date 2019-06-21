@@ -12,8 +12,8 @@ Chinese Resume please click [here](/chnresume/)
 
 + Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai
 + Email：<malcolm@xsong.ltd>
-+ Github：[https://github.com/ECSTA7Y](https://github.com/ECSTA7Y)
-+ Website：[https://xsong.ltd](https://xsong.ltd/)
++ Github：<https://github.com/ECSTA7Y>
++ Website：<https://xsong.ltd>
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
 ### SOFTWARE SKILLS
