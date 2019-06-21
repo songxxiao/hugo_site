@@ -279,7 +279,9 @@ Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
 &gt; #plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
 &gt; autoplot(cox_fit) #拟合值</code></pre>
 <p><img src="../post/survival_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; ##C-指数
+<pre class="r"><code>&gt; ##C-指数 Harrell&#39;s concordance index
+&gt; #coxreg$concordance
+&gt; 
 &gt; concordance(km ~ predict(coxreg), data = cwg)</code></pre>
 <pre><code>Call:
 concordance.formula(object = km ~ predict(coxreg), data = cwg)

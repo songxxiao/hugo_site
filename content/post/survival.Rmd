@@ -199,7 +199,9 @@ cox_fit <- survfit(coxreg)
 #plot(cox_fit, main = "cph model", xlab="Days")
 autoplot(cox_fit) #拟合值
 
-##C-指数
+##C-指数 Harrell's concordance index
+#coxreg$concordance
+
 concordance(km ~ predict(coxreg), data = cwg)
 
 ```
