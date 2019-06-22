@@ -52,7 +52,7 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 班级变量：教师总课时(classtm)、
 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
 
-```{r add ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center'}
+```{r add ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center', out.width='100%'}
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
@@ -117,6 +117,8 @@ rpart.plot(tree)
 
 下面展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
 
+[R语言表格](https://www.jianshu.com/p/08c28c5c55a7)
+
 ```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%'}
 set.seed(1212323) #设置随机数种子
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
@@ -147,6 +149,7 @@ plot(modelroc,xlab ='伪正类率',ylab='真正类率') #ROC 曲线
 test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
 tab <- table(yhat,matgreat) 
+names(dimnames(tab))<-c("预测值","真实值")
 treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
 tab
 treeerror #测试集错误率
@@ -182,6 +185,7 @@ test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
 tab <- table(yhat,matgreat) 
 treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+names(dimnames(tab))<-c("预测值","真实值") #矩阵小标题
 tab #混淆矩阵，行为测试集预测值，列为测试集观测值
 treeerror #测试集错误率
 ```
