@@ -53,14 +53,5 @@
 censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。</description>
     </item>
     
-    <item>
-      <title>初中生学习成绩的影响因素: 基于分类与回归树的分析</title>
-      <link>/edutree/</link>
-      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/edutree/</guid>
-      <description>初中生学习成绩的影响因素: 基于分类与回归树的分析code{white-space: pre;}pre:not([class]) {background-color: white;}if (window.hljs) {hljs.configure({languages: []});hljs.initHighlightingOnLoad();if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) {window.setTimeout(function() { hljs.initHighlighting(); }, 0);}}h1 {font-size: 34px;}h1.title {font-size: 38px;}h2 {font-size: 30px;}h3 {font-size: 24px;}h4 {font-size: 18px;}h5 {font-size: 16px;}h6 {font-size: 12px;}.</description>
-    </item>
-    
   </channel>
 </rss>

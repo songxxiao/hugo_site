@@ -1,11 +1,8 @@
 ---
 title: "初中生学习成绩的影响因素: 基于分类与回归树的分析"
-
 author: ' '
 date: '2019-05-08'
 slug: edutree
-tags: R
-categories: R
 ---
 
 ## 数据  
