@@ -1,0 +1,44 @@
+---
+title: "ggplot2 缂佸啩绡<84>"
+author: ' '
+date: '2019-06-27'
+output:
+  word_document: default
+  pdf_document: default
+slug: ggplot
+---
+
+
+```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+library(ggplot2)
+data(diamonds)
+knitr::kable(head(diamonds),caption="数据概要")
+
+ggplot(diamonds, aes(carat,price)) +
+geom_bin2d() +
+facet_wrap(~cut, nrow = 2)
+
+ggplot(diamonds, aes(log(carat),price)) +
+geom_point() +
+facet_wrap(~cut, nrow = 2)
+
+ggplot(diamonds, aes(carat,log(price))) +
+geom_bin2d() +
+facet_wrap(~cut, nrow = 2)
+
+ggplot(diamonds, aes(log(carat), log10(price))) +
+geom_bin2d() +
+facet_wrap(~cut, nrow = 2)
+```
+
+```{r b ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+i <- ggplot(economics, aes(date, unemploy))
+i + geom_area()
+
+i + geom_line()
+
+
+
+
+```
+

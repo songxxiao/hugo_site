@@ -1,0 +1,12 @@
+---
+title: "R Notebook"
+output: html_notebook
+ ---
+```{r}
+library(ggplot2)
+
+ggplot(diamonds, aes(log10(carat), log10(price))) +
+geom_bin2d() +
+facet_wrap(~cut, nrow = 1)
+```
+
