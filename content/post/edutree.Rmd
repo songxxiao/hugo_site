@@ -72,7 +72,7 @@ histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",ty
 
 为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
 
-```{r a ,message = F,prompt=F, comment = NA,warning = F,message = F,echo = T,fig.align='center',out.width ='100%'}
+```{r a,message = F,prompt=F, comment = NA,warning = F,message = F,echo = T,fig.align='center',out.width ='100%'}
 setwd("E:/edu/data2")
 ceps <- read_dta("E:/edu/data2/ceps.dta")
 #抽出30所学校，作成绩箱线图
