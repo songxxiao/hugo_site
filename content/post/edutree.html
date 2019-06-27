@@ -25,7 +25,7 @@ slug: edutree
 <div class="section level3">
 <h3>因变量</h3>
 <p>本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。</p>
-<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了编号为1-30的学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。</p>
+<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了我们抽取的30所学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。</p>
 </div>
 <div class="section level3">
 <h3>自变量</h3>
@@ -36,7 +36,29 @@ slug: edutree
 <p>班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
 <p><img src="/post/edutree_files/figure-html/add%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。</p>
+<pre class="r"><code>&gt; setwd(&quot;E:/edu/data2&quot;)
+&gt; ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
+&gt; #抽出30所学校，作成绩箱线图
+&gt; ceps1 &lt;- ceps %&gt;% 
++ group_by(schids) %&gt;% 
++ summarize(mathmean = mean(tr_mat, na.rm = T))
+&gt; set.seed(2019)
+&gt; sample &lt;- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
+&gt; ceps1 &lt;- ceps1[sample,]
+&gt; ceps1 &lt;- ceps1$schids #提取抽中学校编号的向量
+&gt; delte &lt;- subset(ceps,schids == ceps1[1])
+&gt; #遍历抽中的学校id，纵向合并数据框
+&gt; for (i in ceps1) delte &lt;- rbind(delte, subset(ceps,schids == i)) 
+&gt; #箱线图
+&gt; delte$schids &lt;- as.factor(delte$schids)  
+&gt; ggplot(delte, aes(schids,tr_mat)) + 
++   geom_boxplot(size=0.1) +
++   xlab(&#39;学校代码&#39;) + ylab(&#39;数学原始成绩&#39;)</code></pre>
 <p><img src="/post/edutree_files/figure-html/a%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>&gt; #ceps1 &lt;- subset(ceps,schids&lt;=30)
+&gt; 
+&gt; ceps &lt;- lapply(ceps, unclass)
+&gt; ceps &lt;- data.frame(ceps)</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -55,13 +77,13 @@ slug: edutree
 + list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
 <pre class="r"><code>tree$cptable #复杂度参数表</code></pre>
 <pre><code>          CP nsplit rel error    xerror         xstd
-1 0.07468185      0 1.0000000 1.0007711 0.0005637024
-2 0.03717668      1 0.9253181 0.9268397 0.0005272599
-3 0.01820999      2 0.8881415 0.9054125 0.0005358907
-4 0.01328867      3 0.8699315 0.8884106 0.0005364790
-5 0.01308371      4 0.8566428 0.8757729 0.0005394897
-6 0.01281814      5 0.8435591 0.8746542 0.0005381943
-7 0.01000000      6 0.8307410 0.8558705 0.0005325595</code></pre>
+1 0.07468185      0 1.0000000 1.0008194 0.0005634699
+2 0.03717668      1 0.9253181 0.9281575 0.0005277763
+3 0.01820999      2 0.8881415 0.9108954 0.0005315458
+4 0.01328867      3 0.8699315 0.9052528 0.0005502155
+5 0.01308371      4 0.8566428 0.8989148 0.0005484642
+6 0.01281814      5 0.8435591 0.8989148 0.0005484642
+7 0.01000000      6 0.8307410 0.8843597 0.0005490267</code></pre>
 <pre class="r"><code>rpart.plot(tree)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:sfff"></span>
 <img src="/post/edutree_files/figure-html/sfff-1.png" alt="总成绩的回归树" width="100%" />
@@ -156,6 +178,42 @@ Figure 1: 总成绩的回归树
 <p>在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25%左右。</p>
 </div>
 <div class="section level3">
+<h3><a href="http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection">交叉验证</a></h3>
+<p>使用<code>caret</code>包进行10次10折交叉验证</p>
+<pre class="r"><code>&gt; library(caret)
+&gt; #install.packages(&#39;e1071&#39;)
+&gt; library(e1071)
+&gt; 
+&gt; ceps$matgreat &lt;- as.factor(ceps$matgreat)
+&gt; 
+&gt; repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions=TRUE)
+&gt; 
+&gt;  rpartFit &lt;- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
++                     data = ceps,
++                     method = &quot;rpart&quot;,
++                     trControl = repeatedcv,
++                     na.action = na.omit)
+&gt; rpartFit</code></pre>
+<pre><code>CART 
+
+19487 samples
+   42 predictor
+    2 classes: &#39;0&#39;, &#39;1&#39; 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold, repeated 10 times) 
+Summary of sample sizes: 4101, 4101, 4101, 4101, 4101, 4102, ... 
+Resampling results across tuning parameters:
+
+  cp          Accuracy   Kappa     
+  0.03015564  0.8039239  0.28843270
+  0.03631647  0.7957860  0.23829366
+  0.07295720  0.7786492  0.08288264
+
+Accuracy was used to select the optimal model using the largest value.
+The final value used for the model was cp = 0.03015564.</code></pre>
+</div>
+<div class="section level3">
 <h3>随机森林</h3>
 <pre class="r"><code>&gt; train$matgreat &lt;- as.factor(train$matgreat)
 &gt; train &lt;- na.omit(train)
@@ -169,47 +227,47 @@ Figure 1: 总成绩的回归树
 &gt; 
 &gt; importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
 <pre><code>         MeanDecreaseAccuracy
-schids             15.8079765
-sex                -1.1436013
-onechi              4.9067360
-maedu              -1.9834895
-faedu               3.7691257
-drunk              -1.5504492
-qurel              -0.1781571
-relation           -0.1456353
-desk                3.2705643
-net                 4.5125379
-dialect             4.7907267
-chkhmwk            -1.0885660
-chkcouse            1.5032324
-classtm            19.4422332
-clpre              14.1047252
-revitm             10.5477621
-subject            12.4271037
-know                8.0812284
-drsmok             13.3536686
-commhr             12.3985947
-schtype             4.1675248
-schcsrm            14.8336130
-comno              15.9875348
-bknum              20.7425997
-buget              18.8042500
-eduqua             18.0370464
-fight               6.5585319
-brkpb               7.5392667
-smok               15.0468939
-drink               1.8399370
-teainc             27.6905792
-money               4.9882468
-clfee               7.4162946
-qianzi              6.2598867
-lifetm             -1.2848707
-dial                9.9690394
-chidia              7.3747625
-futcfd             17.6419549
-huko                4.9797779
-eduy               -0.0509333
-dangy               1.4430383
-houspro             7.6867660</code></pre>
+schids             16.8903964
+sex                -0.5527399
+onechi              5.9131737
+maedu              -3.3066436
+faedu               2.7760047
+drunk              -0.4609220
+qurel               2.0729488
+relation            0.2582815
+desk                4.7214681
+net                 3.2923147
+dialect             6.6658668
+chkhmwk            -1.3403267
+chkcouse            0.2740335
+classtm            19.5927223
+clpre              13.9225375
+revitm              9.6381463
+subject            14.4385027
+know                8.0538974
+drsmok             13.7351259
+commhr             12.7966501
+schtype             4.4636744
+schcsrm            16.2866687
+comno              16.2330809
+bknum              20.1023533
+buget              18.8540922
+eduqua             17.9241374
+fight               6.8018800
+brkpb               8.0343708
+smok               12.4643054
+drink               2.1355375
+teainc             29.4668796
+money               6.1160261
+clfee               8.8551999
+qianzi              6.0560669
+lifetm              0.2319042
+dial                9.3079861
+chidia              6.7512246
+futcfd             16.3089049
+huko                2.8794747
+eduy               -0.5798589
+dangy               2.2516123
+houspro             4.6543525</code></pre>
 </div>
 </div>

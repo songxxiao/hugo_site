@@ -34,7 +34,7 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
 
-为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了编号为1-30的学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了我们抽取的30所学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。
 
 ### 自变量
 
@@ -72,14 +72,26 @@ histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",ty
 
 为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
 
-```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center',out.width ='100%'}
+```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = T,fig.align='center',out.width ='100%'}
 setwd("E:/edu/data2")
 ceps <- read_dta("E:/edu/data2/ceps.dta")
-ceps1 <- subset(ceps,schids<=30)
-ceps1$schids <- as.factor(ceps1$schids)
-ggplot(ceps1, aes(schids,tr_mat)) + 
-  geom_boxplot() +
+#抽出30所学校，作成绩箱线图
+ceps1 <- ceps %>% 
+group_by(schids) %>% 
+summarize(mathmean = mean(tr_mat, na.rm = T))
+set.seed(2019)
+sample <- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
+ceps1 <- ceps1[sample,]
+ceps1 <- ceps1$schids #提取抽中学校编号的向量
+delte <- subset(ceps,schids == ceps1[1])
+#遍历抽中的学校id，纵向合并数据框
+for (i in ceps1) delte <- rbind(delte, subset(ceps,schids == i)) 
+#箱线图
+delte$schids <- as.factor(delte$schids)  
+ggplot(delte, aes(schids,tr_mat)) + 
+  geom_boxplot(size=0.1) +
   xlab('学校代码') + ylab('数学原始成绩')
+#ceps1 <- subset(ceps,schids<=30)
 
 ceps <- lapply(ceps, unclass)
 ceps <- data.frame(ceps)
@@ -191,6 +203,29 @@ treeerror #测试集错误率
 可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。
 
 在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
+
+### [交叉验证](http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection)
+
+使用`caret`包进行10次10折交叉验证
+
+```{r caret,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+
+library(caret)
+#install.packages('e1071')
+library(e1071)
+
+ceps$matgreat <- as.factor(ceps$matgreat)
+
+repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions=TRUE)
+
+ rpartFit <- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
+                    data = ceps,
+                    method = "rpart",
+                    trControl = repeatedcv,
+                    na.action = na.omit)
+rpartFit
+
+```
 
 ### 随机森林
 ```{r randomForest,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
