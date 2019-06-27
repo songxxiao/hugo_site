@@ -15,14 +15,14 @@ categories: R
 
 谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
-```{r 1,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r 1,comment = NA,warning = F,message = F, include = T,fig.align='center'}
 #install.packages('mlbench')
 library(caret) #加载数据集
 ```
 
 
 # 10折交叉验证 (K-fold cross-validation)
-```{r 2,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r 2,comment = NA,warning = F,message = F, include = T,fig.align='center'}
 #install.packages('mlbench')
 
 rfControl <-trainControl( #10折交叉验证
@@ -45,7 +45,7 @@ rpartFit
 将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有"10次10 折交叉验证"。
 
 
-```{r cv,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'} 
+```{r cv,comment = NA,warning = F,message = F, include = T,fig.align='center'} 
 
 
 repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions
@@ -63,7 +63,7 @@ rpartFit
 
 
 # 留一交叉验证(leave-one-out cross validation)
-```{r 3,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r 3,comment = NA,warning = F,message = F, include = T,fig.align='center'}
 rfControl <-trainControl(
 method ="LOOCV"
 ) #留一交叉验证
