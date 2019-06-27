@@ -49,7 +49,7 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 班级变量：教师总课时(classtm)、
 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
 
-```{r add ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center', out.width='100%'}
+```{r add ,message = F,prompt=F, comment = NA,warning = F,message = F,echo = FALSE,fig.align='center', out.width='100%'}
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
@@ -72,7 +72,7 @@ histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",ty
 
 为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
 
-```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F,echo = T,fig.align='center',out.width ='100%'}
+```{r a ,message = F,prompt=F, comment = NA,warning = F,message = F,echo = T,fig.align='center',out.width ='100%'}
 setwd("E:/edu/data2")
 ceps <- read_dta("E:/edu/data2/ceps.dta")
 #抽出30所学校，作成绩箱线图
@@ -104,7 +104,7 @@ ceps <- data.frame(ceps)
 
 首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析，并采用10折交叉验证计算模型的验证误差。
 
-```{r re,message = F,prompt=T, comment = NA,warning = F,message = F, include = T}
+```{r re,message = F,prompt=F, comment = NA,warning = F,message = F, include = T}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
 qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
@@ -128,7 +128,7 @@ rpart.plot(tree)
 
 [R语言表格](https://www.jianshu.com/p/08c28c5c55a7)
 
-```{r c ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%'}
+```{r c ,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%'}
 set.seed(1212323) #设置随机数种子
 sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
 test <- ceps[sampled,] #测试集
@@ -164,7 +164,7 @@ tab
 treeerror #测试集错误率
 ```
 
-```{r d ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%'}
+```{r d ,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%'}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
 cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
@@ -208,7 +208,7 @@ treeerror #测试集错误率
 
 使用`caret`包进行10次10折交叉验证
 
-```{r caret,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r caret,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center'}
 
 library(caret)
 #install.packages('e1071')
@@ -228,7 +228,7 @@ rpartFit
 ```
 
 ### 随机森林
-```{r randomForest,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r randomForest,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center'}
 
 train$matgreat <- as.factor(train$matgreat)
 train <- na.omit(train)

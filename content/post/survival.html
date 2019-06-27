@@ -69,12 +69,12 @@ categories: R
 <div id="-" class="section level2">
 <h2>第三讲: 生存分析估计</h2>
 <p>R生存分析介绍：<a href="http://www.openintro.org/stat/surv.php">survival analysis in R</a></p>
-<pre class="r"><code>&gt; # 加载包
-&gt; library(survival)
-&gt; library(haven) 
-&gt; library(ggplot2)
-&gt; library(dplyr)
-&gt; library(ggfortify)</code></pre>
+<pre class="r"><code># 加载包
+library(survival)
+library(haven) 
+library(ggplot2)
+library(dplyr)
+library(ggfortify)</code></pre>
 <ul>
 <li>数据介绍：<br />
 <code>los1</code>:时间变量<br />
@@ -91,17 +91,17 @@ categories: R
 <p>又称乘积极限法(Product-Limit Method), 公式如下：</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
-<pre class="r"><code>&gt; table(cwg$event)</code></pre>
+<pre class="r"><code>table(cwg$event)</code></pre>
 <pre><code>
   0   1 
 978 300 </code></pre>
-<pre class="r"><code>&gt; # Kaplan Meier Survival Curve
-&gt; km &lt;- with(cwg, Surv(los1, event == 1))
-&gt; head(km,10) #删截后面有+号</code></pre>
+<pre class="r"><code># Kaplan Meier Survival Curve
+km &lt;- with(cwg, Surv(los1, event == 1))
+head(km,10) #删截后面有+号</code></pre>
 <pre><code> [1]  4.30000000+  6.00000000  21.00000000+  0.03333333  10.63333333 
  [6]  4.43333333+  6.86666667+  4.46666667+  2.40000000+  9.00000000 </code></pre>
-<pre class="r"><code>&gt; km_fit &lt;- survfit(km ~ 1, data=cwg)
-&gt; km_fit #生存分析概要</code></pre>
+<pre class="r"><code>km_fit &lt;- survfit(km ~ 1, data=cwg)
+km_fit #生存分析概要</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
       n  events  median 0.95LCL 0.95UCL 
@@ -112,7 +112,7 @@ categories: R
 </p>
 </div>
 <p>生存函数的Kaplan–Meier estimator就是<span class="math inline">\(nPx\)</span>列的累乘。</p>
-<pre class="r"><code>&gt; summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
+<pre class="r"><code>summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
  time n.risk n.event survival std.err lower 95% CI upper 95% CI
@@ -146,10 +146,10 @@ categories: R
 <p class="caption">
 </p>
 </div>
-<pre class="r"><code>&gt; autoplot(km_fit) #ggplot2风格KM图</code></pre>
+<pre class="r"><code>autoplot(km_fit) #ggplot2风格KM图</code></pre>
 <p><img src="/post/survival_files/figure-html/cw-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
-&gt; autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
+<pre class="r"><code>km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
+autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
 <p><img src="/post/survival_files/figure-html/cw-2.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -164,12 +164,12 @@ categories: R
 <li><p>两个分别具有协变量<span class="math inline">\({X_i}\)</span>和<span class="math inline">\({X_j}\)</span>的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）</p></li>
 <li><p><span class="math inline">\({h_i}(t)\)</span>和<span class="math inline">\({h_0}(t)\)</span>随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。</p></li>
 </ul>
-<pre class="r"><code>&gt; cwg$ec &lt;- as.factor(cwg$ec)
-&gt; cwg$minc &lt;- as.factor(cwg$minc)
-&gt; cwg$age &lt;- as.factor(cwg$age)
-&gt; 
-&gt; coxreg &lt;- coxph(km ~ ec + age + female +black + minc, data = cwg)
-&gt; summary(coxreg)</code></pre>
+<pre class="r"><code>cwg$ec &lt;- as.factor(cwg$ec)
+cwg$minc &lt;- as.factor(cwg$minc)
+cwg$age &lt;- as.factor(cwg$age)
+
+coxreg &lt;- coxph(km ~ ec + age + female +black + minc, data = cwg)
+summary(coxreg)</code></pre>
 <pre><code>Call:
 coxph(formula = km ~ ec + age + female + black + minc, data = cwg)
 
@@ -207,14 +207,14 @@ Concordance= 0.648  (se = 0.016 )
 Likelihood ratio test= 79.58  on 11 df,   p=2e-12
 Wald test            = 83.79  on 11 df,   p=3e-13
 Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
-<pre class="r"><code>&gt; cox_fit &lt;- survfit(coxreg)
-&gt; #plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
-&gt; autoplot(cox_fit) #拟合值</code></pre>
+<pre class="r"><code>cox_fit &lt;- survfit(coxreg)
+#plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
+autoplot(cox_fit) #拟合值</code></pre>
 <p><img src="/post/survival_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; ##C-指数 Harrell&#39;s concordance index
-&gt; #coxreg$concordance
-&gt; 
-&gt; concordance(km ~ predict(coxreg), data = cwg)</code></pre>
+<pre class="r"><code>##C-指数 Harrell&#39;s concordance index
+#coxreg$concordance
+
+concordance(km ~ predict(coxreg), data = cwg)</code></pre>
 <pre><code>Call:
 concordance.formula(object = km ~ predict(coxreg), data = cwg)
 
@@ -227,8 +227,8 @@ concordant discordant     tied.x     tied.y    tied.xy
 </div>
 <div id="aalens-additive-regression-model" class="section level2">
 <h2><a href="http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf">Aalen’s additive regression model</a></h2>
-<pre class="r"><code>&gt; aaregfit &lt;-aareg(km ~ ec + age + female +black + minc, data = cwg)
-&gt; aaregfit</code></pre>
+<pre class="r"><code>aaregfit &lt;-aareg(km ~ ec + age + female +black + minc, data = cwg)
+aaregfit</code></pre>
 <pre><code>Call:
 aareg(formula = km ~ ec + age + female + black + minc, data = cwg)
 
@@ -250,7 +250,7 @@ minc3      0.02080  1.15e-03 0.000363  3.180 1.49e-03
 minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
 
 Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
-<pre class="r"><code>&gt; autoplot(aaregfit)</code></pre>
+<pre class="r"><code>autoplot(aaregfit)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:areg"></span>
 <img src="/post/survival_files/figure-html/areg-1.png" alt="协变量作用如何随时间变化" width="100%" />
 <p class="caption">

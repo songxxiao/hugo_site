@@ -36,29 +36,29 @@ slug: edutree
 <p>班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
 <p><img src="/post/edutree_files/figure-html/add%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>为了直观地描述不同学校与学习成绩的差异，下面展示了以学校为分组变量，原始数学成绩为因变量的箱线图。</p>
-<pre class="r"><code>&gt; setwd(&quot;E:/edu/data2&quot;)
-&gt; ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
-&gt; #抽出30所学校，作成绩箱线图
-&gt; ceps1 &lt;- ceps %&gt;% 
-+ group_by(schids) %&gt;% 
-+ summarize(mathmean = mean(tr_mat, na.rm = T))
-&gt; set.seed(2019)
-&gt; sample &lt;- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
-&gt; ceps1 &lt;- ceps1[sample,]
-&gt; ceps1 &lt;- ceps1$schids #提取抽中学校编号的向量
-&gt; delte &lt;- subset(ceps,schids == ceps1[1])
-&gt; #遍历抽中的学校id，纵向合并数据框
-&gt; for (i in ceps1) delte &lt;- rbind(delte, subset(ceps,schids == i)) 
-&gt; #箱线图
-&gt; delte$schids &lt;- as.factor(delte$schids)  
-&gt; ggplot(delte, aes(schids,tr_mat)) + 
-+   geom_boxplot(size=0.1) +
-+   xlab(&#39;学校代码&#39;) + ylab(&#39;数学原始成绩&#39;)</code></pre>
+<pre class="r"><code>setwd(&quot;E:/edu/data2&quot;)
+ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
+#抽出30所学校，作成绩箱线图
+ceps1 &lt;- ceps %&gt;% 
+group_by(schids) %&gt;% 
+summarize(mathmean = mean(tr_mat, na.rm = T))
+set.seed(2019)
+sample &lt;- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
+ceps1 &lt;- ceps1[sample,]
+ceps1 &lt;- ceps1$schids #提取抽中学校编号的向量
+delte &lt;- subset(ceps,schids == ceps1[1])
+#遍历抽中的学校id，纵向合并数据框
+for (i in ceps1) delte &lt;- rbind(delte, subset(ceps,schids == i)) 
+#箱线图
+delte$schids &lt;- as.factor(delte$schids)  
+ggplot(delte, aes(schids,tr_mat)) + 
+  geom_boxplot(size=0.1) +
+  xlab(&#39;学校代码&#39;) + ylab(&#39;数学原始成绩&#39;)</code></pre>
 <p><img src="/post/edutree_files/figure-html/a%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; #ceps1 &lt;- subset(ceps,schids&lt;=30)
-&gt; 
-&gt; ceps &lt;- lapply(ceps, unclass)
-&gt; ceps &lt;- data.frame(ceps)</code></pre>
+<pre class="r"><code>#ceps1 &lt;- subset(ceps,schids&lt;=30)
+
+ceps &lt;- lapply(ceps, unclass)
+ceps &lt;- data.frame(ceps)</code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -66,15 +66,15 @@ slug: edutree
 <div class="section level3">
 <h3>回归树</h3>
 <p>首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析，并采用10折交叉验证计算模型的验证误差。</p>
-<pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
-&gt; tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
-+ qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
-+ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-+ schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
-+ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-+ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-+ subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = 
-+ list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
+<pre class="r"><code>cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
+subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = 
+list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
 <pre class="r"><code>tree$cptable #复杂度参数表</code></pre>
 <pre><code>          CP nsplit rel error    xerror         xstd
 1 0.07468185      0 1.0000000 1.0008194 0.0005634699
@@ -93,86 +93,86 @@ Figure 1: 总成绩的回归树
 </div>
 <p>下面展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。</p>
 <p><a href="https://www.jianshu.com/p/08c28c5c55a7">R语言表格</a></p>
-<pre class="r"><code>&gt; set.seed(1212323) #设置随机数种子
-&gt; sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
-&gt; test &lt;- ceps[sampled,] #测试集
-&gt; train &lt;- ceps[-sampled,] #训练集
-&gt; 
-&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
-&gt; 
-&gt; cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-+ qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-+ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-+ schtype + schcsrm + comno +  bknum + buget + eduqua + fight + 
-+ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-+ dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-+ subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
-+ list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
-&gt; #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
-&gt; rpart.plot(cltree3)</code></pre>
+<pre class="r"><code>set.seed(1212323) #设置随机数种子
+sampled &lt;- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
+test &lt;- ceps[sampled,] #测试集
+train &lt;- ceps[-sampled,] #训练集
+
+cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
+
+cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm + comno +  bknum + buget + eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
+subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
+list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
+#knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
+rpart.plot(cltree3)</code></pre>
 <p><img src="/post/edutree_files/figure-html/c%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
-&gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
-&gt; 
-&gt; pr &lt;- y.pr[,2] 
-&gt; test &lt;- cbind(test,pr)
-&gt; modelroc &lt;- roc(test$matgreat,test$pr)
-&gt; plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
+<pre class="r"><code>test &lt;- na.omit(test) #删除缺失值
+y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
+
+pr &lt;- y.pr[,2] 
+test &lt;- cbind(test,pr)
+modelroc &lt;- roc(test$matgreat,test$pr)
+plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
 <p><img src="/post/edutree_files/figure-html/c%20-2.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
-&gt; attach(test)
-&gt; tab &lt;- table(yhat,matgreat) 
-&gt; names(dimnames(tab))&lt;-c(&quot;预测值&quot;,&quot;真实值&quot;)
-&gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
-&gt; tab</code></pre>
+<pre class="r"><code>test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
+attach(test)
+tab &lt;- table(yhat,matgreat) 
+names(dimnames(tab))&lt;-c(&quot;预测值&quot;,&quot;真实值&quot;)
+treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
+tab</code></pre>
 <pre><code>      真实值
 预测值   0   1
      0 875 183
      1 138  85</code></pre>
-<pre class="r"><code>&gt; treeerror #测试集错误率</code></pre>
+<pre class="r"><code>treeerror #测试集错误率</code></pre>
 <pre><code>[1] 0.2505855</code></pre>
-<pre class="r"><code>&gt; cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
-&gt; 
-&gt; cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-+ qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-+ classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-+ schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
-+ brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-+ dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
-+ subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
-+ list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
-&gt; 
-&gt; #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
-&gt; cltree3$variable.importance #各个变量的重要性程度</code></pre>
+<pre class="r"><code>cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
+
+cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
+qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
+classtm +  clpre + revitm + subject + know + drsmok + commhr + 
+schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
+brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
+dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
+subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
+list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
+
+#knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
+cltree3$variable.importance #各个变量的重要性程度</code></pre>
 <pre><code>     smok     bknum   classtm    eduqua     buget   subject    revitm 
 92336.104 87082.851 72098.477 42822.536 37990.537 28371.716 26624.118 
    schids      know     fight     brkpb     comno    commhr     clpre 
 25602.670 25452.345 23572.820 22293.765 21516.771 18454.934 16719.141 
    chidia   schcsrm    teainc   chkhmwk 
  9999.162  9588.660  2283.551  2032.974 </code></pre>
-<pre class="r"><code>&gt; rpart.plot(cltree3)</code></pre>
+<pre class="r"><code>rpart.plot(cltree3)</code></pre>
 <p><img src="/post/edutree_files/figure-html/d%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; test &lt;- na.omit(test) #删除缺失值
-&gt; y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
-&gt; 
-&gt; pr &lt;- y.pr[,2] 
-&gt; test &lt;- cbind(test,pr)
-&gt; modelroc &lt;- roc(test$matgreat,test$pr)
-&gt; auc(modelroc) #计算AUC值</code></pre>
+<pre class="r"><code>test &lt;- na.omit(test) #删除缺失值
+y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
+
+pr &lt;- y.pr[,2] 
+test &lt;- cbind(test,pr)
+modelroc &lt;- roc(test$matgreat,test$pr)
+auc(modelroc) #计算AUC值</code></pre>
 <pre><code>Area under the curve: 0.6951</code></pre>
-<pre class="r"><code>&gt; plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
+<pre class="r"><code>plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
 <p><img src="/post/edutree_files/figure-html/d%20-2.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>&gt; test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
-&gt; attach(test)
-&gt; tab &lt;- table(yhat,matgreat) 
-&gt; treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
-&gt; names(dimnames(tab))&lt;-c(&quot;预测值&quot;,&quot;真实值&quot;) #矩阵小标题
-&gt; tab #混淆矩阵，行为测试集预测值，列为测试集观测值</code></pre>
+<pre class="r"><code>test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
+attach(test)
+tab &lt;- table(yhat,matgreat) 
+treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
+names(dimnames(tab))&lt;-c(&quot;预测值&quot;,&quot;真实值&quot;) #矩阵小标题
+tab #混淆矩阵，行为测试集预测值，列为测试集观测值</code></pre>
 <pre><code>      真实值
 预测值   0   1
      0 875 183
      1 138  85</code></pre>
-<pre class="r"><code>&gt; treeerror #测试集错误率</code></pre>
+<pre class="r"><code>treeerror #测试集错误率</code></pre>
 <pre><code>[1] 0.2505855</code></pre>
 <p>可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。</p>
 <p>在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25%左右。</p>
@@ -180,20 +180,20 @@ Figure 1: 总成绩的回归树
 <div class="section level3">
 <h3><a href="http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection">交叉验证</a></h3>
 <p>使用<code>caret</code>包进行10次10折交叉验证</p>
-<pre class="r"><code>&gt; library(caret)
-&gt; #install.packages(&#39;e1071&#39;)
-&gt; library(e1071)
-&gt; 
-&gt; ceps$matgreat &lt;- as.factor(ceps$matgreat)
-&gt; 
-&gt; repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions=TRUE)
-&gt; 
-&gt;  rpartFit &lt;- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
-+                     data = ceps,
-+                     method = &quot;rpart&quot;,
-+                     trControl = repeatedcv,
-+                     na.action = na.omit)
-&gt; rpartFit</code></pre>
+<pre class="r"><code>library(caret)
+#install.packages(&#39;e1071&#39;)
+library(e1071)
+
+ceps$matgreat &lt;- as.factor(ceps$matgreat)
+
+repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions=TRUE)
+
+ rpartFit &lt;- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
+                    data = ceps,
+                    method = &quot;rpart&quot;,
+                    trControl = repeatedcv,
+                    na.action = na.omit)
+rpartFit</code></pre>
 <pre><code>CART 
 
 19487 samples
@@ -215,17 +215,17 @@ The final value used for the model was cp = 0.03015564.</code></pre>
 </div>
 <div class="section level3">
 <h3>随机森林</h3>
-<pre class="r"><code>&gt; train$matgreat &lt;- as.factor(train$matgreat)
-&gt; train &lt;- na.omit(train)
-&gt; train &lt;- filter(train, is.na(matgreat)==F)
-&gt; 
-&gt; ratree &lt;- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
-&gt; 
-&gt; #ratree
-&gt; #summary(ratree)
-&gt; #MDSplot(ratree,matgreat,palette=NULL)
-&gt; 
-&gt; importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
+<pre class="r"><code>train$matgreat &lt;- as.factor(train$matgreat)
+train &lt;- na.omit(train)
+train &lt;- filter(train, is.na(matgreat)==F)
+
+ratree &lt;- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
+
+#ratree
+#summary(ratree)
+#MDSplot(ratree,matgreat,palette=NULL)
+
+importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
 <pre><code>         MeanDecreaseAccuracy
 schids             16.8903964
 sex                -0.5527399

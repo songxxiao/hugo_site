@@ -94,18 +94,18 @@
 </div>
 <p>但是，这种方法其实多此一举了！</p>
 <p>因为我们在下载R包时，已经将小品文下载下来了。我们可以使用<code>utils</code>包中的<code>vignette</code>函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：</p>
-<pre class="r"><code>&gt; #install.packages(&#39;utils&#39;)#没安装先安装包
-&gt; #library(utils)#加载包
-&gt; vignette(, package = &quot;rpart&quot;)#提取rpart包的小品文名称</code></pre>
+<pre class="r"><code>#install.packages(&#39;utils&#39;)#没安装先安装包
+#library(utils)#加载包
+vignette(, package = &quot;rpart&quot;)#提取rpart包的小品文名称</code></pre>
 <p>输出结果如下所示：</p>
-<pre class="r"><code>&gt; #Vignettes in package ‘rpart’:
-&gt; 
-&gt; #longintro   Introduction to Rpart 
-&gt; #            (source, pdf)
-&gt; #usercode    User Written Split
-&gt; #            Functions (source, pdf)</code></pre>
+<pre class="r"><code>Vignettes in package ‘rpart’:
+
+longintro   Introduction to Rpart 
+            (source, pdf)
+usercode    User Written Split
+            Functions (source, pdf)</code></pre>
 <p>可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：</p>
-<pre class="r"><code>&gt; vignette(&quot;longintro&quot;, package = &quot;rpart&quot;)</code></pre>
+<pre class="r"><code>vignette(&quot;longintro&quot;, package = &quot;rpart&quot;)</code></pre>
 第一篇《Introduction to Rpart》的pdf便会自动跳出：<br />
 
 <div class="figure">
@@ -115,7 +115,7 @@
 </div>
 <p>便可以阅读了。</p>
 <p>很多R包的小品文是pdf版本，当然还有很多是html形式的，如ggplot2的小品文：</p>
-<pre class="r"><code>&gt; vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)</code></pre>
+<pre class="r"><code>vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)</code></pre>
 <div class="figure">
 <img src="../img/Capture4.png" alt=" " width="100%" />
 <p class="caption">

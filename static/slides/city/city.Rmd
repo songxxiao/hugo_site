@@ -13,6 +13,24 @@ output:
       countIncrementalSlides: false
 ---
 ### 题型
+```{python}
+def BinarySearch(a,target):
+    left = 0
+    right = len(a) - 1
+    while left <= right:
+        mid = (left + right)//2
+        midVal = a[mid]
+        if midVal <target:
+            left = mid + 1
+        elif midVal > target:
+            right = mid - 1
+        else:
+            return mid
+    return - 1
+L = [5,7,13,25,32,46,54,62,78,83,88,91,99]
+BinarySearch(L,13)
+install.packages("scorecard")
+```
 
 选择 16 $\times$ 3
 

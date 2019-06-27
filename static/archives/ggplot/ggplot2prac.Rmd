@@ -12,28 +12,28 @@ slug: ggplot
 
 [用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)
 
-```{r a ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r a ,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 library(ggplot2)
 data(diamonds)
 knitr::kable(head(diamonds),caption="数据概要",align='c')
-
+#原始变量关系
 ggplot(diamonds, aes(carat,price)) +
 geom_bin2d() +
 facet_wrap(~cut, nrow = 2)
-
+#y变量取对数
 ggplot(diamonds, aes(log(carat),price)) +
 geom_point() +
 facet_wrap(~cut, nrow = 2)
-
+#x变量取对数
 ggplot(diamonds, aes(carat,log(price))) +
 geom_bin2d() +
 facet_wrap(~cut, nrow = 2)
-
+#都取对数，最终成为线性关系。
 ggplot(diamonds, aes(log(carat), log10(price))) +
 geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
 ```
-```{r b ,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r b ,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 library(haven)
 setwd("E:/R_codes/capplot")
 X2010 <- read_dta("2010.dta")
@@ -71,7 +71,7 @@ scattered2
 
 
 
-```{r c,message = F,prompt=T, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r c,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 i <- ggplot(economics, aes(date, unemploy))
 i + geom_area()
 

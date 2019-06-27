@@ -31,7 +31,7 @@ knitr::include_graphics("/img/Capture2.png")
 
 因为我们在下载R包时，已经将小品文下载下来了。我们可以使用`utils`包中的`vignette`函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：  
 
-```{r a,message = F,prompt=T,warning = F, include = T,error = T,echo = T,eval = F}
+```{r a,message = F,prompt=F,warning = F, include = T,error = T,echo = T,eval = F}
 #install.packages('utils')#没安装先安装包
 #library(utils)#加载包
 vignette(, package = "rpart")#提取rpart包的小品文名称
@@ -39,20 +39,18 @@ vignette(, package = "rpart")#提取rpart包的小品文名称
 ```
 
 输出结果如下所示：  
+```{r bww,eval = F,warning = F,error = F}
+Vignettes in package ‘rpart’:
 
-
-```{r bww,prompt = T, eval = FALSE}
-#Vignettes in package ‘rpart’:
-
-#longintro   Introduction to Rpart 
-#            (source, pdf)
-#usercode    User Written Split
-#            Functions (source, pdf)
+longintro   Introduction to Rpart 
+            (source, pdf)
+usercode    User Written Split
+            Functions (source, pdf)
 ```
 
 可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为"longintro"和"usercode"。现在，就可以根据简称提取小品文了，输入：
 
-```{r c,message = F,prompt=T, include = T,error = T,echo = T,eval = F,results = 'hide'}
+```{r c,message = F,prompt=F, include = T,error = T,echo = T,eval = F,results = 'hide'}
 vignette("longintro", package = "rpart")
 ```
 
@@ -66,7 +64,7 @@ knitr::include_graphics("/img/Capture3.png")
 
 很多R包的小品文是pdf版本，当然还有很多是html形式的，如ggplot2的小品文：  
 
-```{r d,message = F,prompt=T, include = T,error = T,echo = T,eval = F,results = 'hide'}
+```{r d,message = F,prompt=F, include = T,error = T,echo = T,eval = F,results = 'hide'}
 vignette("ggplot2-specs", package = "ggplot2")
 ```
   
