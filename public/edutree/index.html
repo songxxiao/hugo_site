@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>初中生学习成绩的影响因素: 基于分类与回归树的分析 - Xiao Song </title>
-<meta property="og:title" content="初中生学习成绩的影响因素: 基于分类与回归树的分析 - Xiao Song ">
+<title>初中阶段成绩预测模型 - Xiao Song </title>
+<meta property="og:title" content="初中阶段成绩预测模型 - Xiao Song ">
 
 
   <link href='../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -67,7 +67,7 @@
 
   <article class="article">
 
-    <h1 class="article-title">初中生学习成绩的影响因素: 基于分类与回归树的分析</h1>
+    <h1 class="article-title">初中阶段成绩预测模型</h1>
 
     
     <span class="article-date">2019-06-30</span>
@@ -77,12 +77,14 @@
       
 
 
+<p>本报告使用了<code>CART</code> ；<code>Random Forest</code>算法。</p>
+<hr />
 <div class="section level2">
-<h2>数据</h2>
+<h2>数据介绍</h2>
 <p>本文采用<a href="https://ceps.ruc.edu.cn/">中国教育追踪调查</a> (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。</p>
 </div>
 <div class="section level2">
-<h2>模型与算法</h2>
+<h2>算法介绍</h2>
 <p>CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： <span class="math display">\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]</span></p>
 <p>其中，<span class="math inline">\(x\)</span>是一系列输入特征（自变量），<span class="math inline">\({R_1},{R_2},...,{R_m}\)</span>是输入空间被划分的M个区域。 是区域<span class="math inline">\({R_m}\)</span>对应的最优值。<span class="math inline">\(I\)</span>代表的是指示函数（indicator function），当输入变量<span class="math inline">\(x\)</span>属于区域 <span class="math inline">\({R_m}\)</span>时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。</p>
 <p>为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：</p>

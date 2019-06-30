@@ -12,13 +12,14 @@
     
     
     <item>
-      <title>初中生学习成绩的影响因素: 基于分类与回归树的分析</title>
+      <title>初中阶段成绩预测模型</title>
       <link>/edutree/</link>
       <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/edutree/</guid>
-      <description>数据本文采用中国教育追踪调查 (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
-模型与算法CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： \[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
+      <description>本报告使用了CART ；Random Forest算法。
+数据介绍本文采用中国教育追踪调查 (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
+算法介绍CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： \[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
 其中，\(x\)是一系列输入特征（自变量），\({R_1},{R_2},...,{R_m}\)是输入空间被划分的M个区域。 是区域\({R_m}\)对应的最优值。\(I\)代表的是指示函数（indicator function），当输入变量\(x\)属于区域 \({R_m}\)时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
 为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：
 \[{{\rm{C}}_\alpha }(T) = C(T) + \alpha \left| T \right|\]
@@ -31,8 +32,7 @@
 家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。
 个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。
 学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。
-班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
-Figure 1: 标准化总成绩的直方图setwd(&amp;quot;E:/edu/data2&amp;quot;)ceps &amp;lt;- read_dta(&amp;quot;E:/edu/data2/ceps.</description>
+班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</description>
     </item>
     
     <item>
