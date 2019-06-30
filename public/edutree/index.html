@@ -95,7 +95,7 @@
 <div class="section level3">
 <h3>因变量</h3>
 <p>本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。</p>
-<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。图<a href="#fig:b">1</a>展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。</p>
+<p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。图<a href="#fig:b">1</a> 展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。</p>
 <p>图<a href="#fig:a">2</a> 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。</p>
 </div>
 <div class="section level3">
@@ -135,9 +135,7 @@ ggplot(delte, aes(schids,tr_mat)) +
 Figure 2: 随机抽取30所学校的数学成绩差异
 </p>
 </div>
-<pre class="r"><code>#ceps1 &lt;- subset(ceps,schids&lt;=30)
-
-ceps &lt;- lapply(ceps, unclass)
+<pre class="r"><code>ceps &lt;- lapply(ceps, unclass)
 ceps &lt;- data.frame(ceps)</code></pre>
 <hr />
 </div>
@@ -146,8 +144,9 @@ ceps &lt;- data.frame(ceps)</code></pre>
 <h2>分析结果</h2>
 <div class="section level3">
 <h3>回归树</h3>
-<p>图<a href="#fig:s">3</a>展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>。此处将九年级子样本单独进行分析。</p>
-<pre class="r"><code>cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+<p>图<a href="#fig:s">3</a> 展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>。此处将九年级子样本单独进行分析。</p>
+<pre class="r"><code>#建立回归树
+cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
 <pre class="r"><code>tree$cptable #复杂度参数表</code></pre>
 <pre><code>          CP nsplit rel error    xerror         xstd
@@ -165,7 +164,7 @@ tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qur
 Figure 3: 总成绩的回归树
 </p>
 </div>
-<p>图<a href="#fig:fig1">4</a>展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。之后对原始的树进行剪枝，剪枝后的分类树如图<a href="#fig:fig5">5</a>所示。</p>
+<p>图<a href="#fig:fig1">4</a> 展示的是数学原始成绩是否位于前25%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。之后对原始的树进行剪枝，剪枝后的分类树如图<a href="#fig:fig5">5</a> 所示。</p>
 <p><a href="https://www.jianshu.com/p/08c28c5c55a7">R语言表格教程</a></p>
 <pre class="r"><code>set.seed(1212323) #设置随机数种子
 
@@ -198,6 +197,7 @@ attach(test)
 tab &lt;- table(yhat,matgreat) 
 names(dimnames(tab))&lt;-c(&quot;预测值&quot;,&quot;真实值&quot;)
 treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
+# 混淆矩阵
 tab</code></pre>
 <pre><code>      真实值
 预测值   0   1
@@ -207,8 +207,7 @@ tab</code></pre>
 <pre><code>[1] 0.2505855</code></pre>
 <pre class="r"><code>cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
-cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,
-data = subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
+cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
 
 #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
 cltree3$variable.importance #各个变量的重要性程度</code></pre>
@@ -235,10 +234,10 @@ modelroc &lt;- roc(test$matgreat,test$pr)
 
 #ROC 曲线
 plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../post/edutree_files/figure-html/fig6%20-1.png" alt="剪枝后分类树的ROC曲线" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:fig6"></span>
+<img src="../post/edutree_files/figure-html/fig6-1.png" alt="剪枝后分类树的ROC曲线" width="100%" />
 <p class="caption">
-(#fig:fig6 )剪枝后分类树的ROC曲线
+Figure 6: 剪枝后分类树的ROC曲线
 </p>
 </div>
 <pre class="r"><code>#plot(modelroc,print.auc=T) 
@@ -260,7 +259,7 @@ tab #混淆矩阵，行为测试集预测值，列为测试集观测值</code></
 </div>
 <div class="section level3">
 <h3><a href="http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection">交叉验证</a></h3>
-<p>使用<code>caret</code>包进行10次10折交叉验证,同样使用CART算法。图<a href="#fig:fig7">6</a> 展示了训练后模型的ROC曲线。</p>
+<p>使用<code>caret</code>包进行10次10折交叉验证,同样使用CART算法。图<a href="#fig:fig7">7</a> 展示了训练后模型的ROC曲线。</p>
 <pre class="r"><code>library(caret)
 #install.packages(&#39;e1071&#39;)
 library(e1071)
@@ -304,7 +303,7 @@ plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=
 <div class="figure" style="text-align: center"><span id="fig:fig7"></span>
 <img src="../post/edutree_files/figure-html/fig7-1.png" alt="训练后模型的ROC曲线和AUC值" width="100%" />
 <p class="caption">
-Figure 6: 训练后模型的ROC曲线和AUC值
+Figure 7: 训练后模型的ROC曲线和AUC值
 </p>
 </div>
 <pre class="r"><code>ceps &lt;- within(ceps,{predc &lt;- predict(rpartFit); pr &lt;- predict(rpartFit,type=&quot;prob&quot;)})
@@ -324,7 +323,7 @@ treeerror</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fig8"></span>
 <img src="../post/edutree_files/figure-html/fig8-1.png" alt="分类树的复杂度参数与准确率的关系" width="100%" />
 <p class="caption">
-Figure 7: 分类树的复杂度参数与准确率的关系
+Figure 8: 分类树的复杂度参数与准确率的关系
 </p>
 </div>
 </div>

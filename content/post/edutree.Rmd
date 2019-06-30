@@ -37,7 +37,7 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
 
-为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。图\@ref(fig:b)展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。图\@ref(fig:b) 展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。
 
 图\@ref(fig:a) 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。
 
@@ -95,7 +95,6 @@ delte$schids <- as.factor(delte$schids)
 ggplot(delte, aes(schids,tr_mat)) + 
   geom_boxplot(size=0.1) +
   xlab('学校代码') + ylab('数学原始成绩')
-#ceps1 <- subset(ceps,schids<=30)
 
 ceps <- lapply(ceps, unclass)
 ceps <- data.frame(ceps)
@@ -108,11 +107,12 @@ ceps <- data.frame(ceps)
 
 ### 回归树
 
-图\@ref(fig:s)展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题[^1]。此处将九年级子样本单独进行分析。
+图\@ref(fig:s) 展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题[^1]。此处将九年级子样本单独进行分析。
 
 [^1]:七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。
 
 ```{r re,message=F,comment=NA,warning=F,message = F, include = T}
+#建立回归树
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = "anova",parms = list(split="gini"),control=cont,na.action = na.omit)
 
@@ -123,7 +123,7 @@ tree$cptable #复杂度参数表
 rpart.plot(tree)
 ```
 
-图\@ref(fig:fig1)展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。之后对原始的树进行剪枝，剪枝后的分类树如图\@ref(fig:fig5)所示。
+图\@ref(fig:fig1) 展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。之后对原始的树进行剪枝，剪枝后的分类树如图\@ref(fig:fig5) 所示。
 
 [R语言表格教程](https://www.jianshu.com/p/08c28c5c55a7)
 
@@ -154,6 +154,7 @@ attach(test)
 tab <- table(yhat,matgreat) 
 names(dimnames(tab))<-c("预测值","真实值")
 treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+# 混淆矩阵
 tab
 treeerror #测试集错误率
 ```
@@ -162,8 +163,7 @@ treeerror #测试集错误率
 ```{r fig5,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树'}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
-cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,
-data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit) #决策树
+cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit) #决策树
 
 #knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 cltree3$variable.importance #各个变量的重要性程度
@@ -171,7 +171,8 @@ cltree3$variable.importance #各个变量的重要性程度
 rpart.plot(cltree3)
 ```
 
-```{r fig6 ,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树的ROC曲线'}
+```{r fig6, message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树的ROC曲线'}
+
 test <- na.omit(test) #删除缺失值
 y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 
@@ -192,8 +193,6 @@ treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
 names(dimnames(tab))<-c("预测值","真实值") #矩阵小标题
 tab #混淆矩阵，行为测试集预测值，列为测试集观测值
 treeerror #测试集错误率
-
-
 ```
 
 
@@ -243,7 +242,6 @@ treeerror
 
 ```{r fig8,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='分类树的复杂度参数与准确率的关系'}
 plot(rpartFit)
-
 ```
 
 ### 随机森林
