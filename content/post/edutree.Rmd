@@ -106,14 +106,7 @@ ceps <- data.frame(ceps)
 
 ```{r re,message = F,prompt=F, comment = NA,warning = F,message = F, include = T}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
-tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-subset(ceps,grade9 == 1),weights = sweight,method = "anova",parms = 
-list(split="gini"),control=cont,na.action = na.omit)
+tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = "anova",parms = list(split="gini"),control=cont,na.action = na.omit)
 
 ```
 
@@ -136,14 +129,8 @@ train <- ceps[-sampled,] #训练集
 
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
 
-cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm + comno +  bknum + buget + eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
-list(split="gini"),control=cont,na.action = na.omit,model=T) #决策树
+cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno +  bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,
+                 data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit,model=T) #决策树
 #knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 rpart.plot(cltree3)
 
@@ -153,7 +140,8 @@ y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-plot(modelroc,xlab ='伪正类率',ylab='真正类率') #ROC 曲线
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
 
 test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
@@ -167,14 +155,8 @@ treeerror #测试集错误率
 ```{r d ,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%'}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
-cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
-subset(train,grade9 == 1),weights = sweight,method = "class",parms = 
-list(split="gini"),control=cont,na.action = na.omit) #决策树
+cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,
+data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit) #决策树
 
 #knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
 cltree3$variable.importance #各个变量的重要性程度
@@ -187,8 +169,12 @@ y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-auc(modelroc) #计算AUC值
-plot(modelroc,xlab ='伪正类率',ylab='真正类率') #ROC 曲线
+#auc(modelroc) #计算AUC值
+
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+
+#plot(modelroc,print.auc=T) 
 
 test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
@@ -197,6 +183,8 @@ treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
 names(dimnames(tab))<-c("预测值","真实值") #矩阵小标题
 tab #混淆矩阵，行为测试集预测值，列为测试集观测值
 treeerror #测试集错误率
+
+
 ```
 
 
@@ -208,22 +196,54 @@ treeerror #测试集错误率
 
 使用`caret`包进行10次10折交叉验证
 
-```{r caret,message = F,prompt=F, comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r caret,message = F,comment = NA,warning = F,message = F,include=T,fig.align='center',out.width ='100%'}
 
 library(caret)
 #install.packages('e1071')
 library(e1071)
 
 ceps$matgreat <- as.factor(ceps$matgreat)
-
+ceps <- na.omit(ceps)
+#10次10折交叉验证
 repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions=TRUE)
 
  rpartFit <- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
                     data = ceps,
                     method = "rpart",
-                    trControl = repeatedcv,
-                    na.action = na.omit)
+                    trControl = repeatedcv)
 rpartFit
+
+test <- na.omit(ceps) #删除缺失值
+#y.pr <- predict(rpartFit,ceps,type="prob")
+ceps <- within(ceps,{predc <- predict(rpartFit); pr <- predict(rpartFit,type="prob")})#预测测试集概率
+
+#pr <- y.pr[,2] 
+#ceps <- cbind(ceps,pr)
+modelroc <- roc(ceps$matgreat,ceps$pr.1)
+#auc(modelroc) #计算AUC值
+
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+
+
+#modelroc <- roc(ceps$matgreat,ceps$pr)
+
+
+#混淆矩阵
+
+tab <- table(ceps$predc,ceps$matgreat)
+treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+names(dimnames(tab))<-c("预测值","真实值")
+tab
+#ceps$matgreat <- as.factor(ceps$matgreat)
+#ceps$pr.1 <- as.numeric(ceps$pr.1)
+#modelroc <- roc(ceps$matgreat,ceps$pr.1)
+
+#plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+#错误率
+treeerror
+
+plot(rpartFit)
 
 ```
 
@@ -235,11 +255,12 @@ train <- na.omit(train)
 train <- filter(train, is.na(matgreat)==F)
 
 ratree <- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
-
-#ratree
+ratree
+#class(ratree$confusion)
+## 混淆矩阵
+ratree$confusion
 #summary(ratree)
 #MDSplot(ratree,matgreat,palette=NULL)
-
 importance(ratree, type=1, scale=T) #计算模型变量的重要性
 
 ```

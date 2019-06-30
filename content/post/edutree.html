@@ -67,14 +67,7 @@ ceps &lt;- data.frame(ceps)</code></pre>
 <h3>回归树</h3>
 <p>首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析，并采用10折交叉验证计算模型的验证误差。</p>
 <pre class="r"><code>cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
-tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = 
-list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
+tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
 <pre class="r"><code>tree$cptable #复杂度参数表</code></pre>
 <pre><code>          CP nsplit rel error    xerror         xstd
 1 0.07468185      0 1.0000000 1.0008194 0.0005634699
@@ -100,14 +93,8 @@ train &lt;- ceps[-sampled,] #训练集
 
 cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
 
-cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm + comno +  bknum + buget + eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = 
-subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
-list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
+cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno +  bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,
+                 data = subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit,model=T) #决策树
 #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
 rpart.plot(cltree3)</code></pre>
 <p><img src="/post/edutree_files/figure-html/c%20-1.png" width="100%" style="display: block; margin: auto;" /></p>
@@ -117,7 +104,8 @@ y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
 pr &lt;- y.pr[,2] 
 test &lt;- cbind(test,pr)
 modelroc &lt;- roc(test$matgreat,test$pr)
-plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
 <p><img src="/post/edutree_files/figure-html/c%20-2.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
 attach(test)
@@ -133,14 +121,8 @@ tab</code></pre>
 <pre><code>[1] 0.2505855</code></pre>
 <pre class="r"><code>cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
-cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + 
-qurel + relation + desk + net + dialect + chkhmwk + chkcouse + 
-classtm +  clpre + revitm + subject + know + drsmok + commhr + 
-schtype + schcsrm + comno + bknum + buget + eduqua + fight + 
-brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  
-dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = 
-subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = 
-list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
+cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,
+data = subset(train,grade9 == 1),weights = sweight,method = &quot;class&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit) #决策树
 
 #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
 cltree3$variable.importance #各个变量的重要性程度</code></pre>
@@ -158,11 +140,14 @@ y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
 pr &lt;- y.pr[,2] 
 test &lt;- cbind(test,pr)
 modelroc &lt;- roc(test$matgreat,test$pr)
-auc(modelroc) #计算AUC值</code></pre>
-<pre><code>Area under the curve: 0.6951</code></pre>
-<pre class="r"><code>plot(modelroc,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;) #ROC 曲线</code></pre>
+#auc(modelroc) #计算AUC值
+
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
 <p><img src="/post/edutree_files/figure-html/d%20-2.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
+<pre class="r"><code>#plot(modelroc,print.auc=T) 
+
+test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
 attach(test)
 tab &lt;- table(yhat,matgreat) 
 treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
@@ -185,33 +170,67 @@ tab #混淆矩阵，行为测试集预测值，列为测试集观测值</code></
 library(e1071)
 
 ceps$matgreat &lt;- as.factor(ceps$matgreat)
-
+ceps &lt;- na.omit(ceps)
+#10次10折交叉验证
 repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions=TRUE)
 
  rpartFit &lt;- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
                     data = ceps,
                     method = &quot;rpart&quot;,
-                    trControl = repeatedcv,
-                    na.action = na.omit)
+                    trControl = repeatedcv)
 rpartFit</code></pre>
 <pre><code>CART 
 
-19487 samples
-   42 predictor
-    2 classes: &#39;0&#39;, &#39;1&#39; 
+4519 samples
+  42 predictor
+   2 classes: &#39;0&#39;, &#39;1&#39; 
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 4101, 4101, 4101, 4101, 4101, 4102, ... 
+Summary of sample sizes: 4066, 4067, 4068, 4067, 4067, 4067, ... 
 Resampling results across tuning parameters:
 
   cp          Accuracy   Kappa     
-  0.03015564  0.8039239  0.28843270
-  0.03631647  0.7957860  0.23829366
-  0.07295720  0.7786492  0.08288264
+  0.03021442  0.8024365  0.28813163
+  0.03638726  0.7938704  0.22949516
+  0.07504873  0.7764993  0.07037779
 
 Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was cp = 0.03015564.</code></pre>
+The final value used for the model was cp = 0.03021442.</code></pre>
+<pre class="r"><code>test &lt;- na.omit(ceps) #删除缺失值
+y.pr &lt;- predict(rpartFit,ceps,type=&quot;prob&quot;) #预测测试集概率
+
+pr &lt;- y.pr[,2] 
+ceps &lt;- cbind(ceps,pr)
+modelroc &lt;- roc(ceps$matgreat,ceps$pr)
+#auc(modelroc) #计算AUC值
+
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
+<p><img src="/post/edutree_files/figure-html/caret-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>modelroc &lt;- roc(ceps$matgreat,ceps$pr)
+
+ceps &lt;- within(ceps,{predc &lt;- predict(rpartFit); pr &lt;- predict(rpartFit,type=&quot;prob&quot;)})
+#混淆矩阵
+
+tab &lt;- table(ceps$predc,ceps$matgreat)
+treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)
+names(dimnames(tab))&lt;-c(&quot;预测值&quot;,&quot;真实值&quot;)
+tab</code></pre>
+<pre><code>      真实值
+预测值    0    1
+     0 3295  639
+     1  198  387</code></pre>
+<pre class="r"><code>#ceps$matgreat &lt;- as.factor(ceps$matgreat)
+#ceps$pr.1 &lt;- as.numeric(ceps$pr.1)
+#modelroc &lt;- roc(ceps$matgreat,ceps$pr.1)
+
+#plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)
+#错误率
+treeerror</code></pre>
+<pre><code>[1] 0.185218</code></pre>
+<pre class="r"><code>plot(rpartFit)</code></pre>
+<p><img src="/post/edutree_files/figure-html/caret-2.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div class="section level3">
 <h3>随机森林</h3>
@@ -220,54 +239,70 @@ train &lt;- na.omit(train)
 train &lt;- filter(train, is.na(matgreat)==F)
 
 ratree &lt;- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
+ratree</code></pre>
+<pre><code>
+Call:
+ randomForest(formula = matgreat ~ schids + sex + onechi + maedu +      faedu + drunk + qurel + relation + desk + net + dialect +      chkhmwk + chkcouse + classtm + clpre + revitm + subject +      know + drsmok + commhr + schtype + schcsrm + comno + bknum +      buget + eduqua + fight + brkpb + smok + drink + teainc +      money + clfee + qianzi + lifetm + dial + chidia + futcfd +      huko + eduy + dangy + houspro, data = subset(train, grade9 ==      1), importance = T, proximity = T, mtry = 16) 
+               Type of random forest: classification
+                     Number of trees: 500
+No. of variables tried at each split: 16
 
-#ratree
-#summary(ratree)
+        OOB estimate of  error rate: 21.6%
+Confusion matrix:
+    0   1 class.error
+0 945 131   0.1217472
+1 196 242   0.4474886</code></pre>
+<pre class="r"><code>#class(ratree$confusion)
+## 混淆矩阵
+ratree$confusion</code></pre>
+<pre><code>    0   1 class.error
+0 945 131   0.1217472
+1 196 242   0.4474886</code></pre>
+<pre class="r"><code>#summary(ratree)
 #MDSplot(ratree,matgreat,palette=NULL)
-
 importance(ratree, type=1, scale=T) #计算模型变量的重要性</code></pre>
 <pre><code>         MeanDecreaseAccuracy
-schids             16.8903964
-sex                -0.5527399
-onechi              5.9131737
-maedu              -3.3066436
-faedu               2.7760047
-drunk              -0.4609220
-qurel               2.0729488
-relation            0.2582815
-desk                4.7214681
-net                 3.2923147
-dialect             6.6658668
-chkhmwk            -1.3403267
-chkcouse            0.2740335
-classtm            19.5927223
-clpre              13.9225375
-revitm              9.6381463
-subject            14.4385027
-know                8.0538974
-drsmok             13.7351259
-commhr             12.7966501
-schtype             4.4636744
-schcsrm            16.2866687
-comno              16.2330809
-bknum              20.1023533
-buget              18.8540922
-eduqua             17.9241374
-fight               6.8018800
-brkpb               8.0343708
-smok               12.4643054
-drink               2.1355375
-teainc             29.4668796
-money               6.1160261
-clfee               8.8551999
-qianzi              6.0560669
-lifetm              0.2319042
-dial                9.3079861
-chidia              6.7512246
-futcfd             16.3089049
-huko                2.8794747
-eduy               -0.5798589
-dangy               2.2516123
-houspro             4.6543525</code></pre>
+schids             15.6591618
+sex                 0.1783317
+onechi              6.0246583
+maedu              -2.1523429
+faedu               3.3998484
+drunk              -0.7714147
+qurel               0.8603566
+relation           -0.2970308
+desk                3.7265587
+net                 3.8550495
+dialect             6.4391795
+chkhmwk            -1.3450251
+chkcouse            0.6845458
+classtm            18.8774940
+clpre              13.9676480
+revitm              9.9829836
+subject            13.3015057
+know                8.6269976
+drsmok             12.4323771
+commhr             12.4924669
+schtype             2.8600475
+schcsrm            15.7482505
+comno              15.6795290
+bknum              21.0904503
+buget              17.9734341
+eduqua             18.0905382
+fight               6.2511712
+brkpb               7.5368073
+smok               13.1542247
+drink               0.3728828
+teainc             29.2559239
+money               6.3505110
+clfee               9.8453242
+qianzi              7.0408610
+lifetm              0.7983387
+dial                9.3884031
+chidia              7.1556550
+futcfd             16.3409043
+huko                4.9183822
+eduy                1.0829673
+dangy               1.8206349
+houspro             4.5784527</code></pre>
 </div>
 </div>
