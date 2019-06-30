@@ -12,7 +12,7 @@ slug: ggplot
 
 ---
 
-See Figure \@ref(fig:fig1) 
+`ggplot2` see Figure \@ref(fig:fig1) 
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
@@ -39,7 +39,7 @@ ggplot(diamonds, aes(log(carat), log10(price))) +
 geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
 ```
-```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.7}
 library(haven)
 setwd("E:/R_codes/capplot")
 X2010 <- read_dta("2010.dta")

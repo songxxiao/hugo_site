@@ -12,7 +12,7 @@ slug: ggplot
 
 ---
 
-See Figure \@ref(fig:fig1) 
+`ggplot2` see Figure \@ref(fig:fig1) 
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 

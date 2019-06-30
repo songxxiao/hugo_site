@@ -12,7 +12,7 @@ slug: ggplot
 
 ---
 
-See Figure \@ref(fig:fig1) 
+`ggplot2` see Figure \@ref(fig:fig1) 
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
@@ -145,3 +145,48 @@ i + geom_line()
 
 <img src="ggplot2prac_files/figure-html/c-2.png" width="80%" style="display: block; margin: auto;" />
 
+```r
+set.seed(711)
+x = seq(0, 4, length = 100)
+y = -x + jitter(rep(1:5, each = 20), 2)
+z = rep(1:5, each = 20)
+z <- as.factor(z)
+moto <- data.frame(x,y,z)
+lm1 <- lm(y ~ z,moto)
+moto <- within(moto,res <- residuals(lm1))
+moto1 <- subset(moto,z==1)
+moto2 <- subset(moto,z==2)
+moto3 <- subset(moto,z==3)
+moto4 <- subset(moto,z==4)
+moto5 <- subset(moto,z==5)
+
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(method='lm',se=F)
+```
+
+<img src="ggplot2prac_files/figure-html/d-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+```r
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z)) +
+  facet_wrap(~z, nrow = 2) +
+  geom_smooth(method='lm',se=F)
+```
+
+<img src="ggplot2prac_files/figure-html/e-1.png" width="80%" style="display: block; margin: auto;" />
+
+
+```r
+ggplot(moto, aes(x,y),group=z)+
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(data = moto1,method='lm',se=F)+
+  geom_smooth(data = moto2,method='lm',se=F)+
+  geom_smooth(data = moto3,method='lm',se=F)+
+  geom_smooth(data = moto4,method='lm',se=F)+
+  geom_smooth(data = moto5,method='lm',se=F)
+```
+
+<img src="ggplot2prac_files/figure-html/f-1.png" width="80%" style="display: block; margin: auto;" />
+  
