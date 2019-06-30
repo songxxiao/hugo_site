@@ -3,20 +3,22 @@ title: "ggplot2练习"
 author: ' '
 date: '2019-06-27'
 output:
-  html_document:
+  bookdown::html_document2
 slug: ggplot
 ---
 本文链接：
 
 <https://xsong.ltd/archives/ggplot/ggplot2prac>
+
 ---
 
+See Figure \@ref(fig:fig1) 
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
 [用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)
 
-```{r a ,message = F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 library(ggplot2)
 data(diamonds)
 knitr::kable(head(diamonds),caption="数据概要",align='c')
@@ -37,7 +39,7 @@ ggplot(diamonds, aes(log(carat), log10(price))) +
 geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
 ```
-```{r b ,message = F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 library(haven)
 setwd("E:/R_codes/capplot")
 X2010 <- read_dta("2010.dta")
@@ -59,7 +61,9 @@ scattered <- ggplot(hho,aes(x=agem,y=inc,group=type,shape=type,color=type,weight
   annotate("text", x = 70, y = 200, label="数据来源：CFPS,正常散点", size = 4) + #注解
   theme(legend.position = c(0.9,0.9))#图例位置
 scattered
+```
 
+```{r fig1,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.6,fig.cap='fig1'}
 scattered2 <- ggplot(hho,aes(x=agem,y=inc,weight=fswt_nat)) +
   ylim(0, 20000) +
   labs(title = " ",x = "年龄",y = "人民币(元）")+
@@ -68,21 +72,18 @@ scattered2 <- ggplot(hho,aes(x=agem,y=inc,weight=fswt_nat)) +
   annotate("text", x = 70, y = 200, label=" ", size = 4) + #注解
   theme(legend.position = c(0.9,0.9))#图例位置
 scattered2
-
-
-
 ```
 
 
 
-```{r c,message = F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r c,message = F, comment = NA,warning = F,message = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+
+
+
 i <- ggplot(economics, aes(date, unemploy))
 i + geom_area()
 
 i + geom_line()
-
-
-
 
 ```
 

@@ -2,8 +2,10 @@
 title: "初中生学习成绩的影响因素: 基于分类与回归树的分析"
 author: ' '
 date: '2019-06-30'
+output:
+  bookdown::html_document2
 slug: edutree
-output: bookdown::html_document2
+
 ---
 
 ## 数据  
@@ -35,7 +37,9 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
 
-为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。下图展示了标准化总成绩的密度直方图估计。箱线图展示了我们抽取的30所学校的数学原始成绩差异。我们可以发现，标准化总成绩基本上呈现了正态分布。不同学校间的数学成绩差异十分显著。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。图\@ref(fig:b)展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。
+
+图\@ref(fig:a) 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。
 
 ### 自变量
 
@@ -50,7 +54,7 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 班级变量：教师总课时(classtm)、
 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
 
-```{r bust,message = F,comment = NA,warning = F,message = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图'}
+```{r b,message = F,comment = NA,warning = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图'}
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
@@ -71,9 +75,8 @@ histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",ty
 ```
 
 
-为了直观地描述不同学校与学习成绩的差异，图2展示了以学校为分组变量，原始数学成绩为因变量的箱线图。
 
-```{r a,message = F,comment = NA,warning = F,message = F,echo = T,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
+```{r a,message = F,comment = NA,warning = F,echo = T,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
 setwd("E:/edu/data2")
 ceps <- read_dta("E:/edu/data2/ceps.dta")
 #抽出30所学校，作成绩箱线图
@@ -99,11 +102,15 @@ ceps <- data.frame(ceps)
 
 ```
 
+---
+
 ## 分析结果
 
 ### 回归树
 
-首先我们将展示总成绩的回归结果。由于七年级和九年级学生考试总分的不同。我们将九年级子样本单独进行分析。
+图\@ref(fig:s)展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题[^1]。此处将九年级子样本单独进行分析。
+
+[^1]:七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。
 
 ```{r re,message=F,comment=NA,warning=F,message = F, include = T}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
@@ -111,18 +118,16 @@ tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel 
 
 ```
 
-```{r sfff, fig=TRUE,pdf=TRUE,comment=NA,echo=T,warning=FALSE,out.width ='100%',fig.cap="总成绩的回归树",fig.align='center'}
+```{r s, fig=TRUE,pdf=TRUE,comment=NA,echo=T,warning=FALSE,out.width ='100%',fig.cap="总成绩的回归树",fig.align='center'}
 tree$cptable #复杂度参数表
 rpart.plot(tree)
 ```
 
-
-
-下面展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。
+图\@ref(fig:fig1)展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。之后对原始的树进行剪枝，剪枝后的分类树如图\@ref(fig:fig5)所示。
 
 [R语言表格教程](https://www.jianshu.com/p/08c28c5c55a7)
 
-```{r c ,message = F, comment = NA,warning = F,message = F,include=T,fig.align='center',out.width ='100%',fig.cap='未剪枝的分类树\\label{fig3}'}
+```{r fig1,message = F, comment = NA,warning =F,include=T,fig.align='center',out.width ='100%',fig.cap='未剪枝的分类树'}
 set.seed(1212323) #设置随机数种子
 
 #简单交叉验证划分测试集和训练集
@@ -143,8 +148,6 @@ y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-#ROC 曲线
-#plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
 
 test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
@@ -155,7 +158,8 @@ tab
 treeerror #测试集错误率
 ```
 
-```{r d ,message = F, comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.cap='ROC曲线'}
+
+```{r fig5,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树'}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
 cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,
@@ -165,7 +169,9 @@ data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list
 cltree3$variable.importance #各个变量的重要性程度
 
 rpart.plot(cltree3)
+```
 
+```{r fig6 ,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树的ROC曲线'}
 test <- na.omit(test) #删除缺失值
 y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 
@@ -191,15 +197,15 @@ treeerror #测试集错误率
 ```
 
 
-可以发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。
+从图\@ref(fig:fig5) 发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。
 
-在初次拟合分类树之后，我们对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
+在初次拟合分类树之后，对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
 
 ### [交叉验证](http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection)
 
-使用`caret`包进行10次10折交叉验证,同样使用CART算法。
+使用`caret`包进行10次10折交叉验证,同样使用CART算法。图\@ref(fig:fig7) 展示了训练后模型的ROC曲线。
 
-```{r caret,cached = T,message = F,comment = NA,warning = F,message = F,include=T,fig.align='center',out.width ='100%'}
+```{r fig7,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='训练后模型的ROC曲线和AUC值'}
 
 library(caret)
 #install.packages('e1071')
@@ -232,7 +238,10 @@ names(dimnames(tab))<-c("预测值","真实值")
 tab
 #错误率
 treeerror
+```
 
+
+```{r fig8,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='分类树的复杂度参数与准确率的关系'}
 plot(rpartFit)
 
 ```
