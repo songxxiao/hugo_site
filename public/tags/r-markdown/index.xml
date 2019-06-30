@@ -86,7 +86,7 @@ rpart的官方主页如下所示：
 其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。
 但是，这种方法其实多此一举了！
 因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
-#install.packages(&amp;#39;utils&amp;#39;)#没安装先安装包#library(utils)#加载包vignette(, package = &amp;quot;rpart&amp;quot;)#提取rpart包的小品文名称输出结果如下所示：
+#install.packages(&amp;#39;utils&amp;#39;)#安装包library(utils)#加载包vignette(, package = &amp;quot;rpart&amp;quot;)#提取rpart包的小品文名称输出结果如下所示：
 Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
 vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
 便可以阅读了。
