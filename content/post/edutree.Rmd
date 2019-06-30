@@ -186,12 +186,9 @@ y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
 pr <- y.pr[,2] 
 test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
-#auc(modelroc) #计算AUC值
 
 #ROC 曲线
 plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
-
-#plot(modelroc,print.auc=T) 
 
 test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)

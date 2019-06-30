@@ -232,7 +232,6 @@ y.pr &lt;- predict(cltree3,test,type=&quot;prob&quot;) #预测测试集概率
 pr &lt;- y.pr[,2] 
 test &lt;- cbind(test,pr)
 modelroc &lt;- roc(test$matgreat,test$pr)
-#auc(modelroc) #计算AUC值
 
 #ROC 曲线
 plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
@@ -242,9 +241,7 @@ plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=
 Figure 6: 剪枝后分类树的ROC曲线
 </p>
 </div>
-<pre class="r"><code>#plot(modelroc,print.auc=T) 
-
-test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
+<pre class="r"><code>test$yhat &lt;- ifelse(test$pr &gt;0.5,&#39;1&#39;,&#39;0&#39;) #大于0.5设置为&quot;是&quot;
 attach(test)
 tab &lt;- table(yhat,matgreat) 
 treeerror &lt;- (sum(tab)-sum(diag(tab)))/sum(tab)

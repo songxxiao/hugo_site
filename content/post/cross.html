@@ -9,6 +9,8 @@ categories: R
 
 
 
+<p>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。</p>
+<p>交叉验证主要有以下种类：</p>
 <ul>
 <li><p>简单交叉验证 (hold-out cross validation)</p></li>
 <li><p>k折交叉验证 (K-fold cross-validation)</p></li>
@@ -57,13 +59,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 457, 457, 454, 454, 456, ... 
+Summary of sample sizes: 457, 456, 455, 456, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.772243  0.6008671  4.137261
-  0.17117244  6.749116  0.4525748  4.987597
-  0.45274420  8.836187  0.2106854  6.394347
+  0.07165784  5.938353  0.5909596  4.245315
+  0.17117244  6.616404  0.4795362  4.807548
+  0.45274420  8.331383  0.3045569  6.058895
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -82,13 +84,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 455, 457, 455, 455, 456, ... 
+Summary of sample sizes: 455, 457, 454, 456, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.870862  0.5949411  4.255615
-  0.17117244  6.627447  0.4740641  4.914090
-  0.45274420  8.384046  0.3032931  6.080473
+  0.07165784  5.703880  0.6215122  4.097869
+  0.17117244  6.698519  0.4720635  4.969123
+  0.45274420  8.393638  0.3332490  6.112844
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>

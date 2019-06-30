@@ -76,7 +76,7 @@ scattered2
 
 
 
-```{r c,message = F, comment = NA,warning = F,message = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r c,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 
 
 
@@ -86,4 +86,42 @@ i + geom_area()
 i + geom_line()
 
 ```
+```{r d,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
+set.seed(711)
+x = seq(0, 4, length = 100)
+y = -x + jitter(rep(1:5, each = 20), 2)
+z = rep(1:5, each = 20)
+z <- as.factor(z)
+moto <- data.frame(x,y,z)
+lm1 <- lm(y ~ z,moto)
+moto <- within(moto,res <- residuals(lm1))
+moto1 <- subset(moto,z==1)
+moto2 <- subset(moto,z==2)
+moto3 <- subset(moto,z==3)
+moto4 <- subset(moto,z==4)
+moto5 <- subset(moto,z==5)
 
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(method='lm',se=F)
+```
+
+```{r e,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z)) +
+  facet_wrap(~z, nrow = 2) +
+  geom_smooth(method='lm',se=F)
+```
+
+```{r f,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
+ggplot(moto, aes(x,y),group=z)+
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(data = moto1,method='lm',se=F)+
+  geom_smooth(data = moto2,method='lm',se=F)+
+  geom_smooth(data = moto3,method='lm',se=F)+
+  geom_smooth(data = moto4,method='lm',se=F)+
+  geom_smooth(data = moto5,method='lm',se=F)
+
+
+```
+  
