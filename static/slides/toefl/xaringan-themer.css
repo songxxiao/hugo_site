@@ -16,14 +16,14 @@
  *    - remarkjs wiki: https://github.com/gnab/remark/wiki
  *
  * ------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Noto+Serif:300,300i);
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif);
 @import url(https://fonts.googleapis.com/css?family=Noto+Serif);
 @import url(https://fonts.googleapis.com/css?family=Droid+Mono);
 
 
 body {
   font-family: Noto Serif, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
-  font-weight: 300;
+  font-weight: ;
   color: #13393A;
 }
 h1, h2, h3 {

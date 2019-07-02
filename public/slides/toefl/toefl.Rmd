@@ -5,7 +5,7 @@ author: "Malcolm"
 date: "2019/06/09"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [default, zh-CN.css]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -17,7 +17,7 @@ library(xaringanthemer)
 mono_light(
   base_color = "#1c5253",
   header_font_google = google_font("Noto Serif"),
-  text_font_google   = google_font("Noto Serif", "300", "300i"),
+  text_font_google   = google_font("Noto Serif"),
   code_font_google   = google_font("Droid Mono"))
 ```
 class: center, middle
@@ -119,7 +119,7 @@ This is evidenced by 被···证实了
 demand \ request \ ask sb for 要求  
 cherish 珍惜  
 safeguard 保卫、维护、捍卫  
-fonnulate 制定  
+fomulate 制定  
 two-edge sword 双刃剑  
 nightmares 噩梦  
 double-sided 两面性的  
@@ -128,7 +128,7 @@ conversely 相反地
 下降：decline, reduce, decrease  
 上升：improve, increase, enhance, raise, heighten
 
-prior 先
+prior 先  
 posterior 后
 ---
 class: center, middle

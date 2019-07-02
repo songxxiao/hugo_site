@@ -1,6 +1,6 @@
 
 ---
-title: "Python算法实现"
+title: "Python查找和排序算法"
 author: ' '
 date: '2019-05-24'
 slug: suanfa
@@ -12,7 +12,7 @@ categories: R
 
 
 ```python
-#实验范例（1）：折半查找算法
+#折半查找算法
 def BinarySearch(a,target):
     left = 0
     right = len(a) - 1
@@ -64,7 +64,7 @@ print('结果：',bubble(testlist))
 
 
 ```python
-#（1）找出最大最小值
+#找出最大最小值
 
 lst = [31,45,35,56,37,69,310,21,12]
 
@@ -154,7 +154,7 @@ sequen(Lst,56)
 
 
 ```python
-#实验范例3：插入排序法
+#插入排序法
 def InsertionSort(A):
     for j in range(1,len(A)):
         print(A)
@@ -188,7 +188,7 @@ InsertionSort(A)
 
 
 ```python
-#选择排序算法：程序填空
+#选择排序算法
 def selection_sort(L):
     N = len(L) #提取列表长度N
     exchange_count = 0
@@ -229,7 +229,7 @@ selection_sort(testlist)
 
 
 ```python
-#对于冒泡法的补充思考：能否对字符串进行排序？
+#能否对字符串进行排序？
 def get_key(dict, value):
     return [k for k, v in dict.items() if v == value]
 
@@ -263,7 +263,3 @@ print('结果：',bubbleStr(testlist))
     结果： ['p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     
 
-
-```python
-
-```
