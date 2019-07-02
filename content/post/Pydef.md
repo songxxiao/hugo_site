@@ -2,17 +2,11 @@
 title: "Python函数与模块的使用"
 author: " "
 date: "2019-05-08"
-categories: ["R"]
+categories: Python
 slug: pydef
-tags: ["R Markdown"]
+tags: Python
 ---
-# 函数与模块的使用
-
-### 实验范例6.7.2
-
-
 ```python
-#(1)
 def star(m,n):
     for i in range(m):
         print('*'*n)
@@ -49,7 +43,6 @@ star(4,20)
 
 
 ```python
-#(2)
 def paint(m,s):
     print(s*m)
 paint(3,'*')
@@ -68,7 +61,6 @@ paint(8,'%+')
 
 
 ```python
-#(3)
 def check(a):
     if a>0:
         print('>0')
@@ -100,7 +92,6 @@ check(0)
 
 
 ```python
-#(4)
 def avg(a,b):
     return(a+b)/2
 
@@ -143,7 +134,6 @@ y
 
 
 ```python
-#（5）
 def avg(a,b):
     return(a+b)/2
     return(a+b) #可以有多条return语句，但只执行一条
@@ -159,7 +149,6 @@ avg(4,6)
 
 
 ```python
-#（6）
 def avg(a,b=0):#默认参数
     return(a+b)/2
 avg(6)
@@ -174,7 +163,6 @@ avg(6)
 
 
 ```python
-#（7）
 def more(a,b):
     return a+b,a-b
 more(2,3) #return语句可以返回多个值
@@ -195,9 +183,3 @@ def more(a,b):
 more(2,3) #return后面可以没有返回值
 ```
 
-### 实验内容
-
-
-```python
-
-```
