@@ -40,19 +40,21 @@ slug: edutree
 <p>个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。</p>
 <p>学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。</p>
 <p>班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
+<p><a href="http://www.mamicode.com/info-detail-1402416.html">R语言移除缺失值 NA.RM</a></p>
 <div class="figure" style="text-align: center"><span id="fig:b"></span>
-<img src="/post/edutree_files/figure-html/b-1.png" alt="标准化总成绩的直方图" width="100%" />
+<img src="/post/edutree_files/figure-html/b-1.png" alt="标准化总成绩的直方图(分年级)" width="100%" />
 <p class="caption">
-Figure 1: 标准化总成绩的直方图
+Figure 1: 标准化总成绩的直方图(分年级)
 </p>
 </div>
+<pre><code>NULL</code></pre>
 <pre class="r"><code>setwd(&quot;E:/edu/data2&quot;)
 ceps &lt;- read_dta(&quot;E:/edu/data2/ceps.dta&quot;)
 #抽出30所学校，作成绩箱线图
 ceps1 &lt;- ceps %&gt;% 
 group_by(schids) %&gt;% 
 summarize(mathmean = mean(tr_mat, na.rm = T))
-set.seed(2019)
+set.seed(2018)
 sample &lt;- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
 ceps1 &lt;- ceps1[sample,]
 ceps1 &lt;- ceps1$schids #提取抽中学校编号的向量
@@ -62,7 +64,7 @@ for (i in ceps1) delte &lt;- rbind(delte, subset(ceps,schids == i))
 #箱线图
 delte$schids &lt;- as.factor(delte$schids)  
 ggplot(delte, aes(schids,tr_mat)) + 
-  geom_boxplot(size=0.1) +
+  geom_boxplot(size=0.1,outlier.colour =&quot;#56B4E9&quot;,fill=&#39;sky blue&#39;) +
   xlab(&#39;学校代码&#39;) + ylab(&#39;数学原始成绩&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:a"></span>
 <img src="/post/edutree_files/figure-html/a-1.png" alt="随机抽取30所学校的数学成绩差异" width="100%" />
@@ -72,6 +74,28 @@ Figure 2: 随机抽取30所学校的数学成绩差异
 </div>
 <pre class="r"><code>ceps &lt;- lapply(ceps, unclass)
 ceps &lt;- data.frame(ceps)</code></pre>
+<pre class="r"><code>#独生子女
+dus &lt;- ggplot(ceps, aes(onechi,tr_mat,na.rm=T)) + 
+  geom_boxplot(size=0.1,outlier.colour =&quot;#56B4E9&quot;,position=position_dodge(1),fill=&#39;sky blue&#39;) +
+  xlab(&#39;独生子女&#39;) + ylab(&#39;数学原始成绩&#39;)
+
+#ceps$maedu10 &lt;- ifelse(ceps$maedu&gt;16,TRUE,FALSE)
+shux &lt;- ceps$grade9 &lt;- as.factor(ceps$grade9)
+ggplot(ceps, aes(sex,tr_mat)) + 
+  facet_wrap(~grade9, nrow = 1) +
+  geom_boxplot(size=0.1,outlier.colour =&quot;#56B4E9&quot;,fill=&#39;sky blue&#39;) +
+  xlab(&#39;性别&#39;) + ylab(&#39;数学原始成绩&#39;)
+  
+#dus shux tushu
+#tushu &lt;- ggplot(ceps, aes(bknum, tr_mat)) +
+  geom_point(size=2,na.rm=T) +
+  geom_jitter(height = 2, width = 9,na.rm=T) +
+  geom_smooth(method=&#39;loess&#39;) +
+  xlab(&#39;学校图书数量&#39;) + ylab(&#39;数学原始成绩&#39;)
+
+library(easyGgplot2)
+multiplot &lt;- ggplot2.multiplot(dus,shux)
+multiplot  </code></pre>
 <hr />
 </div>
 </div>
@@ -85,13 +109,13 @@ cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
 <pre class="r"><code>tree$cptable #复杂度参数表</code></pre>
 <pre><code>          CP nsplit rel error    xerror         xstd
-1 0.07468185      0 1.0000000 1.0008194 0.0005634699
-2 0.03717668      1 0.9253181 0.9281575 0.0005277763
-3 0.01820999      2 0.8881415 0.9108954 0.0005315458
-4 0.01328867      3 0.8699315 0.9052528 0.0005502155
-5 0.01308371      4 0.8566428 0.8989148 0.0005484642
-6 0.01281814      5 0.8435591 0.8989148 0.0005484642
-7 0.01000000      6 0.8307410 0.8843597 0.0005490267</code></pre>
+1 0.07468185      0 1.0000000 1.0005817 0.0005632621
+2 0.03717668      1 0.9253181 0.9268011 0.0005265333
+3 0.01820999      2 0.8881415 0.9094717 0.0005329134
+4 0.01328867      3 0.8699315 0.8922139 0.0005316833
+5 0.01308371      4 0.8566428 0.8828939 0.0005337167
+6 0.01281814      5 0.8435591 0.8818077 0.0005334800
+7 0.01000000      6 0.8307410 0.8658482 0.0005283663</code></pre>
 <pre class="r"><code>rpart.plot(tree)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:s"></span>
 <img src="/post/edutree_files/figure-html/s-1.png" alt="总成绩的回归树" width="100%" />
@@ -285,7 +309,7 @@ ratree$confusion</code></pre>
 0 945 131   0.1217472
 1 196 242   0.4474886</code></pre>
 <pre class="r"><code>#计算模型变量的重要性
-importance(ratree, type=1, scale=T) </code></pre>
+importance(ratree, type=1, scale=T)</code></pre>
 <pre><code>         MeanDecreaseAccuracy
 schids             15.6591618
 sex                 0.1783317

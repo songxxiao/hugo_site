@@ -61,7 +61,9 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 班级变量：教师总课时(classtm)、
 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
 
-```{r b,message = F,comment = NA,warning = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图'}
+[R语言移除缺失值 NA.RM](http://www.mamicode.com/info-detail-1402416.html)
+
+```{r b,message = F,comment = NA,warning = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图(分年级)',fig.asp=0.4}
 setwd("E:/edu/data2")
 library(haven)
 library(tidyverse)
@@ -77,8 +79,20 @@ ceps <- read_dta("E:/edu/data2/ceps.dta")
 ceps <- lapply(ceps, unclass)
 ceps <- data.frame(ceps)
 ceps$schids <- as.factor(ceps$schids)
-attach(ceps)
-histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",type = "density",ylab = '密度')
+#attach(ceps)
+#histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",type = "density",ylab = '密度')
+
+ceps$grade9 <- as.factor(ceps$grade9)
+dus <- ggplot(ceps, aes(x = sdtotal,group=grade9,fill=grade9)) + geom_histogram(density = 70)+
+xlab('总成绩') + ylab('频数')
+#七年级和九年级的比较
+shux <- ggplot(ceps, aes(x = sdtotal,group=grade9,fill=grade9,color=grade9)) + geom_density(alpha=1/2) +
+xlab('总成绩') + ylab('密度')
+
+library(easyGgplot2)
+multiplot <- ggplot2.multiplot(dus,shux)
+multiplot  
+
 ```
 
 
@@ -90,7 +104,7 @@ ceps <- read_dta("E:/edu/data2/ceps.dta")
 ceps1 <- ceps %>% 
 group_by(schids) %>% 
 summarize(mathmean = mean(tr_mat, na.rm = T))
-set.seed(2019)
+set.seed(2018)
 sample <- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
 ceps1 <- ceps1[sample,]
 ceps1 <- ceps1$schids #提取抽中学校编号的向量
@@ -100,14 +114,37 @@ for (i in ceps1) delte <- rbind(delte, subset(ceps,schids == i))
 #箱线图
 delte$schids <- as.factor(delte$schids)  
 ggplot(delte, aes(schids,tr_mat)) + 
-  geom_boxplot(size=0.1) +
+  geom_boxplot(size=0.1,outlier.colour ="#56B4E9",fill='sky blue') +
   xlab('学校代码') + ylab('数学原始成绩')
 
 ceps <- lapply(ceps, unclass)
 ceps <- data.frame(ceps)
-
 ```
 
+```{r others,message = F,comment = NA,warning = F,eval= F,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
+#独生子女
+dus <- ggplot(ceps, aes(onechi,tr_mat,na.rm=T)) + 
+  geom_boxplot(size=0.1,outlier.colour ="#56B4E9",position=position_dodge(1),fill='sky blue') +
+  xlab('独生子女') + ylab('数学原始成绩')
+
+#ceps$maedu10 <- ifelse(ceps$maedu>16,TRUE,FALSE)
+shux <- ceps$grade9 <- as.factor(ceps$grade9)
+ggplot(ceps, aes(sex,tr_mat)) + 
+  facet_wrap(~grade9, nrow = 1) +
+  geom_boxplot(size=0.1,outlier.colour ="#56B4E9",fill='sky blue') +
+  xlab('性别') + ylab('数学原始成绩')
+  
+#dus shux tushu
+#tushu <- ggplot(ceps, aes(bknum, tr_mat)) +
+  geom_point(size=2,na.rm=T) +
+  geom_jitter(height = 2, width = 9,na.rm=T) +
+  geom_smooth(method='loess') +
+  xlab('学校图书数量') + ylab('数学原始成绩')
+
+library(easyGgplot2)
+multiplot <- ggplot2.multiplot(dus,shux)
+multiplot  
+```
 ---
 
 ## 分析结果
@@ -260,7 +297,7 @@ ratree
 ## 混淆矩阵
 ratree$confusion
 #计算模型变量的重要性
-importance(ratree, type=1, scale=T) 
+importance(ratree, type=1, scale=T)
 
 ```
 
