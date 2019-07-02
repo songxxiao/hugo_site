@@ -5,13 +5,22 @@ author: "Malcolm"
 date: "2019/06/09"
 output:
   xaringan::moon_reader:
-    css: [default, zh-CN.css]
+    css: xaringan-themer.css
     lib_dir: libs
     nature:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
 ---
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+mono_light(
+  base_color = "#1c5253",
+  header_font_google = google_font("Noto Serif"),
+  text_font_google   = google_font("Noto Serif SC", "300", "300i"),
+  code_font_google   = google_font("Droid Mono")
+)
+```
 class: center, middle
 # 作文经验
 
@@ -132,7 +141,9 @@ I believe ...
 
 inapporiate to ...
 
+call off 取消
 
+set off 出发
 
 ]
 
