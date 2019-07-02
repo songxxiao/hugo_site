@@ -284,7 +284,7 @@ treeerror
 
 
 ```{r fig8,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='分类树的复杂度参数与准确率的关系'}
-plot(rpartFit)
+plot(rpartFit,xlab ='复杂度参数',ylab='准确率(重复交叉验证)')
 ```
 
 ### 随机森林

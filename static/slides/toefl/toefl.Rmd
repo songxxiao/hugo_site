@@ -17,13 +17,12 @@ library(xaringanthemer)
 mono_light(
   base_color = "#1c5253",
   header_font_google = google_font("Noto Serif"),
-  text_font_google   = google_font("Noto Serif SC", "300", "300i"),
-  code_font_google   = google_font("Droid Mono")
-)
+  text_font_google   = google_font("Noto Serif", "300", "300i"),
+  code_font_google   = google_font("Droid Mono"))
 ```
 class: center, middle
-# 作文经验
-
+# 作文经验  
+<https://xsong.ltd/slides/toefl/toefl#1>
 
 
 ---
@@ -119,7 +118,12 @@ lead to 导致
 This is evidenced by 被···证实了  
 demand \ request \ ask sb for 要求  
 cherish 珍惜  
-safeguard 保卫、维护、捍卫
+safeguard 保卫、维护、捍卫  
+fonnulate 制定  
+two-edge sword 双刃剑  
+nightmares 噩梦  
+double-sided 两面性的  
+conversely 相反地  
 
 下降：decline, reduce, decrease  
 上升：improve, increase, enhance, raise, heighten

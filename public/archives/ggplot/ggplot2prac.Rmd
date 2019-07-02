@@ -1,26 +1,27 @@
 ---
 title: "ggplot2练习" 
 author: ' '
-date: '2019-06-27'
+date: ' '
 output:
   bookdown::html_document2:
     toc: true
     theme: united
 slug: ggplot
 ---
+
 本文链接：
 
 <https://xsong.ltd/archives/ggplot/ggplot2prac>
 
----
+# ggplot2练习
 
-`ggplot2` see Figure \@ref(fig:fig1) 
+## 学习资源(resource)
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
 [用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)
 
-## 二维密度图
+## 二维密度图(density plot)
 
 ```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 library(ggplot2)
@@ -44,7 +45,7 @@ geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
 ```
 
-## 抽样散点图
+## 抽样散点图(sampled scatter)
 
 ```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.7}
 library(haven)
@@ -69,19 +70,6 @@ scattered <- ggplot(hho,aes(x=agem,y=inc,group=type,shape=type,color=type,weight
   theme(legend.position = c(0.9,0.9))#图例位置
 scattered
 ```
-
-```{r fig1,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.6,fig.cap='fig1'}
-scattered2 <- ggplot(hho,aes(x=agem,y=inc,weight=fswt_nat)) +
-  ylim(0, 20000) +
-  labs(title = " ",x = "年龄",y = "人民币(元）")+
-  geom_bin2d(bins = 70)  +
-  geom_smooth(span = 10,size=1.5,colour='red') +
-  annotate("text", x = 70, y = 200, label=" ", size = 4) + #注解
-  theme(legend.position = c(0.9,0.9))#图例位置
-scattered2
-```
-
-
 
 ```{r c,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 
@@ -135,7 +123,7 @@ ggplot(moto, aes(x,y),group=z)+
 
 ```
 
-## 地图绘制
+## 地图绘制(china maps)
 
 ```{r g,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
 rm(list=ls())
