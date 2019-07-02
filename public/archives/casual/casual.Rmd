@@ -2,6 +2,10 @@
 title: "科学预测和因果关系"
 author: ' '
 date: '2017-08-01'
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
 slug: casual 
 bibliography: bibfile.bib
 ---
