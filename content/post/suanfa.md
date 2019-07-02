@@ -1,51 +1,26 @@
 
 ---
-title: "Python查找和排序算法"
+title: "排序和查找算法(Python实现)"
 author: ' '
-date: '2019-05-24'
+date: '2019-05-09'
 slug: suanfa
-tags: R
-categories: R
+tags: Python
+categories: Python
 ---
 
-### 7.7实验
+## 排序算法
+
+### 冒泡排序法
 
 
 ```python
-#折半查找算法
-def BinarySearch(a,target):
-    left = 0
-    right = len(a) - 1
-    while left <= right:
-        mid = (left + right)//2
-        midVal = a[mid]
-        if midVal <target:
-            left = mid + 1
-        elif midVal > target:
-            right = mid - 1
-        else:
-            return mid
-    return - 1
-L = [5,7,13,25,32,46,54,62,78,83,88,91,99]
-BinarySearch(L,13)
-```
-
-
-
-
-    2
-
-
-
-
-```python
-#冒泡排序法
 def bubble(List):
     for j in range(len(List)-1,0,-1):
         print(List)
         for i in range(0,j):
-            if List[i]>List[i+1]:List[i],List[i+1] = List[i+1],List[i]
-    return List
+            if List[i]>List[i+1]:
+                List[i],List[i+1] = List[i+1],List[i]
+    return List 
 testlist = [49,38,65,97,76,13,27,49]
 print('结果：',bubble(testlist))
 ```
@@ -60,135 +35,11 @@ print('结果：',bubble(testlist))
     结果： [13, 27, 38, 49, 49, 65, 76, 97]
     
 
-### 实验内容
+### 选择排序算法
 
 
 ```python
-#找出最大最小值
-
-lst = [31,45,35,56,37,69,310,21,12]
-
-def max2(List):
-    for j in range(len(List)-1,0,-1):
-        for i in range(0,j):
-            if List[i]>List[i+1]:List[i],List[i+1] = List[i+1],List[i]
-    return List[len(List)-1]
-
-max2(lst)        
-
-```
-
-
-
-
-    310
-
-
-
-
-```python
-# 找出列表最小值
-def min2(List):
-    for j in range(len(List)-1,0,-1):
-        for i in range(0,j):
-            if List[i]>List[i+1]:List[i],List[i+1] = List[i+1],List[i]
-    return List[0]
-min2(lst) 
-```
-
-
-
-
-    12
-
-
-
-
-```python
-# 折半查找算法，有多个则返回第一个。
-def BinarySearch(a,target):
-    left = 0
-    right = len(a) - 1
-    while left <= right:
-        mid = (left + right)//2 #整除，提取中点
-        midVal = a[mid]
-        if midVal < target: #在中点右侧寻找
-            left = mid + 1
-        elif midVal > target: #在中点左侧寻找
-            right = mid - 1
-        else:
-            return a.index(midVal) #返回第一个查找值
-    return - 1
-L = [32,32,32,32,32,46,54,62,78,83,88,91,99]
-L2 = [54,62,78,32,32,32,32,32,46,83,88,91,99]
-BinarySearch(L2,32)
-```
-
-
-
-
-    3
-
-
-
-
-```python
-#顺序搜索算法
-Lst = [31,45,35,56,37,69,310,21,12]
-def sequen(lst,x):
-    i = 0
-    while i < len(lst):
-        if lst[i] == x:
-            return i
-        i += 1
-    else: return -1
-sequen(Lst,56)
-```
-
-
-
-
-    3
-
-
-
-
-```python
-#插入排序法
-def InsertionSort(A):
-    for j in range(1,len(A)):
-        print(A)
-        key = A[j]
-        i = j-1
-        while i >= 0 and A[i]>key:
-            A[i+1] = A[i]
-            i = i-1
-        A[i+1] = key
-    return A
-A = [31,45,35,56,37,69,310,21,12]
-InsertionSort(A)
-```
-
-    [31, 45, 35, 56, 37, 69, 310, 21, 12]
-    [31, 45, 35, 56, 37, 69, 310, 21, 12]
-    [31, 35, 45, 56, 37, 69, 310, 21, 12]
-    [31, 35, 45, 56, 37, 69, 310, 21, 12]
-    [31, 35, 37, 45, 56, 69, 310, 21, 12]
-    [31, 35, 37, 45, 56, 69, 310, 21, 12]
-    [31, 35, 37, 45, 56, 69, 310, 21, 12]
-    [21, 31, 35, 37, 45, 56, 69, 310, 12]
-    
-
-
-
-
-    [12, 21, 31, 35, 37, 45, 56, 69, 310]
-
-
-
-
-```python
-#选择排序算法
+#选择排序算法：程序填空
 def selection_sort(L):
     N = len(L) #提取列表长度N
     exchange_count = 0
@@ -227,6 +78,40 @@ selection_sort(testlist)
 
 
 
+### 插入排序法
+
+
+```python
+def Insert(A):
+    for j in range(1,len(A)):
+        print(A)
+        key = A[j] #key为关键位置的值
+        i = j - 1 #i为关键位置之前的索引
+        while i > 0 and A[i]>key: #
+            A[i+1]=A[i] #将小于A[i]的元素前移
+            i = i - 1 
+        A[i + 1] = key
+    return A
+testlist = [49,38,49,97,76,13,27,65]
+Insert(testlist)
+```
+
+    [49, 38, 49, 97, 76, 13, 27, 65]
+    [49, 38, 49, 97, 76, 13, 27, 65]
+    [49, 38, 49, 97, 76, 13, 27, 65]
+    [49, 38, 49, 97, 76, 13, 27, 65]
+    [49, 38, 49, 76, 97, 13, 27, 65]
+    [49, 13, 38, 49, 76, 97, 27, 65]
+    [49, 13, 27, 38, 49, 76, 97, 65]
+    
+
+
+
+
+    [49, 13, 27, 38, 49, 65, 76, 97]
+
+
+
 
 ```python
 #能否对字符串进行排序？
@@ -262,4 +147,55 @@ print('结果：',bubbleStr(testlist))
 
     结果： ['p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     
+
+## 查找
+
+### 顺序搜索算法
+
++ 逐一查找
+
+
+```python
+#顺序搜索算法
+Lst = [31,45,35,56,37,69,310,21,12]
+def sequen(lst,x):
+    i = 0
+    while i < len(lst): #while 循环
+        if lst[i] == x:
+            return i
+        i += 1
+    else: return -1
+sequen(Lst,56)
+```
+
+### 折半查找算法
+
++ 被查找的数据必须是有序的
+
+
+```python
+#有多个则返回第一个。
+def BinarySearch(a,target):
+    left = 0
+    right = len(a) - 1
+    while left <= right:
+        mid = (left + right)//2 #整除，提取中点
+        midVal = a[mid]
+        if midVal < target: #在中点右侧寻找
+            left = mid + 1
+        elif midVal > target: #在中点左侧寻找
+            right = mid - 1
+        else:
+            return a.index(midVal) #返回第一个查找值
+    return - 1
+L = [32,32,32,32,32,46,54,62,78,83,88,91,99]
+L2 = [54,62,78,32,32,32,32,32,46,83,88,91,99]
+BinarySearch(L2,32)
+```
+
+
+
+
+    3
+
 

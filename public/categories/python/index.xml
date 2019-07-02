@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Xiao Song </title>
+    <link>/categories/python/</link>
+    <description>Recent content in Python on Xiao Song </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>排序和查找算法(Python实现)</title>
+      <link>/suanfa/</link>
+      <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/suanfa/</guid>
+      <description>排序算法 冒泡排序法 def bubble(List): for j in range(len(List)-1,0,-1): print(List) for i in range(0,j): if List[i]&amp;gt;List[i+1]: List[i],List[i+1] = List[i+1],List[i] return List testlist = [49,38,65,97,76,13,27,49] print(&#39;结果：&#39;,bubble(testlist))  [49, 38, 65, 97, 76, 13, 27, 49] [38, 49, 65, 76, 13, 27, 49, 97] [38, 49, 65, 13, 27, 49, 76, 97] [38, 49, 13, 27, 49, 65, 76, 97] [38, 13, 27, 49, 49, 65, 76, 97] [13, 27, 38, 49, 49, 65, 76, 97] [13, 27, 38, 49, 49, 65, 76, 97] 结果： [13, 27, 38, 49, 49, 65, 76, 97]  选择排序算法 #选择排序算法：程序填空 def selection_sort(L): N = len(L) #提取列表长度N exchange_count = 0 for i in range(0, N-1): #从0开始循环 min_index = i #排序序列的末尾位置 for j in range(i+1,N): #嵌套循环 if L[min_index] &amp;gt; L[j]: #第一次循环L[0]&amp;gt;L[1] min_index = j #第一次循环min_index=1 j是二者最小值的列表索引。 #min_index永远等于最小值索引 #以下是移动程序 if min_index!</description>
+    </item>
+    
+  </channel>
+</rss>

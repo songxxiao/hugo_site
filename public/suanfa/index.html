@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>Python查找和排序算法 - Xiao Song </title>
-<meta property="og:title" content="Python查找和排序算法 - Xiao Song ">
+<title>排序和查找算法(Python实现) - Xiao Song </title>
+<meta property="og:title" content="排序和查找算法(Python实现) - Xiao Song ">
 
 
   <link href='../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -67,45 +67,26 @@
 
   <article class="article">
 
-    <h1 class="article-title">Python查找和排序算法</h1>
+    <h1 class="article-title">排序和查找算法(Python实现)</h1>
 
     
-    <span class="article-date">2019-05-24</span>
+    <span class="article-date">2019-05-09</span>
     
 
     <div class="article-content">
       
 
-<h3 id="7-7实验">7.7实验</h3>
+<h2 id="排序算法">排序算法</h2>
 
-<pre><code class="language-python">#折半查找算法
-def BinarySearch(a,target):
-    left = 0
-    right = len(a) - 1
-    while left &lt;= right:
-        mid = (left + right)//2
-        midVal = a[mid]
-        if midVal &lt;target:
-            left = mid + 1
-        elif midVal &gt; target:
-            right = mid - 1
-        else:
-            return mid
-    return - 1
-L = [5,7,13,25,32,46,54,62,78,83,88,91,99]
-BinarySearch(L,13)
-</code></pre>
+<h3 id="冒泡排序法">冒泡排序法</h3>
 
-<pre><code>2
-</code></pre>
-
-<pre><code class="language-python">#冒泡排序法
-def bubble(List):
+<pre><code class="language-python">def bubble(List):
     for j in range(len(List)-1,0,-1):
         print(List)
         for i in range(0,j):
-            if List[i]&gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]
-    return List
+            if List[i]&gt;List[i+1]:
+                List[i],List[i+1] = List[i+1],List[i]
+    return List 
 testlist = [49,38,65,97,76,13,27,49]
 print('结果：',bubble(testlist))
 </code></pre>
@@ -120,106 +101,9 @@ print('结果：',bubble(testlist))
 结果： [13, 27, 38, 49, 49, 65, 76, 97]
 </code></pre>
 
-<h3 id="实验内容">实验内容</h3>
+<h3 id="选择排序算法">选择排序算法</h3>
 
-<pre><code class="language-python">#找出最大最小值
-
-lst = [31,45,35,56,37,69,310,21,12]
-
-def max2(List):
-    for j in range(len(List)-1,0,-1):
-        for i in range(0,j):
-            if List[i]&gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]
-    return List[len(List)-1]
-
-max2(lst)        
-
-</code></pre>
-
-<pre><code>310
-</code></pre>
-
-<pre><code class="language-python"># 找出列表最小值
-def min2(List):
-    for j in range(len(List)-1,0,-1):
-        for i in range(0,j):
-            if List[i]&gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]
-    return List[0]
-min2(lst) 
-</code></pre>
-
-<pre><code>12
-</code></pre>
-
-<pre><code class="language-python"># 折半查找算法，有多个则返回第一个。
-def BinarySearch(a,target):
-    left = 0
-    right = len(a) - 1
-    while left &lt;= right:
-        mid = (left + right)//2 #整除，提取中点
-        midVal = a[mid]
-        if midVal &lt; target: #在中点右侧寻找
-            left = mid + 1
-        elif midVal &gt; target: #在中点左侧寻找
-            right = mid - 1
-        else:
-            return a.index(midVal) #返回第一个查找值
-    return - 1
-L = [32,32,32,32,32,46,54,62,78,83,88,91,99]
-L2 = [54,62,78,32,32,32,32,32,46,83,88,91,99]
-BinarySearch(L2,32)
-</code></pre>
-
-<pre><code>3
-</code></pre>
-
-<pre><code class="language-python">#顺序搜索算法
-Lst = [31,45,35,56,37,69,310,21,12]
-def sequen(lst,x):
-    i = 0
-    while i &lt; len(lst):
-        if lst[i] == x:
-            return i
-        i += 1
-    else: return -1
-sequen(Lst,56)
-</code></pre>
-
-<pre><code>3
-</code></pre>
-
-<pre><code class="language-python">#插入排序法
-def InsertionSort(A):
-    for j in range(1,len(A)):
-        print(A)
-        key = A[j]
-        i = j-1
-        while i &gt;= 0 and A[i]&gt;key:
-            A[i+1] = A[i]
-            i = i-1
-        A[i+1] = key
-    return A
-A = [31,45,35,56,37,69,310,21,12]
-InsertionSort(A)
-</code></pre>
-
-<pre><code>[31, 45, 35, 56, 37, 69, 310, 21, 12]
-[31, 45, 35, 56, 37, 69, 310, 21, 12]
-[31, 35, 45, 56, 37, 69, 310, 21, 12]
-[31, 35, 45, 56, 37, 69, 310, 21, 12]
-[31, 35, 37, 45, 56, 69, 310, 21, 12]
-[31, 35, 37, 45, 56, 69, 310, 21, 12]
-[31, 35, 37, 45, 56, 69, 310, 21, 12]
-[21, 31, 35, 37, 45, 56, 69, 310, 12]
-
-
-
-
-
-[12, 21, 31, 35, 37, 45, 56, 69, 310]
-</code></pre>
-
-<pre><code class="language-python">#选择排序算法
+<pre><code class="language-python">#选择排序算法：程序填空
 def selection_sort(L):
     N = len(L) #提取列表长度N
     exchange_count = 0
@@ -257,6 +141,37 @@ Total 6 swappings
 [13, 27, 38, 49, 49, 65, 76, 97]
 </code></pre>
 
+<h3 id="插入排序法">插入排序法</h3>
+
+<pre><code class="language-python">def Insert(A):
+    for j in range(1,len(A)):
+        print(A)
+        key = A[j] #key为关键位置的值
+        i = j - 1 #i为关键位置之前的索引
+        while i &gt; 0 and A[i]&gt;key: #
+            A[i+1]=A[i] #将小于A[i]的元素前移
+            i = i - 1 
+        A[i + 1] = key
+    return A
+testlist = [49,38,49,97,76,13,27,65]
+Insert(testlist)
+</code></pre>
+
+<pre><code>[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 76, 97, 13, 27, 65]
+[49, 13, 38, 49, 76, 97, 27, 65]
+[49, 13, 27, 38, 49, 76, 97, 65]
+
+
+
+
+
+[49, 13, 27, 38, 49, 65, 76, 97]
+</code></pre>
+
 <pre><code class="language-python">#能否对字符串进行排序？
 def get_key(dict, value):
     return [k for k, v in dict.items() if v == value]
@@ -289,6 +204,54 @@ print('结果：',bubbleStr(testlist))
 </code></pre>
 
 <pre><code>结果： ['p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+</code></pre>
+
+<h2 id="查找">查找</h2>
+
+<h3 id="顺序搜索算法">顺序搜索算法</h3>
+
+<ul>
+<li>逐一查找</li>
+</ul>
+
+<pre><code class="language-python">#顺序搜索算法
+Lst = [31,45,35,56,37,69,310,21,12]
+def sequen(lst,x):
+    i = 0
+    while i &lt; len(lst): #while 循环
+        if lst[i] == x:
+            return i
+        i += 1
+    else: return -1
+sequen(Lst,56)
+</code></pre>
+
+<h3 id="折半查找算法">折半查找算法</h3>
+
+<ul>
+<li>被查找的数据必须是有序的</li>
+</ul>
+
+<pre><code class="language-python">#有多个则返回第一个。
+def BinarySearch(a,target):
+    left = 0
+    right = len(a) - 1
+    while left &lt;= right:
+        mid = (left + right)//2 #整除，提取中点
+        midVal = a[mid]
+        if midVal &lt; target: #在中点右侧寻找
+            left = mid + 1
+        elif midVal &gt; target: #在中点左侧寻找
+            right = mid - 1
+        else:
+            return a.index(midVal) #返回第一个查找值
+    return - 1
+L = [32,32,32,32,32,46,54,62,78,83,88,91,99]
+L2 = [54,62,78,32,32,32,32,32,46,83,88,91,99]
+BinarySearch(L2,32)
+</code></pre>
+
+<pre><code>3
 </code></pre>
 
     </div>
