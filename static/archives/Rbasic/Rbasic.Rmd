@@ -1,0 +1,71 @@
+---
+title: "R 基础操作" 
+subtitle: ' '
+author: ' '
+date: ' '
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+slug: basicr
+## bookdown themes:https://bookdown.org/yihui/bookdown/theming.html
+---
+
+模式强制转换：字符串：`as.character()`,整数：`as.integer()`,向量：`as.vector()`
+
+`cbind()`把矩阵横向合并成一个大矩阵（列方式），而`rbind()`是纵向合并（行方式）。
+
+#基本对象
+
+## 向量
+
+
+## 数组和矩阵
+
+```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+mar<-c(652,1537,598,242,36,46,38,21,218,327,106,67)
+caff.marital<-matrix(mar,nrow=3,byrow=T) #byrow=T通过行来填充
+caff.marital
+
+x <- array(1:20, dim=c(4,5))  
+x
+
+h <- c(1:24)
+Z <- array(h, dim=c(3,4,2)) #创建3X4X2的数组
+Z
+
+vec <- as.vector(Z)
+vec
+
+
+
+
+```
+
+## 列表
+
++ 列表（list）是一个以对象的有序集合构成的对象。列表中包含的对象又称为它的分量（components）。
+分量可以是不同的模式或类型，如一个列表可以同时包括数值向量，逻辑向量，矩阵，复向量，字符数组，函数等等。
+
+
+
+# 循环
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

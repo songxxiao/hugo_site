@@ -6,8 +6,9 @@ date: ' '
 output:
   bookdown::html_document2:
     toc: true
-    theme: united
+    theme: journal
 slug: ggplot
+## bookdown themes:https://bookdown.org/yihui/bookdown/theming.html
 ---
 
 本文链接：
