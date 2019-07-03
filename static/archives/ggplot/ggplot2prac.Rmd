@@ -125,7 +125,9 @@ ggplot(moto, aes(x,y),group=z)+
 
 ## 地图绘制(china maps)
 
-```{r g,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
++ 不会分面(`facet_wrap`)者的笨办法，使用`ggplot2.multiplot`手动合并图形
+
+```{r g,message = F, comment = NA,warning = F, include = F,cache = T,fig.align='center',out.width ='100%'} 
 rm(list=ls())
 library(haven)
 china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
@@ -138,6 +140,8 @@ mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
 mapdata <- as.data.frame(mapdata)
 mapdata <- select(mapdata,-(NAME)) #reverse selection
 china_data <- join(china_map_data, mapdata, type="full")
+
+china_data <- select(china_data,long,lat,group,out12,in12,out14,in14,out16,in16)
 
 out12 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= out12)) +
   geom_polygon(colour="brown",size=0.2) +
@@ -234,8 +238,76 @@ in16 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= in16)) +
     plot.title = element_text(hjust = 0.5,vjust=0.9, size=11),
     legend.title = element_text(size=0),
     plot.margin = unit(c(0.001,0.001,0.001,0.001), "cm")) 
-#library(devtools)
-#install_local("C:/Users/xsong/Desktop/easyGgplot2-master.zip")
+```
+
+```{r mergemult,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
+#devtools::install_local("C:/Users/xsong/Desktop/easyGgplot2-master.zip")
 library(easyGgplot2)
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
+
+# 数据长宽转换(Reshape)与分面
+
++ 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
+
++ 使用[`facet_wrap`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)进行分面
+
+[`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
+
+```{r h,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
+
+library(reshape2)
+long<- melt(china_data, id=c("long", "lat","group"))
+library(ggplot2)
+ggplot(long, aes(x = long, y = lat, group = group,fill= value)) +
+  geom_polygon(colour="brown",size=0.2) +
+  scale_fill_gradientn(colours = c("yellow", "red"),na.value = "white",breaks = c(10,20,30,40),limits=c(0,43), guide = "legend") +
+  coord_map("polyconic") +  
+  facet_wrap(~variable,nrow = 3) +
+  xlab('经度') + 
+  ylab('纬度') +
+  theme(legend.title=element_blank()) #去除图例标题
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

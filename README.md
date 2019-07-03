@@ -9,6 +9,6 @@ The website is built by `hugo`'s theme `lithium`, and it is deployed by github a
 
 I use this website to help my work and study.
 
-
+This website will be updated very frequently.
 
 
