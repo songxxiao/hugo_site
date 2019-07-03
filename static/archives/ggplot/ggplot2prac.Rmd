@@ -1,5 +1,6 @@
 ---
 title: "ggplot2练习" 
+subtitle: '描述与探索'
 author: ' '
 date: ' '
 output:
@@ -13,15 +14,14 @@ slug: ggplot
 
 <https://xsong.ltd/archives/ggplot/ggplot2prac>
 
-# ggplot2练习
 
-## 学习资源(resource)
+# 学习资源(resource)
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
 [用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)
 
-## 二维密度图(density plot)
+# 二维密度图(density plot)
 
 ```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 library(ggplot2)
@@ -45,7 +45,7 @@ geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
 ```
 
-## 抽样散点图(sampled scatter)
+# 抽样散点图(sampled scatter)
 
 ```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.7}
 library(haven)
@@ -54,11 +54,9 @@ X2010 <- read_dta("2010.dta")
 xy <- read_dta("id.dta")
 hho <- read_dta("aggregrate.dta")
 nrow(hho)
-
 set.seed(13)#设置随机数种子
 sample <- sample(1:nrow(hho),600,replace = F)#抽取600个样本
 hhosampled <- hho[sample,]#抽取
-nrow(hhosampled)
 
 library(ggplot2)
 scattered <- ggplot(hho,aes(x=agem,y=inc,group=type,shape=type,color=type,weight=fswt_nat)) +
@@ -82,7 +80,7 @@ i + geom_line()
 
 ```
 
-## 分面(facet)
+# 模型可视化(model)
 
 ```{r d,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
 set.seed(711)
@@ -91,18 +89,13 @@ y = -x + jitter(rep(1:5, each = 20), 2)
 z = rep(1:5, each = 20)
 z <- as.factor(z)
 moto <- data.frame(x,y,z)
-lm1 <- lm(y ~ z,moto)
-moto <- within(moto,res <- residuals(lm1))
-moto1 <- subset(moto,z==1)
-moto2 <- subset(moto,z==2)
-moto3 <- subset(moto,z==3)
-moto4 <- subset(moto,z==4)
-moto5 <- subset(moto,z==5)
-
+#ols无控制变量
 ggplot(moto, aes(x, y)) +
   geom_point(aes(color = z),size=3) +
   geom_smooth(method='lm',se=F)
 ```
+
+## 分面(facetting)
 
 ```{r e,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 ggplot(moto, aes(x, y)) +
@@ -111,19 +104,33 @@ ggplot(moto, aes(x, y)) +
   geom_smooth(method='lm',se=F)
 ```
 
+## 分组(grouping)
+
++ 使用[`modelr`](https://r4ds.had.co.nz/model-basics.html)包进行模型拟合
+
 ```{r f,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
-ggplot(moto, aes(x,y),group=z)+
+#不同组拟合不同的模型
+
+ggplot(moto, aes(x, y,group=z)) +
   geom_point(aes(color = z),size=3) +
-  geom_smooth(data = moto1,method='lm',se=F)+
-  geom_smooth(data = moto2,method='lm',se=F)+
-  geom_smooth(data = moto3,method='lm',se=F)+
-  geom_smooth(data = moto4,method='lm',se=F)+
-  geom_smooth(data = moto5,method='lm',se=F)
+  geom_smooth(method='lm',se=F)
+
+library(modelr)
+mod1 <- lm(y ~ x + z,data = moto)
+grid <- moto %>%
+data_grid(x,z) %>%
+gather_predictions(mod1)
+knitr::kable(head(grid),caption="数据概要",align='c')
+#不同组拟合同一个模型，控制组z                
+ggplot(moto, aes(x, y,group=z)) +
+  geom_point(aes(color = z),size=3) +
+  geom_line(data = grid, aes(y = pred,x=x),size=0.8,color='blue') +
+  ylim(0.5,2)
 
 
 ```
 
-## 地图绘制(china maps)
+# 地图绘制(china maps)
 
 + 不会分面(`facet_wrap`)者的笨办法，使用`ggplot2.multiplot`手动合并图形
 
@@ -246,7 +253,7 @@ library(easyGgplot2)
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
 
-# 数据长宽转换(Reshape)与分面
+# 数据长宽转换(Reshape)
 
 + 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
 
