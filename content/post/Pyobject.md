@@ -6,8 +6,6 @@ categories: Python
 slug: pyobject
 tags: Python
 ---
-### 代码范例 
-
 
 ```python
 class Dog:
@@ -167,9 +165,6 @@ gDog1.guide()
     我正在引导我的主人！
     我有3年的工作经历！
     
-
-#### 实验范例
-
 
 ```python
 class Rectangle:

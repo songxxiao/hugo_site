@@ -102,7 +102,7 @@ knitr选项函数
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/pyobject/</guid>
-      <description>代码范例 class Dog: def bark(self): print(&amp;quot;woo woo woo&amp;quot;)  dog1=Dog() dog1.bark()  woo woo woo  class Dog: def bark(self,xm): self.name = xm print(&amp;quot;woo woo woo, I am &amp;quot;+self.name) dog1=Dog() dog1.bark(&amp;quot;Lulu&amp;quot;)  woo woo woo, I am Lulu  ##__init__()方法 class Dog: def __init__(self,name,color): self.name = name self.color = color def bark(self): print(&amp;quot;woo,woo,woo,我是&amp;quot;+ self.name +&amp;quot;!&amp;quot;) dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;) dog1.bark() #print(&amp;quot;刚才创建了一个狗对象，名叫：&amp;quot;+dog1.name+&amp;quot;!&amp;quot;) #bark()  woo,woo,woo,我是阿黄!  dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;)  class Dog: number = 0 def __init__(self,name): self.</description>
+      <description>class Dog: def bark(self): print(&amp;quot;woo woo woo&amp;quot;)  dog1=Dog() dog1.bark()  woo woo woo  class Dog: def bark(self,xm): self.name = xm print(&amp;quot;woo woo woo, I am &amp;quot;+self.name) dog1=Dog() dog1.bark(&amp;quot;Lulu&amp;quot;)  woo woo woo, I am Lulu  ##__init__()方法 class Dog: def __init__(self,name,color): self.name = name self.color = color def bark(self): print(&amp;quot;woo,woo,woo,我是&amp;quot;+ self.name +&amp;quot;!&amp;quot;) dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;) dog1.bark() #print(&amp;quot;刚才创建了一个狗对象，名叫：&amp;quot;+dog1.name+&amp;quot;!&amp;quot;) #bark()  woo,woo,woo,我是阿黄!  dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;)  class Dog: number = 0 def __init__(self,name): self.</description>
     </item>
     
     <item>
