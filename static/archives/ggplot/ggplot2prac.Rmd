@@ -16,13 +16,13 @@ slug: ggplot
 <https://xsong.ltd/archives/ggplot/ggplot2prac>
 
 
-# 学习资源(resource)
+# 学习资源<span style="color:white">a</span>
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
 [用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)
 
-# 二维密度图(density plot)
+# 二维密度图<span style="color:white">b</span>
 
 ```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 library(ggplot2)
@@ -46,7 +46,7 @@ geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
 ```
 
-# 抽样散点图(sampled scatter)
+# 抽样散点图<span style="color:white">c</span>
 
 ```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.7}
 library(haven)
@@ -81,7 +81,7 @@ i + geom_line()
 
 ```
 
-# 模型可视化(model)
+# 模型可视化<span style="color:white">d</span>
 
 ```{r d,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
 set.seed(711)
@@ -96,7 +96,7 @@ ggplot(moto, aes(x, y)) +
   geom_smooth(method='lm',se=F)
 ```
 
-## 分面(facetting)
+## 分面<span style="color:white">e</span>
 
 ```{r e,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 ggplot(moto, aes(x, y)) +
@@ -105,7 +105,7 @@ ggplot(moto, aes(x, y)) +
   geom_smooth(method='lm',se=F)
 ```
 
-## 分组(grouping)
+## 分组<span style="color:white">f</span>
 
 + 使用[`modelr`](https://r4ds.had.co.nz/model-basics.html)包进行模型拟合
 
@@ -131,7 +131,7 @@ ggplot(moto, aes(x, y,group=z)) +
 
 ```
 
-# 地图绘制(china maps)
+# 地图绘制<span style="color:white">g</span>
 
 + 不会分面(`facet_wrap`)者的笨办法，使用`ggplot2.multiplot`手动合并图形
 
@@ -254,7 +254,7 @@ library(easyGgplot2)
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
 
-# 数据长宽转换(Reshape)
+# 数据长宽转换<span style="color:white">h</span>
 
 + 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
 
@@ -278,10 +278,37 @@ ggplot(long, aes(x = long, y = lat, group = group,fill= value)) +
 
 ```
 
+## 气泡地图<span style="color:white">i</span>
 
+```{r is,message = F, comment = NA, warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
+library(rgdal)
+bottom  <- readOGR(dsn = "E:/R_codes/maps/CHN_adm/CHN_adm2.shp",stringsAsFactors=F)
+library(ggplot2)
+bottomdata <- fortify(bottom)         
+x <- bottom@data          
+xs <- data.frame(x,id=seq(0:344)-1)        
+library(plyr)
+china_map <- join(bottomdata, xs, type = "full")          
+library(readxl)
+fills <- read_excel("E:/R_codes/maps/pointmap/citydis.xlsx")
 
+china_map <- join(china_map,fills, type = "full")   
+point <- china_map
+point <- na.omit(point)
+midpos <- function(x) mean(range(x,na.rm=TRUE)) 
+centres <- ddply(china_map,.(NAME_2),colwise(midpos,.(long,lat)))
+center <- join(centres,fills, type = "full") 
+center  <- na.omit(center)
 
+ggplot(china_map,aes(x=long,y=lat)) + 
+  geom_polygon(aes(group = group),fill="white",color="black",size=0.1) + 
+  geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = "sky blue") +
+  coord_map("polyconic") +
+  xlab('经度') + 
+  ylab('纬度') +
+  theme(legend.title=element_blank()) #去除图例标题
 
+```
 
 
 

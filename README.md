@@ -1,9 +1,5 @@
----
-title: "INTRODUCTION"
 
----
-
-
+# INTRODUCTION
 
 This is Xiao Song's personal website.
 The url is [https://xsong.ltd/](https://xsong.ltd/)

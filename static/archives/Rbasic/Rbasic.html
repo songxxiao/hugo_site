@@ -203,7 +203,7 @@ $(document).ready(function () {
 </ul>
 </div>
 
-<p>模式强制转换：字符串：<code>as.character()</code>,整数：<code>as.integer()</code>,向量：<code>as.vector()</code></p>
+<p>模式强制转换：字符串：<code>as.character()</code>,整数：<code>as.integer()</code>,向量：<code>as.vector()</code>, 数据框：<code>as.data.frame()</code></p>
 <p><code>cbind()</code>把矩阵横向合并成一个大矩阵（列方式），而<code>rbind()</code>是纵向合并（行方式）。</p>
 <div class="section level1">
 <h1><span class="header-section-number">1</span> 基本对象</h1>
@@ -219,7 +219,8 @@ caff.marital</code></pre>
 [1,]  652 1537  598  242
 [2,]   36   46   38   21
 [3,]  218  327  106   67</code></pre>
-<pre class="r"><code>x &lt;- array(1:20, dim=c(4,5))  
+<pre class="r"><code>#nrow和ncol中的一个被明确给出，则R会计算相应的另一个，从而使得矩阵中的数值与输入的值数目相匹配
+x &lt;- array(1:20, dim=c(4,5))  
 x</code></pre>
 <pre><code>     [,1] [,2] [,3] [,4] [,5]
 [1,]    1    5    9   13   17

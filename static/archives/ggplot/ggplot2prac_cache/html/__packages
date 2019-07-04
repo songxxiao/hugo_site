@@ -7,3 +7,5 @@ readxl
 easyGgplot2
 reshape2
 modelr
+sp
+rgdal
