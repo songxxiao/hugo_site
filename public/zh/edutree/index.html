@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>初中阶段成绩预测模型 - Xiao Song </title>
-<meta property="og:title" content="初中阶段成绩预测模型 - Xiao Song ">
+<title>初中阶段成绩预测模型 -   </title>
+<meta property="og:title" content="初中阶段成绩预测模型 -   ">
 
 
   <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -54,7 +54,7 @@
     
     <li><a href="../../zh/reward/">Reward</a></li>
     
-    <li><a href="../../tags/">Categories</a></li>
+    <li><a href="../../zh/tags/">Categories</a></li>
     
     <li><a href="../../en">English Version</a></li>
     
@@ -111,7 +111,7 @@
 <p>班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
 <p><a href="http://www.mamicode.com/info-detail-1402416.html">R语言移除缺失值 NA.RM</a></p>
 <div class="figure" style="text-align: center"><span id="fig:b"></span>
-<img src="../../post/edutree_files/figure-html/b-1.png" alt="标准化总成绩的直方图(分年级)" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/b-1.png" alt="标准化总成绩的直方图(分年级)" width="100%" />
 <p class="caption">
 Figure 1: 标准化总成绩的直方图(分年级)
 </p>
@@ -136,7 +136,7 @@ ggplot(delte, aes(schids,tr_mat)) +
   geom_boxplot(size=0.1,outlier.colour =&quot;#56B4E9&quot;,fill=&#39;sky blue&#39;) +
   xlab(&#39;学校代码&#39;) + ylab(&#39;数学原始成绩&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:a"></span>
-<img src="../../post/edutree_files/figure-html/a-1.png" alt="随机抽取30所学校的数学成绩差异" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/a-1.png" alt="随机抽取30所学校的数学成绩差异" width="100%" />
 <p class="caption">
 Figure 2: 随机抽取30所学校的数学成绩差异
 </p>
@@ -187,7 +187,7 @@ tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qur
 7 0.01000000      6 0.8307410 0.8658482 0.0005283663</code></pre>
 <pre class="r"><code>rpart.plot(tree)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:s"></span>
-<img src="../../post/edutree_files/figure-html/s-1.png" alt="总成绩的回归树" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/s-1.png" alt="总成绩的回归树" width="100%" />
 <p class="caption">
 Figure 3: 总成绩的回归树
 </p>
@@ -208,7 +208,7 @@ cltree3 &lt;- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk 
 #knitr::kable(printcp(cltree3),caption=&quot;复杂度参数表&quot;,digits =4)
 rpart.plot(cltree3)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fig1"></span>
-<img src="../../post/edutree_files/figure-html/fig1-1.png" alt="未剪枝的分类树" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/fig1-1.png" alt="未剪枝的分类树" width="100%" />
 <p class="caption">
 Figure 4: 未剪枝的分类树
 </p>
@@ -247,7 +247,7 @@ cltree3$variable.importance #各个变量的重要性程度</code></pre>
  9999.162  9588.660  2283.551  2032.974 </code></pre>
 <pre class="r"><code>rpart.plot(cltree3)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fig5"></span>
-<img src="../../post/edutree_files/figure-html/fig5-1.png" alt="剪枝后分类树" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/fig5-1.png" alt="剪枝后分类树" width="100%" />
 <p class="caption">
 Figure 5: 剪枝后分类树
 </p>
@@ -262,7 +262,7 @@ modelroc &lt;- roc(test$matgreat,test$pr)
 #ROC 曲线
 plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fig6"></span>
-<img src="../../post/edutree_files/figure-html/fig6-1.png" alt="剪枝后分类树的ROC曲线" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/fig6-1.png" alt="剪枝后分类树的ROC曲线" width="100%" />
 <p class="caption">
 Figure 6: 剪枝后分类树的ROC曲线
 </p>
@@ -326,7 +326,7 @@ modelroc &lt;- roc(ceps$matgreat,ceps$pr)
 #ROC 曲线
 plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col=&quot;skyblue&quot;, print.thres=TRUE,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fig7"></span>
-<img src="../../post/edutree_files/figure-html/fig7-1.png" alt="训练后模型的ROC曲线和AUC值" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/fig7-1.png" alt="训练后模型的ROC曲线和AUC值" width="100%" />
 <p class="caption">
 Figure 7: 训练后模型的ROC曲线和AUC值
 </p>
@@ -346,7 +346,7 @@ treeerror</code></pre>
 <pre><code>[1] 0.185218</code></pre>
 <pre class="r"><code>plot(rpartFit,xlab =&#39;复杂度参数&#39;,ylab=&#39;准确率(重复交叉验证)&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:fig8"></span>
-<img src="../../post/edutree_files/figure-html/fig8-1.png" alt="分类树的复杂度参数与准确率的关系" width="100%" />
+<img src="../../post/edutree.zh_files/figure-html/fig8-1.png" alt="分类树的复杂度参数与准确率的关系" width="100%" />
 <p class="caption">
 Figure 8: 分类树的复杂度参数与准确率的关系
 </p>

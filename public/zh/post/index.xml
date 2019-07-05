@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Xiao Song </title>
+    <title>Posts on   </title>
     <link>/zh/post/</link>
-    <description>Recent content in Posts on Xiao Song </description>
+    <description>Recent content in Posts on   </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0000</lastBuildDate>
@@ -107,10 +107,10 @@ knitr选项函数
     
     <item>
       <title>排序和查找算法(Python实现)</title>
-      <link>/zh/suanfa/</link>
+      <link>/zh/%E6%8E%92%E5%BA%8F%E5%92%8C%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>/zh/suanfa/</guid>
+      <guid>/zh/%E6%8E%92%E5%BA%8F%E5%92%8C%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/</guid>
       <description>排序算法 冒泡排序法 def bubble(List): for j in range(len(List)-1,0,-1): print(List) for i in range(0,j): if List[i]&amp;gt;List[i+1]: List[i],List[i+1] = List[i+1],List[i] return List testlist = [49,38,65,97,76,13,27,49] print(&#39;结果：&#39;,bubble(testlist))  [49, 38, 65, 97, 76, 13, 27, 49] [38, 49, 65, 76, 13, 27, 49, 97] [38, 49, 65, 13, 27, 49, 76, 97] [38, 49, 13, 27, 49, 65, 76, 97] [38, 13, 27, 49, 49, 65, 76, 97] [13, 27, 38, 49, 49, 65, 76, 97] [13, 27, 38, 49, 49, 65, 76, 97] 结果： [13, 27, 38, 49, 49, 65, 76, 97]  选择排序算法 #选择排序算法：程序填空 def selection_sort(L): N = len(L) #提取列表长度N exchange_count = 0 for i in range(0, N-1): #从0开始循环 min_index = i #排序序列的末尾位置 for j in range(i+1,N): #嵌套循环 if L[min_index] &amp;gt; L[j]: #第一次循环L[0]&amp;gt;L[1] min_index = j #第一次循环min_index=1 j是二者最小值的列表索引。 #min_index永远等于最小值索引 #以下是移动程序 if min_index!</description>
     </item>
     

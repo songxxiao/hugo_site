@@ -1,0 +1,125 @@
+---
+title: "交叉验证"
+author: ' '
+date: '2019-05-25'
+slug: cross
+tags: ["R","应用统计","机器学习"]
+---
+
+
+
+<p>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。</p>
+<p>交叉验证主要有以下种类：</p>
+<ul>
+<li><p>简单交叉验证 (hold-out cross validation)</p></li>
+<li><p>k折交叉验证 (K-fold cross-validation)</p></li>
+<li><p>留一交叉验证(leave-one-out cross validation)</p></li>
+</ul>
+<p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
+<pre class="r"><code>#install.packages(&#39;mlbench&#39;)
+library(caret) #加载数据集</code></pre>
+<div id="-k-fold-cross-validation" class="section level1">
+<h1>10折交叉验证 (K-fold cross-validation)</h1>
+<pre class="r"><code>#install.packages(&#39;mlbench&#39;)
+
+rfControl &lt;-trainControl( #10折交叉验证
+method =&quot;cv&quot;, 
+number =10 # Number of folds
+)
+
+library(mlbench) #加载数据集
+data(BostonHousing)
+head(BostonHousing)</code></pre>
+<pre><code>     crim zn indus chas   nox    rm  age    dis rad tax ptratio      b
+1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90
+2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90
+3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83
+4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63
+5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90
+6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12
+  lstat medv
+1  4.98 24.0
+2  9.14 21.6
+3  4.03 34.7
+4  2.94 33.4
+5  5.33 36.2
+6  5.21 28.7</code></pre>
+<pre class="r"><code>nrow(BostonHousing) #样本量</code></pre>
+<pre><code>[1] 506</code></pre>
+<pre class="r"><code>rpartFit &lt;- train(medv ~ .,
+                  data = BostonHousing,
+                  method = &quot;rpart&quot;,
+                  trControl = rfControl)
+rpartFit</code></pre>
+<pre><code>CART 
+
+506 samples
+ 13 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold) 
+Summary of sample sizes: 455, 454, 455, 458, 456, 455, ... 
+Resampling results across tuning parameters:
+
+  cp          RMSE      Rsquared   MAE     
+  0.07165784  5.512231  0.6435764  3.965677
+  0.17117244  6.611941  0.4819346  4.919408
+  0.45274420  8.378830  0.3517552  6.125674
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.07165784.</code></pre>
+<p>将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有“10次10 折交叉验证”。</p>
+<pre class="r"><code>repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
+=TRUE)
+rpartFit &lt;- train(medv ~ .,
+                  data = BostonHousing,
+                  method = &quot;rpart&quot;,
+                  trControl = repeatedcv)
+rpartFit</code></pre>
+<pre><code>CART 
+
+506 samples
+ 13 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold, repeated 10 times) 
+Summary of sample sizes: 455, 456, 454, 456, 456, 456, ... 
+Resampling results across tuning parameters:
+
+  cp          RMSE      Rsquared   MAE     
+  0.07165784  5.759709  0.6111338  4.160367
+  0.17117244  6.668274  0.4756325  4.955390
+  0.45274420  8.420769  0.3162420  6.111549
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.07165784.</code></pre>
+</div>
+<div id="leave-one-out-cross-validation" class="section level1">
+<h1>留一交叉验证(leave-one-out cross validation)</h1>
+<pre class="r"><code>rfControl &lt;-trainControl(
+method =&quot;LOOCV&quot;
+) #留一交叉验证
+rpartFit &lt;- train(medv ~ .,
+                  data = BostonHousing,
+                  method = &quot;rpart&quot;,
+                  trControl = rfControl)
+rpartFit</code></pre>
+<pre><code>CART 
+
+506 samples
+ 13 predictor
+
+No pre-processing
+Resampling: Leave-One-Out Cross-Validation 
+Summary of sample sizes: 505, 505, 505, 505, 505, 505, ... 
+Resampling results across tuning parameters:
+
+  cp          RMSE      Rsquared      MAE     
+  0.07165784  6.060240  0.5665051649  4.289854
+  0.17117244  7.489499  0.3524415744  6.088882
+  0.45274420  9.700709  0.0008358062  7.539715
+
+RMSE was used to select the optimal model using the smallest value.
+The final value used for the model was cp = 0.07165784.</code></pre>
+<pre class="r"><code>#summary(rpartFit)</code></pre>
+</div>

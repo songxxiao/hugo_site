@@ -10,7 +10,7 @@ defaultContentLanguageInSubdir = true
 [languages.zh]
   languageCode = "zh-cn"
 
-title = "Xiao Song "
+title = "  "
 author = "Xiao Song"
 theme = "hugo-lithium"
 googleAnalytics = ""
@@ -42,7 +42,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [[languages.zh.menu.main]]
     name = 'Categories'
-    url = "/tags/"
+    url = "/zh/tags/"
    weight = 5
 
 [[languages.zh.menu.main]]
@@ -52,7 +52,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   
 [[languages.en.menu.main]]
     name = "Home"
-    url = "/en/"
+    url = "/en"
     weight = 1
 
 [[languages.en.menu.main]]

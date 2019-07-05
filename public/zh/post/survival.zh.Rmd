@@ -1,0 +1,221 @@
+---
+title: "生存分析云笔记" 
+author: ' '
+date: '2019-05-23'
+slug: survival
+tags: ["R","应用统计"]
+
+---
+本文系复旦大学人口学系[张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html)老师和华东师范大学人口研究所[李强]()老师的数据分析课程笔记。
+
+一个R生存分析应用的介绍网页[Survival Analysis with R](https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/)
+
+两篇重要的中文文献：
+
+李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
+
+李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.
+
+---
+
+##第一讲: 基本概念
+
++ 社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。**在一个状态内待的时间和风险有着密切的关系**。
+
+
+
+$T$为随机变量，上帝也不知道
+
+生存函数：$S(t) = P(T > t)$。是存活概率也是存活百分比。
+
+失效函数(Failure Function)：$F(t)$,$S(t) = 1 - F(t)$, $F(t)$是T的累积分布函数。
+
+
+
+$f(t) = \frac{{dF(t)}}{{dt}}$，即$S(t)$的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
+
+风险函数: $$h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T < t + \Delta t|T \ge t)}}{{\Delta t}},0 < h(t) <  + \infty $$
+
+
+
+$h(t)$不是密度也不是概率。
+
+
++ censor(删截):   知道事件发生，但不知道事件何时发生。事件观测期内无法观测。
++ truncate(截平):   只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。
+
+  + censor涉及到事件，truncate涉及到暴露量。
+
++ 能活到预期寿命者总是62\%
+
+---
+
+## 第二讲: 最大似然估计(MLE)
+
+ Cox回归避开了模型分布假定的问题。
+
++ 假定数据独立同分布。
+
+    似然函数：
+
+$${\rm{L}}(\lambda ){\rm{ = }}\prod\limits_{i = 1}^\pi  {P(T = t)}  = \prod {f({t_i})}$$  
+$\delta$是积分小区间
+
+$$P(T = t) \approx 2\delta f(t)$$
+
+
++ 发生风险率(Occurrence-exposure rate)
+$$\widehat \lambda  = \frac{1}{{\bar t }} = \frac{n}{{\sum\limits_{}^{} {{t_i}} }}$$
+$\sum\limits_{}^{} {{t_i}}$是历险人年数。$n$是事件发生数。  
+ $\lambda$是个概率估计。
+
+### 删截(Censored)样本的似然函数
+
++ 完全样本的似然函数是在该时点t的密度函数$f({t_i})$。右删截数据是生存函数$S({C_r})$。左删截数据为累计分布函数$1 - S({C_l})$。区间删截为在该时段内的发生概率$S(L) - S(R)$。
+
+右删截：
+$$P({t_i} > 40) = S(40)$$
+
++ 40岁删截
+
+
+$$L(\lambda ) = \prod\limits_{observed} {f({t_i})}  \cdot \prod\limits_{censored} {S(40)}$$
+
+Assume the first $d$ individuals died, $(n-d)$ ware alive at 40:
+
+$$\hat \lambda  = \frac{d}{{\sum {{t_i} - (n - d) \cdot 40} }}$$
+
+分子为事件发生数。
+
+
+
+人口学、医学中最多的情况是left-truncated & right-cencored(LT-RC)数据。
+
+非参数模型Aalen’s additive regression model可以替代Cox模型。R的```survival```包的```aareg```函数可以进行拟合。
+
+---
+
+## 第三讲: 生存分析估计
+
+R生存分析介绍：[survival analysis in R](http://www.openintro.org/stat/surv.php)
+
+
+
+```{r pack,comment = NA,warning = F,message = F,fig.align='center',results = "hide"}
+# 加载包
+library(survival)
+library(haven) 
+library(ggplot2)
+library(dplyr)
+library(ggfortify)
+```
+
++ 数据介绍：  
+`los1`:时间变量  
+`cen_r`:事件是否发生,被收养成功  
+`female`:性别  
+`ec`:进入队列   
+`minc`:母亲月均收入  
+(minc=1, \$0-\$299; minc=2, \$300-\$999; minc=3, \$1,000-\$1,999;
+minc=4,$2000+)  
+`age`:年龄  
+`black`:种族  
+
+
+
+```{r a,comment = NA,warning = F,message = F,fig.align='center',include = F}
+cwg <- read_dta("C:/Users/xsong/Desktop/table/highdata/surv/cwg.dta")
+#变量排序
+cwg$event[cwg$cen_r ==0] <- 1
+cwg$event[cwg$cen_r ==1] <- 0
+cwg$los1 <- cwg$los1/30
+
+cwg <- select(cwg,cen_r,event, los1,everything())
+#head(cwg)#数据
+```
+
+### Kaplan–Meier estimator | 卡普兰迈耶法
+
+又称乘积极限法(Product-Limit Method), 公式如下：
+
+$${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}$$
+
+$n_i$是在时间$t_i$中的历险人数，$d_i$是事件发生数。
+
+
+```{r b,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+table(cwg$event)
+# Kaplan Meier Survival Curve
+km <- with(cwg, Surv(los1, event == 1))
+head(km,10) #删截后面有+号
+
+km_fit <- survfit(km ~ 1, data=cwg)
+km_fit #生存分析概要
+```
+
+```{r sur1, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+knitr::include_graphics("/img/survival/life.jpg")
+```
+生存函数的Kaplan–Meier estimator就是$nPx$列的累乘。
+
+```{r c,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
+```
+
+```{r sur2, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+knitr::include_graphics("/img/survival/life2.jpg")
+```
+
+```{r cw,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+autoplot(km_fit) #ggplot2风格KM图
+
+km_trt_fit <- survfit(km ~ female, data=cwg)#分性别KM估计
+autoplot(km_trt_fit) #图中+号可能是"打结" ties?
+
+```
+
+## Cox比例风险模型
+
+$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
+
++ ${h_i}(t)$是个体i在时间t时的风险值。${h_0}(t)$是所有个体在时间t时的非参数风险函数值。${\beta_p}{X_p}$是对个体i的解释变量和系数。
+
+$${{h(t|{X_i})} \over {h(t|{X_j})}} = {{{h_0}(t)\exp (X_i^T\beta )} \over {{h_0}(t)\exp (X_j^T\beta )}} = \exp [(X_i^T - X_j^T)\beta ]$$
+
++ 两个分别具有协变量${X_i}$和${X_j}$的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）
+
++ ${h_i}(t)$和${h_0}(t)$随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。
+
+```{r cox,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+
+cwg$ec <- as.factor(cwg$ec)
+cwg$minc <- as.factor(cwg$minc)
+cwg$age <- as.factor(cwg$age)
+
+coxreg <- coxph(km ~ ec + age + female +black + minc, data = cwg)
+summary(coxreg)
+
+cox_fit <- survfit(coxreg)
+#plot(cox_fit, main = "cph model", xlab="Days")
+autoplot(cox_fit) #拟合值
+
+##C-指数 Harrell's concordance index
+#coxreg$concordance
+
+concordance(km ~ predict(coxreg), data = cwg)
+
+```
+
+[生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
+
+[C-index/C-statistic 计算的5种不同方法及比较](https://blog.csdn.net/anshiquanshu/article/details/53438438)
+
+## [Aalen’s additive regression model](http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf)
+
+```{r areg,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',fig.cap='协变量作用如何随时间变化'}
+aaregfit <-aareg(km ~ ec + age + female +black + minc, data = cwg)
+aaregfit
+autoplot(aaregfit)
+```
+
+

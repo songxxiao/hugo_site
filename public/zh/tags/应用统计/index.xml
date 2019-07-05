@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>应用统计 on   </title>
+    <link>/zh/tags/%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1/</link>
+    <description>Recent content in 应用统计 on   </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/zh/tags/%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初中阶段成绩预测模型</title>
+      <link>/zh/edutree/</link>
+      <pubDate>Sun, 30 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/edutree/</guid>
+      <description>本报告使用了CART ；Random Forest算法。
+数据介绍本文采用中国教育追踪调查 (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
+算法介绍CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： \[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
+其中，\(x\)是一系列输入特征（自变量），\({R_1},{R_2},...,{R_m}\)是输入空间被划分的M个区域。 是区域\({R_m}\)对应的最优值。\(I\)代表的是指示函数（indicator function），当输入变量\(x\)属于区域 \({R_m}\)时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
+为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：
+\[{{\rm{C}}_\alpha }(T) = C(T) + \alpha \left| T \right|\]
+其中，\(T\)为任意子树。\(C(T)\)为对训练数据的预测误差（如基尼指数）， \(\left| T \right|\)为子树的叶结点个数，\(\alpha \ge 0\)为参数，\({{\rm{C}}_\alpha }(T)\)是参数为\(\alpha\)时的子树\(T\)的整体损失。参数\(\alpha\)测量了模型的复杂度。
+变量本研究依据以往教育学和社会学文献，选取了50个自变量进行预测。为了降低测量误差，本研究在变量选取的过程中遵循了以下两个原则：1.尽可能挑选“客观的”变量。2.尽可能挑选直观上对学习成绩有重要影响的变量。
+因变量本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。图1 展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。
+图2 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。
+自变量下面展示了自变量以及自变量在模型中的编码：
+家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。
+个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。
+学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。
+班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</description>
+    </item>
+    
+    <item>
+      <title>交叉验证</title>
+      <link>/zh/cross/</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/cross/</guid>
+      <description>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。
+交叉验证主要有以下种类：
+简单交叉验证 (hold-out cross validation)
+k折交叉验证 (K-fold cross-validation)
+留一交叉验证(leave-one-out cross validation)
+谢益辉的统计动画R包animation直观地展示了交叉验证方法。
+#install.packages(&amp;#39;mlbench&amp;#39;)library(caret) #加载数据集10折交叉验证 (K-fold cross-validation)#install.packages(&amp;#39;mlbench&amp;#39;)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 # Number of folds)library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.3 396.902 0.</description>
+    </item>
+    
+    <item>
+      <title>生存分析云笔记</title>
+      <link>/zh/survival/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/survival/</guid>
+      <description>本文系复旦大学人口学系张震老师和华东师范大学人口研究所李强老师的数据分析课程笔记。
+一个R生存分析应用的介绍网页Survival Analysis with R
+两篇重要的中文文献：
+李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
+李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.
+第一讲: 基本概念社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道
+生存函数：\(S(t) = P(T &amp;gt; t)\)。是存活概率也是存活百分比。
+失效函数(Failure Function)：\(F(t)\),\(S(t) = 1 - F(t)\), \(F(t)\)是T的累积分布函数。
+\(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
+风险函数: \[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &amp;lt; t + \Delta t|T \ge t)}}{{\Delta t}},0 &amp;lt; h(t) &amp;lt; + \infty \]
+\(h(t)\)不是密度也不是概率。
+censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。</description>
+    </item>
+    
+  </channel>
+</rss>

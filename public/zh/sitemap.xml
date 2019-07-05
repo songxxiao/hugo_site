@@ -39,41 +39,14 @@
   </url>
   
   <url>
-    <loc>/zh/edutree/</loc>
+    <loc>/zh/tags/r/</loc>
     <lastmod>2019-06-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/zh/categories/</loc>
-    <lastmod>2019-06-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/categories/"
-                />
-  </url>
-  
-  <url>
-    <loc>/zh/categories/r/</loc>
-    <lastmod>2019-06-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/zh/tags/r-markdown/</loc>
-    <lastmod>2019-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/zh/tags/</loc>
-    <lastmod>2019-06-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -88,6 +61,23 @@
   </url>
   
   <url>
+    <loc>/zh/edutree/</loc>
+    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/zh/tags/%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1/</loc>
+    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/zh/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2019-06-30T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/zh/rsweave/</loc>
     <lastmod>2019-06-08T00:00:00+00:00</lastmod>
   </url>
@@ -98,20 +88,24 @@
   </url>
   
   <url>
-    <loc>/zh/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2019-05-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/zh/tags/r/</loc>
-    <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/zh/survival/</loc>
     <lastmod>2019-05-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/zh/categories/</loc>
+    <lastmod>2019-05-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/categories/"
+                />
   </url>
   
   <url>
@@ -132,7 +126,13 @@
   </url>
   
   <url>
-    <loc>/zh/suanfa/</loc>
+    <loc>/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2019-05-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/zh/%E6%8E%92%E5%BA%8F%E5%92%8C%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2019-05-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -148,10 +148,6 @@
   
   <url>
     <loc>/zh/reward/</loc>
-  </url>
-  
-  <url>
-    <loc>/zh/reward2/</loc>
   </url>
   
   <url>

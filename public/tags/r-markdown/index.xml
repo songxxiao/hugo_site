@@ -1,89 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>R Markdown on </title>
-    <link>/tags/r-markdown/</link>
-    <description>Recent content in R Markdown on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jun 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>使用R Studio运行LaTeX</title>
-      <link>/rsweave/</link>
-      <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/rsweave/</guid>
-      <description>一些有用的链接谢益辉: Sweave：打造一个可重复的统计研究流程
-knitr 与可重复的统计研究（花絮篇）
-knitr中文介绍
-knitr选项函数
-宋春林：用LaTeX写学位论文
-用 knitr 写作业
-我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是MikTeX（虽然它常常因为简陋的功能为人诟病）。
-而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
-Figure 1: MikTeX界面然而，R Studio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？
-首先要安装LaTeX环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
-后续需要安装一些R包，如Knitr，tinytex等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。
-然后需要配置一下R Studio的环境:
-Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，Weave Rnw files using选knitr。想要写中文LaTeX文档必须选XeLaTeX环境。
-我们点击Open File打开一个LaTeX文档：
-Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在R Studio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的LaTeX Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：
-Figure 6: Mathtype编辑器如，以上的公式可以直接复制为如下的纯文本LaTeX公式：</description>
-    </item>
-    
-    <item>
-      <title>宋 骁</title>
-      <link>/chnresume/</link>
-      <pubDate>Fri, 10 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/chnresume/</guid>
-      <description>英文简历请点击这里
-PDF版本请点击这里下载
-联系方式地址：上海市浦东新区芳华路53号邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd微信公众号：ApocalypseNow软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)相关课程R语言数据分析算法与程序设计基础 (Python)回归分析与Stata应用SPSS应用类别数据分析概率与统计导论社会模拟与NetLogo应用教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
-课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
-上海大学 第6届·应用社会科学研究方法研修班 2017年7月
-课程：Stata与应用回归分析基础，类别数据分析
-狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
-使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
-科研经历土地流转的福利效应与社会不平等——来自CFPS的经验证据 2018年-2019年</description>
-    </item>
-    
-    <item>
-      <title>Xiao Song</title>
-      <link>/englishresume/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/englishresume/</guid>
-      <description>Chinese Resume please click here
-CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcolm@xsong.ltdGithub：https://github.com/ECSTA7YWebsite：https://xsong.ltdWechat Official Account：ApocalypseNowSOFTWARE SKILLSR, LaTeX, StataPython, SQL, SPSSRELEVANT COURSESData Analysis Using RAlgorithm and program design (Python)Regression Analysis and Stata ApplicationSPSS ApplicationCategorical Data AnalysisSocial Simulation and NetLogo ApplicationEDUCATIONEast China Normal University 2016-09~Today</description>
-    </item>
-    
-    <item>
-      <title>如何提取R包中的小品文? </title>
-      <link>/vignette/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/vignette/</guid>
-      <description>公众号文章 《如何提取R包中的小品文》请点击这里
-用R实现各种分析任务需要学习不同的R包。而学习R包实现方法的同时必须同时结合理论。因此仅仅看帮助文档和用户手册（Reference manual）是远远不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习数据分析的不可多得的好材料。下文将以rpart包为例讲解如何获取R包的官方小品文。
-在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
-rpart的官方主页如下所示：
-其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。
-但是，这种方法其实多此一举了！
-因为我们在下载R包时，已经将小品文下载下来了。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
-#install.packages(&amp;#39;utils&amp;#39;)#安装包library(utils)#加载包vignette(, package = &amp;quot;rpart&amp;quot;)#提取rpart包的小品文名称输出结果如下所示：
-Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
-vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
-便可以阅读了。
-很多R包的小品文是pdf版本，当然还有很多是html形式的，如ggplot2的小品文：
-vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)看起来这个小品文是用R Markdown写的。</description>
-    </item>
-    
-  </channel>
-</rss>
