@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.5" />
+
+
+<title>排序和查找算法(Python实现) - Xiao Song </title>
+<meta property="og:title" content="排序和查找算法(Python实现) - Xiao Song ">
+
+
+  <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="fixed-top">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../" class="nav-logo">
+    <img src="../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../">Home</a></li>
+    
+    <li><a href="../../zhresume/">Resume</a></li>
+    
+    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
+    
+    <li><a href="../../reward/">Reward</a></li>
+    
+    <li><a href="../../tags/">Categories</a></li>
+    
+    <li><a href="../en">English</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+
+    <h1 class="article-title">排序和查找算法(Python实现)</h1>
+
+    
+    <span class="article-date">2019-05-09</span>
+    
+
+    <div class="article-content">
+      
+
+<h2 id="排序算法">排序算法</h2>
+
+<h3 id="冒泡排序法">冒泡排序法</h3>
+
+<pre><code class="language-python">def bubble(List):
+    for j in range(len(List)-1,0,-1):
+        print(List)
+        for i in range(0,j):
+            if List[i]&gt;List[i+1]:
+                List[i],List[i+1] = List[i+1],List[i]
+    return List 
+testlist = [49,38,65,97,76,13,27,49]
+print('结果：',bubble(testlist))
+</code></pre>
+
+<pre><code>[49, 38, 65, 97, 76, 13, 27, 49]
+[38, 49, 65, 76, 13, 27, 49, 97]
+[38, 49, 65, 13, 27, 49, 76, 97]
+[38, 49, 13, 27, 49, 65, 76, 97]
+[38, 13, 27, 49, 49, 65, 76, 97]
+[13, 27, 38, 49, 49, 65, 76, 97]
+[13, 27, 38, 49, 49, 65, 76, 97]
+结果： [13, 27, 38, 49, 49, 65, 76, 97]
+</code></pre>
+
+<h3 id="选择排序算法">选择排序算法</h3>
+
+<pre><code class="language-python">#选择排序算法：程序填空
+def selection_sort(L):
+    N = len(L) #提取列表长度N
+    exchange_count = 0
+    for i in range(0, N-1): #从0开始循环
+        min_index = i #排序序列的末尾位置
+        for j in range(i+1,N): #嵌套循环
+            if L[min_index] &gt; L[j]: #第一次循环L[0]&gt;L[1] 
+                min_index = j #第一次循环min_index=1  j是二者最小值的列表索引。   
+                #min_index永远等于最小值索引
+        #以下是移动程序
+        if min_index!= i: #如果索引交换了
+            L[min_index],L[i] = L[i],L[min_index] #交换值
+            exchange_count += 1
+        print('iteration#{}:{}'.format(i,L))
+    print('Total {} swappings'.format(exchange_count))
+    return L
+
+testlist = [49,38,49,97,76,13,27,65]
+selection_sort(testlist)
+</code></pre>
+
+<pre><code>iteration#0:[13, 38, 49, 97, 76, 49, 27, 65]
+iteration#1:[13, 27, 49, 97, 76, 49, 38, 65]
+iteration#2:[13, 27, 38, 97, 76, 49, 49, 65]
+iteration#3:[13, 27, 38, 49, 76, 97, 49, 65]
+iteration#4:[13, 27, 38, 49, 49, 97, 76, 65]
+iteration#5:[13, 27, 38, 49, 49, 65, 76, 97]
+iteration#6:[13, 27, 38, 49, 49, 65, 76, 97]
+Total 6 swappings
+
+
+
+
+
+[13, 27, 38, 49, 49, 65, 76, 97]
+</code></pre>
+
+<h3 id="插入排序法">插入排序法</h3>
+
+<pre><code class="language-python">def Insert(A):
+    for j in range(1,len(A)):
+        print(A)
+        key = A[j] #key为关键位置的值
+        i = j - 1 #i为关键位置之前的索引
+        while i &gt; 0 and A[i]&gt;key: #
+            A[i+1]=A[i] #将小于A[i]的元素前移
+            i = i - 1 
+        A[i + 1] = key
+    return A
+testlist = [49,38,49,97,76,13,27,65]
+Insert(testlist)
+</code></pre>
+
+<pre><code>[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 97, 76, 13, 27, 65]
+[49, 38, 49, 76, 97, 13, 27, 65]
+[49, 13, 38, 49, 76, 97, 27, 65]
+[49, 13, 27, 38, 49, 76, 97, 65]
+
+
+
+
+
+[49, 13, 27, 38, 49, 65, 76, 97]
+</code></pre>
+
+<pre><code class="language-python">#能否对字符串进行排序？
+def get_key(dict, value):
+    return [k for k, v in dict.items() if v == value]
+
+def bubbleStr(List):
+    # 输入字母顺序字典对象
+    azdict = {1:'a',2:'b',3:'c',4:'d',5:'e',6:'f',
+                  7:'g',8:'h',9:'i',10:'j',11:'k',12:'l',
+                  13:'m',14:'n',15:'o',16:'p',17:'q',18:'r',19:'s',
+                 20:'t',21:'u',22:'v',23:'w',24:'x',25:'y',26:'z'}   
+    List = list(List) #将输入的字符串转化为列表
+    numList = []
+    for i in List:
+        c = get_key(azdict,i)
+        numList.extend(c) #提取出字母列表的排序进行排序
+        
+    for j in range(len(numList)-1,0,-1):#从后往前循环
+        #print(numList)
+        for i in range(0,j):
+            if numList[i]&gt;numList[i+1]:#大小互换
+                numList[i],numList[i+1] = numList[i+1],numList[i]
+    delta = []
+    for w in numList:
+        c = azdict.get(w)
+        delta.append(c)
+    return delta
+#输入为字符串
+testlist = 'zyxwvutsrqp'
+print('结果：',bubbleStr(testlist))
+</code></pre>
+
+<pre><code>结果： ['p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+</code></pre>
+
+<h2 id="查找">查找</h2>
+
+<h3 id="顺序搜索算法">顺序搜索算法</h3>
+
+<ul>
+<li>逐一查找</li>
+</ul>
+
+<pre><code class="language-python">#顺序搜索算法
+Lst = [31,45,35,56,37,69,310,21,12]
+def sequen(lst,x):
+    i = 0
+    while i &lt; len(lst): #while 循环
+        if lst[i] == x:
+            return i
+        i += 1
+    else: return -1
+sequen(Lst,56)
+</code></pre>
+
+<h3 id="折半查找算法">折半查找算法</h3>
+
+<ul>
+<li>被查找的数据必须是有序的</li>
+</ul>
+
+<pre><code class="language-python">#有多个则返回第一个。
+def BinarySearch(a,target):
+    left = 0
+    right = len(a) - 1
+    while left &lt;= right:
+        mid = (left + right)//2 #整除，提取中点
+        midVal = a[mid]
+        if midVal &lt; target: #在中点右侧寻找
+            left = mid + 1
+        elif midVal &gt; target: #在中点左侧寻找
+            right = mid - 1
+        else:
+            return a.index(midVal) #返回第一个查找值
+    return - 1
+L = [32,32,32,32,32,46,54,62,78,83,88,91,99]
+L2 = [54,62,78,32,32,32,32,32,46,83,88,91,99]
+BinarySearch(L2,32)
+</code></pre>
+
+<pre><code>3
+</code></pre>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on </title>
+    <link>/en/categories/r/</link>
+    <description>Recent content in R on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/en/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Xiao Song</title>
+      <link>/en/englishresume/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/en/englishresume/</guid>
+      <description>Chinese Resume please click here
+CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcolm@xsong.ltdGithub：https://github.com/ECSTA7YWebsite：https://xsong.ltdWechat Official Account：ApocalypseNowSOFTWARE SKILLSR, LaTeX, StataPython, SQL, SPSSRELEVANT COURSESData Analysis Using RAlgorithm and program design (Python)Regression Analysis and Stata ApplicationSPSS ApplicationCategorical Data AnalysisSocial Simulation and NetLogo ApplicationEDUCATIONEast China Normal University 2016-09~Today</description>
+    </item>
+    
+  </channel>
+</rss>

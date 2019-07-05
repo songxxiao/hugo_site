@@ -40,6 +40,7 @@ code {
 .header {
   padding: 20px 0;
   position: relative;
+  width:100%;
   background: #7B7B7B;
   border-bottom: 1px solid #eaeaea;
 }

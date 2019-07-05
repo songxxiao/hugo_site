@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>机器学习 on Xiao Song </title>
+    <link>/zh/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+    <description>Recent content in 机器学习 on Xiao Song </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 25 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/zh/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>交叉验证</title>
+      <link>/zh/cross/</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/cross/</guid>
+      <description>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。
+交叉验证主要有以下种类：
+简单交叉验证 (hold-out cross validation)
+k折交叉验证 (K-fold cross-validation)
+留一交叉验证(leave-one-out cross validation)
+谢益辉的统计动画R包animation直观地展示了交叉验证方法。
+#install.packages(&amp;#39;mlbench&amp;#39;)library(caret) #加载数据集10折交叉验证 (K-fold cross-validation)#install.packages(&amp;#39;mlbench&amp;#39;)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 # Number of folds)library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.3 396.902 0.</description>
+    </item>
+    
+  </channel>
+</rss>

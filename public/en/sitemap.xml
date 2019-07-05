@@ -34,7 +34,6 @@
   
   <url>
     <loc>/en/</loc>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"

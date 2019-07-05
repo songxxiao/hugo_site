@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.5" />
+
+
+<title>使用R Studio运行LaTeX - Xiao Song </title>
+<meta property="og:title" content="使用R Studio运行LaTeX - Xiao Song ">
+
+
+  <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="fixed-top">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../" class="nav-logo">
+    <img src="../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../">Home</a></li>
+    
+    <li><a href="../../zhresume/">Resume</a></li>
+    
+    <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
+    
+    <li><a href="../../reward/">Reward</a></li>
+    
+    <li><a href="../../tags/">Categories</a></li>
+    
+    <li><a href="../en">English</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+
+    <h1 class="article-title">使用R Studio运行LaTeX</h1>
+
+    
+    <span class="article-date">2019-06-08</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div class="section level3">
+<h3>一些有用的链接</h3>
+<p>谢益辉: <a href="https://cosx.org/2010/11/reproducible-research-in-statistics">Sweave：打造一个可重复的统计研究流程</a></p>
+<p><a href="https://cosx.org/2012/06/reproducible-research-with-knitr/">knitr 与可重复的统计研究（花絮篇）</a></p>
+<p><a href="https://bookdown.org/yihui/r-ninja/auto-report.html">knitr中文介绍</a></p>
+<p><a href="https://yihui.name/knitr/options">knitr选项函数</a></p>
+<p>宋春林：<a href="http://songchunlin.net/cn/2019/03/latex-vs-word/">用LaTeX写学位论文</a></p>
+<p><a href="http://songchunlin.net/cn/2014/03/use-knitr/">用 knitr 写作业</a></p>
+<hr />
+<p>我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是<a href="https://miktex.org/">MikTeX</a>（虽然它常常因为简陋的功能为人诟病）。</p>
+<p>而之所以不使用<a href="http://www.xm1math.net/texmaker/">TeXmaker</a>或是<a href="http://www.ctex.org/HomePage">CTeX</a>是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。</p>
+<div class="figure" style="text-align: center"><span id="fig:sur22"></span>
+<img src="../../img/sweave/mmk.jpg" alt="MikTeX界面" width="60%" />
+<p class="caption">
+Figure 1: MikTeX界面
+</p>
+</div>
+<p>然而，R Studio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？</p>
+<p>首先要安装LaTeX环境。安装后R会自动识别这个环境。Windows用户请注意，<strong>MikTeX一定要安装在全英文路径下！</strong> <strong>MikTeX一定要安装在全英文路径下！</strong> <strong>MikTeX一定要安装在全英文路径下！</strong></p>
+<p>后续需要安装一些R包，如<code>Knitr</code>，<code>tinytex</code>等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。</p>
+<p>然后需要配置一下R Studio的环境:</p>
+<div class="figure" style="text-align: center"><span id="fig:sur1"></span>
+<img src="../../img/sweave/tempsnip.png" alt="依次点击Tools - Global Options - Sweave配置Sweave环境" width="60%" />
+<p class="caption">
+Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境
+</p>
+</div>
+<p>其中，<code>Weave Rnw files using</code>选<code>knitr</code>。想要写中文LaTeX文档必须选<code>XeLaTeX</code>环境。</p>
+<p>我们点击<code>Open File</code>打开一个LaTeX文档：</p>
+<div class="figure" style="text-align: center"><span id="fig:spdf"></span>
+<img src="../../img/sweave/cut.JPG" alt="点击Open File打开一个LaTeX文档" width="70%" />
+<p class="caption">
+Figure 3: 点击Open File打开一个LaTeX文档
+</p>
+</div>
+<p>打开后，可以直接在R Studio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：</p>
+<div class="figure" style="text-align: center"><span id="fig:click"></span>
+<img src="../../img/sweave/tempsnip2.png" alt="点击Complie PDF编译LaTeX文档" width="70%" />
+<p class="caption">
+Figure 4: 点击Complie PDF编译LaTeX文档
+</p>
+</div>
+<p>编译成功的PDF文档（是我用于某课程pre的<a href="http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html">LaTeX Beamer</a>）如图：</p>
+<div class="figure" style="text-align: center"><span id="fig:click2"></span>
+<img src="../../img/sweave/beamer.jpg" alt="编译好的PDF文档" width="70%" />
+<p class="caption">
+Figure 5: 编译好的PDF文档
+</p>
+</div>
+<p>编辑公式我使用<a href="http://www.mathtype.cn/">Mathtype</a>。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好<code>剪切和复制预置</code>选项)：</p>
+<div class="figure" style="text-align: center"><span id="fig:type"></span>
+<img src="../../img/sweave/mathtype.jpg" alt="Mathtype编辑器" width="80%" />
+<p class="caption">
+Figure 6: Mathtype编辑器
+</p>
+</div>
+<p>如，以上的公式可以直接复制为如下的纯文本LaTeX公式：</p>
+<pre class="python"><code>$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$</code></pre>
+<hr />
+</div>
+<div id="r-sweave" class="section level2">
+<h2>使用R Sweave</h2>
+<p>另一个方案是使用<a href="https://cosx.org/2010/11/reproducible-research-in-statistics">R Sweave</a>。</p>
+<p>R Sweave的主要功能并不是一个写纯LaTeX文档，而是为了将R代码嵌入LaTeX形成动态PDF报告。当然，作为日常工作，使用R Sweave写文档而不运行代码是完全可以的(只不过有点大材小用)。</p>
+<p>方法很简单，新建一个R Sweave文档，然后在里面编辑LaTeX，之后运行就可以了。</p>
+<div class="figure" style="text-align: center"><span id="fig:rnw"></span>
+<img src="../../img/sweave/rnw.png" alt="新建一个R Sweave文档" width="25%" />
+<p class="caption">
+Figure 7: 新建一个R Sweave文档
+</p>
+</div>
+<p>R Sweave文档以.Rnw为后缀，它可以将R代码整合到LaTeX中去。当然，因为语法的复杂性，R Sweave的功能很大程度上被<a href="https://rmarkdown.rstudio.com/">R Markdown</a>代替了。</p>
+<p>很久以前的公众号文章《使用R Sweave运行LaTeX》请点击<a href="https://mp.weixin.qq.com/s/1JU2ILRt9E7jYyUKilDX8A">这里</a>。</p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

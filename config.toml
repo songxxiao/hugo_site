@@ -1,6 +1,15 @@
 baseurl = "https://xsong.ltd/"
 relativeurls = true
-languageCode = "en-us"
+
+defaultContentLanguage = "zh"
+defaultContentLanguageInSubdir = true
+
+[languages.en]
+  languageCode = "en-us"
+
+[languages.zh]
+  languageCode = "zh-cn"
+
 title = "Xiao Song "
 author = "Xiao Song"
 theme = "hugo-lithium"
@@ -11,34 +20,69 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [permalinks]
     post = "/:slug/"
 
-[[menu.main]]
+[[languages.zh.menu.main]]
     name = "Home"
     url = "/"
     weight = 1
 
-[[menu.main]]
+[[languages.zh.menu.main]]
     name = "Resume"
-    url = "/englishresume/"
+    url = "/zhresume/"
    weight = 2
  
-[[menu.main]]
-    name = "Chinese Resume"
-    url = "/chnresume/"
-   weight = 3
-
-[[menu.main]]
+[[languages.zh.menu.main]]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
-    weight = 4
+    weight = 3
 
-[[menu.main]]
+[[languages.zh.menu.main]]
     name = "Reward"
     url = "/reward/"
+   weight = 4
+
+[[languages.zh.menu.main]]
+    name = 'Categories'
+    url = "/tags/"
    weight = 5
+
+[[languages.zh.menu.main]]
+  name = "English"
+  url = "../en"
+  weight =6
+  
+[[languages.en.menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[languages.en.menu.main]]
+    name = "Resume"
+    url = "/enresume/"
+   weight = 2
+ 
+[[languages.en.menu.main]]
+    name = "GitHub"
+    url = "https://github.com/ECSTA7Y"
+    weight = 3
+
+[[languages.en.menu.main]]
+    name = "Reward"
+    url = "/reward/"
+   weight = 4
+
+[[languages.en.menu.main]]
+    name = 'Categories'
+    url = "/tags/"
+   weight = 5
+
+[[languages.en.menu.main]]
+  name = "Chinese"
+  url = "../zh"
+  weight =6
 
 [params]
     description = "Xiao Song's Website "
-    footer = "&copy; [Xiao Song](https://hsiaosong.netlify.com/)  "
+    footer = "&copy; [Xiao Song](https://xsong.ltd/)  "
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
