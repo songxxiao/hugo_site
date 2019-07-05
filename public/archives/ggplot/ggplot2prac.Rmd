@@ -140,8 +140,7 @@ rm(list=ls())
 library(haven)
 china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
 
-library(dplyr)
-library(plyr)
+library(plyr); library(dplyr)
 # prepare work data, which needed to be filled in the map
 library(readxl)
 mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
@@ -254,7 +253,7 @@ library(easyGgplot2)
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
 
-# 数据长宽转换<span style="color:white">h</span>
+## 数据长宽转换<span style="color:white">h</span>
 
 + 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
 
@@ -302,7 +301,7 @@ center  <- na.omit(center)
 
 ggplot(china_map,aes(x=long,y=lat)) + 
   geom_polygon(aes(group = group),fill="white",color="black",size=0.1) + 
-  geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = "sky blue") +
+  geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = "steelblue") +
   coord_map("polyconic") +
   xlab('经度') + 
   ylab('纬度') +

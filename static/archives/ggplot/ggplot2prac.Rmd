@@ -253,7 +253,7 @@ library(easyGgplot2)
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
 
-# 数据长宽转换<span style="color:white">h</span>
+## 数据长宽转换<span style="color:white">h</span>
 
 + 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
 
