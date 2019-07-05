@@ -1,0 +1,42 @@
+---
+title: "Reward"
+author: " "
+date: " "
+slug: reward2
+---
+
+## 赞赏
+
+
+ <p align="center">支付宝 (Alipay)</p>
+
+``````{r alipay, echo=F, fig.cap=" ", out.width = '45%',fig.align='center'}
+knitr::include_graphics("/img/alipay.jpg")
+```
+
+
+---
+
+ <p align="center">微信 (Wechat)</p>
+
+``````{r wechat, echo=F, fig.cap=" ", out.width = '45%',fig.align='center'}
+knitr::include_graphics("/img/wechat.png")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

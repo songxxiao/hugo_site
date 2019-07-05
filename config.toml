@@ -32,12 +32,12 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [[languages.zh.menu.main]]
     name = "Resume"
-    url = "/zhresume/"
+    url = "/zh/zhresume/"
     weight = 3
 
 [[languages.zh.menu.main]]
     name = "Reward"
-    url = "/reward/"
+    url = "/zh/reward/"
    weight = 4
 
 [[languages.zh.menu.main]]
@@ -46,18 +46,18 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
    weight = 5
 
 [[languages.zh.menu.main]]
-  name = "English"
-  url = "../en"
+  name = "English Version"
+  url = "/en"
   weight =6
   
 [[languages.en.menu.main]]
     name = "Home"
-    url = "/"
+    url = "/en/"
     weight = 1
 
 [[languages.en.menu.main]]
     name = "Resume"
-    url = "/enresume/"
+    url = "/en/enresume/"
    weight = 2
  
 [[languages.en.menu.main]]
@@ -66,23 +66,18 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 3
 
 [[languages.en.menu.main]]
-    name = "Reward"
-    url = "/reward/"
+    name = 'Categories'
+    url = "/en/tags/"
    weight = 4
 
 [[languages.en.menu.main]]
-    name = 'Categories'
-    url = "/tags/"
-   weight = 5
-
-[[languages.en.menu.main]]
-  name = "Chinese"
-  url = "../zh"
-  weight =6
+  name = "Chinese Version"
+  url = "/zh"
+  weight =5
 
 [params]
     description = "Xiao Song's Website "
-    footer = "&copy; [Xiao Song](https://xsong.ltd/)  "
+    footer = "&copy; [ ](https://xsong.ltd/)  "
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"

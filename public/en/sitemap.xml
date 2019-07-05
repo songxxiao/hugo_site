@@ -18,21 +18,6 @@
   </url>
   
   <url>
-    <loc>/en/post/</loc>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-  </url>
-  
-  <url>
     <loc>/en/tags/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -59,10 +44,6 @@
                 hreflang="en"
                 href="/en/"
                 />
-  </url>
-  
-  <url>
-    <loc>/en/enresume/</loc>
   </url>
   
 </urlset>

@@ -1,7 +1,7 @@
 ---
 title: "Xiao Song"
 author: " "
-date: " "
+date: "2019-07-05"
 slug: enresume
 ---
 Chinese Resume please click [here](/chnresume/)

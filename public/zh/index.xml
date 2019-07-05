@@ -6,10 +6,20 @@
     <description>Recent content in 宋 骁 | Xiao Song  on Xiao Song </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 30 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Xiao Song</title>
+      <link>/zh/enresume/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/enresume/</guid>
+      <description>Chinese Resume please click here
+CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcolm@xsong.ltdGithub：https://github.com/ECSTA7YWebsite：https://xsong.ltdWechat Official Account：ApocalypseNowSOFTWARE SKILLSR, LaTeX, StataPython, SQL, SPSSRELEVANT COURSESData Analysis Using RAlgorithm and program design (Python)Regression Analysis and Stata ApplicationSPSS ApplicationCategorical Data AnalysisSocial Simulation and NetLogo ApplicationEDUCATIONEast China Normal University 2016-09~Today</description>
+    </item>
     
     <item>
       <title>初中阶段成绩预测模型</title>
@@ -154,21 +164,20 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
     </item>
     
     <item>
-      <title>Xiao Song</title>
-      <link>/zh/enresume/</link>
+      <title>Reward</title>
+      <link>/zh/reward2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/zh/enresume/</guid>
-      <description>Chinese Resume please click here
-CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcolm@xsong.ltdGithub：https://github.com/ECSTA7YWebsite：https://xsong.ltdWechat Official Account：ApocalypseNowSOFTWARE SKILLSR, LaTeX, StataPython, SQL, SPSSRELEVANT COURSESData Analysis Using RAlgorithm and program design (Python)Regression Analysis and Stata ApplicationSPSS ApplicationCategorical Data AnalysisSocial Simulation and NetLogo ApplicationEDUCATIONEast China Normal University 2016-09~Today</description>
+      <guid>/zh/reward2/</guid>
+      <description>赞赏支付宝 (Alipay)微信 (Wechat)</description>
     </item>
     
     <item>
       <title>宋 骁</title>
-      <link>/zh/resumezh/</link>
+      <link>/zh/zhresume/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/zh/resumezh/</guid>
+      <guid>/zh/zhresume/</guid>
       <description>英文简历请点击这里
 PDF版本请点击这里下载
 联系方式地址：上海市浦东新区芳华路53号邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd微信公众号：ApocalypseNow软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)相关课程R语言数据分析算法与程序设计基础 (Python)回归分析与Stata应用SPSS应用类别数据分析概率与统计导论社会模拟与NetLogo应用教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
