@@ -2,7 +2,7 @@
 title: "宋 骁"
 author: " "
 date: " "
-slug: zhresume
+slug: resumezh
 ---
 
 英文简历请点击[这里](/englishresume/)  
@@ -76,28 +76,4 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + **[CET-4](http://cet.neea.edu.cn/)**: 614
 
 [^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
