@@ -10,7 +10,7 @@ defaultContentLanguageInSubdir = true
 [languages.zh]
   languageCode = "zh-cn"
 
-title = "  "
+title = "Xiao Song"
 author = "Xiao Song"
 theme = "hugo-lithium"
 googleAnalytics = ""
