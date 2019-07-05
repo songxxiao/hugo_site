@@ -5,6 +5,16 @@
   <url>
     <loc>/zh/enresume/</loc>
     <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/enresume/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/enresume/"
+                />
   </url>
   
   <url>

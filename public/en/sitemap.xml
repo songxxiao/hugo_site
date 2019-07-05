@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/en/</loc>
+    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/enresume/</loc>
+    <lastmod>2019-07-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/enresume/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/enresume/"
+                />
+  </url>
+  
+  <url>
     <loc>/en/categories/</loc>
     <priority>0</priority>
     <xhtml:link
@@ -29,20 +59,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/en/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/en/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/"
                 />
   </url>
   
