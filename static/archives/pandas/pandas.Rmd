@@ -1,0 +1,44 @@
+---
+title: "Pandas"
+author: ' '
+date: ' '
+slug: pandas
+tags: ['Python',' ']
+---
+
+```{python a,message = F,comment = NA,warning = F,echo = T,fig.align='center',out.width ='100%',fig.cap=' '}
+import pandas as pd
+import numpy as np
+data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada', 'Nevada'],
+'year': [2000, 2001, 2002, 2001, 2002, 2003],
+'pop': [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]} #字典
+frame = pd.DataFrame(data)
+frame
+
+# 重编码
+frame[frame['pop'] < 3] = 55
+frame
+
+data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada', 'Nevada'],
+'year': [2000, 2001, 2002, 2001, 2002, 2003],
+'pop': [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]} #字典
+frame2 = pd.DataFrame(data, columns=['year', 'state', 'pop', 'debt'],index=['one', 'two', 'three', 'four', 'five', 'six'])
+frame2["odd_even"] = frame2["state"].map({'Ohio':"Nevada",'Nevada':'Ohio'})
+frame2
+
+points = np.arange(-5, 5, 0.01) # 1000 equally spaced points
+xs, ys = np.meshgrid(points, points)
+ys
+z = np.sqrt(xs ** 2 + ys ** 2)
+z
+import matplotlib.pyplot as plt
+plt.plot([0, 2, 1, 4])
+plt.show()
+
+```
+
+
+
+
+
+

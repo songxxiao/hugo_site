@@ -199,7 +199,9 @@ $(document).ready(function () {
 <li><a><span class="toc-section-number">1.2</span> 数组和矩阵</a></li>
 <li><a><span class="toc-section-number">1.3</span> 列表</a></li>
 </ul></li>
-<li><a><span class="toc-section-number">2</span> 循环</a></li>
+<li><a href="#apply"><span class="toc-section-number">2</span> <code>apply()</code>族函数</a></li>
+<li><a><span class="toc-section-number">3</span> 循环</a></li>
+<li><a href="#tidyverse"><span class="toc-section-number">4</span> <code>tidyverse</code>处理缺失值</a></li>
 </ul>
 </div>
 
@@ -243,10 +245,43 @@ Z</code></pre>
 [1,]   13   16   19   22
 [2,]   14   17   20   23
 [3,]   15   18   21   24</code></pre>
+<pre class="r"><code>Z[,,2]#索引</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]   13   16   19   22
+[2,]   14   17   20   23
+[3,]   15   18   21   24</code></pre>
 <pre class="r"><code>vec &lt;- as.vector(Z)
 vec</code></pre>
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 [24] 24</code></pre>
+<pre class="r"><code># 数组命名
+vector1 &lt;- c(5,9,3)
+vector2 &lt;- c(10,11,12,13,14,15)
+column.names &lt;- c(&quot;COL1&quot;,&quot;COL2&quot;,&quot;COL3&quot;)
+row.names &lt;- c(&quot;ROW1&quot;,&quot;ROW2&quot;,&quot;ROW3&quot;)
+matrix.names &lt;- c(&quot;Matrix1&quot;,&quot;Matrix2&quot;)
+
+result &lt;- array(c(vector1,vector2),dim = c(3,3,2),dimnames = list(row.names,column.names,
+   matrix.names))
+result</code></pre>
+<pre><code>, , Matrix1
+
+     COL1 COL2 COL3
+ROW1    5   10   13
+ROW2    9   11   14
+ROW3    3   12   15
+
+, , Matrix2
+
+     COL1 COL2 COL3
+ROW1    5   10   13
+ROW2    9   11   14
+ROW3    3   12   15</code></pre>
+<pre class="r"><code>result[,,'Matrix2'] #索引</code></pre>
+<pre><code>     COL1 COL2 COL3
+ROW1    5   10   13
+ROW2    9   11   14
+ROW3    3   12   15</code></pre>
 </div>
 <div class="section level2">
 <h2><span class="header-section-number">1.3</span> 列表</h2>
@@ -255,8 +290,185 @@ vec</code></pre>
 </ul>
 </div>
 </div>
+<div id="apply" class="section level1">
+<h1><span class="header-section-number">2</span> <code>apply()</code>族函数</h1>
+<p><a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family?utm_source=adwords_ppc&amp;utm_campaignid=1565261270&amp;utm_adgroupid=67750485268&amp;utm_device=c&amp;utm_keyword=&amp;utm_matchtype=b&amp;utm_network=g&amp;utm_adpostion=1t1&amp;utm_creative=332661264365&amp;utm_targetid=aud-392016246653:dsa-473406586995&amp;utm_loc_interest_ms=&amp;utm_loc_physical_ms=9032008&amp;gclid=CjwKCAjw6vvoBRBtEiwAZq-T1VINBuWR5b5Pe3QeGmfaBBSQ_57nvMN6p7H1AVs3iBpQXgEx480XuxoC_0UQAvD_BwE">Tutorial on the R Apply Family</a></p>
+<p>包括<code>sapply()</code>, <code>lapply()</code>, 和 <code>tapply()</code></p>
+<p><code>lapply()</code>默认返回值是列表</p>
+<p><code>aggregate()</code>类似于<code>dplyr::group_by</code></p>
+</div>
 <div class="section level1">
-<h1><span class="header-section-number">2</span> 循环</h1>
+<h1><span class="header-section-number">3</span> 循环</h1>
+<p><code>for</code>循环</p>
+<pre class="r"><code>pp &lt;- c(&quot;Peter&quot;, &quot;Piper&quot;, &quot;picked&quot;, &quot;a&quot;, &quot;peck&quot;, &quot;of&quot;, &quot;pickled&quot;, &quot;peppers&quot;)
+for(i in seq_along(pp)) print(pp[i])</code></pre>
+<pre><code>[1] &quot;Peter&quot;
+[1] &quot;Piper&quot;
+[1] &quot;picked&quot;
+[1] &quot;a&quot;
+[1] &quot;peck&quot;
+[1] &quot;of&quot;
+[1] &quot;pickled&quot;
+[1] &quot;peppers&quot;</code></pre>
+</div>
+<div id="tidyverse" class="section level1">
+<h1><span class="header-section-number">4</span> <code>tidyverse</code>处理缺失值</h1>
+<pre class="r"><code>library(tidyverse)
+stocks &lt;- tibble(
+year = c(2015, NA, 2015, 2015, NA, 2016, 2016),
+qtr = c( 1, 2, NA, NA, 2, NA, 4),
+return = c(1.88, 0.44, 0.35, 0.66, 0.92, 0.17, 3.40)
+)
+knitr::kable(stocks,caption = '数据概要')</code></pre>
+<table>
+<caption>(#tab:c )数据概要</caption>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">qtr</th>
+<th align="right">return</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="right">1.88</td>
+</tr>
+<tr class="even">
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0.44</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">NA</td>
+<td align="right">0.35</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">NA</td>
+<td align="right">0.66</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0.92</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">NA</td>
+<td align="right">0.17</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">4</td>
+<td align="right">3.40</td>
+</tr>
+</tbody>
+</table>
+<p>缺失值重编码成其他值：</p>
+<pre class="r"><code>stocks &lt;- stocks %&gt;%
+  mutate(year= ifelse(is.na(qtr)==T,9999,year))
+knitr::kable(stocks,caption = '数据概要')</code></pre>
+<table>
+<caption><span id="tab:d">Table 4.1: </span>数据概要</caption>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">qtr</th>
+<th align="right">return</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="right">1.88</td>
+</tr>
+<tr class="even">
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0.44</td>
+</tr>
+<tr class="odd">
+<td align="right">9999</td>
+<td align="right">NA</td>
+<td align="right">0.35</td>
+</tr>
+<tr class="even">
+<td align="right">9999</td>
+<td align="right">NA</td>
+<td align="right">0.66</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0.92</td>
+</tr>
+<tr class="even">
+<td align="right">9999</td>
+<td align="right">NA</td>
+<td align="right">0.17</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">4</td>
+<td align="right">3.40</td>
+</tr>
+</tbody>
+</table>
+<p>其他值重编码成缺失值：</p>
+<pre class="r"><code>stocks &lt;- stocks %&gt;%
+  mutate(return=ifelse(year&gt;2016 &amp; is.na(year) == F, NA,return))
+knitr::kable(stocks,caption = '数据概要')</code></pre>
+<table>
+<caption><span id="tab:e">Table 4.2: </span>数据概要</caption>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">qtr</th>
+<th align="right">return</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">1</td>
+<td align="right">1.88</td>
+</tr>
+<tr class="even">
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0.44</td>
+</tr>
+<tr class="odd">
+<td align="right">9999</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">9999</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="right">2</td>
+<td align="right">0.92</td>
+</tr>
+<tr class="even">
+<td align="right">9999</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">4</td>
+<td align="right">3.40</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
