@@ -17,3 +17,9 @@ Thanks to [Yihui](https://yihui.name/)'s [`blogdown`](https://bookdown.org/yihui
 + The `bookdown` themes please click [here](https://bookdown.org/yihui/bookdown/theming.html).
 
 + [This](http://xuer.dapengde.com/post/hugo-blogdown/) and [This](https://cosx.org/2018/01/build-blog-with-blogdown-hugo-netlify-github/) passage have helped me a lot when making the website. Without them, I might had more trouble. Thanks to the authors!
+
++ I followed [this](https://www.pzhao.org/zh/post/hugo-multilingual/) instruction to build the two-language
+function.
+
+
+
