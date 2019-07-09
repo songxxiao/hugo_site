@@ -1,0 +1,67 @@
+---
+title: "Python函数与模块的使用"
+author: " "
+date: "2019-05-08"
+categories: Python
+slug: pydef
+tags: ['Python','编程基础']
+---
+```{python a, comment = NA}
+def star(m,n):
+    for i in range(m):
+        print('*'*n)
+star(3,2) 
+
+star(5,6)  
+
+star(4,20) 
+
+def paint(m,s):
+    print(s*m)
+paint(3,'*')
+
+paint(8,'%+')
+
+def check(a):
+    if a>0:
+        print('>0')
+    elif a < 0:
+        print('<0')
+    else:
+        print("==0")
+check(5)
+
+check(-2)
+
+check(0)
+
+def avg(a,b):
+    return(a+b)/2
+
+c = avg(4,6)
+c
+
+x = avg(3,6)
+x
+
+y = avg(3,avg(5,7))
+y
+
+def avg(a,b):
+    return(a+b)/2
+    return(a+b) #可以有多条return语句，但只执行一条
+avg(4,6)
+
+def avg(a,b=0):#默认参数
+    return(a+b)/2
+avg(6)
+
+def more(a,b):
+    return a+b,a-b
+more(2,3) #return语句可以返回多个值
+
+def more(a,b):
+    return
+more(2,3) #return后面可以没有返回值
+```
+

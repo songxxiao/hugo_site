@@ -22,7 +22,7 @@ slug: basicr
 
 ## 数组和矩阵
 
-```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r a ,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 mar<-c(652,1537,598,242,36,46,38,21,218,327,106,67)
 caff.marital<-matrix(mar,nrow=3,byrow=T) #byrow=T通过行来填充
 caff.marital
@@ -33,9 +33,24 @@ x
 h <- c(1:24)
 Z <- array(h, dim=c(3,4,2)) #创建3X4X2的数组
 Z
-
+Z[,,2]#索引
 vec <- as.vector(Z)
 vec
+
+# 数组命名
+vector1 <- c(5,9,3)
+vector2 <- c(10,11,12,13,14,15)
+column.names <- c("COL1","COL2","COL3")
+row.names <- c("ROW1","ROW2","ROW3")
+matrix.names <- c("Matrix1","Matrix2")
+
+result <- array(c(vector1,vector2),dim = c(3,3,2),dimnames = list(row.names,column.names,
+   matrix.names))
+result
+result[,,'Matrix2'] #索引
+
+
+
 
 
 
@@ -48,18 +63,56 @@ vec
 分量可以是不同的模式或类型，如一个列表可以同时包括数值向量，逻辑向量，矩阵，复向量，字符数组，函数等等。
 
 
+# `apply()`族函数
+
+[Tutorial on the R Apply Family](https://www.datacamp.com/community/tutorials/r-tutorial-apply-family?utm_source=adwords_ppc&utm_campaignid=1565261270&utm_adgroupid=67750485268&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=1t1&utm_creative=332661264365&utm_targetid=aud-392016246653:dsa-473406586995&utm_loc_interest_ms=&utm_loc_physical_ms=9032008&gclid=CjwKCAjw6vvoBRBtEiwAZq-T1VINBuWR5b5Pe3QeGmfaBBSQ_57nvMN6p7H1AVs3iBpQXgEx480XuxoC_0UQAvD_BwE)
+
+包括`sapply()`, `lapply()`, 和 `tapply()`
+
+```{r b ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+
+
+```
+
+
+`lapply()`默认返回值是列表
+
+`aggregate()`类似于`dplyr::group_by`
 
 # 循环
+`for`循环
+```{r for ,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+pp <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers")
+for(i in seq_along(pp)) print(pp[i])
+```
+
+# `tidyverse`处理缺失值
 
 
+```{r c ,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+library(tidyverse)
+stocks <- tibble(
+year = c(2015, NA, 2015, 2015, NA, 2016, 2016),
+qtr = c( 1, 2, NA, NA, 2, NA, 4),
+return = c(1.88, 0.44, 0.35, 0.66, 0.92, 0.17, 3.40)
+)
+knitr::kable(stocks,caption = '数据概要')
+```
 
+缺失值重编码成其他值：
 
+```{r d,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+stocks <- stocks %>%
+  mutate(year= ifelse(is.na(qtr)==T,9999,year))
+knitr::kable(stocks,caption = '数据概要')
+```
 
-
-
-
-
-
+其他值重编码成缺失值：
+```{r e,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+stocks <- stocks %>%
+  mutate(return=ifelse(year>2016 & is.na(year) == F, NA,return))
+knitr::kable(stocks,caption = '数据概要')
+```
 
 
 

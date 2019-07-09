@@ -1,6 +1,6 @@
 ---
 title: "TOEFL经验"
-subtitle: " "
+subtitle: "笔记与总结"
 author: "Malcolm"
 date: "2019/06/09"
 output:
@@ -24,6 +24,9 @@ class: center, middle
 # 作文经验  
 <https://xsong.ltd/slides/toefl/toefl#1>
 
+---
+
+[综合作文](https://www.toeflresources.com/writing-section/integrated-writing)
 
 ---
 ## 作文
@@ -124,6 +127,7 @@ two-edge sword 双刃剑
 nightmares 噩梦  
 double-sided 两面性的  
 conversely 相反地  
+qualified 称职的
 
 下降：decline, reduce, decrease  
 上升：improve, increase, enhance, raise, heighten
@@ -164,14 +168,23 @@ throw up 呕吐
 
 freak 怪物
 
-vagina 阴道
+
 ]
 
 ---
 ## 地道的表达
 .mid[
+vagina 阴道
+
 sober 清醒
 
+freaked out 吓坏了
+
+go ahead 继续说
+
+exactly 确实是
+
+we have nothing in common 我们没有共同点
 
 ]
 ---
@@ -196,6 +209,8 @@ class: center, middle
 
 + 唯一、第一都不对
 
++ 答题时候回看笔记会得到答案
+
 
 ---
 class: center, middle
@@ -205,6 +220,8 @@ class: center, middle
 ## 阅读
 
 + 开始得别太早，不然会被吵
+
++ 最后一题总结题注意introductory sentence
 
 ---
 
