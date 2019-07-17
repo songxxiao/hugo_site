@@ -24,9 +24,7 @@ class: center, middle
 # 作文经验  
 <https://xsong.ltd/slides/toefl/toefl#1>
 
----
 
-[综合作文](https://www.toeflresources.com/writing-section/integrated-writing)
 
 ---
 ## 作文
@@ -76,16 +74,31 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 
 ## 综合作文 | Integrate Writing
 
++ [综合作文模板教程](https://www.toeflresources.com/writing-section/integrated-writing)
+
 + Reference the sources accordingly
+
+---
+
+## 综合作文常用词
+
+| 中文| 英文 | 
+|:------|:------:| 
+| 说 | claim, mention, suggest, state, posit, note, argue | 
+
++ The lecturer challenges the claims made by the author.
 
 ---
 
 ## 独立作文
 
++ [独立作文教程](https://www.toeflresources.com/writing-section/toefl-independent-writing-section)
+
 + 首段：Just end your introduction with a thesis statement.
 
 + 结尾段：The concluding paragraph must contain a summary of the key points you
 made in the body and a reiteration o f your thesis statement.
+
 
 ---
 
@@ -146,27 +159,19 @@ class: center, middle
 ## 地道的表达
 .mid[
 
-I feel this way because ...
+I feel this way because ...  
+There's lot of advantages that  
+I believe ...  
+inapporiate to ...  
+call off 取消  
+set off 出发  
+touch my heart 触动我  
+turn out 结果是  
+conflict 时间冲突  
+throw up 呕吐  
+freak 怪物  
 
-There's lot of advantages that
 
-I believe ...
-
-inapporiate to ...
-
-call off 取消
-
-set off 出发
-
-touch my heart 触动我
-
-turn out 结果是
-
-conflict 时间冲突
-
-throw up 呕吐
-
-freak 怪物
 
 
 ]
@@ -174,6 +179,8 @@ freak 怪物
 ---
 ## 地道的表达
 .mid[
+tender gentle 温柔的
+
 vagina 阴道
 
 sober 清醒
@@ -186,7 +193,20 @@ exactly 确实是
 
 we have nothing in common 我们没有共同点
 
+be dying to do sth 十分想做某事
+
 ]
+
+---
+### 口语：task 4
+
++ 文章出来直接读！ 没时间记笔记！
+
++ 读文章时候记得总结the concept
+
++ 详细阐述例子。不要说太多理论。把精力放在听力中！
+
+
 ---
 ### 口语：task 5
 
@@ -196,7 +216,16 @@ we have nothing in common 我们没有共同点
 
 + the two solutions are 
 
++ she could either do this or do that
+---
 
+### 口语：task 6
+
++ 简单summarize一下主题，引入两个方法。
+
++ 主要听例子,说例子
+
++ 记笔记的时候最好换个说法
 
 
 ---

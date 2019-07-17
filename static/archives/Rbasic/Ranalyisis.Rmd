@@ -1,5 +1,5 @@
 ---
-title: " "
+title: "R"
 author: " "
 date: " "
 output:
@@ -13,6 +13,8 @@ slug: ranalysis
 
 ## k-means聚类
 
+[k-means in R](https://uc-r.github.io/kmeans_clustering)
+
 ```{r delta,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 #葡萄酒数据
 #install.packages("rattle")
@@ -24,8 +26,7 @@ set.seed(1234)
 fit.pam <- pam(wine[-1], k=3, stand=T)#3个质心
 fit.pam$medoids #查看质心
 
-clusplot(fit.pam, main="Bivariate Cluster Plot")
-
+c
 library(fMultivar)
 set.seed(1234)
 df <- rnorm2d(1000, rho=0.9) #2元正态分布
@@ -39,6 +40,14 @@ df$clustering <- factor(fit$clustering)#输出聚类结果变量
 ggplot(data=df, aes(x=V1, y=V2, color=clustering, shape=clustering)) +
 geom_point() + ggtitle("Clustering of Bivariate Normal Data")
 
+require(graphics)
+# a 2-dimensional example
+x <- rbind(matrix(rnorm(100, sd = 0.3), ncol = 2),
+           matrix(rnorm(100, mean = 1, sd = 0.3), ncol = 2))
+colnames(x) <- c("x", "y")
+(cl <- kmeans(x, 2))
+plot(x, col = cl$cluster)
+points(cl$centers, col = 1:2, pch = 8, cex = 2)
 
 ```
 
@@ -68,7 +77,7 @@ rect.hclust(h, k=7, border = "red")
 #install.packages('jiebaR')
 library(wordcloud2)
 library(jiebaR)
-text <- readLines("E:/R_codes/Rkws.csv",encoding = "UTF-8")
+text <- readLines("E:/R_codes/others/Rkws.csv",encoding = "UTF-8")
 text <- text[-1] 
 freq <- freq(text)
 index <- order(-freq[,2]) 

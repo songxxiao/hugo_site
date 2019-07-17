@@ -10,34 +10,37 @@ tags: ['机器学习','应用统计','R']
 
 <p>本报告使用了<code>CART</code> ；<code>Random Forest</code>算法。</p>
 <hr />
-<div class="section level2">
+<div id="section" class="section level2">
 <h2>数据介绍</h2>
-<p>本文采用<a href="https://ceps.ruc.edu.cn/">中国教育追踪调查</a> (China Education Panel Survey, CEPS)2013-2014学年基线数据。 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。</p>
+<p>本文采用<a href="https://ceps.ruc.edu.cn/">中国教育追踪调查</a> (China Education Panel Survey, CEPS)2013-2014学年基线数据。
+采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。</p>
 </div>
-<div class="section level2">
+<div id="section-1" class="section level2">
 <h2>算法介绍</h2>
-<p>CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。 回归树模型可表示为： <span class="math display">\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]</span></p>
-<p>其中，<span class="math inline">\(x\)</span>是一系列输入特征（自变量），<span class="math inline">\({R_1},{R_2},...,{R_m}\)</span>是输入空间被划分的M个区域。 是区域<span class="math inline">\({R_m}\)</span>对应的最优值。<span class="math inline">\(I\)</span>代表的是指示函数（indicator function），当输入变量<span class="math inline">\(x\)</span>属于区域 <span class="math inline">\({R_m}\)</span>时，输出为1，否则输出为0。 CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。</p>
+<p>CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。
+回归树模型可表示为：
+<span class="math display">\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]</span></p>
+<p>其中，<span class="math inline">\(x\)</span>是一系列输入特征（自变量），<span class="math inline">\({R_1},{R_2},...,{R_m}\)</span>是输入空间被划分的M个区域。 是区域<span class="math inline">\({R_m}\)</span>对应的最优值。<span class="math inline">\(I\)</span>代表的是指示函数（indicator function），当输入变量<span class="math inline">\(x\)</span>属于区域 <span class="math inline">\({R_m}\)</span>时，输出为1，否则输出为0。
+CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。</p>
 <p>为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：</p>
 <p><span class="math display">\[{{\rm{C}}_\alpha }(T) = C(T) + \alpha \left| T \right|\]</span></p>
 <p>其中，<span class="math inline">\(T\)</span>为任意子树。<span class="math inline">\(C(T)\)</span>为对训练数据的预测误差（如基尼指数）， <span class="math inline">\(\left| T \right|\)</span>为子树的叶结点个数，<span class="math inline">\(\alpha \ge 0\)</span>为参数，<span class="math inline">\({{\rm{C}}_\alpha }(T)\)</span>是参数为<span class="math inline">\(\alpha\)</span>时的子树<span class="math inline">\(T\)</span>的整体损失。参数<span class="math inline">\(\alpha\)</span>测量了模型的复杂度。</p>
-</div>
-<div class="section level2">
-<h2>变量</h2>
+<p>##变量</p>
 <p>本研究依据以往教育学和社会学文献，选取了50个自变量进行预测。为了降低测量误差，本研究在变量选取的过程中遵循了以下两个原则：1.尽可能挑选“客观的”变量。2.尽可能挑选直观上对学习成绩有重要影响的变量。</p>
-<div class="section level3">
+<div id="section-2" class="section level3">
 <h3>因变量</h3>
 <p>本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。</p>
 <p>为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25%(是=1，否=0)单独划分为一个分类变量建立分类树。图<a href="#fig:b">1</a> 展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。</p>
 <p>图<a href="#fig:a">2</a> 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。</p>
 </div>
-<div class="section level3">
+<div id="section-3" class="section level3">
 <h3>自变量</h3>
 <p>下面展示了自变量以及自变量在模型中的编码：</p>
 <p>家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。</p>
 <p>个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。</p>
 <p>学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。</p>
-<p>班级变量：教师总课时(classtm)、 备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
+<p>班级变量：教师总课时(classtm)、
+备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。</p>
 <p><a href="http://www.mamicode.com/info-detail-1402416.html">R语言移除缺失值 NA.RM</a></p>
 <div class="figure" style="text-align: center"><span id="fig:b"></span>
 <img src="/post/edutree.zh_files/figure-html/b-1.png" alt="标准化总成绩的直方图(分年级)" width="100%" />
@@ -97,11 +100,11 @@ multiplot  </code></pre>
 <hr />
 </div>
 </div>
-<div class="section level2">
+<div id="section-4" class="section level2">
 <h2>分析结果</h2>
-<div class="section level3">
+<div id="section-5" class="section level3">
 <h3>回归树</h3>
-<p>图<a href="#fig:s">3</a> 展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>。此处将九年级子样本单独进行分析。</p>
+<p>图<a href="#fig:s">3</a> 展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。此处将九年级子样本单独进行分析。</p>
 <pre class="r"><code>#建立回归树
 cont &lt;- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 tree &lt;- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = &quot;anova&quot;,parms = list(split=&quot;gini&quot;),control=cont,na.action = na.omit)</code></pre>
@@ -211,7 +214,7 @@ tab #混淆矩阵，行为测试集预测值，列为测试集观测值</code></
 <p>从图<a href="#fig:fig5">5</a> 发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。</p>
 <p>在初次拟合分类树之后，对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25%左右。</p>
 </div>
-<div class="section level3">
+<div id="section-6" class="section level3">
 <h3><a href="http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection">交叉验证</a></h3>
 <p>使用<code>caret</code>包进行10次10折交叉验证,同样使用CART算法。图<a href="#fig:fig7">7</a> 展示了训练后模型的ROC曲线。</p>
 <pre class="r"><code>library(caret)
@@ -281,7 +284,7 @@ Figure 8: 分类树的复杂度参数与准确率的关系
 </p>
 </div>
 </div>
-<div class="section level3">
+<div id="section-7" class="section level3">
 <h3>随机森林</h3>
 <pre class="r"><code>train$matgreat &lt;- as.factor(train$matgreat)
 train &lt;- na.omit(train)
@@ -307,7 +310,7 @@ ratree$confusion</code></pre>
 0 945 131   0.1217472
 1 196 242   0.4474886</code></pre>
 <pre class="r"><code>#计算模型变量的重要性
-importance(ratree, type=1, scale=T)</code></pre>
+importance(ratree,type=1, scale=T)</code></pre>
 <pre><code>         MeanDecreaseAccuracy
 schids             15.6591618
 sex                 0.1783317
@@ -351,11 +354,18 @@ huko                4.9183822
 eduy                1.0829673
 dangy               1.8206349
 houspro             4.5784527</code></pre>
+<pre class="r"><code>varImpPlot(ratree,type=1)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:randomForest"></span>
+<img src="/post/edutree.zh_files/figure-html/randomForest-1.png" alt="变量重要性" width="100%" />
+<p class="caption">
+Figure 9: 变量重要性
+</p>
+</div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。<a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
