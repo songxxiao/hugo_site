@@ -1,0 +1,79 @@
+---
+title: "R练习0717"
+author: " "
+date: " "
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+slug: ranalysis
+---
+
+# 聚类分析
+
+```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+#葡萄酒数据
+#install.packages("rattle")
+data(wine, package="rattle")
+head(wine)
+
+#班级数据
+library(cluster)
+Rclass=read.csv("E:/R_codes/others/Rdclass.csv",header=T)
+Rclass1=Rclass[,-c(1,6,7,8)]
+rownames(Rclass1)=Rclass$Name
+gower_dist<-daisy(Rclass1,metric = "gower")#分类变量的聚类
+summary(gower_dist)
+h <- hclust(gower_dist)
+plot(h)
+rect.hclust(h, k=7, border = "red")
+(cn <- cutree(h, k = 7))
+
+
+
+```
+
+# 词云图
+
+```{r b,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+#install.packages('wordcloud2')
+#install.packages('jiebaR')
+library(wordcloud2)
+library(jiebaR)
+text <- readLines("E:/R_codes/Rkws.csv",encoding = "UTF-8")
+text <- text[-1] 
+freq <- freq(text)
+index <- order(-freq[,2]) 
+order2 <- freq[index, ]
+wordcloud2(freq,size = 1, color = "random-light")
+#wordcloud2(freq,size = 1, color = "random-light",shape='cardioid')
+#wordcloud2(freq,size = 1, color = "random-light",shape='diamond')
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
