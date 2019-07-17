@@ -18,7 +18,7 @@ tags: ["R","应用统计","机器学习"]
 <p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
 <pre class="r"><code>#install.packages(&#39;mlbench&#39;)
 library(caret) #加载数据集</code></pre>
-<div id="-k-fold-cross-validation" class="section level1">
+<div id="k-fold-cross-validation" class="section level1">
 <h1>10折交叉验证 (K-fold cross-validation)</h1>
 <pre class="r"><code>#install.packages(&#39;mlbench&#39;)
 
@@ -58,13 +58,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 454, 455, 458, 456, 455, ... 
+Summary of sample sizes: 457, 454, 456, 456, 454, 454, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.512231  0.6435764  3.965677
-  0.17117244  6.611941  0.4819346  4.919408
-  0.45274420  8.378830  0.3517552  6.125674
+  0.07165784  5.583843  0.6302097  3.938358
+  0.17117244  6.531364  0.4987375  4.748411
+  0.45274420  8.346533  0.3416569  6.047449
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -83,16 +83,20 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 456, 454, 456, 456, 456, ... 
+Summary of sample sizes: 456, 455, 455, 456, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.759709  0.6111338  4.160367
-  0.17117244  6.668274  0.4756325  4.955390
-  0.45274420  8.420769  0.3162420  6.111549
+  0.07165784  5.842526  0.5999238  4.244645
+  0.17117244  6.685525  0.4718053  4.969191
+  0.45274420  8.412658  0.3144768  6.131069
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
+<pre class="r"><code>importance &lt;- varImp(rpartFit, scale = F)
+# 得到各个变量的重要性
+plot(importance, xlab = &quot;变量重要性&quot;)</code></pre>
+<p><img src="/post/cross.zh_files/figure-html/cv-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="leave-one-out-cross-validation" class="section level1">
 <h1>留一交叉验证(leave-one-out cross validation)</h1>
@@ -121,5 +125,23 @@ Resampling results across tuning parameters:
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
-<pre class="r"><code>#summary(rpartFit)</code></pre>
+<pre class="r"><code>#summary(rpartFit)
+varImp(rpartFit, scale = F)</code></pre>
+<pre><code>rpart variable importance
+
+        Overall
+lstat    0.8646
+nox      0.5008
+ptratio  0.4643
+rm       0.4527
+indus    0.2595
+crim     0.2484
+age      0.2089
+rad      0.0000
+b        0.0000
+zn       0.0000
+chas1    0.0000
+dis      0.0000
+tax      0.0000</code></pre>
+<pre class="r"><code># 得到各个变量的重要性</code></pre>
 </div>

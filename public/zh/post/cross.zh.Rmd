@@ -49,9 +49,7 @@ rpartFit
 将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有"10次10 折交叉验证"。
 
 
-```{r cv,comment = NA,warning = F,message = F, include = T,fig.align='center'} 
-
-
+```{r cv,comment = NA,warning = F,message = F, include = T,fig.align='center',out.width='70%',fig.asp=1.2} 
 repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions
 =TRUE)
 rpartFit <- train(medv ~ .,
@@ -59,6 +57,10 @@ rpartFit <- train(medv ~ .,
                   method = "rpart",
                   trControl = repeatedcv)
 rpartFit
+
+importance <- varImp(rpartFit, scale = F)
+# 得到各个变量的重要性
+plot(importance, xlab = "变量重要性")
 ```
 
 
@@ -77,6 +79,9 @@ rpartFit <- train(medv ~ .,
                   trControl = rfControl)
 rpartFit
 #summary(rpartFit)
+varImp(rpartFit, scale = F)
+# 得到各个变量的重要性
+
 ```
 
 
