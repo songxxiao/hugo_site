@@ -1,5 +1,5 @@
 ---
-title: "R练习0717"
+title: " "
 author: " "
 date: " "
 output:
@@ -11,11 +11,39 @@ slug: ranalysis
 
 # 聚类分析
 
-```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+## k-means聚类
+
+```{r delta,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 #葡萄酒数据
 #install.packages("rattle")
 data(wine, package="rattle")
-head(wine)
+knitr::kable(head(wine))
+
+library(cluster)
+set.seed(1234)
+fit.pam <- pam(wine[-1], k=3, stand=T)#3个质心
+fit.pam$medoids #查看质心
+
+clusplot(fit.pam, main="Bivariate Cluster Plot")
+
+library(fMultivar)
+set.seed(1234)
+df <- rnorm2d(1000, rho=0.9) #2元正态分布
+df <- as.data.frame(df)
+plot(df, main="Bivariate Normal Distribution with rho=0.9")
+
+library(ggplot2)
+library(cluster)
+fit <- pam(df, k=2)
+df$clustering <- factor(fit$clustering)#输出聚类结果变量
+ggplot(data=df, aes(x=V1, y=V2, color=clustering, shape=clustering)) +
+geom_point() + ggtitle("Clustering of Bivariate Normal Data")
+
+
+```
+
+
+```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 
 #班级数据
 library(cluster)
@@ -23,7 +51,7 @@ Rclass=read.csv("E:/R_codes/others/Rdclass.csv",header=T)
 Rclass1=Rclass[,-c(1,6,7,8)]
 rownames(Rclass1)=Rclass$Name
 gower_dist<-daisy(Rclass1,metric = "gower")#分类变量的聚类
-summary(gower_dist)
+#summary(gower_dist)
 h <- hclust(gower_dist)
 plot(h)
 rect.hclust(h, k=7, border = "red")
@@ -35,7 +63,7 @@ rect.hclust(h, k=7, border = "red")
 
 # 词云图
 
-```{r b,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r b,message = F, comment = NA,warning = F,include = T,cache=T,fig.align='center',out.width ='100%',fig.asp=0.6}
 #install.packages('wordcloud2')
 #install.packages('jiebaR')
 library(wordcloud2)
