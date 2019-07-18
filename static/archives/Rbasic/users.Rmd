@@ -1,7 +1,7 @@
 ---
-title: " "
-author: " "
-date: " "
+title: "B级三厢车用户洞察项目"
+author: "宋骁"
+date: "2019-7-18"
 output:
   bookdown::html_document2:
     toc: true
@@ -9,12 +9,107 @@ output:
 slug: rusers
 ---
 
+# 数据清理
+  
+## 变量
+  
+  + 人口学：性别`S5`； 年龄`S6__1__open`；婚姻状况`D5`；孩子`D6`；教育`D3`
+  + 车系`S10B`
+  + 生活方式、价值观`Q7__1:Q7__35`
+  + 对车的态度`A0__1:A0__27`
 
 
-```{r,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r a,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='60%',fig.asp=0.7}
+library(tidyverse)
 dt.car <- read.csv("C:/Users/xsong/Desktop/table/WWD.csv")
 #knitr::kable((dt.car))
+knitr::kable(prop.table(table(dt.car$S5))*100)
+knitr::kable(prop.table(table(dt.car$D5))*100)
+
+summary(dt.car$S6__1__open)
+
+ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
+xlab('年龄') + 
+ylab('频数') +
+labs(fill="车型")
+#thme(fill=guide_legend(title='车型'))
+
+
+
+knitr::kable(prop.table(table(dt.car$D3))*100)
+knitr::kable(prop.table(table(dt.car$S10B))*100)
+
+```
+
+
+
+```{r b,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+dta <- dt.car %>%
+  select(S5,S6__1__open,D5,D6,D3,S10B,Q7__1:Q7__35,A0__1:A0__27) %>% #筛选列
+  rename(age=S6__1__open,edu=D3) %>% #重命名
+  mutate(eduy=recode(edu,'初中'=9,
+                     '大学本科 - 国内'=16,
+                     '大学本科 - 国外'=16,
+                     '大专'=15,
+                     '高中'=12,
+                     '技术/职业学校/中专'=12,
+                     '研究生或以上 - 国内'=20)) %>% #重编码
+  select(edu,eduy,everything()) #排序
+
+```
+
+# 价值观变量的主成分分析
+  + 
+
+```{r c,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='60%',fig.asp=0.8}
+pcdata <- dta %>% #用于主成分分析的数据
+  select(Q7__1:Q7__35) 
+
+#循环编码35个变量
+for(i in 1:35) {
+  pcdata[,i+35] <- 0
+  pcdata[,i+35][pcdata[,i]=='非常同意1'] <- 1
+  pcdata[,i+35][pcdata[,i]=='比较同意2'] <- 2
+  pcdata[,i+35][pcdata[,i]=='谈不上同不同意3'] <- 3
+  pcdata[,i+35][pcdata[,i]=='比较不同意4'] <- 4
+  pcdata[,i+35][pcdata[,i]=='完全不同意5'] <- 5
+}
+
+pcdata <- pcdata %>% #保留需要主成分分析的35个变量
+  select(-(Q7__1:Q7__35)) 
+
+#主成分分析
+library(psych)
+fa.parallel(pcdata, fa="pc", n.iter=100,show.legend=F, main="碎石图")
+pc <- principal(pcdata, nfactors=3, rotate="varimax", score=T) #方差极大旋转
+pc
+dta$score <- pc$scores #三个主成分为PC1,PC2, PC3
+
+
 
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
