@@ -24,9 +24,8 @@ knitr::kable(head(wine))
 library(cluster)
 set.seed(1234)
 fit.pam <- pam(wine[-1], k=3, stand=T)#3个质心
-fit.pam$medoids #查看质心
+knitr::kable(fit.pam$medoids) #查看质心
 
-c
 library(fMultivar)
 set.seed(1234)
 df <- rnorm2d(1000, rho=0.9) #2元正态分布
@@ -87,7 +86,25 @@ wordcloud2(freq,size = 1, color = "random-light")
 #wordcloud2(freq,size = 1, color = "random-light",shape='diamond')
 ```
 
+# 主成分分析
 
+```{r c,message = F, comment = NA,warning = F,include = T,cache=T,fig.align='center',out.width ='90%',fig.asp=0.8}
+#数据:USJudgeRatings
+knitr::kable(head(USJudgeRatings))
+library(psych)
+fa.parallel(USJudgeRatings[,-1], fa="pc", n.iter=100,
+show.legend=F, main="碎石图")
+pc <- principal(USJudgeRatings[,-1], nfactors=1, rotate="varimax", score=T) #方差极大旋转
+pc
+
+USJudgeRatings$score <- pc$scores
+knitr::kable(head(USJudgeRatings$score))
+
+```
+
+```{r}
+
+```
 
 
 

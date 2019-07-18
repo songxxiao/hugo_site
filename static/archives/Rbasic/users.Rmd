@@ -1,0 +1,20 @@
+---
+title: " "
+author: " "
+date: " "
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+slug: rusers
+---
+
+
+
+```{r,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+dt.car <- read.csv("C:/Users/xsong/Desktop/table/WWD.csv")
+#knitr::kable((dt.car))
+
+
+```
+
