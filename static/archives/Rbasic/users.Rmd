@@ -53,7 +53,12 @@ dta <- dt.car %>%
                      '大专'=15,
                      '高中'=12,
                      '技术/职业学校/中专'=12,
-                     '研究生或以上 - 国内'=20)) %>% #重编码
+                     '研究生或以上 - 国内'=20),
+         child=recode(D6,'没有孩子'=0,
+                      '有1个孩子'=1,
+                      '有2个孩子'=2,
+                      '有3个孩子及以上'=3)
+         ) %>% #重编码
   select(edu,eduy,everything()) #排序
 
 ```
@@ -82,16 +87,58 @@ pcdata <- pcdata %>% #保留需要主成分分析的35个变量
 library(psych)
 fa.parallel(pcdata, fa="pc", n.iter=100,show.legend=F, main="碎石图")
 pc <- principal(pcdata, nfactors=3, rotate="varimax", score=T) #方差极大旋转
-pc
-dta$score <- pc$scores #三个主成分为PC1,PC2, PC3
+pc #三个主成分为PC1,PC2, PC3
 
+rmd <- pc$scores #2个主成分为RC1,RC2
+rmd <- as.data.frame(rmd)
+rmd <- rmd %>% 
+  rename(lfatd1=RC1,lfatd2=RC2,lfatd3=RC3)
 
+dta <- cbind(dta,rmd)
 
 
 ```
 
+# 对车的态度主成分分析
+
+```{r d,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='60%',fig.asp=0.8}
+
+pcdata2 <- dta %>% #用于主成分分析的数据
+  select(A0__1:A0__27) 
+
+#循环编码27个变量
+for(i in 1:27) {
+  pcdata2[,i+27] <- 0
+  pcdata2[,i+27][pcdata2[,i]=='非常同意1'] <- 1
+  pcdata2[,i+27][pcdata2[,i]=='比较同意2'] <- 2
+  pcdata2[,i+27][pcdata2[,i]=='谈不上同意不同意3'] <- 3
+  pcdata2[,i+27][pcdata2[,i]=='比较不同意4'] <- 4
+  pcdata2[,i+27][pcdata2[,i]=='完全不同意5'] <- 5
+}
+
+pcdata2 <- pcdata2 %>% #保留需要主成分分析的35个变量
+  select(-(A0__1:A0__27)) 
+
+#主成分分析
+library(psych)
+fa.parallel(pcdata2, fa="pc", n.iter=100,show.legend=F, main="碎石图")
+pc2 <- principal(pcdata2, nfactors=2, rotate="varimax", score=T) #方差极大旋转
+pc2
+cwb <- pc2$scores #2个主成分为RC1,RC2
+cwb <- as.data.frame(cwb)
+cwb <- cwb %>% 
+  rename(catatd1=RC1,catatd2=RC2)
+
+dta <- cbind(dta,cwb)
+
+dta <- dta %>% 
+  select(-(edu),-(D6),-(Q7__1:Q7__35),-(A0__1:A0__27),) %>% 
+  mutate(child = ifelse(is.na(child)==T,0,child))
+
+knitr::kable(head(dta,n=20),caption = '数据概要')
 
 
+```
 
 
 

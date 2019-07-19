@@ -50,8 +50,9 @@ points(cl$centers, col = 1:2, pch = 8, cex = 2)
 
 ```
 
+## 系统聚类
 
-```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='95%',fig.asp=0.7}
 
 #班级数据
 library(cluster)
@@ -102,15 +103,27 @@ knitr::kable(head(USJudgeRatings$score))
 
 ```
 
-```{r}
+# 市场人群细分
 
-```
++ CHAID算法
+  + 卡方自动交互检测器
 
++ Latent Class
 
++ Canonical Correlation (典型相关分析)
+  + 可以做多组变量(连续、离散）的分析
+  + 之后做聚类
+  + 出来之后的维度类似于因子，思路和因子分析相差不大
+  + 权重和loading
+  + 保存对象得分，得出连续因子
+  
++ 最后做系统聚类，最小聚类数，最大聚类数。最好使用`ward`方法
 
++ 1000样本量尽量分4-5群
 
++ 说服自己、说服客服
 
-
++ 最后做判别分析
 
 
 
