@@ -4,8 +4,11 @@ author: " "
 slug: zhresume
 ---
 
+
+
+
 英文简历请点击[这里](/en/enresume/)  
-PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/master/static/%E4%B8%AD%E6%96%87%E7%AE%80%E5%8E%86-%E5%AE%8B%E9%AA%81.pdf)下载
+PDF版本请点击[这里](/chnxsong.pdf)下载
 
 ### 联系方式
 
@@ -49,7 +52,7 @@ PDF版本请点击[这里](https://raw.githubusercontent.com/ECSTA7Y/Mysite/mast
 + **土地流转的福利效应与社会不平等——来自CFPS的经验证据**&emsp;2018年-2019年   
 国家大学生创新训练项目&emsp; 独立作者  
 使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。  
-点击[这里](http://www.baige.me/v?i=Rwy)下载全文。
+点击[这里](/land.pdf)下载全文。
 
 ### 所获奖项 
 
