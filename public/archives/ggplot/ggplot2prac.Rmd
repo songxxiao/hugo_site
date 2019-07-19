@@ -264,7 +264,8 @@ ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```{r h,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
 
 library(reshape2)
-long<- melt(china_data, id=c("long", "lat","group"))
+long <- melt(china_data, id=c("long", "lat","group"))
+
 library(ggplot2)
 ggplot(long, aes(x = long, y = lat, group = group,fill= value)) +
   geom_polygon(colour="brown",size=0.2) +

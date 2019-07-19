@@ -4,6 +4,10 @@ author: ' '
 date: '2019-06-30'
 slug: edutree
 tags: ['机器学习','应用统计','R']
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
 ---
 
 本报告使用了`CART` ；`Random Forest`算法。
@@ -13,12 +17,12 @@ tags: ['机器学习','应用统计','R']
 
 
 
-## 数据介绍  
+# 数据介绍  
 
 本文采用[中国教育追踪调查](https://ceps.ruc.edu.cn/) (China Education Panel Survey, CEPS)2013-2014学年基线数据。
 采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
 
-## 算法介绍
+# 算法介绍
 
 CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。
 回归树模型可表示为：
@@ -33,11 +37,11 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 其中，$T$为任意子树。$C(T)$为对训练数据的预测误差（如基尼指数）， $\left| T \right|$为子树的叶结点个数，$\alpha  \ge 0$为参数，${{\rm{C}}_\alpha }(T)$是参数为$\alpha$时的子树$T$的整体损失。参数$\alpha$测量了模型的复杂度\cite{breiman2017}。
 
-##变量
+# 变量
 
 本研究依据以往教育学和社会学文献，选取了50个自变量进行预测。为了降低测量误差，本研究在变量选取的过程中遵循了以下两个原则：1.尽可能挑选“客观的”变量。2.尽可能挑选直观上对学习成绩有重要影响的变量。
 
-### 因变量
+## 因变量
 
 
 本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
@@ -46,7 +50,7 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 
 图\@ref(fig:a) 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。
 
-### 自变量
+## 自变量
 
 下面展示了自变量以及自变量在模型中的编码：
 
@@ -112,8 +116,9 @@ for (i in ceps1) delte <- rbind(delte, subset(ceps,schids == i))
 #箱线图
 delte$schids <- as.factor(delte$schids)  
 ggplot(delte, aes(schids,tr_mat)) + 
-  geom_boxplot(size=0.1,outlier.colour ="#56B4E9",fill='sky blue') +
-  xlab('学校代码') + ylab('数学原始成绩')
+  geom_boxplot(size=0.1,outlier.colour ='sky blue',fill='sky blue') +
+xlab('学校代码') + ylab('数学原始成绩')+
+theme_bw()
 
 ceps <- lapply(ceps, unclass)
 ceps <- data.frame(ceps)
@@ -145,9 +150,9 @@ multiplot
 ```
 ---
 
-## 分析结果
+# 分析结果
 
-### 回归树
+## 回归树
 
 图\@ref(fig:s) 展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题[^1]。此处将九年级子样本单独进行分析。
 
@@ -239,7 +244,7 @@ treeerror #测试集错误率
 
 在初次拟合分类树之后，对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
 
-### [交叉验证](http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection)
+## [交叉验证](http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection)
 
 使用`caret`包进行10次10折交叉验证,同样使用CART算法。图\@ref(fig:fig7) 展示了训练后模型的ROC曲线。
 
@@ -283,7 +288,7 @@ treeerror
 plot(rpartFit,xlab ='复杂度参数',ylab='准确率(重复交叉验证)')
 ```
 
-### 随机森林
+## 随机森林
 ```{r randomForest,message = F,comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=1.2,fig.cap='变量重要性'}
 
 train$matgreat <- as.factor(train$matgreat)

@@ -24,9 +24,8 @@ knitr::kable(head(wine))
 library(cluster)
 set.seed(1234)
 fit.pam <- pam(wine[-1], k=3, stand=T)#3个质心
-fit.pam$medoids #查看质心
+knitr::kable(fit.pam$medoids) #查看质心
 
-c
 library(fMultivar)
 set.seed(1234)
 df <- rnorm2d(1000, rho=0.9) #2元正态分布
@@ -51,8 +50,9 @@ points(cl$centers, col = 1:2, pch = 8, cex = 2)
 
 ```
 
+## 系统聚类
 
-```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='95%',fig.asp=0.7}
 
 #班级数据
 library(cluster)
@@ -62,7 +62,7 @@ rownames(Rclass1)=Rclass$Name
 gower_dist<-daisy(Rclass1,metric = "gower")#分类变量的聚类
 #summary(gower_dist)
 h <- hclust(gower_dist)
-plot(h)
+plot(h,main = '系统聚类图')
 rect.hclust(h, k=7, border = "red")
 (cn <- cutree(h, k = 7))
 
@@ -87,13 +87,43 @@ wordcloud2(freq,size = 1, color = "random-light")
 #wordcloud2(freq,size = 1, color = "random-light",shape='diamond')
 ```
 
+# 主成分分析
 
+```{r c,message = F, comment = NA,warning = F,include = T,cache=T,fig.align='center',out.width ='90%',fig.asp=0.8}
+#数据:USJudgeRatings
+knitr::kable(head(USJudgeRatings))
+library(psych)
+fa.parallel(USJudgeRatings[,-1], fa="pc", n.iter=100,
+show.legend=F, main="碎石图")
+pc <- principal(USJudgeRatings[,-1], nfactors=1, rotate="varimax", score=T) #方差极大旋转
+pc
 
+USJudgeRatings$score <- pc$scores
+knitr::kable(head(USJudgeRatings$score))
 
+```
 
+# 市场人群细分
 
++ CHAID算法
+  + 卡方自动交互检测器
 
++ Latent Class
 
++ Canonical Correlation (典型相关分析)
+  + 可以做多组变量(连续、离散）的分析
+  + 之后做聚类
+  + 出来之后的维度类似于因子，思路和因子分析相差不大
+  + 权重和loading
+  + 保存对象得分，得出连续因子
+  
++ 最后做系统聚类，最小聚类数，最大聚类数。最好使用`ward`方法
+
++ 1000样本量尽量分4-5群
+
++ 说服自己、说服客服
+
++ 最后做判别分析
 
 
 
