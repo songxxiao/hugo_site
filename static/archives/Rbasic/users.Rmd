@@ -25,20 +25,14 @@ dt.car <- read.csv("C:/Users/xsong/Desktop/table/WWD.csv")
 #knitr::kable((dt.car))
 knitr::kable(prop.table(table(dt.car$S5))*100)
 knitr::kable(prop.table(table(dt.car$D5))*100)
-
-summary(dt.car$S6__1__open)
+knitr::kable(prop.table(table(dt.car$D3))*100)
+knitr::kable(prop.table(table(dt.car$S10B))*100)
 
 ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
 xlab('年龄') + 
 ylab('频数') +
 labs(fill="车型")
 #thme(fill=guide_legend(title='车型'))
-
-
-
-knitr::kable(prop.table(table(dt.car$D3))*100)
-knitr::kable(prop.table(table(dt.car$S10B))*100)
-
 ```
 
 
@@ -135,21 +129,96 @@ dta <- dta %>%
   select(-(edu),-(D6),-(Q7__1:Q7__35),-(A0__1:A0__27),) %>% 
   mutate(child = ifelse(is.na(child)==T,0,child))
 
-knitr::kable(head(dta,n=20),caption = '数据概要')
+knitr::kable(head(dta,n=10),caption = '数据概要')
 
 
 ```
 
 
+# 聚类分析
+
++ 聚成5类，使用变量：态度、价值观
+
+```{r e,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.8}
+cludta <- dta %>% 
+  select(lfatd1,lfatd2,lfatd3,catatd1,catatd2)
+
+library(cluster) 
+dta.scaled <- scale(cludta) #变量中心化
+d <- dist(dta.scaled) #计算欧式距离
+fit <- hclust(d, method="ward.D")
+plot(fit, hang=-1, cex=.8, main="层次聚类图(使用Ward方法)",xlab='样本',ylab='高度')
+
+rect.hclust(fit, k=4, border = "red")
+
+```
+
++ 从上图可以看到有的类样本很多，有的很少。
+
++ 由于一些人口学特征，如性别等无法使用层次聚类法，现在使用相异度矩阵计算(Dissimilarity Matrix Calculation)法进行聚类。使用`cluster`包的`daisy`函数实现。
+
+```{r f,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.8}
+
+gower_dist<-daisy(dta,metric = "gower")#分类变量的聚类
+#summary(gower_dist)
+h <- hclust(gower_dist)
+plot(h,main = '层次聚类图(gower距离)',xlab='样本',ylab='高度')
+rect.hclust(h, k=5, border = "red")
+
+#提取最终的聚类方案
+dta$clusters <- cutree(h, k=5)
+knitr::kable(table(dta$clusters),caption = '每一类的样本量',align='c')
+```
+
++ 此方法聚类样本较为均衡。
+
+## 聚类分析后的描述性统计
+
+```{r g,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='90%',fig.asp=0.8}
+
+knitr::kable(
+dta %>%
+group_by(clusters) %>%
+summarize(平均年龄 = mean(age),
+           平均教育年限 = mean(eduy),
+           平均子女数 = mean(child)
+)
+,digits=2,caption='分聚类类别描述性统计',align='c')
+
+mar <- table(dta$D5,dta$clusters)
+names(dimnames(mar))<-c("婚姻状况","聚类类别")
+knitr::kable(mar,caption = '聚类类别和婚姻状况的交互表')
+#矩阵小标题
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,婚姻状况)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+knitr::kable(table(dta$S10B,dta$clusters),caption = '聚类类别和车系的交互表')
+mar <- table(dta$S10B,dta$clusters)
+names(dimnames(mar))<-c("车系","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,车系)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+knitr::kable(table(dta$S5,dta$clusters),caption = '聚类类别和性别的交互表')
+mar <- table(dta$S5,dta$clusters)
+names(dimnames(mar))<-c("性别","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,性别)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
 
 
 
-
-
-
-
-
-
+```
 
 
 

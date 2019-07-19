@@ -62,7 +62,7 @@ rownames(Rclass1)=Rclass$Name
 gower_dist<-daisy(Rclass1,metric = "gower")#分类变量的聚类
 #summary(gower_dist)
 h <- hclust(gower_dist)
-plot(h)
+plot(h,main = '系统聚类图')
 rect.hclust(h, k=7, border = "red")
 (cn <- cutree(h, k = 7))
 
