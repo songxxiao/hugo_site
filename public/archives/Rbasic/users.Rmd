@@ -110,7 +110,7 @@ for(i in 1:27) {
   pcdata2[,i+27][pcdata2[,i]=='完全不同意5'] <- 5
 }
 
-pcdata2 <- pcdata2 %>% #保留需要主成分分析的35个变量
+pcdata2 <- pcdata2 %>% #保留需要主成分分析的27个变量
   select(-(A0__1:A0__27)) 
 
 #主成分分析
