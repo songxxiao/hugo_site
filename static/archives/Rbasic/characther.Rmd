@@ -13,7 +13,7 @@ output:
 
 [re官方中文文档](https://docs.python.org/zh-cn/3/library/re.html)
 
-
+在R语言可以使用`stringr`包实现
 
 # Python正则表达式
 
@@ -35,7 +35,12 @@ regex.findall(text)
 
 re.match('www', 'www.runoob.com').group()
 
-import re
+wb = re.search(r'FishC', 'I love FishC.com!')
+wb.group()
+
+re.search(r'.','I love FishC.com!').group()
+
+re.match(r'.','I love FishC.com!').group()#
 
 content = 'Hello 123 4567 World_This is a Regex Demo'
 result = re.match('^Hello\s\d\d\d\s\d{4}\s\w{10}', content)

@@ -398,6 +398,7 @@ $(document).ready(function () {
 
 <p><a href="http://deerchao.net/tutorials/regex/regex.htm">正则表达式基础</a></p>
 <p><a href="https://docs.python.org/zh-cn/3/library/re.html">re官方中文文档</a></p>
+<p>在R语言可以使用<code>stringr</code>包实现</p>
 <div id="python" class="section level1">
 <h1><span class="header-section-number">1</span> Python正则表达式</h1>
 <div id="match" class="section level2">
@@ -417,9 +418,14 @@ regex</code></pre>
 <pre><code>[&#39; &#39;, &#39;\t &#39;, &#39; \t&#39;]</code></pre>
 <pre class="python"><code>re.match(&#39;www&#39;, &#39;www.runoob.com&#39;).group()</code></pre>
 <pre><code>&#39;www&#39;</code></pre>
-<pre class="python"><code>import re
-
-content = &#39;Hello 123 4567 World_This is a Regex Demo&#39;
+<pre class="python"><code>wb = re.search(r&#39;FishC&#39;, &#39;I love FishC.com!&#39;)
+wb.group()</code></pre>
+<pre><code>&#39;FishC&#39;</code></pre>
+<pre class="python"><code>re.search(r&#39;.&#39;,&#39;I love FishC.com!&#39;).group()</code></pre>
+<pre><code>&#39;I&#39;</code></pre>
+<pre class="python"><code>re.match(r&#39;.&#39;,&#39;I love FishC.com!&#39;).group()#</code></pre>
+<pre><code>&#39;I&#39;</code></pre>
+<pre class="python"><code>content = &#39;Hello 123 4567 World_This is a Regex Demo&#39;
 result = re.match(&#39;^Hello\s\d\d\d\s\d{4}\s\w{10}&#39;, content)
 result
 #print(result.group())
