@@ -222,8 +222,22 @@ labs(fill="频数")
 
 
 
+# 多分类决策树
+
+```{r h,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='100%',fig.asp=1,fig.cap='多分类决策树'}
+library(rpart)
+library(rpart.plot)
+
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
+tree.fit <- rpart(clusters ~ eduy+S5+age+ D5+S10B+child+lfatd1+lfatd2+lfatd3	+catatd1+catatd2,data = dta,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit)
+
+knitr::kable(tree.fit$cptable,caption = '复杂度参数表')
+#决策树
+rpart.plot(tree.fit)
 
 
+
+```
 
 
 
