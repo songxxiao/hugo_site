@@ -683,6 +683,7 @@ Figure 4.6: 分类树的复杂度参数与准确率的关系
 </div>
 <div id="section-8" class="section level2">
 <h2><span class="header-section-number">4.3</span> 随机森林</h2>
+<p>作为<code>Bagging</code>方法的扩展，随机森林采用决策树作为基分类器。随机森林算法不仅做到了随机样本扰动，还引入了随机属性扰动。这使得随机森林比<code>Bagging</code>法具有更强的泛化能力。具体而言，随机森林首先使用<code>Bootstrap</code>法同时对数据行和列进行重复抽样。其次，每一次抽出的子样本都使用一棵决策树拟合。在构建每一棵决策树的过程中，可以无需剪枝。由于属性和样本的随机性，随机森林并不会遇到过拟合的问题。当需要对样本进行预测时，可将样本属性值带入每一棵决策树中计算结果，并通过投票法确定被选择最多的那个类。</p>
 <pre class="r"><code>train$matgreat &lt;- as.factor(train$matgreat)
 train &lt;- na.omit(train)
 train &lt;- filter(train, is.na(matgreat)==F)

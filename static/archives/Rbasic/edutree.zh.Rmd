@@ -289,6 +289,12 @@ plot(rpartFit,xlab ='复杂度参数',ylab='准确率(重复交叉验证)')
 ```
 
 ## 随机森林
+
+作为`Bagging`方法的扩展，随机森林采用决策树作为基分类器。随机森林算法不仅做到了随机样本扰动，还引入了随机属性扰动。这使得随机森林比`Bagging`法具有更强的泛化能力。具体而言，随机森林首先使用`Bootstrap`法同时对数据行和列进行重复抽样。其次，每一次抽出的子样本都使用一棵决策树拟合。在构建每一棵决策树的过程中，可以无需剪枝。由于属性和样本的随机性，随机森林并不会遇到过拟合的问题。当需要对样本进行预测时，可将样本属性值带入每一棵决策树中计算结果，并通过投票法确定被选择最多的那个类。
+
+
+
+
 ```{r randomForest,message = F,comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=1.2,fig.cap='变量重要性'}
 
 train$matgreat <- as.factor(train$matgreat)
