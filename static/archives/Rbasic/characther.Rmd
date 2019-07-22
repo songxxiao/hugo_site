@@ -1,11 +1,11 @@
 ---
 title: "正则表达式"
-author: "Malcolm"
-date: "2019/7/20"
-output:
+author: "Malcolm"output:
   bookdown::html_document2:
     toc: true
     theme: united
+
+date: "2019/7/20"
 
 ---
 
