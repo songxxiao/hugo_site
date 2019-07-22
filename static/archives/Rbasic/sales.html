@@ -389,6 +389,7 @@ $(document).ready(function () {
 <div id="TOC">
 <ul>
 <li><a href="#section"><span class="toc-section-number">1</span> 六月</a></li>
+<li><a href="#section-1"><span class="toc-section-number">2</span> 五月</a></li>
 </ul>
 </div>
 
@@ -478,7 +479,92 @@ sales6 %&gt;%
 </tr>
 </tbody>
 </table>
-<p>门店名 日期 车牌 产品分类</p>
+</div>
+<div id="section-1" class="section level1">
+<h1><span class="header-section-number">2</span> 五月</h1>
+<pre class="r"><code>sales &lt;- read_excel(&quot;C:/Users/xsong/Desktop/table/sales.xlsx&quot;)
+library(tidyverse)
+library(lubridate)
+sales5 &lt;- sales %&gt;%
+  select(门店名,日期,车牌,产品分类) %&gt;%
+  mutate(month=month(日期),day=mday(日期)) %&gt;%
+  filter(month == 5)
+
+library(reshape2)
+sales5 &lt;- dcast(sales5,门店名+车牌~日期+产品分类)
+#knitr::kable(head(sales))
+
+knitr::kable(
+sales5 %&gt;%
+  group_by(门店名) %&gt;%
+  summarize(count = n())
+)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">门店名</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">安徽牛永贸易有限公司</td>
+<td align="right">391</td>
+</tr>
+<tr class="even">
+<td align="left">驰加(上海)汽车用品贸易有限公司</td>
+<td align="right">701</td>
+</tr>
+<tr class="odd">
+<td align="left">驰加（上海）汽车用品贸易有限公司嘉定分公司</td>
+<td align="right">529</td>
+</tr>
+<tr class="even">
+<td align="left">驰加(上海)汽车用品贸易有限公司龙阳路店</td>
+<td align="right">706</td>
+</tr>
+<tr class="odd">
+<td align="left">驰加(上海)汽车用品贸易有限公司浦东大道店</td>
+<td align="right">444</td>
+</tr>
+<tr class="even">
+<td align="left">驰加(上海)汽车用品贸易有限公司松江新城店</td>
+<td align="right">803</td>
+</tr>
+<tr class="odd">
+<td align="left">滁州市鹏飞汽车服务有限公司</td>
+<td align="right">921</td>
+</tr>
+<tr class="even">
+<td align="left">合肥市包河区仁江轮胎经营部</td>
+<td align="right">805</td>
+</tr>
+<tr class="odd">
+<td align="left">南京汉马汽车服务有限公司</td>
+<td align="right">988</td>
+</tr>
+<tr class="even">
+<td align="left">上海贝登汽车服务有限公司</td>
+<td align="right">322</td>
+</tr>
+<tr class="odd">
+<td align="left">上海捷之洁汽车服务有限公司</td>
+<td align="right">589</td>
+</tr>
+<tr class="even">
+<td align="left">上海立民汽车装璜用品有限公司</td>
+<td align="right">821</td>
+</tr>
+<tr class="odd">
+<td align="left">上海三都澳车业服务有限公司</td>
+<td align="right">187</td>
+</tr>
+<tr class="even">
+<td align="left">无锡鑫苏马赫汽车维修服务有限公司</td>
+<td align="right">909</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

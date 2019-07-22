@@ -21,7 +21,7 @@ slug: rusers
 
 ```{r a,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='60%',fig.asp=0.7}
 library(tidyverse)
-dt.car <- read.csv("C:/Users/xsong/Desktop/table/WWD.csv")
+dt.car <- read.csv("C:/Users/xsong/Desktop/table/DT.csv")
 #knitr::kable((dt.car))
 knitr::kable(prop.table(table(dt.car$S5))*100)
 knitr::kable(prop.table(table(dt.car$D5))*100)
@@ -29,6 +29,12 @@ knitr::kable(prop.table(table(dt.car$D3))*100)
 knitr::kable(prop.table(table(dt.car$S10B))*100)
 
 ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
+xlab('年龄') + 
+ylab('频数') +
+labs(fill="车型")
+
+ggplot(dt.car, aes(S6__1__open,S10B)) + 
+  geom_histogram(density = 70) +
 xlab('年龄') + 
 ylab('频数') +
 labs(fill="车型")
@@ -163,10 +169,10 @@ gower_dist<-daisy(dta,metric = "gower")#分类变量的聚类
 #summary(gower_dist)
 h <- hclust(gower_dist)
 plot(h,main = '层次聚类图(gower距离)',xlab='样本',ylab='高度')
-rect.hclust(h, k=5, border = "red")
+rect.hclust(h, k=4, border = "red")
 
 #提取最终的聚类方案
-dta$clusters <- cutree(h, k=5)
+dta$clusters <- cutree(h, k=4)
 knitr::kable(table(dta$clusters),caption = '每一类的样本量',align='c')
 ```
 
@@ -181,9 +187,7 @@ dta %>%
 group_by(clusters) %>%
 summarize(平均年龄 = mean(age),
            平均教育年限 = mean(eduy),
-           平均子女数 = mean(child)
-)
-,digits=2,caption='分聚类类别描述性统计',align='c')
+           平均子女数 = mean(child)),digits=2,caption='分聚类类别描述性统计',align='c')
 
 mar <- table(dta$D5,dta$clusters)
 names(dimnames(mar))<-c("婚姻状况","聚类类别")
