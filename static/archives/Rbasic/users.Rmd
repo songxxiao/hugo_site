@@ -235,7 +235,7 @@ labs(fill="频数")
 
 # 多分类决策树
 
-```{r h,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r h,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='100%',fig.asp=1,fig.cap='多分类决策树'}
 library(rpart)
 library(rpart.plot)
 
