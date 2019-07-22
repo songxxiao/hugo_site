@@ -405,7 +405,7 @@ sales6 &lt;- sales %&gt;%
   filter(month == 6)
 
 library(reshape2)
-sales6 &lt;- dcast(sales6,门店名+车牌~日期+产品分类)
+sales6 &lt;- dcast(sales6,门店名+车牌~产品分类)
 #knitr::kable(head(sales))
 
 knitr::kable(
@@ -491,7 +491,7 @@ sales5 &lt;- sales %&gt;%
   filter(month == 5)
 
 library(reshape2)
-sales5 &lt;- dcast(sales5,门店名+车牌~日期+产品分类)
+sales5 &lt;- dcast(sales5,门店名+车牌~产品分类)
 #knitr::kable(head(sales))
 
 knitr::kable(

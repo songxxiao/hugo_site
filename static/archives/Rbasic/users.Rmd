@@ -15,11 +15,12 @@ slug: rusers
   
   + 人口学：性别`S5`； 年龄`S6__1__open`；婚姻状况`D5`；孩子`D6`；教育`D3`
   + 车系`S10B`
+  + 车牌`S10`
   + 生活方式、价值观`Q7__1:Q7__35`
   + 对车的态度`A0__1:A0__27`
 
 
-```{r a,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='60%',fig.asp=0.7}
+```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 library(tidyverse)
 dt.car <- read.csv("C:/Users/xsong/Desktop/table/DT.csv")
 #knitr::kable((dt.car))
@@ -27,25 +28,27 @@ knitr::kable(prop.table(table(dt.car$S5))*100)
 knitr::kable(prop.table(table(dt.car$D5))*100)
 knitr::kable(prop.table(table(dt.car$D3))*100)
 knitr::kable(prop.table(table(dt.car$S10B))*100)
+knitr::kable(prop.table(table(dt.car$S10))*100)
 
 ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
 xlab('年龄') + 
 ylab('频数') +
 labs(fill="车型")
 
-ggplot(dt.car, aes(S6__1__open,S10B)) + 
-  geom_histogram(density = 70) +
-xlab('年龄') + 
-ylab('频数') +
-labs(fill="车型")
+
+ggplot(dt.car, aes(S10B,S6__1__open)) + 
+  geom_boxplot(size=0.1,outlier.colour ='sky blue',fill='sky blue') +
+xlab('车型') + 
+ylab('年龄') 
 #thme(fill=guide_legend(title='车型'))
 ```
 
 
 
 ```{r b,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+dt.car$S10B <- as.character(dt.car$S10B)
 dta <- dt.car %>%
-  select(S5,S6__1__open,D5,D6,D3,S10B,Q7__1:Q7__35,A0__1:A0__27) %>% #筛选列
+  select(S5,S6__1__open,D5,D6,D3,S10,S10B,Q7__1:Q7__35,A0__1:A0__27) %>% #筛选列
   rename(age=S6__1__open,edu=D3) %>% #重命名
   mutate(eduy=recode(edu,'初中'=9,
                      '大学本科 - 国内'=16,
@@ -57,7 +60,11 @@ dta <- dt.car %>%
          child=recode(D6,'没有孩子'=0,
                       '有1个孩子'=1,
                       '有2个孩子'=2,
-                      '有3个孩子及以上'=3)
+                      '有3个孩子及以上'=3),
+         S10=recode(S10,'奥迪-A4L'='豪华车',
+                     '宝马-320Li'='豪华车',
+                     '奔驰-C180'='豪华车'),
+         S10B= ifelse(S10=='豪华车','豪华车',S10B) #将奔驰、宝马、奥迪编码为豪华车
          ) %>% #重编码
   select(edu,eduy,everything()) #排序
 
@@ -66,7 +73,7 @@ dta <- dt.car %>%
 # 价值观变量的主成分分析
   + 
 
-```{r c,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='60%',fig.asp=0.8}
+```{r c,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 pcdata <- dta %>% #用于主成分分析的数据
   select(Q7__1:Q7__35) 
 
@@ -101,7 +108,7 @@ dta <- cbind(dta,rmd)
 
 # 对车的态度主成分分析
 
-```{r d,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='60%',fig.asp=0.8}
+```{r d,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 
 pcdata2 <- dta %>% #用于主成分分析的数据
   select(A0__1:A0__27) 
@@ -122,12 +129,12 @@ pcdata2 <- pcdata2 %>% #保留需要主成分分析的27个变量
 #主成分分析
 library(psych)
 fa.parallel(pcdata2, fa="pc", n.iter=100,show.legend=F, main="碎石图")
-pc2 <- principal(pcdata2, nfactors=2, rotate="varimax", score=T) #方差极大旋转
+pc2 <- principal(pcdata2, nfactors=3, rotate="varimax", score=T) #方差极大旋转
 pc2
 cwb <- pc2$scores #2个主成分为RC1,RC2
 cwb <- as.data.frame(cwb)
 cwb <- cwb %>% 
-  rename(catatd1=RC1,catatd2=RC2)
+  rename(catatd1=RC1,catatd2=RC2,catatd3=RC3)
 
 dta <- cbind(dta,cwb)
 
@@ -145,9 +152,9 @@ knitr::kable(head(dta,n=10),caption = '数据概要')
 
 + 聚成5类，使用变量：态度、价值观
 
-```{r e,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.8}
+```{r e,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 cludta <- dta %>% 
-  select(lfatd1,lfatd2,lfatd3,catatd1,catatd2)
+  select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3)
 
 library(cluster) 
 dta.scaled <- scale(cludta) #变量中心化
@@ -163,8 +170,8 @@ rect.hclust(fit, k=4, border = "red")
 
 + 由于一些人口学特征，如性别等无法使用层次聚类法，现在使用相异度矩阵计算(Dissimilarity Matrix Calculation)法进行聚类。使用`cluster`包的`daisy`函数实现。
 
-```{r f,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.8}
-
+```{r f,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+dta$S10B <- as.factor(dta$S10B)
 gower_dist<-daisy(dta,metric = "gower")#分类变量的聚类
 #summary(gower_dist)
 h <- hclust(gower_dist)
@@ -180,7 +187,7 @@ knitr::kable(table(dta$clusters),caption = '每一类的样本量',align='c')
 
 ## 聚类分析后的描述性统计
 
-```{r g,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='90%',fig.asp=0.8}
+```{r g,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 
 knitr::kable(
 dta %>%
@@ -228,7 +235,7 @@ labs(fill="频数")
 
 # 多分类决策树
 
-```{r h,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='100%',fig.asp=1,fig.cap='多分类决策树'}
+```{r h,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
 library(rpart)
 library(rpart.plot)
 
@@ -238,8 +245,6 @@ tree.fit <- rpart(clusters ~ eduy+S5+age+ D5+S10B+child+lfatd1+lfatd2+lfatd3	+ca
 knitr::kable(tree.fit$cptable,caption = '复杂度参数表')
 #决策树
 rpart.plot(tree.fit)
-
-
 
 ```
 
