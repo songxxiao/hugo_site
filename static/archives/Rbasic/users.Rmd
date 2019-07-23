@@ -20,7 +20,7 @@ slug: rusers
   + 对车的态度`A0__1:A0__27`
 
 
-```{r a,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r a}
 library(tidyverse)
 dt.car <- read.csv("C:/Users/xsong/Desktop/table/DT.csv")
 #knitr::kable((dt.car))
@@ -45,7 +45,7 @@ ylab('年龄')
 
 
 
-```{r b,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r b}
 dt.car$S10B <- as.character(dt.car$S10B)
 dta <- dt.car %>%
   select(S5,S6__1__open,D5,D6,D3,S10,S10B,Q7__1:Q7__35,A0__1:A0__27) %>% #筛选列
@@ -57,10 +57,21 @@ dta <- dt.car %>%
                      '高中'=12,
                      '技术/职业学校/中专'=12,
                      '研究生或以上 - 国内'=20),
-         child=recode(D6,'没有孩子'=0,
-                      '有1个孩子'=1,
-                      '有2个孩子'=2,
-                      '有3个孩子及以上'=3),
+         edu_stage = recode(edu,'初中'='初中及以下',
+                     '大学本科 - 国内'='大专及以上',
+                     '大学本科 - 国外'='大专及以上',
+                     '大专'='大专及以上',
+                     '高中'='高中或中专',
+                     '技术/职业学校/中专'='高中或中专',
+                     '研究生或以上 - 国内'='大专及以上'),
+         age_stage = '30岁以下',
+         age_stage = ifelse(age>30 & age<=40,'30-40岁',age_stage),
+         age_stage = ifelse(age>40,'40岁以上',age_stage),
+         child=recode(D6,'有1个孩子'='有孩子',
+                      '有2个孩子'='有孩子',
+                      '有3个孩子及以上'='有孩子',
+                      '没有孩子'='没有孩子',
+                      .default='没有结婚'),
          S10=recode(S10,'奥迪-A4L'='豪华车',
                      '宝马-320Li'='豪华车',
                      '奔驰-C180'='豪华车'),
@@ -73,7 +84,7 @@ dta <- dt.car %>%
 # 价值观变量的主成分分析
   + 
 
-```{r c,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r c}
 pcdata <- dta %>% #用于主成分分析的数据
   select(Q7__1:Q7__35) 
 
@@ -108,7 +119,7 @@ dta <- cbind(dta,rmd)
 
 # 对车的态度主成分分析
 
-```{r d,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r d}
 
 pcdata2 <- dta %>% #用于主成分分析的数据
   select(A0__1:A0__27) 
@@ -139,8 +150,7 @@ cwb <- cwb %>%
 dta <- cbind(dta,cwb)
 
 dta <- dta %>% 
-  select(-(edu),-(D6),-(Q7__1:Q7__35),-(A0__1:A0__27),) %>% 
-  mutate(child = ifelse(is.na(child)==T,0,child))
+  select(-(edu),-(D6),-(Q7__1:Q7__35),-(A0__1:A0__27),) 
 
 knitr::kable(head(dta,n=10),caption = '数据概要')
 
@@ -150,9 +160,8 @@ knitr::kable(head(dta,n=10),caption = '数据概要')
 
 # 聚类分析
 
-+ 聚成5类，使用变量：态度、价值观
 
-```{r e,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r e}
 cludta <- dta %>% 
   select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3)
 
@@ -170,9 +179,17 @@ rect.hclust(fit, k=4, border = "red")
 
 + 由于一些人口学特征，如性别等无法使用层次聚类法，现在使用相异度矩阵计算(Dissimilarity Matrix Calculation)法进行聚类。使用`cluster`包的`daisy`函数实现。
 
-```{r f,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
-dta$S10B <- as.factor(dta$S10B)
-gower_dist<-daisy(dta,metric = "gower")#分类变量的聚类
+```{r f}
+cludta <- dta %>% 
+  select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3,age)
+
+clu <- dta %>%
+  select(S5,D5,S10B,edu_stage)
+
+cludta <- cbind(clu,cludta)
+
+cludta$S10B <- as.factor(cludta$S10B)
+gower_dist<-daisy(cludta,metric = "gower")#分类变量的聚类
 #summary(gower_dist)
 h <- hclust(gower_dist)
 plot(h,main = '层次聚类图(gower距离)',xlab='样本',ylab='高度')
@@ -183,18 +200,16 @@ dta$clusters <- cutree(h, k=4)
 knitr::kable(table(dta$clusters),caption = '每一类的样本量',align='c')
 ```
 
-+ 此方法聚类样本较为均衡。
 
 ## 聚类分析后的描述性统计
 
-```{r g,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r g}
 
 knitr::kable(
 dta %>%
 group_by(clusters) %>%
 summarize(平均年龄 = mean(age),
-           平均教育年限 = mean(eduy),
-           平均子女数 = mean(child)),digits=2,caption='分聚类类别描述性统计',align='c')
+           平均教育年限 = mean(eduy)),digits=2,caption='分聚类类别描述性统计',align='c')
 
 mar <- table(dta$D5,dta$clusters)
 names(dimnames(mar))<-c("婚姻状况","聚类类别")
@@ -227,6 +242,35 @@ ggplot(mar,aes(聚类类别,性别)) +
   geom_text(aes(label = Freq))+ #图中加入频数
 labs(fill="频数")
 
+knitr::kable(table(dta$edu_stage,dta$clusters),caption = '聚类类别和教育水平的交互表')
+mar <- table(dta$edu_stage,dta$clusters)
+names(dimnames(mar))<-c("教育水平","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,教育水平)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+knitr::kable(table(dta$age_stage,dta$clusters),caption = '聚类类别和年龄段的交互表')
+mar <- table(dta$age_stage,dta$clusters)
+names(dimnames(mar))<-c("年龄段","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,年龄段)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+knitr::kable(table(dta$child,dta$clusters),caption = '聚类类别和生育情况的交互表')
+mar <- table(dta$child,dta$clusters)
+names(dimnames(mar))<-c("生育情况","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,生育情况)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
 
 
 ```
@@ -235,12 +279,12 @@ labs(fill="频数")
 
 # 多分类决策树
 
-```{r h,message = F, comment = NA,warning = F,include = T,echo=F,fig.align='center',out.width ='100%',fig.asp=1,fig.cap='多分类决策树'}
+```{r h}
 library(rpart)
 library(rpart.plot)
 
-cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
-tree.fit <- rpart(clusters ~ eduy+S5+age+ D5+S10B+child+lfatd1+lfatd2+lfatd3	+catatd1+catatd2,data = dta,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit)
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.005) #设置参数
+tree.fit <- rpart(clusters ~ edu_stage +S5+age_stage+ D5+S10B+child+lfatd1+lfatd2+lfatd3	+catatd1+catatd2,data = dta,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit)
 
 knitr::kable(tree.fit$cptable,caption = '复杂度参数表')
 #决策树
