@@ -48,7 +48,7 @@ ylab('年龄')
 ```{r b}
 dt.car$S10B <- as.character(dt.car$S10B)
 dta <- dt.car %>%
-  select(S5,S6__1__open,D5,D6,D3,S10,S10B,Q7__1:Q7__35,A0__1:A0__27) %>% #筛选列
+  select(S5,S6__1__open,D5,D6,D3,S10,S10B,Q7__1:Q7__35,A0__1:A0__27,) %>% #筛选列
   rename(age=S6__1__open,edu=D3) %>% #重命名
   mutate(eduy=recode(edu,'初中'=9,
                      '大学本科 - 国内'=16,
@@ -175,16 +175,15 @@ rect.hclust(fit, k=4, border = "red")
 
 ```
 
-+ 从上图可以看到有的类样本很多，有的很少。
++ 相异度矩阵计算(Dissimilarity Matrix Calculation)聚类法。使用`cluster`包的`daisy`函数实现。
 
-+ 由于一些人口学特征，如性别等无法使用层次聚类法，现在使用相异度矩阵计算(Dissimilarity Matrix Calculation)法进行聚类。使用`cluster`包的`daisy`函数实现。
 
 ```{r f}
 cludta <- dta %>% 
   select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3,age)
 
 clu <- dta %>%
-  select(S5,D5,S10B,edu_stage)
+  select(S5,S10B,edu_stage,child)
 
 cludta <- cbind(clu,cludta)
 
