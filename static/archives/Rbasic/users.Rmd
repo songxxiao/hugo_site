@@ -23,18 +23,15 @@ slug: rusers
 ```{r a}
 library(tidyverse)
 dt.car <- read.csv("C:/Users/xsong/Desktop/table/DT.csv")
-#knitr::kable((dt.car))
-knitr::kable(prop.table(table(dt.car$S5))*100)
-knitr::kable(prop.table(table(dt.car$D5))*100)
-knitr::kable(prop.table(table(dt.car$D3))*100)
-knitr::kable(prop.table(table(dt.car$S10B))*100)
-knitr::kable(prop.table(table(dt.car$S10))*100)
-
+knitr::kable(table(dt.car$S5))
+knitr::kable(table(dt.car$D5))
+knitr::kable(table(dt.car$D3))
+knitr::kable(table(dt.car$S10B))
+knitr::kable(table(dt.car$S10))
 #ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
 #xlab('年龄') + 
 #ylab('频数') +
 #labs(fill="车型")
-
 
 #ggplot(dt.car, aes(S10B,S6__1__open)) + 
 #  geom_boxplot(size=0.1,outlier.colour ='sky blue',fill='sky blue') +
