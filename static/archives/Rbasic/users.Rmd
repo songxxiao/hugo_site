@@ -30,16 +30,16 @@ knitr::kable(prop.table(table(dt.car$D3))*100)
 knitr::kable(prop.table(table(dt.car$S10B))*100)
 knitr::kable(prop.table(table(dt.car$S10))*100)
 
-ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
-xlab('年龄') + 
-ylab('频数') +
-labs(fill="车型")
+#ggplot(dt.car, aes(x = S6__1__open,fill=S10B)) + geom_histogram(density = 70) +
+#xlab('年龄') + 
+#ylab('频数') +
+#labs(fill="车型")
 
 
-ggplot(dt.car, aes(S10B,S6__1__open)) + 
-  geom_boxplot(size=0.1,outlier.colour ='sky blue',fill='sky blue') +
-xlab('车型') + 
-ylab('年龄') 
+#ggplot(dt.car, aes(S10B,S6__1__open)) + 
+#  geom_boxplot(size=0.1,outlier.colour ='sky blue',fill='sky blue') +
+#xlab('车型') + 
+#ylab('年龄') 
 #thme(fill=guide_legend(title='车型'))
 ```
 
@@ -149,10 +149,10 @@ cwb <- cwb %>%
 
 dta <- cbind(dta,cwb)
 
-dta <- dta %>% 
-  select(-(edu),-(D6),-(Q7__1:Q7__35),-(A0__1:A0__27),) 
+#dta <- dta %>% 
+#  select(-(edu),-(D6),-(Q7__1:Q7__35),-(A0__1:A0__27),) 
 
-knitr::kable(head(dta,n=10),caption = '数据概要')
+#knitr::kable(head(dta,n=10),caption = '数据概要')
 
 
 ```
@@ -172,7 +172,7 @@ fit <- hclust(d, method="ward.D")
 plot(fit, hang=-1, cex=.8, main="层次聚类图(使用Ward方法)",xlab='样本',ylab='高度')
 
 rect.hclust(fit, k=4, border = "red")
-
+#dta$clusters <- cutree(fit, k=4)
 ```
 
 + 相异度矩阵计算(Dissimilarity Matrix Calculation)聚类法。使用`cluster`包的`daisy`函数实现。
@@ -180,10 +180,10 @@ rect.hclust(fit, k=4, border = "red")
 
 ```{r f}
 cludta <- dta %>% 
-  select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3,age)
+  select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3,eduy)
 
 clu <- dta %>%
-  select(S5,S10B,edu_stage,child)
+  select(S5,S10B,child)
 
 cludta <- cbind(clu,cludta)
 
@@ -274,19 +274,79 @@ labs(fill="频数")
 
 ```
 
+## 态度变量的描述
+
+
+```{r h}
+dta$Q7__2 <- factor(dta$Q7__2,levels=c('非常同意1','比较同意2','谈不上同不同意3','比较不同意4','完全不同意5') )
+knitr::kable(table(dta$Q7__2,dta$clusters),caption = '“人活一张皮”，面子对我很重要')
+mar <- table(dta$Q7__2,dta$clusters)
+names(dimnames(mar))<-c("人活一张皮面子对我很重要","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,人活一张皮面子对我很重要)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+dta$Q7__13 <- factor(dta$Q7__13,levels=c('非常同意1','比较同意2','谈不上同不同意3','比较不同意4','完全不同意5') )
+mar <- table(dta$Q7__13,dta$clusters)
+knitr::kable(mar,caption = '金钱是衡量成功的最佳标准')
+names(dimnames(mar))<-c("金钱是衡量成功的最佳标准","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,金钱是衡量成功的最佳标准)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+
+dta$Q7__17 <- factor(dta$Q7__17,levels=c('非常同意1','比较同意2','谈不上同不同意3','比较不同意4','完全不同意5') )
+mar <- table(dta$Q7__17,dta$clusters)
+knitr::kable(mar,caption = '我不盲目消费买东西以实用为主')
+names(dimnames(mar))<-c("我不盲目消费买东西以实用为主","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,我不盲目消费买东西以实用为主)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+dta$Q7__23 <- factor(dta$Q7__23,levels=c('非常同意1','比较同意2','谈不上同不同意3','比较不同意4','完全不同意5') )
+mar <- table(dta$Q7__23,dta$clusters)
+knitr::kable(mar,caption = '我乐于追随时尚潮流不喜欢规矩中庸')
+names(dimnames(mar))<-c("我乐于追随时尚潮流不喜欢规矩中庸","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,我乐于追随时尚潮流不喜欢规矩中庸)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+dta$Q7__34 <- factor(dta$Q7__34,levels=c('非常同意1','比较同意2','谈不上同不同意3','比较不同意4','完全不同意5') )
+mar <- table(dta$Q7__34,dta$clusters)
+knitr::kable(mar,caption = '我非常关注科技的发展喜欢研究各种新奇的东西')
+names(dimnames(mar))<-c("我非常关注科技的发展喜欢研究各种新奇的东西","聚类类别")
+mar <- as.data.frame(mar)
+ggplot(mar,aes(聚类类别,我非常关注科技的发展喜欢研究各种新奇的东西)) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq))+ #图中加入频数
+labs(fill="频数")
+
+
+```
 
 
 # 多分类决策树
 
-```{r h}
+```{r i}
 library(rpart)
 library(rpart.plot)
 
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.005) #设置参数
 tree.fit <- rpart(clusters ~ edu_stage +S5+age_stage+ D5+S10B+child+lfatd1+lfatd2+lfatd3	+catatd1+catatd2,data = dta,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit)
-
-knitr::kable(tree.fit$cptable,caption = '复杂度参数表')
-#决策树
+#knitr::kable(tree.fit$cptable,caption = '复杂度参数表')
 rpart.plot(tree.fit)
 
 ```
