@@ -6,10 +6,19 @@
     <description>Recent content in 宋 骁 on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NBA球员薪资分析：基于AdaBoost算法的Python实战</title>
+      <link>/zh/nba/</link>
+      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/nba/</guid>
+      <description>请点击：NBA球员薪资分析：基于AdaBoost算法的Python实战</description>
+    </item>
     
     <item>
       <title>Xiao Song</title>

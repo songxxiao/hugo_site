@@ -1,0 +1,73 @@
+---
+title: "数据规整"
+author: "Malcolm"
+date: "2019/7/22"
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+
+---
+
+# 六月
+
+```{r 1,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='60%',fig.asp=0.7}
+
+library(readxl)
+sales <- read_excel("C:/Users/xsong/Desktop/table/sales.xlsx")
+library(tidyverse)
+library(lubridate)
+sales6 <- sales %>%
+  select(门店名,日期,车牌,产品分类) %>%
+  mutate(month=month(日期),day=mday(日期)) %>%
+  filter(month == 6)
+
+library(reshape2)
+sales6 <- dcast(sales6,门店名+车牌~产品分类)
+#knitr::kable(head(sales))
+
+knitr::kable(
+sales6 %>%
+  group_by(门店名) %>%
+  summarize(count = n())
+)
+
+
+
+
+
+```
+
+
+# 五月
+
+```{r 2,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='60%',fig.asp=0.7}
+
+sales <- read_excel("C:/Users/xsong/Desktop/table/sales.xlsx")
+library(tidyverse)
+library(lubridate)
+sales5 <- sales %>%
+  select(门店名,日期,车牌,产品分类) %>%
+  mutate(month=month(日期),day=mday(日期)) %>%
+  filter(month == 5)
+
+library(reshape2)
+sales5 <- dcast(sales5,门店名+车牌~产品分类)
+#knitr::kable(head(sales))
+
+knitr::kable(
+sales5 %>%
+  group_by(门店名) %>%
+  summarize(count = n())
+)
+
+```
+
+
+
+
+
+
+
+
+
