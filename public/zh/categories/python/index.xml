@@ -20,14 +20,5 @@
       <description>class Dog:def bark(self):print(&amp;quot;woo woo woo&amp;quot;)dog1=Dog()dog1.bark()woo woo wooclass Dog:def bark(self,xm):self.name = xmprint(&amp;quot;woo woo woo, I am &amp;quot;+self.name)dog1=Dog()dog1.bark(&amp;quot;Lulu&amp;quot;) woo woo woo, I am Lulu##__init__()方法class Dog:def __init__(self,name,color):self.name = nameself.color = colordef bark(self):print(&amp;quot;woo,woo,woo,我是&amp;quot;+ self.name +&amp;quot;!&amp;quot;)dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;)dog1.bark()#print(&amp;quot;刚才创建了一个狗对象，名叫：&amp;quot;+dog1.name+&amp;quot;!&amp;quot;)#bark()woo,woo,woo,我是阿黄!dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;)class Dog:number = 0def __init__(self,name):self.name = nameDog.</description>
     </item>
     
-    <item>
-      <title>Python函数与模块的使用</title>
-      <link>/zh/pydef/</link>
-      <pubDate>Wed, 08 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/pydef/</guid>
-      <description>def star(m,n):for i in range(m):print(&amp;#39;*&amp;#39;*n)star(3,2) ******star(5,6) ******************************star(4,20) ********************************************************************************def paint(m,s):print(s*m)paint(3,&amp;#39;*&amp;#39;)***paint(8,&amp;#39;%+&amp;#39;)%+%+%+%+%+%+%+%+def check(a):if a&amp;gt;0:print(&amp;#39;&amp;gt;0&amp;#39;)elif a &amp;lt; 0:print(&amp;#39;&amp;lt;0&amp;#39;)else:print(&amp;quot;==0&amp;quot;)check(5)&amp;gt;0check(-2)&amp;lt;0check(0)==0def avg(a,b):return(a+b)/2c = avg(4,6)c5.0x = avg(3,6)x4.5y = avg(3,avg(5,7))y4.5def avg(a,b):return(a+b)/2return(a+b) #可以有多条return语句，但只执行一条avg(4,6)5.</description>
-    </item>
-    
   </channel>
 </rss>
