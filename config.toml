@@ -13,7 +13,7 @@ defaultContentLanguageInSubdir = true
 title = "Xiao Song"
 author = "Xiao Song"
 theme = "hugo-lithium"
-googleAnalytics = ""
+googleAnalytics = "UA-144652310-1"
 disqusShortname = "Xiao Song"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
