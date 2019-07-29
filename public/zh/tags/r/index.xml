@@ -6,19 +6,10 @@
     <description>Recent content in R on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>电影</title>
-      <link>/zh/movie/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/movie/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>使用R Studio运行LaTeX</title>
@@ -30,6 +21,7 @@
 knitr 与可重复的统计研究（花絮篇）
 knitr中文介绍
 knitr选项函数
+R Markdown: The Definitive Guide
 宋春林：用LaTeX写学位论文
 用 knitr 写作业
 我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是MikTeX（虽然它常常因为简陋的功能为人诟病）。
@@ -42,8 +34,7 @@ knitr选项函数
 我们点击Open File打开一个LaTeX文档：
 Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在R Studio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：
 Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的LaTeX Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：
-Figure 6: Mathtype编辑器如，以上的公式可以直接复制为如下的纯文本LaTeX公式：</description>
+Figure 5: 编译好的PDF文档编辑公式我使用Mathtype。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：</description>
     </item>
     
     <item>

@@ -4,15 +4,11 @@ author: " "
 slug: zhresume
 ---
 
-
-
-
-英文简历请点击[这里](/en/enresume/)  
-PDF版本请点击[这里](/chnxsong.pdf)下载
+[English Version](/en/enresume/)  
+[PDF](/chnxsong.pdf)
 
 ### 联系方式
 
-+ 地址：上海市浦东新区芳华路53号
 + 邮箱：<malcolm@xsong.ltd>
 + Github：<https://github.com/ECSTA7Y>
 + 个人主页：<https://xsong.ltd>
@@ -51,8 +47,9 @@ PDF版本请点击[这里](/chnxsong.pdf)下载
 
 + **土地流转的福利效应与社会不平等——来自CFPS的经验证据**&emsp;2018年-2019年   
 国家大学生创新训练项目&emsp; 独立作者  
-使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。  
-点击[这里](/land.pdf)下载全文。
+使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。([PDF](/land.pdf))
+
+
 
 ### 所获奖项 
 
@@ -61,10 +58,25 @@ PDF版本请点击[这里](/chnxsong.pdf)下载
 + 2018年 华东师范大学优秀学生二等奖学金
 + 2017年 华东师范大学优秀学生二等奖学金
 
+### 会议报告
+
++ 2017年 中国社会学会 [社会分层与流动冬季论坛](http://sociology.cssn.cn/xstt/xhzywyh/201712/t20171220_3786193.shtml) 西安交通大学  
+口头报告  
+论坛主持人：[吴愈晓](https://sociology.nju.edu.cn/99/2b/c17737a301355/page.htm)、[李煜](http://www.ssdpp.fudan.edu.cn/portal/f02f3f0f152247628e5e173df9bcecfd/orotsd.html)
+
 ### 实习经历
+
++ [艾瑞咨询](https://www.iresearch.com.cn/)&emsp;数据分析&emsp;2019年7月-至今  
+   + 使用R、SPSS、软件对B级三厢车车用户进行用户画像分析工作。具体使用主成分分析、聚类分析法对线下数据进行分类，研究不同车系用户态度区分。对汽车生产商决策提供重要参考意见。
+   + 使用DBeaver数据库探查美孚石油H5线上数据。   
+
+&nbsp;   
 
 + [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362)&emsp;校园经理&emsp;2017年9月-2018年1月  
 负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。在华东师范大学内招募约10 位校园兼职早餐配送员。完成每位配送员平均每月1000 订单的目标。
+
+
+
 
 ### 标化成绩
 
@@ -78,4 +90,14 @@ PDF版本请点击[这里](/chnxsong.pdf)下载
 + **[CET-4](http://cet.neea.edu.cn/)**: 614
 
 [^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
+
+
+### 其他经历
+
++ 2019 华东师范大学 助教 
+回归分析与Stata应用 
+
+
+
+
 

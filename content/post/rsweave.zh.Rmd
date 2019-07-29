@@ -16,6 +16,8 @@ tags: ["R"]
 
 [knitr选项函数](https://yihui.name/knitr/options)
 
+[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
 宋春林：[用LaTeX写学位论文](http://songchunlin.net/cn/2019/03/latex-vs-word/)
 
 [用 knitr 写作业](http://songchunlin.net/cn/2014/03/use-knitr/)

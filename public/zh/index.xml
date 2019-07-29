@@ -6,19 +6,10 @@
     <description>Recent content in 宋 骁 on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 25 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>电影</title>
-      <link>/zh/movie/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/movie/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>NBA球员薪资分析：基于AdaBoost算法的Python实战</title>
@@ -49,6 +40,7 @@ CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcol
 knitr 与可重复的统计研究（花絮篇）
 knitr中文介绍
 knitr选项函数
+R Markdown: The Definitive Guide
 宋春林：用LaTeX写学位论文
 用 knitr 写作业
 我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是MikTeX（虽然它常常因为简陋的功能为人诟病）。
@@ -61,8 +53,7 @@ knitr选项函数
 我们点击Open File打开一个LaTeX文档：
 Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在R Studio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：
 Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的LaTeX Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：
-Figure 6: Mathtype编辑器如，以上的公式可以直接复制为如下的纯文本LaTeX公式：</description>
+Figure 5: 编译好的PDF文档编辑公式我使用Mathtype。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：</description>
     </item>
     
     <item>
@@ -154,9 +145,9 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/zhresume/</guid>
-      <description>英文简历请点击这里
-PDF版本请点击这里下载
-联系方式地址：上海市浦东新区芳华路53号邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd微信公众号：ApocalypseNow软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)相关课程R语言数据分析算法与程序设计基础 (Python)回归分析与Stata应用SPSS应用类别数据分析概率与统计导论社会模拟与NetLogo应用教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
+      <description>English Version
+PDF
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd微信公众号：ApocalypseNow软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)相关课程R语言数据分析算法与程序设计基础 (Python)回归分析与Stata应用SPSS应用类别数据分析概率与统计导论社会模拟与NetLogo应用教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
 上海大学 第6届·应用社会科学研究方法研修班 2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
