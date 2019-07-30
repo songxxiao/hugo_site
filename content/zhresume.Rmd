@@ -29,8 +29,8 @@ slug: zhresume
 + 社会模拟与[NetLogo](http://ccl.northwestern.edu/netlogo/)应用
 
 ### 教育背景
-+ 华东师范大学,  社会发展学院 &emsp;2016年09月-至今
-+ 中山大学,  学期交换 &emsp;2018年2月-2018年7月
++ [华东师范大学](https://www.ecnu.edu.cn/),  社会发展学院 &emsp;2016年09月-至今
++ [中山大学](http://www.sysu.edu.cn/2012/cn/index.htm),  学期交换 &emsp;2018年2月-2018年7月
 
 ### 培训经历
 + 北京大学-密歇根大学学院 暑期课程 &emsp;2018年8月  

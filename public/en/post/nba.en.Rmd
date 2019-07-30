@@ -1,0 +1,15 @@
+---
+title: "NBA Player Salary Prediction: Python Application Using AdaBoost Algorithm"
+author: ' '
+date: '2019-07-25'
+slug: nba
+tags: ["Python","Applied Statistics","Machine Learning"]
+---
+
+
+Please Click：
+[NBA Player Salary Prediction: Python Application Using AdaBoost Algorithm](https://xsong.ltd/archives/pandas/nba_en)
+
+```{r nba, echo=F, fig.cap=" ", out.width = '90%',fig.align='center'}
+knitr::include_graphics("/img/nba/nba.jpg")
+```

@@ -5,5 +5,11 @@ date: '2019-07-25'
 slug: nba
 tags: ["Python","应用统计","机器学习"]
 ---
+
 请点击：
 [NBA球员薪资分析：基于AdaBoost算法的Python实战](https://xsong.ltd/archives/pandas/nba)
+
+```{r nba, echo=F, fig.cap=" ", out.width = '90%',fig.align='center'}
+knitr::include_graphics("/img/nba/nba.jpg")
+```
+

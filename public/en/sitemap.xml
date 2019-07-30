@@ -3,22 +3,67 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/en/categories/</loc>
+    <loc>/en/tags/applied-statistics/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/en/tags/machine-learning/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/en/nba/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/categories/"
+                href="/zh/nba/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/categories/"
+                href="/en/nba/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/post/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/tags/python/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tags/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/python/"
                 />
   </url>
   
   <url>
     <loc>/en/tags/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -34,6 +79,7 @@
   
   <url>
     <loc>/en/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -43,6 +89,21 @@
                 rel="alternate"
                 hreflang="en"
                 href="/en/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/categories/"
                 />
   </url>
   

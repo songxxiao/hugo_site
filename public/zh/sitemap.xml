@@ -5,18 +5,48 @@
   <url>
     <loc>/zh/nba/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/nba/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/nba/"
+                />
   </url>
   
   <url>
     <loc>/zh/post/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/post/"
+                />
   </url>
   
   <url>
     <loc>/zh/tags/python/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/tags/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/tags/python/"
+                />
   </url>
   
   <url>
