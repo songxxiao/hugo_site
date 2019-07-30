@@ -5,7 +5,8 @@ date: "Last Update: 2019-7"
 slug: enresume
 ---
 
-[Chinese version](/zh/zhresume/)
+[Chinese version](/zh/zhresume/)  
+[PDF](/xsong_en.pdf)
 
 ### CONTACT
 

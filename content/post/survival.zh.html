@@ -9,14 +9,13 @@ tags: ["R","应用统计"]
 
 
 
-<p>本文系复旦大学人口学系<a href="http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html">张震</a>老师和华东师范大学人口研究所<a href="">李强</a>老师的数据分析课程笔记。</p>
+<p>本文系复旦大学人口学系<a href="http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html">张震</a>老师和华东师范大学人口研究所<a href="https://faculty.ecnu.edu.cn/s/2160/main.jspy">李强</a>老师的数据分析课程笔记。</p>
 <p>一个R生存分析应用的介绍网页<a href="https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/">Survival Analysis with R</a></p>
 <p>两篇重要的中文文献：</p>
 <p>李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.</p>
 <p>李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.</p>
 <hr />
-<div id="-" class="section level2">
-<h2>第一讲: 基本概念</h2>
+<p>##第一讲: 基本概念</p>
 <ul>
 <li>社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。<strong>在一个状态内待的时间和风险有着密切的关系</strong>。</li>
 </ul>
@@ -28,13 +27,14 @@ tags: ["R","应用统计"]
 <p><span class="math inline">\(h(t)\)</span>不是密度也不是概率。</p>
 <ul>
 <li>censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。</li>
-<li><p>truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。</p></li>
-<li><p>censor涉及到事件，truncate涉及到暴露量。</p></li>
+<li><p>truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。</p>
+<ul>
+<li>censor涉及到事件，truncate涉及到暴露量。</li>
+</ul></li>
 <li><p>能活到预期寿命者总是62%</p></li>
 </ul>
 <hr />
-</div>
-<div id="-mle" class="section level2">
+<div id="mle" class="section level2">
 <h2>第二讲: 最大似然估计(MLE)</h2>
 <p>Cox回归避开了模型分布假定的问题。</p>
 <ul>
@@ -45,7 +45,9 @@ tags: ["R","应用统计"]
 <span class="math inline">\(\delta\)</span>是积分小区间</p>
 <p><span class="math display">\[P(T = t) \approx 2\delta f(t)\]</span></p>
 <ul>
-<li>发生风险率(Occurrence-exposure rate) <span class="math display">\[\widehat \lambda  = \frac{1}{{\bar t }} = \frac{n}{{\sum\limits_{}^{} {{t_i}} }}\]</span> <span class="math inline">\(\sum\limits_{}^{} {{t_i}}\)</span>是历险人年数。<span class="math inline">\(n\)</span>是事件发生数。<br />
+<li>发生风险率(Occurrence-exposure rate)
+<span class="math display">\[\widehat \lambda  = \frac{1}{{\bar t }} = \frac{n}{{\sum\limits_{}^{} {{t_i}} }}\]</span>
+<span class="math inline">\(\sum\limits_{}^{} {{t_i}}\)</span>是历险人年数。<span class="math inline">\(n\)</span>是事件发生数。<br />
 <span class="math inline">\(\lambda\)</span>是个概率估计。</li>
 </ul>
 <div id="censored" class="section level3">
@@ -53,7 +55,8 @@ tags: ["R","应用统计"]
 <ul>
 <li>完全样本的似然函数是在该时点t的密度函数<span class="math inline">\(f({t_i})\)</span>。右删截数据是生存函数<span class="math inline">\(S({C_r})\)</span>。左删截数据为累计分布函数<span class="math inline">\(1 - S({C_l})\)</span>。区间删截为在该时段内的发生概率<span class="math inline">\(S(L) - S(R)\)</span>。</li>
 </ul>
-<p>右删截： <span class="math display">\[P({t_i} &gt; 40) = S(40)\]</span></p>
+<p>右删截：
+<span class="math display">\[P({t_i} &gt; 40) = S(40)\]</span></p>
 <ul>
 <li>40岁删截</li>
 </ul>
@@ -66,7 +69,7 @@ tags: ["R","应用统计"]
 <hr />
 </div>
 </div>
-<div id="-" class="section level2">
+<div id="section" class="section level2">
 <h2>第三讲: 生存分析估计</h2>
 <p>R生存分析介绍：<a href="http://www.openintro.org/stat/surv.php">survival analysis in R</a></p>
 <pre class="r"><code># 加载包
@@ -82,7 +85,8 @@ library(ggfortify)</code></pre>
 <code>female</code>:性别<br />
 <code>ec</code>:进入队列<br />
 <code>minc</code>:母亲月均收入<br />
-(minc=1, $0-$299; minc=2, $300-$999; minc=3, $1,000-$1,999; minc=4,$2000+)<br />
+(minc=1, $0-$299; minc=2, $300-$999; minc=3, $1,000-$1,999;
+minc=4,$2000+)<br />
 <code>age</code>:年龄<br />
 <code>black</code>:种族</li>
 </ul>
