@@ -1,14 +1,14 @@
 ---
 title: "Xiao Song"
 author: " "
-date: "2019-07-05"
+date: "Last Update: 2019-7"
 slug: enresume
 ---
-Chinese Resume please click [here](/zh/zhresume/)
+
+[Chinese version](/zh/zhresume/)
 
 ### CONTACT
 
-+ Adress：No. 53, Fanghua Road, Pudong New Area, Shanghai
 + Email：<malcolm@xsong.ltd>
 + Github：<https://github.com/ECSTA7Y>
 + Website：<https://xsong.ltd>
@@ -29,9 +29,9 @@ Chinese Resume please click [here](/zh/zhresume/)
 
 ### EDUCATION
 
-+ East China Normal University&emsp;2016-09~Today    
++ [East China Normal University](http://english.ecnu.edu.cn/)&emsp;2016-09~Today    
 School of Social Development&emsp;(Overall GPA：3.64 /4 | Top 10%)
-+ Sun Yat-Sun University&emsp;Exchange Student&emsp;2018-02~2018-07
++ [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;Exchange Student&emsp;2018-02~2018-07
 
 
 ### TRAINING EXPERIENCE
@@ -44,6 +44,9 @@ Using Python's `Pandas`, `Numpy`, and `scikit-learn` libraries for data cleansin
 Summer workshop  
 [General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)&emsp;(Grade：94/100)
 
++ Nanjing University&emsp;2018-01  
+[Big Data, Cloud Computing and New Methods of Humanities and Social Sciences](https://mp.weixin.qq.com/s/eZ_gNl9qLWtD6BSZkVF8NA) [Winter Workshop](https://mp.weixin.qq.com/s/eZ_gNl9qLWtD6BSZkVF8NA)
+
 + Shanghai University&emsp;2017-07  
 [6th Training Workshop on Applied Social Science Research Methods](http://caser.ust.hk/?act=course_main&id=16)  
 Course: Regression Analysis and Stata Application,  Categorical Data Analysis
@@ -54,26 +57,38 @@ Course: Regression Analysis and Stata Application,  Categorical Data Analysis
 
 + Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS&emsp;2018-2019    
 National Innovation Training Program for College Students,  Independent author  
-The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using R's `ggplot2` software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. Click [here](http://www.baige.me/v?i=Rwy) to download the passage.
+The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using R's `ggplot2` software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. ([PDF](http://www.baige.me/v?i=Rwy))
+
 
 
 
 ### HONORS AND AWARDS 
 
-+ 2019 [The 2nd National University Data Driven Innovation Research Competition](http://opendata.pku.edu.cn/competition-2019.xhtml;jsessionid=200f6d0adbfa75292afed361235f) Excellence award
-+ 2018 [12th Social Science Forum for Undergraduates](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm) Highest Honor
++ 2019&emsp;[The 2nd National University Data Driven Innovation Research Competition](http://opendata.pku.edu.cn/competition-2019.xhtml;jsessionid=200f6d0adbfa75292afed361235f)&emsp;Excellence award
++ 2018&emsp;[12th Social Science Forum for Undergraduates](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm)&emsp;Highest Honor
 + 2018 Second Class Academic Honors (East China Normal University)
-+ 2017 Second Class Academic Honors (East China Normal University)
++ 2017&emsp;Second Class Academic Honors (East China Normal University)
++ 2017&emsp;The 12th "Wisdom Cup" Philosophical Essay Competition for College Students&emsp;First Award
 
-### WORK EXPERIENCE
+### CONFERENCE PRESENTATIONS 
+
++ Chinese Sociological Association   
+[Winter Meeting of Social Stratification and Mobility Committee](http://sociology.nju.edu.cn/so_en/e9/79/c18475a321913/page.htm)  
+[Xi’an Jiaotong University](http://en.xjtu.edu.cn/)    
+Forum hosts：[Yu Xiao Wu](https://sociology.nju.edu.cn/99/2b/c17737a301355/page.htm)、[Yu Li](http://www.ssdpp.fudan.edu.cn/portal/f02f3f0f152247628e5e173df9bcecfd/orotsd.html)
+
+
+### WORK & INTERNSHIP EXPERIENCE
+
++ [iRESEARCH](http://www.iresearchchina.com/)&emsp;Data Analyst&emsp;2019-07~Today
+   + Using R and SPSS to analysis profile of  Class B cars' users. Through PCA and Cluster analysis,I catogorized survey data and found cars users' attitude difference.
+  + Using DBeaver database to explore Mobil Oil H5 online data. 
+   
+&nbsp; 
 
 + [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362)&emsp;Campus Manager&emsp;2017-09~2018-01  
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
-
-
-
-
 
 
 ### STANDARDIZED TEST
@@ -89,3 +104,13 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 
 [^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
 [^cet]: [College English Test](http://www.cet.edu.cn/)
+
+### OTHER EXPERIENCE
+
++ 2018-2019 East China Normal University   
+Regression Analysis and Stata Application([Shisong Qing](https://faculty.ecnu.edu.cn/s/2136/main.jspy))  
+Teaching Assistant
+
+
+
+
