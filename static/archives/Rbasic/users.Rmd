@@ -47,7 +47,7 @@ dt.car$S10C <- as.character(dt.car$S10C)
 #dt.car$S3 <- as.numeric(dt.car$S3)
 
 dta <- dt.car %>%
-  select(S5,S3,S6__1__open,D5,D6,D3,S10,S10C,Q7__1:Q7__35,A0__1:A0__27,D12A,city_tier) %>% #筛选列
+  select(rid,S5,S3,S6__1__open,D5,D6,D3,S10,S10C,Q7__1:Q7__35,A0__1:A0__27,D12A,city_tier) %>% #筛选列
   rename(age=S6__1__open,edu=D3) %>% #重命名      唐山 
   mutate(cityle=recode(S3,'成都'='一线','上海'='一线','广州'='一线','南京' ='二线','惠州'='二线', '郑州' ='二线','唐山'='三线', '常州'='三线', '临沂'='三线','北京'='一线城市'),
          cityregion=recode(S3,'成都'='西南','上海'='东部','广州'='南部','南京'='东部','惠州'='南部','郑州' ='中部','唐山'='北部', '常州'='东部','临沂'='北部','北京'='北部'),
@@ -179,8 +179,8 @@ cludta <- dta %>%
   select(eduy)
 
 clu <- dta %>%
-  select(S10C,child,S5,S10C,age_stage)
-
+  select(child,S5,S10C,age_stage)
+#教育年限、生育、性别、车系、年龄
 cludta <- cbind(clu,cludta)
 
 cludta$S5 <- as.factor(cludta$S5)
@@ -197,13 +197,9 @@ rect.hclust(h, k=4, border = "red")
 dta$clusters <- cutree(h, k=4)
 knitr::kable(table(dta$clusters),caption = '每一类的样本量',align='c')
 
-
-#dta <- na.omit(dta)
-#write.table(dta, "mydata.csv")
-#dta$clusters <- cutree(h, k=4)
-#dt.car <- dt.car %>%
-#  select(rid,clusters)
-#write.csv(dt.car,file="C:/Users/xsong/Desktop/table/cardata.csv",row.names = F)
+dt.car <- dta %>%
+   select(rid,clusters)
+write.csv(dt.car,file="C:/Users/xsong/Desktop/table/cardata.csv",row.names = F)
 
 ```
 
