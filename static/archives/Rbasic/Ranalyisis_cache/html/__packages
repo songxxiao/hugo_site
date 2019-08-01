@@ -1,11 +1,11 @@
 base
 cluster
-wordcloud2
-jiebaRD
-jiebaR
 timeDate
 timeSeries
 fBasics
 fMultivar
 ggplot2
+wordcloud2
+jiebaRD
+jiebaR
 psych

@@ -125,13 +125,116 @@ knitr::kable(head(USJudgeRatings$score))
 
 + 最后做判别分析
 
+# 计量经济学：因果推断模型
 
 
+## Regression Discontinuity Design
+
+```{r cars2,message = F, comment = NA,warning = F,include = T}
+
+library(tidyverse)
+#install.packages("rdd")
+library(magrittr)
+library(MASS)
+library(rdd)
+set.seed(1)
+n <- 10 ^ 3
+mu <- matrix(c(0, 0))
+rho <- 0.5
+sigma1 <- 0.5
+sigma2 <- 2
+Sigma <- matrix(c(sigma1 ^ 2,
+rho * sigma1 * sigma2,
+rho * sigma1 * sigma2,
+sigma2 ^ 2),
+c(2, 2))
+simulatedXandC <- mvrnorm(n = n, mu = mu, Sigma = Sigma)
+simulatedError <- rnorm(n = n)
+simulatedZ <- round(runif(n))
+group <- round(runif(n))
+df <- data.frame(X = simulatedXandC[, 1],
+C = simulatedXandC[, 2],
+error = simulatedError)
+library(tidyverse)
+df %<>%
+mutate(Y = 10 + 1 * X + 5 * C + error)
+fit <- lm(Y ~ X, data = df)
+summary(fit)
+fit <- lm(Y ~ X + C, data = df)
+summary(fit)
+
+df <- data.frame(X = simulatedXandC[, 1],
+C = simulatedXandC[, 2],
+T = (simulatedXandC[, 1] > 0),
+error = simulatedError)
+df %<>%
+mutate(Y = 10 + X ^ 3 + 5 * T + 1 * C + error)
+fit <- RDestimate(Y ~ X, data = df)
+summary(fit)
+library(ggplot2)
+rdplot <- ggplot(data = df, aes(x = X, y = Y, color = (X > 0))) +
+geom_point() +
+geom_smooth(method = lm,
+se = FALSE)
+rdplot
+```
 
 
+## Difference-in-Differences
 
+```{r cars3,message = F, comment = NA,warning = F,include = T}
+df <- data.frame(time = 10 * round(runif(n), 1) - 5,
+treatment = group,
+error = simulatedError)
+library(tidyverse)
+df %<>%
+mutate(Y = 1 - time + 5 * treatment + 7 * (time >= 0) * treatment + error)
+fit <- lm(Y ~ time + treatment + I((time >= 0) * treatment), data = df)
+summary(fit)
+dfMean <- df %>%
+group_by(time, treatment) %>%
+summarise(Y = mean(Y))
+ggplot(data = df, aes(x = time, y = Y, color = factor(treatment + 2 * (time >= 0)))) +
+geom_point() +
+geom_smooth(method = lm,
+se = FALSE) +
+theme(legend.position = "none") +
+scale_color_manual(values = c("#F05253", "#2A73CC", "#F05253", "#2A73CC"))
+```
 
+## Fixed Effects Regression
 
+```{r cars4,message = F, comment = NA,warning = F,include = T}
+df <- data.frame(X = simulatedXandC[, 1],
+C = round(pmin(2, pmax(-2, simulatedXandC[, 2]))),
+error = simulatedError)
+df %<>%
+mutate(Y = 10 + 1 * X + 5 * C + error)
+fit <- lm(Y ~ X, data = df)
+summary(fit)
+fit <- lm(Y ~ X + factor(C), data = df)
+summary(fit)
+```
+
+## Instrumental Variables
+
+```{r cars5,message = F, comment = NA,warning = F,include = T}
+df <- data.frame(Z = simulatedZ,
+X = simulatedXandC[, 1] + simulatedZ,
+C = simulatedXandC[, 2],
+error = simulatedError)
+df %<>%
+mutate(Y = 10 + 1.0 * X - 2 * C + error)
+
+#Naive regression produces biased estimates
+fit <- lm(Y ~ X, data = df)
+summary(fit, vcov = sandwich)
+
+#IV recovers the underlying model
+fit <- ivreg(Y ~ X | Z, data = df)
+summary(fit, vcov = sandwich, df = Inf, diagnostics = TRUE)
+
+```
 
 
 
