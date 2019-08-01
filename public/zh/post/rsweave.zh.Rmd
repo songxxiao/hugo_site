@@ -6,7 +6,7 @@ slug: rsweave
 tags: ["R"]
 ---
 
-### 一些有用的链接
+### 一些对理解本文有用的链接
 
 谢益辉: [Sweave：打造一个可重复的统计研究流程](https://cosx.org/2010/11/reproducible-research-in-statistics)
 
@@ -66,14 +66,14 @@ knitr::include_graphics("/img/sweave/tempsnip2.png")
 knitr::include_graphics("/img/sweave/beamer.jpg")
 ```
 
-编辑公式我使用[Mathtype](http://www.mathtype.cn/)。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好`剪切和复制预置`选项)：
+编辑公式我使用[Mathtype](http://www.mathtype.cn/)或者这个[在线工具](http://www.wiris.com/editor/demo/en/developers)。Mathtype的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好`剪切和复制预置`选项)：
 
 
 ```{r type, echo=F, fig.cap=" ", out.width = '80%',fig.align='center',fig.cap='Mathtype编辑器'}
 knitr::include_graphics("/img/sweave/mathtype.jpg")
 ```
 
-如，以上的公式可以直接复制为如下的纯文本LaTeX公式：
+以上的公式可以直接复制为如下的纯文本LaTeX公式：
 
 ```python
 $$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$

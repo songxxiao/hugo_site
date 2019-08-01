@@ -17,8 +17,7 @@
       <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/nba/</guid>
-      <description>请点击：NBA球员薪资分析：基于AdaBoost算法的Python实战
-</description>
+      <description>window.location.replace(&#34;https://xsong.ltd/archives/pandas/nba&#34;)</description>
     </item>
     
     <item>
@@ -37,7 +36,7 @@ CONTACTAdress：No. 53, Fanghua Road, Pudong New Area, ShanghaiEmail：malcol
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/rsweave/</guid>
-      <description>一些有用的链接谢益辉: Sweave：打造一个可重复的统计研究流程
+      <description>一些对理解本文有用的链接谢益辉: Sweave：打造一个可重复的统计研究流程
 knitr 与可重复的统计研究（花絮篇）
 knitr中文介绍
 knitr选项函数
@@ -54,7 +53,7 @@ R Markdown: The Definitive Guide
 我们点击Open File打开一个LaTeX文档：
 Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在R Studio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：
 Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的LaTeX Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype。它的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：</description>
+Figure 5: 编译好的PDF文档编辑公式我使用Mathtype或者这个在线工具。Mathtype的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：</description>
     </item>
     
     <item>
@@ -83,8 +82,7 @@ R Markdown: The Definitive Guide
 两篇重要的中文文献：
 李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
 李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.
-##第一讲: 基本概念
-社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道
+第一讲: 基本概念社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道
 生存函数：\(S(t) = P(T &amp;gt; t)\)。是存活概率也是存活百分比。
 失效函数(Failure Function)：\(F(t)\),\(S(t) = 1 - F(t)\), \(F(t)\)是T的累积分布函数。
 \(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。

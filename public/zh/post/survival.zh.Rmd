@@ -18,7 +18,7 @@ tags: ["R","应用统计"]
 
 ---
 
-##第一讲: 基本概念
+## 第一讲: 基本概念
 
 + 社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。**在一个状态内待的时间和风险有着密切的关系**。
 
@@ -124,7 +124,7 @@ minc=4,$2000+)
 
 
 ```{r a,comment = NA,warning = F,message = F,fig.align='center',include = F}
-cwg <- read_dta("C:/Users/xsong/Desktop/table/highdata/surv/cwg.dta")
+cwg <- read_dta("E:/R_codes/others/cwg.dta")
 #变量排序
 cwg$event[cwg$cen_r ==0] <- 1
 cwg$event[cwg$cen_r ==1] <- 0

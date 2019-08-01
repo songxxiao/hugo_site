@@ -124,7 +124,7 @@ minc=4,$2000+)
 
 
 ```{r a,comment = NA,warning = F,message = F,fig.align='center',include = F}
-cwg <- read_dta("C:/Users/xsong/Desktop/table/highdata/surv/cwg.dta")
+cwg <- read_dta("E:/R_codes/others/cwg.dta")
 #变量排序
 cwg$event[cwg$cen_r ==0] <- 1
 cwg$event[cwg$cen_r ==1] <- 0
