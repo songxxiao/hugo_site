@@ -6,6 +6,8 @@ slug: nba
 tags: ["Python","Applied Statistics","Machine Learning"]
 ---
 
+Loading ...
+
 <script>
 
 window.location.replace("https://xsong.ltd/archives/pandas/nba_en")

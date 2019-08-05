@@ -6,6 +6,8 @@ slug: nba
 tags: ["Python","应用统计","机器学习"]
 ---
 
+页面跳转中···
+
 <script>
 
 window.location.replace("https://xsong.ltd/archives/pandas/nba")
