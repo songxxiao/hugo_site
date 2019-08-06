@@ -10,6 +10,8 @@ tags: ["R","应用统计"]
 
 一个R生存分析应用的介绍网页[Survival Analysis with R](https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/)
 
+生存分析应用：[移动通讯运营商的用户流失问题分析](https://mp.weixin.qq.com/s/XrL2CmoxmJwdvnUDMMYT6w)
+
 两篇重要的中文文献：
 
 李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.

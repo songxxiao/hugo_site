@@ -16444,7 +16444,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><h1>目录<span class="tocSkip"></span></h1></p>
-<div class="toc"><ul class="toc-item"><li><span><a href="#基本描述统计" data-toc-modified-id="基本描述统计-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>基本描述统计</a></span></li><li><span><a href="#自变量" data-toc-modified-id="自变量-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>自变量</a></span><ul class="toc-item"><li><span><a href="#数据可视化" data-toc-modified-id="数据可视化-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>数据可视化</a></span></li></ul></li><li><span><a href="#因变量" data-toc-modified-id="因变量-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>因变量</a></span></li><li><span><a href="#CART回归树算法" data-toc-modified-id="CART回归树算法-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>CART回归树算法</a></span></li><li><span><a href="#集成学习：AdaBoost提升树" data-toc-modified-id="集成学习：AdaBoost提升树-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>集成学习：AdaBoost提升树</a></span></li></ul></div>
+<div class="toc"><ul class="toc-item"><li><span><a href="#数据清洗" data-toc-modified-id="数据清洗-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>数据清洗</a></span></li><li><span><a href="#基本描述统计--&amp;-数据可视化" data-toc-modified-id="基本描述统计--&amp;-数据可视化-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>基本描述统计  &amp; 数据可视化</a></span><ul class="toc-item"><li><span><a href="#场均得分榜" data-toc-modified-id="场均得分榜-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>场均得分榜</a></span></li><li><span><a href="#场均效率值榜" data-toc-modified-id="场均效率值榜-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>场均效率值榜</a></span></li><li><span><a href="#高龄球员榜" data-toc-modified-id="高龄球员榜-2.3"><span class="toc-item-num">2.3&nbsp;&nbsp;</span>高龄球员榜</a></span></li><li><span><a href="#场均失误榜" data-toc-modified-id="场均失误榜-2.4"><span class="toc-item-num">2.4&nbsp;&nbsp;</span>场均失误榜</a></span></li><li><span><a href="#相关系数矩阵图" data-toc-modified-id="相关系数矩阵图-2.5"><span class="toc-item-num">2.5&nbsp;&nbsp;</span>相关系数矩阵图</a></span></li><li><span><a href="#年龄与场均得分的关系" data-toc-modified-id="年龄与场均得分的关系-2.6"><span class="toc-item-num">2.6&nbsp;&nbsp;</span>年龄与场均得分的关系</a></span></li><li><span><a href="#哪个位置最容易出现失误？" data-toc-modified-id="哪个位置最容易出现失误？-2.7"><span class="toc-item-num">2.7&nbsp;&nbsp;</span>哪个位置最容易出现失误？</a></span></li><li><span><a href="#谁的盖帽最多？" data-toc-modified-id="谁的盖帽最多？-2.8"><span class="toc-item-num">2.8&nbsp;&nbsp;</span>谁的盖帽最多？</a></span></li><li><span><a href="#因变量" data-toc-modified-id="因变量-2.9"><span class="toc-item-num">2.9&nbsp;&nbsp;</span>因变量</a></span></li></ul></li><li><span><a href="#算法" data-toc-modified-id="算法-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>算法</a></span><ul class="toc-item"><li><span><a href="#CART回归树算法" data-toc-modified-id="CART回归树算法-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>CART回归树算法</a></span></li><li><span><a href="#集成学习：AdaBoost提升树" data-toc-modified-id="集成学习：AdaBoost提升树-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>集成学习：AdaBoost提升树</a></span></li></ul></li></ul></div>
 </div>
 </div>
 </div>
@@ -16494,20 +16494,6 @@ div#notebook {
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#22522;&#26412;&#25551;&#36848;&#32479;&#35745;">&#22522;&#26412;&#25551;&#36848;&#32479;&#35745;<a class="anchor-link" href="#&#22522;&#26412;&#25551;&#36848;&#32479;&#35745;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#33258;&#21464;&#37327;">&#33258;&#21464;&#37327;<a class="anchor-link" href="#&#33258;&#21464;&#37327;">&#182;</a></h2>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -16682,10 +16668,14 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>场均得分榜</li>
-</ul>
-
+<h1 id="&#22522;&#26412;&#25551;&#36848;&#32479;&#35745;--&amp;-&#25968;&#25454;&#21487;&#35270;&#21270;">&#22522;&#26412;&#25551;&#36848;&#32479;&#35745;  &amp; &#25968;&#25454;&#21487;&#35270;&#21270;<a class="anchor-link" href="#&#22522;&#26412;&#25551;&#36848;&#32479;&#35745;--&amp;-&#25968;&#25454;&#21487;&#35270;&#21270;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#22330;&#22343;&#24471;&#20998;&#27036;">&#22330;&#22343;&#24471;&#20998;&#27036;<a class="anchor-link" href="#&#22330;&#22343;&#24471;&#20998;&#27036;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -16802,10 +16792,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>场均效率值榜</li>
-</ul>
-
+<h2 id="&#22330;&#22343;&#25928;&#29575;&#20540;&#27036;">&#22330;&#22343;&#25928;&#29575;&#20540;&#27036;<a class="anchor-link" href="#&#22330;&#22343;&#25928;&#29575;&#20540;&#27036;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -16921,10 +16908,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>高龄球员榜</li>
-</ul>
-
+<h2 id="&#39640;&#40836;&#29699;&#21592;&#27036;">&#39640;&#40836;&#29699;&#21592;&#27036;<a class="anchor-link" href="#&#39640;&#40836;&#29699;&#21592;&#27036;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -17040,9 +17024,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>场均失误榜，哈登高居第一位，这应该和球权有关，会在后文给出验证</li>
-</ul>
+<h2 id="&#22330;&#22343;&#22833;&#35823;&#27036;">&#22330;&#22343;&#22833;&#35823;&#27036;<a class="anchor-link" href="#&#22330;&#22343;&#22833;&#35823;&#27036;">&#182;</a></h2><p>哈登高居第一位，这应该和球权有关，会在后文给出验证</p>
 
 </div>
 </div>
@@ -17159,17 +17141,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="&#25968;&#25454;&#21487;&#35270;&#21270;">&#25968;&#25454;&#21487;&#35270;&#21270;<a class="anchor-link" href="#&#25968;&#25454;&#21487;&#35270;&#21270;">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>相关系数矩阵图</li>
-</ul>
-
+<h2 id="&#30456;&#20851;&#31995;&#25968;&#30697;&#38453;&#22270;">&#30456;&#20851;&#31995;&#25968;&#30697;&#38453;&#22270;<a class="anchor-link" href="#&#30456;&#20851;&#31995;&#25968;&#30697;&#38453;&#22270;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -17240,10 +17212,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>年龄与场均得分的关系</li>
-</ul>
-
+<h2 id="&#24180;&#40836;&#19982;&#22330;&#22343;&#24471;&#20998;&#30340;&#20851;&#31995;">&#24180;&#40836;&#19982;&#22330;&#22343;&#24471;&#20998;&#30340;&#20851;&#31995;<a class="anchor-link" href="#&#24180;&#40836;&#19982;&#22330;&#22343;&#24471;&#20998;&#30340;&#20851;&#31995;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -17306,8 +17275,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>哪个位置最容易出现失误？</p>
-
+<h2 id="&#21738;&#20010;&#20301;&#32622;&#26368;&#23481;&#26131;&#20986;&#29616;&#22833;&#35823;&#65311;">&#21738;&#20010;&#20301;&#32622;&#26368;&#23481;&#26131;&#20986;&#29616;&#22833;&#35823;&#65311;<a class="anchor-link" href="#&#21738;&#20010;&#20301;&#32622;&#26368;&#23481;&#26131;&#20986;&#29616;&#22833;&#35823;&#65311;">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -17370,7 +17338,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>谁的盖帽最多？毫无疑问</p>
+<h2 id="&#35841;&#30340;&#30422;&#24125;&#26368;&#22810;&#65311;">&#35841;&#30340;&#30422;&#24125;&#26368;&#22810;&#65311;<a class="anchor-link" href="#&#35841;&#30340;&#30422;&#24125;&#26368;&#22810;&#65311;">&#182;</a></h2><p>毫无疑问</p>
 
 </div>
 </div>
