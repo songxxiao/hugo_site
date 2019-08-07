@@ -44,8 +44,9 @@ code {
   padding: 20px 0;
   position: relative;
   width:100%;
-  background: #7B7B7B;
-  border-bottom: 1px solid #eaeaea;
+  background: #BEBEBE;
+  border-bottom: 1px solid #ADADAD;
+  box-shadow: 0 0.125rem 0.25rem 0 #ADADAD;
 }
 
 .nav {
@@ -58,6 +59,7 @@ code {
 .nav-logo {
   float: left;
   margin-top: -11px;
+  margin-bottom: -11px;
   transition: transform 150ms ease-out;
 }
 
@@ -90,11 +92,11 @@ code {
 
 .nav-links a {
   text-decoration: none;
-  color: #FFFFFF;
+  color: #000000;
 }
 
 .nav-links a:hover {
-  color: #000;
+  color: #FFFFFF;
 }
 
 .content {
@@ -259,7 +261,9 @@ code {
 
 @media (min-width: 600px) {
   .header {
-    padding: 16px 0;
+    top: 0;
+    position: fixed;
+    padding: 15px 0;
   }
 
   .nav-logo {
@@ -279,6 +283,9 @@ code {
   }
 
   .content {
+    padding: 18px 0;
+    margin-top: 85px;
+    top: 55px;
     font-size: 18px;
     line-height: 1.8;
   }
@@ -310,6 +317,7 @@ code {
   }
 
   .article-title {
+    top: 55px;
     font-size: 30px;
   }
 
