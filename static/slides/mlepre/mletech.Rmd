@@ -5,7 +5,7 @@ author: "宋骁"
 date: "2019/06/07"
 output:
   xaringan::moon_reader:
-    css: [default, zh-CN.css]
+    css: [default, GBBB.css]
     lib_dir: libs
     nature:
       highlightStyle: github
