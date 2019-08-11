@@ -5,7 +5,7 @@ author: "宋骁 彭璟 吴迪雅 姜昱竹 宋虹玉"
 date: "2019/06/17"
 output:
   xaringan::moon_reader:
-    css: [default, zh-CN.css]
+    css: [default, GBBB.css]
     lib_dir: libs
     nature:
       highlightStyle: github
