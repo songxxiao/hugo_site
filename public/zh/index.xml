@@ -69,7 +69,7 @@ R Markdown: The Definitive Guide
 k折交叉验证 (K-fold cross-validation)
 留一交叉验证(leave-one-out cross validation)
 谢益辉的统计动画R包animation直观地展示了交叉验证方法。
-#install.packages(&amp;#39;mlbench&amp;#39;)library(caret) #加载数据集R示例10折交叉验证 (K-fold cross-validation)#install.packages(&amp;#39;mlbench&amp;#39;)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 # Number of folds)library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.</description>
+library(caret)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.3 396.902 0.02731 0 7.07 0 0.</description>
     </item>
     
     <item>
