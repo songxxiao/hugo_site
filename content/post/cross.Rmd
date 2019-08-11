@@ -27,19 +27,16 @@ output:
 谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
 ```{r 1,comment = NA,warning = F,message = F, include = T,fig.align='center'}
-#install.packages('mlbench')
-library(caret) #加载数据集
+library(caret)
 ```
 
 # R示例
 
 ## 10折交叉验证 (K-fold cross-validation)
 ```{r 2,comment = NA,warning = F,message = F, include = T,fig.align='center'}
-#install.packages('mlbench')
-
 rfControl <-trainControl( #10折交叉验证
 method ="cv", 
-number =10 # Number of folds
+number =10 
 )
 
 library(mlbench) #加载数据集
@@ -98,28 +95,32 @@ varImp(rpartFit, scale = F)
  + 数据：[口袋妖怪](https://www.kaggle.com/abcsds/pokemon)数据集
  + 任务：通过各种属性预测神奇宝贝是否为传说级别
  
->1. ID,每只神奇宝贝的ID  
-2. Name,每只神奇宝贝的名字  
-3. Type1:每只神奇宝贝的类型，比如说水系，比如说火系  
-4. Type2:由于有特殊的神奇宝贝拥有复数以上的属性。  
-5. Total:指每只神奇宝贝的强度，一般越高越强  
-6. HP：指每只神奇宝贝的生命值  
-7. Attack:指每只神奇宝贝的攻击力  
-8. Defense:指每只神奇宝贝的防御力  
-9. SP Attack:指每只神奇宝贝面对相克属性神奇宝贝时的攻击力，通常会比普通攻击力高  
-10. SP Defense:指每只神奇宝贝面对相克属性神奇宝贝时的防御力，通常会比普通防御力高。  
-11. Speed:指每只神奇宝贝的速度  
-12. Generation：指每一只神奇宝贝属于哪一部神奇宝贝的，目前分为五部。 
-13. Legendary:指每一只神奇宝贝是不是属于传说级别的神奇宝贝，比如麒麟，超梦，梦幻之类的。  
+> + ID,每只神奇宝贝的ID  
++ Name,每只神奇宝贝的名字  
++ Type1:每只神奇宝贝的类型，比如说水系，比如说火系  
++ Type2:由于有特殊的神奇宝贝拥有复数以上的属性。  
++ Total:指每只神奇宝贝的强度，一般越高越强  
++ HP：指每只神奇宝贝的生命值  
++ Attack:指每只神奇宝贝的攻击力  
++ Defense:指每只神奇宝贝的防御力  
++ SP Attack:指每只神奇宝贝面对相克属性神奇宝贝时的攻击力，通常会比普通攻击力高  
++ SP Defense:指每只神奇宝贝面对相克属性神奇宝贝时的防御力，通常会比普通防御力高。  
++ Speed:指每只神奇宝贝的速度  
++ Generation：指每一只神奇宝贝属于哪一部神奇宝贝的，目前分为五部。 
++ Legendary:指每一只神奇宝贝是不是属于传说级别的神奇宝贝，比如麒麟，超梦，梦幻之类的。  
+
+[代码参考](https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/)
 
 ```{r 4,comment = NA,warning = F,message = F, include = T,fig.align='center'}
 library(readr)
 library(caret)
 library(kknn)
+
 pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
-duindex <- duplicated(pokemon$id)
-#用!来取反
-pokemon <- pokemon[!duindex,]
+colnames(pokemon)[1] <- 'id' #修改变量名
+colnames(pokemon)[3] <- 'Type1'
+colnames(pokemon)[4] <- 'Type2'
+
 pokemon$Legendary <- as.factor(pokemon$Legendary)
 pokemon <- na.omit(pokemon)
 trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 10)
@@ -129,7 +130,7 @@ pokemon <- na.omit(pokemon)
 set.seed(3333)
 knn_fit <- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "knn",
  trControl=trctrl,
- preProcess = c("center", "scale"),
+ preProcess = c("center", "scale"), #centering and scaling the data
  tuneLength = 10)
 knn_fit
 

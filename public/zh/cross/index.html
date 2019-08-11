@@ -135,13 +135,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 456, 455, 454, 455, 455, ... 
+Summary of sample sizes: 455, 456, 456, 458, 454, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.961943  0.6013342  4.218855
-  0.17117244  7.071905  0.4336066  5.217361
-  0.45274420  7.995433  0.3699801  5.779144
+  0.07165784  5.859771  0.6012200  4.270307
+  0.17117244  6.465297  0.5024722  4.814776
+  0.45274420  8.166896  0.3398754  6.057420
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -160,13 +160,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 454, 455, 456, 456, 456, 456, ... 
+Summary of sample sizes: 455, 455, 456, 455, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.728875  0.6110460  4.110709
-  0.17117244  6.641604  0.4718629  4.894044
-  0.45274420  8.246441  0.3297068  5.992793
+  0.07165784  5.759083  0.6086366  4.128548
+  0.17117244  6.592302  0.4827559  4.864081
+  0.45274420  8.271677  0.3296361  6.025990
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -214,12 +214,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-b        0.0000
 tax      0.0000
+b        0.0000
 dis      0.0000
+chas1    0.0000
 rad      0.0000
-zn       0.0000
-chas1    0.0000</code></pre>
+zn       0.0000</code></pre>
 <pre class="r"><code># 得到各个变量的重要性</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
