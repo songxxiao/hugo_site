@@ -225,10 +225,10 @@ km_fit #生存分析概要</code></pre>
 </p>
 </div>
 <pre class="r"><code>autoplot(km_fit) #ggplot2风格KM图</code></pre>
-<p><img src="../../post/survival.zh_files/figure-html/cw-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/survival_files/figure-html/cw-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
 autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
-<p><img src="../../post/survival.zh_files/figure-html/cw-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/survival_files/figure-html/cw-2.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="cox" class="section level2">
@@ -288,7 +288,7 @@ Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
 <pre class="r"><code>cox_fit &lt;- survfit(coxreg)
 #plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
 autoplot(cox_fit) #拟合值</code></pre>
-<p><img src="../../post/survival.zh_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/survival_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>##C-指数 Harrell&#39;s concordance index
 #coxreg$concordance
 
@@ -330,7 +330,7 @@ minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
 Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
 <pre class="r"><code>autoplot(aaregfit)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:areg"></span>
-<img src="../../post/survival.zh_files/figure-html/areg-1.png" alt="协变量作用如何随时间变化" width="100%" />
+<img src="../../post/survival_files/figure-html/areg-1.png" alt="协变量作用如何随时间变化" width="100%" />
 <p class="caption">
 Figure 1: 协变量作用如何随时间变化
 </p>

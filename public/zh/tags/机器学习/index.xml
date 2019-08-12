@@ -22,18 +22,19 @@
     </item>
     
     <item>
-      <title>交叉验证</title>
+      <title>交叉验证：基于CARET包</title>
       <link>/zh/cross/</link>
       <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/cross/</guid>
       <description>基本概念交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。
+划分测试集和训练集同样有助于更加客观地评价模型的泛化能力。同时，交叉验证也是模型调参的过程。
 交叉验证主要有以下种类：
 简单交叉验证 (hold-out cross validation)
 k折交叉验证 (K-fold cross-validation)
 留一交叉验证(leave-one-out cross validation)
 谢益辉的统计动画R包animation直观地展示了交叉验证方法。
-library(caret)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.3 396.902 0.02731 0 7.07 0 0.</description>
+library(caret)library(readr)library(tidyr)library(dplyr)library(magrittr)library(kknn)library(ggplot2)library(pROC)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.</description>
     </item>
     
   </channel>

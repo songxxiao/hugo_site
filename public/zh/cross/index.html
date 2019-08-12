@@ -7,8 +7,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>交叉验证 - Xiao Song</title>
-<meta property="og:title" content="交叉验证 - Xiao Song">
+<title>交叉验证：基于CARET包 - Xiao Song</title>
+<meta property="og:title" content="交叉验证：基于CARET包 - Xiao Song">
 
 
   <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -70,7 +70,7 @@
 
   <article class="article">
 
-    <h1 class="article-title">交叉验证</h1>
+    <h1 class="article-title">交叉验证：基于CARET包</h1>
 
     
     <span class="article-date">2019-05-25</span>
@@ -83,6 +83,7 @@
 <div id="section" class="section level1">
 <h1>基本概念</h1>
 <p>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。</p>
+<p>划分测试集和训练集同样有助于更加客观地评价模型的泛化能力。同时，交叉验证也是模型调参的过程。</p>
 <p>交叉验证主要有以下种类：</p>
 <ul>
 <li><p>简单交叉验证 (hold-out cross validation)</p></li>
@@ -90,7 +91,14 @@
 <li><p>留一交叉验证(leave-one-out cross validation)</p></li>
 </ul>
 <p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
-<pre class="r"><code>library(caret)</code></pre>
+<pre class="r"><code>library(caret)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(magrittr)
+library(kknn)
+library(ggplot2)
+library(pROC)</code></pre>
 </div>
 <div id="r" class="section level1">
 <h1>R示例</h1>
@@ -132,13 +140,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 454, 456, 455, 455, 456, ... 
+Summary of sample sizes: 455, 456, 456, 456, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.773994  0.6132864  4.117588
-  0.17117244  6.614233  0.4743554  4.910051
-  0.45274420  8.226960  0.3374905  5.943182
+  0.07165784  5.754002  0.6303396  4.214201
+  0.17117244  6.493253  0.5152743  4.832443
+  0.45274420  8.230149  0.3455251  6.042966
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -157,18 +165,17 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 454, 456, 454, 455, 456, 455, ... 
+Summary of sample sizes: 454, 455, 455, 455, 455, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.795540  0.6026849  4.170954
-  0.17117244  6.656407  0.4715952  4.911988
-  0.45274420  8.430011  0.3086941  6.104030
+  0.07165784  5.758149  0.6100734  4.159329
+  0.17117244  6.670842  0.4716949  4.942065
+  0.45274420  8.325495  0.3205173  6.063042
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
 <pre class="r"><code>importance &lt;- varImp(rpartFit, scale = F)
-# 得到各个变量的重要性
 plot(importance, xlab = &quot;变量重要性&quot;)</code></pre>
 <p><img src="../../post/cross_files/figure-html/cv-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
@@ -199,8 +206,7 @@ Resampling results across tuning parameters:
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
-<pre class="r"><code>#summary(rpartFit)
-varImp(rpartFit, scale = F)</code></pre>
+<pre class="r"><code>varImp(rpartFit, scale = F)# 变量的重要性</code></pre>
 <pre><code>rpart variable importance
 
         Overall
@@ -211,13 +217,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-chas1    0.0000
-dis      0.0000
 zn       0.0000
+chas1    0.0000
+b        0.0000
 tax      0.0000
 rad      0.0000
-b        0.0000</code></pre>
-<pre class="r"><code># 得到各个变量的重要性</code></pre>
+dis      0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -258,25 +263,35 @@ b        0.0000</code></pre>
 </ul>
 </blockquote>
 <p><a href="https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/">代码参考</a></p>
-<pre class="r"><code>library(readr)
-library(caret)
-library(kknn)
-
-pokemon &lt;- read_csv(&quot;E:/R_codes/others/Pokemon.csv&quot;)
+<div id="kk-nearest-neighbor" class="section level2">
+<h2>K近邻算法(k-nearest neighbor)</h2>
+<ul>
+<li>K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。</li>
+<li>在样本比较少的情况下，通常使用交叉验证确定K值。</li>
+<li>K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。</li>
+</ul>
+<pre class="r"><code>pokemon &lt;- read_csv(&quot;E:/R_codes/others/Pokemon.csv&quot;)
 colnames(pokemon)[1] &lt;- &#39;id&#39; #修改变量名
 colnames(pokemon)[3] &lt;- &#39;Type1&#39;
 colnames(pokemon)[4] &lt;- &#39;Type2&#39;
 
 pokemon$Legendary &lt;- as.factor(pokemon$Legendary)
 pokemon &lt;- na.omit(pokemon)
-trctrl &lt;- trainControl(method = &quot;repeatedcv&quot;, number = 10, repeats = 10)
 
-pokemon &lt;- na.omit(pokemon)
+pokemon &lt;- pokemon %&gt;%
+  drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
+  select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation)
+  
+sampled &lt;- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
+trainpok &lt;- pokemon[sampled,]
+testpok &lt;- pokemon[-sampled,]
+
+trctrl &lt;- trainControl(method = &quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
+=T)
 
 set.seed(3333)
 knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;knn&quot;,
  trControl=trctrl,
- preProcess = c(&quot;center&quot;, &quot;scale&quot;), #centering and scaling the data
  tuneLength = 10)
 knn_fit</code></pre>
 <pre><code>k-Nearest Neighbors 
@@ -285,25 +300,83 @@ knn_fit</code></pre>
   8 predictor
   2 classes: &#39;FALSE&#39;, &#39;TRUE&#39; 
 
-Pre-processing: centered (44), scaled (44) 
+No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
 Summary of sample sizes: 373, 373, 372, 372, 372, 373, ... 
 Resampling results across tuning parameters:
 
-  k   Accuracy   Kappa      
-   5  0.9188560  0.300507757
-   7  0.9084495  0.178126329
-   9  0.9057433  0.146422463
-  11  0.8987631  0.005620524
-  13  0.9036063  0.010462884
-  15  0.9033682  0.000000000
-  17  0.9033682  0.000000000
-  19  0.9033682  0.000000000
-  21  0.9036121  0.003756345
-  23  0.9038502  0.007518721
+  k   Accuracy   Kappa    
+   5  0.9400755  0.6798640
+   7  0.9466086  0.7129350
+   9  0.9456678  0.7151342
+  11  0.9451800  0.7083078
+  13  0.9487921  0.7330679
+  15  0.9480720  0.7290125
+  17  0.9492915  0.7328239
+  19  0.9471138  0.7166178
+  21  0.9466376  0.7151965
+  23  0.9461614  0.7147069
 
 Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was k = 5.</code></pre>
+The final value used for the model was k = 17.</code></pre>
+<pre class="r"><code>kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) 
+kacc &lt;- kacc[,1:2]
+ggplot(kacc,aes(k,Accuracy)) +
+geom_line() +
+geom_point() +
+scale_x_continuous(breaks=seq(5,26,1))</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:4"></span>
+<img src="../../post/cross_files/figure-html/4-1.png" alt="K值和准确率的关系" width="65%" />
+<p class="caption">
+Figure 1: K值和准确率的关系
+</p>
+</div>
+<pre class="r"><code>pokemon &lt;- pokemon %&gt;%
+  mutate(test_pred=predict(knn_fit,newdata=pokemon))
+confusionMatrix(pokemon$test_pred,pokemon$Legendary)</code></pre>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE TRUE
+     FALSE   360    5
+     TRUE     14   35
+                                          
+               Accuracy : 0.9541          
+                 95% CI : (0.9293, 0.9721)
+    No Information Rate : 0.9034          
+    P-Value [Acc &gt; NIR] : 9.684e-05       
+                                          
+                  Kappa : 0.7611          
+                                          
+ Mcnemar&#39;s Test P-Value : 0.06646         
+                                          
+            Sensitivity : 0.9626          
+            Specificity : 0.8750          
+         Pos Pred Value : 0.9863          
+         Neg Pred Value : 0.7143          
+             Prevalence : 0.9034          
+         Detection Rate : 0.8696          
+   Detection Prevalence : 0.8816          
+      Balanced Accuracy : 0.9188          
+                                          
+       &#39;Positive&#39; Class : FALSE           
+                                          </code></pre>
+<pre class="r"><code>pokemon$test_pred &lt;- as.ordered(pokemon$test_pred)
+pokemon$Legendary &lt;- as.ordered(pokemon$Legendary)
+roc(pokemon$test_pred,pokemon$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:5"></span>
+<img src="../../post/cross_files/figure-html/5-1.png" alt="ROC曲线" width="65%" />
+<p class="caption">
+Figure 2: ROC曲线
+</p>
+</div>
+<pre><code>
+Call:
+roc.default(response = pokemon$test_pred, predictor = pokemon$Legendary,     plot = T, print.auc = T, auc.polygon = T, max.auc.polygon = T,     auc.polygon.col = &quot;skyblue&quot;, print.thres = T, xlab = &quot;伪正类率&quot;,     ylab = &quot;真正类率&quot;)
+
+Data: pokemon$Legendary in 365 controls (pokemon$test_pred FALSE) &lt; 49 cases (pokemon$test_pred TRUE).
+Area under the curve: 0.8503</code></pre>
+</div>
 </div>
 
     </div>

@@ -1,0 +1,316 @@
+---
+title: "初中阶段成绩预测模型"
+author: ' '
+date: '2019-06-30'
+slug: edutree
+tags: ['机器学习','应用统计','R']
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+---
+
+本报告使用了`CART` ；`Random Forest`算法。
+
+
+---
+
+
+
+# 数据介绍  
+
+本文采用[中国教育追踪调查](https://ceps.ruc.edu.cn/) (China Education Panel Survey, CEPS)2013-2014学年基线数据。
+采用PPS抽样方法，以人口平均受教育水平和人口比例为分层变量并通过两阶段分层抽样从从全国随机抽取了28个县级单位作为调查点。具体而言，CEPS在每个入样县（区）所辖地理范围内分别抽取4所初中学校。并在每所入样学校中分别抽取4个班级，包括2个七年级班和2个九年级班。
+
+# 算法介绍
+
+CART算法全称为分类与回归树（Classification and Regression Trees）。它可以处理分类与回归算法，以及生存分析因变量。作为一种非参数的机器学习方法，CART决策树无需对数据的分布做任何假定。CART算法划分数据的依据是变量的取值顺序，因此它对异常值不敏感。最后，通过交叉验证（Cross Validation）的方法求得预测误差。
+回归树模型可表示为：
+\[f(x) = \sum\limits_{m = 1}^M {{c_m}I(x \in {R_m})} \]
+ 
+其中，$x$是一系列输入特征（自变量），${R_1},{R_2},...,{R_m}$是输入空间被划分的M个区域。 是区域${R_m}$对应的最优值。$I$代表的是指示函数（indicator function），当输入变量$x$属于区域 ${R_m}$时，输出为1，否则输出为0。
+CART算法选择基尼系数进行属性划分。CART算法可以运用于分类和回归问题中。
+
+为了防止过拟合问题(Over-fitted),需要对过于复杂的树模型进行剪枝。这也是训练模型的重要过程。通过改善模型的复杂度参数(Complexity Parameter, CP)。在CART算法中，复杂度参数定义如下：
+
+\[{{\rm{C}}_\alpha }(T) = C(T) + \alpha \left| T \right|\]
+
+其中，$T$为任意子树。$C(T)$为对训练数据的预测误差（如基尼指数）， $\left| T \right|$为子树的叶结点个数，$\alpha  \ge 0$为参数，${{\rm{C}}_\alpha }(T)$是参数为$\alpha$时的子树$T$的整体损失。参数$\alpha$测量了模型的复杂度\cite{breiman2017}。
+
+# 变量
+
+本研究依据以往教育学和社会学文献，选取了50个自变量进行预测。为了降低测量误差，本研究在变量选取的过程中遵循了以下两个原则：1.尽可能挑选“客观的”变量。2.尽可能挑选直观上对学习成绩有重要影响的变量。
+
+## 因变量
+
+
+本研究的因变量是被调查学生上一次期中考试的成绩。包括数学成绩、语文成绩、英语成绩。我们将同时对总成绩进行分析。
+
+为了讨论学习成绩的门槛效应，我们将数学成绩是否位于所有学生的前25\%(是=1，否=0)单独划分为一个分类变量建立分类树。图\@ref(fig:b) 展示了标准化总成绩的密度直方图估计。可以发现，标准化总成绩基本上呈现了正态分布。
+
+图\@ref(fig:a) 展示了以随机抽取的30所学校为分组变量，原始数学成绩为因变量的箱线图。
+
+## 自变量
+
+下面展示了自变量以及自变量在模型中的编码：
+
+家庭变量：每星期零用钱(money)、上兴趣班费用总计(clfee)、监督孩子的作业(qianzi)、花在孩子身上的时间(lifetm)、孩子交流方言(dial)、父母交流方言(chidia)、家长教育期望(eduyexp)、对孩子未来的信心(futcfd)、孩子户口类型(huko)、家长教育程度(eduy)、家长政治面貌(dangy)、住房是否生产经营用(houspro)。  
+
+个人变量：性别(sex)、是否独生子女(onechi)、父亲教育水平(faedu)、母亲教育水平(maedu)、爸爸经常酗酒(drunk)、父母经常吵架(qurel)、父母之间关系很好(relation)、有独立书桌(desk)、家里有电脑和网络(net)、家庭交流方言(dialect)、父母督促学习天数(chkhmwk chkcouse)、父母教育期望(eduexp)。
+
+学校变量：学校性质(schtype)、教室数量(schcsrm)、学校电脑数(comno)、图书数量(bknum)、生均财政拨款(buget)、持有教师资格证人数(eduqua)、打架斗殴(fight)、破坏公物(brkpb)、吸烟(smok)、饮酒(drink)、高级教师年收入(teainc)。
+
+班级变量：教师总课时(classtm)、
+备课时间(clpre)、批改作业时间(revitm)、班主任教授本班科目(subject)、认识多少家长(know)、是否有抽烟喝酒的学生(drsmok)、与学生交流时间(commhr)。
+
+[R语言移除缺失值 NA.RM](http://www.mamicode.com/info-detail-1402416.html)
+
+```{r b,message = F,comment = NA,warning = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图(分年级)',fig.asp=0.4}
+setwd("E:/edu/data2")
+library(haven)
+library(tidyverse)
+library(rpart)
+library(rpart.plot)
+library(lattice)
+require(stats)
+library(ggplot2)
+library(pROC)
+library(randomForest)
+
+ceps <- read_dta("E:/edu/data2/ceps.dta")
+ceps <- lapply(ceps, unclass)
+ceps <- data.frame(ceps)
+ceps$schids <- as.factor(ceps$schids)
+#attach(ceps)
+#histogram(sdtotal,equal.widths = TRUE, nint = 70, xlab = "标准化总成绩",type = "density",ylab = '密度')
+
+ceps$grade9 <- as.factor(ceps$grade9)
+dus <- ggplot(ceps, aes(x = sdtotal,group=grade9,fill=grade9)) + geom_histogram(density = 70)+
+xlab('总成绩') + ylab('频数')
+#七年级和九年级的比较
+shux <- ggplot(ceps, aes(x = sdtotal,group=grade9,fill=grade9,color=grade9)) + geom_density(alpha=1/2) +
+xlab('总成绩') + ylab('密度')
+
+library(easyGgplot2)
+multiplot <- ggplot2.multiplot(dus,shux)
+multiplot  
+
+```
+
+
+
+```{r a,message = F,comment = NA,warning = F,echo = T,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
+setwd("E:/edu/data2")
+ceps <- read_dta("E:/edu/data2/ceps.dta")
+#抽出30所学校，作成绩箱线图
+ceps1 <- ceps %>% 
+group_by(schids) %>% 
+summarize(mathmean = mean(tr_mat, na.rm = T))
+set.seed(2018)
+sample <- sample(1:nrow(ceps1),30,replace = F)#随机抽取30个学校
+ceps1 <- ceps1[sample,]
+ceps1 <- ceps1$schids #提取抽中学校编号的向量
+delte <- subset(ceps,schids == ceps1[1])
+#遍历抽中的学校id，纵向合并数据框
+for (i in ceps1) delte <- rbind(delte, subset(ceps,schids == i)) 
+#箱线图
+delte$schids <- as.factor(delte$schids)  
+ggplot(delte, aes(schids,tr_mat)) + 
+  geom_boxplot(size=0.1,outlier.colour ='sky blue',fill='sky blue') +
+xlab('学校代码') + ylab('数学原始成绩')+
+theme_bw()
+
+ceps <- lapply(ceps, unclass)
+ceps <- data.frame(ceps)
+```
+
+```{r others,message = F,comment = NA,warning = F,eval= F,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
+#独生子女
+dus <- ggplot(ceps, aes(onechi,tr_mat,na.rm=T)) + 
+  geom_boxplot(size=0.1,outlier.colour ="#56B4E9",position=position_dodge(1),fill='sky blue') +
+  xlab('独生子女') + ylab('数学原始成绩')
+
+#ceps$maedu10 <- ifelse(ceps$maedu>16,TRUE,FALSE)
+shux <- ceps$grade9 <- as.factor(ceps$grade9)
+ggplot(ceps, aes(sex,tr_mat)) + 
+  facet_wrap(~grade9, nrow = 1) +
+  geom_boxplot(size=0.1,outlier.colour ="#56B4E9",fill='sky blue') +
+  xlab('性别') + ylab('数学原始成绩')
+  
+#dus shux tushu
+#tushu <- ggplot(ceps, aes(bknum, tr_mat)) +
+  geom_point(size=2,na.rm=T) +
+  geom_jitter(height = 2, width = 9,na.rm=T) +
+  geom_smooth(method='loess') +
+  xlab('学校图书数量') + ylab('数学原始成绩')
+
+library(easyGgplot2)
+multiplot <- ggplot2.multiplot(dus,shux)
+multiplot  
+```
+---
+
+# 分析结果
+
+## 回归树
+
+图\@ref(fig:s) 展示了总成绩的回归结果。由于可能存在七年级和九年级学生考试总成绩的不同的问题[^1]。此处将九年级子样本单独进行分析。
+
+[^1]:七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。
+
+```{r re,message=F,comment=NA,warning=F,message = F, include = T}
+#建立回归树
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
+tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = "anova",parms = list(split="gini"),control=cont,na.action = na.omit)
+
+```
+
+```{r s, fig=TRUE,pdf=TRUE,comment=NA,echo=T,warning=FALSE,out.width ='100%',fig.cap="总成绩的回归树",fig.align='center'}
+tree$cptable #复杂度参数表
+rpart.plot(tree)
+```
+
+图\@ref(fig:fig1) 展示的是数学原始成绩是否位于前25\%的分类决策树。首先，我们在备选的约50个自变量中纳入学校哑变量。仅考虑家庭、个体、班级因素对学生学习成绩的影响。通过划分训练集和测试集的方式计算模型的预测错误率。检验模型的泛化能力。之后对原始的树进行剪枝，剪枝后的分类树如图\@ref(fig:fig5) 所示。
+
+[R语言表格教程](https://www.jianshu.com/p/08c28c5c55a7)
+
+```{r fig1,message = F, comment = NA,warning =F,include=T,fig.align='center',out.width ='100%',fig.cap='未剪枝的分类树'}
+set.seed(1212323) #设置随机数种子
+
+#简单交叉验证划分测试集和训练集
+sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
+test <- ceps[sampled,] #测试集
+train <- ceps[-sampled,] #训练集
+
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01) #设置参数
+
+cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno +  bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,
+                 data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit,model=T) #决策树
+#knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
+rpart.plot(cltree3)
+
+test <- na.omit(test) #删除缺失值
+y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
+
+pr <- y.pr[,2] 
+test <- cbind(test,pr)
+modelroc <- roc(test$matgreat,test$pr)
+
+test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
+attach(test)
+tab <- table(yhat,matgreat) 
+names(dimnames(tab))<-c("预测值","真实值")
+treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+# 混淆矩阵
+tab
+treeerror #测试集错误率
+```
+
+
+```{r fig5,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树'}
+cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
+
+cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit) #决策树
+
+#knitr::kable(printcp(cltree3),caption="复杂度参数表",digits =4)
+cltree3$variable.importance #各个变量的重要性程度
+
+rpart.plot(cltree3)
+```
+
+```{r fig6, message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树的ROC曲线'}
+
+test <- na.omit(test) #删除缺失值
+y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
+
+pr <- y.pr[,2] 
+test <- cbind(test,pr)
+modelroc <- roc(test$matgreat,test$pr)
+
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+
+test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
+attach(test)
+tab <- table(yhat,matgreat) 
+treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+names(dimnames(tab))<-c("预测值","真实值") #矩阵小标题
+tab #混淆矩阵，行为测试集预测值，列为测试集观测值
+treeerror #测试集错误率
+```
+
+
+从图\@ref(fig:fig5) 发现，对因变量分类有显著贡献的变量有学校哑变量、对孩子未来的信心、上兴趣班费用总计、与学生交流时间。可见学校层面的特征对数学成绩的影响非常强。
+
+在初次拟合分类树之后，对分类树进行剪枝。通过第一棵分类树的结果，我们选取预测误差(即表中的xerror通过交叉验证获得)最小的CP值带入到下一个模型中，最终的验证集错误率在25\%左右。
+
+## [交叉验证](http://topepo.github.io/caret/train-models-by-tag.html#implicit-feature-selection)
+
+使用`caret`包进行10次10折交叉验证,同样使用CART算法。图\@ref(fig:fig7) 展示了训练后模型的ROC曲线。
+
+```{r fig7,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='训练后模型的ROC曲线和AUC值'}
+
+library(caret)
+#install.packages('e1071')
+library(e1071)
+
+ceps$matgreat <- as.factor(ceps$matgreat)
+ceps <- na.omit(ceps)
+#10次10折交叉验证
+repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions=TRUE)
+
+ rpartFit <- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
+                    data = ceps,
+                    method = "rpart",
+                    trControl = repeatedcv)
+rpartFit
+test <- na.omit(ceps) #删除缺失值
+y.pr <- predict(rpartFit,ceps,type="prob") 
+pr <- y.pr[,2] 
+ceps <- cbind(ceps,pr)
+modelroc <- roc(ceps$matgreat,ceps$pr)
+
+#ROC 曲线
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+
+ceps <- within(ceps,{predc <- predict(rpartFit); pr <- predict(rpartFit,type="prob")})
+tab <- table(ceps$predc,ceps$matgreat)
+treeerror <- (sum(tab)-sum(diag(tab)))/sum(tab)
+names(dimnames(tab))<-c("预测值","真实值")
+#混淆矩阵
+tab
+#错误率
+treeerror
+```
+
+
+```{r fig8,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='分类树的复杂度参数与准确率的关系'}
+plot(rpartFit,xlab ='复杂度参数',ylab='准确率(重复交叉验证)')
+```
+
+## 随机森林
+
+作为`Bagging`方法的扩展，随机森林采用决策树作为基分类器。随机森林算法不仅做到了随机样本扰动，还引入了随机属性扰动。这使得随机森林比`Bagging`法具有更强的泛化能力。具体而言，随机森林首先使用`Bootstrap`法同时对数据行和列进行重复抽样。其次，每一次抽出的子样本都使用一棵决策树拟合。在构建每一棵决策树的过程中，可以无需剪枝。由于属性和样本的随机性，随机森林并不会遇到过拟合的问题。当需要对样本进行预测时，可将样本属性值带入每一棵决策树中计算结果，并通过投票法确定被选择最多的那个类。
+
+
+
+
+```{r randomForest,message = F,comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=1.2,fig.cap='变量重要性'}
+
+train$matgreat <- as.factor(train$matgreat)
+train <- na.omit(train)
+train <- filter(train, is.na(matgreat)==F)
+
+ratree <- randomForest(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,data = subset(train,grade9 == 1),importance=T,proximity=T,mtry=16)
+ratree
+## 混淆矩阵
+ratree$confusion
+#计算模型变量的重要性
+importance(ratree,type=1, scale=T)
+
+varImpPlot(ratree,type=1)
+
+
+```
+
+

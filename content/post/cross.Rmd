@@ -1,5 +1,5 @@
 ---
-title: "交叉验证"
+title: "交叉验证：基于CARET包"
 author: ' '
 date: '2019-05-25'
 slug: cross
@@ -15,6 +15,8 @@ output:
 
 交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。
 
+划分测试集和训练集同样有助于更加客观地评价模型的泛化能力。同时，交叉验证也是模型调参的过程。
+
 
 交叉验证主要有以下种类：
 
@@ -28,6 +30,13 @@ output:
 
 ```{r 1,comment = NA,warning = F,message = F, include = T,fig.align='center'}
 library(caret)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(magrittr)
+library(kknn)
+library(ggplot2)
+library(pROC)
 ```
 
 # R示例
@@ -64,7 +73,6 @@ rpartFit <- train(medv ~ .,
 rpartFit
 
 importance <- varImp(rpartFit, scale = F)
-# 得到各个变量的重要性
 plot(importance, xlab = "变量重要性")
 ```
 
@@ -83,9 +91,8 @@ rpartFit <- train(medv ~ .,
                   method = "rpart",
                   trControl = rfControl)
 rpartFit
-#summary(rpartFit)
-varImp(rpartFit, scale = F)
-# 得到各个变量的重要性
+
+varImp(rpartFit, scale = F)# 变量的重要性
 ```
 
 + 我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。
@@ -111,11 +118,13 @@ varImp(rpartFit, scale = F)
 
 [代码参考](https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/)
 
-```{r 4,comment = NA,warning = F,message = F, include = T,fig.align='center'}
-library(readr)
-library(caret)
-library(kknn)
+## K近邻算法(k-nearest neighbor)
 
++ K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。
++ 在样本比较少的情况下，通常使用交叉验证确定K值。
++ K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
+
+```{r 4,comment = NA,warning = F,message = F, include = T,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
 pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
 colnames(pokemon)[1] <- 'id' #修改变量名
 colnames(pokemon)[3] <- 'Type1'
@@ -123,19 +132,43 @@ colnames(pokemon)[4] <- 'Type2'
 
 pokemon$Legendary <- as.factor(pokemon$Legendary)
 pokemon <- na.omit(pokemon)
-trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 10)
 
-pokemon <- na.omit(pokemon)
+pokemon <- pokemon %>%
+  drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
+  select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation)
+  
+sampled <- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
+trainpok <- pokemon[sampled,]
+testpok <- pokemon[-sampled,]
+
+trctrl <- trainControl(method = "repeatedcv", number =10,repeats =10, savePredictions
+=T)
 
 set.seed(3333)
 knn_fit <- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "knn",
  trControl=trctrl,
- preProcess = c("center", "scale"), #centering and scaling the data
  tuneLength = 10)
 knn_fit
 
+kacc <- as.data.frame(knn_fit[["results"]]) 
+kacc <- kacc[,1:2]
+ggplot(kacc,aes(k,Accuracy)) +
+geom_line() +
+geom_point() +
+scale_x_continuous(breaks=seq(5,26,1))
+
+pokemon <- pokemon %>%
+  mutate(test_pred=predict(knn_fit,newdata=pokemon))
+confusionMatrix(pokemon$test_pred,pokemon$Legendary)
 ```
 
+
+
+```{r 5,comment = NA,warning = F,message = F, include = T,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
+pokemon$test_pred <- as.ordered(pokemon$test_pred)
+pokemon$Legendary <- as.ordered(pokemon$Legendary)
+roc(pokemon$test_pred,pokemon$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')
+```
 
 
 
