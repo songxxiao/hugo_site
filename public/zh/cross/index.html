@@ -7,8 +7,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>交叉验证：基于CARET包 - Xiao Song</title>
-<meta property="og:title" content="交叉验证：基于CARET包 - Xiao Song">
+<title>交叉验证：基于Caret包 - Xiao Song</title>
+<meta property="og:title" content="交叉验证：基于Caret包 - Xiao Song">
 
 
   <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -70,7 +70,7 @@
 
   <article class="article">
 
-    <h1 class="article-title">交叉验证：基于CARET包</h1>
+    <h1 class="article-title">交叉验证：基于Caret包</h1>
 
     
     <span class="article-date">2019-05-25</span>
@@ -140,13 +140,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 456, 456, 456, 455, 455, ... 
+Summary of sample sizes: 455, 456, 455, 456, 455, 457, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.754002  0.6303396  4.214201
-  0.17117244  6.493253  0.5152743  4.832443
-  0.45274420  8.230149  0.3455251  6.042966
+  0.07165784  5.571504  0.6410690  3.971202
+  0.17117244  6.809436  0.4584998  5.134741
+  0.45274420  8.755800  0.2741602  6.314942
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -165,13 +165,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 454, 455, 455, 455, 455, 456, ... 
+Summary of sample sizes: 457, 454, 454, 455, 456, 454, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.758149  0.6100734  4.159329
-  0.17117244  6.670842  0.4716949  4.942065
-  0.45274420  8.325495  0.3205173  6.063042
+  0.07165784  5.731806  0.6144760  4.146801
+  0.17117244  6.698008  0.4679246  4.991892
+  0.45274420  8.320292  0.3286059  6.036814
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -217,12 +217,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-zn       0.0000
 chas1    0.0000
 b        0.0000
+dis      0.0000
 tax      0.0000
 rad      0.0000
-dis      0.0000</code></pre>
+zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>

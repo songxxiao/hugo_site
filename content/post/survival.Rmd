@@ -93,7 +93,7 @@ $$\hat \lambda  = \frac{d}{{\sum {{t_i} - (n - d) \cdot 40} }}$$
 
 人口学、医学中最多的情况是left-truncated & right-cencored(LT-RC)数据。
 
-非参数模型Aalen’s additive regression model可以替代Cox模型。R的```survival```包的```aareg```函数可以进行拟合。
+非参数模型Aalen’s additive regression model可以替代Cox模型。R的``survival``包的``aareg``函数可以进行拟合。
 
 ---
 
@@ -168,7 +168,7 @@ summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
 knitr::include_graphics("/img/survival/life2.jpg")
 ```
 
-```{r cw,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+```{r cw,comment = NA,warning = F,message = F,fig.align='center',out.width ='70%'}
 autoplot(km_fit) #ggplot2风格KM图
 
 km_trt_fit <- survfit(km ~ female, data=cwg)#分性别KM估计

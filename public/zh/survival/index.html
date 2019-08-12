@@ -225,10 +225,10 @@ km_fit #生存分析概要</code></pre>
 </p>
 </div>
 <pre class="r"><code>autoplot(km_fit) #ggplot2风格KM图</code></pre>
-<p><img src="../../post/survival_files/figure-html/cw-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/survival_files/figure-html/cw-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
 autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
-<p><img src="../../post/survival_files/figure-html/cw-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/survival_files/figure-html/cw-2.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="cox" class="section level2">
