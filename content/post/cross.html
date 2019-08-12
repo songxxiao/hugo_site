@@ -1,5 +1,5 @@
 ---
-title: "交叉验证：基于Caret包"
+title: "交叉验证：基于caret包"
 author: ' '
 date: '2019-05-25'
 slug: cross
@@ -72,13 +72,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 456, 455, 456, 455, 457, ... 
+Summary of sample sizes: 455, 454, 457, 457, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.571504  0.6410690  3.971202
-  0.17117244  6.809436  0.4584998  5.134741
-  0.45274420  8.755800  0.2741602  6.314942
+  0.07165784  5.744931  0.6110250  4.077373
+  0.17117244  6.840010  0.4431344  5.007557
+  0.45274420  8.638821  0.2776978  6.171185
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -97,18 +97,30 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 457, 454, 454, 455, 456, 454, ... 
+Summary of sample sizes: 454, 455, 456, 455, 456, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.731806  0.6144760  4.146801
-  0.17117244  6.698008  0.4679246  4.991892
-  0.45274420  8.320292  0.3286059  6.036814
+  0.07165784  5.722060  0.6197902  4.126977
+  0.17117244  6.631935  0.4801628  4.916017
+  0.45274420  8.337658  0.3308242  6.050239
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
 <pre class="r"><code>importance &lt;- varImp(rpartFit, scale = F)
-plot(importance, xlab = &quot;变量重要性&quot;)</code></pre>
+imp &lt;- as.data.frame(importance[[&quot;importance&quot;]])
+
+imp &lt;- imp %&gt;%
+  mutate(name=rownames(imp)) %&gt;%
+  filter(Overall&gt;0) %&gt;%
+  rename(&#39;impt&#39;=&#39;Overall&#39;) #%&gt;%
+  #mutate(varname = fct_reorder(varname,impt))
+
+ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
+  geom_bar(stat = &#39;identity&#39;,width = 0.1,position = &#39;dodge&#39;)+
+  coord_flip()+
+  xlab(&#39;重要性&#39;)+
+  ylab(&#39;变量名&#39;)</code></pre>
 <p><img src="/post/cross_files/figure-html/cv-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="leave-one-out-cross-validation" class="section level2">
@@ -149,12 +161,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-chas1    0.0000
-b        0.0000
-dis      0.0000
-tax      0.0000
 rad      0.0000
-zn       0.0000</code></pre>
+chas1    0.0000
+dis      0.0000
+zn       0.0000
+b        0.0000
+tax      0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>

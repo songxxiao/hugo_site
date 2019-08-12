@@ -1,5 +1,5 @@
 ---
-title: "交叉验证：基于Caret包"
+title: "交叉验证：基于caret包"
 author: ' '
 date: '2019-05-25'
 slug: cross
@@ -73,7 +73,20 @@ rpartFit <- train(medv ~ .,
 rpartFit
 
 importance <- varImp(rpartFit, scale = F)
-plot(importance, xlab = "变量重要性")
+imp <- as.data.frame(importance[["importance"]])
+
+imp <- imp %>%
+  mutate(name=rownames(imp)) %>%
+  filter(Overall>0) %>%
+  rename('impt'='Overall') #%>%
+  #mutate(varname = fct_reorder(varname,impt))
+
+ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
+  geom_bar(stat = 'identity',width = 0.1,position = 'dodge')+
+  coord_flip()+
+  xlab('重要性')+
+  ylab('变量名')
+
 ```
 
 
