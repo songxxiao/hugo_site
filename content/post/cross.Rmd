@@ -82,7 +82,7 @@ imp <- imp %>%
   #mutate(varname = fct_reorder(varname,impt))
 
 ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
-  geom_bar(stat = 'identity',width = 0.1,position = 'dodge')+
+  geom_bar(stat = 'identity',width = 0.1)+
   coord_flip()+
   xlab('重要性')+
   ylab('变量名')
@@ -181,6 +181,7 @@ confusionMatrix(pokemon$test_pred,pokemon$Legendary)
 pokemon$test_pred <- as.ordered(pokemon$test_pred)
 pokemon$Legendary <- as.ordered(pokemon$Legendary)
 roc(pokemon$test_pred,pokemon$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')
+#ggroc()
 ```
 
 

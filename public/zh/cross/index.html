@@ -140,13 +140,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 454, 457, 457, 456, 455, ... 
+Summary of sample sizes: 454, 455, 457, 456, 454, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.744931  0.6110250  4.077373
-  0.17117244  6.840010  0.4431344  5.007557
-  0.45274420  8.638821  0.2776978  6.171185
+  0.07165784  5.879360  0.5969992  4.332896
+  0.17117244  6.228259  0.5368709  4.648677
+  0.45274420  8.584948  0.2709517  6.149787
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -165,13 +165,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 454, 455, 456, 455, 456, 456, ... 
+Summary of sample sizes: 457, 455, 455, 456, 454, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.722060  0.6197902  4.126977
-  0.17117244  6.631935  0.4801628  4.916017
-  0.45274420  8.337658  0.3308242  6.050239
+  0.07165784  5.649639  0.6244109  4.093195
+  0.17117244  6.526943  0.4909907  4.846807
+  0.45274420  8.331773  0.3220911  6.070339
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -185,7 +185,7 @@ imp &lt;- imp %&gt;%
   #mutate(varname = fct_reorder(varname,impt))
 
 ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
-  geom_bar(stat = &#39;identity&#39;,width = 0.1,position = &#39;dodge&#39;)+
+  geom_bar(stat = &#39;identity&#39;,width = 0.1)+
   coord_flip()+
   xlab(&#39;重要性&#39;)+
   ylab(&#39;变量名&#39;)</code></pre>
@@ -230,11 +230,11 @@ indus    0.2595
 crim     0.2484
 age      0.2089
 rad      0.0000
-chas1    0.0000
-dis      0.0000
-zn       0.0000
 b        0.0000
-tax      0.0000</code></pre>
+chas1    0.0000
+tax      0.0000
+dis      0.0000
+zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -388,6 +388,7 @@ roc.default(response = pokemon$test_pred, predictor = pokemon$Legendary,     plo
 
 Data: pokemon$Legendary in 365 controls (pokemon$test_pred FALSE) &lt; 49 cases (pokemon$test_pred TRUE).
 Area under the curve: 0.8503</code></pre>
+<pre class="r"><code>#ggroc()</code></pre>
 </div>
 </div>
 

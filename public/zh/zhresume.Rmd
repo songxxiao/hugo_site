@@ -41,7 +41,9 @@ slug: zhresume
 
 + [狗熊会](http://www.xiong99.com.cn/about.php) 在线实习项目 &emsp;2019年5月&emsp;      
 课程：[信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)  
-使用Python的`Pandas`、`Numpy`和`scikit-learn`库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
+使用Python的`Pandas`、`Numpy`和`scikit-learn`库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的[数据分析报告](https://xsong.ltd/archives/pandas/scorecard)。
+
+
 
 ### 科研经历
 
