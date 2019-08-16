@@ -68,7 +68,8 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 ```{r b,message = F,comment = NA,warning = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图(分年级)',fig.asp=0.4}
 setwd("E:/edu/data2")
 library(haven)
-library(tidyverse)
+library(dplyr)
+library(magrittr)
 library(rpart)
 library(rpart.plot)
 library(lattice)

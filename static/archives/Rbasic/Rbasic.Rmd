@@ -11,18 +11,23 @@ slug: basicr
 ## bookdown themes:https://bookdown.org/yihui/bookdown/theming.html
 ---
 
+
+
+# 基本对象
+
 模式强制转换：字符串：`as.character()`,整数：`as.integer()`,向量：`as.vector()`, 数据框：`as.data.frame()`
 
 `cbind()`把矩阵横向合并成一个大矩阵（列方式），而`rbind()`是纵向合并（行方式）。
-
-#基本对象
 
 ## 向量
 
 
 ## 数组和矩阵
 
-```{r a ,message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r a ,message = F, comment = NA,warning = F,include = T}
+library(dplyr)
+`%>%` <- magrittr::`%>%`
+
 mar<-c(652,1537,598,242,36,46,38,21,218,327,106,67)
 caff.marital<-matrix(mar,nrow=3,byrow=T) #byrow=T通过行来填充
 caff.marital
@@ -69,10 +74,7 @@ result[,,'Matrix2'] #索引
 
 包括`sapply()`, `lapply()`, 和 `tapply()`
 
-```{r b ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 
-
-```
 
 
 `lapply()`默认返回值是列表
@@ -81,16 +83,15 @@ result[,,'Matrix2'] #索引
 
 # 循环
 `for`循环
-```{r for ,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r for ,message = F, comment = NA,warning = F, include = T}
 pp <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers")
 for(i in seq_along(pp)) print(pp[i])
 ```
 
-# `tidyverse`处理缺失值
+# `dplyr`处理缺失值
 
 
-```{r c ,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
-library(tidyverse)
+```{r c ,message = F, comment = NA,warning = F, include = T}
 stocks <- tibble(
 year = c(2015, NA, 2015, 2015, NA, 2016, 2016),
 qtr = c( 1, 2, NA, NA, 2, NA, 4),
@@ -101,19 +102,67 @@ knitr::kable(stocks,caption = '数据概要')
 
 缺失值重编码成其他值：
 
-```{r d,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
-stocks <- stocks %>%
-  mutate(year= ifelse(is.na(qtr)==T,9999,year))
-knitr::kable(stocks,caption = '数据概要')
++ 任务，将`qtr`等于`NA`的行的`year`变量重编码为`9999`
+
++ `dplyr::recode`无法给出条件
+
+```{r d,message = F, comment = NA,warning = F, include = T}
+stocks %>% mutate(year= ifelse(is.na(qtr),9999,year))
+
+stocks %>% mutate(year=case_when(
+  is.na(qtr) ~ 9999,
+  is.na(qtr)==F ~ year,
+))
+
+stocks %>% mutate(year=replace(year,is.na(qtr),9999))
+
+
 ```
 
 其他值重编码成缺失值：
-```{r e,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
-stocks <- stocks %>%
-  mutate(return=ifelse(year>2016 & is.na(year) == F, NA,return))
-knitr::kable(stocks,caption = '数据概要')
+
++ 
+
++ 使用`na_if`。但是无法给出条件。
+
+```{r e,message = F, comment = NA,warning = F, include = T}
+stocks %>% mutate(return=ifelse(year==2016,NA,return))
+
+stocks %>% mutate(return=replace(return,year==2016,NA))
+
+stocks %>% mutate(return=na_if(return,year==2016))
+
+stocks %>% mutate(year=na_if(year,2016))
+
+stocks %>% mutate(return=na_if(year==2016,return))
+
 ```
 
+# `dplyr`数据合并
+
+```{r g,message = F, comment = NA,warning = F, include = T}
+
+myData <- data.frame(
+    nation=rep(c('USA','Japan','Libya'),3),
+    subregion=rep(c('north','south','middle'),each=3),
+    Awesomeness=rnorm(9)
+    )
+myData
+
+countryData <- data.frame(
+    nation=c('USA','Japan','Libya','Belarus'),
+    NumberOfSquid=c(rpois(4,10))
+    )
+countryData
+
+myData %>% full_join(countryData,copy=T)
+
+myData %>% left_join(countryData,copy=T)
+
+library(plyr)
+join(myData, countryData, by='nation', type='left', match='all')
+
+```
 
 
 
