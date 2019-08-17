@@ -28,9 +28,9 @@ library(caret)
 library(readr)
 library(tidyr)
 library(dplyr)
-library(kknn)
 library(ggplot2)
-library(pROC)</code></pre>
+library(pROC)
+library(ROSE)</code></pre>
 </div>
 <div id="r" class="section level1">
 <h1>R示例</h1>
@@ -72,13 +72,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 456, 455, 457, 454, 457, ... 
+Summary of sample sizes: 456, 454, 457, 456, 457, 454, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.726336  0.6053211  4.131969
-  0.17117244  6.411746  0.4885047  4.747490
-  0.45274420  8.391470  0.2971518  6.046203
+  0.07165784  5.991858  0.5796926  4.211448
+  0.17117244  6.663043  0.4713290  4.794135
+  0.45274420  8.561665  0.3080318  6.124588
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -97,13 +97,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 456, 455, 456, 456, 455, 454, ... 
+Summary of sample sizes: 455, 455, 455, 454, 455, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.736542  0.6143491  4.166319
-  0.17117244  6.584765  0.4825539  4.889515
-  0.45274420  8.309118  0.3299417  6.035630
+  0.07165784  5.710808  0.6144399  4.114640
+  0.17117244  6.665878  0.4695044  4.938213
+  0.45274420  8.327090  0.3174102  6.035468
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -151,7 +151,7 @@ Resampling results across tuning parameters:
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
-<pre class="r"><code>varImp(rpartFit, scale = F)# 变量的重要性</code></pre>
+<pre class="r"><code>varImp(rpartFit, scale = F)</code></pre>
 <pre><code>rpart variable importance
 
         Overall
@@ -162,12 +162,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-zn       0.0000
 tax      0.0000
-b        0.0000
-dis      0.0000
 chas1    0.0000
-rad      0.0000</code></pre>
+dis      0.0000
+zn       0.0000
+rad      0.0000
+b        0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -226,44 +226,47 @@ pokemon &lt;- na.omit(pokemon)
 pokemon &lt;- pokemon %&gt;%
   drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
   select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation)
-  
-sampled &lt;- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
-trainpok &lt;- pokemon[sampled,]
-testpok &lt;- pokemon[-sampled,]
+
+#过采样
+balanced &lt;- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;both&quot;, p=0.5,N=748,seed = 1)$data
+
+#sampled &lt;- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
+#trainpok &lt;- pokemon[sampled,]
+#testpok &lt;- pokemon[-sampled,]
 
 trctrl &lt;- trainControl(method = &quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
 =T)
 
-set.seed(3333)
-knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;knn&quot;,
+set.seed(213)
+knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = balanced, method = &quot;knn&quot;,
  trControl=trctrl,
  tuneLength = 10)
 knn_fit</code></pre>
 <pre><code>k-Nearest Neighbors 
 
-414 samples
+748 samples
   8 predictor
   2 classes: &#39;FALSE&#39;, &#39;TRUE&#39; 
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 373, 373, 372, 372, 372, 373, ... 
+Summary of sample sizes: 674, 673, 674, 672, 674, 674, ... 
 Resampling results across tuning parameters:
 
   k   Accuracy   Kappa    
-   5  0.9400755  0.6798640
-   7  0.9466086  0.7129350
-   9  0.9456678  0.7151342
-  11  0.9451800  0.7083078
-  13  0.9487921  0.7330679
-  15  0.9480720  0.7290125
-  17  0.9492915  0.7328239
-  19  0.9471138  0.7166178
-  21  0.9466376  0.7151965
-  23  0.9461614  0.7147069
+   5  0.9484350  0.8971586
+   7  0.9425515  0.8854659
+   9  0.9432165  0.8867946
+  11  0.9477308  0.8957603
+  13  0.9509650  0.9021897
+  15  0.9398669  0.8801152
+  17  0.9369208  0.8742642
+  19  0.9375875  0.8755897
+  21  0.9389192  0.8782317
+  23  0.9415845  0.8835236
 
 Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was k = 17.</code></pre>
+The final value used for the model was k = 13.</code></pre>
 <pre class="r"><code>kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) 
 kacc &lt;- kacc[,1:2]
 ggplot(kacc,aes(k,Accuracy)) +
@@ -276,39 +279,41 @@ scale_x_continuous(breaks=seq(5,26,1))</code></pre>
 Figure 1: K值和准确率的关系
 </p>
 </div>
-<pre class="r"><code>pokemon &lt;- pokemon %&gt;%
-  mutate(test_pred=predict(knn_fit,newdata=pokemon))
-confusionMatrix(pokemon$test_pred,pokemon$Legendary)</code></pre>
+<pre class="r"><code>balanced &lt;- balanced %&gt;%
+  mutate(test_pred=predict(knn_fit,newdata=balanced))
+conMatrix &lt;- confusionMatrix(balanced$test_pred,balanced$Legendary)
+matrix &lt;- conMatrix[[&quot;table&quot;]]
+conMatrix</code></pre>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
 Prediction FALSE TRUE
-     FALSE   360    5
-     TRUE     14   35
+     FALSE   351    0
+     TRUE     33  364
                                           
-               Accuracy : 0.9541          
-                 95% CI : (0.9293, 0.9721)
-    No Information Rate : 0.9034          
-    P-Value [Acc &gt; NIR] : 9.684e-05       
+               Accuracy : 0.9559          
+                 95% CI : (0.9386, 0.9694)
+    No Information Rate : 0.5134          
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
                                           
-                  Kappa : 0.7611          
+                  Kappa : 0.9119          
                                           
- Mcnemar&#39;s Test P-Value : 0.06646         
+ Mcnemar&#39;s Test P-Value : 2.54e-08        
                                           
-            Sensitivity : 0.9626          
-            Specificity : 0.8750          
-         Pos Pred Value : 0.9863          
-         Neg Pred Value : 0.7143          
-             Prevalence : 0.9034          
-         Detection Rate : 0.8696          
-   Detection Prevalence : 0.8816          
-      Balanced Accuracy : 0.9188          
+            Sensitivity : 0.9141          
+            Specificity : 1.0000          
+         Pos Pred Value : 1.0000          
+         Neg Pred Value : 0.9169          
+             Prevalence : 0.5134          
+         Detection Rate : 0.4693          
+   Detection Prevalence : 0.4693          
+      Balanced Accuracy : 0.9570          
                                           
        &#39;Positive&#39; Class : FALSE           
                                           </code></pre>
-<pre class="r"><code>pokemon$test_pred &lt;- as.ordered(pokemon$test_pred)
-pokemon$Legendary &lt;- as.ordered(pokemon$Legendary)
-roc(pokemon$test_pred,pokemon$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
+<pre class="r"><code>balanced$test_pred &lt;- as.ordered(balanced$test_pred)
+balanced$Legendary &lt;- as.ordered(balanced$Legendary)
+roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:5"></span>
 <img src="/post/cross_files/figure-html/5-1.png" alt="ROC曲线" width="65%" />
 <p class="caption">
@@ -317,10 +322,10 @@ Figure 2: ROC曲线
 </div>
 <pre><code>
 Call:
-roc.default(response = pokemon$test_pred, predictor = pokemon$Legendary,     plot = T, print.auc = T, auc.polygon = T, max.auc.polygon = T,     auc.polygon.col = &quot;skyblue&quot;, print.thres = T, xlab = &quot;伪正类率&quot;,     ylab = &quot;真正类率&quot;)
+roc.default(response = balanced$test_pred, predictor = balanced$Legendary,     plot = T, print.auc = T, auc.polygon = T, max.auc.polygon = T,     auc.polygon.col = &quot;skyblue&quot;, print.thres = T, xlab = &quot;伪正类率&quot;,     ylab = &quot;真正类率&quot;)
 
-Data: pokemon$Legendary in 365 controls (pokemon$test_pred FALSE) &lt; 49 cases (pokemon$test_pred TRUE).
-Area under the curve: 0.8503</code></pre>
+Data: balanced$Legendary in 351 controls (balanced$test_pred FALSE) &lt; 397 cases (balanced$test_pred TRUE).
+Area under the curve: 0.9584</code></pre>
 <pre class="r"><code>#ggroc()</code></pre>
 </div>
 </div>

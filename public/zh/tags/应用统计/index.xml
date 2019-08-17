@@ -44,7 +44,7 @@
 k折交叉验证 (K-fold cross-validation)
 留一交叉验证(leave-one-out cross validation)
 谢益辉的统计动画R包animation直观地展示了交叉验证方法。
-`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`library(caret)library(readr)library(tidyr)library(dplyr)library(kknn)library(ggplot2)library(pROC)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.</description>
+`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`library(caret)library(readr)library(tidyr)library(dplyr)library(ggplot2)library(pROC)library(ROSE)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.</description>
     </item>
     
     <item>

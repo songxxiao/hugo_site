@@ -28,21 +28,21 @@ output:
 
 谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
-```{r 1,comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r 1,comment = NA,warning = F,message = F,fig.align='center'}
 `%>%` <- magrittr::`%>%`
 library(caret)
 library(readr)
 library(tidyr)
 library(dplyr)
-library(kknn)
 library(ggplot2)
 library(pROC)
+library(ROSE)
 ```
 
 # R示例
 
 ## 10折交叉验证 (K-fold cross-validation)
-```{r 2,comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r 2,comment = NA,warning = F,message = F,fig.align='center'}
 rfControl <-trainControl( #10折交叉验证
 method ="cv", 
 number =10 
@@ -63,7 +63,7 @@ rpartFit
 将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有"10次10 折交叉验证"。
 
 
-```{r cv,comment = NA,warning = F,message = F, include = T,fig.align='center',out.width='70%',fig.asp=1.2} 
+```{r cv,comment = NA,warning = F,message = F,fig.align='center',out.width='70%',fig.asp=1.2} 
 repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions
 =T)
 rpartFit <- train(medv ~ .,
@@ -87,9 +87,8 @@ ggplot(imp,aes(reorder(name,impt),impt)) +
   coord_flip()+
   labs(x="重要性",y="变量名") + 
   theme_bw()
-              
-              
 ```
+
 ```{r bar,eval=F,echo=F}
 ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
   geom_bar(stat = 'identity',width = 0.2) +
@@ -99,12 +98,8 @@ ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
 ```
 
 
-
-
-
-
 ## 留一交叉验证(leave-one-out cross validation)
-```{r 3,comment = NA,warning = F,message = F, include = T,fig.align='center'}
+```{r 3,comment = NA,warning = F,message = F,fig.align='center'}
 rfControl <-trainControl(
 method ="LOOCV"
 ) #留一交叉验证
@@ -114,7 +109,7 @@ rpartFit <- train(medv ~ .,
                   trControl = rfControl)
 rpartFit
 
-varImp(rpartFit, scale = F)# 变量的重要性
+varImp(rpartFit, scale = F)
 ```
 
 + 我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。
@@ -146,7 +141,7 @@ varImp(rpartFit, scale = F)# 变量的重要性
 + 在样本比较少的情况下，通常使用交叉验证确定K值。
 + K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
 
-```{r 4,comment = NA,warning = F,message = F, include = T,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
+```{r 4,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
 pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
 colnames(pokemon)[1] <- 'id' #修改变量名
 colnames(pokemon)[3] <- 'Type1'
@@ -158,16 +153,19 @@ pokemon <- na.omit(pokemon)
 pokemon <- pokemon %>%
   drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
   select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation)
-  
-sampled <- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
-trainpok <- pokemon[sampled,]
-testpok <- pokemon[-sampled,]
+
+#过采样
+balanced <- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "both", p=0.5,N=748,seed = 1)$data
+
+#sampled <- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
+#trainpok <- pokemon[sampled,]
+#testpok <- pokemon[-sampled,]
 
 trctrl <- trainControl(method = "repeatedcv", number =10,repeats =10, savePredictions
 =T)
 
-set.seed(3333)
-knn_fit <- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "knn",
+set.seed(213)
+knn_fit <- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = balanced, method = "knn",
  trControl=trctrl,
  tuneLength = 10)
 knn_fit
@@ -179,17 +177,20 @@ geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))
 
-pokemon <- pokemon %>%
-  mutate(test_pred=predict(knn_fit,newdata=pokemon))
-confusionMatrix(pokemon$test_pred,pokemon$Legendary)
+balanced <- balanced %>%
+  mutate(test_pred=predict(knn_fit,newdata=balanced))
+conMatrix <- confusionMatrix(balanced$test_pred,balanced$Legendary)
+matrix <- conMatrix[["table"]]
+conMatrix
+
 ```
 
 
 
-```{r 5,comment = NA,warning = F,message = F, include = T,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
-pokemon$test_pred <- as.ordered(pokemon$test_pred)
-pokemon$Legendary <- as.ordered(pokemon$Legendary)
-roc(pokemon$test_pred,pokemon$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')
+```{r 5,comment = NA,warning = F,message =F,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
+balanced$test_pred <- as.ordered(balanced$test_pred)
+balanced$Legendary <- as.ordered(balanced$Legendary)
+roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')
 #ggroc()
 ```
 
