@@ -70,7 +70,7 @@ R Markdown: The Definitive Guide
 k折交叉验证 (K-fold cross-validation)
 留一交叉验证(leave-one-out cross validation)
 谢益辉的统计动画R包animation直观地展示了交叉验证方法。
-library(caret)library(readr)library(tidyr)library(dplyr)library(magrittr)library(kknn)library(ggplot2)library(pROC)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.2 4.0900 1 296 15.</description>
+`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`library(caret)library(readr)library(tidyr)library(dplyr)library(kknn)library(ggplot2)library(pROC)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.00632 18 2.31 0 0.538 6.575 65.</description>
     </item>
     
     <item>
@@ -113,21 +113,21 @@ library(caret)library(readr)library(tidyr)library(dplyr)library(magrittr)li
     </item>
     
     <item>
-      <title>如何提取R包中的小品文? </title>
+      <title>如何查看R包中的小品文? </title>
       <link>/zh/vignette/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/vignette/</guid>
-      <description>用R实现各种分析任务需要学习不同的R包。学习R包的同时需要结合统计理论。因此仅仅看帮助文档和用户手册（Reference manual）是不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习R包和其中思想的好材料。下文讲解如何使用utils::vignette和utils::browseVignettes两个函数获取R包的官方小品文。
+      <description>用R实现各种分析任务需要学习不同的R包。学习R包的同时需要结合统计理论。因此仅仅看帮助文档和用户手册（Reference manual）是不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习R包和其中思想的好材料。下文讲解如何使用vignette和browseVignettes两个函数获取R包的官方小品文。
 在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
 rpart的官方主页如下所示：
 其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。
 这种方法其实多此一举了！
-我们在下载R包时，已将小品文下载下来。我们可以使用utils包中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
-library(utils)vignette(, package = &amp;quot;rpart&amp;quot;)输出结果如下所示：
+由于R在下载程序包时，已将小品文下载下来。我们可以使用utils包(这个包含许多有用函数的包不需要加载)中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
+vignette(, package = &amp;quot;rpart&amp;quot;)输出结果如下所示：
 Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
 vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
-然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单。弹出的小品文列表直接点击就可以阅读。
+然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：
 browseVignettes(package = &amp;quot;rpart&amp;quot;)很多R包的小品文是PDF版本，当然还有的是html形式的，如ggplot2的小品文：
 vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)</description>
     </item>

@@ -65,9 +65,6 @@ h <- hclust(gower_dist)
 plot(h,main = '系统聚类图')
 rect.hclust(h, k=7, border = "red")
 (cn <- cutree(h, k = 7))
-
-
-
 ```
 
 # 词云图
@@ -133,7 +130,6 @@ knitr::kable(head(USJudgeRatings$score))
 ```{r cars2,message = F, comment = NA,warning = F,include = T}
 
 library(tidyverse)
-#install.packages("rdd")
 library(magrittr)
 library(MASS)
 library(rdd)

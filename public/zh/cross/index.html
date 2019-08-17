@@ -91,11 +91,11 @@
 <li><p>留一交叉验证(leave-one-out cross validation)</p></li>
 </ul>
 <p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
-<pre class="r"><code>library(caret)
+<pre class="r"><code>`%&gt;%` &lt;- magrittr::`%&gt;%`
+library(caret)
 library(readr)
 library(tidyr)
 library(dplyr)
-library(magrittr)
 library(kknn)
 library(ggplot2)
 library(pROC)</code></pre>
@@ -140,19 +140,19 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 454, 455, 457, 456, 454, 456, ... 
+Summary of sample sizes: 456, 456, 455, 457, 454, 457, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.879360  0.5969992  4.332896
-  0.17117244  6.228259  0.5368709  4.648677
-  0.45274420  8.584948  0.2709517  6.149787
+  0.07165784  5.726336  0.6053211  4.131969
+  0.17117244  6.411746  0.4885047  4.747490
+  0.45274420  8.391470  0.2971518  6.046203
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
 <p>将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有“10次10 折交叉验证”。</p>
 <pre class="r"><code>repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
-=TRUE)
+=T)
 rpartFit &lt;- train(medv ~ .,
                   data = BostonHousing,
                   method = &quot;rpart&quot;,
@@ -165,13 +165,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 457, 455, 455, 456, 454, 456, ... 
+Summary of sample sizes: 456, 455, 456, 456, 455, 454, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.649639  0.6244109  4.093195
-  0.17117244  6.526943  0.4909907  4.846807
-  0.45274420  8.331773  0.3220911  6.070339
+  0.07165784  5.736542  0.6143491  4.166319
+  0.17117244  6.584765  0.4825539  4.889515
+  0.45274420  8.309118  0.3299417  6.035630
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -184,11 +184,12 @@ imp &lt;- imp %&gt;%
   rename(&#39;impt&#39;=&#39;Overall&#39;) #%&gt;%
   #mutate(varname = fct_reorder(varname,impt))
 
-ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
-  geom_bar(stat = &#39;identity&#39;,width = 0.1)+
+ggplot(imp,aes(reorder(name,impt),impt)) +
+  geom_segment( aes(x=reorder(name,impt), xend=reorder(name,impt), y=0, yend=impt),size=1) +
+  geom_point(size=3, color=&quot;red&quot;)+
   coord_flip()+
-  xlab(&#39;重要性&#39;)+
-  ylab(&#39;变量名&#39;)</code></pre>
+  labs(x=&quot;重要性&quot;,y=&quot;变量名&quot;) + 
+  theme_bw()</code></pre>
 <p><img src="../../post/cross_files/figure-html/cv-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="leave-one-out-cross-validation" class="section level2">
@@ -229,12 +230,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-rad      0.0000
-b        0.0000
-chas1    0.0000
+zn       0.0000
 tax      0.0000
+b        0.0000
 dis      0.0000
-zn       0.0000</code></pre>
+chas1    0.0000
+rad      0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>

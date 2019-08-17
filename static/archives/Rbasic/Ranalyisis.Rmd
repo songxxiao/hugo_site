@@ -130,7 +130,6 @@ knitr::kable(head(USJudgeRatings$score))
 ```{r cars2,message = F, comment = NA,warning = F,include = T}
 
 library(tidyverse)
-#install.packages("rdd")
 library(magrittr)
 library(MASS)
 library(rdd)
