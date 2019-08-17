@@ -103,8 +103,7 @@ R生存分析介绍：[survival analysis in R](http://www.openintro.org/stat/sur
 
 
 
-```{r pack,comment = NA,warning = F,message = F,fig.align='center',results = "hide"}
-# 加载包
+```{r package,comment = NA,warning = F,message = F,fig.align='center'}
 library(survival)
 library(haven) 
 library(ggplot2)
@@ -122,8 +121,6 @@ library(ggfortify)
 minc=4,$2000+)  
 `age`:年龄  
 `black`:种族  
-
-
 
 ```{r a,comment = NA,warning = F,message = F,fig.align='center',include = F}
 cwg <- read_dta("E:/R_codes/others/cwg.dta")
@@ -143,7 +140,6 @@ cwg <- select(cwg,cen_r,event, los1,everything())
 $${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}$$
 
 $n_i$是在时间$t_i$中的历险人数，$d_i$是事件发生数。
-
 
 ```{r b,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
 table(cwg$event)
@@ -198,12 +194,9 @@ coxreg <- coxph(km ~ ec + age + female +black + minc, data = cwg)
 summary(coxreg)
 
 cox_fit <- survfit(coxreg)
-#plot(cox_fit, main = "cph model", xlab="Days")
 autoplot(cox_fit) #拟合值
-
 ##C-指数 Harrell's concordance index
 #coxreg$concordance
-
 concordance(km ~ predict(coxreg), data = cwg)
 
 ```

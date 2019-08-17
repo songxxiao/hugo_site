@@ -75,8 +75,7 @@ tags: ["R","应用统计"]
 <div id="section-1" class="section level2">
 <h2>第三讲: 生存分析估计</h2>
 <p>R生存分析介绍：<a href="http://www.openintro.org/stat/surv.php">survival analysis in R</a></p>
-<pre class="r"><code># 加载包
-library(survival)
+<pre class="r"><code>library(survival)
 library(haven) 
 library(ggplot2)
 library(dplyr)
@@ -215,12 +214,10 @@ Likelihood ratio test= 79.58  on 11 df,   p=2e-12
 Wald test            = 83.79  on 11 df,   p=3e-13
 Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
 <pre class="r"><code>cox_fit &lt;- survfit(coxreg)
-#plot(cox_fit, main = &quot;cph model&quot;, xlab=&quot;Days&quot;)
 autoplot(cox_fit) #拟合值</code></pre>
 <p><img src="/post/survival_files/figure-html/cox-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>##C-指数 Harrell&#39;s concordance index
 #coxreg$concordance
-
 concordance(km ~ predict(coxreg), data = cwg)</code></pre>
 <pre><code>Call:
 concordance.formula(object = km ~ predict(coxreg), data = cwg)

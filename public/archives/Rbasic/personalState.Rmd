@@ -1,0 +1,18 @@
+---
+title: "个人陈述草稿"
+author: " "
+date: "2019/8/17"
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+slug: ps
+---
+
+# 为什么要学习data science?
+
+在我上大学学习社会学的定量方法的同时，突然发现模型很有趣。能够预测未来的事情。比如，通过一个人的教育、家庭、婚姻等变量预测他的收入
+
+
+
+

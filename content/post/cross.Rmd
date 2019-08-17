@@ -5,7 +5,7 @@ date: '2019-05-25'
 slug: cross
 tags: ["R","应用统计","机器学习"]
 output:
-  html_document:
+  html_document2:
     toc: true
     theme: united
 ---
@@ -42,6 +42,7 @@ library(ROSE)
 # R示例
 
 ## 10折交叉验证 (K-fold cross-validation)
+
 ```{r 2,comment = NA,warning = F,message = F,fig.align='center'}
 rfControl <-trainControl( #10折交叉验证
 method ="cv", 
