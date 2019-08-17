@@ -15,6 +15,8 @@ slug: ggplot
 
 <https://xsong.ltd/archives/ggplot/ggplot2prac>
 
+# 笔记
+
 + 在`aes`函数里面的参数，如`fill`、`color`、`shape`，控制的是图形的映射对象。它将特定变量映射为统计图形的特定元素。而`+`后面的图形函数中的参数，仅仅是图形的附加属性。无法根据特定变量变化。
 
 
@@ -308,15 +310,36 @@ ggplot(china_map,aes(x=long,y=lat)) +
   coord_map("polyconic") +
   xlab('经度') + 
   ylab('纬度') +
-  theme(legend.title=element_blank()) #去除图例标题
+  theme(legend.title=element_blank()) +   
+  theme_bw()
 
 ```
 
+# 主题
+
+```{r was,message = F, comment = NA, warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(method='lm',se=F) +
+  theme_bw()
+
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(method='lm',se=F) +
+  theme_grey()
+
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(method='lm',se=F) +
+  theme_classic()
+
+ggplot(moto, aes(x, y)) +
+  geom_point(aes(color = z),size=3) +
+  geom_smooth(method='lm',se=F) +
+  theme_light()
 
 
-
-
-
+```
 
 
 

@@ -16669,13 +16669,6 @@ Name: dep_value, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-$$wo{e_i} = \ln {{{P_{yi}}} \over {{P_{ni}}}} = \ln {{{y_i}/{y_s}} \over {{n_i}/{n_s}}}$$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>定义<code>calc_iv</code>函数计算信息价值和WOE值<br>
 来源：<a href="https://www.kaggle.com/puremath86/iv-woe-starter-for-python">Calculate Information Value</a></li>
@@ -19435,7 +19428,105 @@ Name: famtp, dtype: float64</pre>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://blog.csdn.net/KIDxu/article/details/88647080">Python自动分箱，计算woe,iv</a><br>
-<a href="https://pypi.org/project/woe/">woe包官网</a></p>
+<a href="https://blog.csdn.net/kingzone_2008/article/details/80449287">数据挖掘模型中的IV和WOE详解</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Weight of Evidence(WoE):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$wo{e_i} = \ln {{{P_{yi}}} \over {{P_{ni}}}} = \ln {{{y_i}/{y_s}} \over {{n_i}/{n_s}}}$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>其中，$wo{e_i}$表示的是第i类的WOE值。${{P_{yi}}}$是这个类中正样本(${{y_i}}$)占所有正样本(${{y_s}}$)的比例。${{P_{ni}}}$是这个类中负样本(${{n_i}}$)占所有负样本(${{n_s}}$)的比例。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Information Value (IV):</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$I{V_i} = ({P_{yi}} - {P_{ni}}) \times wo{e_i}$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>而各类的IV值则是条件正类率和条件负类率的差乘以变量的WOE值。变量的总IV值则可以理解为条件正类率和条件负类率差的加权和：</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$IV = \sum\limits_i^n {I{V_i}} $$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>IV值衡量了变量预测能力的大小。IV值总是正值。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>IV值和预测能力的关系</p>
+<table>
+<thead><tr>
+<th style="text-align:left">IV</th>
+<th style="text-align:center">预测能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&lt;0.02</td>
+<td style="text-align:center">几乎没有预测力</td>
+</tr>
+<tr>
+<td style="text-align:left">0.02~0.1</td>
+<td style="text-align:center">预测力较弱</td>
+</tr>
+<tr>
+<td style="text-align:left">0.1~0.3</td>
+<td style="text-align:center">预测力适中</td>
+</tr>
+<tr>
+<td style="text-align:left">0.3~0.5</td>
+<td style="text-align:center">预测力较强</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;0.5</td>
+<td style="text-align:center">预测力过强，需要检查变量</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
