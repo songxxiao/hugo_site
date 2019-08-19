@@ -144,7 +144,6 @@ countryData <- data.frame(
 countryData
 
 myData %>% full_join(countryData,copy=T)
-
 myData %>% left_join(countryData,copy=T)
 
 library(plyr)
@@ -162,7 +161,7 @@ install_github('lchiffon/REmap') #可以试试，但基本不好使
 install_local("C:/Users/lenovo/Desktop/REmap-master.zip") #设置正确的本地路径
 ```
 
-
+# `magrittr`管道操作符
 
 
 
