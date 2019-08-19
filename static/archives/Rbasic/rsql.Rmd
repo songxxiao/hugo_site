@@ -1,6 +1,6 @@
 ---
 title: "SQL查询语句"
-author: "宋骁"
+author: " "
 date: " "
 output:
   bookdown::html_document2:
@@ -8,11 +8,29 @@ output:
     theme: united
 slug: rsql
 ---
-```{r setup, include=F}
-knitr::opts_chunk$set(echo = T)
+
+[MySQL 教程](http://www.runoob.com/mysql/mysql-tutorial.html)
+
++ 使用`sqldf`包在R中调用SQL语句
+
+```{r 1,message = F, comment = NA,warning = F,error=T }
+library(sqldf)
+library(readr)
+salary <- read_csv("E:/R_codes/others/nba/NBA_season1718_salary.csv")
+Seasons <- read_csv("E:/R_codes/others/nba/Seasons_Stats.csv")
+
 ```
 
 
+```{r 2,message = F, comment = NA,warning = F,error=T}
+
+head(sqldf(
+"SELECT Year from Seasons;"
+))
+
+
+
+```
 
 
 

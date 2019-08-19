@@ -66,14 +66,11 @@ CART算法选择基尼系数进行属性划分。CART算法可以运用于分类
 [R语言移除缺失值 NA.RM](http://www.mamicode.com/info-detail-1402416.html)
 
 ```{r b,message = F,comment = NA,warning = F,echo = F,fig.align='center', out.width='100%',fig.cap='标准化总成绩的直方图(分年级)',fig.asp=0.4}
-setwd("E:/edu/data2")
 library(haven)
 library(dplyr)
-library(magrittr)
+`%>%` <- magrittr::`%>%`
 library(rpart)
 library(rpart.plot)
-library(lattice)
-require(stats)
 library(ggplot2)
 library(pROC)
 library(randomForest)
@@ -100,7 +97,7 @@ multiplot
 
 
 
-```{r a,message = F,comment = NA,warning = F,echo = T,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
+```{r a,message = F,comment = NA,warning = F,fig.align='center',out.width ='100%',fig.cap='随机抽取30所学校的数学成绩差异'}
 setwd("E:/edu/data2")
 ceps <- read_dta("E:/edu/data2/ceps.dta")
 #抽出30所学校，作成绩箱线图
@@ -159,14 +156,14 @@ multiplot
 
 [^1]:七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。
 
-```{r re,message=F,comment=NA,warning=F,message = F, include = T}
+```{r re,message=F,comment=NA,warning=F,message = F}
 #建立回归树
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
 tree <- rpart(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy +  houspro ,data = subset(ceps,grade9 == 1),weights = sweight,method = "anova",parms = list(split="gini"),control=cont,na.action = na.omit)
 
 ```
 
-```{r s, fig=TRUE,pdf=TRUE,comment=NA,echo=T,warning=FALSE,out.width ='100%',fig.cap="总成绩的回归树",fig.align='center'}
+```{r s,,comment=NA,warning=FALSE,out.width ='100%',fig.cap="总成绩的回归树",fig.align='center'}
 tree$cptable #复杂度参数表
 rpart.plot(tree)
 ```
@@ -175,11 +172,11 @@ rpart.plot(tree)
 
 [R语言表格教程](https://www.jianshu.com/p/08c28c5c55a7)
 
-```{r fig1,message = F, comment = NA,warning =F,include=T,fig.align='center',out.width ='100%',fig.cap='未剪枝的分类树'}
+```{r fig1,message = F, comment = NA,warning =F,fig.align='center',out.width ='100%',fig.cap='未剪枝的分类树'}
 set.seed(1212323) #设置随机数种子
 
 #简单交叉验证划分测试集和训练集
-sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=FALSE) #抽取30%样本作为验证集
+sampled <- sample(1:nrow(ceps),nrow(ceps)*0.3,replace=F) #抽取30%样本作为验证集
 test <- ceps[sampled,] #测试集
 train <- ceps[-sampled,] #训练集
 
@@ -208,7 +205,7 @@ treeerror #测试集错误率
 ```
 
 
-```{r fig5,message = F, comment = NA,warning = F, include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树'}
+```{r fig5,message = F, comment = NA,warning = F,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树'}
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.014) #设置参数
 
 cltree3 <- rpart(matgreat ~  schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro ,data = subset(train,grade9 == 1),weights = sweight,method = "class",parms = list(split="gini"),control=cont,na.action = na.omit) #决策树
@@ -219,7 +216,7 @@ cltree3$variable.importance #各个变量的重要性程度
 rpart.plot(cltree3)
 ```
 
-```{r fig6, message = F, comment = NA,warning = F,include = T,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树的ROC曲线'}
+```{r fig6, message = F, comment = NA,warning = F,fig.align='center',out.width ='100%',fig.cap='剪枝后分类树的ROC曲线'}
 
 test <- na.omit(test) #删除缺失值
 y.pr <- predict(cltree3,test,type="prob") #预测测试集概率
@@ -229,7 +226,7 @@ test <- cbind(test,pr)
 modelroc <- roc(test$matgreat,test$pr)
 
 #ROC 曲线
-plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')
 
 test$yhat <- ifelse(test$pr >0.5,'1','0') #大于0.5设置为"是"
 attach(test)
@@ -249,7 +246,7 @@ treeerror #测试集错误率
 
 使用`caret`包进行10次10折交叉验证,同样使用CART算法。图\@ref(fig:fig7) 展示了训练后模型的ROC曲线。
 
-```{r fig7,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='训练后模型的ROC曲线和AUC值'}
+```{r fig7,cache=T,message = F,comment = NA,warning=F,fig.align='center',out.width ='100%',fig.cap='训练后模型的ROC曲线和AUC值'}
 
 library(caret)
 #install.packages('e1071')
@@ -258,7 +255,7 @@ library(e1071)
 ceps$matgreat <- as.factor(ceps$matgreat)
 ceps <- na.omit(ceps)
 #10次10折交叉验证
-repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions=TRUE)
+repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions=T)
 
  rpartFit <- train(matgreat ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation + desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm + comno + bknum + buget + eduqua + fight + brkpb + smok + drink + teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd + huko + eduy + dangy +  houspro  ,
                     data = ceps,
@@ -272,7 +269,7 @@ ceps <- cbind(ceps,pr)
 modelroc <- roc(ceps$matgreat,ceps$pr)
 
 #ROC 曲线
-plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=TRUE,auc.polygon.col="skyblue", print.thres=TRUE,xlab ='伪正类率',ylab='真正类率')
+plot(modelroc, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')
 
 ceps <- within(ceps,{predc <- predict(rpartFit); pr <- predict(rpartFit,type="prob")})
 tab <- table(ceps$predc,ceps$matgreat)
@@ -285,7 +282,7 @@ treeerror
 ```
 
 
-```{r fig8,cached = T,message = F,comment = NA,warning=F,include=T,fig.align='center',out.width ='100%',fig.cap='分类树的复杂度参数与准确率的关系'}
+```{r fig8,cache = T,message = F,comment = NA,warning=F,fig.align='center',out.width ='100%',fig.cap='分类树的复杂度参数与准确率的关系'}
 plot(rpartFit,xlab ='复杂度参数',ylab='准确率(重复交叉验证)')
 ```
 
@@ -296,7 +293,7 @@ plot(rpartFit,xlab ='复杂度参数',ylab='准确率(重复交叉验证)')
 
 
 
-```{r randomForest,message = F,comment = NA,warning = F,message = F, include = T,fig.align='center',out.width ='100%',fig.asp=1.2,fig.cap='变量重要性'}
+```{r randomForest,message = F,comment = NA,warning = F,fig.align='center',out.width ='100%',fig.asp=1.2,fig.cap='变量重要性'}
 
 train$matgreat <- as.factor(train$matgreat)
 train <- na.omit(train)

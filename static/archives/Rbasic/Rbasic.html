@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content />
+<meta name="author" content="宋骁" />
 
 
 <title>R 基础操作</title>
@@ -381,6 +381,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R 基础操作</h1>
+<h4 class="author">宋骁</h4>
 
 </div>
 
@@ -395,6 +396,7 @@ $(document).ready(function () {
 <li><a href="#section-4"><span class="toc-section-number">3</span> 循环</a></li>
 <li><a href="#dplyr"><span class="toc-section-number">4</span> <code>dplyr</code>处理缺失值</a></li>
 <li><a href="#dplyr-1"><span class="toc-section-number">5</span> <code>dplyr</code>数据合并</a></li>
+<li><a href="#devtoolsr"><span class="toc-section-number">6</span> 使用<code>devtools</code>本地安装R包</a></li>
 </ul>
 </div>
 
@@ -674,15 +676,15 @@ knitr::kable(stocks,caption = &#39;数据概要&#39;)</code></pre>
     )
 myData</code></pre>
 <pre><code>  nation subregion Awesomeness
-1    USA     north -0.48515639
-2  Japan     north -0.75028745
-3  Libya     north  0.14340378
-4    USA     south -0.48709095
-5  Japan     south  0.57493903
-6  Libya     south -1.62600802
-7    USA    middle  0.01397283
-8  Japan    middle  1.66620729
-9  Libya    middle -0.66242380</code></pre>
+1    USA     north -0.96160390
+2  Japan     north -1.97875947
+3  Libya     north -1.63134831
+4    USA     south -0.58277337
+5  Japan     south -0.65511220
+6  Libya     south -0.14891862
+7    USA    middle  0.97440866
+8  Japan    middle -0.54271696
+9  Libya    middle  0.05089287</code></pre>
 <pre class="r"><code>countryData &lt;- data.frame(
     nation=c(&#39;USA&#39;,&#39;Japan&#39;,&#39;Libya&#39;,&#39;Belarus&#39;),
     NumberOfSquid=c(rpois(4,10))
@@ -690,44 +692,51 @@ myData</code></pre>
 countryData</code></pre>
 <pre><code>   nation NumberOfSquid
 1     USA            10
-2   Japan            12
-3   Libya             8
-4 Belarus            14</code></pre>
+2   Japan             8
+3   Libya             9
+4 Belarus             9</code></pre>
 <pre class="r"><code>myData %&gt;% full_join(countryData,copy=T)</code></pre>
 <pre><code>    nation subregion Awesomeness NumberOfSquid
-1      USA     north -0.48515639            10
-2    Japan     north -0.75028745            12
-3    Libya     north  0.14340378             8
-4      USA     south -0.48709095            10
-5    Japan     south  0.57493903            12
-6    Libya     south -1.62600802             8
-7      USA    middle  0.01397283            10
-8    Japan    middle  1.66620729            12
-9    Libya    middle -0.66242380             8
-10 Belarus      &lt;NA&gt;          NA            14</code></pre>
+1      USA     north -0.96160390            10
+2    Japan     north -1.97875947             8
+3    Libya     north -1.63134831             9
+4      USA     south -0.58277337            10
+5    Japan     south -0.65511220             8
+6    Libya     south -0.14891862             9
+7      USA    middle  0.97440866            10
+8    Japan    middle -0.54271696             8
+9    Libya    middle  0.05089287             9
+10 Belarus      &lt;NA&gt;          NA             9</code></pre>
 <pre class="r"><code>myData %&gt;% left_join(countryData,copy=T)</code></pre>
 <pre><code>  nation subregion Awesomeness NumberOfSquid
-1    USA     north -0.48515639            10
-2  Japan     north -0.75028745            12
-3  Libya     north  0.14340378             8
-4    USA     south -0.48709095            10
-5  Japan     south  0.57493903            12
-6  Libya     south -1.62600802             8
-7    USA    middle  0.01397283            10
-8  Japan    middle  1.66620729            12
-9  Libya    middle -0.66242380             8</code></pre>
+1    USA     north -0.96160390            10
+2  Japan     north -1.97875947             8
+3  Libya     north -1.63134831             9
+4    USA     south -0.58277337            10
+5  Japan     south -0.65511220             8
+6  Libya     south -0.14891862             9
+7    USA    middle  0.97440866            10
+8  Japan    middle -0.54271696             8
+9  Libya    middle  0.05089287             9</code></pre>
 <pre class="r"><code>library(plyr)
 join(myData, countryData, by=&#39;nation&#39;, type=&#39;left&#39;, match=&#39;all&#39;)</code></pre>
 <pre><code>  nation subregion Awesomeness NumberOfSquid
-1    USA     north -0.48515639            10
-2  Japan     north -0.75028745            12
-3  Libya     north  0.14340378             8
-4    USA     south -0.48709095            10
-5  Japan     south  0.57493903            12
-6  Libya     south -1.62600802             8
-7    USA    middle  0.01397283            10
-8  Japan    middle  1.66620729            12
-9  Libya    middle -0.66242380             8</code></pre>
+1    USA     north -0.96160390            10
+2  Japan     north -1.97875947             8
+3  Libya     north -1.63134831             9
+4    USA     south -0.58277337            10
+5  Japan     south -0.65511220             8
+6  Libya     south -0.14891862             9
+7    USA    middle  0.97440866            10
+8  Japan    middle -0.54271696             8
+9  Libya    middle  0.05089287             9</code></pre>
+</div>
+<div id="devtoolsr" class="section level1">
+<h1><span class="header-section-number">6</span> 使用<code>devtools</code>本地安装R包</h1>
+<p>以<code>REmap</code>包为例,从<a href="https://github.com/">github</a>上下载压缩包后，使用<code>install_local</code>安装。</p>
+<pre class="r"><code>library(devtools)
+install_github(&#39;lchiffon/REmap&#39;) #可以试试，但基本不好使
+install_local(&quot;C:/Users/lenovo/Desktop/REmap-master.zip&quot;) #设置正确的本地路径</code></pre>
 </div>
 
 
