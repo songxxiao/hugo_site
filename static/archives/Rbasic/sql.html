@@ -385,25 +385,305 @@ $(document).ready(function () {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#section"><span class="toc-section-number">1</span> 变量排序</a></li>
+<li><a href="#section-1"><span class="toc-section-number">2</span> 创建新变量 &amp; 修改新变量</a></li>
+<li><a href="#section-2"><span class="toc-section-number">3</span> 按特定行删除重复值</a></li>
+<li><a href="#section-3"><span class="toc-section-number">4</span> 按变量排序行</a></li>
+<li><a href="#section-4"><span class="toc-section-number">5</span> 按条件筛选数据</a></li>
+<li><a href="#section-5"><span class="toc-section-number">6</span> 数据匹配</a></li>
+</ul>
+</div>
 
 <p><a href="http://www.runoob.com/mysql/mysql-tutorial.html">MySQL 教程</a></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/1177760294764384">廖雪峰SQL教程</a></p>
+<p><a href="https://www.w3school.com.cn/sql/index.asp">W3school SQL教程</a></p>
+<hr />
 <ul>
-<li>使用<code>sqldf</code>包在R中调用SQL语句</li>
+<li><a href="https://www.kaggle.com/drgilermo/nba-players-stats">NBA技术统计</a>和<a href="https://www.kaggle.com/koki25ando/salary">球员薪酬</a>数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。</li>
 </ul>
-<pre class="r"><code>library(sqldf)
-library(readr)
-salary &lt;- read_csv(&quot;E:/R_codes/others/nba/NBA_season1718_salary.csv&quot;)
-Seasons &lt;- read_csv(&quot;E:/R_codes/others/nba/Seasons_Stats.csv&quot;)</code></pre>
-<pre class="r"><code>head(sqldf(
-&quot;SELECT Year from Seasons;&quot;
-))</code></pre>
-<pre><code>  Year
-1 1950
-2 1950
-3 1950
-4 1950
-5 1950
-6 1950</code></pre>
+<div id="section" class="section level1">
+<h1><span class="header-section-number">1</span> 变量排序</h1>
+</div>
+<div id="section-1" class="section level1">
+<h1><span class="header-section-number">2</span> 创建新变量 &amp; 修改新变量</h1>
+<pre class="sql"><code>ALTER TABLE salary 
+ADD salary17_18 FLOAT;
+UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>f1</th>
+<th>Player</th>
+<th>Tm</th>
+<th>season17_18</th>
+<th>salary17_18</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Stephen Curry</td>
+<td>GSW</td>
+<td>34682550</td>
+<td>34.6825</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>LeBron James</td>
+<td>CLE</td>
+<td>33285709</td>
+<td>33.2857</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Paul Millsap</td>
+<td>DEN</td>
+<td>31269231</td>
+<td>31.2692</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Gordon Hayward</td>
+<td>BOS</td>
+<td>29727900</td>
+<td>29.7279</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Blake Griffin</td>
+<td>DET</td>
+<td>29512900</td>
+<td>29.5129</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Kyle Lowry</td>
+<td>TOR</td>
+<td>28703704</td>
+<td>28.7037</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Russell Westbrook</td>
+<td>OKC</td>
+<td>28530608</td>
+<td>28.5306</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Mike Conley</td>
+<td>MEM</td>
+<td>28530608</td>
+<td>28.5306</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>James Harden</td>
+<td>HOU</td>
+<td>28299399</td>
+<td>28.2994</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>DeMar DeRozan</td>
+<td>TOR</td>
+<td>27739975</td>
+<td>27.74</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-2" class="section level1">
+<h1><span class="header-section-number">3</span> 按特定行删除重复值</h1>
+</div>
+<div id="section-3" class="section level1">
+<h1><span class="header-section-number">4</span> 按变量排序行</h1>
+<ul>
+<li><code>DISTINCT</code>按选中的列去重。得到高龄球员榜</li>
+</ul>
+<pre class="sql"><code>SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>Player</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Kevin Willis</td>
+<td>44</td>
+</tr>
+<tr class="even">
+<td>Robert Parish*</td>
+<td>43</td>
+</tr>
+<tr class="odd">
+<td>Dikembe Mutombo*</td>
+<td>42</td>
+</tr>
+<tr class="even">
+<td>Kevin Willis</td>
+<td>42</td>
+</tr>
+<tr class="odd">
+<td>Robert Parish*</td>
+<td>42</td>
+</tr>
+<tr class="even">
+<td>Bob Cousy*</td>
+<td>41</td>
+</tr>
+<tr class="odd">
+<td>Dikembe Mutombo*</td>
+<td>41</td>
+</tr>
+<tr class="even">
+<td>Kareem Abdul-Jabbar*</td>
+<td>41</td>
+</tr>
+<tr class="odd">
+<td>Kevin Willis</td>
+<td>41</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-4" class="section level1">
+<h1><span class="header-section-number">5</span> 按条件筛选数据</h1>
+<ul>
+<li>使用<code>WHERE</code>子句保留2017年之后的数据</li>
+</ul>
+<pre class="sql"><code>SELECT * FROM seasons WHERE Year&gt;=2017</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>f1</th>
+<th>Year</th>
+<th>Player</th>
+<th>Pos</th>
+<th>Age</th>
+<th>Tm</th>
+<th>G</th>
+<th>GS</th>
+<th>MP</th>
+<th>PER</th>
+<th>TS%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>24096</td>
+<td>2017</td>
+<td>Alex Abrines</td>
+<td>SG</td>
+<td>23</td>
+<td>OKC</td>
+<td>68</td>
+<td>6</td>
+<td>1055</td>
+<td>10.1</td>
+<td>0.56</td>
+</tr>
+<tr class="even">
+<td>24097</td>
+<td>2017</td>
+<td>Quincy Acy</td>
+<td>PF</td>
+<td>26</td>
+<td>TOT</td>
+<td>38</td>
+<td>1</td>
+<td>558</td>
+<td>11.8</td>
+<td>0.565</td>
+</tr>
+<tr class="odd">
+<td>24098</td>
+<td>2017</td>
+<td>Quincy Acy</td>
+<td>PF</td>
+<td>26</td>
+<td>DAL</td>
+<td>6</td>
+<td>0</td>
+<td>48</td>
+<td>-1.4</td>
+<td>0.355</td>
+</tr>
+<tr class="even">
+<td>24099</td>
+<td>2017</td>
+<td>Quincy Acy</td>
+<td>PF</td>
+<td>26</td>
+<td>BRK</td>
+<td>32</td>
+<td>1</td>
+<td>510</td>
+<td>13.1</td>
+<td>0.587</td>
+</tr>
+<tr class="odd">
+<td>24100</td>
+<td>2017</td>
+<td>Steven Adams</td>
+<td>C</td>
+<td>23</td>
+<td>OKC</td>
+<td>80</td>
+<td>80</td>
+<td>2389</td>
+<td>16.5</td>
+<td>0.589</td>
+</tr>
+<tr class="even">
+<td>24101</td>
+<td>2017</td>
+<td>Arron Afflalo</td>
+<td>SG</td>
+<td>31</td>
+<td>SAC</td>
+<td>61</td>
+<td>45</td>
+<td>1580</td>
+<td>9</td>
+<td>0.559</td>
+</tr>
+<tr class="odd">
+<td>24102</td>
+<td>2017</td>
+<td>Alexis Ajinca</td>
+<td>C</td>
+<td>28</td>
+<td>NOP</td>
+<td>39</td>
+<td>15</td>
+<td>584</td>
+<td>12.9</td>
+<td>0.529</td>
+</tr>
+<tr class="even">
+<td>24103</td>
+<td>2017</td>
+<td>Cole Aldrich</td>
+<td>C</td>
+<td>28</td>
+<td>MIN</td>
+<td>62</td>
+<td>0</td>
+<td>531</td>
+<td>12.7</td>
+<td>0.549</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-5" class="section level1">
+<h1><span class="header-section-number">6</span> 数据匹配</h1>
+</div>
 
 
 
