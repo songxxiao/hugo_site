@@ -156,6 +156,34 @@ multiplot
 
 [^1]:七年级可能会采取单科100分制，而九年级按照中考模式更可能采取单科150分制。不同地域之间也存在差别。
 
+
+# Lasso回归
+
+```{r lasso,message=F,comment=NA,warning=F,message = F}
+setwd("E:/edu/data2")
+ceps <- read_dta("E:/edu/data2/ceps.dta")
+ceps <- ceps %>% 
+  select(sdtotal,everything()) %>% 
+  na.omit()
+#options(na.action="na.fail")
+
+library(glmnet)
+x_train <- model.matrix(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm +  clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget +  eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy + houspro,ceps)[,-1]
+
+y_train <- ceps %>%
+  select(sdtotal) %>%
+  unlist() %>%
+  as.numeric()
+
+lasso_mod = glmnet(x_train, 
+                   y_train, 
+                   alpha = 1) # Fit lasso model on training data
+
+plot(lasso_mod)    # Draw plot of coefficients
+
+```
+
+
 ```{r re,message=F,comment=NA,warning=F,message = F}
 #建立回归树
 cont <- rpart.control(minsplit=5,maxcompete=100,xval=10,maxdepth=30,cp=0.01)
@@ -249,7 +277,6 @@ treeerror #测试集错误率
 ```{r fig7,cache=T,message = F,comment = NA,warning=F,fig.align='center',out.width ='100%',fig.cap='训练后模型的ROC曲线和AUC值'}
 
 library(caret)
-#install.packages('e1071')
 library(e1071)
 
 ceps$matgreat <- as.factor(ceps$matgreat)

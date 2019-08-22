@@ -393,6 +393,8 @@ $(document).ready(function () {
 <li><a href="#section-3"><span class="toc-section-number">4</span> 按变量排序行</a></li>
 <li><a href="#section-4"><span class="toc-section-number">5</span> 按条件筛选数据</a></li>
 <li><a href="#section-5"><span class="toc-section-number">6</span> 数据匹配</a></li>
+<li><a href="#section-6"><span class="toc-section-number">7</span> 删除列</a></li>
+<li><a href="#section-7"><span class="toc-section-number">8</span> 按条件删除行</a></li>
 </ul>
 </div>
 
@@ -457,41 +459,6 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 <td>29512900</td>
 <td>29.5129</td>
 </tr>
-<tr class="even">
-<td>6</td>
-<td>Kyle Lowry</td>
-<td>TOR</td>
-<td>28703704</td>
-<td>28.7037</td>
-</tr>
-<tr class="odd">
-<td>7</td>
-<td>Russell Westbrook</td>
-<td>OKC</td>
-<td>28530608</td>
-<td>28.5306</td>
-</tr>
-<tr class="even">
-<td>8</td>
-<td>Mike Conley</td>
-<td>MEM</td>
-<td>28530608</td>
-<td>28.5306</td>
-</tr>
-<tr class="odd">
-<td>9</td>
-<td>James Harden</td>
-<td>HOU</td>
-<td>28299399</td>
-<td>28.2994</td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td>DeMar DeRozan</td>
-<td>TOR</td>
-<td>27739975</td>
-<td>27.74</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -531,22 +498,6 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 <tr class="odd">
 <td>Robert Parish*</td>
 <td>42</td>
-</tr>
-<tr class="even">
-<td>Bob Cousy*</td>
-<td>41</td>
-</tr>
-<tr class="odd">
-<td>Dikembe Mutombo*</td>
-<td>41</td>
-</tr>
-<tr class="even">
-<td>Kareem Abdul-Jabbar*</td>
-<td>41</td>
-</tr>
-<tr class="odd">
-<td>Kevin Willis</td>
-<td>41</td>
 </tr>
 </tbody>
 </table>
@@ -639,50 +590,22 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 <td>16.5</td>
 <td>0.589</td>
 </tr>
-<tr class="even">
-<td>24101</td>
-<td>2017</td>
-<td>Arron Afflalo</td>
-<td>SG</td>
-<td>31</td>
-<td>SAC</td>
-<td>61</td>
-<td>45</td>
-<td>1580</td>
-<td>9</td>
-<td>0.559</td>
-</tr>
-<tr class="odd">
-<td>24102</td>
-<td>2017</td>
-<td>Alexis Ajinca</td>
-<td>C</td>
-<td>28</td>
-<td>NOP</td>
-<td>39</td>
-<td>15</td>
-<td>584</td>
-<td>12.9</td>
-<td>0.529</td>
-</tr>
-<tr class="even">
-<td>24103</td>
-<td>2017</td>
-<td>Cole Aldrich</td>
-<td>C</td>
-<td>28</td>
-<td>MIN</td>
-<td>62</td>
-<td>0</td>
-<td>531</td>
-<td>12.7</td>
-<td>0.549</td>
-</tr>
 </tbody>
 </table>
 </div>
 <div id="section-5" class="section level1">
 <h1><span class="header-section-number">6</span> 数据匹配</h1>
+</div>
+<div id="section-6" class="section level1">
+<h1><span class="header-section-number">7</span> 删除列</h1>
+<pre class="sql"><code>ALTER TABLE salary
+DROP COLUMN Tm;
+SELECT * FROM salary
+JOIN seasons
+ON salary.Player=seasons.Player</code></pre>
+</div>
+<div id="section-7" class="section level1">
+<h1><span class="header-section-number">8</span> 按条件删除行</h1>
 </div>
 
 

@@ -41,11 +41,7 @@ UPDATE salary SET salary17_18 = season17_18/1000000
 | 3  | Paul Millsap      | DEN | 31269231    | 31.2692     |
 | 4  | Gordon Hayward    | BOS | 29727900    | 29.7279     |
 | 5  | Blake Griffin     | DET | 29512900    | 29.5129     |
-| 6  | Kyle Lowry        | TOR | 28703704    | 28.7037     |
-| 7  | Russell Westbrook | OKC | 28530608    | 28.5306     |
-| 8  | Mike Conley       | MEM | 28530608    | 28.5306     |
-| 9  | James Harden      | HOU | 28299399    | 28.2994     |
-| 10 | DeMar DeRozan     | TOR | 27739975    | 27.74       |
+
 
 # 按特定行删除重复值
 
@@ -63,10 +59,7 @@ SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;
 | Dikembe Mutombo*     | 42  |
 | Kevin Willis         | 42  |
 | Robert Parish*       | 42  |
-| Bob Cousy*           | 41  |
-| Dikembe Mutombo*     | 41  |
-| Kareem Abdul-Jabbar* | 41  |
-| Kevin Willis         | 41  |
+
 
 # 按条件筛选数据
 
@@ -82,19 +75,20 @@ SELECT * FROM seasons WHERE Year>=2017
 | 24098 | 2017 | Quincy Acy    | PF  | 26  | DAL | 6  | 0  | 48   | -1.4 | 0.355 |
 | 24099 | 2017 | Quincy Acy    | PF  | 26  | BRK | 32 | 1  | 510  | 13.1 | 0.587 |
 | 24100 | 2017 | Steven Adams  | C   | 23  | OKC | 80 | 80 | 2389 | 16.5 | 0.589 |
-| 24101 | 2017 | Arron Afflalo | SG  | 31  | SAC | 61 | 45 | 1580 | 9    | 0.559 |
-| 24102 | 2017 | Alexis Ajinca | C   | 28  | NOP | 39 | 15 | 584  | 12.9 | 0.529 |
-| 24103 | 2017 | Cole Aldrich  | C   | 28  | MIN | 62 | 0  | 531  | 12.7 | 0.549 |
+
 
 # 数据匹配
 
+# 删除列
 
-
-
-
-
-
-
+```sql
+ALTER TABLE salary
+DROP COLUMN Tm;
+SELECT * FROM salary
+JOIN seasons
+ON salary.Player=seasons.Player
+```
+# 按条件删除行
 
 
 
