@@ -19437,58 +19437,11 @@ Name: famtp, dtype: float64</pre>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Weight of Evidence(WoE):</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$wo{e_i} = \ln {{{P_{yi}}} \over {{P_{ni}}}} = \ln {{{y_i}/{y_s}} \over {{n_i}/{n_s}}}$$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>其中，$wo{e_i}$表示的是第i类的WOE值。${{P_{yi}}}$是这个类中正样本(${{y_i}}$)占所有正样本(${{y_s}}$)的比例。${{P_{ni}}}$是这个类中负样本(${{n_i}}$)占所有负样本(${{n_s}}$)的比例。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Information Value (IV):</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$I{V_i} = ({P_{yi}} - {P_{ni}}) \times wo{e_i}$$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>而各类的IV值则是条件正类率和条件负类率的差乘以变量的WOE值。变量的总IV值则可以理解为条件正类率和条件负类率差的加权和：</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$IV = \sum\limits_i^n {I{V_i}} $$
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+$$wo{e_i} = \ln {{{P_{yi}}} \over {{P_{ni}}}} = \ln {{{y_i}/{y_s}} \over {{n_i}/{n_s}}}$$<p>其中，$wo{e_i}$表示的是第i类的WOE值。${{P_{yi}}}$是这个类中正样本(${{y_i}}$)占所有正样本(${{y_s}}$)的比例。${{P_{ni}}}$是这个类中负样本(${{n_i}}$)占所有负样本(${{n_s}}$)的比例。</p>
+<p>Information Value (IV):<br>
+$$I{V_i} = ({P_{yi}} - {P_{ni}}) \times wo{e_i}$$<br>
+而各类的IV值则是条件正类率和条件负类率的差乘以变量的WOE值。变量的总IV值则可以理解为条件正类率和条件负类率差的加权和：<br>
+$$IV = \sum\limits_i^n {I{V_i}} $$</p>
 <p>IV值衡量了变量预测能力的大小。IV值总是正值。</p>
 
 </div>
@@ -19964,18 +19917,13 @@ $$IV = \sum\limits_i^n {I{V_i}} $$
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## GBDT算法</span>
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://blog.csdn.net/qq_40418612/article/details/82470055">Python帮助系统</a></p>
 
-    </div>
 </div>
 </div>
-
 </div>
     </div>
   </div>

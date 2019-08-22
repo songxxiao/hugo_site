@@ -177,9 +177,9 @@ y_train <- ceps %>%
 
 lasso_mod = glmnet(x_train, 
                    y_train, 
-                   alpha = 1) # Fit lasso model on training data
-
-plot(lasso_mod)    # Draw plot of coefficients
+                   alpha = 1)
+plot(lasso_mod)
+plot(lasso_mod,xvar="lambda",label=T)  
 
 ```
 

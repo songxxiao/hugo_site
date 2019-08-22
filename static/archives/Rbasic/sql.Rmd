@@ -89,6 +89,23 @@ JOIN seasons
 ON salary.Player=seasons.Player
 ```
 # 按条件删除行
+```sql
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
