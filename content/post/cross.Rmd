@@ -28,7 +28,7 @@ output:
 
 谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
-```{r 1,comment = NA,warning = F,message = F,fig.align='center'}
+```{r,comment = NA,warning = F,message = F,fig.align='center'}
 `%>%` <- magrittr::`%>%`
 library(caret)
 library(readr)
@@ -43,7 +43,7 @@ library(ROSE)
 
 ## 10折交叉验证 (K-fold cross-validation)
 
-```{r 2,comment = NA,warning = F,message = F,fig.align='center'}
+```{r,comment = NA,warning = F,message = F,fig.align='center'}
 rfControl <-trainControl( #10折交叉验证
 method ="cv", 
 number =10 
@@ -64,7 +64,7 @@ rpartFit
 将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有"10次10 折交叉验证"。
 
 
-```{r cv,comment = NA,warning = F,message = F,fig.align='center',out.width='70%',fig.asp=1.2} 
+```{r,comment=NA,warning = F,message=F,fig.align='center',out.width='70%',fig.asp=1.2,fig.cap='变量重要性'} 
 repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions
 =T)
 rpartFit <- train(medv ~ .,
@@ -90,7 +90,7 @@ ggplot(imp,aes(reorder(name,impt),impt)) +
   theme_bw()
 ```
 
-```{r bar,eval=F,echo=F}
+```{r,eval=F,echo=F}
 ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
   geom_bar(stat = 'identity',width = 0.2) +
   coord_flip() +
@@ -100,7 +100,7 @@ ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
 
 
 ## 留一交叉验证(leave-one-out cross validation)
-```{r 3,comment = NA,warning = F,message = F,fig.align='center'}
+```{r,comment = NA,warning = F,message = F,fig.align='center'}
 rfControl <-trainControl(
 method ="LOOCV"
 ) #留一交叉验证
@@ -142,7 +142,7 @@ varImp(rpartFit, scale = F)
 + 在样本比较少的情况下，通常使用交叉验证确定K值。
 + K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
 
-```{r 4,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
 pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
 colnames(pokemon)[1] <- 'id' #修改变量名
 colnames(pokemon)[3] <- 'Type1'
@@ -188,7 +188,7 @@ conMatrix
 
 
 
-```{r 5,comment = NA,warning = F,message =F,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
+```{r,comment = NA,warning = F,message =F,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
 balanced$test_pred <- as.ordered(balanced$test_pred)
 balanced$Legendary <- as.ordered(balanced$Legendary)
 roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')

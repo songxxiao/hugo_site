@@ -28,8 +28,17 @@ slug: ggplot
 
 # 二维密度图
 
-```{r a ,message = F, comment = NA,warning = F,cache = T, include = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 library(ggplot2)
+library(dplyr)
+library(plyr)
+library(readxl)
+library(modelr)
+library(easyGgplot2)
+library(reshape2)
+library(rgdal)
+`%>%` <- magrittr::`%>%`
+
 data(diamonds)
 knitr::kable(head(diamonds),caption="数据概要",align='c')
 #原始变量关系
@@ -52,7 +61,7 @@ facet_wrap(~cut, nrow = 2)
 
 # 抽样散点图
 
-```{r b ,message = F, comment = NA,warning = F,cache = T,include = T,fig.align='center',out.width ='80%',fig.asp=0.7}
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.7}
 library(haven)
 setwd("E:/R_codes/capplot")
 X2010 <- read_dta("2010.dta")
@@ -63,10 +72,9 @@ set.seed(13)#设置随机数种子
 sample <- sample(1:nrow(hho),600,replace = F)#抽取600个样本
 hhosampled <- hho[sample,]#抽取
 
-library(ggplot2)
 scattered <- ggplot(hho,aes(x=agem,y=inc,group=type,shape=type,color=type,weight=fswt_nat)) +
   ylim(0, 20000) +
-  labs(title = " ",x = "年龄",y = "人民币(元）")+
+  labs(title = " ",x = "年龄",y = "人民币(元）") +
   geom_smooth(span = 10,size=1.5) + 
   geom_point(data = hhosampled, alpha = 4/7,size = 2.5 )  +
   annotate("text", x = 70, y = 200, label="数据来源：CFPS,正常散点", size = 4) + #注解
@@ -74,10 +82,7 @@ scattered <- ggplot(hho,aes(x=agem,y=inc,group=type,shape=type,color=type,weight
 scattered
 ```
 
-```{r c,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
-
-
-
+```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 i <- ggplot(economics, aes(date, unemploy))
 i + geom_area()
 
@@ -87,7 +92,7 @@ i + geom_line()
 
 # 模型可视化
 
-```{r d,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
+```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
 set.seed(711)
 x = seq(0, 4, length = 100)
 y = -x + jitter(rep(1:5, each = 20), 2)
@@ -102,7 +107,7 @@ ggplot(moto, aes(x, y)) +
 
 ## 分面
 
-```{r e,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
 ggplot(moto, aes(x, y)) +
   geom_point(aes(color = z)) +
   facet_wrap(~z, nrow = 2) +
@@ -113,20 +118,18 @@ ggplot(moto, aes(x, y)) +
 
 + 使用[`modelr`](https://r4ds.had.co.nz/model-basics.html)包进行模型拟合
 
-```{r f,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
 #不同组拟合不同的模型
-
 ggplot(moto, aes(x, y,group=z)) +
   geom_point(aes(color = z),size=3) +
   geom_smooth(method='lm',se=F)
 
-library(modelr)
 mod1 <- lm(y ~ x + z,data = moto)
 grid <- moto %>%
 data_grid(x,z) %>%
 gather_predictions(mod1)
 knitr::kable(head(grid),caption="数据概要",align='c')
-#不同组拟合同一个模型，控制组z                
+#不同组拟合同一个模型，控制组z              
 ggplot(moto, aes(x, y,group=z)) +
   geom_point(aes(color = z),size=3) +
   geom_line(data = grid, aes(y = pred,x=x),size=0.8,color='blue') +
@@ -139,14 +142,10 @@ ggplot(moto, aes(x, y,group=z)) +
 
 + 不会分面(`facet_wrap`)者的笨办法，使用`ggplot2.multiplot`手动合并图形
 
-```{r g,message = F, comment = NA,warning = F, include = F,cache = T,fig.align='center',out.width ='100%'} 
+```{r,echo=F,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
 rm(list=ls())
-library(haven)
 china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
 
-library(plyr); library(dplyr)
-# prepare work data, which needed to be filled in the map
-library(readxl)
 mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
 mapdata <- as.data.frame(mapdata)
 mapdata <- select(mapdata,-(NAME)) #reverse selection
@@ -251,9 +250,8 @@ in16 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= in16)) +
     plot.margin = unit(c(0.001,0.001,0.001,0.001), "cm")) 
 ```
 
-```{r mergemult,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
 #devtools::install_local("C:/Users/xsong/Desktop/easyGgplot2-master.zip")
-library(easyGgplot2)
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
 
@@ -265,41 +263,37 @@ ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 
 [`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
 
-```{r h,message = F, comment = NA,warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
-
-library(reshape2)
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
 long <- melt(china_data, id=c("long", "lat","group"))
 
-library(ggplot2)
 ggplot(long, aes(x = long, y = lat, group = group,fill= value)) +
   geom_polygon(colour="brown",size=0.2) +
   scale_fill_gradientn(colours = c("yellow", "red"),na.value = "white",breaks = c(10,20,30,40),limits=c(0,43), guide = "legend") +
   coord_map("polyconic") +  
   facet_wrap(~variable,nrow = 3) +
-  xlab('经度') + 
-  ylab('纬度') +
-  theme(legend.title=element_blank()) #去除图例标题
+  labs(x='经度',y='纬度') +
+  theme(legend.title=element_blank()) +   
+  theme_bw()
 
 ```
 
 ## 气泡地图
 
-```{r is,message = F, comment = NA, warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
-library(rgdal)
+```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%'} 
 bottom  <- readOGR(dsn = "E:/R_codes/maps/CHN_adm/CHN_adm2.shp",stringsAsFactors=F)
-library(ggplot2)
+
 bottomdata <- fortify(bottom)         
 x <- bottom@data          
 xs <- data.frame(x,id=seq(0:344)-1)        
-library(plyr)
+
 china_map <- join(bottomdata, xs, type = "full")          
-library(readxl)
+
 fills <- read_excel("E:/R_codes/maps/pointmap/citydis.xlsx")
 
 china_map <- join(china_map,fills, type = "full")   
 point <- china_map
 point <- na.omit(point)
-midpos <- function(x) mean(range(x,na.rm=TRUE)) 
+midpos <- function(x) mean(range(x,na.rm=T)) 
 centres <- ddply(china_map,.(NAME_2),colwise(midpos,.(long,lat)))
 center <- join(centres,fills, type = "full") 
 center  <- na.omit(center)
@@ -308,8 +302,7 @@ ggplot(china_map,aes(x=long,y=lat)) +
   geom_polygon(aes(group = group),fill="white",color="black",size=0.1) + 
   geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = "steelblue") +
   coord_map("polyconic") +
-  xlab('经度') + 
-  ylab('纬度') +
+  labs(x='经度',y='纬度') +
   theme(legend.title=element_blank()) +   
   theme_bw()
 
@@ -317,7 +310,7 @@ ggplot(china_map,aes(x=long,y=lat)) +
 
 # 主题
 
-```{r was,message = F, comment = NA, warning = F, include = T,cache = T,fig.align='center',out.width ='100%'} 
+```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%'} 
 ggplot(moto, aes(x, y)) +
   geom_point(aes(color = z),size=3) +
   geom_smooth(method='lm',se=F) +
@@ -337,8 +330,6 @@ ggplot(moto, aes(x, y)) +
   geom_point(aes(color = z),size=3) +
   geom_smooth(method='lm',se=F) +
   theme_light()
-
-
 ```
 
 

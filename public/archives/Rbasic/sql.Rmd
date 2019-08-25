@@ -1,0 +1,121 @@
+---
+title: "SQL查询语句"
+author: "宋骁"
+date: " "
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+slug: sql
+---
+
+[MySQL 教程](http://www.runoob.com/mysql/mysql-tutorial.html)
+
+[廖雪峰SQL教程](https://www.liaoxuefeng.com/wiki/1177760294764384)
+
+[W3school SQL教程](https://www.w3school.com.cn/sql/index.asp)
+
+---
+
++ [NBA技术统计](https://www.kaggle.com/drgilermo/nba-players-stats)和[球员薪酬](https://www.kaggle.com/koki25ando/salary)数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
+
+
+
+
+# 变量排序
+
+
+
+# 创建新变量 & 修改新变量
+
+```sql
+ALTER TABLE salary 
+ADD salary17_18 FLOAT;
+UPDATE salary SET salary17_18 = season17_18/1000000
+```
+
+| f1 | Player            | Tm  | season17_18 | salary17_18 |
+|----|-------------------|-----|-------------|-------------|
+| 1  | Stephen Curry     | GSW | 34682550    | 34.6825     |
+| 2  | LeBron James      | CLE | 33285709    | 33.2857     |
+| 3  | Paul Millsap      | DEN | 31269231    | 31.2692     |
+| 4  | Gordon Hayward    | BOS | 29727900    | 29.7279     |
+| 5  | Blake Griffin     | DET | 29512900    | 29.5129     |
+
+
+# 按特定行删除重复值
+
+# 按变量排序行
+
++ `DISTINCT`按选中的列去重。得到高龄球员榜
+
+```sql
+SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;
+```
+| Player               | Age |
+|----------------------|-----|
+| Kevin Willis         | 44  |
+| Robert Parish*       | 43  |
+| Dikembe Mutombo*     | 42  |
+| Kevin Willis         | 42  |
+| Robert Parish*       | 42  |
+
+
+# 按条件筛选数据
+
++ 使用`WHERE`子句保留2017年之后的数据
+
+```sql
+SELECT * FROM seasons WHERE Year>=2017
+```
+| f1    | Year | Player        | Pos | Age | Tm  | G  | GS | MP   | PER  | TS%   |
+|-------|------|---------------|-----|-----|-----|----|----|------|------|-------|
+| 24096 | 2017 | Alex Abrines  | SG  | 23  | OKC | 68 | 6  | 1055 | 10.1 | 0.56  |
+| 24097 | 2017 | Quincy Acy    | PF  | 26  | TOT | 38 | 1  | 558  | 11.8 | 0.565 |
+| 24098 | 2017 | Quincy Acy    | PF  | 26  | DAL | 6  | 0  | 48   | -1.4 | 0.355 |
+| 24099 | 2017 | Quincy Acy    | PF  | 26  | BRK | 32 | 1  | 510  | 13.1 | 0.587 |
+| 24100 | 2017 | Steven Adams  | C   | 23  | OKC | 80 | 80 | 2389 | 16.5 | 0.589 |
+
+
+# 数据匹配
+
+# 删除列
+
+```sql
+ALTER TABLE salary
+DROP COLUMN Tm;
+SELECT * FROM salary
+JOIN seasons
+ON salary.Player=seasons.Player
+```
+# 按条件删除行
+```sql
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

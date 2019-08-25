@@ -9,7 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content />
+<meta name="author" content="宋骁" />
 
 
 <title>R 基础操作</title>
@@ -381,6 +381,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">R 基础操作</h1>
+<h4 class="author">宋骁</h4>
 
 </div>
 
@@ -394,14 +395,15 @@ $(document).ready(function () {
 <li><a href="#apply"><span class="toc-section-number">2</span> <code>apply()</code>族函数</a></li>
 <li><a href="#section-4"><span class="toc-section-number">3</span> 循环</a></li>
 <li><a href="#dplyr"><span class="toc-section-number">4</span> <code>dplyr</code>处理缺失值</a></li>
-<li><a href="#dplyr-1"><span class="toc-section-number">5</span> <code>dplyr</code>数据合并</a></li>
+<li><a href="#section-5"><span class="toc-section-number">5</span> 数据合并</a></li>
+<li><a href="#devtoolsr"><span class="toc-section-number">6</span> 使用<code>devtools</code>本地安装R包</a></li>
+<li><a href="#magrittr"><span class="toc-section-number">7</span> <span><code>magrittr</code></span>管道操作符</a></li>
 </ul>
 </div>
 
 <div id="section" class="section level1">
 <h1><span class="header-section-number">1</span> 基本对象</h1>
 <p>模式强制转换：字符串：<code>as.character()</code>,整数：<code>as.integer()</code>,向量：<code>as.vector()</code>, 数据框：<code>as.data.frame()</code></p>
-<p><code>cbind()</code>把矩阵横向合并成一个大矩阵（列方式），而<code>rbind()</code>是纵向合并（行方式）。</p>
 <div id="section-1" class="section level2">
 <h2><span class="header-section-number">1.1</span> 向量</h2>
 </div>
@@ -493,6 +495,9 @@ ROW3    3   12   15</code></pre>
 <p>包括<code>sapply()</code>, <code>lapply()</code>, 和 <code>tapply()</code></p>
 <p><code>lapply()</code>默认返回值是列表</p>
 <p><code>aggregate()</code>类似于<code>dplyr::group_by</code></p>
+<pre class="r"><code>sapply(iris, class)</code></pre>
+<pre><code>Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+   &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;    &quot;numeric&quot;     &quot;factor&quot; </code></pre>
 </div>
 <div id="section-4" class="section level1">
 <h1><span class="header-section-number">3</span> 循环</h1>
@@ -517,7 +522,7 @@ return = c(1.88, 0.44, 0.35, 0.66, 0.92, 0.17, 3.40)
 )
 knitr::kable(stocks,caption = &#39;数据概要&#39;)</code></pre>
 <table>
-<caption>(#tab:c )数据概要</caption>
+<caption><span id="tab:unnamed-chunk-4">Table 4.1: </span>数据概要</caption>
 <thead>
 <tr class="header">
 <th align="right">year</th>
@@ -665,8 +670,12 @@ knitr::kable(stocks,caption = &#39;数据概要&#39;)</code></pre>
 6  2016    NA TRUE  
 7  2016     4 TRUE  </code></pre>
 </div>
-<div id="dplyr-1" class="section level1">
-<h1><span class="header-section-number">5</span> <code>dplyr</code>数据合并</h1>
+<div id="section-5" class="section level1">
+<h1><span class="header-section-number">5</span> 数据合并</h1>
+<ul>
+<li><p><code>cbind()</code>把矩阵横向合并成一个大矩阵（列方式），而<code>rbind()</code>是纵向合并（行方式）。</p></li>
+<li><p><code>dplyr</code>的<code>join</code>方法</p></li>
+</ul>
 <pre class="r"><code>myData &lt;- data.frame(
     nation=rep(c(&#39;USA&#39;,&#39;Japan&#39;,&#39;Libya&#39;),3),
     subregion=rep(c(&#39;north&#39;,&#39;south&#39;,&#39;middle&#39;),each=3),
@@ -674,60 +683,80 @@ knitr::kable(stocks,caption = &#39;数据概要&#39;)</code></pre>
     )
 myData</code></pre>
 <pre><code>  nation subregion Awesomeness
-1    USA     north -0.48515639
-2  Japan     north -0.75028745
-3  Libya     north  0.14340378
-4    USA     south -0.48709095
-5  Japan     south  0.57493903
-6  Libya     south -1.62600802
-7    USA    middle  0.01397283
-8  Japan    middle  1.66620729
-9  Libya    middle -0.66242380</code></pre>
+1    USA     north  1.04224683
+2  Japan     north  1.40382633
+3  Libya     north -0.83204820
+4    USA     south  0.09716154
+5  Japan     south  1.64850777
+6  Libya     south  0.32415341
+7    USA    middle -0.70527059
+8  Japan    middle -0.09387925
+9  Libya    middle -0.39393511</code></pre>
 <pre class="r"><code>countryData &lt;- data.frame(
     nation=c(&#39;USA&#39;,&#39;Japan&#39;,&#39;Libya&#39;,&#39;Belarus&#39;),
     NumberOfSquid=c(rpois(4,10))
     )
 countryData</code></pre>
 <pre><code>   nation NumberOfSquid
-1     USA            10
-2   Japan            12
-3   Libya             8
-4 Belarus            14</code></pre>
+1     USA            14
+2   Japan            11
+3   Libya            12
+4 Belarus             7</code></pre>
 <pre class="r"><code>myData %&gt;% full_join(countryData,copy=T)</code></pre>
 <pre><code>    nation subregion Awesomeness NumberOfSquid
-1      USA     north -0.48515639            10
-2    Japan     north -0.75028745            12
-3    Libya     north  0.14340378             8
-4      USA     south -0.48709095            10
-5    Japan     south  0.57493903            12
-6    Libya     south -1.62600802             8
-7      USA    middle  0.01397283            10
-8    Japan    middle  1.66620729            12
-9    Libya    middle -0.66242380             8
-10 Belarus      &lt;NA&gt;          NA            14</code></pre>
+1      USA     north  1.04224683            14
+2    Japan     north  1.40382633            11
+3    Libya     north -0.83204820            12
+4      USA     south  0.09716154            14
+5    Japan     south  1.64850777            11
+6    Libya     south  0.32415341            12
+7      USA    middle -0.70527059            14
+8    Japan    middle -0.09387925            11
+9    Libya    middle -0.39393511            12
+10 Belarus      &lt;NA&gt;          NA             7</code></pre>
 <pre class="r"><code>myData %&gt;% left_join(countryData,copy=T)</code></pre>
 <pre><code>  nation subregion Awesomeness NumberOfSquid
-1    USA     north -0.48515639            10
-2  Japan     north -0.75028745            12
-3  Libya     north  0.14340378             8
-4    USA     south -0.48709095            10
-5  Japan     south  0.57493903            12
-6  Libya     south -1.62600802             8
-7    USA    middle  0.01397283            10
-8  Japan    middle  1.66620729            12
-9  Libya    middle -0.66242380             8</code></pre>
+1    USA     north  1.04224683            14
+2  Japan     north  1.40382633            11
+3  Libya     north -0.83204820            12
+4    USA     south  0.09716154            14
+5  Japan     south  1.64850777            11
+6  Libya     south  0.32415341            12
+7    USA    middle -0.70527059            14
+8  Japan    middle -0.09387925            11
+9  Libya    middle -0.39393511            12</code></pre>
 <pre class="r"><code>library(plyr)
 join(myData, countryData, by=&#39;nation&#39;, type=&#39;left&#39;, match=&#39;all&#39;)</code></pre>
 <pre><code>  nation subregion Awesomeness NumberOfSquid
-1    USA     north -0.48515639            10
-2  Japan     north -0.75028745            12
-3  Libya     north  0.14340378             8
-4    USA     south -0.48709095            10
-5  Japan     south  0.57493903            12
-6  Libya     south -1.62600802             8
-7    USA    middle  0.01397283            10
-8  Japan    middle  1.66620729            12
-9  Libya    middle -0.66242380             8</code></pre>
+1    USA     north  1.04224683            14
+2  Japan     north  1.40382633            11
+3  Libya     north -0.83204820            12
+4    USA     south  0.09716154            14
+5  Japan     south  1.64850777            11
+6  Libya     south  0.32415341            12
+7    USA    middle -0.70527059            14
+8  Japan    middle -0.09387925            11
+9  Libya    middle -0.39393511            12</code></pre>
+</div>
+<div id="devtoolsr" class="section level1">
+<h1><span class="header-section-number">6</span> 使用<code>devtools</code>本地安装R包</h1>
+<p>以<code>REmap</code>包为例,从<a href="https://github.com/">github</a>上下载压缩包后，使用<code>install_local</code>安装。</p>
+<pre class="r"><code>library(devtools)
+install_github(&#39;lchiffon/REmap&#39;) #可以试试，但基本不好使
+install_local(&quot;C:/Users/lenovo/Desktop/REmap-master.zip&quot;) #设置正确的本地路径</code></pre>
+</div>
+<div id="magrittr" class="section level1">
+<h1><span class="header-section-number">7</span> <a href="https://magrittr.tidyverse.org/"><code>magrittr</code></a>管道操作符</h1>
+<p><a href="https://mp.weixin.qq.com/s/wD2tK04qGJ8Qvb-sD0Nhcg">张丹的文章</a></p>
+<p><code>%T&gt;%</code></p>
+<p><code>%$%</code></p>
+<pre class="r"><code>library(magrittr)
+rnorm(100) %&gt;%
+matrix(ncol = 2) %T&gt;%
+plot() %&gt;%
+str()</code></pre>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABUAAAAPACAMAAADDuCPrAAAAtFBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZrY6AAA6OgA6Ojo6OmY6ZmY6ZpA6ZrY6kNtmAABmOgBmOjpmZjpmZmZmZpBmkLZmkNtmtttmtv+QOgCQOjqQZjqQkLaQtraQttuQtv+Q2/+2ZgC2Zjq2kDq2kGa2tpC2tra2ttu227a229u22/+2///bkDrbkGbbtmbbtpDbtrbb27bb29vb2//b////tmb/25D/27b/29v//7b//9v///9wTSRGAAAACXBIWXMAAB2HAAAdhwGP5fFlAAAeIklEQVR4nO3dbWPbVJqAYacDdAodWrbD0u7OMrTLsjO0wE7pC03+///aOG0SJ5Zj67GO9JxzrusLCbhBso7u6uXIWZ0BELJaegEAaiWgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQlDugK4DJTJ+oyX/ihJZ+t4G2TN6oqX/glAr8hQF0S0ABggQU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bsTJCegszk//7rX/MeYX2t33evk0prOWN+LUBHQO7T9/dK3dfe/yU12b/zzQljfi1AR0Dq9Wm9puacP7XjefSN/yRpyYgM7g4hO+BbR+v/idSNwkoDO4muwjoJXr5bdyNr0RJyWgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSgAEECChAkoABBAgoQJKAAQQIKECSg1OfDo9W5kx+G/su9lxdfvLu/fsmnb6AQAaU+OwN6+mwloMxIQKnProCePl8JKHMSUOpzHtChNJ4ff242c8erYDoCSn2G0/jbrYNOAaU4AaU+Q2l8//i8ng8fCyhzElDqM5TGV6vVyXfXN5F2vAomJaDUZzCgJ395cyagzEtAqc9QGv94c3YmoMxMQKnPzjQKKPMSUOojoCQhoNRHQElCQKmPgJKEgFIfASUJAaU+AkoSAkp9BJQkBJT6CChJCCj1EVCSEFDqI6AkIaDUR0BJQkCpx3kSLz6G/jqNl//mEwFlXgJKPQSUZASUeggoyQgo9dlM46uh32689SooQkCpz2Yan++MpIBSnIBSn400nj77/M3+V0EZAkp9Nn4v/KvV08GX+L3wzEFAqc91QE//47vhlwgocxBQ6rNxBLqLgDIHAQUIElCAIAEFCBJQgCABBQgSUIAgAQUIElCAIAEFCBJQgCABBQgSUIAgAQUIElCAIAEFCBJQgCABBQgSUIAgAQUIElCAIAEFCBJQgCABBQgSUIAgAQUIElCAIAEFCBJQgCABBQgSUIAgAQUIElCAIAEFCBJQgCABBQgSUIAgAQUIElCAIAEFCBJQgCABBQgSUIAgAQUI+n+f2/xMBjfV5wAAAABJRU5ErkJggg==" width="672" /></p>
+<pre><code> num [1:50, 1:2] -0.121 -2.093 1.7 -2.052 1.214 ...</code></pre>
 </div>
 
 

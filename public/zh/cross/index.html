@@ -140,13 +140,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 455, 456, 455, 455, 455, ... 
+Summary of sample sizes: 455, 456, 456, 456, 456, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.694568  0.6178202  4.103595
-  0.17117244  6.737319  0.4600068  4.972774
-  0.45274420  7.864190  0.3581662  5.717364
+  0.07165784  5.804367  0.6039877  4.116968
+  0.17117244  6.682824  0.4671587  4.901186
+  0.45274420  8.255468  0.3360563  5.977632
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -165,13 +165,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 455, 456, 456, 455, 455, ... 
+Summary of sample sizes: 457, 455, 455, 455, 454, 457, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.689138  0.6189563  4.082663
-  0.17117244  6.669438  0.4714544  4.934262
-  0.45274420  8.318319  0.3277845  6.059582
+  0.07165784  5.715938  0.6147842  4.085756
+  0.17117244  6.602661  0.4862931  4.858811
+  0.45274420  8.533648  0.3016862  6.190326
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -190,7 +190,12 @@ ggplot(imp,aes(reorder(name,impt),impt)) +
   coord_flip()+
   labs(x=&quot;重要性&quot;,y=&quot;变量名&quot;) + 
   theme_bw()</code></pre>
-<p><img src="../../post/cross_files/figure-html/cv-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="../../post/cross_files/figure-html/unnamed-chunk-3-1.png" alt="变量重要性" width="70%" />
+<p class="caption">
+Figure 1: 变量重要性
+</p>
+</div>
 </div>
 <div id="leave-one-out-cross-validation" class="section level2">
 <h2>留一交叉验证(leave-one-out cross validation)</h2>
@@ -230,11 +235,11 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-rad      0.0000
 chas1    0.0000
-dis      0.0000
 b        0.0000
+rad      0.0000
 tax      0.0000
+dis      0.0000
 zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
@@ -341,10 +346,10 @@ ggplot(kacc,aes(k,Accuracy)) +
 geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:4"></span>
-<img src="../../post/cross_files/figure-html/4-1.png" alt="K值和准确率的关系" width="65%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="../../post/cross_files/figure-html/unnamed-chunk-6-1.png" alt="K值和准确率的关系" width="65%" />
 <p class="caption">
-Figure 1: K值和准确率的关系
+Figure 2: K值和准确率的关系
 </p>
 </div>
 <pre class="r"><code>balanced &lt;- balanced %&gt;%
@@ -382,10 +387,10 @@ Prediction FALSE TRUE
 <pre class="r"><code>balanced$test_pred &lt;- as.ordered(balanced$test_pred)
 balanced$Legendary &lt;- as.ordered(balanced$Legendary)
 roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:5"></span>
-<img src="../../post/cross_files/figure-html/5-1.png" alt="ROC曲线" width="65%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="../../post/cross_files/figure-html/unnamed-chunk-7-1.png" alt="ROC曲线" width="65%" />
 <p class="caption">
-Figure 2: ROC曲线
+Figure 3: ROC曲线
 </p>
 </div>
 <pre><code>

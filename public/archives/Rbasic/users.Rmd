@@ -20,8 +20,9 @@ slug: rusers
   + 对车的态度`A0__1:A0__27`
 
 
-```{r a}
-library(tidyverse)
+```{r,comment=NA,message=F}
+library(dplyr)
+library(ggplot2)
 dt.car <- read.csv("C:/Users/xsong/Desktop/table/DT3.csv")
 knitr::kable(table(dt.car$S5))
 knitr::kable(table(dt.car$D5))
@@ -42,7 +43,7 @@ knitr::kable(table(dt.car$S10))
 
 
 
-```{r b}
+```{r,comment=NA}
 dt.car$S10C <- as.character(dt.car$S10C)
 #dt.car$S3 <- as.numeric(dt.car$S3)
 
@@ -80,7 +81,7 @@ dta <- dt.car %>%
 # 价值观变量的主成分分析
   + 
 
-```{r c}
+```{r,comment=NA}
 pcdata <- dta %>% #用于主成分分析的数据
   select(Q7__1:Q7__35) 
 
@@ -109,13 +110,11 @@ rmd <- rmd %>%
   rename(lfatd1=RC1,lfatd2=RC2,lfatd3=RC3)
 
 dta <- cbind(dta,rmd)
-
-
 ```
 
 # 对车的态度主成分分析
 
-```{r d}
+```{r,comment=NA}
 
 pcdata2 <- dta %>% #用于主成分分析的数据
   select(A0__1:A0__27) 
@@ -157,7 +156,7 @@ dta <- cbind(dta,cwb)
 # 聚类分析
 
 
-```{r e}
+```{r,comment=NA}
 cludta <- dta %>% 
   select(lfatd1,lfatd2,lfatd3,catatd1,catatd2,catatd3)
 
@@ -174,7 +173,7 @@ rect.hclust(fit, k=4, border = "red")
 + 相异度矩阵计算(Dissimilarity Matrix Calculation)聚类法。使用`cluster`包的`daisy`函数实现。
 
 
-```{r f}
+```{r,comment=NA}
 cludta <- dta %>% 
   select(eduy)
 
@@ -206,7 +205,7 @@ write.csv(dt.car,file="C:/Users/xsong/Desktop/table/cardata.csv",row.names = F)
 
 ## 聚类分析后的描述性统计
 
-```{r g}
+```{r,comment=NA}
 
 #knitr::kable(
 ##dta %>%
@@ -292,7 +291,7 @@ labs(fill="频数")
 ```
 
 ## 态度变量的描述
-```{r h1}
+```{r,comment=NA}
 
 
 #循环编码27个变量
@@ -320,7 +319,7 @@ labs(fill="频数")
 ```
 
 
-```{r h}
+```{r,comment=NA}
 dta$Q7__2 <- factor(dta$Q7__2,levels=c('非常同意1','比较同意2','谈不上同不同意3','比较不同意4','完全不同意5') )
 knitr::kable(table(dta$Q7__2,dta$clusters),caption = '“人活一张皮”，面子对我很重要')
 mar <- table(dta$Q7__2,dta$clusters)
@@ -376,14 +375,12 @@ ggplot(mar,aes(聚类类别,我非常关注科技的发展喜欢研究各种新�
   scale_fill_gradient(low='white',high = 'steel blue')+
   geom_text(aes(label = Freq))+ #图中加入频数
 labs(fill="频数")
-
-
 ```
 
 
 # 多分类决策树
 
-```{r i}
+```{r,comment=NA}
 library(rpart)
 library(rpart.plot)
 dta$Q7__23 <- as.numeric(dta$Q7__23)

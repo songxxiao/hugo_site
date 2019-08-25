@@ -15,14 +15,14 @@ slug: basicr
 
 模式强制转换：字符串：`as.character()`,整数：`as.integer()`,向量：`as.vector()`, 数据框：`as.data.frame()`
 
-`cbind()`把矩阵横向合并成一个大矩阵（列方式），而`rbind()`是纵向合并（行方式）。
+
 
 ## 向量
 
 
 ## 数组和矩阵
 
-```{r a ,message = F, comment = NA,warning = F}
+```{r ,message = F, comment = NA,warning = F}
 library(dplyr)
 `%>%` <- magrittr::`%>%`
 
@@ -69,9 +69,14 @@ result[,,'Matrix2'] #索引
 
 `aggregate()`类似于`dplyr::group_by`
 
+```{r,message = F, comment = NA,warning = F}
+sapply(iris, class)
+```
+
+
 # 循环
 `for`循环
-```{r for ,message = F, comment = NA,warning = F}
+```{r,message = F, comment = NA,warning = F}
 pp <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers")
 for(i in seq_along(pp)) print(pp[i])
 ```
@@ -79,7 +84,7 @@ for(i in seq_along(pp)) print(pp[i])
 # `dplyr`处理缺失值
 
 
-```{r c ,message = F, comment = NA,warning = F}
+```{r,message = F, comment = NA,warning = F}
 stocks <- tibble(
 year = c(2015, NA, 2015, 2015, NA, 2016, 2016),
 qtr = c( 1, 2, NA, NA, 2, NA, 4),
@@ -94,7 +99,7 @@ knitr::kable(stocks,caption = '数据概要')
 
 + `dplyr::recode`无法给出条件
 
-```{r d,message = F, comment = NA,warning = F}
+```{r ,message = F, comment = NA,warning = F}
 stocks %>% mutate(year= ifelse(is.na(qtr),9999,year))
 
 stocks %>% mutate(year=case_when(
@@ -113,7 +118,7 @@ stocks %>% mutate(year=replace(year,is.na(qtr),9999))
 
 + 使用`na_if`。但是无法给出条件。
 
-```{r e,message = F, comment = NA,warning = F}
+```{r ,message = F, comment = NA,warning = F}
 stocks %>% mutate(return=ifelse(year==2016,NA,return))
 
 stocks %>% mutate(return=replace(return,year==2016,NA))
@@ -126,9 +131,13 @@ stocks %>% mutate(return=na_if(year==2016,return))
 
 ```
 
-# `dplyr`数据合并
+# 数据合并
 
-```{r g,message = F, comment = NA,warning = F,error=T}
++ `cbind()`把矩阵横向合并成一个大矩阵（列方式），而`rbind()`是纵向合并（行方式）。
+
++ `dplyr`的`join`方法
+
+```{r ,message = F, comment = NA,warning = F,error=T,cache=T}
 
 myData <- data.frame(
     nation=rep(c('USA','Japan','Libya'),3),
@@ -161,8 +170,23 @@ install_github('lchiffon/REmap') #可以试试，但基本不好使
 install_local("C:/Users/lenovo/Desktop/REmap-master.zip") #设置正确的本地路径
 ```
 
-# `magrittr`管道操作符
+# [`magrittr`](https://magrittr.tidyverse.org/)管道操作符
 
+[张丹的文章](https://mp.weixin.qq.com/s/wD2tK04qGJ8Qvb-sD0Nhcg)
+
+`%T>%`
+
+`%$%`
+
+```{r ,message = F, comment = NA,warning = F,error=T}
+library(magrittr)
+rnorm(100) %>%
+matrix(ncol = 2) %T>%
+plot() %>%
+str()
+
+
+```
 
 
 

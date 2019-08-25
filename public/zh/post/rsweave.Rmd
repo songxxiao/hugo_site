@@ -28,7 +28,7 @@ tags: ["R"]
 
 而之所以不使用[TeXmaker](http://www.xm1math.net/texmaker/)或是[CTeX](http://www.ctex.org/HomePage)是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
 
-```{r 0, echo=F,out.width = '60%',fig.align='center',fig.cap='MikTeX界面'}
+```{r,echo=F,out.width = '60%',fig.align='center',fig.cap='MikTeX界面'}
 knitr::include_graphics("/img/sweave/mmk.jpg")
 
 ```
@@ -41,7 +41,7 @@ knitr::include_graphics("/img/sweave/mmk.jpg")
 
 然后需要配置一下R Studio的环境:
 
-```{r 1, echo=F, out.width = '60%',fig.align='center',fig.cap='依次点击Tools - Global Options - Sweave配置Sweave环境'}
+```{r, echo=F, out.width = '60%',fig.align='center',fig.cap='依次点击Tools - Global Options - Sweave配置Sweave环境'}
 knitr::include_graphics("/img/sweave/tempsnip.png")
 ```
 
@@ -49,33 +49,33 @@ knitr::include_graphics("/img/sweave/tempsnip.png")
 
 我们点击`Open File`打开一个LaTeX文档：
 
-```{r 2, echo=F, out.width = '70%',fig.align='center',fig.cap='点击Open File打开一个LaTeX文档'}
+```{r, echo=F, out.width = '70%',fig.align='center',fig.cap='点击Open File打开一个LaTeX文档'}
 knitr::include_graphics("/img/sweave/cut.JPG")
 ```
 
 打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方`Complie PDF`编译LaTeX文档，如图：
 
-```{r 3, echo=F, out.width = '70%',fig.align='center',fig.cap='点击Complie PDF编译LaTeX文档'}
+```{r, echo=F, out.width = '70%',fig.align='center',fig.cap='点击Complie PDF编译LaTeX文档'}
 knitr::include_graphics("/img/sweave/tempsnip2.png")
 ```
 
 
 编译成功的PDF文档（是我用于某课程pre的[LaTeX Beamer](http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html)）如图：
 
-```{r 4, echo=F, out.width = '70%',fig.align='center',fig.cap='编译好的PDF文档'}
+```{r, echo=F, out.width = '70%',fig.align='center',fig.cap='编译好的PDF文档'}
 knitr::include_graphics("/img/sweave/beamer.jpg")
 ```
 
 编辑公式我使用[Mathtype](http://www.mathtype.cn/)或者这个[在线工具](http://www.wiris.com/editor/demo/en/developers)。Mathtype的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好`剪切和复制预置`选项)：
 
 
-```{r 5, echo=F, out.width = '80%',fig.align='center',fig.cap='Mathtype编辑器'}
+```{r, echo=F, out.width = '80%',fig.align='center',fig.cap='Mathtype编辑器'}
 knitr::include_graphics("/img/sweave/mathtype.jpg")
 ```
 
 以上的公式可以直接复制为如下的纯文本LaTeX公式：
 
-```python
+```
 $$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
 ```
 
@@ -90,13 +90,13 @@ R Sweave的主要功能并不是一个写纯LaTeX文档，而是为了将R代码
 
 方法很简单，新建一个R Sweave文档，然后在里面编辑LaTeX，之后运行就可以了。
 
-```{r 6, echo=F, out.width = '25%',fig.align='center',fig.cap='新建一个R Sweave文档'}
+```{r, echo=F, out.width = '25%',fig.align='center',fig.cap='新建一个R Sweave文档'}
 knitr::include_graphics("/img/sweave/rnw.png")
 ```
 
 注意，如果发现你编写的R Sweave文档的图片不能显示中文，可以在R代码块中加入如下语句：
 
-```{r 7, eval=F,include=T}
+```{r , eval=F}
 pdf.options(family='GB1')
 ```
 

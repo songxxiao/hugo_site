@@ -103,7 +103,7 @@ R生存分析介绍：[survival analysis in R](http://www.openintro.org/stat/sur
 
 
 
-```{r package,comment = NA,warning = F,message = F,fig.align='center'}
+```{r,comment = NA,warning = F,message = F}
 library(survival)
 library(haven) 
 library(ggplot2)
@@ -122,7 +122,7 @@ minc=4,$2000+)
 `age`:年龄  
 `black`:种族  
 
-```{r a,comment = NA,warning = F,message = F,fig.align='center',include = F}
+```{r ,comment = NA,warning = F,message = F,fig.align='center',include = F}
 cwg <- read_dta("E:/R_codes/others/cwg.dta")
 #变量排序
 cwg$event[cwg$cen_r ==0] <- 1
@@ -141,7 +141,7 @@ $${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\li
 
 $n_i$是在时间$t_i$中的历险人数，$d_i$是事件发生数。
 
-```{r b,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
 table(cwg$event)
 # Kaplan Meier Survival Curve
 km <- with(cwg, Surv(los1, event == 1))
@@ -151,20 +151,20 @@ km_fit <- survfit(km ~ 1, data=cwg)
 km_fit #生存分析概要
 ```
 
-```{r sur1, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
 knitr::include_graphics("/img/survival/life.jpg")
 ```
 生存函数的Kaplan–Meier estimator就是$nPx$列的累乘。
 
-```{r c,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
 summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
 ```
 
-```{r sur2, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
 knitr::include_graphics("/img/survival/life2.jpg")
 ```
 
-```{r cw,comment = NA,warning = F,message = F,fig.align='center',out.width ='70%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='70%'}
 autoplot(km_fit) #ggplot2风格KM图
 
 km_trt_fit <- survfit(km ~ female, data=cwg)#分性别KM估计
@@ -184,7 +184,7 @@ $${{h(t|{X_i})} \over {h(t|{X_j})}} = {{{h_0}(t)\exp (X_i^T\beta )} \over {{h_0}
 
 + ${h_i}(t)$和${h_0}(t)$随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。
 
-```{r cox,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
 
 cwg$ec <- as.factor(cwg$ec)
 cwg$minc <- as.factor(cwg$minc)
@@ -198,7 +198,6 @@ autoplot(cox_fit) #拟合值
 ##C-指数 Harrell's concordance index
 #coxreg$concordance
 concordance(km ~ predict(coxreg), data = cwg)
-
 ```
 
 [生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
@@ -207,7 +206,7 @@ concordance(km ~ predict(coxreg), data = cwg)
 
 ## [Aalen’s additive regression model](http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf)
 
-```{r areg,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',fig.cap='协变量作用如何随时间变化'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',fig.cap='协变量作用如何随时间变化'}
 aaregfit <-aareg(km ~ ec + age + female +black + minc, data = cwg)
 aaregfit
 autoplot(aaregfit)

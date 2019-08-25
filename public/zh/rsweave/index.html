@@ -93,7 +93,7 @@
 <hr />
 <p>我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是<a href="https://miktex.org/">MikTeX</a>（虽然它常常因为简陋的功能为人诟病）。</p>
 <p>而之所以不使用<a href="http://www.xm1math.net/texmaker/">TeXmaker</a>或是<a href="http://www.ctex.org/HomePage">CTeX</a>是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。</p>
-<div class="figure" style="text-align: center"><span id="fig:0"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="../../img/sweave/mmk.jpg" alt="MikTeX界面" width="60%" />
 <p class="caption">
 Figure 1: MikTeX界面
@@ -103,7 +103,7 @@ Figure 1: MikTeX界面
 <p>首先要安装LaTeX环境。安装后R会自动识别这个环境。Windows用户请注意，<strong>MikTeX一定要安装在全英文路径下！</strong> <strong>MikTeX一定要安装在全英文路径下！</strong> <strong>MikTeX一定要安装在全英文路径下！</strong></p>
 <p>后续需要安装一些R包，如<code>Knitr</code>，<code>tinytex</code>等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。</p>
 <p>然后需要配置一下R Studio的环境:</p>
-<div class="figure" style="text-align: center"><span id="fig:1"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="../../img/sweave/tempsnip.png" alt="依次点击Tools - Global Options - Sweave配置Sweave环境" width="60%" />
 <p class="caption">
 Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境
@@ -111,42 +111,42 @@ Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境
 </div>
 <p>其中，<code>Weave Rnw files using</code>选<code>knitr</code>。想要写中文LaTeX文档必须选<code>XeLaTeX</code>环境。</p>
 <p>我们点击<code>Open File</code>打开一个LaTeX文档：</p>
-<div class="figure" style="text-align: center"><span id="fig:2"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="../../img/sweave/cut.JPG" alt="点击Open File打开一个LaTeX文档" width="70%" />
 <p class="caption">
 Figure 3: 点击Open File打开一个LaTeX文档
 </p>
 </div>
 <p>打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方<code>Complie PDF</code>编译LaTeX文档，如图：</p>
-<div class="figure" style="text-align: center"><span id="fig:3"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="../../img/sweave/tempsnip2.png" alt="点击Complie PDF编译LaTeX文档" width="70%" />
 <p class="caption">
 Figure 4: 点击Complie PDF编译LaTeX文档
 </p>
 </div>
 <p>编译成功的PDF文档（是我用于某课程pre的<a href="http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html">LaTeX Beamer</a>）如图：</p>
-<div class="figure" style="text-align: center"><span id="fig:4"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
 <img src="../../img/sweave/beamer.jpg" alt="编译好的PDF文档" width="70%" />
 <p class="caption">
 Figure 5: 编译好的PDF文档
 </p>
 </div>
 <p>编辑公式我使用<a href="http://www.mathtype.cn/">Mathtype</a>或者这个<a href="http://www.wiris.com/editor/demo/en/developers">在线工具</a>。Mathtype的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好<code>剪切和复制预置</code>选项)：</p>
-<div class="figure" style="text-align: center"><span id="fig:5"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
 <img src="../../img/sweave/mathtype.jpg" alt="Mathtype编辑器" width="80%" />
 <p class="caption">
 Figure 6: Mathtype编辑器
 </p>
 </div>
 <p>以上的公式可以直接复制为如下的纯文本LaTeX公式：</p>
-<pre class="python"><code>$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$</code></pre>
+<pre><code>$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$</code></pre>
 <hr />
 <div id="r-sweave" class="section level2">
 <h2>使用R Sweave</h2>
 <p>另一个方案是使用<a href="https://cosx.org/2010/11/reproducible-research-in-statistics">R Sweave</a>。</p>
 <p>R Sweave的主要功能并不是一个写纯LaTeX文档，而是为了将R代码嵌入LaTeX形成动态PDF报告。当然，作为日常工作，使用R Sweave写文档而不运行代码是完全可以的(只不过有点大材小用)。</p>
 <p>方法很简单，新建一个R Sweave文档，然后在里面编辑LaTeX，之后运行就可以了。</p>
-<div class="figure" style="text-align: center"><span id="fig:6"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="../../img/sweave/rnw.png" alt="新建一个R Sweave文档" width="25%" />
 <p class="caption">
 Figure 7: 新建一个R Sweave文档
