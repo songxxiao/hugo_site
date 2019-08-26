@@ -11,6 +11,7 @@
 
 <meta name="author" content="宋骁" />
 
+<meta name="date" content="2019-08-25" />
 
 <title>SQL查询语句</title>
 
@@ -382,34 +383,50 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">SQL查询语句</h1>
 <h4 class="author">宋骁</h4>
+<h4 class="date">2019-08-25</h4>
 
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#section"><span class="toc-section-number">1</span> 变量排序</a></li>
-<li><a href="#section-1"><span class="toc-section-number">2</span> 创建新变量 &amp; 修改新变量</a></li>
-<li><a href="#section-2"><span class="toc-section-number">3</span> 按特定行删除重复值</a></li>
-<li><a href="#section-3"><span class="toc-section-number">4</span> 按变量排序行</a></li>
+<li><a href="#section-1"><span class="toc-section-number">2</span> 删除 &amp; 增添列</a></li>
+<li><a href="#section-2"><span class="toc-section-number">3</span> 重编码新变量</a></li>
+<li><a href="#section-3"><span class="toc-section-number">4</span> 按特定行删除重复值</a></li>
 <li><a href="#section-4"><span class="toc-section-number">5</span> 按条件筛选数据</a></li>
-<li><a href="#section-5"><span class="toc-section-number">6</span> 数据匹配</a></li>
-<li><a href="#section-6"><span class="toc-section-number">7</span> 删除列</a></li>
-<li><a href="#section-7"><span class="toc-section-number">8</span> 按条件删除行</a></li>
+<li><a href="#section-5"><span class="toc-section-number">6</span> 数据合并</a><ul>
+<li><a href="#section-6"><span class="toc-section-number">6.1</span> 横向连接</a></li>
+<li><a href="#section-7"><span class="toc-section-number">6.2</span> 纵向连接</a></li>
+</ul></li>
+<li><a href="#section-8"><span class="toc-section-number">7</span> 按条件删除行</a></li>
 </ul>
 </div>
 
+<blockquote>
+<p>学而时习之，不亦乐乎？<br />
+——孔子</p>
+</blockquote>
+<hr />
 <p><a href="http://www.runoob.com/mysql/mysql-tutorial.html">MySQL 教程</a></p>
 <p><a href="https://www.liaoxuefeng.com/wiki/1177760294764384">廖雪峰SQL教程</a></p>
 <p><a href="https://www.w3school.com.cn/sql/index.asp">W3school SQL教程</a></p>
 <hr />
 <ul>
-<li><a href="https://www.kaggle.com/drgilermo/nba-players-stats">NBA技术统计</a>和<a href="https://www.kaggle.com/koki25ando/salary">球员薪酬</a>数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。</li>
+<li><p>数据：<a href="https://www.kaggle.com/drgilermo/nba-players-stats">NBA技术统计</a>和<a href="https://www.kaggle.com/koki25ando/salary">球员薪酬</a>数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。</p></li>
+<li><p>本文基于MySQL。</p></li>
 </ul>
 <div id="section" class="section level1">
 <h1><span class="header-section-number">1</span> 变量排序</h1>
+<pre class="sql"><code>SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;</code></pre>
 </div>
 <div id="section-1" class="section level1">
-<h1><span class="header-section-number">2</span> 创建新变量 &amp; 修改新变量</h1>
+<h1><span class="header-section-number">2</span> 删除 &amp; 增添列</h1>
+<pre class="sql"><code>ALTER TABLE salary 
+DROP COLUMN Tm
+ADD COLUMN Team VARCHAR;</code></pre>
+</div>
+<div id="section-2" class="section level1">
+<h1><span class="header-section-number">3</span> 重编码新变量</h1>
 <pre class="sql"><code>ALTER TABLE salary 
 ADD salary17_18 FLOAT;
 UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
@@ -462,11 +479,8 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 </tbody>
 </table>
 </div>
-<div id="section-2" class="section level1">
-<h1><span class="header-section-number">3</span> 按特定行删除重复值</h1>
-</div>
 <div id="section-3" class="section level1">
-<h1><span class="header-section-number">4</span> 按变量排序行</h1>
+<h1><span class="header-section-number">4</span> 按特定行删除重复值</h1>
 <ul>
 <li><code>DISTINCT</code>按选中的列去重。得到高龄球员榜</li>
 </ul>
@@ -594,18 +608,31 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 </table>
 </div>
 <div id="section-5" class="section level1">
-<h1><span class="header-section-number">6</span> 数据匹配</h1>
-</div>
-<div id="section-6" class="section level1">
-<h1><span class="header-section-number">7</span> 删除列</h1>
+<h1><span class="header-section-number">6</span> 数据合并</h1>
+<div id="section-6" class="section level2">
+<h2><span class="header-section-number">6.1</span> 横向连接</h2>
 <pre class="sql"><code>ALTER TABLE salary
 DROP COLUMN Tm;
 SELECT * FROM salary
 JOIN seasons
 ON salary.Player=seasons.Player</code></pre>
 </div>
-<div id="section-7" class="section level1">
-<h1><span class="header-section-number">8</span> 按条件删除行</h1>
+<div id="section-7" class="section level2">
+<h2><span class="header-section-number">6.2</span> 纵向连接</h2>
+<ul>
+<li><code>UNION ALL</code>允许重复值</li>
+<li><code>UNION</code>不允许重复值</li>
+</ul>
+<pre class="sql"><code>SELECT Player FROM salary
+UNION ALL
+SELECT Player FROM seasons; 
+ORDER BY Player</code></pre>
+</div>
+</div>
+<div id="section-8" class="section level1">
+<h1><span class="header-section-number">7</span> 按条件删除行</h1>
+<pre class="sql"><code>DELETE FROM salary WHERE Player=&#39;Stephen Curry&#39;;
+SELECT * FROM salary LIMIT 5</code></pre>
 </div>
 
 

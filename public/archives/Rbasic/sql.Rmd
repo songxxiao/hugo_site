@@ -1,12 +1,17 @@
 ---
-title: "SQL查询语句"
+title: 'SQL查询语句'
 author: "宋骁"
-date: " "
+date: '2019-08-25'
 output:
   bookdown::html_document2:
     toc: true
     theme: united
 slug: sql
+---
+
+>学而时习之，不亦乐乎？      
+——孔子
+
 ---
 
 [MySQL 教程](http://www.runoob.com/mysql/mysql-tutorial.html)
@@ -17,16 +22,20 @@ slug: sql
 
 ---
 
-+ [NBA技术统计](https://www.kaggle.com/drgilermo/nba-players-stats)和[球员薪酬](https://www.kaggle.com/koki25ando/salary)数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
++ 数据：[NBA技术统计](https://www.kaggle.com/drgilermo/nba-players-stats)和[球员薪酬](https://www.kaggle.com/koki25ando/salary)数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
+
++ 本文基于MySQL。
 
 
 
+# 删除 & 增添列 
+```sql
+ALTER TABLE salary 
+DROP COLUMN Tm
+ADD COLUMN Team VARCHAR;
+```
 
-# 变量排序
-
-
-
-# 创建新变量 & 修改新变量
+# 重编码新变量
 
 ```sql
 ALTER TABLE salary 
@@ -77,9 +86,10 @@ SELECT * FROM seasons WHERE Year>=2017
 | 24100 | 2017 | Steven Adams  | C   | 23  | OKC | 80 | 80 | 2389 | 16.5 | 0.589 |
 
 
-# 数据匹配
 
-# 删除列
+# 数据合并
+
+## 横向连接
 
 ```sql
 ALTER TABLE salary
@@ -88,11 +98,27 @@ SELECT * FROM salary
 JOIN seasons
 ON salary.Player=seasons.Player
 ```
+## 纵向连接
+ 
+ + `UNION ALL`允许重复值
+ + `UNION`不允许重复值
+ 
+```sql
+SELECT Player FROM salary
+UNION ALL
+SELECT Player FROM seasons; 
+ORDER BY Player
+```
+
+
+
 # 按条件删除行
 ```sql
-
-
+DELETE FROM salary WHERE Player='Stephen Curry';
+SELECT * FROM salary LIMIT 5
 ```
+
+
 
 
 
