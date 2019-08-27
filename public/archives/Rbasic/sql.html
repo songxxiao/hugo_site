@@ -393,13 +393,12 @@ $(document).ready(function () {
 <li><a href="#section-1"><span class="toc-section-number">2</span> 删除 &amp; 增添列</a></li>
 <li><a href="#section-2"><span class="toc-section-number">3</span> 重编码新变量</a></li>
 <li><a href="#section-3"><span class="toc-section-number">4</span> 按特定行删除重复值</a></li>
-<li><a href="#section-4"><span class="toc-section-number">5</span> 按变量排序行</a></li>
-<li><a href="#section-5"><span class="toc-section-number">6</span> 按条件筛选数据</a></li>
-<li><a href="#section-6"><span class="toc-section-number">7</span> 数据合并</a><ul>
-<li><a href="#section-7"><span class="toc-section-number">7.1</span> 横向连接</a></li>
-<li><a href="#section-8"><span class="toc-section-number">7.2</span> 纵向连接</a></li>
+<li><a href="#section-4"><span class="toc-section-number">5</span> 按条件筛选数据</a></li>
+<li><a href="#section-5"><span class="toc-section-number">6</span> 数据合并</a><ul>
+<li><a href="#section-6"><span class="toc-section-number">6.1</span> 横向连接</a></li>
+<li><a href="#section-7"><span class="toc-section-number">6.2</span> 纵向连接</a></li>
 </ul></li>
-<li><a href="#section-9"><span class="toc-section-number">8</span> 按条件删除行</a></li>
+<li><a href="#section-8"><span class="toc-section-number">7</span> 按条件删除行</a></li>
 </ul>
 </div>
 
@@ -418,6 +417,7 @@ $(document).ready(function () {
 </ul>
 <div id="section" class="section level1">
 <h1><span class="header-section-number">1</span> 变量排序</h1>
+<pre class="sql"><code>SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;</code></pre>
 </div>
 <div id="section-1" class="section level1">
 <h1><span class="header-section-number">2</span> 删除 &amp; 增添列</h1>
@@ -481,9 +481,6 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 </div>
 <div id="section-3" class="section level1">
 <h1><span class="header-section-number">4</span> 按特定行删除重复值</h1>
-</div>
-<div id="section-4" class="section level1">
-<h1><span class="header-section-number">5</span> 按变量排序行</h1>
 <ul>
 <li><code>DISTINCT</code>按选中的列去重。得到高龄球员榜</li>
 </ul>
@@ -519,8 +516,8 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 </tbody>
 </table>
 </div>
-<div id="section-5" class="section level1">
-<h1><span class="header-section-number">6</span> 按条件筛选数据</h1>
+<div id="section-4" class="section level1">
+<h1><span class="header-section-number">5</span> 按条件筛选数据</h1>
 <ul>
 <li>使用<code>WHERE</code>子句保留2017年之后的数据</li>
 </ul>
@@ -610,18 +607,18 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 </tbody>
 </table>
 </div>
-<div id="section-6" class="section level1">
-<h1><span class="header-section-number">7</span> 数据合并</h1>
-<div id="section-7" class="section level2">
-<h2><span class="header-section-number">7.1</span> 横向连接</h2>
+<div id="section-5" class="section level1">
+<h1><span class="header-section-number">6</span> 数据合并</h1>
+<div id="section-6" class="section level2">
+<h2><span class="header-section-number">6.1</span> 横向连接</h2>
 <pre class="sql"><code>ALTER TABLE salary
 DROP COLUMN Tm;
 SELECT * FROM salary
 JOIN seasons
 ON salary.Player=seasons.Player</code></pre>
 </div>
-<div id="section-8" class="section level2">
-<h2><span class="header-section-number">7.2</span> 纵向连接</h2>
+<div id="section-7" class="section level2">
+<h2><span class="header-section-number">6.2</span> 纵向连接</h2>
 <ul>
 <li><code>UNION ALL</code>允许重复值</li>
 <li><code>UNION</code>不允许重复值</li>
@@ -632,10 +629,56 @@ SELECT Player FROM seasons;
 ORDER BY Player</code></pre>
 </div>
 </div>
-<div id="section-9" class="section level1">
-<h1><span class="header-section-number">8</span> 按条件删除行</h1>
+<div id="section-8" class="section level1">
+<h1><span class="header-section-number">7</span> 按条件删除行</h1>
+<ul>
+<li><p>删除斯蒂芬·库里</p></li>
+<li><p><code>LIMIT</code>语句控制结果显示的行数</p></li>
+</ul>
 <pre class="sql"><code>DELETE FROM salary WHERE Player=&#39;Stephen Curry&#39;;
 SELECT * FROM salary LIMIT 5</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>f1</th>
+<th>Player</th>
+<th>season17_18</th>
+<th>salary17_18</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>LeBron James</td>
+<td>33285709</td>
+<td>33.2857</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Paul Millsap</td>
+<td>31269231</td>
+<td>31.2692</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Gordon Hayward</td>
+<td>29727900</td>
+<td>29.7279</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Blake Griffin</td>
+<td>29512900</td>
+<td>29.5129</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Kyle Lowry</td>
+<td>28703704</td>
+<td>28.7037</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
