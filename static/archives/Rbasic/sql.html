@@ -631,8 +631,54 @@ ORDER BY Player</code></pre>
 </div>
 <div id="section-8" class="section level1">
 <h1><span class="header-section-number">7</span> 按条件删除行</h1>
+<ul>
+<li><p>删除斯蒂芬·库里</p></li>
+<li><p><code>LIMIT</code>语句控制结果显示的行数</p></li>
+</ul>
 <pre class="sql"><code>DELETE FROM salary WHERE Player=&#39;Stephen Curry&#39;;
 SELECT * FROM salary LIMIT 5</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>f1</th>
+<th>Player</th>
+<th>season17_18</th>
+<th>salary17_18</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>LeBron James</td>
+<td>33285709</td>
+<td>33.2857</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Paul Millsap</td>
+<td>31269231</td>
+<td>31.2692</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Gordon Hayward</td>
+<td>29727900</td>
+<td>29.7279</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Blake Griffin</td>
+<td>29512900</td>
+<td>29.5129</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Kyle Lowry</td>
+<td>28703704</td>
+<td>28.7037</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

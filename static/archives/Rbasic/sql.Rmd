@@ -86,8 +86,6 @@ SELECT * FROM seasons WHERE Year>=2017
 | 24099 | 2017 | Quincy Acy    | PF  | 26  | BRK | 32 | 1  | 510  | 13.1 | 0.587 |
 | 24100 | 2017 | Steven Adams  | C   | 23  | OKC | 80 | 80 | 2389 | 16.5 | 0.589 |
 
-
-
 # 数据合并
 
 ## 横向连接
@@ -110,15 +108,23 @@ UNION ALL
 SELECT Player FROM seasons; 
 ORDER BY Player
 ```
-
-
-
 # 按条件删除行
+
++ 删除斯蒂芬·库里
+
++ `LIMIT`语句控制结果显示的行数
+
 ```sql
 DELETE FROM salary WHERE Player='Stephen Curry';
 SELECT * FROM salary LIMIT 5
 ```
-
+| f1 | Player         | season17_18 | salary17_18 |
+|----|----------------|-------------|-------------|
+| 2  | LeBron James   | 33285709    | 33.2857     |
+| 3  | Paul Millsap   | 31269231    | 31.2692     |
+| 4  | Gordon Hayward | 29727900    | 29.7279     |
+| 5  | Blake Griffin  | 29512900    | 29.5129     |
+| 6  | Kyle Lowry     | 28703704    | 28.7037     |
 
 
 
