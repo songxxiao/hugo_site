@@ -46,7 +46,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
    weight = 5
 
 [[languages.zh.menu.main]]
-  name = "English Version"
+  name = "English"
   url = "/en"
   weight =6
   
@@ -71,7 +71,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
    weight = 4
 
 [[languages.en.menu.main]]
-  name = "Chinese Version"
+  name = "Chinese"
   url = "/zh"
   weight =5
 
