@@ -2,11 +2,8 @@
 title: 'SQL查询语句'
 author: "宋骁"
 date: '2019-08-25'
-output:
-  bookdown::html_document2:
-    toc: true
-    theme: united
 slug: sql
+tags: ['编程基础']
 ---
 
 页面跳转中···

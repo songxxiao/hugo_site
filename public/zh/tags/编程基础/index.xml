@@ -6,10 +6,20 @@
     <description>Recent content in 编程基础 on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 11 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SQL查询语句</title>
+      <link>/zh/sql/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/sql/</guid>
+      <description>页面跳转中···
+window.location.replace(&#34;https://xsong.ltd/archives/Rbasic/sql&#34;)</description>
+    </item>
     
     <item>
       <title>Python面向对象基础</title>

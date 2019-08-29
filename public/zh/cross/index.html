@@ -49,13 +49,13 @@
     
     <li><a href="../../">Home</a></li>
     
+    <li><a href="../../zh/zhresume/">Vitae</a></li>
+    
+    <li><a href="../../zh/tags/">Blog</a></li>
+    
     <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
     
-    <li><a href="../../zh/zhresume/">Resume</a></li>
-    
     <li><a href="../../zh/reward/">Reward</a></li>
-    
-    <li><a href="../../zh/tags/">Categories</a></li>
     
     <li><a href="../../en">English</a></li>
     
@@ -140,13 +140,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 456, 456, 456, 456, 456, ... 
+Summary of sample sizes: 456, 455, 455, 455, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.804367  0.6039877  4.116968
-  0.17117244  6.682824  0.4671587  4.901186
-  0.45274420  8.255468  0.3360563  5.977632
+  0.07165784  5.728939  0.6124071  4.108182
+  0.17117244  6.592267  0.4785617  4.839885
+  0.45274420  8.198177  0.3359489  5.976964
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -165,13 +165,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 457, 455, 455, 455, 454, 457, ... 
+Summary of sample sizes: 454, 458, 455, 455, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.715938  0.6147842  4.085756
-  0.17117244  6.602661  0.4862931  4.858811
-  0.45274420  8.533648  0.3016862  6.190326
+  0.07165784  5.664894  0.6217557  4.119880
+  0.17117244  6.509313  0.4942258  4.869885
+  0.45274420  8.457328  0.3150451  6.128833
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -235,12 +235,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
+zn       0.0000
 chas1    0.0000
-b        0.0000
-rad      0.0000
 tax      0.0000
 dis      0.0000
-zn       0.0000</code></pre>
+b        0.0000
+rad      0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>

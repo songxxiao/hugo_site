@@ -28,22 +28,22 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[languages.zh.menu.main]]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
-    weight = 2
+    weight = 4
 
 [[languages.zh.menu.main]]
-    name = "Resume"
+    name = "Vitae"
     url = "/zh/zhresume/"
-    weight = 3
+    weight = 2
 
 [[languages.zh.menu.main]]
     name = "Reward"
     url = "/zh/reward/"
-   weight = 4
+   weight =5
 
 [[languages.zh.menu.main]]
-    name = 'Categories'
+    name = 'Blog'
     url = "/zh/tags/"
-   weight = 5
+   weight = 3
 
 [[languages.zh.menu.main]]
   name = "English"
@@ -56,19 +56,19 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 1
 
 [[languages.en.menu.main]]
-    name = "Resume"
+    name = "Vitae"
     url = "/en/enresume/"
    weight = 2
  
 [[languages.en.menu.main]]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
-    weight = 3
+    weight = 4
 
 [[languages.en.menu.main]]
-    name = 'Categories'
+    name = 'Blog'
     url = "/en/tags/"
-   weight = 4
+   weight = 3
 
 [[languages.en.menu.main]]
   name = "Chinese"
