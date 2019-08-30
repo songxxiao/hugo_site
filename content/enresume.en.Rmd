@@ -1,7 +1,6 @@
 ---
 title: "Xiao Song"
 author: " "
-date: "Last Update: 2019-7"
 slug: enresume
 ---
 
@@ -15,7 +14,7 @@ slug: enresume
 + Website：<https://xsong.ltd>
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 
-### SOFTWARE SKILLS
+### SOFTWARE & Programming SKILLS
 + R, LaTeX, Stata 
 + Python, SQL, SPSS 
 
@@ -34,7 +33,6 @@ slug: enresume
 School of Social Development&emsp;(Overall GPA：3.64 /4 | Top 10%)
 + [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;Exchange Student&emsp;2018-02~2018-07
 
-
 ### TRAINING EXPERIENCE
 
 + [Gouxionghui](http://www.xiong99.com.cn/about.php)&emsp;2019-05  
@@ -52,16 +50,11 @@ Summer workshop
 [6th Training Workshop on Applied Social Science Research Methods](http://caser.ust.hk/?act=course_main&id=16)  
 Course: Regression Analysis and Stata Application,  Categorical Data Analysis
 
-
-
 ### ACADEMIC RESEARCH
 
 + Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS&emsp;2018-2019    
 National Innovation Training Program for College Students,  Independent author  
 The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using R's `ggplot2` software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. ([PDF](http://www.baige.me/v?i=Rwy))
-
-
-
 
 ### HONORS AND AWARDS 
 
@@ -73,11 +66,13 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### CONFERENCE PRESENTATIONS 
 
-+ Chinese Sociological Association   
++ 2017-11&emsp;Chinese Sociological Association   
 [Winter Meeting of Social Stratification and Mobility Committee](http://sociology.nju.edu.cn/so_en/e9/79/c18475a321913/page.htm)  
 [Xi’an Jiaotong University](http://en.xjtu.edu.cn/)    
 Forum hosts：[Yu Xiao Wu](https://sociology.nju.edu.cn/99/2b/c17737a301355/page.htm)、[Yu Li](http://www.ssdpp.fudan.edu.cn/portal/f02f3f0f152247628e5e173df9bcecfd/orotsd.html)
 
++ 2018-7&emsp;Chinese Sociological Association Annual Meeting [Large Academic Survey Reflection and Social Quality Research Forum](http://css.cssn.cn/xsdt/zwdt/201805/t20180531_4323061.shtml) Nanjing University    
+Forum hosts：Wei Li
 
 ### WORK & INTERNSHIP EXPERIENCE
 

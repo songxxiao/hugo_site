@@ -14,6 +14,8 @@ slug: sql
 
 ---
 
+[MySQL安装(基于Windows)](https://www.cnblogs.com/vuenote/archive/2018/10/13/9783463.html)
+
 [MySQL 教程](http://www.runoob.com/mysql/mysql-tutorial.html)
 
 [廖雪峰SQL教程](https://www.liaoxuefeng.com/wiki/1177760294764384)
