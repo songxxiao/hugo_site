@@ -185,9 +185,49 @@ matrix(ncol = 2) %T>%
 plot() %>%
 str()
 
+myData %$%
+  table(nation,subregion)
+
+mar <- 
+myData %$%
+  table(nation,subregion) %>% 
+  as.data.frame()
+
+```
+
+# 函数
+
+```{r,message = F, comment = NA,warning = F,error=T}
+library(ggplot2)
+library(magrittr)
+library(dplyr)
+library(titanic)
+
+plot_table <- function(x,y,xlab,ylab){
+  mar <- as.data.frame(table(x,y))
+  ggplot2::ggplot(mar,aes(mar[,1],mar[,2])) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq)) + labs(fill="频数",x=xlab,y=ylab)
+}
+
+data("titanic_train")
+titanic <- titanic_train %>% 
+  as.data.frame()
+
+titanic %$%
+plot_table(Sex,Survived,"性别","生存")
 
 ```
 
 
-
+```{r,message = F, comment = NA,warning = F,error=T}
+scattplot <- function(x,y){
+  plot(x,y)
+  return(x+y)
+}
+x <- rnorm(10)
+y <- rnorm(10,2,3)
+scattplot(x,y)
+```
 
