@@ -36,8 +36,8 @@ School of Social Development&emsp;(Overall GPA：3.64 /4 | Top 10%)
 ### TRAINING EXPERIENCE
 
 + [Gouxionghui](http://www.xiong99.com.cn/about.php)&emsp;2019-05  
-Online internship&emsp;[Credit card application scoring model](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)   
-Using Python's `Pandas`, `Numpy`, and `scikit-learn` libraries for data cleansing and modeling. A credit card scoring model was built using a logistic model and a decision tree model. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis report.
+Online internship&emsp;[Credit Card Approval Analysis](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)   
+Using Python's `Pandas`, `Numpy`, and `scikit-learn` libraries for data wrangling and modeling. A credit card application model was built using machine learning models like Random Forest. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis [report](https://xsong.ltd/archives/pandas/scorecard_en).
 
 + Peking University&emsp;2018-08  
 Summer workshop  

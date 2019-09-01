@@ -129,7 +129,9 @@ SELECT * FROM salary LIMIT 5
 | 6  | Kyle Lowry     | 28703704    | 28.7037     |
 
 
+# 视图
 
++ 在SQL中，视图是基于SQL语句的结果集的可视化的表。
 
 
 

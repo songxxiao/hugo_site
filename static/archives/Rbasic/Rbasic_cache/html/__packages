@@ -6,4 +6,7 @@ grDevices
 graphics
 stats
 dplyr
+ggplot2
+magrittr
+titanic
 plyr
