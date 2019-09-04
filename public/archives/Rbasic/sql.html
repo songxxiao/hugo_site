@@ -399,6 +399,7 @@ $(document).ready(function () {
 <li><a href="#section-7"><span class="toc-section-number">6.2</span> 纵向连接</a></li>
 </ul></li>
 <li><a href="#section-8"><span class="toc-section-number">7</span> 按条件删除行</a></li>
+<li><a href="#section-9"><span class="toc-section-number">8</span> 视图</a></li>
 </ul>
 </div>
 
@@ -516,6 +517,8 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 </tr>
 </tbody>
 </table>
+<pre class="sql"><code>SELECT pubid,adfmt,event,COUNT(DISTINCT imei),COUNT(DISTINCT idfa) FROM table_numb 
+WHERE pubid= &#39;20&#39; AND adfmt &lt;&gt; &#39;chip&#39; AND event = &#39;ac&#39;</code></pre>
 </div>
 <div id="section-4" class="section level1">
 <h1><span class="header-section-number">5</span> 按条件筛选数据</h1>
@@ -680,6 +683,12 @@ SELECT * FROM salary LIMIT 5</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="section-9" class="section level1">
+<h1><span class="header-section-number">8</span> 视图</h1>
+<ul>
+<li>在SQL中，视图是基于SQL语句的结果集的可视化的表。</li>
+</ul>
 </div>
 
 

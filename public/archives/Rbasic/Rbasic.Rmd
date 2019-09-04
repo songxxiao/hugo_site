@@ -11,20 +11,20 @@ slug: basicr
 ## bookdown themes:https://bookdown.org/yihui/bookdown/theming.html
 ---
 
+本文收集了我在学习R过程中觉得重要的知识点。
+
 # 基本对象
 
 模式强制转换：字符串：`as.character()`,整数：`as.integer()`,向量：`as.vector()`, 数据框：`as.data.frame()`
-
-
-
-## 向量
-
 
 ## 数组和矩阵
 
 ```{r ,message = F, comment = NA,warning = F}
 library(dplyr)
-`%>%` <- magrittr::`%>%`
+library(ggplot2)
+library(magrittr)
+library(dplyr)
+library(titanic)
 
 mar<-c(652,1537,598,242,36,46,38,21,218,327,106,67)
 caff.marital<-matrix(mar,nrow=3,byrow=T) #byrow=T通过行来填充
@@ -58,6 +58,13 @@ result[,,'Matrix2'] #索引
 + 列表（list）是一个以对象的有序集合构成的对象。列表中包含的对象又称为它的分量（components）。
 分量可以是不同的模式或类型，如一个列表可以同时包括数值向量，逻辑向量，矩阵，复向量，字符数组，函数等等。
 
+# 循环
+`for`循环
+```{r,message = F, comment = NA,warning = F}
+pp <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers")
+for(i in seq_along(pp)) print(pp[i])
+```
+
 
 # `apply()`族函数
 
@@ -74,12 +81,8 @@ sapply(iris, class)
 ```
 
 
-# 循环
-`for`循环
-```{r,message = F, comment = NA,warning = F}
-pp <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers")
-for(i in seq_along(pp)) print(pp[i])
-```
+
+
 
 # `dplyr`处理缺失值
 
@@ -108,8 +111,6 @@ stocks %>% mutate(year=case_when(
 ))
 
 stocks %>% mutate(year=replace(year,is.na(qtr),9999))
-
-
 ```
 
 其他值重编码成缺失值：
@@ -179,15 +180,55 @@ install_local("C:/Users/lenovo/Desktop/REmap-master.zip") #设置正确的本地
 `%$%`
 
 ```{r ,message = F, comment = NA,warning = F,error=T}
-library(magrittr)
 rnorm(100) %>%
 matrix(ncol = 2) %T>%
 plot() %>%
 str()
 
+myData %$%
+  table(nation,subregion)
+
+mar <- 
+myData %$%
+  table(nation,subregion) %>% 
+  as.data.frame()
+
+```
+
+# 函数
+
++ 自己编写一个绘制交互表图形的函数`plot_table`。其中`x`为行向量，`y`为列向量，`xlab`为行标签，`ylab`为列标签。
+
+```{r,message = F, comment = NA,warning = F,error=T}
+plot_table <- function(x,y,xlab=x,ylab=y){
+  mar <- as.data.frame(table(x,y))
+  ggplot2::ggplot(mar,aes(mar[,1],mar[,2])) +
+  geom_tile(aes(fill=Freq),color='black') +
+  scale_fill_gradient(low='white',high = 'steel blue')+
+  geom_text(aes(label = Freq)) + labs(fill="频数",x=xlab,y=ylab)
+}
+
+data("titanic_train")
+titanic <- titanic_train %>% 
+  as.data.frame()
+
+titanic %$%
+plot_table(Sex,Survived)
+
+titanic %$%
+plot_table(Sex,Survived,"性别","是否生存")
+
 
 ```
 
 
-
+```{r,message = F, comment = NA,warning = F,error=T}
+scattplot <- function(x,y){
+  plot(x,y)
+  return(x+y)
+}
+x <- rnorm(10)
+y <- rnorm(10,2,3)
+scattplot(x,y)
+```
 

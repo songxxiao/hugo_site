@@ -72,6 +72,12 @@ SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;
 | Kevin Willis         | 42  |
 | Robert Parish*       | 42  |
 
+```sql
+SELECT pubid,adfmt,event,COUNT(DISTINCT imei),COUNT(DISTINCT idfa) FROM table_numb 
+WHERE pubid= '20' AND adfmt <> 'chip' AND event = 'ac'
+```
+
+
 
 # 按条件筛选数据
 
