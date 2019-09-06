@@ -1,0 +1,31 @@
+---
+title: '测试'
+author: '宋骁'
+date: '2019-05-01'
+slug: diary
+tags: ['意识之流']
+---
+
+
+
+
+<iframe src="http://mpvideo.qpic.cn/tjg_3572855911_50000_2435965b37c34ffbab120d0b86a70215.f10002.mp4?dis_k=533e40308dfd69fe4167c930fc3323d8&dis_t=1567735997" width="700" height="300" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
