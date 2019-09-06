@@ -4,7 +4,7 @@
   
   <url>
     <loc>/en/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-10T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -18,35 +18,14 @@
   </url>
   
   <url>
-    <loc>/en/tags/applied-statistics/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/en/tags/machine-learning/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/en/nba/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/nba/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/nba/"
-                />
   </url>
   
   <url>
     <loc>/en/post/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -61,24 +40,8 @@
   </url>
   
   <url>
-    <loc>/en/tags/python/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/tags/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/tags/python/"
-                />
-  </url>
-  
-  <url>
     <loc>/en/tags/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <lastmod>2019-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -89,6 +52,36 @@
                 rel="alternate"
                 hreflang="en"
                 href="/en/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/pyscore/</loc>
+    <lastmod>2019-08-10T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/pyscore/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/pyscore/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/nba/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/nba/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/nba/"
                 />
   </url>
   

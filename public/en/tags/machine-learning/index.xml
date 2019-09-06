@@ -6,10 +6,20 @@
     <description>Recent content in Machine Learning on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用Python开发信用卡申请评分模型</title>
+      <link>/en/pyscore/</link>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/en/pyscore/</guid>
+      <description>Loading …
+window.location.replace(&#34;https://xsong.ltd/archives/pandas/scorecard_en&#34;)</description>
+    </item>
     
     <item>
       <title>NBA Player Salary Prediction: Python Application Using AdaBoost Algorithm</title>

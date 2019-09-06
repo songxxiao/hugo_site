@@ -3,14 +3,15 @@ title: "使用Python开发信用卡申请评分模型"
 author: ' '
 date: '2019-08-10'
 slug: pyscore
-tags: ["机器学习"]
+tags: ["Machine Learning"]
 ---
 
-页面跳转中···
+Loading ...
 
 <script>
 
-window.location.replace("https://xsong.ltd/archives/pandas/scorecard")
+window.location.replace("https://xsong.ltd/archives/pandas/scorecard_en")
 
 </script>
+
 

@@ -3,7 +3,7 @@ title: "NBA Player Salary Prediction: Python Application Using AdaBoost Algorith
 author: ' '
 date: '2019-07-25'
 slug: nba
-tags: ["Python","Applied Statistics","Machine Learning"]
+tags: ["Machine Learning"]
 ---
 
 Loading ...

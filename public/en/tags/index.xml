@@ -6,35 +6,17 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Applied Statistics</title>
-      <link>/en/tags/applied-statistics/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/tags/applied-statistics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Machine Learning</title>
       <link>/en/tags/machine-learning/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/en/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/en/tags/python/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/tags/python/</guid>
       <description></description>
     </item>
     

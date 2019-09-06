@@ -8,10 +8,12 @@ tags: ['意识之流']
 
 <iframe src="https://open.spotify.com/embed/track/33rsCCLHklTQav9klbpnAi" width="700" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 
+<iframe src="//player.bilibili.com/player.html?aid=58915581&cid=102708009&page=1" width="700" height="300" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 
 网站建成有一段时间了。一直在考虑写不写博客的事情。
 
-我在高中时期是写日记的。所记大多是意识流。换句话说，是将学业之苦一五一十倾倒出来。后来发现此法常常使痛苦加倍。遂放弃。后来受《邪不压正》台词的影响：“一个写日记的人能可靠吗，正经人谁写日记啊？”“心里话谁写日记里啊，写出来的能叫心里话吗？下贱！”总觉得心里话写出来有种贩卖隐私的做作感。一开始我对个人网站的定位是作为技术分享和个人备忘之用。可惜我没有技术，嗯。
+我在高中时期是写日记的。所记大多是意识流。换句话说，是将学业之苦一五一十倾倒出来。后来发现此法常常使痛苦加倍。遂放弃。后来受《邪不压正》台词的影响：“一个写日记的人能可靠吗，正经人谁写日记啊？”;“心里话谁写日记里啊，写出来的能叫心里话吗？下贱！”总觉得心里话写出来有种贩卖隐私的做作感。一开始我对个人网站的定位是作为技术分享和个人备忘之用。可惜我没有技术，嗯。
 
 1.后来据我观察大家少时间和兴趣观察别人的私事（可见我多闲）。换句话说，写了也没人看。
 
