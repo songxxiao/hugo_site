@@ -1,5 +1,5 @@
 ---
-title: "使用Python开发信用卡申请评分模型"
+title: "Credit Card Approval Prediction Using Sklearn"
 author: ' '
 date: '2019-08-10'
 slug: pyscore

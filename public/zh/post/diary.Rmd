@@ -5,11 +5,7 @@ date: '2019-08-27'
 slug: diary
 tags: ['意识之流']
 ---
-
 <iframe src="https://open.spotify.com/embed/track/33rsCCLHklTQav9klbpnAi" width="700" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-
-<iframe src="//player.bilibili.com/player.html?aid=58915581&cid=102708009&page=1" width="700" height="300" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
 
 网站建成有一段时间了。一直在考虑写不写博客的事情。
 
