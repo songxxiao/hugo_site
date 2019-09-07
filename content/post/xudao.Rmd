@@ -8,28 +8,35 @@ tags: ['意识之流']
 
 徐正阳是我的小学和初中同学。初中毕业后，我们都没留在原本的学校。我去了一所擅长虐待学生的高中，他则去了另一所高中。没想到这小子又参加艺考最终高中北京电影学院了！  
 
-在和Tom Cruise、Steven Spielberg~~谈笑风生~~之后 ，他在大二后自愿成为丘八。临走时填写的入伍志愿地点的是“边远艰苦地区”。在几次失意的网恋后，他在军队中留下的最后一件大事是拍摄了一部军旅题材的[微电影](https://mp.weixin.qq.com/s/PofOYVY_VN0tOkjUhE58mw)。 
+在故宫和Tom Cruise、Steven Spielberg~~谈笑风生~~之后 ，他在大二后自愿成为丘八。临走时填写的入伍志愿地点的是“边远艰苦地区”。在几次失意的网恋，并得到著名相声演员牛群老师的耳提面命之后，他在军队中留下的最后一件大事是拍摄了一部军旅题材的[微电影](https://mp.weixin.qq.com/s/PofOYVY_VN0tOkjUhE58mw)。 
 
-```{r, echo=F, fig.cap="和Tom Cruise、Steven Spielberg谈笑风生", out.width = '100%',fig.align='center'}
-knitr::include_graphics("/img/survival/life2.jpg")
+```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+knitr::include_graphics("/img/xudao/xu1.jpg")
+knitr::include_graphics("/img/xudao/xu2.jpg")
 ```
+
+```{r, echo=F, fig.cap="徐导和Tom Cruise、Steven Spielberg谈笑风生", out.width = '100%',fig.align='center'}
+knitr::include_graphics("/img/xudao/xu3.jpg")
+```
+
+以上照片有点搞笑哈。为了保护徐导的个人隐私，和牛老师的照片我就不放了。
 
 
 和他之前拍摄的作品相比。这部电影故事是原创的。布景也更加宏大。  
 
 以下是徐导以往的作品，如向《喜剧之王》致敬的《外卖》：  
 
-<iframe src="//player.bilibili.com/player.html?aid=7964811&cid=13082523&page=1" width="700" height="300" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=7964811&cid=13082523&page=1" width="700" height="500" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 演绎了武侠爱情的《一世安》：  
 
-<iframe src="//player.bilibili.com/player.html?aid=17290218&cid=28252846&page=1" width="700" height="300" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=17290218&cid=28252846&page=1" width="700" height="500" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 以及，异常青涩的处女作《寻》：  
 
-<iframe src="//player.bilibili.com/player.html?aid=37803284&cid=66457550&page=1" width="700" height="300" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe src="//player.bilibili.com/player.html?aid=37803284&cid=66457550&page=1" width="700" height="500" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
-可以看出，徐导在不断进步。对于我这种半吊子鉴赏者来说。看着朋友一部部推出新作，是件神奇的事情。希望他的作品能早日登录院线。
+徐导在不断进步呢。对于我这种半吊子鉴赏者来说。看着朋友一部部推出新作，是件有意思的事情。作为有多年交情的铁子，希望他的作品能早日登录院线:D
 
 
 

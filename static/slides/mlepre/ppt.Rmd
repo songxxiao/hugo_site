@@ -1,11 +1,11 @@
 ---
 title: " "
 subtitle: " "
-author: "å®‹éª"
+author: "ËÎæç"
 date: "2019/06/07"
 output:
   xaringan::moon_reader:
-    css: [default, GBBB.css]
+    css: [default, zh-CN.css]
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -13,16 +13,21 @@ output:
       countIncrementalSlides: false
       
 ---
-### è´­è½¦æ”¾å¼ƒåŸå› 
+---
+### ¹º³µ·ÅÆúÔ­Òò
 
 
-```{r, echo=F,message=F,warning=F,fig.cap=" ", out.width = '100%',fig.align='center',fig.asp = 0.618 }
+```{r, echo=F,message=F,warning=F,fig.cap=" ", out.width = '150%',fig.align='center',fig.asp = 0.618,dev='png'}
+setwd("C:/Users/xsong/Desktop")
+#??pdf.option
 library(ggplot2)
+library(Cairo)
 library(readr)
 bar <- read_csv("C:/Users/xsong/Desktop/bar.csv")
 ggplot(bar,aes(reorder(tag,value),value,color=car,fill=car)) +
   geom_bar(stat = 'identity',width = 0.3,position = 'dodge') +
   coord_flip()+
+  geom_text(aes(label = value,position='right',hjust=-1),size=2.7,color='black') +
   facet_wrap(~car, nrow = 1) +
   labs(x=" ",y=" ") + 
   theme_classic() +
@@ -31,3 +36,19 @@ ggplot(bar,aes(reorder(tag,value),value,color=car,fill=car)) +
 
 ---
 
+```{r, echo=F,message=F,warning=F,fig.cap=" ", out.width = '150%',fig.align='center',fig.asp = 0.618,dev='png'}
+setwd("C:/Users/xsong/Desktop")
+#??pdf.option
+library(ggplot2)
+library(Cairo)
+library(readr)
+bar <- read_csv("C:/Users/xsong/Desktop/bar.csv")
+ggplot(bar,aes(reorder(tag,value),value,color=car,fill=car)) +
+  geom_bar(stat = 'identity',width = 0.3,position = 'dodge') +
+  coord_flip()+
+  geom_text(aes(label = value,position='right',hjust=-1),size=2.7,color='black') +
+  facet_wrap(~car, nrow = 1) +
+  labs(x=" ",y=" ") + 
+  theme_classic() +
+  theme(legend.position='none')
+```
