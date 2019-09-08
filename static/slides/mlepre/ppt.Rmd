@@ -21,7 +21,6 @@ output:
 setwd("C:/Users/xsong/Desktop")
 #??pdf.option
 library(ggplot2)
-library(Cairo)
 library(readr)
 bar <- read_csv("C:/Users/xsong/Desktop/bar.csv")
 ggplot(bar,aes(reorder(tag,value),value,color=car,fill=car)) +
