@@ -15,6 +15,13 @@ slug: ggplot
 
 <https://xsong.ltd/archives/ggplot/ggplot2prac>
 
+一个有用的链接：
+<http://rpubs.com/faststar/442420>
+
+[ggplot2 Shiny App](https://github.com/cardiomoon/ggplot2new)
+
+[现代统计图形](https://bookdown.org/xiangyun/msg/)
+
 # 笔记
 
 + 在`aes`函数里面的参数，如`fill`、`color`、`shape`，控制的是图形的映射对象。它将特定变量映射为统计图形的特定元素。而`+`后面的图形函数中的参数，仅仅是图形的附加属性。无法根据特定变量变化。
@@ -34,6 +41,7 @@ library(dplyr)
 library(plyr)
 library(readxl)
 library(modelr)
+library(readr)
 library(easyGgplot2)
 library(reshape2)
 library(rgdal)
@@ -113,6 +121,25 @@ ggplot(moto, aes(x, y)) +
   facet_wrap(~z, nrow = 2) +
   geom_smooth(method='lm',se=F)
 ```
+
++ 基于两个变量的分面:`facet_grid`
+
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+bar1 <- read_csv("F:/Mysite/Mysite/static/slides/mlepre/bar1.csv")
+ggplot(bar1,aes(reorder(car
+,value),value,color=segment
+,fill=segment
+)) +
+  geom_bar(stat = 'identity',width = 0.3) +
+  coord_flip()+
+  geom_text(aes(label = value,position='right',hjust=0.8),size=2.7,color='black') +
+  facet_grid(phase~segment,space = "free_x") +
+  labs(x=" ",y=" ") + 
+  theme_classic() +
+  theme(legend.position='none')
+```
+
+
 
 ## 分组
 
