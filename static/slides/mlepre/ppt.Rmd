@@ -1,5 +1,5 @@
 ---
-title: "定量"
+title: "使用R Markdown制作幻灯片"
 subtitle: " "
 author: "宋骁"
 date: "2019/09/10"
