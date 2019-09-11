@@ -7,6 +7,10 @@ slug: pybasic
 tags: ['Python']
 ---
 
+![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)]
+
+[一本Python书](http://funhacks.net/explore-python/)
+
 # 从文件中读取数据
 
 

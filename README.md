@@ -1,5 +1,10 @@
 
-# INTRODUCTION
+# [xsong.ltd](https://xsong.ltd/)
+
+![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
+
+
+## INTRODUCTION
 
 This is Xiao Song's personal website.
 The url is [https://xsong.ltd/](https://xsong.ltd/)
