@@ -1,0 +1,85 @@
+---
+title: "Python有用的函数"
+author: " "
+date: "2019-09-11"
+categories: Python
+slug: pybasic
+tags: ['Python']
+---
+
+
+
+<div id="section" class="section level1">
+<h1>从文件中读取数据</h1>
+<p>文件类提供了三种方法读取文本文件的内容，分别是：</p>
+<pre class="python"><code>f.read(size)</code></pre>
+<p>返回一个字符串，内容为长度为size的文本。参数size表示读取的数扯，可以省略。如果省略size参数，则表示<strong>读取文件所有内容，作为一个字符串返回</strong>。</p>
+<pre class="python"><code>f.readline()</code></pre>
+<p>返回一个字符串，内容为文件当前一行的文本。</p>
+<pre class="python"><code>f.readlines()</code></pre>
+<p>返回一个列表，列表的数据项为一行的文本[linel, line2, ···,lineN] 。再通过循环操作可以逐行访问列表中每一行的内容。</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">mode</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">r</td>
+<td align="left">以只读方式打开</td>
+</tr>
+<tr class="even">
+<td align="center">w</td>
+<td align="left">以写方式打开一个文件，当这个文件存在时，覆盖原来的内容。当这个文件不存在时，创建这个文件</td>
+</tr>
+<tr class="odd">
+<td align="center">x</td>
+<td align="left">创建一个新文件，以写方式打开，当文件已存在， 报错FileExistsError</td>
+</tr>
+<tr class="even">
+<td align="center">a</td>
+<td align="left">以写方式打开，写人内容追加在文件的末尾</td>
+</tr>
+<tr class="odd">
+<td align="center">b</td>
+<td align="left">表示二进制文件，添加在其他控制字符后</td>
+</tr>
+<tr class="even">
+<td align="center">t</td>
+<td align="left">表示文本文件，默认值</td>
+</tr>
+<tr class="odd">
+<td align="center">+</td>
+<td align="left">以修改方式打开，支持读写</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="section-1" class="section level1">
+<h1>设置工作目录</h1>
+<ul>
+<li>获取当前工作目录：</li>
+</ul>
+<pre class="python"><code>import os
+os.getcwd(&#39; &#39;)    </code></pre>
+<ul>
+<li>设置工作目录</li>
+</ul>
+<pre class="python"><code>os.chdir(&#39; &#39;) </code></pre>
+</div>
+<div id="jupyter-notebook" class="section level1">
+<h1>设置<code>Jupyter Notebook</code>图片输出格式</h1>
+<ul>
+<li>SVG格式</li>
+</ul>
+<pre class="python"><code>%matplotlib inline
+%config InlineBackend.figure_format = &#39;svg&#39;</code></pre>
+</div>
+<div id="section-2" class="section level1">
+<h1>让图片说中文</h1>
+<pre class="python"><code>import matplotlib.pyplot as plt
+plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
+</div>

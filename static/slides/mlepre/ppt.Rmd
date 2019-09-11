@@ -16,6 +16,7 @@ output:
 
 ### 购车放弃原因
 
++ 购车原因
 
 ```{r, echo=F,message=F,warning=F,fig.cap=" ", out.width = '150%',fig.align='center',fig.asp = 0.618,dev='svg',fig.showtext=T}
 

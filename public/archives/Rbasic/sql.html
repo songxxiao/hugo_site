@@ -399,7 +399,9 @@ $(document).ready(function () {
 <li><a href="#section-7"><span class="toc-section-number">6.2</span> 纵向连接</a></li>
 </ul></li>
 <li><a href="#section-8"><span class="toc-section-number">7</span> 按条件删除行</a></li>
-<li><a href="#section-9"><span class="toc-section-number">8</span> 视图</a></li>
+<li><a href="#section-9"><span class="toc-section-number">8</span> 视图</a><ul>
+<li><a href="#section-10"><span class="toc-section-number">8.1</span> 从视图中查询</a></li>
+</ul></li>
 </ul>
 </div>
 
@@ -689,6 +691,57 @@ SELECT * FROM salary LIMIT 5</code></pre>
 <ul>
 <li>在SQL中，视图是基于SQL语句的结果集的可视化的表。</li>
 </ul>
+<pre class="sql"><code>CREATE VIEW teamage AS
+SELECT DISTINCT Year,Tm, AVG(Age)
+FROM season
+GROUP BY Tm
+ORDER BY Year;</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>f1</th>
+<th>Player</th>
+<th>season17_18</th>
+<th>salary17_18</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>LeBron James</td>
+<td>33285709</td>
+<td>33.2857</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Paul Millsap</td>
+<td>31269231</td>
+<td>31.2692</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Gordon Hayward</td>
+<td>29727900</td>
+<td>29.7279</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Blake Griffin</td>
+<td>29512900</td>
+<td>29.5129</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Kyle Lowry</td>
+<td>28703704</td>
+<td>28.7037</td>
+</tr>
+</tbody>
+</table>
+<div id="section-10" class="section level2">
+<h2><span class="header-section-number">8.1</span> 从视图中查询</h2>
+<pre class="sql"><code>SELECT COUNT(DISTINCT Tm) FROM teamage;</code></pre>
+</div>
 </div>
 
 

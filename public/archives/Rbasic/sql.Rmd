@@ -139,8 +139,26 @@ SELECT * FROM salary LIMIT 5
 
 + 在SQL中，视图是基于SQL语句的结果集的可视化的表。
 
+```sql
+CREATE VIEW teamage AS
+SELECT DISTINCT Year,Tm, AVG(Age)
+FROM season
+GROUP BY Tm
+ORDER BY Year;
+```
+| f1 | Player         | season17_18 | salary17_18 |
+|----|----------------|-------------|-------------|
+| 2  | LeBron James   | 33285709    | 33.2857     |
+| 3  | Paul Millsap   | 31269231    | 31.2692     |
+| 4  | Gordon Hayward | 29727900    | 29.7279     |
+| 5  | Blake Griffin  | 29512900    | 29.5129     |
+| 6  | Kyle Lowry     | 28703704    | 28.7037     |
 
+## 从视图中查询
 
+```sql
+SELECT COUNT(DISTINCT Tm) FROM teamage;
+```
 
 
 
