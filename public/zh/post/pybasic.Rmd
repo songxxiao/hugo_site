@@ -29,15 +29,47 @@ f.readlines()
 ```
 返回一个列表，列表的数据项为一行的文本[linel, line2, ···,lineN] 。再通过循环操作可以逐行访问列表中每一行的内容。
 
-| mode  |                                           解释                                           |
-|:-----:|:----------------------------------------------------------------------------------------|
-| r     | 以只读方式打开                                                                           |
-| w     | 以写方式打开一个文件，当这个文件存在时，覆盖原来的内容。当这个文件不存在时，创建这个文件 |
-| x     | 创建一个新文件，以写方式打开，当文件已存在， 报错FileExistsError                         |
-| a     | 以写方式打开，写人内容追加在文件的末尾                                                   |
-| b     | 表示二进制文件，添加在其他控制字符后                                                     |
-| t     | 表示文本文件，默认值                                                                     |
-| +     | 以修改方式打开，支持读写                                                                 |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-c3ow">mode </th>
+    <th class="tg-c3ow">解释</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">r </td>
+    <td class="tg-0pky">以只读方式打开</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">w</td>
+    <td class="tg-0pky">以写方式打开一个文件，当这个文件存在时，覆盖原来的内容。当这个文件不存在时，创建这个文件</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">x</td>
+    <td class="tg-0pky">创建一个新文件，以写方式打开，当文件已存在， 报错FileExistsError</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">a </td>
+    <td class="tg-0pky">以写方式打开，写人内容追加在文件的末尾</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">b </td>
+    <td class="tg-0pky">表示二进制文件，添加在其他控制字符后</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">t</td>
+    <td class="tg-0pky">表示文本文件，默认值</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">+</td>
+    <td class="tg-0pky">以修改方式打开，支持读写</td>
+  </tr>
+</table>    
 
 # 设置工作目录
 
