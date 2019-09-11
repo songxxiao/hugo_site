@@ -434,53 +434,116 @@ ADD COLUMN Team VARCHAR;</code></pre>
 <pre class="sql"><code>ALTER TABLE salary 
 ADD salary17_18 FLOAT;
 UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th>f1</th>
-<th>Player</th>
-<th>Tm</th>
-<th>season17_18</th>
-<th>salary17_18</th>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-h240{font-family:serif !important;;text-align:left;vertical-align:middle}
+.tg .tg-ilw0{font-family:serif !important;;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-h240">
+f1
+</th>
+<th class="tg-h240">
+Player
+</th>
+<th class="tg-ilw0">
+Tm
+</th>
+<th class="tg-ilw0">
+season17_18
+</th>
+<th class="tg-ilw0">
+salary17_18
+</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Stephen Curry</td>
-<td>GSW</td>
-<td>34682550</td>
-<td>34.6825</td>
+<tr>
+<td class="tg-h240">
+1
+</td>
+<td class="tg-h240">
+Stephen Curry
+</td>
+<td class="tg-ilw0">
+GSW
+</td>
+<td class="tg-ilw0">
+34682550
+</td>
+<td class="tg-ilw0">
+34.6825
+</td>
 </tr>
-<tr class="even">
-<td>2</td>
-<td>LeBron James</td>
-<td>CLE</td>
-<td>33285709</td>
-<td>33.2857</td>
+<tr>
+<td class="tg-h240">
+2
+</td>
+<td class="tg-h240">
+LeBron James
+</td>
+<td class="tg-ilw0">
+CLE
+</td>
+<td class="tg-ilw0">
+33285709
+</td>
+<td class="tg-ilw0">
+33.2857
+</td>
 </tr>
-<tr class="odd">
-<td>3</td>
-<td>Paul Millsap</td>
-<td>DEN</td>
-<td>31269231</td>
-<td>31.2692</td>
+<tr>
+<td class="tg-ilw0">
+3
+</td>
+<td class="tg-ilw0">
+Paul Millsap
+</td>
+<td class="tg-ilw0">
+DEN
+</td>
+<td class="tg-ilw0">
+31269231
+</td>
+<td class="tg-ilw0">
+31.2692
+</td>
 </tr>
-<tr class="even">
-<td>4</td>
-<td>Gordon Hayward</td>
-<td>BOS</td>
-<td>29727900</td>
-<td>29.7279</td>
+<tr>
+<td class="tg-ilw0">
+4
+</td>
+<td class="tg-ilw0">
+Gordon Hayward
+</td>
+<td class="tg-ilw0">
+BOS
+</td>
+<td class="tg-ilw0">
+29727900
+</td>
+<td class="tg-ilw0">
+29.7279
+</td>
 </tr>
-<tr class="odd">
-<td>5</td>
-<td>Blake Griffin</td>
-<td>DET</td>
-<td>29512900</td>
-<td>29.5129</td>
+<tr>
+<td class="tg-ilw0">
+5
+</td>
+<td class="tg-ilw0">
+Blake Griffin
+</td>
+<td class="tg-ilw0">
+DET
+</td>
+<td class="tg-ilw0">
+29512900
+</td>
+<td class="tg-ilw0">
+29.5129
+</td>
 </tr>
-</tbody>
 </table>
 </div>
 <div id="section-3" class="section level1">
@@ -489,35 +552,62 @@ UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
 <li><code>DISTINCT</code>按选中的列去重。得到高龄球员榜</li>
 </ul>
 <pre class="sql"><code>SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th>Player</th>
-<th>Age</th>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+Player
+</th>
+<th class="tg-cly1">
+Age
+</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Kevin Willis</td>
-<td>44</td>
+<tr>
+<td class="tg-cly1">
+Kevin Willis
+</td>
+<td class="tg-cly1">
+44
+</td>
 </tr>
-<tr class="even">
-<td>Robert Parish*</td>
-<td>43</td>
+<tr>
+<td class="tg-cly1">
+Robert Parish*
+</td>
+<td class="tg-cly1">
+43
+</td>
 </tr>
-<tr class="odd">
-<td>Dikembe Mutombo*</td>
-<td>42</td>
+<tr>
+<td class="tg-0lax">
+Dikembe Mutombo*
+</td>
+<td class="tg-0lax">
+42
+</td>
 </tr>
-<tr class="even">
-<td>Kevin Willis</td>
-<td>42</td>
+<tr>
+<td class="tg-0lax">
+Kevin Willis
+</td>
+<td class="tg-0lax">
+42
+</td>
 </tr>
-<tr class="odd">
-<td>Robert Parish*</td>
-<td>42</td>
+<tr>
+<td class="tg-0lax">
+Robert Parish*
+</td>
+<td class="tg-0lax">
+42
+</td>
 </tr>
-</tbody>
 </table>
 <pre class="sql"><code>SELECT pubid,adfmt,event,COUNT(DISTINCT imei),COUNT(DISTINCT idfa) FROM table_numb 
 WHERE pubid= &#39;20&#39; AND adfmt &lt;&gt; &#39;chip&#39; AND event = &#39;ac&#39;</code></pre>
@@ -528,89 +618,224 @@ WHERE pubid= &#39;20&#39; AND adfmt &lt;&gt; &#39;chip&#39; AND event = &#39;ac&
 <li>使用<code>WHERE</code>子句保留2017年之后的数据</li>
 </ul>
 <pre class="sql"><code>SELECT * FROM seasons WHERE Year&gt;=2017</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th>f1</th>
-<th>Year</th>
-<th>Player</th>
-<th>Pos</th>
-<th>Age</th>
-<th>Tm</th>
-<th>G</th>
-<th>GS</th>
-<th>MP</th>
-<th>PER</th>
-<th>TS%</th>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+f1
+</th>
+<th class="tg-cly1">
+Year
+</th>
+<th class="tg-0lax">
+Player
+</th>
+<th class="tg-0lax">
+Pos
+</th>
+<th class="tg-0lax">
+Age
+</th>
+<th class="tg-0lax">
+Tm
+</th>
+<th class="tg-0lax">
+G
+</th>
+<th class="tg-0lax">
+GS
+</th>
+<th class="tg-0lax">
+MP
+</th>
+<th class="tg-0lax">
+PER
+</th>
+<th class="tg-0lax">
+TS%
+</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>24096</td>
-<td>2017</td>
-<td>Alex Abrines</td>
-<td>SG</td>
-<td>23</td>
-<td>OKC</td>
-<td>68</td>
-<td>6</td>
-<td>1055</td>
-<td>10.1</td>
-<td>0.56</td>
+<tr>
+<td class="tg-cly1">
+24096
+</td>
+<td class="tg-cly1">
+2017
+</td>
+<td class="tg-0lax">
+Alex Abrines
+</td>
+<td class="tg-0lax">
+SG
+</td>
+<td class="tg-0lax">
+23
+</td>
+<td class="tg-0lax">
+OKC
+</td>
+<td class="tg-0lax">
+68
+</td>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+1055
+</td>
+<td class="tg-0lax">
+10.1
+</td>
+<td class="tg-0lax">
+0.56
+</td>
 </tr>
-<tr class="even">
-<td>24097</td>
-<td>2017</td>
-<td>Quincy Acy</td>
-<td>PF</td>
-<td>26</td>
-<td>TOT</td>
-<td>38</td>
-<td>1</td>
-<td>558</td>
-<td>11.8</td>
-<td>0.565</td>
+<tr>
+<td class="tg-cly1">
+24097
+</td>
+<td class="tg-cly1">
+2017
+</td>
+<td class="tg-0lax">
+Quincy Acy
+</td>
+<td class="tg-0lax">
+PF
+</td>
+<td class="tg-0lax">
+26
+</td>
+<td class="tg-0lax">
+TOT
+</td>
+<td class="tg-0lax">
+38
+</td>
+<td class="tg-0lax">
+1
+</td>
+<td class="tg-0lax">
+558
+</td>
+<td class="tg-0lax">
+11.8
+</td>
+<td class="tg-0lax">
+0.565
+</td>
 </tr>
-<tr class="odd">
-<td>24098</td>
-<td>2017</td>
-<td>Quincy Acy</td>
-<td>PF</td>
-<td>26</td>
-<td>DAL</td>
-<td>6</td>
-<td>0</td>
-<td>48</td>
-<td>-1.4</td>
-<td>0.355</td>
+<tr>
+<td class="tg-0lax">
+24098
+</td>
+<td class="tg-0lax">
+2017
+</td>
+<td class="tg-0lax">
+Quincy Acy
+</td>
+<td class="tg-0lax">
+PF
+</td>
+<td class="tg-0lax">
+26
+</td>
+<td class="tg-0lax">
+DAL
+</td>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+0
+</td>
+<td class="tg-0lax">
+48
+</td>
+<td class="tg-0lax">
+-1.4
+</td>
+<td class="tg-0lax">
+0.355
+</td>
 </tr>
-<tr class="even">
-<td>24099</td>
-<td>2017</td>
-<td>Quincy Acy</td>
-<td>PF</td>
-<td>26</td>
-<td>BRK</td>
-<td>32</td>
-<td>1</td>
-<td>510</td>
-<td>13.1</td>
-<td>0.587</td>
+<tr>
+<td class="tg-0lax">
+24099
+</td>
+<td class="tg-0lax">
+2017
+</td>
+<td class="tg-0lax">
+Quincy Acy
+</td>
+<td class="tg-0lax">
+PF
+</td>
+<td class="tg-0lax">
+26
+</td>
+<td class="tg-0lax">
+BRK
+</td>
+<td class="tg-0lax">
+32
+</td>
+<td class="tg-0lax">
+1
+</td>
+<td class="tg-0lax">
+510
+</td>
+<td class="tg-0lax">
+13.1
+</td>
+<td class="tg-0lax">
+0.587
+</td>
 </tr>
-<tr class="odd">
-<td>24100</td>
-<td>2017</td>
-<td>Steven Adams</td>
-<td>C</td>
-<td>23</td>
-<td>OKC</td>
-<td>80</td>
-<td>80</td>
-<td>2389</td>
-<td>16.5</td>
-<td>0.589</td>
+<tr>
+<td class="tg-0lax">
+24100
+</td>
+<td class="tg-0lax">
+2017
+</td>
+<td class="tg-0lax">
+Steven Adams
+</td>
+<td class="tg-0lax">
+C
+</td>
+<td class="tg-0lax">
+23
+</td>
+<td class="tg-0lax">
+OKC
+</td>
+<td class="tg-0lax">
+80
+</td>
+<td class="tg-0lax">
+80
+</td>
+<td class="tg-0lax">
+2389
+</td>
+<td class="tg-0lax">
+16.5
+</td>
+<td class="tg-0lax">
+0.589
+</td>
 </tr>
-</tbody>
 </table>
 </div>
 <div id="section-5" class="section level1">
@@ -643,47 +868,98 @@ ORDER BY Player</code></pre>
 </ul>
 <pre class="sql"><code>DELETE FROM salary WHERE Player=&#39;Stephen Curry&#39;;
 SELECT * FROM salary LIMIT 5</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th>f1</th>
-<th>Player</th>
-<th>season17_18</th>
-<th>salary17_18</th>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+f1
+</th>
+<th class="tg-cly1">
+Player
+</th>
+<th class="tg-cly1">
+season17_18
+</th>
+<th class="tg-0lax">
+salary17_18
+</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2</td>
-<td>LeBron James</td>
-<td>33285709</td>
-<td>33.2857</td>
+<tr>
+<td class="tg-cly1">
+2
+</td>
+<td class="tg-cly1">
+LeBron James
+</td>
+<td class="tg-cly1">
+33285709
+</td>
+<td class="tg-0lax">
+33.2857
+</td>
 </tr>
-<tr class="even">
-<td>3</td>
-<td>Paul Millsap</td>
-<td>31269231</td>
-<td>31.2692</td>
+<tr>
+<td class="tg-cly1">
+3
+</td>
+<td class="tg-cly1">
+Paul Millsap
+</td>
+<td class="tg-cly1">
+31269231
+</td>
+<td class="tg-0lax">
+31.2692
+</td>
 </tr>
-<tr class="odd">
-<td>4</td>
-<td>Gordon Hayward</td>
-<td>29727900</td>
-<td>29.7279</td>
+<tr>
+<td class="tg-0lax">
+4
+</td>
+<td class="tg-0lax">
+Gordon Hayward
+</td>
+<td class="tg-0lax">
+29727900
+</td>
+<td class="tg-0lax">
+29.7279
+</td>
 </tr>
-<tr class="even">
-<td>5</td>
-<td>Blake Griffin</td>
-<td>29512900</td>
-<td>29.5129</td>
+<tr>
+<td class="tg-0lax">
+5
+</td>
+<td class="tg-0lax">
+Blake Griffin
+</td>
+<td class="tg-0lax">
+29512900
+</td>
+<td class="tg-0lax">
+29.5129
+</td>
 </tr>
-<tr class="odd">
-<td>6</td>
-<td>Kyle Lowry</td>
-<td>28703704</td>
-<td>28.7037</td>
+<tr>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+Kyle Lowry
+</td>
+<td class="tg-0lax">
+28703704
+</td>
+<td class="tg-0lax">
+28.7037
+</td>
 </tr>
-</tbody>
 </table>
 </div>
 <div id="section-9" class="section level1">
@@ -696,47 +972,98 @@ SELECT DISTINCT Year,Tm, AVG(Age)
 FROM season
 GROUP BY Tm
 ORDER BY Year;</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th>f1</th>
-<th>Player</th>
-<th>season17_18</th>
-<th>salary17_18</th>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+f1
+</th>
+<th class="tg-cly1">
+Player
+</th>
+<th class="tg-cly1">
+season17_18
+</th>
+<th class="tg-0lax">
+salary17_18
+</th>
 </tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2</td>
-<td>LeBron James</td>
-<td>33285709</td>
-<td>33.2857</td>
+<tr>
+<td class="tg-cly1">
+2
+</td>
+<td class="tg-cly1">
+LeBron James
+</td>
+<td class="tg-cly1">
+33285709
+</td>
+<td class="tg-0lax">
+33.2857
+</td>
 </tr>
-<tr class="even">
-<td>3</td>
-<td>Paul Millsap</td>
-<td>31269231</td>
-<td>31.2692</td>
+<tr>
+<td class="tg-cly1">
+3
+</td>
+<td class="tg-cly1">
+Paul Millsap
+</td>
+<td class="tg-cly1">
+31269231
+</td>
+<td class="tg-0lax">
+31.2692
+</td>
 </tr>
-<tr class="odd">
-<td>4</td>
-<td>Gordon Hayward</td>
-<td>29727900</td>
-<td>29.7279</td>
+<tr>
+<td class="tg-0lax">
+4
+</td>
+<td class="tg-0lax">
+Gordon Hayward
+</td>
+<td class="tg-0lax">
+29727900
+</td>
+<td class="tg-0lax">
+29.7279
+</td>
 </tr>
-<tr class="even">
-<td>5</td>
-<td>Blake Griffin</td>
-<td>29512900</td>
-<td>29.5129</td>
+<tr>
+<td class="tg-0lax">
+5
+</td>
+<td class="tg-0lax">
+Blake Griffin
+</td>
+<td class="tg-0lax">
+29512900
+</td>
+<td class="tg-0lax">
+29.5129
+</td>
 </tr>
-<tr class="odd">
-<td>6</td>
-<td>Kyle Lowry</td>
-<td>28703704</td>
-<td>28.7037</td>
+<tr>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+Kyle Lowry
+</td>
+<td class="tg-0lax">
+28703704
+</td>
+<td class="tg-0lax">
+28.7037
+</td>
 </tr>
-</tbody>
 </table>
 <div id="section-10" class="section level2">
 <h2><span class="header-section-number">8.1</span> 从视图中查询</h2>

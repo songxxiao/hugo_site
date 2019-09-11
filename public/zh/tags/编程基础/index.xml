@@ -17,8 +17,15 @@
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/sql/</guid>
-      <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/Rbasic/sql&#34;)</description>
+      <description>学而时习之，不亦乐乎？
+——孔子
+MySQL安装(基于Windows)
+MySQL 教程
+廖雪峰SQL教程
+W3school SQL教程
+数据：NBA技术统计和球员薪酬数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
+本文基于MySQL。
+变量排序SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;删除 &amp;amp; 增添列ALTER TABLE salary DROP COLUMN TmADD COLUMN Team VARCHAR;重编码新变量ALTER TABLE salary ADD salary17_18 FLOAT;UPDATE salary SET salary17_18 = season17_18/1000000.tg {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg .tg-h240{font-family:serif !important;;text-align:left;vertical-align:middle}.tg .tg-ilw0{font-family:serif !important;;text-align:left;vertical-align:top}f1PlayerTmseason17_18salary17_181Stephen CurryGSW3468255034.</description>
     </item>
     
     <item>

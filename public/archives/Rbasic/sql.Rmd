@@ -48,14 +48,57 @@ ALTER TABLE salary
 ADD salary17_18 FLOAT;
 UPDATE salary SET salary17_18 = season17_18/1000000
 ```
-
-| f1 | Player            | Tm  | season17_18 | salary17_18 |
-|----|-------------------|-----|-------------|-------------|
-| 1  | Stephen Curry     | GSW | 34682550    | 34.6825     |
-| 2  | LeBron James      | CLE | 33285709    | 33.2857     |
-| 3  | Paul Millsap      | DEN | 31269231    | 31.2692     |
-| 4  | Gordon Hayward    | BOS | 29727900    | 29.7279     |
-| 5  | Blake Griffin     | DET | 29512900    | 29.5129     |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-h240{font-family:serif !important;;text-align:left;vertical-align:middle}
+.tg .tg-ilw0{font-family:serif !important;;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-h240">f1</th>
+    <th class="tg-h240">Player</th>
+    <th class="tg-ilw0">Tm</th>
+    <th class="tg-ilw0">season17_18</th>
+    <th class="tg-ilw0">salary17_18</th>
+  </tr>
+  <tr>
+    <td class="tg-h240">1</td>
+    <td class="tg-h240">Stephen Curry</td>
+    <td class="tg-ilw0">GSW</td>
+    <td class="tg-ilw0">34682550</td>
+    <td class="tg-ilw0">34.6825</td>
+  </tr>
+  <tr>
+    <td class="tg-h240">2</td>
+    <td class="tg-h240">LeBron James</td>
+    <td class="tg-ilw0">CLE</td>
+    <td class="tg-ilw0">33285709</td>
+    <td class="tg-ilw0">33.2857</td>
+  </tr>
+  <tr>
+    <td class="tg-ilw0">3</td>
+    <td class="tg-ilw0">Paul Millsap</td>
+    <td class="tg-ilw0">DEN</td>
+    <td class="tg-ilw0">31269231</td>
+    <td class="tg-ilw0">31.2692</td>
+  </tr>
+  <tr>
+    <td class="tg-ilw0">4</td>
+    <td class="tg-ilw0">Gordon Hayward</td>
+    <td class="tg-ilw0">BOS</td>
+    <td class="tg-ilw0">29727900</td>
+    <td class="tg-ilw0">29.7279</td>
+  </tr>
+  <tr>
+    <td class="tg-ilw0">5</td>
+    <td class="tg-ilw0">Blake Griffin</td>
+    <td class="tg-ilw0">DET</td>
+    <td class="tg-ilw0">29512900</td>
+    <td class="tg-ilw0">29.5129</td>
+  </tr>
+</table>
 
 # 按特定行删除重复值
 
@@ -64,13 +107,39 @@ UPDATE salary SET salary17_18 = season17_18/1000000
 ```sql
 SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;
 ```
-| Player               | Age |
-|----------------------|-----|
-| Kevin Willis         | 44  |
-| Robert Parish*       | 43  |
-| Dikembe Mutombo*     | 42  |
-| Kevin Willis         | 42  |
-| Robert Parish*       | 42  |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-cly1">Player</th>
+    <th class="tg-cly1">Age</th>
+  </tr>
+  <tr>
+    <td class="tg-cly1">Kevin Willis</td>
+    <td class="tg-cly1">44</td>
+  </tr>
+  <tr>
+    <td class="tg-cly1">Robert Parish*</td>
+    <td class="tg-cly1">43</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Dikembe Mutombo*</td>
+    <td class="tg-0lax">42</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Kevin Willis</td>
+    <td class="tg-0lax">42</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Robert Parish*</td>
+    <td class="tg-0lax">42</td>
+  </tr>
+</table>
 
 ```sql
 SELECT pubid,adfmt,event,COUNT(DISTINCT imei),COUNT(DISTINCT idfa) FROM table_numb 
@@ -86,13 +155,93 @@ WHERE pubid= '20' AND adfmt <> 'chip' AND event = 'ac'
 ```sql
 SELECT * FROM seasons WHERE Year>=2017
 ```
-| f1    | Year | Player        | Pos | Age | Tm  | G  | GS | MP   | PER  | TS%   |
-|-------|------|---------------|-----|-----|-----|----|----|------|------|-------|
-| 24096 | 2017 | Alex Abrines  | SG  | 23  | OKC | 68 | 6  | 1055 | 10.1 | 0.56  |
-| 24097 | 2017 | Quincy Acy    | PF  | 26  | TOT | 38 | 1  | 558  | 11.8 | 0.565 |
-| 24098 | 2017 | Quincy Acy    | PF  | 26  | DAL | 6  | 0  | 48   | -1.4 | 0.355 |
-| 24099 | 2017 | Quincy Acy    | PF  | 26  | BRK | 32 | 1  | 510  | 13.1 | 0.587 |
-| 24100 | 2017 | Steven Adams  | C   | 23  | OKC | 80 | 80 | 2389 | 16.5 | 0.589 |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-cly1">f1</th>
+    <th class="tg-cly1">Year</th>
+    <th class="tg-0lax">Player</th>
+    <th class="tg-0lax">Pos</th>
+    <th class="tg-0lax">Age</th>
+    <th class="tg-0lax">Tm</th>
+    <th class="tg-0lax">G</th>
+    <th class="tg-0lax">GS</th>
+    <th class="tg-0lax">MP</th>
+    <th class="tg-0lax">PER</th>
+    <th class="tg-0lax">TS%</th>
+  </tr>
+  <tr>
+    <td class="tg-cly1">24096</td>
+    <td class="tg-cly1">2017</td>
+    <td class="tg-0lax">Alex Abrines</td>
+    <td class="tg-0lax">SG</td>
+    <td class="tg-0lax">23</td>
+    <td class="tg-0lax">OKC</td>
+    <td class="tg-0lax">68</td>
+    <td class="tg-0lax">6</td>
+    <td class="tg-0lax">1055</td>
+    <td class="tg-0lax">10.1</td>
+    <td class="tg-0lax">0.56</td>
+  </tr>
+  <tr>
+    <td class="tg-cly1">24097</td>
+    <td class="tg-cly1">2017</td>
+    <td class="tg-0lax">Quincy Acy</td>
+    <td class="tg-0lax">PF</td>
+    <td class="tg-0lax">26</td>
+    <td class="tg-0lax">TOT</td>
+    <td class="tg-0lax">38</td>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">558</td>
+    <td class="tg-0lax">11.8</td>
+    <td class="tg-0lax">0.565</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">24098</td>
+    <td class="tg-0lax">2017</td>
+    <td class="tg-0lax">Quincy Acy</td>
+    <td class="tg-0lax">PF</td>
+    <td class="tg-0lax">26</td>
+    <td class="tg-0lax">DAL</td>
+    <td class="tg-0lax">6</td>
+    <td class="tg-0lax">0</td>
+    <td class="tg-0lax">48</td>
+    <td class="tg-0lax">-1.4</td>
+    <td class="tg-0lax">0.355</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">24099</td>
+    <td class="tg-0lax">2017</td>
+    <td class="tg-0lax">Quincy Acy</td>
+    <td class="tg-0lax">PF</td>
+    <td class="tg-0lax">26</td>
+    <td class="tg-0lax">BRK</td>
+    <td class="tg-0lax">32</td>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">510</td>
+    <td class="tg-0lax">13.1</td>
+    <td class="tg-0lax">0.587</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">24100</td>
+    <td class="tg-0lax">2017</td>
+    <td class="tg-0lax">Steven Adams</td>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">23</td>
+    <td class="tg-0lax">OKC</td>
+    <td class="tg-0lax">80</td>
+    <td class="tg-0lax">80</td>
+    <td class="tg-0lax">2389</td>
+    <td class="tg-0lax">16.5</td>
+    <td class="tg-0lax">0.589</td>
+  </tr>
+</table>
 
 # 数据合并
 
@@ -126,13 +275,51 @@ ORDER BY Player
 DELETE FROM salary WHERE Player='Stephen Curry';
 SELECT * FROM salary LIMIT 5
 ```
-| f1 | Player         | season17_18 | salary17_18 |
-|----|----------------|-------------|-------------|
-| 2  | LeBron James   | 33285709    | 33.2857     |
-| 3  | Paul Millsap   | 31269231    | 31.2692     |
-| 4  | Gordon Hayward | 29727900    | 29.7279     |
-| 5  | Blake Griffin  | 29512900    | 29.5129     |
-| 6  | Kyle Lowry     | 28703704    | 28.7037     |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-cly1">f1</th>
+    <th class="tg-cly1">Player</th>
+    <th class="tg-cly1">season17_18</th>
+    <th class="tg-0lax">salary17_18</th>
+  </tr>
+  <tr>
+    <td class="tg-cly1">2</td>
+    <td class="tg-cly1">LeBron James</td>
+    <td class="tg-cly1">33285709</td>
+    <td class="tg-0lax">33.2857</td>
+  </tr>
+  <tr>
+    <td class="tg-cly1">3</td>
+    <td class="tg-cly1">Paul Millsap</td>
+    <td class="tg-cly1">31269231</td>
+    <td class="tg-0lax">31.2692</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">Gordon Hayward</td>
+    <td class="tg-0lax">29727900</td>
+    <td class="tg-0lax">29.7279</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">Blake Griffin</td>
+    <td class="tg-0lax">29512900</td>
+    <td class="tg-0lax">29.5129</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">6</td>
+    <td class="tg-0lax">Kyle Lowry</td>
+    <td class="tg-0lax">28703704</td>
+    <td class="tg-0lax">28.7037</td>
+  </tr>
+</table>
 
 
 # 视图
@@ -146,13 +333,52 @@ FROM season
 GROUP BY Tm
 ORDER BY Year;
 ```
-| f1 | Player         | season17_18 | salary17_18 |
-|----|----------------|-------------|-------------|
-| 2  | LeBron James   | 33285709    | 33.2857     |
-| 3  | Paul Millsap   | 31269231    | 31.2692     |
-| 4  | Gordon Hayward | 29727900    | 29.7279     |
-| 5  | Blake Griffin  | 29512900    | 29.5129     |
-| 6  | Kyle Lowry     | 28703704    | 28.7037     |
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-cly1">f1</th>
+    <th class="tg-cly1">Player</th>
+    <th class="tg-cly1">season17_18</th>
+    <th class="tg-0lax">salary17_18</th>
+  </tr>
+  <tr>
+    <td class="tg-cly1">2</td>
+    <td class="tg-cly1">LeBron James</td>
+    <td class="tg-cly1">33285709</td>
+    <td class="tg-0lax">33.2857</td>
+  </tr>
+  <tr>
+    <td class="tg-cly1">3</td>
+    <td class="tg-cly1">Paul Millsap</td>
+    <td class="tg-cly1">31269231</td>
+    <td class="tg-0lax">31.2692</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">Gordon Hayward</td>
+    <td class="tg-0lax">29727900</td>
+    <td class="tg-0lax">29.7279</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">Blake Griffin</td>
+    <td class="tg-0lax">29512900</td>
+    <td class="tg-0lax">29.5129</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">6</td>
+    <td class="tg-0lax">Kyle Lowry</td>
+    <td class="tg-0lax">28703704</td>
+    <td class="tg-0lax">28.7037</td>
+  </tr>
+</table>
 
 ## 从视图中查询
 

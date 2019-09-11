@@ -23,6 +23,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="../../css/fonts.css" media="all">
 <link rel="stylesheet" href="../../css/main.css" media="all">
 
@@ -75,12 +80,671 @@
       
 
 
-<p>页面跳转中···</p>
-<script>
-
-window.location.replace("https://xsong.ltd/archives/Rbasic/sql")
-
-</script>
+<blockquote>
+<p>学而时习之，不亦乐乎？<br />
+——孔子</p>
+</blockquote>
+<hr />
+<p><a href="https://www.cnblogs.com/vuenote/archive/2018/10/13/9783463.html">MySQL安装(基于Windows)</a></p>
+<p><a href="http://www.runoob.com/mysql/mysql-tutorial.html">MySQL 教程</a></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/1177760294764384">廖雪峰SQL教程</a></p>
+<p><a href="https://www.w3school.com.cn/sql/index.asp">W3school SQL教程</a></p>
+<hr />
+<ul>
+<li><p>数据：<a href="https://www.kaggle.com/drgilermo/nba-players-stats">NBA技术统计</a>和<a href="https://www.kaggle.com/koki25ando/salary">球员薪酬</a>数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。</p></li>
+<li><p>本文基于MySQL。</p></li>
+</ul>
+<div id="section" class="section level1">
+<h1>变量排序</h1>
+<pre class="sql"><code>SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;</code></pre>
+</div>
+<div id="section-1" class="section level1">
+<h1>删除 &amp; 增添列</h1>
+<pre class="sql"><code>ALTER TABLE salary 
+DROP COLUMN Tm
+ADD COLUMN Team VARCHAR;</code></pre>
+</div>
+<div id="section-2" class="section level1">
+<h1>重编码新变量</h1>
+<pre class="sql"><code>ALTER TABLE salary 
+ADD salary17_18 FLOAT;
+UPDATE salary SET salary17_18 = season17_18/1000000</code></pre>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-h240{font-family:serif !important;;text-align:left;vertical-align:middle}
+.tg .tg-ilw0{font-family:serif !important;;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-h240">
+f1
+</th>
+<th class="tg-h240">
+Player
+</th>
+<th class="tg-ilw0">
+Tm
+</th>
+<th class="tg-ilw0">
+season17_18
+</th>
+<th class="tg-ilw0">
+salary17_18
+</th>
+</tr>
+<tr>
+<td class="tg-h240">
+1
+</td>
+<td class="tg-h240">
+Stephen Curry
+</td>
+<td class="tg-ilw0">
+GSW
+</td>
+<td class="tg-ilw0">
+34682550
+</td>
+<td class="tg-ilw0">
+34.6825
+</td>
+</tr>
+<tr>
+<td class="tg-h240">
+2
+</td>
+<td class="tg-h240">
+LeBron James
+</td>
+<td class="tg-ilw0">
+CLE
+</td>
+<td class="tg-ilw0">
+33285709
+</td>
+<td class="tg-ilw0">
+33.2857
+</td>
+</tr>
+<tr>
+<td class="tg-ilw0">
+3
+</td>
+<td class="tg-ilw0">
+Paul Millsap
+</td>
+<td class="tg-ilw0">
+DEN
+</td>
+<td class="tg-ilw0">
+31269231
+</td>
+<td class="tg-ilw0">
+31.2692
+</td>
+</tr>
+<tr>
+<td class="tg-ilw0">
+4
+</td>
+<td class="tg-ilw0">
+Gordon Hayward
+</td>
+<td class="tg-ilw0">
+BOS
+</td>
+<td class="tg-ilw0">
+29727900
+</td>
+<td class="tg-ilw0">
+29.7279
+</td>
+</tr>
+<tr>
+<td class="tg-ilw0">
+5
+</td>
+<td class="tg-ilw0">
+Blake Griffin
+</td>
+<td class="tg-ilw0">
+DET
+</td>
+<td class="tg-ilw0">
+29512900
+</td>
+<td class="tg-ilw0">
+29.5129
+</td>
+</tr>
+</table>
+</div>
+<div id="section-3" class="section level1">
+<h1>按特定行删除重复值</h1>
+<ul>
+<li><code>DISTINCT</code>按选中的列去重。得到高龄球员榜</li>
+</ul>
+<pre class="sql"><code>SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;</code></pre>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+Player
+</th>
+<th class="tg-cly1">
+Age
+</th>
+</tr>
+<tr>
+<td class="tg-cly1">
+Kevin Willis
+</td>
+<td class="tg-cly1">
+44
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+Robert Parish*
+</td>
+<td class="tg-cly1">
+43
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+Dikembe Mutombo*
+</td>
+<td class="tg-0lax">
+42
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+Kevin Willis
+</td>
+<td class="tg-0lax">
+42
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+Robert Parish*
+</td>
+<td class="tg-0lax">
+42
+</td>
+</tr>
+</table>
+<pre class="sql"><code>SELECT pubid,adfmt,event,COUNT(DISTINCT imei),COUNT(DISTINCT idfa) FROM table_numb 
+WHERE pubid= &#39;20&#39; AND adfmt &lt;&gt; &#39;chip&#39; AND event = &#39;ac&#39;</code></pre>
+</div>
+<div id="section-4" class="section level1">
+<h1>按条件筛选数据</h1>
+<ul>
+<li>使用<code>WHERE</code>子句保留2017年之后的数据</li>
+</ul>
+<pre class="sql"><code>SELECT * FROM seasons WHERE Year&gt;=2017</code></pre>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+f1
+</th>
+<th class="tg-cly1">
+Year
+</th>
+<th class="tg-0lax">
+Player
+</th>
+<th class="tg-0lax">
+Pos
+</th>
+<th class="tg-0lax">
+Age
+</th>
+<th class="tg-0lax">
+Tm
+</th>
+<th class="tg-0lax">
+G
+</th>
+<th class="tg-0lax">
+GS
+</th>
+<th class="tg-0lax">
+MP
+</th>
+<th class="tg-0lax">
+PER
+</th>
+<th class="tg-0lax">
+TS%
+</th>
+</tr>
+<tr>
+<td class="tg-cly1">
+24096
+</td>
+<td class="tg-cly1">
+2017
+</td>
+<td class="tg-0lax">
+Alex Abrines
+</td>
+<td class="tg-0lax">
+SG
+</td>
+<td class="tg-0lax">
+23
+</td>
+<td class="tg-0lax">
+OKC
+</td>
+<td class="tg-0lax">
+68
+</td>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+1055
+</td>
+<td class="tg-0lax">
+10.1
+</td>
+<td class="tg-0lax">
+0.56
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+24097
+</td>
+<td class="tg-cly1">
+2017
+</td>
+<td class="tg-0lax">
+Quincy Acy
+</td>
+<td class="tg-0lax">
+PF
+</td>
+<td class="tg-0lax">
+26
+</td>
+<td class="tg-0lax">
+TOT
+</td>
+<td class="tg-0lax">
+38
+</td>
+<td class="tg-0lax">
+1
+</td>
+<td class="tg-0lax">
+558
+</td>
+<td class="tg-0lax">
+11.8
+</td>
+<td class="tg-0lax">
+0.565
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+24098
+</td>
+<td class="tg-0lax">
+2017
+</td>
+<td class="tg-0lax">
+Quincy Acy
+</td>
+<td class="tg-0lax">
+PF
+</td>
+<td class="tg-0lax">
+26
+</td>
+<td class="tg-0lax">
+DAL
+</td>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+0
+</td>
+<td class="tg-0lax">
+48
+</td>
+<td class="tg-0lax">
+-1.4
+</td>
+<td class="tg-0lax">
+0.355
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+24099
+</td>
+<td class="tg-0lax">
+2017
+</td>
+<td class="tg-0lax">
+Quincy Acy
+</td>
+<td class="tg-0lax">
+PF
+</td>
+<td class="tg-0lax">
+26
+</td>
+<td class="tg-0lax">
+BRK
+</td>
+<td class="tg-0lax">
+32
+</td>
+<td class="tg-0lax">
+1
+</td>
+<td class="tg-0lax">
+510
+</td>
+<td class="tg-0lax">
+13.1
+</td>
+<td class="tg-0lax">
+0.587
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+24100
+</td>
+<td class="tg-0lax">
+2017
+</td>
+<td class="tg-0lax">
+Steven Adams
+</td>
+<td class="tg-0lax">
+C
+</td>
+<td class="tg-0lax">
+23
+</td>
+<td class="tg-0lax">
+OKC
+</td>
+<td class="tg-0lax">
+80
+</td>
+<td class="tg-0lax">
+80
+</td>
+<td class="tg-0lax">
+2389
+</td>
+<td class="tg-0lax">
+16.5
+</td>
+<td class="tg-0lax">
+0.589
+</td>
+</tr>
+</table>
+</div>
+<div id="section-5" class="section level1">
+<h1>数据合并</h1>
+<div id="section-6" class="section level2">
+<h2>横向连接</h2>
+<pre class="sql"><code>ALTER TABLE salary
+DROP COLUMN Tm;
+SELECT * FROM salary
+JOIN seasons
+ON salary.Player=seasons.Player</code></pre>
+</div>
+<div id="section-7" class="section level2">
+<h2>纵向连接</h2>
+<ul>
+<li><code>UNION ALL</code>允许重复值</li>
+<li><code>UNION</code>不允许重复值</li>
+</ul>
+<pre class="sql"><code>SELECT Player FROM salary
+UNION ALL
+SELECT Player FROM seasons; 
+ORDER BY Player</code></pre>
+</div>
+</div>
+<div id="section-8" class="section level1">
+<h1>按条件删除行</h1>
+<ul>
+<li><p>删除斯蒂芬·库里</p></li>
+<li><p><code>LIMIT</code>语句控制结果显示的行数</p></li>
+</ul>
+<pre class="sql"><code>DELETE FROM salary WHERE Player=&#39;Stephen Curry&#39;;
+SELECT * FROM salary LIMIT 5</code></pre>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+f1
+</th>
+<th class="tg-cly1">
+Player
+</th>
+<th class="tg-cly1">
+season17_18
+</th>
+<th class="tg-0lax">
+salary17_18
+</th>
+</tr>
+<tr>
+<td class="tg-cly1">
+2
+</td>
+<td class="tg-cly1">
+LeBron James
+</td>
+<td class="tg-cly1">
+33285709
+</td>
+<td class="tg-0lax">
+33.2857
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+3
+</td>
+<td class="tg-cly1">
+Paul Millsap
+</td>
+<td class="tg-cly1">
+31269231
+</td>
+<td class="tg-0lax">
+31.2692
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+4
+</td>
+<td class="tg-0lax">
+Gordon Hayward
+</td>
+<td class="tg-0lax">
+29727900
+</td>
+<td class="tg-0lax">
+29.7279
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+5
+</td>
+<td class="tg-0lax">
+Blake Griffin
+</td>
+<td class="tg-0lax">
+29512900
+</td>
+<td class="tg-0lax">
+29.5129
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+Kyle Lowry
+</td>
+<td class="tg-0lax">
+28703704
+</td>
+<td class="tg-0lax">
+28.7037
+</td>
+</tr>
+</table>
+</div>
+<div id="section-9" class="section level1">
+<h1>视图</h1>
+<ul>
+<li>在SQL中，视图是基于SQL语句的结果集的可视化的表。</li>
+</ul>
+<pre class="sql"><code>CREATE VIEW teamage AS
+SELECT DISTINCT Year,Tm, AVG(Age)
+FROM season
+GROUP BY Tm
+ORDER BY Year;</code></pre>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<tr>
+<th class="tg-cly1">
+f1
+</th>
+<th class="tg-cly1">
+Player
+</th>
+<th class="tg-cly1">
+season17_18
+</th>
+<th class="tg-0lax">
+salary17_18
+</th>
+</tr>
+<tr>
+<td class="tg-cly1">
+2
+</td>
+<td class="tg-cly1">
+LeBron James
+</td>
+<td class="tg-cly1">
+33285709
+</td>
+<td class="tg-0lax">
+33.2857
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+3
+</td>
+<td class="tg-cly1">
+Paul Millsap
+</td>
+<td class="tg-cly1">
+31269231
+</td>
+<td class="tg-0lax">
+31.2692
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+4
+</td>
+<td class="tg-0lax">
+Gordon Hayward
+</td>
+<td class="tg-0lax">
+29727900
+</td>
+<td class="tg-0lax">
+29.7279
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+5
+</td>
+<td class="tg-0lax">
+Blake Griffin
+</td>
+<td class="tg-0lax">
+29512900
+</td>
+<td class="tg-0lax">
+29.5129
+</td>
+</tr>
+<tr>
+<td class="tg-0lax">
+6
+</td>
+<td class="tg-0lax">
+Kyle Lowry
+</td>
+<td class="tg-0lax">
+28703704
+</td>
+<td class="tg-0lax">
+28.7037
+</td>
+</tr>
+</table>
+<div id="section-10" class="section level2">
+<h2>从视图中查询</h2>
+<pre class="sql"><code>SELECT COUNT(DISTINCT Tm) FROM teamage;</code></pre>
+</div>
+</div>
 
     </div>
   </article>
@@ -120,6 +784,18 @@ window.location.replace("https://xsong.ltd/archives/Rbasic/sql")
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 
