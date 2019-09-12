@@ -71,7 +71,7 @@ R Markdown: The Definitive Guide
 \(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
 风险函数: \[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &amp;lt; t + \Delta t|T \ge t)}}{{\Delta t}},0 &amp;lt; h(t) &amp;lt; + \infty \]
 \(h(t)\)不是密度也不是概率。
-censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。</description>
+censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。</description>
     </item>
     
     <item>

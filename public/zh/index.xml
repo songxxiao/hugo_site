@@ -47,7 +47,7 @@ f.readlines()返回一个列表，列表的数据项为一行的文本[linel, l
       <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/diary/</guid>
-      <description>网站建成有一段时间了。一直在考虑写不写博客的事情。
+      <description>--网站建成有一段时间了。一直在考虑写不写博客的事情。
 我在高中时期是写日记的。所记大多是意识流。换句话说，是将学业之苦一五一十倾倒出来。后来发现此法常常使痛苦加倍。遂放弃。后来受《邪不压正》台词的影响：“一个写日记的人能可靠吗，正经人谁写日记啊？”;“心里话谁写日记里啊，写出来的能叫心里话吗？下贱！”总觉得心里话写出来有种贩卖隐私的做作感。一开始我对个人网站的定位是作为技术分享和个人备忘之用。可惜我没有技术，嗯。
 1.后来据我观察大家少时间和兴趣观察别人的私事（可见我多闲）。换句话说，写了也没人看。
 2.我修改这个网站外观浪费了大量时间（固定导航栏还参考了Rolling Stone网站）。不写点啥有点说不过去。
@@ -164,7 +164,7 @@ R Markdown: The Definitive Guide
 \(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
 风险函数: \[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &amp;lt; t + \Delta t|T \ge t)}}{{\Delta t}},0 &amp;lt; h(t) &amp;lt; + \infty \]
 \(h(t)\)不是密度也不是概率。
-censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。truncate(截平): 只有在给定观测期内的个体才会被观测到的状况。样本选择问题。生存函数对应于某种条件概率。</description>
+censor(删截): 知道事件发生，但不知道事件何时发生。事件观测期内无法观测。</description>
     </item>
     
     <item>
@@ -222,13 +222,16 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
       <guid>/zh/zhresume/</guid>
       <description>English Version
 PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd微信公众号：ApocalypseNow软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)相关课程R语言数据分析算法与程序设计基础 (Python)回归分析与Stata应用SPSS应用类别数据分析概率与统计导论社会模拟与NetLogo应用教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/ECSTA7Y个人主页：https://xsong.ltd软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)教育背景华东师范大学, 社会发展学院 2016年09月-至今中山大学, 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
 上海大学 第6届·应用社会科学研究方法研修班 2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
 狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
-科研经历土地流转的福利效应与社会不平等——基于中国家庭追踪调查面板数据的分析 2018年-2019年</description>
+科研经历土地流转的福利效应与社会不平等——基于中国家庭追踪调查面板数据的分析 2018年-2019年
+国家大学生创新训练项目 独立作者
+使用中国家庭追踪调查(CFPS)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。(PDF)
+导师：卿石松所获奖项2019年 华东师范大学优秀学生三等奖学金2019年 华东师范大学第二十七届 大夏杯 大学生课外学术科技作品竞赛 三等奖</description>
     </item>
     
   </channel>

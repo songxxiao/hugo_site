@@ -9,7 +9,7 @@ tags: ['Python']
 
 
 
-<p><a href="https://raw.githubusercontent.com/ethan-funny/explore-python/master/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" alt="License: CC BY-NC-ND 4.0" /></a></p>
+<p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
 <p><a href="http://funhacks.net/explore-python/">一本Python书</a></p>
 <div id="section" class="section level1">
 <h1>从文件中读取数据</h1>
@@ -112,4 +112,22 @@ os.getcwd(&#39; &#39;)    </code></pre>
 <pre class="python"><code>import matplotlib.pyplot as plt
 plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
 plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
+</div>
+<div id="section-3" class="section level1">
+<h1>异常处理</h1>
+<pre class="python"><code>a=3
+b=2
+for i in range(5):
+    try:
+        a = a - 1
+        c=b/a
+        print(c)
+
+    except Exception as e:
+        print(e)#输出异常行为名称</code></pre>
+<pre><code>1.0
+2.0
+division by zero
+-2.0
+-1.0</code></pre>
 </div>

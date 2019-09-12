@@ -12,12 +12,15 @@ slug: enresume
 + Email：<malcolm@xsong.ltd>
 + Github：<https://github.com/ECSTA7Y>
 + Website：<https://xsong.ltd>
+<!--
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
+-->
 
 ### SOFTWARE & Programming SKILLS
 + R, LaTeX, Stata 
 + Python, SQL, SPSS 
 
+<!--
 ### RELEVANT COURSES
 
 + Data Analysis Using R
@@ -26,6 +29,7 @@ slug: enresume
 + SPSS Application
 + Categorical Data Analysis
 + Social Simulation and [NetLogo](http://ccl.northwestern.edu/netlogo/) Application
+-->
 
 ### EDUCATION
 
@@ -58,16 +62,17 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### HONORS AND AWARDS 
 
-+ 2019&emsp;*Daxia Cup* Student Academic Works Competition in ECNU &emsp;Third Award 
++ 2019&emsp;Third Class Academic Honors (East China Normal University)  
++ 2019&emsp;**Daxia Cup** Student Academic Works Competition in ECNU &emsp;Third Award 
 
 + 2019&emsp;[The 2nd National University Data Driven Innovation Research Competition](http://opendata.pku.edu.cn/competition-2019.xhtml;jsessionid=200f6d0adbfa75292afed361235f)&emsp;Excellence award
 + 2018&emsp;[12th Social Science Forum for Undergraduates](http://www.shupl.edu.cn/2018/1125/c1168a51557/page.htm)&emsp;Highest Award
 
-+ 2018&emsp;*Daxia Cup* Student Academic Works Competition in ECNU &emsp;Second Award 
++ 2018&emsp;**Daxia Cup** Student Academic Works Competition in ECNU &emsp;Second Award 
 
 + 2018&emsp;Second Class Academic Honors (East China Normal University)
 + 2017&emsp;Second Class Academic Honors (East China Normal University)
-+ 2017&emsp;The 12th *Wisdom Cup* Philosophical Essay Competition in ECNU&emsp;First Award
++ 2017&emsp;The 12th **Wisdom Cup** Philosophical Essay Competition in ECNU&emsp;First Award
 
 ### CONFERENCE PRESENTATIONS 
 
