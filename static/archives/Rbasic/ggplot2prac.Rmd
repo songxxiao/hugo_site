@@ -22,6 +22,8 @@ slug: ggplot
 
 [现代统计图形](https://bookdown.org/xiangyun/msg/)
 
+[Python ggplot库](http://ggplot.yhathq.com/)
+
 # 笔记
 
 + 在`aes`函数里面的参数，如`fill`、`color`、`shape`，控制的是图形的映射对象。它将特定变量映射为统计图形的特定元素。而`+`后面的图形函数中的参数，仅仅是图形的附加属性。无法根据特定变量变化。

@@ -11,6 +11,8 @@ tags: ['Python']
 
 [一本Python书](http://funhacks.net/explore-python/)
 
+[Python数据分析小抄](http://www.utc.fr/~jlaforet/Suppl/python-cheatsheets.pdf)
+
 # 从文件中读取数据
 
 
@@ -77,5 +79,6 @@ for i in range(5):
     except Exception as e:
         print(e)#输出异常行为名称
 ```
+
 
 
