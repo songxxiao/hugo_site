@@ -18,6 +18,7 @@
       
       <guid>/zh/pybasic/</guid>
       <description>一本Python书
+Python数据分析小抄
 从文件中读取数据文件类提供了三种方法读取文本文件的内容，分别是：
 f.read(size)返回一个字符串，内容为长度为size的文本。参数size表示读取的数扯，可以省略。如果省略size参数，则表示读取文件所有内容，作为一个字符串返回。
 f.readline()返回一个字符串，内容为文件当前一行的文本。
