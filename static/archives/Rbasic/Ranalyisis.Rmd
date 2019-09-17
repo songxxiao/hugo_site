@@ -1,5 +1,5 @@
 ---
-title: "R"
+title: "R数据分析"
 author: " "
 date: " "
 output:
@@ -121,10 +121,11 @@ knitr::kable(head(USJudgeRatings$score))
 ## Regression Discontinuity Design
 
 ```{r ,message = F, comment = NA,warning = F}
-library(tidyverse)
+library(dplyr)
 library(magrittr)
 library(MASS)
 library(rdd)
+
 set.seed(1)
 n <- 10 ^ 3
 mu <- matrix(c(0, 0))
@@ -237,6 +238,47 @@ $$\hat{\beta_{Lasso}} = arg min_{\beta \in R^d}||Y - X\beta||^2 +\lambda \sum_{j
 
 
 
+```{r,error=T,comment=NA,warning=F,message=F}
+library(haven)
+library(dplyr)
+library(tidyr)
+library(plotmo)
+library(glmnet)
+library(readr)
+`%>%` <- magrittr::`%>%`
+
+ceps <- read_csv("C:/Users/xsong/Desktop/table/ceps.imputed.csv")
+
+ceps <- na.omit(ceps)
+
+x_train <- model.matrix(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm + clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy + houspro,ceps)[,-1]
+
+y_train <- ceps$sdtotal %>% 
+  unlist() %>%
+  as.numeric()
+
+lasso_mod <- glmnet(x_train, 
+                   y_train, 
+                   alpha = 1)
+
+
+plot_glmnet(lasso_mod,xvar='lambda',label=10)
+
+cvfit <- cv.glmnet(x_train, 
+                   y_train, 
+                   alpha = 1)
+cvfit$lambda.min
+cvfit$lambda.1se
+plot(cvfit)
+```
+
+# XGBOOST
+
++ 在变量的层面并行计算
+
++ 可以进行正则化收缩
+
+参数：
 
 
 

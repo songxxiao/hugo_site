@@ -199,7 +199,7 @@ myData %$%
 
 + 自己编写一个绘制交互表图形的函数`plot_table`。其中`x`为行向量，`y`为列向量，`xlab`为行标签，`ylab`为列标签。
 
-```{r,message = F, comment = NA,warning = F,error=T}
+```{r,message = F, comment = NA,warning = F,error=T,out.width='80%',fig.align='center'}
 plot_table <- function(x,y,xlab=x,ylab=y){
   mar <- as.data.frame(table(x,y))
   ggplot2::ggplot(mar,aes(mar[,1],mar[,2])) +

@@ -16419,6 +16419,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><img style="float: left;" src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://xsong.ltd/">宋骁</a><br>
 <a href="https://xsong.ltd/archives/pandas/scorecard_en">English Version</a></p>
 
@@ -16429,7 +16437,20 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><h1>目录<span class="tocSkip"></span></h1></p>
-<div class="toc"><ul class="toc-item"><li><span><a href="#特征工程" data-toc-modified-id="特征工程-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>特征工程</a></span><ul class="toc-item"><li><span><a href="#因变量" data-toc-modified-id="因变量-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>因变量</a></span></li><li><span><a href="#自变量" data-toc-modified-id="自变量-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>自变量</a></span><ul class="toc-item"><li><span><a href="#二分类变量" data-toc-modified-id="二分类变量-1.2.1"><span class="toc-item-num">1.2.1&nbsp;&nbsp;</span>二分类变量</a></span><ul class="toc-item"><li><span><a href="#性别" data-toc-modified-id="性别-1.2.1.1"><span class="toc-item-num">1.2.1.1&nbsp;&nbsp;</span>性别</a></span></li><li><span><a href="#是否有车" data-toc-modified-id="是否有车-1.2.1.2"><span class="toc-item-num">1.2.1.2&nbsp;&nbsp;</span>是否有车</a></span></li><li><span><a href="#是否有房产" data-toc-modified-id="是否有房产-1.2.1.3"><span class="toc-item-num">1.2.1.3&nbsp;&nbsp;</span>是否有房产</a></span></li><li><span><a href="#是否有自己的电话" data-toc-modified-id="是否有自己的电话-1.2.1.4"><span class="toc-item-num">1.2.1.4&nbsp;&nbsp;</span>是否有自己的电话</a></span></li><li><span><a href="#是否有email" data-toc-modified-id="是否有email-1.2.1.5"><span class="toc-item-num">1.2.1.5&nbsp;&nbsp;</span>是否有email</a></span></li><li><span><a href="#是否有工作电话" data-toc-modified-id="是否有工作电话-1.2.1.6"><span class="toc-item-num">1.2.1.6&nbsp;&nbsp;</span>是否有工作电话</a></span></li></ul></li><li><span><a href="#连续变量分箱" data-toc-modified-id="连续变量分箱-1.2.2"><span class="toc-item-num">1.2.2&nbsp;&nbsp;</span>连续变量分箱</a></span><ul class="toc-item"><li><span><a href="#孩子数" data-toc-modified-id="孩子数-1.2.2.1"><span class="toc-item-num">1.2.2.1&nbsp;&nbsp;</span>孩子数</a></span></li><li><span><a href="#年收入" data-toc-modified-id="年收入-1.2.2.2"><span class="toc-item-num">1.2.2.2&nbsp;&nbsp;</span>年收入</a></span></li><li><span><a href="#年龄" data-toc-modified-id="年龄-1.2.2.3"><span class="toc-item-num">1.2.2.3&nbsp;&nbsp;</span>年龄</a></span></li><li><span><a href="#工龄" data-toc-modified-id="工龄-1.2.2.4"><span class="toc-item-num">1.2.2.4&nbsp;&nbsp;</span>工龄</a></span></li><li><span><a href="#家庭规模" data-toc-modified-id="家庭规模-1.2.2.5"><span class="toc-item-num">1.2.2.5&nbsp;&nbsp;</span>家庭规模</a></span></li></ul></li><li><span><a href="#多分类变量" data-toc-modified-id="多分类变量-1.2.3"><span class="toc-item-num">1.2.3&nbsp;&nbsp;</span>多分类变量</a></span><ul class="toc-item"><li><span><a href="#收入类别" data-toc-modified-id="收入类别-1.2.3.1"><span class="toc-item-num">1.2.3.1&nbsp;&nbsp;</span>收入类别</a></span></li><li><span><a href="#职业类型" data-toc-modified-id="职业类型-1.2.3.2"><span class="toc-item-num">1.2.3.2&nbsp;&nbsp;</span>职业类型</a></span></li><li><span><a href="#住户类型" data-toc-modified-id="住户类型-1.2.3.3"><span class="toc-item-num">1.2.3.3&nbsp;&nbsp;</span>住户类型</a></span></li><li><span><a href="#教育水平" data-toc-modified-id="教育水平-1.2.3.4"><span class="toc-item-num">1.2.3.4&nbsp;&nbsp;</span>教育水平</a></span></li><li><span><a href="#婚姻\家庭状况" data-toc-modified-id="婚姻\家庭状况-1.2.3.5"><span class="toc-item-num">1.2.3.5&nbsp;&nbsp;</span>婚姻\家庭状况</a></span></li></ul></li></ul></li><li><span><a href="#IV、WOE：概念及分析" data-toc-modified-id="IV、WOE：概念及分析-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>IV、WOE：概念及分析</a></span></li></ul></li><li><span><a href="#算法" data-toc-modified-id="算法-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>算法</a></span><ul class="toc-item"><li><span><a href="#划分数据集" data-toc-modified-id="划分数据集-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>划分数据集</a></span></li><li><span><a href="#随机森林：调参-&amp;-交叉验证" data-toc-modified-id="随机森林：调参-&amp;-交叉验证-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>随机森林：调参 &amp; 交叉验证</a></span></li><li><span><a href="#模型评估" data-toc-modified-id="模型评估-2.3"><span class="toc-item-num">2.3&nbsp;&nbsp;</span>模型评估</a></span></li></ul></li></ul></div>
+<div class="toc"><ul class="toc-item"><li><span><a href="#绪论" data-toc-modified-id="绪论-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>绪论</a></span></li><li><span><a href="#特征工程" data-toc-modified-id="特征工程-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>特征工程</a></span><ul class="toc-item"><li><span><a href="#因变量" data-toc-modified-id="因变量-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>因变量</a></span></li><li><span><a href="#自变量" data-toc-modified-id="自变量-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>自变量</a></span><ul class="toc-item"><li><span><a href="#二分类变量" data-toc-modified-id="二分类变量-2.2.1"><span class="toc-item-num">2.2.1&nbsp;&nbsp;</span>二分类变量</a></span><ul class="toc-item"><li><span><a href="#性别" data-toc-modified-id="性别-2.2.1.1"><span class="toc-item-num">2.2.1.1&nbsp;&nbsp;</span>性别</a></span></li><li><span><a href="#是否有车" data-toc-modified-id="是否有车-2.2.1.2"><span class="toc-item-num">2.2.1.2&nbsp;&nbsp;</span>是否有车</a></span></li><li><span><a href="#是否有房产" data-toc-modified-id="是否有房产-2.2.1.3"><span class="toc-item-num">2.2.1.3&nbsp;&nbsp;</span>是否有房产</a></span></li><li><span><a href="#是否有自己的电话" data-toc-modified-id="是否有自己的电话-2.2.1.4"><span class="toc-item-num">2.2.1.4&nbsp;&nbsp;</span>是否有自己的电话</a></span></li><li><span><a href="#是否有email" data-toc-modified-id="是否有email-2.2.1.5"><span class="toc-item-num">2.2.1.5&nbsp;&nbsp;</span>是否有email</a></span></li><li><span><a href="#是否有工作电话" data-toc-modified-id="是否有工作电话-2.2.1.6"><span class="toc-item-num">2.2.1.6&nbsp;&nbsp;</span>是否有工作电话</a></span></li></ul></li><li><span><a href="#连续变量分箱" data-toc-modified-id="连续变量分箱-2.2.2"><span class="toc-item-num">2.2.2&nbsp;&nbsp;</span>连续变量分箱</a></span><ul class="toc-item"><li><span><a href="#孩子数" data-toc-modified-id="孩子数-2.2.2.1"><span class="toc-item-num">2.2.2.1&nbsp;&nbsp;</span>孩子数</a></span></li><li><span><a href="#年收入" data-toc-modified-id="年收入-2.2.2.2"><span class="toc-item-num">2.2.2.2&nbsp;&nbsp;</span>年收入</a></span></li><li><span><a href="#年龄" data-toc-modified-id="年龄-2.2.2.3"><span class="toc-item-num">2.2.2.3&nbsp;&nbsp;</span>年龄</a></span></li><li><span><a href="#工龄" data-toc-modified-id="工龄-2.2.2.4"><span class="toc-item-num">2.2.2.4&nbsp;&nbsp;</span>工龄</a></span></li><li><span><a href="#家庭规模" data-toc-modified-id="家庭规模-2.2.2.5"><span class="toc-item-num">2.2.2.5&nbsp;&nbsp;</span>家庭规模</a></span></li></ul></li><li><span><a href="#多分类变量" data-toc-modified-id="多分类变量-2.2.3"><span class="toc-item-num">2.2.3&nbsp;&nbsp;</span>多分类变量</a></span><ul class="toc-item"><li><span><a href="#收入类别" data-toc-modified-id="收入类别-2.2.3.1"><span class="toc-item-num">2.2.3.1&nbsp;&nbsp;</span>收入类别</a></span></li><li><span><a href="#职业类型" data-toc-modified-id="职业类型-2.2.3.2"><span class="toc-item-num">2.2.3.2&nbsp;&nbsp;</span>职业类型</a></span></li><li><span><a href="#住户类型" data-toc-modified-id="住户类型-2.2.3.3"><span class="toc-item-num">2.2.3.3&nbsp;&nbsp;</span>住户类型</a></span></li><li><span><a href="#教育水平" data-toc-modified-id="教育水平-2.2.3.4"><span class="toc-item-num">2.2.3.4&nbsp;&nbsp;</span>教育水平</a></span></li><li><span><a href="#婚姻\家庭状况" data-toc-modified-id="婚姻\家庭状况-2.2.3.5"><span class="toc-item-num">2.2.3.5&nbsp;&nbsp;</span>婚姻\家庭状况</a></span></li></ul></li></ul></li><li><span><a href="#IV、WOE：概念及分析" data-toc-modified-id="IV、WOE：概念及分析-2.3"><span class="toc-item-num">2.3&nbsp;&nbsp;</span>IV、WOE：概念及分析</a></span></li></ul></li><li><span><a href="#算法" data-toc-modified-id="算法-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>算法</a></span><ul class="toc-item"><li><span><a href="#划分数据集" data-toc-modified-id="划分数据集-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>划分数据集</a></span></li><li><span><a href="#Logistic回归" data-toc-modified-id="Logistic回归-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>Logistic回归</a></span></li><li><span><a href="#随机森林：调参-&amp;-交叉验证" data-toc-modified-id="随机森林：调参-&amp;-交叉验证-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>随机森林：调参 &amp; 交叉验证</a></span></li><li><span><a href="#模型评估" data-toc-modified-id="模型评估-3.4"><span class="toc-item-num">3.4&nbsp;&nbsp;</span>模型评估</a></span></li></ul></li></ul></div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="&#32490;&#35770;">&#32490;&#35770;<a class="anchor-link" href="#&#32490;&#35770;">&#182;</a></h1><p>信用评分卡是金融行业常见的风险控制方式。它使用信用卡申请者提交的个人信息与数据，预测他们今后违约、拖欠信用卡借款的概率。银行能够根据它决定是否向申请人发放信用卡。信用评分能够客观地量化风险的大小。<br>
+&nbsp;<br>
+一般而言，信用评分卡以历史数据为基础。一旦遭遇较大的经济波动。以往的模型可能失去原有的预测效力。Logistic模型是信用评分的常用方法。因为Logistic适用于二分类任务，并且能够计算出每个特征的系数。为了便于理解和操作，评分卡会将Logistic回归系数乘以一定的数值(如100)并取整。<br>
+&nbsp;<br>
+而目前，随着机器学习算法的发展。Boosting、随机森林、支持向量机等预测力更强的方法被引入信用卡评分中。然而，这些方法往往不具有很好的透明度。可能难以向客户和监管者提供一个拒绝或接受的理由。</p>
+<p>消费信用模型：定价、利润与组合</p>
+
 </div>
 </div>
 </div>
@@ -16520,7 +16541,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>一般而言风险用户的比例应该控制在3%以内，因此选择逾期60天以上的用户作为目标风险用户。</p>
+<p>2007年的巴塞尔协议规定违约是指贷款出现90天逾期或贷款机构有理由认为贷款不会被偿还(消费信用模型  定价  利润与组合)。一般而言风险用户的比例应该控制在3%以内，因此选择逾期60天以上的用户作为目标风险用户。</p>
 
 </div>
 </div>
@@ -17732,7 +17753,7 @@ Name: inc, dtype: int64
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x27fdae04fd0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x25684d84cf8&gt;</pre>
 </div>
 
 </div>
@@ -17775,7 +17796,7 @@ z
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path clip-path="url(#p5a7b0a735d)" d="M 56.832951 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 56.832951 228.14 
 L 56.832951 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -17815,7 +17836,7 @@ z
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
-      <path clip-path="url(#p5a7b0a735d)" d="M 96.156418 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 96.156418 228.14 
 L 96.156418 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -17855,7 +17876,7 @@ z
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
-      <path clip-path="url(#p5a7b0a735d)" d="M 135.479886 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 135.479886 228.14 
 L 135.479886 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -17888,7 +17909,7 @@ z
     </g>
     <g id="xtick_4">
      <g id="line2d_4">
-      <path clip-path="url(#p5a7b0a735d)" d="M 174.803353 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 174.803353 228.14 
 L 174.803353 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -17937,7 +17958,7 @@ z
     </g>
     <g id="xtick_5">
      <g id="line2d_5">
-      <path clip-path="url(#p5a7b0a735d)" d="M 214.12682 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 214.12682 228.14 
 L 214.12682 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -17993,7 +18014,7 @@ z
     </g>
     <g id="xtick_6">
      <g id="line2d_6">
-      <path clip-path="url(#p5a7b0a735d)" d="M 253.450287 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 253.450287 228.14 
 L 253.450287 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18021,7 +18042,7 @@ z
     </g>
     <g id="xtick_7">
      <g id="line2d_7">
-      <path clip-path="url(#p5a7b0a735d)" d="M 292.773755 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 292.773755 228.14 
 L 292.773755 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18036,7 +18057,7 @@ L 292.773755 10.7
     </g>
     <g id="xtick_8">
      <g id="line2d_8">
-      <path clip-path="url(#p5a7b0a735d)" d="M 332.097222 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 332.097222 228.14 
 L 332.097222 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18051,7 +18072,7 @@ L 332.097222 10.7
     </g>
     <g id="xtick_9">
      <g id="line2d_9">
-      <path clip-path="url(#p5a7b0a735d)" d="M 371.420689 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 371.420689 228.14 
 L 371.420689 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18068,7 +18089,7 @@ L 371.420689 10.7
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_10">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 228.14 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 228.14 
 L 381.723437 228.14 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18092,7 +18113,7 @@ z
     </g>
     <g id="ytick_2">
      <g id="line2d_11">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 196.709638 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 196.709638 
 L 381.723437 196.709638 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18108,7 +18129,7 @@ L 381.723437 196.709638
     </g>
     <g id="ytick_3">
      <g id="line2d_12">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 165.279276 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 165.279276 
 L 381.723437 165.279276 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18124,7 +18145,7 @@ L 381.723437 165.279276
     </g>
     <g id="ytick_4">
      <g id="line2d_13">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 133.848913 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 133.848913 
 L 381.723437 133.848913 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18175,7 +18196,7 @@ z
     </g>
     <g id="ytick_5">
      <g id="line2d_14">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 102.418551 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 102.418551 
 L 381.723437 102.418551 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18191,7 +18212,7 @@ L 381.723437 102.418551
     </g>
     <g id="ytick_6">
      <g id="line2d_15">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 70.988189 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 70.988189 
 L 381.723437 70.988189 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18234,7 +18255,7 @@ z
     </g>
     <g id="ytick_7">
      <g id="line2d_16">
-      <path clip-path="url(#p5a7b0a735d)" d="M 46.923438 39.557827 
+      <path clip-path="url(#p45dead2da5)" d="M 46.923438 39.557827 
 L 381.723437 39.557827 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -18427,7 +18448,7 @@ z
     </g>
    </g>
    <g id="patch_3">
-    <path clip-path="url(#p5a7b0a735d)" d="M 62.141619 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 62.141619 228.14 
 L 68.228892 228.14 
 L 68.228892 221.43506 
 L 62.141619 221.43506 
@@ -18435,7 +18456,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_4">
-    <path clip-path="url(#p5a7b0a735d)" d="M 68.228892 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 68.228892 228.14 
 L 74.316165 228.14 
 L 74.316165 179.710944 
 L 68.228892 179.710944 
@@ -18443,7 +18464,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_5">
-    <path clip-path="url(#p5a7b0a735d)" d="M 74.316165 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 74.316165 228.14 
 L 80.403437 228.14 
 L 80.403437 75.057328 
 L 74.316165 75.057328 
@@ -18451,7 +18472,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_6">
-    <path clip-path="url(#p5a7b0a735d)" d="M 80.403437 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 80.403437 228.14 
 L 86.49071 228.14 
 L 86.49071 51.186126 
 L 80.403437 51.186126 
@@ -18459,7 +18480,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_7">
-    <path clip-path="url(#p5a7b0a735d)" d="M 86.49071 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 86.49071 228.14 
 L 92.577983 228.14 
 L 92.577983 21.054286 
 L 86.49071 21.054286 
@@ -18467,7 +18488,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_8">
-    <path clip-path="url(#p5a7b0a735d)" d="M 92.577983 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 92.577983 228.14 
 L 98.665256 228.14 
 L 98.665256 146.832502 
 L 92.577983 146.832502 
@@ -18475,7 +18496,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_9">
-    <path clip-path="url(#p5a7b0a735d)" d="M 98.665256 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 98.665256 228.14 
 L 104.752528 228.14 
 L 104.752528 120.053132 
 L 98.665256 120.053132 
@@ -18483,7 +18504,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_10">
-    <path clip-path="url(#p5a7b0a735d)" d="M 104.752528 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 104.752528 228.14 
 L 110.839801 228.14 
 L 110.839801 136.169223 
 L 104.752528 136.169223 
@@ -18491,7 +18512,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_11">
-    <path clip-path="url(#p5a7b0a735d)" d="M 110.839801 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 110.839801 228.14 
 L 116.927074 228.14 
 L 116.927074 205.965228 
 L 110.839801 205.965228 
@@ -18499,7 +18520,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_12">
-    <path clip-path="url(#p5a7b0a735d)" d="M 116.927074 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 116.927074 228.14 
 L 123.014347 228.14 
 L 123.014347 189.808745 
 L 116.927074 189.808745 
@@ -18507,7 +18528,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_13">
-    <path clip-path="url(#p5a7b0a735d)" d="M 123.014347 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 123.014347 228.14 
 L 129.101619 228.14 
 L 129.101619 194.494125 
 L 123.014347 194.494125 
@@ -18515,7 +18536,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_14">
-    <path clip-path="url(#p5a7b0a735d)" d="M 129.101619 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 129.101619 228.14 
 L 135.188892 228.14 
 L 135.188892 219.698238 
 L 129.101619 219.698238 
@@ -18523,7 +18544,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_15">
-    <path clip-path="url(#p5a7b0a735d)" d="M 135.188892 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 135.188892 228.14 
 L 141.276165 228.14 
 L 141.276165 217.880634 
 L 135.188892 217.880634 
@@ -18531,7 +18552,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_16">
-    <path clip-path="url(#p5a7b0a735d)" d="M 141.276165 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 141.276165 228.14 
 L 147.363437 228.14 
 L 147.363437 215.255205 
 L 141.276165 215.255205 
@@ -18539,7 +18560,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_17">
-    <path clip-path="url(#p5a7b0a735d)" d="M 147.363437 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 147.363437 228.14 
 L 153.45071 228.14 
 L 153.45071 227.251393 
 L 147.363437 227.251393 
@@ -18547,7 +18568,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_18">
-    <path clip-path="url(#p5a7b0a735d)" d="M 153.45071 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 153.45071 228.14 
 L 159.537983 228.14 
 L 159.537983 226.403178 
 L 153.45071 226.403178 
@@ -18555,7 +18576,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_19">
-    <path clip-path="url(#p5a7b0a735d)" d="M 159.537983 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 159.537983 228.14 
 L 165.625256 228.14 
 L 165.625256 226.160831 
 L 159.537983 226.160831 
@@ -18563,7 +18584,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_20">
-    <path clip-path="url(#p5a7b0a735d)" d="M 165.625256 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 165.625256 228.14 
 L 171.712528 228.14 
 L 171.712528 227.170611 
 L 165.625256 227.170611 
@@ -18571,7 +18592,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_21">
-    <path clip-path="url(#p5a7b0a735d)" d="M 171.712528 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 171.712528 228.14 
 L 177.799801 228.14 
 L 177.799801 226.80709 
 L 171.712528 226.80709 
@@ -18579,7 +18600,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_22">
-    <path clip-path="url(#p5a7b0a735d)" d="M 177.799801 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 177.799801 228.14 
 L 183.887074 228.14 
 L 183.887074 227.089829 
 L 177.799801 227.089829 
@@ -18587,7 +18608,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_23">
-    <path clip-path="url(#p5a7b0a735d)" d="M 183.887074 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 183.887074 228.14 
 L 189.974347 228.14 
 L 189.974347 224.625965 
 L 183.887074 224.625965 
@@ -18595,7 +18616,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_24">
-    <path clip-path="url(#p5a7b0a735d)" d="M 189.974347 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 189.974347 228.14 
 L 196.061619 228.14 
 L 196.061619 228.059218 
 L 189.974347 228.059218 
@@ -18603,7 +18624,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_25">
-    <path clip-path="url(#p5a7b0a735d)" d="M 196.061619 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 196.061619 228.14 
 L 202.148892 228.14 
 L 202.148892 227.291785 
 L 196.061619 227.291785 
@@ -18611,7 +18632,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_26">
-    <path clip-path="url(#p5a7b0a735d)" d="M 202.148892 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 202.148892 228.14 
 L 208.236165 228.14 
 L 208.236165 227.776479 
 L 202.148892 227.776479 
@@ -18619,7 +18640,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_27">
-    <path clip-path="url(#p5a7b0a735d)" d="M 208.236165 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 208.236165 228.14 
 L 214.323437 228.14 
 L 214.323437 227.938044 
 L 208.236165 227.938044 
@@ -18627,7 +18648,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_28">
-    <path clip-path="url(#p5a7b0a735d)" d="M 214.323437 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 214.323437 228.14 
 L 220.41071 228.14 
 L 220.41071 227.81687 
 L 214.323437 227.81687 
@@ -18635,7 +18656,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_29">
-    <path clip-path="url(#p5a7b0a735d)" d="M 220.41071 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 220.41071 228.14 
 L 226.497983 228.14 
 L 226.497983 228.14 
 L 220.41071 228.14 
@@ -18643,7 +18664,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_30">
-    <path clip-path="url(#p5a7b0a735d)" d="M 226.497983 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 226.497983 228.14 
 L 232.585256 228.14 
 L 232.585256 228.14 
 L 226.497983 228.14 
@@ -18651,7 +18672,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_31">
-    <path clip-path="url(#p5a7b0a735d)" d="M 232.585256 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 232.585256 228.14 
 L 238.672528 228.14 
 L 238.672528 226.605134 
 L 232.585256 226.605134 
@@ -18659,7 +18680,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_32">
-    <path clip-path="url(#p5a7b0a735d)" d="M 238.672528 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 238.672528 228.14 
 L 244.759801 228.14 
 L 244.759801 227.978435 
 L 238.672528 227.978435 
@@ -18667,7 +18688,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_33">
-    <path clip-path="url(#p5a7b0a735d)" d="M 244.759801 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 244.759801 228.14 
 L 250.847074 228.14 
 L 250.847074 228.14 
 L 244.759801 228.14 
@@ -18675,7 +18696,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_34">
-    <path clip-path="url(#p5a7b0a735d)" d="M 250.847074 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 250.847074 228.14 
 L 256.934347 228.14 
 L 256.934347 227.978435 
 L 250.847074 227.978435 
@@ -18683,7 +18704,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_35">
-    <path clip-path="url(#p5a7b0a735d)" d="M 256.934347 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 256.934347 228.14 
 L 263.021619 228.14 
 L 263.021619 228.14 
 L 256.934347 228.14 
@@ -18691,7 +18712,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_36">
-    <path clip-path="url(#p5a7b0a735d)" d="M 263.021619 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 263.021619 228.14 
 L 269.108892 228.14 
 L 269.108892 228.14 
 L 263.021619 228.14 
@@ -18699,7 +18720,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_37">
-    <path clip-path="url(#p5a7b0a735d)" d="M 269.108892 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 269.108892 228.14 
 L 275.196165 228.14 
 L 275.196165 228.14 
 L 269.108892 228.14 
@@ -18707,7 +18728,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_38">
-    <path clip-path="url(#p5a7b0a735d)" d="M 275.196165 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 275.196165 228.14 
 L 281.283437 228.14 
 L 281.283437 228.018826 
 L 275.196165 228.018826 
@@ -18715,7 +18736,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_39">
-    <path clip-path="url(#p5a7b0a735d)" d="M 281.283437 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 281.283437 228.14 
 L 287.37071 228.14 
 L 287.37071 228.14 
 L 281.283437 228.14 
@@ -18723,7 +18744,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_40">
-    <path clip-path="url(#p5a7b0a735d)" d="M 287.37071 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 287.37071 228.14 
 L 293.457983 228.14 
 L 293.457983 228.14 
 L 287.37071 228.14 
@@ -18731,7 +18752,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_41">
-    <path clip-path="url(#p5a7b0a735d)" d="M 293.457983 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 293.457983 228.14 
 L 299.545256 228.14 
 L 299.545256 228.14 
 L 293.457983 228.14 
@@ -18739,7 +18760,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_42">
-    <path clip-path="url(#p5a7b0a735d)" d="M 299.545256 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 299.545256 228.14 
 L 305.632528 228.14 
 L 305.632528 228.14 
 L 299.545256 228.14 
@@ -18747,7 +18768,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_43">
-    <path clip-path="url(#p5a7b0a735d)" d="M 305.632528 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 305.632528 228.14 
 L 311.719801 228.14 
 L 311.719801 228.14 
 L 305.632528 228.14 
@@ -18755,7 +18776,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_44">
-    <path clip-path="url(#p5a7b0a735d)" d="M 311.719801 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 311.719801 228.14 
 L 317.807074 228.14 
 L 317.807074 228.14 
 L 311.719801 228.14 
@@ -18763,7 +18784,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_45">
-    <path clip-path="url(#p5a7b0a735d)" d="M 317.807074 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 317.807074 228.14 
 L 323.894347 228.14 
 L 323.894347 227.897653 
 L 317.807074 227.897653 
@@ -18771,7 +18792,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_46">
-    <path clip-path="url(#p5a7b0a735d)" d="M 323.894347 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 323.894347 228.14 
 L 329.981619 228.14 
 L 329.981619 228.14 
 L 323.894347 228.14 
@@ -18779,7 +18800,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_47">
-    <path clip-path="url(#p5a7b0a735d)" d="M 329.981619 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 329.981619 228.14 
 L 336.068892 228.14 
 L 336.068892 228.14 
 L 329.981619 228.14 
@@ -18787,7 +18808,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_48">
-    <path clip-path="url(#p5a7b0a735d)" d="M 336.068892 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 336.068892 228.14 
 L 342.156165 228.14 
 L 342.156165 228.14 
 L 336.068892 228.14 
@@ -18795,7 +18816,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_49">
-    <path clip-path="url(#p5a7b0a735d)" d="M 342.156165 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 342.156165 228.14 
 L 348.243437 228.14 
 L 348.243437 228.14 
 L 342.156165 228.14 
@@ -18803,7 +18824,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_50">
-    <path clip-path="url(#p5a7b0a735d)" d="M 348.243437 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 348.243437 228.14 
 L 354.33071 228.14 
 L 354.33071 228.14 
 L 348.243437 228.14 
@@ -18811,7 +18832,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_51">
-    <path clip-path="url(#p5a7b0a735d)" d="M 354.33071 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 354.33071 228.14 
 L 360.417983 228.14 
 L 360.417983 228.14 
 L 354.33071 228.14 
@@ -18819,7 +18840,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_52">
-    <path clip-path="url(#p5a7b0a735d)" d="M 360.417983 228.14 
+    <path clip-path="url(#p45dead2da5)" d="M 360.417983 228.14 
 L 366.505256 228.14 
 L 366.505256 227.81687 
 L 360.417983 227.81687 
@@ -18849,7 +18870,7 @@ L 381.723437 10.7
   </g>
  </g>
  <defs>
-  <clipPath id="p5a7b0a735d">
+  <clipPath id="p45dead2da5">
    <rect height="217.44" width="334.8" x="46.923438" y="10.7"/>
   </clipPath>
  </defs>
@@ -19060,7 +19081,7 @@ Name: Age, dtype: float64
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x27fdc64bcc0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x25684966dd8&gt;</pre>
 </div>
 
 </div>
@@ -19103,7 +19124,7 @@ z
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path clip-path="url(#p43bf9f92d5)" d="M 62.141619 228.14 
+      <path clip-path="url(#pfd07e19b7e)" d="M 62.141619 228.14 
 L 62.141619 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19168,7 +19189,7 @@ z
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
-      <path clip-path="url(#p43bf9f92d5)" d="M 126.89984 228.14 
+      <path clip-path="url(#pfd07e19b7e)" d="M 126.89984 228.14 
 L 126.89984 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19217,7 +19238,7 @@ z
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
-      <path clip-path="url(#p43bf9f92d5)" d="M 191.65806 228.14 
+      <path clip-path="url(#pfd07e19b7e)" d="M 191.65806 228.14 
 L 191.65806 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19250,7 +19271,7 @@ z
     </g>
     <g id="xtick_4">
      <g id="line2d_4">
-      <path clip-path="url(#p43bf9f92d5)" d="M 256.416281 228.14 
+      <path clip-path="url(#pfd07e19b7e)" d="M 256.416281 228.14 
 L 256.416281 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19291,7 +19312,7 @@ z
     </g>
     <g id="xtick_5">
      <g id="line2d_5">
-      <path clip-path="url(#p43bf9f92d5)" d="M 321.174501 228.14 
+      <path clip-path="url(#pfd07e19b7e)" d="M 321.174501 228.14 
 L 321.174501 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19342,7 +19363,7 @@ z
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_6">
-      <path clip-path="url(#p43bf9f92d5)" d="M 46.923438 228.14 
+      <path clip-path="url(#pfd07e19b7e)" d="M 46.923438 228.14 
 L 381.723437 228.14 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19366,7 +19387,7 @@ z
     </g>
     <g id="ytick_2">
      <g id="line2d_7">
-      <path clip-path="url(#p43bf9f92d5)" d="M 46.923438 182.618984 
+      <path clip-path="url(#pfd07e19b7e)" d="M 46.923438 182.618984 
 L 381.723437 182.618984 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19395,7 +19416,7 @@ z
     </g>
     <g id="ytick_3">
      <g id="line2d_8">
-      <path clip-path="url(#p43bf9f92d5)" d="M 46.923438 137.097968 
+      <path clip-path="url(#pfd07e19b7e)" d="M 46.923438 137.097968 
 L 381.723437 137.097968 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19411,7 +19432,7 @@ L 381.723437 137.097968
     </g>
     <g id="ytick_4">
      <g id="line2d_9">
-      <path clip-path="url(#p43bf9f92d5)" d="M 46.923438 91.576952 
+      <path clip-path="url(#pfd07e19b7e)" d="M 46.923438 91.576952 
 L 381.723437 91.576952 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19427,7 +19448,7 @@ L 381.723437 91.576952
     </g>
     <g id="ytick_5">
      <g id="line2d_10">
-      <path clip-path="url(#p43bf9f92d5)" d="M 46.923438 46.055936 
+      <path clip-path="url(#pfd07e19b7e)" d="M 46.923438 46.055936 
 L 381.723437 46.055936 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -19620,7 +19641,7 @@ z
     </g>
    </g>
    <g id="patch_3">
-    <path clip-path="url(#p43bf9f92d5)" d="M 62.141619 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 62.141619 228.14 
 L 77.359801 228.14 
 L 77.359801 218.120967 
 L 62.141619 218.120967 
@@ -19628,7 +19649,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_4">
-    <path clip-path="url(#p43bf9f92d5)" d="M 77.359801 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 77.359801 228.14 
 L 92.577983 228.14 
 L 92.577983 189.605256 
 L 77.359801 189.605256 
@@ -19636,7 +19657,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_5">
-    <path clip-path="url(#p43bf9f92d5)" d="M 92.577983 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 92.577983 228.14 
 L 107.796165 228.14 
 L 107.796165 98.817399 
 L 92.577983 98.817399 
@@ -19644,7 +19665,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_6">
-    <path clip-path="url(#p43bf9f92d5)" d="M 107.796165 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 107.796165 228.14 
 L 123.014347 228.14 
 L 123.014347 97.353079 
 L 107.796165 97.353079 
@@ -19652,7 +19673,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_7">
-    <path clip-path="url(#p43bf9f92d5)" d="M 123.014347 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 123.014347 228.14 
 L 138.232528 228.14 
 L 138.232528 102.593804 
 L 123.014347 102.593804 
@@ -19660,7 +19681,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_8">
-    <path clip-path="url(#p43bf9f92d5)" d="M 138.232528 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 138.232528 228.14 
 L 153.45071 228.14 
 L 153.45071 24.830691 
 L 138.232528 24.830691 
@@ -19668,7 +19689,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_9">
-    <path clip-path="url(#p43bf9f92d5)" d="M 153.45071 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 153.45071 228.14 
 L 168.668892 228.14 
 L 168.668892 104.366402 
 L 153.45071 104.366402 
@@ -19676,7 +19697,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_10">
-    <path clip-path="url(#p43bf9f92d5)" d="M 168.668892 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 168.668892 228.14 
 L 183.887074 228.14 
 L 183.887074 79.16468 
 L 168.668892 79.16468 
@@ -19684,7 +19705,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_11">
-    <path clip-path="url(#p43bf9f92d5)" d="M 183.887074 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 183.887074 228.14 
 L 199.105256 228.14 
 L 199.105256 21.054286 
 L 183.887074 21.054286 
@@ -19692,7 +19713,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_12">
-    <path clip-path="url(#p43bf9f92d5)" d="M 199.105256 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 199.105256 228.14 
 L 214.323437 228.14 
 L 214.323437 99.973441 
 L 199.105256 99.973441 
@@ -19700,7 +19721,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_13">
-    <path clip-path="url(#p43bf9f92d5)" d="M 214.323437 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 214.323437 228.14 
 L 229.541619 228.14 
 L 229.541619 118.547188 
 L 214.323437 118.547188 
@@ -19708,7 +19729,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_14">
-    <path clip-path="url(#p43bf9f92d5)" d="M 229.541619 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 229.541619 228.14 
 L 244.759801 228.14 
 L 244.759801 62.903018 
 L 229.541619 62.903018 
@@ -19716,7 +19737,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_15">
-    <path clip-path="url(#p43bf9f92d5)" d="M 244.759801 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 244.759801 228.14 
 L 259.977983 228.14 
 L 259.977983 128.951569 
 L 244.759801 128.951569 
@@ -19724,7 +19745,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_16">
-    <path clip-path="url(#p43bf9f92d5)" d="M 259.977983 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 259.977983 228.14 
 L 275.196165 228.14 
 L 275.196165 135.425406 
 L 259.977983 135.425406 
@@ -19732,7 +19753,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_17">
-    <path clip-path="url(#p43bf9f92d5)" d="M 275.196165 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 275.196165 228.14 
 L 290.414347 228.14 
 L 290.414347 124.481539 
 L 275.196165 124.481539 
@@ -19740,7 +19761,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_18">
-    <path clip-path="url(#p43bf9f92d5)" d="M 290.414347 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 290.414347 228.14 
 L 305.632528 228.14 
 L 305.632528 183.516766 
 L 290.414347 183.516766 
@@ -19748,7 +19769,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_19">
-    <path clip-path="url(#p43bf9f92d5)" d="M 305.632528 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 305.632528 228.14 
 L 320.85071 228.14 
 L 320.85071 193.381661 
 L 305.632528 193.381661 
@@ -19756,7 +19777,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_20">
-    <path clip-path="url(#p43bf9f92d5)" d="M 320.85071 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 320.85071 228.14 
 L 336.068892 228.14 
 L 336.068892 199.778428 
 L 320.85071 199.778428 
@@ -19764,7 +19785,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_21">
-    <path clip-path="url(#p43bf9f92d5)" d="M 336.068892 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 336.068892 228.14 
 L 351.287074 228.14 
 L 351.287074 217.427341 
 L 336.068892 217.427341 
@@ -19772,7 +19793,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_22">
-    <path clip-path="url(#p43bf9f92d5)" d="M 351.287074 228.14 
+    <path clip-path="url(#pfd07e19b7e)" d="M 351.287074 228.14 
 L 366.505256 228.14 
 L 366.505256 225.442568 
 L 351.287074 225.442568 
@@ -19802,7 +19823,7 @@ L 381.723437 10.7
   </g>
  </g>
  <defs>
-  <clipPath id="p43bf9f92d5">
+  <clipPath id="pfd07e19b7e">
    <rect height="217.44" width="334.8" x="46.923438" y="10.7"/>
   </clipPath>
  </defs>
@@ -19826,7 +19847,7 @@ L 381.723437 10.7
 <span class="n">inccate</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">inccate</span><span class="p">)</span>
 <span class="n">inccate</span><span class="p">[</span><span class="s1">&#39;agegp&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">inccate</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span>
 <span class="n">new_data</span><span class="o">=</span><span class="n">new_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">inccate</span><span class="p">[</span><span class="s1">&#39;agegp&#39;</span><span class="p">])</span>
-<span class="n">Posdumy</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">inccate</span><span class="p">[</span><span class="s1">&#39;agegp&#39;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="c1">#对位置进行哑变量编码</span>
+<span class="n">Posdumy</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">inccate</span><span class="p">[</span><span class="s1">&#39;agegp&#39;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> 
 <span class="n">Posdumy</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;age_lowest&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">new_data</span><span class="o">=</span><span class="n">new_data</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Posdumy</span><span class="p">)</span>
 </pre></div>
@@ -20025,7 +20046,7 @@ L 381.723437 10.7
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x27fdacfc6a0&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x25684b433c8&gt;</pre>
 </div>
 
 </div>
@@ -20068,7 +20089,7 @@ z
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path clip-path="url(#pe7ab865b00)" d="M 62.141619 228.14 
+      <path clip-path="url(#p9e2481eb9e)" d="M 62.141619 228.14 
 L 62.141619 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20108,7 +20129,7 @@ z
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
-      <path clip-path="url(#pe7ab865b00)" d="M 132.92386 228.14 
+      <path clip-path="url(#p9e2481eb9e)" d="M 132.92386 228.14 
 L 132.92386 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20135,7 +20156,7 @@ z
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
-      <path clip-path="url(#pe7ab865b00)" d="M 203.706101 228.14 
+      <path clip-path="url(#p9e2481eb9e)" d="M 203.706101 228.14 
 L 203.706101 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20175,7 +20196,7 @@ z
     </g>
     <g id="xtick_4">
      <g id="line2d_4">
-      <path clip-path="url(#pe7ab865b00)" d="M 274.488342 228.14 
+      <path clip-path="url(#p9e2481eb9e)" d="M 274.488342 228.14 
 L 274.488342 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20224,7 +20245,7 @@ z
     </g>
     <g id="xtick_5">
      <g id="line2d_5">
-      <path clip-path="url(#pe7ab865b00)" d="M 345.270583 228.14 
+      <path clip-path="url(#p9e2481eb9e)" d="M 345.270583 228.14 
 L 345.270583 10.7 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20259,7 +20280,7 @@ z
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_6">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 228.14 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 228.14 
 L 381.723437 228.14 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20283,7 +20304,7 @@ z
     </g>
     <g id="ytick_2">
      <g id="line2d_7">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 196.456765 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 196.456765 
 L 381.723437 196.456765 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20299,7 +20320,7 @@ L 381.723437 196.456765
     </g>
     <g id="ytick_3">
      <g id="line2d_8">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 164.77353 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 164.77353 
 L 381.723437 164.77353 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20315,7 +20336,7 @@ L 381.723437 164.77353
     </g>
     <g id="ytick_4">
      <g id="line2d_9">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 133.090296 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 133.090296 
 L 381.723437 133.090296 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20366,7 +20387,7 @@ z
     </g>
     <g id="ytick_5">
      <g id="line2d_10">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 101.407061 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 101.407061 
 L 381.723437 101.407061 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20424,7 +20445,7 @@ z
     </g>
     <g id="ytick_6">
      <g id="line2d_11">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 69.723826 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 69.723826 
 L 381.723437 69.723826 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20440,7 +20461,7 @@ L 381.723437 69.723826
     </g>
     <g id="ytick_7">
      <g id="line2d_12">
-      <path clip-path="url(#pe7ab865b00)" d="M 46.923438 38.040591 
+      <path clip-path="url(#p9e2481eb9e)" d="M 46.923438 38.040591 
 L 381.723437 38.040591 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -20633,7 +20654,7 @@ z
     </g>
    </g>
    <g id="patch_3">
-    <path clip-path="url(#pe7ab865b00)" d="M 62.141619 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 62.141619 228.14 
 L 77.359801 228.14 
 L 77.359801 21.054286 
 L 62.141619 21.054286 
@@ -20641,7 +20662,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_4">
-    <path clip-path="url(#pe7ab865b00)" d="M 77.359801 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 77.359801 228.14 
 L 92.577983 228.14 
 L 92.577983 84.082922 
 L 77.359801 84.082922 
@@ -20649,7 +20670,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_5">
-    <path clip-path="url(#pe7ab865b00)" d="M 92.577983 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 92.577983 228.14 
 L 107.796165 228.14 
 L 107.796165 128.496124 
 L 92.577983 128.496124 
@@ -20657,7 +20678,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_6">
-    <path clip-path="url(#pe7ab865b00)" d="M 107.796165 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 107.796165 228.14 
 L 123.014347 228.14 
 L 123.014347 143.79889 
 L 107.796165 143.79889 
@@ -20665,7 +20686,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_7">
-    <path clip-path="url(#pe7ab865b00)" d="M 123.014347 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 123.014347 228.14 
 L 138.232528 228.14 
 L 138.232528 170.564074 
 L 123.014347 170.564074 
@@ -20673,7 +20694,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_8">
-    <path clip-path="url(#pe7ab865b00)" d="M 138.232528 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 138.232528 228.14 
 L 153.45071 228.14 
 L 153.45071 193.195751 
 L 138.232528 193.195751 
@@ -20681,7 +20702,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_9">
-    <path clip-path="url(#pe7ab865b00)" d="M 153.45071 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 153.45071 228.14 
 L 168.668892 228.14 
 L 168.668892 186.834257 
 L 153.45071 186.834257 
@@ -20689,7 +20710,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_10">
-    <path clip-path="url(#pe7ab865b00)" d="M 168.668892 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 168.668892 228.14 
 L 183.887074 228.14 
 L 183.887074 215.768798 
 L 168.668892 215.768798 
@@ -20697,7 +20718,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_11">
-    <path clip-path="url(#pe7ab865b00)" d="M 183.887074 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 183.887074 228.14 
 L 199.105256 228.14 
 L 199.105256 214.2737 
 L 183.887074 214.2737 
@@ -20705,7 +20726,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_12">
-    <path clip-path="url(#pe7ab865b00)" d="M 199.105256 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 199.105256 228.14 
 L 214.323438 228.14 
 L 214.323438 217.000055 
 L 199.105256 217.000055 
@@ -20713,7 +20734,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_13">
-    <path clip-path="url(#pe7ab865b00)" d="M 214.323438 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 214.323438 228.14 
 L 229.541619 228.14 
 L 229.541619 219.374622 
 L 214.323438 219.374622 
@@ -20721,7 +20742,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_14">
-    <path clip-path="url(#pe7ab865b00)" d="M 229.541619 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 229.541619 228.14 
 L 244.759801 228.14 
 L 244.759801 221.514664 
 L 229.541619 221.514664 
@@ -20729,7 +20750,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_15">
-    <path clip-path="url(#pe7ab865b00)" d="M 244.759801 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 244.759801 228.14 
 L 259.977983 228.14 
 L 259.977983 223.625391 
 L 244.759801 223.625391 
@@ -20737,7 +20758,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_16">
-    <path clip-path="url(#pe7ab865b00)" d="M 259.977983 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 259.977983 228.14 
 L 275.196165 228.14 
 L 275.196165 224.211704 
 L 259.977983 224.211704 
@@ -20745,7 +20766,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_17">
-    <path clip-path="url(#pe7ab865b00)" d="M 275.196165 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 275.196165 228.14 
 L 290.414347 228.14 
 L 290.414347 225.736117 
 L 275.196165 225.736117 
@@ -20753,7 +20774,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_18">
-    <path clip-path="url(#pe7ab865b00)" d="M 290.414347 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 290.414347 228.14 
 L 305.632528 228.14 
 L 305.632528 226.52764 
 L 290.414347 226.52764 
@@ -20761,7 +20782,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_19">
-    <path clip-path="url(#pe7ab865b00)" d="M 305.632528 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 305.632528 228.14 
 L 320.85071 228.14 
 L 320.85071 226.879427 
 L 305.632528 226.879427 
@@ -20769,7 +20790,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_20">
-    <path clip-path="url(#pe7ab865b00)" d="M 320.85071 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 320.85071 228.14 
 L 336.068892 228.14 
 L 336.068892 227.700265 
 L 320.85071 227.700265 
@@ -20777,7 +20798,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_21">
-    <path clip-path="url(#pe7ab865b00)" d="M 336.068892 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 336.068892 228.14 
 L 351.287074 228.14 
 L 351.287074 227.348478 
 L 336.068892 227.348478 
@@ -20785,7 +20806,7 @@ z
 " style="fill:#1f77b4;stroke:#ffffff;stroke-linejoin:miter;"/>
    </g>
    <g id="patch_22">
-    <path clip-path="url(#pe7ab865b00)" d="M 351.287074 228.14 
+    <path clip-path="url(#p9e2481eb9e)" d="M 351.287074 228.14 
 L 366.505256 228.14 
 L 366.505256 227.993422 
 L 351.287074 227.993422 
@@ -20815,7 +20836,7 @@ L 381.723437 10.7
   </g>
  </g>
  <defs>
-  <clipPath id="pe7ab865b00">
+  <clipPath id="p9e2481eb9e">
    <rect height="217.44" width="334.8" x="46.923438" y="10.7"/>
   </clipPath>
  </defs>
@@ -21235,14 +21256,14 @@ Name: famsize, dtype: int64</pre>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>State servant            2437
-Working                 15622
 Commercial associate     7052
+Working                 15622
 Student                    10
 Pensioner                  13
 Name: inctp, dtype: int64
 State servant           0.096960
-Working                 0.621549
 Commercial associate    0.280576
+Working                 0.621549
 Student                 0.000398
 Pensioner               0.000517
 Name: inctp, dtype: float64
@@ -21872,11 +21893,11 @@ Name: occyp, dtype: int64
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Civil marriage          0.084865
+<pre>Single / not married    0.137065
+Civil marriage          0.084865
 Separated               0.058367
-Widow                   0.023076
-Single / not married    0.137065
 Married                 0.696626
+Widow                   0.023076
 Name: famtp, dtype: float64</pre>
 </div>
 
@@ -22308,7 +22329,7 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>使用人工少数类过采样法(<a href="https://blog.csdn.net/Scc_hy/article/details/84190080"><code>SMOTE</code></a> 算法)解决不平衡样本的问题</li>
+<li>由于样本中的不平衡问题(违约者仅仅占总样本非常小的一部分)，我们需要从正样本中进行抽样。当然，也可以人为增加负样本的数量，这种做法被称为过采样。接下来使用人工少数类过采样算法(<a href="https://blog.csdn.net/Scc_hy/article/details/84190080"><code>SMOTE</code></a>)解决不平衡样本的问题。</li>
 </ul>
 
 </div>
@@ -22329,6 +22350,19 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_balance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_balance</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -22342,13 +22376,206 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Logistic&#22238;&#24402;">Logistic&#22238;&#24402;<a class="anchor-link" href="#Logistic&#22238;&#24402;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$\log(\frac P{1-P})=\beta_0+\beta_1X$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="n">X_balance</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_balance</span><span class="p">)</span>
+<span class="n">logit_model</span><span class="o">=</span><span class="n">sm</span><span class="o">.</span><span class="n">GLM</span><span class="p">(</span><span class="n">Y_balance</span><span class="p">,</span><span class="n">X_balance</span><span class="p">,</span><span class="n">family</span><span class="o">=</span><span class="n">sm</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">Binomial</span><span class="p">())</span>
+<span class="n">logit_results</span> <span class="o">=</span> <span class="n">logit_model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">logit_results</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[50]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<table class="simpletable">
+<caption>Generalized Linear Model Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>y</td>        <th>  No. Observations:  </th>  <td> 49424</td>  
+</tr>
+<tr>
+  <th>Model:</th>                 <td>GLM</td>       <th>  Df Residuals:      </th>  <td> 49394</td>  
+</tr>
+<tr>
+  <th>Model Family:</th>       <td>Binomial</td>     <th>  Df Model:          </th>  <td>    29</td>  
+</tr>
+<tr>
+  <th>Link Function:</th>        <td>logit</td>      <th>  Scale:             </th> <td>  1.0000</td> 
+</tr>
+<tr>
+  <th>Method:</th>               <td>IRLS</td>       <th>  Log-Likelihood:    </th> <td> -32585.</td> 
+</tr>
+<tr>
+  <th>Date:</th>           <td>Tue, 17 Sep 2019</td> <th>  Deviance:          </th> <td>  65170.</td> 
+</tr>
+<tr>
+  <th>Time:</th>               <td>13:22:04</td>     <th>  Pearson chi2:      </th> <td>4.91e+04</td> 
+</tr>
+<tr>
+  <th>No. Iterations:</th>        <td>23</td>        <th>  Covariance Type:   </th> <td>nonrobust</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+               <td></td>                 <th>coef</th>     <th>std err</th>      <th>z</th>      <th>P>|z|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>                      <td>    0.6081</td> <td>    0.046</td> <td>   13.173</td> <td> 0.000</td> <td>    0.518</td> <td>    0.699</td>
+</tr>
+<tr>
+  <th>Gender</th>                     <td>    0.2093</td> <td>    0.023</td> <td>    8.923</td> <td> 0.000</td> <td>    0.163</td> <td>    0.255</td>
+</tr>
+<tr>
+  <th>Reality</th>                    <td>   -0.4028</td> <td>    0.022</td> <td>  -18.714</td> <td> 0.000</td> <td>   -0.445</td> <td>   -0.361</td>
+</tr>
+<tr>
+  <th>Chld_1</th>                     <td>   -0.2011</td> <td>    0.025</td> <td>   -8.153</td> <td> 0.000</td> <td>   -0.249</td> <td>   -0.153</td>
+</tr>
+<tr>
+  <th>Chld_2More</th>                 <td>   -0.0958</td> <td>    0.032</td> <td>   -3.008</td> <td> 0.003</td> <td>   -0.158</td> <td>   -0.033</td>
+</tr>
+<tr>
+  <th>wkphone</th>                    <td>   -0.0615</td> <td>    0.023</td> <td>   -2.686</td> <td> 0.007</td> <td>   -0.106</td> <td>   -0.017</td>
+</tr>
+<tr>
+  <th>age_low</th>                    <td>   -0.1436</td> <td>    0.031</td> <td>   -4.662</td> <td> 0.000</td> <td>   -0.204</td> <td>   -0.083</td>
+</tr>
+<tr>
+  <th>age_medium</th>                 <td>   -0.0882</td> <td>    0.032</td> <td>   -2.786</td> <td> 0.005</td> <td>   -0.150</td> <td>   -0.026</td>
+</tr>
+<tr>
+  <th>age_high</th>                   <td>    0.2938</td> <td>    0.036</td> <td>    8.080</td> <td> 0.000</td> <td>    0.223</td> <td>    0.365</td>
+</tr>
+<tr>
+  <th>age_highest</th>                <td>   -1.9187</td> <td>    0.098</td> <td>  -19.518</td> <td> 0.000</td> <td>   -2.111</td> <td>   -1.726</td>
+</tr>
+<tr>
+  <th>inc_low</th>                    <td>   -0.1217</td> <td>    0.025</td> <td>   -4.782</td> <td> 0.000</td> <td>   -0.172</td> <td>   -0.072</td>
+</tr>
+<tr>
+  <th>inc_medium</th>                 <td>   -0.1059</td> <td>    0.025</td> <td>   -4.223</td> <td> 0.000</td> <td>   -0.155</td> <td>   -0.057</td>
+</tr>
+<tr>
+  <th>worktm_low</th>                 <td>   -0.5254</td> <td>    0.027</td> <td>  -19.611</td> <td> 0.000</td> <td>   -0.578</td> <td>   -0.473</td>
+</tr>
+<tr>
+  <th>worktm_medium</th>              <td>   -0.8867</td> <td>    0.053</td> <td>  -16.828</td> <td> 0.000</td> <td>   -0.990</td> <td>   -0.783</td>
+</tr>
+<tr>
+  <th>worktm_high</th>                <td>   -2.1569</td> <td>    0.144</td> <td>  -14.940</td> <td> 0.000</td> <td>   -2.440</td> <td>   -1.874</td>
+</tr>
+<tr>
+  <th>worktm_highest</th>             <td>  -23.7936</td> <td>  1.2e+04</td> <td>   -0.002</td> <td> 0.998</td> <td>-2.36e+04</td> <td> 2.36e+04</td>
+</tr>
+<tr>
+  <th>occyp_hightecwk</th>            <td>   -0.1384</td> <td>    0.030</td> <td>   -4.576</td> <td> 0.000</td> <td>   -0.198</td> <td>   -0.079</td>
+</tr>
+<tr>
+  <th>occyp_officewk</th>             <td>   -0.0986</td> <td>    0.026</td> <td>   -3.831</td> <td> 0.000</td> <td>   -0.149</td> <td>   -0.048</td>
+</tr>
+<tr>
+  <th>houtp_Co-op apartment</th>      <td>   -0.7128</td> <td>    0.148</td> <td>   -4.806</td> <td> 0.000</td> <td>   -1.004</td> <td>   -0.422</td>
+</tr>
+<tr>
+  <th>houtp_Municipal apartment</th>  <td>   -0.3091</td> <td>    0.059</td> <td>   -5.272</td> <td> 0.000</td> <td>   -0.424</td> <td>   -0.194</td>
+</tr>
+<tr>
+  <th>houtp_Office apartment</th>     <td>   -0.2183</td> <td>    0.113</td> <td>   -1.940</td> <td> 0.052</td> <td>   -0.439</td> <td>    0.002</td>
+</tr>
+<tr>
+  <th>houtp_Rented apartment</th>     <td>   -0.9004</td> <td>    0.088</td> <td>  -10.226</td> <td> 0.000</td> <td>   -1.073</td> <td>   -0.728</td>
+</tr>
+<tr>
+  <th>houtp_With parents</th>         <td>   -0.4867</td> <td>    0.045</td> <td>  -10.772</td> <td> 0.000</td> <td>   -0.575</td> <td>   -0.398</td>
+</tr>
+<tr>
+  <th>edu_Higher education</th>       <td>    0.0837</td> <td>    0.023</td> <td>    3.582</td> <td> 0.000</td> <td>    0.038</td> <td>    0.130</td>
+</tr>
+<tr>
+  <th>edu_Incomplete higher</th>      <td>    0.0667</td> <td>    0.052</td> <td>    1.290</td> <td> 0.197</td> <td>   -0.035</td> <td>    0.168</td>
+</tr>
+<tr>
+  <th>edu_Lower secondary</th>        <td>    0.4895</td> <td>    0.114</td> <td>    4.308</td> <td> 0.000</td> <td>    0.267</td> <td>    0.712</td>
+</tr>
+<tr>
+  <th>famtp_Civil marriage</th>       <td>   -0.3729</td> <td>    0.039</td> <td>   -9.655</td> <td> 0.000</td> <td>   -0.449</td> <td>   -0.297</td>
+</tr>
+<tr>
+  <th>famtp_Separated</th>            <td>   -0.6898</td> <td>    0.050</td> <td>  -13.796</td> <td> 0.000</td> <td>   -0.788</td> <td>   -0.592</td>
+</tr>
+<tr>
+  <th>famtp_Single / not married</th> <td>    0.1996</td> <td>    0.029</td> <td>    6.883</td> <td> 0.000</td> <td>    0.143</td> <td>    0.257</td>
+</tr>
+<tr>
+  <th>famtp_Widow</th>                <td>    0.1111</td> <td>    0.068</td> <td>    1.632</td> <td> 0.103</td> <td>   -0.022</td> <td>    0.245</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>年龄与逾期的关系呈现非线性。年龄较高者逾期率更低。<br>
+收入越高逾期率越高。<br>
+和已婚者相比，未婚者与丧偶者更容易拖欠还款。</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&#38543;&#26426;&#26862;&#26519;&#65306;&#35843;&#21442;-&amp;-&#20132;&#21449;&#39564;&#35777;">&#38543;&#26426;&#26862;&#26519;&#65306;&#35843;&#21442; &amp; &#20132;&#21449;&#39564;&#35777;<a class="anchor-link" href="#&#38543;&#26426;&#26862;&#26519;&#65306;&#35843;&#21442;-&amp;-&#20132;&#21449;&#39564;&#35777;">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
@@ -22376,7 +22603,7 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -22410,11 +22637,11 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>最优训练器的精度: 0.9665351982675411
-最优训练器参数: RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;gini&#39;,
-                       max_depth=None, max_features=10, max_leaf_nodes=None,
+<pre>最优训练器的精度: 0.9672030750885023
+最优训练器参数: RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;entropy&#39;,
+                       max_depth=None, max_features=3, max_leaf_nodes=None,
                        min_impurity_decrease=0.0, min_impurity_split=None,
-                       min_samples_leaf=1, min_samples_split=9,
+                       min_samples_leaf=1, min_samples_split=10,
                        min_weight_fraction_leaf=0.0, n_estimators=20,
                        n_jobs=None, oob_score=False, random_state=None,
                        verbose=0, warm_start=False)
@@ -22428,7 +22655,7 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">best</span> <span class="o">=</span> <span class="n">random_search</span><span class="o">.</span><span class="n">best_estimator_</span>
@@ -22445,16 +22672,16 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[50]:</div>
+    <div class="prompt output_prompt">Out[53]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;gini&#39;,
-                       max_depth=None, max_features=10, max_leaf_nodes=None,
+<pre>RandomForestClassifier(bootstrap=True, class_weight=None, criterion=&#39;entropy&#39;,
+                       max_depth=None, max_features=3, max_leaf_nodes=None,
                        min_impurity_decrease=0.0, min_impurity_split=None,
-                       min_samples_leaf=1, min_samples_split=9,
+                       min_samples_leaf=1, min_samples_split=10,
                        min_weight_fraction_leaf=0.0, n_estimators=20,
                        n_jobs=None, oob_score=False, random_state=None,
                        verbose=0, warm_start=False)</pre>
@@ -22478,7 +22705,7 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_balance</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_balance</span><span class="p">)</span>
@@ -22498,7 +22725,7 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[51]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -22533,13 +22760,13 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
   <tbody>
     <tr>
       <th>0.0</th>
-      <td>23922</td>
-      <td>456</td>
+      <td>24009</td>
+      <td>514</td>
     </tr>
     <tr>
       <th>1.0</th>
-      <td>790</td>
-      <td>24256</td>
+      <td>703</td>
+      <td>24198</td>
     </tr>
   </tbody>
 </table>
@@ -22561,7 +22788,7 @@ $$IV = \sum\limits_i^n {I{V_i}} $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_balance</span><span class="p">,</span><span class="n">Y_balance</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y_balance</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -22626,7 +22853,7 @@ z
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_1">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 320.769375 
 L 41.245312 21.789375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -22674,7 +22901,7 @@ z
     </g>
     <g id="xtick_2">
      <g id="line2d_2">
-      <path clip-path="url(#p5a9b0d6633)" d="M 119.365313 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 119.365313 320.769375 
 L 119.365313 21.789375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -22715,7 +22942,7 @@ z
     </g>
     <g id="xtick_3">
      <g id="line2d_3">
-      <path clip-path="url(#p5a9b0d6633)" d="M 197.485313 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 197.485313 320.769375 
 L 197.485313 21.789375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -22749,7 +22976,7 @@ z
     </g>
     <g id="xtick_4">
      <g id="line2d_4">
-      <path clip-path="url(#p5a9b0d6633)" d="M 275.605313 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 275.605313 320.769375 
 L 275.605313 21.789375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -22799,7 +23026,7 @@ z
     </g>
     <g id="xtick_5">
      <g id="line2d_5">
-      <path clip-path="url(#p5a9b0d6633)" d="M 353.725313 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 353.725313 320.769375 
 L 353.725313 21.789375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -22856,7 +23083,7 @@ z
     </g>
     <g id="xtick_6">
      <g id="line2d_6">
-      <path clip-path="url(#p5a9b0d6633)" d="M 431.845313 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 431.845313 320.769375 
 L 431.845313 21.789375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23152,7 +23379,7 @@ z
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
      <g id="line2d_7">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 320.769375 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 320.769375 
 L 431.845313 320.769375 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23167,7 +23394,7 @@ L 431.845313 320.769375
     </g>
     <g id="ytick_2">
      <g id="line2d_8">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 263.820804 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 263.820804 
 L 431.845313 263.820804 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23182,7 +23409,7 @@ L 431.845313 263.820804
     </g>
     <g id="ytick_3">
      <g id="line2d_9">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 206.872232 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 206.872232 
 L 431.845313 206.872232 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23197,7 +23424,7 @@ L 431.845313 206.872232
     </g>
     <g id="ytick_4">
      <g id="line2d_10">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 149.923661 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 149.923661 
 L 431.845313 149.923661 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23212,7 +23439,7 @@ L 431.845313 149.923661
     </g>
     <g id="ytick_5">
      <g id="line2d_11">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 92.975089 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 92.975089 
 L 431.845313 92.975089 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23227,7 +23454,7 @@ L 431.845313 92.975089
     </g>
     <g id="ytick_6">
      <g id="line2d_12">
-      <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 36.026518 
+      <path clip-path="url(#p9a292a61e8)" d="M 41.245312 36.026518 
 L 431.845313 36.026518 
 " style="fill:none;stroke:#cccccc;stroke-linecap:round;stroke-width:0.8;"/>
      </g>
@@ -23313,52 +23540,60 @@ z
     </g>
    </g>
    <g id="line2d_13">
-    <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 320.769375 
-L 41.71947 97.361066 
-L 42.404363 83.189214 
-L 42.825836 76.62177 
-L 42.931204 71.091291 
-L 43.036572 70.246357 
-L 43.194625 67.519523 
-L 43.984886 61.067298 
-L 44.090255 59.953521 
-L 44.511727 57.533936 
-L 45.038569 55.22957 
-L 45.56541 52.387518 
-L 45.934198 51.312147 
-L 46.039567 51.081711 
-L 46.144935 50.544025 
-L 46.355671 49.814309 
-L 46.935197 48.662126 
-L 47.093249 47.701974 
-L 47.567406 47.509943 
-L 47.725458 46.818633 
-L 47.988879 46.204135 
-L 48.357668 45.896887 
-L 48.410352 45.436013 
-L 51.20261 43.59252 
-L 52.835817 42.785992 
-L 53.25729 42.01787 
-L 54.41634 41.32656 
-L 54.521709 40.980905 
-L 55.94418 40.135971 
-L 57.788123 38.791757 
-L 58.156912 38.791757 
-L 59.421331 38.561321 
-L 60.316961 38.062041 
-L 61.528695 38.062041 
-L 61.950168 37.67798 
-L 87.501962 37.601168 
-L 87.712699 37.562762 
-L 104.835035 37.48595 
-L 104.835035 37.447544 
-L 136.55087 37.409138 
+    <path clip-path="url(#p9a292a61e8)" d="M 41.245312 320.769375 
+L 41.666785 112.761914 
+L 41.930206 100.548773 
+L 41.930206 100.0879 
+L 42.351679 88.182007 
+L 42.509731 86.799388 
+L 42.509731 84.226179 
+L 42.773152 81.960219 
+L 42.87852 80.308756 
+L 42.931204 74.35581 
+L 43.247309 70.937667 
+L 43.247309 70.899261 
+L 43.458045 68.671706 
+L 43.563413 66.86662 
+L 43.721466 65.983279 
+L 44.66978 58.071622 
+L 45.56541 53.84695 
+L 45.670778 53.309265 
+L 45.82883 52.541143 
+L 46.408355 50.582431 
+L 47.145933 46.703415 
+L 47.462038 46.012105 
+L 47.936195 45.896887 
+L 48.041563 45.589638 
+L 48.621088 45.090358 
+L 49.147929 44.97514 
+L 49.253297 44.437455 
+L 50.728453 42.939617 
+L 50.781137 42.670774 
+L 51.044557 42.593962 
+L 51.571398 42.286713 
+L 53.204606 41.633809 
+L 54.363656 40.750469 
+L 54.521709 40.481626 
+L 56.2076 39.521473 
+L 56.576389 39.521473 
+L 57.893492 38.638133 
+L 60.316961 38.023635 
+L 60.791118 37.716386 
+L 76.06951 37.639574 
+L 76.122194 37.601168 
+L 91.558639 37.524356 
+L 92.717689 37.48595 
+L 112.737651 37.409138 
+L 117.742642 37.370732 
+L 141.081703 37.332325 
+L 153.409785 37.140295 
+L 154.305415 37.140295 
 L 431.845313 36.026518 
 L 431.845313 36.026518 
 " style="fill:none;stroke:#ff8c00;stroke-linecap:round;stroke-width:1.5;"/>
    </g>
    <g id="line2d_14">
-    <path clip-path="url(#p5a9b0d6633)" d="M 41.245312 320.769375 
+    <path clip-path="url(#p9a292a61e8)" d="M 41.245312 320.769375 
 L 431.845313 36.026518 
 " style="fill:none;stroke:#000080;stroke-dasharray:5.55,2.4;stroke-dashoffset:0;stroke-width:1.5;"/>
    </g>
@@ -23595,7 +23830,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p5a9b0d6633">
+  <clipPath id="p9a292a61e8">
    <rect height="298.98" width="390.6" x="41.245312" y="21.789375"/>
   </clipPath>
  </defs>
@@ -23629,7 +23864,7 @@ z
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ks</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">tpr</span><span class="o">-</span><span class="n">fpr</span><span class="p">)</span>
@@ -23646,13 +23881,13 @@ z
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[72]:</div>
+    <div class="prompt output_prompt">Out[56]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.9486107364445644</pre>
+<pre>0.9522524952792015</pre>
 </div>
 
 </div>
