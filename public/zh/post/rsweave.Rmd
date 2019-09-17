@@ -80,6 +80,9 @@ knitr::include_graphics("/img/sweave/mathtype.jpg")
 ```
 $$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
 ```
+效果是这样的：
+
+$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
 
 ---
 
@@ -110,7 +113,9 @@ R Sweave文档以.Rnw为后缀，它可以将R代码整合到LaTeX中去。当�
 
 ## R Markdown
 
-如果在使用R Markdown的`svg`图片格式进行输出，中文无法显示时。可以先`install.packages('showtext')`之后使用如下的`knitr`选项就行了。
+此小节写在我最初写这篇文章的半年后。我现在认为用LaTeX、R Sweave之类的已经完全没有使用的必要了。如果你需要做幻灯片、写论文、做数据分析、做网页，答案只有一个：R Markdown！它的功能目前已经完全替代了前两者。需要注意的是，如果要输出PDF文档的话，最好使用`rticles`包附带的中文模板。具体可以看[这篇文章](https://www.jianshu.com/p/25356b414042)。
+
+需要的注意的是，如果在使用R Markdown的`svg`图片格式进行输出(PDF 同样)，中文无法显示时。可以`install.packages('showtext')`后使用如下的`knitr`选项：
 
 ```{r, eval=F}
 {r,dev='svg',fig.showtext=T}

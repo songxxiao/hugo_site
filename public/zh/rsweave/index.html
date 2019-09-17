@@ -141,6 +141,8 @@ Figure 6: Mathtype编辑器
 </div>
 <p>以上的公式可以直接复制为如下的纯文本LaTeX公式：</p>
 <pre><code>$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$</code></pre>
+<p>效果是这样的：</p>
+<p><span class="math display">\[\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}\]</span></p>
 <hr />
 <div id="r-sweave" class="section level2">
 <h2>使用R Sweave</h2>
@@ -160,7 +162,8 @@ Figure 7: 新建一个R Sweave文档
 </div>
 <div id="r-markdown" class="section level2">
 <h2>R Markdown</h2>
-<p>如果在使用R Markdown的<code>svg</code>图片格式进行输出，中文无法显示时。可以先<code>install.packages('showtext')</code>之后使用如下的<code>knitr</code>选项就行了。</p>
+<p>此小节写在我最初写这篇文章的半年后。我现在认为用LaTeX、R Sweave之类的已经完全没有使用的必要了。如果你需要做幻灯片、写论文、做数据分析、做网页，答案只有一个：R Markdown！它的功能目前已经完全替代了前两者。需要注意的是，如果要输出PDF文档的话，最好使用<code>rticles</code>包附带的中文模板。具体可以看<a href="https://www.jianshu.com/p/25356b414042">这篇文章</a>。</p>
+<p>需要的注意的是，如果在使用R Markdown的<code>svg</code>图片格式进行输出(PDF 同样)，中文无法显示时。可以<code>install.packages('showtext')</code>后使用如下的<code>knitr</code>选项：</p>
 <pre class="r"><code>{r,dev=&#39;svg&#39;,fig.showtext=T}</code></pre>
 <p>矢量图输出人人有责。</p>
 </div>
