@@ -90,6 +90,7 @@
 <p><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a></p>
 <p>宋春林：<a href="http://songchunlin.net/cn/2019/03/latex-vs-word/">用LaTeX写学位论文</a></p>
 <p><a href="http://songchunlin.net/cn/2014/03/use-knitr/">用 knitr 写作业</a></p>
+<p><a href="https://www.jianshu.com/p/25356b414042">在R Markdown文档中使用中文</a></p>
 <hr />
 <p>我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是<a href="https://miktex.org/">MikTeX</a>（虽然它常常因为简陋的功能为人诟病）。</p>
 <p>而之所以不使用<a href="http://www.xm1math.net/texmaker/">TeXmaker</a>或是<a href="http://www.ctex.org/HomePage">CTeX</a>是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。</p>
@@ -156,6 +157,12 @@ Figure 7: 新建一个R Sweave文档
 <pre class="r"><code>pdf.options(family=&#39;GB1&#39;)</code></pre>
 <p>具体的关于R Sweave中文显示问题可以参看谢益辉老师的<a href="https://yihui.name/cn/2010/02/misc-issues-in-latex-lyx-r-sweave-pgfsweave/">这个链接</a>。</p>
 <p>R Sweave文档以.Rnw为后缀，它可以将R代码整合到LaTeX中去。当然，因为语法的复杂性，R Sweave的功能很大程度上被<a href="https://rmarkdown.rstudio.com/">R Markdown</a>代替了。所以除非你有写论文的需求，否则尽量少用Sweave。</p>
+</div>
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<p>如果在使用R Markdown的<code>svg</code>图片格式进行输出，中文无法显示时。可以先<code>install.packages('showtext')</code>之后使用如下的<code>knitr</code>选项就行了。</p>
+<pre class="r"><code>{r,dev=&#39;svg&#39;,fig.showtext=T}</code></pre>
+<p>矢量图输出人人有责。</p>
 </div>
 
     </div>

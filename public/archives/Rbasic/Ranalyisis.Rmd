@@ -1,5 +1,5 @@
 ---
-title: "R"
+title: "R数据分析"
 author: " "
 date: " "
 output:
@@ -121,10 +121,11 @@ knitr::kable(head(USJudgeRatings$score))
 ## Regression Discontinuity Design
 
 ```{r ,message = F, comment = NA,warning = F}
-library(tidyverse)
+library(dplyr)
 library(magrittr)
 library(MASS)
 library(rdd)
+
 set.seed(1)
 n <- 10 ^ 3
 mu <- matrix(c(0, 0))
@@ -237,8 +238,86 @@ $$\hat{\beta_{Lasso}} = arg min_{\beta \in R^d}||Y - X\beta||^2 +\lambda \sum_{j
 
 
 
+```{r,error=T,comment=NA,warning=F,message=F}
+library(haven)
+library(dplyr)
+library(tidyr)
+library(plotmo)
+library(glmnet)
+library(readr)
+`%>%` <- magrittr::`%>%`
+
+ceps <- read_csv("C:/Users/xsong/Desktop/table/ceps.imputed.csv")
+
+ceps <- na.omit(ceps)
+
+x_train <- model.matrix(sdtotal ~ schids + sex + onechi +  maedu +  faedu + drunk + qurel + relation +  desk + net + dialect + chkhmwk + chkcouse + classtm + clpre + revitm + subject + know + drsmok + commhr + schtype + schcsrm +  comno +  bknum + buget + eduqua + fight + brkpb + smok +  drink +  teainc + money + clfee + qianzi + lifetm +  dial +  chidia +  futcfd +  huko + eduy +  dangy + houspro,ceps)[,-1]
+
+y_train <- ceps$sdtotal %>% 
+  unlist() %>%
+  as.numeric()
+
+lasso_mod <- glmnet(x_train, 
+                   y_train, 
+                   alpha = 1)
 
 
+plot_glmnet(lasso_mod,xvar='lambda',label=10)
 
+cvfit <- cv.glmnet(x_train, 
+                   y_train, 
+                   alpha = 1)
+cvfit$lambda.min
+cvfit$lambda.1se
+plot(cvfit)
+```
+
+# XGBOOST
+
++ 在变量的层面并行计算
+
++ 可以进行正则化收缩
+
+参数：
+
+```{r,error=T,comment=NA,warning=F,message=F,dev='svg',fig.showtext=T,out.width='80%',fig.show=T}
+library(xgboost)
+library(rpart.plot)
+data(agaricus.train, package='xgboost')
+data(agaricus.test, package='xgboost')
+train <- agaricus.train
+test <- agaricus.test
+bst <- xgboost(data = train$data, label = train$label, max_depth = 2, eta = 1,nrounds = 2,verbose = 3, objective = "binary:logistic")
+importance_matrix <- xgb.importance(model = bst)
+xgb.plot.importance(importance_matrix = importance_matrix)
+
+xgb.dump(bst, with_stats = T)
+#xgb.plot.tree(model = bst,trees=0,show_node_id=T)
+
+pred <- predict(bst, test$data)
+```
+
+
+```{r,error=T,comment=NA,warning=F,message=F}
+logregobj <- function(preds, dtrain) {
+labels <- getinfo(dtrain, "label")
+preds <- 1/(1 + exp(-preds))
+grad <- preds - labels
+hess <- preds * (1 - preds)
+return(list(grad = grad, hess = hess))
+}
+evalerror <- function(preds, dtrain) {
+labels <- getinfo(dtrain, "label")
+err <- sqrt(mean((preds-labels)^2))
+return(list(metric = "MSE", value = err))
+}
+
+dtrain <- xgb.DMatrix(train$data, label = train$label)
+
+dtest <- xgb.DMatrix(test$data, label = test$label)
+watchlist <- list(eval = dtest, train = dtrain)
+param <- list(max_depth = 2, eta = 1, silent = 1)
+bst <- xgb.train(param, dtrain, nrounds = 2, watchlist, logregobj, evalerror, maximize = FALSE)
+```
 
 

@@ -118,6 +118,7 @@ knitr选项函数
 R Markdown: The Definitive Guide
 宋春林：用LaTeX写学位论文
 用 knitr 写作业
+在R Markdown文档中使用中文
 我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是MikTeX（虽然它常常因为简陋的功能为人诟病）。
 而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
 Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？

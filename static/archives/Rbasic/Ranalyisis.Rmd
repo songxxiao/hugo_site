@@ -280,7 +280,44 @@ plot(cvfit)
 
 参数：
 
+```{r,error=T,comment=NA,warning=F,message=F,dev='svg',fig.showtext=T,out.width='80%',fig.show=T}
+library(xgboost)
+library(rpart.plot)
+data(agaricus.train, package='xgboost')
+data(agaricus.test, package='xgboost')
+train <- agaricus.train
+test <- agaricus.test
+bst <- xgboost(data = train$data, label = train$label, max_depth = 2, eta = 1,nrounds = 2,verbose = 3, objective = "binary:logistic")
+importance_matrix <- xgb.importance(model = bst)
+xgb.plot.importance(importance_matrix = importance_matrix)
+
+xgb.dump(bst, with_stats = T)
+#xgb.plot.tree(model = bst,trees=0,show_node_id=T)
+
+pred <- predict(bst, test$data)
+```
 
 
+```{r,error=T,comment=NA,warning=F,message=F}
+logregobj <- function(preds, dtrain) {
+labels <- getinfo(dtrain, "label")
+preds <- 1/(1 + exp(-preds))
+grad <- preds - labels
+hess <- preds * (1 - preds)
+return(list(grad = grad, hess = hess))
+}
+evalerror <- function(preds, dtrain) {
+labels <- getinfo(dtrain, "label")
+err <- sqrt(mean((preds-labels)^2))
+return(list(metric = "MSE", value = err))
+}
+
+dtrain <- xgb.DMatrix(train$data, label = train$label)
+
+dtest <- xgb.DMatrix(test$data, label = test$label)
+watchlist <- list(eval = dtest, train = dtrain)
+param <- list(max_depth = 2, eta = 1, silent = 1)
+bst <- xgb.train(param, dtrain, nrounds = 2, watchlist, logregobj, evalerror, maximize = FALSE)
+```
 
 
