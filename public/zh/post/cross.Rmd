@@ -28,6 +28,8 @@ output:
 
 谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
+输入`?mlbench::BostonHousing`查看数据集解释。
+
 ```{r,comment = NA,warning = F,message = F,fig.align='center'}
 `%>%` <- magrittr::`%>%`
 library(caret)
@@ -195,9 +197,9 @@ roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, ma
 #ggroc()
 ```
 
+Python交叉验证
 
-
-
+Sklearn库中的[`cross_val_score`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html)、[`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)和[`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)函数
 
 
 

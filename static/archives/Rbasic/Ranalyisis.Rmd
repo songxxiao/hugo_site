@@ -280,6 +280,46 @@ plot(cvfit)
 
 参数：
 
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-cly1">booster </th>
+    <th class="tg-cly1">基学习器</th>
+    <th class="tg-cly1">线性回归：gblinear<br>&nbsp;&nbsp;&nbsp;&nbsp;决策树：gbtree</th>
+  </tr>
+  <tr>
+    <td class="tg-cly1">eta</td>
+    <td class="tg-cly1">学习率</td>
+    <td class="tg-cly1"></td>
+  </tr>
+  <tr>
+    <td class="tg-cly1">gamma</td>
+    <td class="tg-cly1">最小伽马损失减少量</td>
+    <td class="tg-cly1"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">max_depth</td>
+    <td class="tg-0lax">每棵树的最大深度。默认为6</td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">objective </td>
+    <td class="tg-0lax">任务参数。</td>
+    <td class="tg-0lax">reg:squarederror 回归<br>&nbsp;&nbsp;&nbsp;&nbsp;logistic回归<br>&nbsp;&nbsp;&nbsp;&nbsp;binary:logistic 输出logistic概率<br>&nbsp;&nbsp;&nbsp;&nbsp;rank:pairwise 排序<br>&nbsp;&nbsp;&nbsp;&nbsp;num_class 多分类<br>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">nrounds</td>
+    <td class="tg-0lax">最大boost迭代数</td>
+    <td class="tg-0lax">自变量和因变量关系越复杂nrounds需要越大</td>
+  </tr>
+</table>
+
 ```{r,error=T,comment=NA,warning=F,message=F,dev='svg',fig.showtext=T,out.width='80%',fig.show=T}
 library(xgboost)
 library(rpart.plot)

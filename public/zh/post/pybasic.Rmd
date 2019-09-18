@@ -67,7 +67,7 @@ plt.rcParams['axes.unicode_minus']=False
 ```
 # 异常处理
 
-```{python, comment = NA}
+```python
 a=3
 b=2
 for i in range(5):
@@ -80,5 +80,18 @@ for i in range(5):
         print(e)#输出异常行为名称
 ```
 
+```python
+1.0
+2.0
+division by zero
+-2.0
+-1.0
+```
 
 
+# 管道(Sklearn Pipeline)
+
+```python
+
+```
+# 

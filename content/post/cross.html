@@ -23,6 +23,7 @@ output:
 <li><p>留一交叉验证(leave-one-out cross validation)</p></li>
 </ul>
 <p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
+<p>输入<code>?mlbench::BostonHousing</code>查看数据集解释。</p>
 <pre class="r"><code>`%&gt;%` &lt;- magrittr::`%&gt;%`
 library(caret)
 library(readr)
@@ -72,13 +73,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 455, 455, 455, 455, 455, ... 
+Summary of sample sizes: 455, 456, 455, 457, 456, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.728939  0.6124071  4.108182
-  0.17117244  6.592267  0.4785617  4.839885
-  0.45274420  8.198177  0.3359489  5.976964
+  0.07165784  5.859176  0.5994776  4.267479
+  0.17117244  6.693944  0.4651201  5.042508
+  0.45274420  8.352837  0.3211284  6.121012
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -97,13 +98,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 454, 458, 455, 455, 456, 455, ... 
+Summary of sample sizes: 456, 455, 456, 456, 455, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.664894  0.6217557  4.119880
-  0.17117244  6.509313  0.4942258  4.869885
-  0.45274420  8.457328  0.3150451  6.128833
+  0.07165784  5.801759  0.6061987  4.180732
+  0.17117244  6.610604  0.4804028  4.891403
+  0.45274420  8.358015  0.3151408  6.060892
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -169,10 +170,10 @@ crim     0.2484
 age      0.2089
 zn       0.0000
 chas1    0.0000
-tax      0.0000
 dis      0.0000
-b        0.0000
-rad      0.0000</code></pre>
+tax      0.0000
+rad      0.0000
+b        0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -332,5 +333,7 @@ roc.default(response = balanced$test_pred, predictor = balanced$Legendary,     p
 Data: balanced$Legendary in 351 controls (balanced$test_pred FALSE) &lt; 397 cases (balanced$test_pred TRUE).
 Area under the curve: 0.9584</code></pre>
 <pre class="r"><code>#ggroc()</code></pre>
+<p>Python交叉验证</p>
+<p>Sklearn库中的<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"><code>cross_val_score</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a>和<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV</code></a>函数</p>
 </div>
 </div>

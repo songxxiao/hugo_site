@@ -1,7 +1,7 @@
 ---
-title: "Ê¹ÓÃR MarkdownÖÆ×÷»ÃµÆÆ¬"
+title: "ä½¿ç”¨R Markdownåˆ¶ä½œå¹»ç¯ç‰‡"
 subtitle: " "
-author: "ËÎæç"
+author: "å®‹éª"
 date: "2019/09/10"
 output:
   xaringan::moon_reader:
@@ -14,9 +14,9 @@ output:
 
 ---
 
-### ¹º³µ·ÅÆúÔ­Òò
+### è´­è½¦æ”¾å¼ƒåŸå› 
 
-+ ¹º³µÔ­Òò
++ è´­è½¦åŸå› 
 
 ```{r, echo=F,message=F,warning=F,fig.cap=" ", out.width = '150%',fig.align='center',fig.asp = 0.618,dev='svg',fig.showtext=T}
 
@@ -35,7 +35,7 @@ ggplot(bar,aes(reorder(tag,value),value,color=car,fill=car)) +
 
 ---
 
-### ¿¼ÂÇµÄ³µĞÍ
+### è€ƒè™‘çš„è½¦å‹
 
 ```{r,echo=F,message=F,warning=F,fig.cap=" ", out.width = '150%',fig.align='center',fig.asp = 0.618,dev='svg',fig.showtext=T}
 bar1 <- read_csv("F:/Mysite/Mysite/static/slides/mlepre/bar1.csv")
@@ -51,4 +51,3 @@ ggplot(bar1,aes(reorder(car
   theme_classic() +
   theme(legend.position='none')
 ```
-

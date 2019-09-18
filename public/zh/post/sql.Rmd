@@ -256,6 +256,10 @@ SELECT * FROM salary
 JOIN seasons
 ON salary.Player=seasons.Player
 ```
++ MySQL多对一、一对多匹配可以自动复制。
+
+
+
 ## 纵向连接
  
  + `UNION ALL`允许重复值
