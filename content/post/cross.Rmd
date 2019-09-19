@@ -28,6 +28,8 @@ output:
 
 谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
 
+任务：通过一系列特征预测波士顿房价
+
 输入`?mlbench::BostonHousing`查看数据集解释。
 
 ```{r,comment = NA,warning = F,message = F,fig.align='center'}
