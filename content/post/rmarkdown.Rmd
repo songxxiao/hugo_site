@@ -1,9 +1,8 @@
 ---
-title: "使用RStudio运行LaTeX"
+title: "使用RStudio写作"
 author: " "
-date: 2019-06-08
-slug: rsweave
-tags: ["R"]
+date: '2019-06-08'
+slug: rmarkdown
 ---
 
 + 一些对理解本文有用的链接
@@ -26,7 +25,7 @@ tags: ["R"]
 
 ---
 
-我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是[MikTeX](https://miktex.org/)（虽然它常常因为简陋的功能为人诟病）。
+我一开始使用LaTeX写论文。我一直以来用的是[MikTeX](https://miktex.org/)。
 
 而之所以不使用[TeXmaker](http://www.xm1math.net/texmaker/)或是[CTeX](http://www.ctex.org/HomePage)是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
 
@@ -123,4 +122,6 @@ R Sweave文档以.Rnw为后缀，它可以将R代码整合到LaTeX中去。当�
 
 矢量图输出人人有责。
 
+## 表格工具
 
+R Markdown同时支持HTML、Markdown、LaTeX表格。具体使用什么表格取决于要输出的格式。其中，HTML、LaTeX表格的语法十分复杂。我会使用[Tables Generator](https://www.tablesgenerator.com/)这个强大的工具生成表格。谁用谁知道！

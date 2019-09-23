@@ -30,7 +30,7 @@ output:
 
 任务：通过一系列特征预测波士顿房价
 
-输入`?mlbench::BostonHousing`查看数据集解释。
+输入`?mlbench::BostonHousing`查看数据集解释。下面主要使用[caret](http://topepo.github.io/caret/index.html)包(classification and regression training)进行交叉验证。
 
 ```{r,comment = NA,warning = F,message = F,fig.align='center'}
 `%>%` <- magrittr::`%>%`

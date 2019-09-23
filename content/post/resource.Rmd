@@ -1,0 +1,40 @@
+---
+title: "实用学习资源链接(持续更新)"
+author: " "
+date: '2019-09-23'
+slug: resource
+---
+
+# 教科书
+
+[R for Data Science](https://r4ds.had.co.nz/)
+
+[ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+
+[现代统计图形](https://bookdown.org/xiangyun/msg/)
+
+[现代统计图形之极乐净土](https://pzhaonet.github.io/msgtv/)
+
+[caret包](http://topepo.github.io/caret/index.html)
+
+[Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
+
+[统计学与R读书笔记(第六版)](https://cran.rstudio.com/doc/contrib/Xu-Statistics_and_R.pdf)
+
+[Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛](https://pzhaonet.github.io/btcookbook/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

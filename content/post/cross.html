@@ -24,7 +24,7 @@ output:
 </ul>
 <p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
 <p>任务：通过一系列特征预测波士顿房价</p>
-<p>输入<code>?mlbench::BostonHousing</code>查看数据集解释。</p>
+<p>输入<code>?mlbench::BostonHousing</code>查看数据集解释。下面主要使用<a href="http://topepo.github.io/caret/index.html">caret</a>包(classification and regression training)进行交叉验证。</p>
 <pre class="r"><code>`%&gt;%` &lt;- magrittr::`%&gt;%`
 library(caret)
 library(readr)
@@ -74,13 +74,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 456, 457, 455, 454, 456, ... 
+Summary of sample sizes: 456, 455, 455, 455, 455, 454, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.972024  0.5753249  4.304049
-  0.17117244  6.635000  0.4761596  4.934467
-  0.45274420  8.239427  0.3260693  5.980955
+  0.07165784  5.755646  0.6150148  4.236059
+  0.17117244  6.624831  0.4819679  5.027550
+  0.45274420  8.001175  0.3650444  5.869618
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -99,13 +99,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 457, 454, 455, 455, 457, ... 
+Summary of sample sizes: 455, 454, 455, 456, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.770354  0.6086904  4.125216
-  0.17117244  6.792517  0.4580809  5.016283
-  0.45274420  8.459612  0.3165265  6.122560
+  0.07165784  5.704959  0.6172202  4.088445
+  0.17117244  6.638020  0.4792440  4.898814
+  0.45274420  8.258279  0.3367566  5.967943
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -169,11 +169,11 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-b        0.0000
-rad      0.0000
-zn       0.0000
-chas1    0.0000
 dis      0.0000
+chas1    0.0000
+rad      0.0000
+b        0.0000
+zn       0.0000
 tax      0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
