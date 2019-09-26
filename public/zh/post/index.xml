@@ -25,6 +25,10 @@ caret包
 Fundamentals of Data Visualization
 统计学与R读书笔记(第六版)
 Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛
+XGBoost Documentation
+PythonPython -WordCloud 修改色调
+Python中WordCloud各参数的含义
+超详细：Python(wordcloud+jieba)生成中文词云图
 </description>
     </item>
     
@@ -127,33 +131,6 @@ R Markdown: The Definitive Guide
 用 knitr 写作业
 在R Markdown文档中使用中文
 我一开始使用LaTeX写论文。我一直以来用的是MikTeX。
-而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
-Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？
-首先要安装LaTeX环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
-后续需要安装一些R包，如Knitr，tinytex等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。
-然后需要配置一下R Studio的环境:
-Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，Weave Rnw files using选knitr。想要写中文LaTeX文档必须选XeLaTeX环境。
-我们点击Open File打开一个LaTeX文档：
-Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的LaTeX Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype或者这个在线工具。Mathtype的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：</description>
-    </item>
-    
-    <item>
-      <title>使用RStudio运行LaTeX</title>
-      <link>/zh/rsweave/</link>
-      <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/rsweave/</guid>
-      <description>一些对理解本文有用的链接谢益辉: Sweave：打造一个可重复的统计研究流程
-knitr 与可重复的统计研究（花絮篇）
-knitr中文介绍
-knitr选项函数
-R Markdown: The Definitive Guide
-宋春林：用LaTeX写学位论文
-用 knitr 写作业
-在R Markdown文档中使用中文
-我平时喜欢使用LaTeX写文档。而因为种种原因，我一直以来用的是MikTeX（虽然它常常因为简陋的功能为人诟病）。
 而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
 Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？
 首先要安装LaTeX环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！

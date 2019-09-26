@@ -23,9 +23,15 @@ slug: resource
 
 [Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛](https://pzhaonet.github.io/btcookbook/)
 
+[XGBoost Documentation](https://xgboost.readthedocs.io/en/latest/index.html)
 
+# Python
 
+[Python -WordCloud 修改色调](https://blog.csdn.net/u010152318/article/details/80242460)   
 
+[Python中WordCloud各参数的含义](https://blog.csdn.net/kouyi5627/article/details/80530569)  
+
+[超详细：Python(wordcloud+jieba)生成中文词云图](https://www.cnblogs.com/delav/p/7845539.html)
 
 
 
