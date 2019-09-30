@@ -140,37 +140,52 @@ varImp(rpartFit, scale = F)
 
 [代码参考](https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/)
 
+
+```{r,comment = NA,warning = F,message = F}
+pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
+colnames(pokemon)[1] <- 'id' #修改变量名
+colnames(pokemon)[3] <- 'Type1'
+colnames(pokemon)[4] <- 'Type2'
+
+pokemon <- pokemon %>%
+  drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
+  select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
+  mutate(Type1=recode(Type1,'Fairy'='oth','Fighting'='oth','Flying'='oth'),Legendary=as.factor(Legendary),
+)
+
+```
+
+```{r,comment = NA,warning = F,message = F,fig.cap='过采样前',out.width='65%'}
+ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
+  geom_point(size=3)
+```
+
+
 ## K近邻算法(k-nearest neighbor)
 
 + K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。
 + 在样本比较少的情况下，通常使用交叉验证确定K值。
 + K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
-pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
-colnames(pokemon)[1] <- 'id' #修改变量名
-colnames(pokemon)[3] <- 'Type1'
-colnames(pokemon)[4] <- 'Type2'
-
-pokemon$Legendary <- as.factor(pokemon$Legendary)
-pokemon <- na.omit(pokemon)
-
-pokemon <- pokemon %>%
-  drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
-  select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation)
-
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样后',out.width='65%'}
 #过采样
-balanced <- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "both", p=0.5,N=748,seed = 1)$data
+balance <- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "both", p=0.5,N=748,seed = 1)$data
 
-#sampled <- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
-#trainpok <- pokemon[sampled,]
-#testpok <- pokemon[-sampled,]
+sampled <- sample(1:nrow(balance),nrow(balance)*0.7,replace=F)
+trainpok <- balance[sampled,]
+testpok <- balance[-sampled,]
 
+ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
+  geom_jitter(size=1.5,height = 10, width = 40)
+```
+
+
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
 trctrl <- trainControl(method = "repeatedcv", number =10,repeats =10, savePredictions
 =T)
 
 set.seed(213)
-knn_fit <- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = balanced, method = "knn",
+knn_fit <- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = trainpok, method = "knn",
  trControl=trctrl,
  tuneLength = 10)
 knn_fit
@@ -182,17 +197,41 @@ geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))
 
-balanced <- balanced %>%
-  mutate(test_pred=predict(knn_fit,newdata=balanced))
-conMatrix <- confusionMatrix(balanced$test_pred,balanced$Legendary)
-matrix <- conMatrix[["table"]]
-conMatrix
+testpok <- testpok %>%
+  mutate(pred=predict(knn_fit,testpok))
+
+prob1 <- predict(knn_fit,testpok,type='prob')
+pr1 <- prob1[,2] 
+
+trainpok <- trainpok %>%
+  mutate(pred=predict(knn_fit,trainpok))
+
+prob2 <- predict(knn_fit,trainpok,type='prob')
+pr2 <- prob2[,2] 
+
+conMatrix1 <- confusionMatrix(testpok$pred,testpok$Legendary) 
+#matrix <- conMatrix1[["table"]]
+conMatrix1
+
+conMatrix2 <- confusionMatrix(trainpok$pred,trainpok$Legendary)
+#matrix <- conMatrix[["table"]]
+conMatrix2
+
+testpok$Legendary <- as.ordered(testpok$Legendary)
+trainpok$Legendary <- as.ordered(trainpok$Legendary)
+
+roca <- roc(testpok$Legendary,pr1)
+rocb <- roc(trainpok$Legendary,pr2)
+
+ggroc(list('测试集'=roca,'训练集'=rocb),size=1)+
+  geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='dashed')+
+  theme(legend.title=element_blank()) 
 
 ```
 
 
 
-```{r,comment = NA,warning = F,message =F,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
+```{r,eval=F,comment = NA,warning = F,message =F,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
 balanced$test_pred <- as.ordered(balanced$test_pred)
 balanced$Legendary <- as.ordered(balanced$Legendary)
 roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')

@@ -74,13 +74,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 456, 455, 455, 455, 455, 454, ... 
+Summary of sample sizes: 455, 454, 457, 454, 454, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.755646  0.6150148  4.236059
-  0.17117244  6.624831  0.4819679  5.027550
-  0.45274420  8.001175  0.3650444  5.869618
+  0.07165784  5.837933  0.6078149  4.224454
+  0.17117244  6.714598  0.4687158  5.023691
+  0.45274420  8.204023  0.3406843  5.955655
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -99,13 +99,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 454, 455, 456, 455, 455, ... 
+Summary of sample sizes: 456, 455, 455, 456, 455, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.704959  0.6172202  4.088445
-  0.17117244  6.638020  0.4792440  4.898814
-  0.45274420  8.258279  0.3367566  5.967943
+  0.07165784  5.738040  0.6195086  4.158151
+  0.17117244  6.602190  0.4845667  4.892682
+  0.45274420  8.200033  0.3458102  5.979634
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -169,12 +169,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
+tax      0.0000
 dis      0.0000
-chas1    0.0000
 rad      0.0000
-b        0.0000
+chas1    0.0000
 zn       0.0000
-tax      0.0000</code></pre>
+b        0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -215,6 +215,24 @@ tax      0.0000</code></pre>
 </ul>
 </blockquote>
 <p><a href="https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/">代码参考</a></p>
+<pre class="r"><code>pokemon &lt;- read_csv(&quot;E:/R_codes/others/Pokemon.csv&quot;)
+colnames(pokemon)[1] &lt;- &#39;id&#39; #修改变量名
+colnames(pokemon)[3] &lt;- &#39;Type1&#39;
+colnames(pokemon)[4] &lt;- &#39;Type2&#39;
+
+pokemon &lt;- pokemon %&gt;%
+  drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
+  select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
+  mutate(Type1=recode(Type1,&#39;Fairy&#39;=&#39;oth&#39;,&#39;Fighting&#39;=&#39;oth&#39;,&#39;Flying&#39;=&#39;oth&#39;),Legendary=as.factor(Legendary),
+)</code></pre>
+<pre class="r"><code>ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
+  geom_point(size=3)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-7-1.png" alt="过采样前" width="65%" />
+<p class="caption">
+Figure 2: 过采样前
+</p>
+</div>
 <div id="kk-nearest-neighbor" class="section level2">
 <h2>K近邻算法(k-nearest neighbor)</h2>
 <ul>
@@ -222,118 +240,157 @@ tax      0.0000</code></pre>
 <li>在样本比较少的情况下，通常使用交叉验证确定K值。</li>
 <li>K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。</li>
 </ul>
-<pre class="r"><code>pokemon &lt;- read_csv(&quot;E:/R_codes/others/Pokemon.csv&quot;)
-colnames(pokemon)[1] &lt;- &#39;id&#39; #修改变量名
-colnames(pokemon)[3] &lt;- &#39;Type1&#39;
-colnames(pokemon)[4] &lt;- &#39;Type2&#39;
+<pre class="r"><code>#过采样
+balance &lt;- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;both&quot;, p=0.5,N=748,seed = 1)$data
 
-pokemon$Legendary &lt;- as.factor(pokemon$Legendary)
-pokemon &lt;- na.omit(pokemon)
+sampled &lt;- sample(1:nrow(balance),nrow(balance)*0.7,replace=F)
+trainpok &lt;- balance[sampled,]
+testpok &lt;- balance[-sampled,]
 
-pokemon &lt;- pokemon %&gt;%
-  drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
-  select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation)
-
-#过采样
-balanced &lt;- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;both&quot;, p=0.5,N=748,seed = 1)$data
-
-#sampled &lt;- sample(1:nrow(pokemon),nrow(pokemon)*0.7,replace=F)
-#trainpok &lt;- pokemon[sampled,]
-#testpok &lt;- pokemon[-sampled,]
-
-trctrl &lt;- trainControl(method = &quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
+ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
+  geom_jitter(size=1.5,height = 10, width = 40)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-8-1.png" alt="过采样后" width="65%" />
+<p class="caption">
+Figure 3: 过采样后
+</p>
+</div>
+<pre class="r"><code>trctrl &lt;- trainControl(method = &quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
 =T)
 
 set.seed(213)
-knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = balanced, method = &quot;knn&quot;,
+knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = trainpok, method = &quot;knn&quot;,
  trControl=trctrl,
  tuneLength = 10)
 knn_fit</code></pre>
 <pre><code>k-Nearest Neighbors 
 
-748 samples
+523 samples
   8 predictor
   2 classes: &#39;FALSE&#39;, &#39;TRUE&#39; 
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 674, 673, 674, 672, 674, 674, ... 
+Summary of sample sizes: 470, 470, 471, 471, 472, 471, ... 
 Resampling results across tuning parameters:
 
   k   Accuracy   Kappa    
-   5  0.9484350  0.8971586
-   7  0.9425515  0.8854659
-   9  0.9432165  0.8867946
-  11  0.9477308  0.8957603
-  13  0.9509650  0.9021897
-  15  0.9398669  0.8801152
-  17  0.9369208  0.8742642
-  19  0.9375875  0.8755897
-  21  0.9389192  0.8782317
-  23  0.9415845  0.8835236
+   5  0.9430503  0.8863625
+   7  0.9449590  0.8901647
+   9  0.9501266  0.9004474
+  11  0.9375277  0.8753408
+  13  0.9388303  0.8779424
+  15  0.9414972  0.8832631
+  17  0.9416970  0.8836506
+  19  0.9436204  0.8874898
+  21  0.9447597  0.8897732
+  23  0.9422666  0.8848008
 
 Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was k = 13.</code></pre>
+The final value used for the model was k = 9.</code></pre>
 <pre class="r"><code>kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) 
 kacc &lt;- kacc[,1:2]
 ggplot(kacc,aes(k,Accuracy)) +
 geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-6-1.png" alt="K值和准确率的关系" width="65%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="K值和准确率的关系" width="65%" />
 <p class="caption">
-Figure 2: K值和准确率的关系
+Figure 4: K值和准确率的关系
 </p>
 </div>
-<pre class="r"><code>balanced &lt;- balanced %&gt;%
-  mutate(test_pred=predict(knn_fit,newdata=balanced))
-conMatrix &lt;- confusionMatrix(balanced$test_pred,balanced$Legendary)
-matrix &lt;- conMatrix[[&quot;table&quot;]]
-conMatrix</code></pre>
+<pre class="r"><code>testpok &lt;- testpok %&gt;%
+  mutate(pred=predict(knn_fit,testpok))
+
+prob1 &lt;- predict(knn_fit,testpok,type=&#39;prob&#39;)
+pr1 &lt;- prob1[,2] 
+
+trainpok &lt;- trainpok %&gt;%
+  mutate(pred=predict(knn_fit,trainpok))
+
+prob2 &lt;- predict(knn_fit,trainpok,type=&#39;prob&#39;)
+pr2 &lt;- prob2[,2] 
+
+conMatrix1 &lt;- confusionMatrix(testpok$pred,testpok$Legendary) 
+#matrix &lt;- conMatrix1[[&quot;table&quot;]]
+conMatrix1</code></pre>
 <pre><code>Confusion Matrix and Statistics
 
           Reference
 Prediction FALSE TRUE
-     FALSE   351    0
-     TRUE     33  364
+     FALSE   106    0
+     TRUE     11  108
                                           
-               Accuracy : 0.9559          
-                 95% CI : (0.9386, 0.9694)
-    No Information Rate : 0.5134          
+               Accuracy : 0.9511          
+                 95% CI : (0.9142, 0.9753)
+    No Information Rate : 0.52            
     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
                                           
-                  Kappa : 0.9119          
+                  Kappa : 0.9024          
                                           
- Mcnemar&#39;s Test P-Value : 2.54e-08        
+ Mcnemar&#39;s Test P-Value : 0.002569        
                                           
-            Sensitivity : 0.9141          
+            Sensitivity : 0.9060          
             Specificity : 1.0000          
          Pos Pred Value : 1.0000          
-         Neg Pred Value : 0.9169          
-             Prevalence : 0.5134          
-         Detection Rate : 0.4693          
-   Detection Prevalence : 0.4693          
-      Balanced Accuracy : 0.9570          
+         Neg Pred Value : 0.9076          
+             Prevalence : 0.5200          
+         Detection Rate : 0.4711          
+   Detection Prevalence : 0.4711          
+      Balanced Accuracy : 0.9530          
                                           
        &#39;Positive&#39; Class : FALSE           
                                           </code></pre>
-<pre class="r"><code>balanced$test_pred &lt;- as.ordered(balanced$test_pred)
-balanced$Legendary &lt;- as.ordered(balanced$Legendary)
-roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-7-1.png" alt="ROC曲线" width="65%" />
+<pre class="r"><code>conMatrix2 &lt;- confusionMatrix(trainpok$pred,trainpok$Legendary)
+#matrix &lt;- conMatrix[[&quot;table&quot;]]
+conMatrix2</code></pre>
+<pre><code>Confusion Matrix and Statistics
+
+          Reference
+Prediction FALSE TRUE
+     FALSE   245    0
+     TRUE     22  256
+                                         
+               Accuracy : 0.9579         
+                 95% CI : (0.937, 0.9735)
+    No Information Rate : 0.5105         
+    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+                                         
+                  Kappa : 0.916          
+                                         
+ Mcnemar&#39;s Test P-Value : 7.562e-06      
+                                         
+            Sensitivity : 0.9176         
+            Specificity : 1.0000         
+         Pos Pred Value : 1.0000         
+         Neg Pred Value : 0.9209         
+             Prevalence : 0.5105         
+         Detection Rate : 0.4685         
+   Detection Prevalence : 0.4685         
+      Balanced Accuracy : 0.9588         
+                                         
+       &#39;Positive&#39; Class : FALSE          
+                                         </code></pre>
+<pre class="r"><code>testpok$Legendary &lt;- as.ordered(testpok$Legendary)
+trainpok$Legendary &lt;- as.ordered(trainpok$Legendary)
+
+roca &lt;- roc(testpok$Legendary,pr1)
+rocb &lt;- roc(trainpok$Legendary,pr2)
+
+ggroc(list(&#39;测试集&#39;=roca,&#39;训练集&#39;=rocb),size=1)+
+  geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;dashed&#39;)+
+  theme(legend.title=element_blank()) </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-9-2.png" alt="K值和准确率的关系" width="65%" />
 <p class="caption">
-Figure 3: ROC曲线
+Figure 5: K值和准确率的关系
 </p>
 </div>
-<pre><code>
-Call:
-roc.default(response = balanced$test_pred, predictor = balanced$Legendary,     plot = T, print.auc = T, auc.polygon = T, max.auc.polygon = T,     auc.polygon.col = &quot;skyblue&quot;, print.thres = T, xlab = &quot;伪正类率&quot;,     ylab = &quot;真正类率&quot;)
-
-Data: balanced$Legendary in 351 controls (balanced$test_pred FALSE) &lt; 397 cases (balanced$test_pred TRUE).
-Area under the curve: 0.9584</code></pre>
-<pre class="r"><code>#ggroc()</code></pre>
+<pre class="r"><code>balanced$test_pred &lt;- as.ordered(balanced$test_pred)
+balanced$Legendary &lt;- as.ordered(balanced$Legendary)
+roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)
+#ggroc()</code></pre>
 <p>Python交叉验证</p>
 <p>Sklearn库中的<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"><code>cross_val_score</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a>和<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV</code></a>函数</p>
 </div>
