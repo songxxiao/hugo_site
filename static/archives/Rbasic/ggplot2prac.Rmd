@@ -1,7 +1,7 @@
 ---
 title: "ggplot2练习" 
 subtitle: '描述与探索'
-author: ' '
+author: '[宋骁](https://xsong.ltd)'
 date: ' '
 output:
   bookdown::html_document2:
@@ -23,6 +23,14 @@ slug: ggplot
 [现代统计图形](https://bookdown.org/xiangyun/msg/)
 
 [Python ggplot库](http://ggplot.yhathq.com/)
+
+# 便捷命令速查表
+
+去除图例标题
+
+```r
+theme(legend.title=element_blank())
+```
 
 # 笔记
 
@@ -51,19 +59,7 @@ library(rgdal)
 
 data(diamonds)
 knitr::kable(head(diamonds),caption="数据概要",align='c')
-#原始变量关系
-ggplot(diamonds, aes(carat,price)) +
-geom_bin2d() +
-facet_wrap(~cut, nrow = 2)
-#y变量取对数
-ggplot(diamonds, aes(log(carat),price)) +
-geom_point() +
-facet_wrap(~cut, nrow = 2)
-#x变量取对数
-ggplot(diamonds, aes(carat,log(price))) +
-geom_bin2d() +
-facet_wrap(~cut, nrow = 2)
-#都取对数，最终成为线性关系。
+
 ggplot(diamonds, aes(log(carat), log10(price))) +
 geom_bin2d(bins = 100) +
 facet_wrap(~cut, nrow = 2)
@@ -280,7 +276,6 @@ in16 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= in16)) +
 ```
 
 ```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
-#devtools::install_local("C:/Users/xsong/Desktop/easyGgplot2-master.zip")
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
 
@@ -329,7 +324,7 @@ center  <- na.omit(center)
 
 ggplot(china_map,aes(x=long,y=lat)) + 
   geom_polygon(aes(group = group),fill="white",color="black",size=0.1) + 
-  geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = "steelblue") +
+  geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = 'red') +
   coord_map("polyconic") +
   labs(x='经度',y='纬度') +
   theme(legend.title=element_blank()) +   
@@ -337,28 +332,23 @@ ggplot(china_map,aes(x=long,y=lat)) +
 
 ```
 
-# 主题
+# 误差可视化
 
-```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%'} 
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z),size=3) +
-  geom_smooth(method='lm',se=F) +
-  theme_bw()
+```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='80%'} 
+df <- data.frame(grp = 1:17, fit = c(1,2,2,3,4,6,7,9,15,16,17,19,18,8,10,11,2), se = 2)
 
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z),size=3) +
-  geom_smooth(method='lm',se=F) +
-  theme_grey()
+ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+  geom_point()+
+  geom_line()+
+  geom_errorbar(width=0.3)
 
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z),size=3) +
-  geom_smooth(method='lm',se=F) +
-  theme_classic()
-
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z),size=3) +
-  geom_smooth(method='lm',se=F) +
-  theme_light()
+ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+  geom_line()+
+  geom_linerange()
+  
+ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+  geom_line()+
+  geom_pointrange()
 ```
 
 
