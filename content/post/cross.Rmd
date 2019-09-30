@@ -10,6 +10,7 @@ output:
     theme: united
 ---
 
+![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
 
 # 基本概念
 
@@ -155,7 +156,7 @@ pokemon <- pokemon %>%
 
 ```
 
-```{r,comment = NA,warning = F,message = F,fig.cap='过采样前',out.width='65%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样前',out.width='100%'}
 ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_point(size=3)
 ```
@@ -167,7 +168,7 @@ ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
 + 在样本比较少的情况下，通常使用交叉验证确定K值。
 + K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样后',out.width='65%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样后',out.width='100%'}
 #过采样
 balance <- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "both", p=0.5,N=748,seed = 1)$data
 
@@ -180,7 +181,7 @@ ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
 ```
 
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='65%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='100%'}
 trctrl <- trainControl(method = "repeatedcv", number =10,repeats =10, savePredictions
 =T)
 
@@ -222,16 +223,21 @@ trainpok$Legendary <- as.ordered(trainpok$Legendary)
 
 roca <- roc(testpok$Legendary,pr1)
 rocb <- roc(trainpok$Legendary,pr2)
-
-ggroc(list('测试集'=roca,'训练集'=rocb),size=1)+
-  geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='dashed')+
-  theme(legend.title=element_blank()) 
-
 ```
 
 
 
-```{r,eval=F,comment = NA,warning = F,message =F,fig.align='center',fig.cap='ROC曲线',out.width='65%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='ROC曲线',out.width='100%'}
+ggroc(list('测试集'=roca,'训练集'=rocb),size=1)+
+  geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='dashed')+
+  theme(legend.title=element_blank()) 
+```
+
+
+
+
+
+```{r,echo=F,eval=F}
 balanced$test_pred <- as.ordered(balanced$test_pred)
 balanced$Legendary <- as.ordered(balanced$Legendary)
 roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col="skyblue", print.thres=T,xlab ='伪正类率',ylab='真正类率')

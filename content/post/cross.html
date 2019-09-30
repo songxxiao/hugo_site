@@ -12,6 +12,7 @@ output:
 
 
 
+<p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
 <div id="section" class="section level1">
 <h1>基本概念</h1>
 <p>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。</p>
@@ -74,13 +75,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 454, 457, 454, 454, 456, ... 
+Summary of sample sizes: 455, 455, 457, 455, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.837933  0.6078149  4.224454
-  0.17117244  6.714598  0.4687158  5.023691
-  0.45274420  8.204023  0.3406843  5.955655
+  0.07165784  5.746223  0.6190189  4.092380
+  0.17117244  6.721127  0.4727533  4.958666
+  0.45274420  8.284143  0.3432870  6.021853
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -99,13 +100,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 456, 455, 455, 456, 455, 456, ... 
+Summary of sample sizes: 457, 456, 456, 454, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.738040  0.6195086  4.158151
-  0.17117244  6.602190  0.4845667  4.892682
-  0.45274420  8.200033  0.3458102  5.979634
+  0.07165784  5.730642  0.6107123  4.113779
+  0.17117244  6.616879  0.4754298  4.898243
+  0.45274420  8.375343  0.3124782  6.080709
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -169,12 +170,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-tax      0.0000
+b        0.0000
 dis      0.0000
-rad      0.0000
-chas1    0.0000
 zn       0.0000
-b        0.0000</code></pre>
+rad      0.0000
+tax      0.0000
+chas1    0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -227,8 +228,8 @@ pokemon &lt;- pokemon %&gt;%
 )</code></pre>
 <pre class="r"><code>ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_point(size=3)</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-7"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-7-1.png" alt="过采样前" width="65%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-7-1.png" alt="过采样前" width="100%" />
 <p class="caption">
 Figure 2: 过采样前
 </p>
@@ -250,7 +251,7 @@ testpok &lt;- balance[-sampled,]
 ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_jitter(size=1.5,height = 10, width = 40)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-8-1.png" alt="过采样后" width="65%" />
+<img src="/post/cross_files/figure-html/unnamed-chunk-8-1.png" alt="过采样后" width="100%" />
 <p class="caption">
 Figure 3: 过采样后
 </p>
@@ -294,8 +295,8 @@ ggplot(kacc,aes(k,Accuracy)) +
 geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="K值和准确率的关系" width="65%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="K值和准确率的关系" width="100%" />
 <p class="caption">
 Figure 4: K值和准确率的关系
 </p>
@@ -376,21 +377,16 @@ Prediction FALSE TRUE
 trainpok$Legendary &lt;- as.ordered(trainpok$Legendary)
 
 roca &lt;- roc(testpok$Legendary,pr1)
-rocb &lt;- roc(trainpok$Legendary,pr2)
-
-ggroc(list(&#39;测试集&#39;=roca,&#39;训练集&#39;=rocb),size=1)+
+rocb &lt;- roc(trainpok$Legendary,pr2)</code></pre>
+<pre class="r"><code>ggroc(list(&#39;测试集&#39;=roca,&#39;训练集&#39;=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;dashed&#39;)+
   theme(legend.title=element_blank()) </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-9-2.png" alt="K值和准确率的关系" width="65%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-10-1.png" alt="ROC曲线" width="100%" />
 <p class="caption">
-Figure 5: K值和准确率的关系
+Figure 5: ROC曲线
 </p>
 </div>
-<pre class="r"><code>balanced$test_pred &lt;- as.ordered(balanced$test_pred)
-balanced$Legendary &lt;- as.ordered(balanced$Legendary)
-roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, max.auc.polygon=T,auc.polygon.col=&quot;skyblue&quot;, print.thres=T,xlab =&#39;伪正类率&#39;,ylab=&#39;真正类率&#39;)
-#ggroc()</code></pre>
 <p>Python交叉验证</p>
 <p>Sklearn库中的<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"><code>cross_val_score</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a>和<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV</code></a>函数</p>
 </div>
