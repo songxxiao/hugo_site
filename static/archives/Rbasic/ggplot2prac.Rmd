@@ -13,7 +13,7 @@ slug: ggplot
 
 本文链接：
 
-<https://xsong.ltd/archives/ggplot/ggplot2prac>
+<https://xsong.ltd/archives/rbasic/ggplot2prac>
 
 一个有用的链接：
 <http://rpubs.com/faststar/442420>
@@ -51,6 +51,7 @@ library(dplyr)
 library(plyr)
 library(readxl)
 library(modelr)
+library(haven)
 library(readr)
 library(easyGgplot2)
 library(reshape2)
@@ -68,24 +69,18 @@ facet_wrap(~cut, nrow = 2)
 # 抽样散点图
 
 ```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.7}
-library(haven)
-setwd("E:/R_codes/capplot")
-X2010 <- read_dta("2010.dta")
-xy <- read_dta("id.dta")
-hho <- read_dta("aggregrate.dta")
-nrow(hho)
-set.seed(13)#设置随机数种子
-sample <- sample(1:nrow(hho),600,replace = F)#抽取600个样本
-hhosampled <- hho[sample,]#抽取
+hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
+set.seed(20191001)
+sample <- sample(1:nrow(hatdt),600,replace = F)
+sampled <- hatdt[sample,]
 
-scattered <- ggplot(hho,aes(x=agem,y=inc,group=type,shape=type,color=type,weight=fswt_nat)) +
+ggplot(hatdt,aes(x=agem,y=inc,shape=type,color=type,weight=fswt_nat)) +
+  geom_jitter(data = sampled,height=550,width=5,size =1.2) +
+  geom_smooth(span = 10,size=1) + 
   ylim(0, 20000) +
   labs(title = " ",x = "年龄",y = "人民币(元）") +
-  geom_smooth(span = 10,size=1.5) + 
-  geom_point(data = hhosampled, alpha = 4/7,size = 2.5 )  +
-  annotate("text", x = 70, y = 200, label="数据来源：CFPS,正常散点", size = 4) + #注解
-  theme(legend.position = c(0.9,0.9))#图例位置
-scattered
+  annotate("text", x = 70, y = 100, label="数据来源:CFPS", size = 4) +
+  theme_bw()
 ```
 
 ```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
