@@ -15,21 +15,14 @@ slug: ggplot
 
 <https://xsong.ltd/archives/rbasic/ggplot2prac>
 
-一个有用的链接：
-<http://rpubs.com/faststar/442420>
 
-[ggplot2 Shiny App](https://github.com/cardiomoon/ggplot2new)
-
-[现代统计图形](https://bookdown.org/xiangyun/msg/)
-
-[Python ggplot库](http://ggplot.yhathq.com/)
-
-# 便捷命令速查表
-
-去除图例标题
+# 便捷命令速查
 
 ```r
+#去除图例标题
 theme(legend.title=element_blank())
+#去除图例
+theme(legend.position='none')
 ```
 
 # 笔记
@@ -37,15 +30,20 @@ theme(legend.title=element_blank())
 + 在`aes`函数里面的参数，如`fill`、`color`、`shape`，控制的是图形的映射对象。它将特定变量映射为统计图形的特定元素。而`+`后面的图形函数中的参数，仅仅是图形的附加属性。无法根据特定变量变化。
 
 
-# 学习资源
+# 资源
 
 [如何使用ggplot2?](https://mp.weixin.qq.com/s/mlfCRrd0CMzoYpuCSqsVtQ)
 
-[用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)
+[ggplot2 in R](http://rpubs.com/faststar/442420)
 
-# 二维密度图
+[ggplot2 Shiny App](https://github.com/cardiomoon/ggplot2new)
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+[现代统计图形](https://bookdown.org/xiangyun/msg/)
+
+[Python ggplot库](http://ggplot.yhathq.com/)
+
+
+```{r,message = F, comment = NA,warning = F}
 library(ggplot2)
 library(dplyr)
 library(plyr)
@@ -57,18 +55,25 @@ library(easyGgplot2)
 library(reshape2)
 library(rgdal)
 `%>%` <- magrittr::`%>%`
+```
 
+
+# 密度可视化
+
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
 data(diamonds)
-knitr::kable(head(diamonds),caption="数据概要",align='c')
+ggplot(diamonds, aes(log(carat), log10(price))) +
+geom_bin2d(bins = 50) +
+facet_wrap(~cut, nrow = 2)
 
 ggplot(diamonds, aes(log(carat), log10(price))) +
-geom_bin2d(bins = 100) +
+geom_hex() +
 facet_wrap(~cut, nrow = 2)
 ```
 
 # 抽样散点图
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.7}
+```{r 1,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.7,fig.cap='`ggplot2`按图层绘图。为防止散点堆叠，图中散点经过抽样。lowess曲线是根据原始数据绘制。不同图层可使用不同数据。'}
 hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
 set.seed(20191001)
 sample <- sample(1:nrow(hatdt),600,replace = F)
@@ -83,43 +88,51 @@ ggplot(hatdt,aes(x=agem,y=inc,shape=type,color=type,weight=fswt_nat)) +
   theme_bw()
 ```
 
-```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
-i <- ggplot(economics, aes(date, unemploy))
-i + geom_area()
-
-i + geom_line()
-
-```
-
 # 模型可视化
 
-```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
-set.seed(711)
-x = seq(0, 4, length = 100)
-y = -x + jitter(rep(1:5, each = 20), 2)
-z = rep(1:5, each = 20)
++ 例子来自：[用局部加权回归散点平滑法观察二维变量之间的关系](https://cosx.org/2008/11/lowess-to-explore-bivariate-correlation-by-yihui)。
+
++ 使用[`modelr`](https://r4ds.had.co.nz/model-basics.html)包进行模型拟合。
+
+```{r 2,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.8,fig.cap='散点图的颜色代表不同组。左上:简单OLS拟合。右上:令每个组斜率相同、截距不同(固定效应)。相当于将组别变量`z`作为控制变量。原本的正相关相关关系颠倒为负相关。左下:对每个组分别拟合线性模型。各组斜率不同，截距也不同。'}
+set.seed(91)
+x <- seq(0, 4, length = 100)
+y <- -x + jitter(rep(1:5, each = 20), 2)
+z <- rep(1:5, each = 20)
 z <- as.factor(z)
-moto <- data.frame(x,y,z)
-#ols无控制变量
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z),size=3) +
-  geom_smooth(method='lm',se=F)
+dt <- data.frame(x,y,z)
+
+modela <- ggplot(dt, aes(x, y)) +
+  geom_point(aes(color = z),size=2) +
+  geom_smooth(method='lm',se=F)+
+  theme(legend.position='none')
+
+moda <- lm(y ~ x + z,data = dt)
+grid <- dt %>%
+data_grid(x,z) %>%
+gather_predictions(moda)
+          
+modelb <- ggplot() +
+  geom_point(data=dt,aes(x, y,color=z,group=z),size=2) +
+  geom_line(data=grid, aes(y = pred,x=x,group=z),size=0.75,color='blue') +
+  ylim(0.3,2.1)+
+  theme(legend.position='none')
+
+modelc <- ggplot(dt, aes(x, y,group=z)) +
+  geom_point(aes(color = z),size=2) +
+  geom_smooth(method='lm',se=F)+
+  theme(legend.position='none')
+ggplot2.multiplot(modela,modelb,modelc,cols=2)
+
 ```
 
 ## 分面
 
-```{r ,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z)) +
-  facet_wrap(~z, nrow = 2) +
-  geom_smooth(method='lm',se=F)
-```
-
 + 基于两个变量的分面:`facet_grid`
 
 ```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
-bar1 <- read_csv("F:/Mysite/Mysite/static/slides/mlepre/bar1.csv")
-ggplot(bar1,aes(reorder(car
+bara <- read_csv("F:/Mysite/Mysite/static/slides/mlepre/bar1.csv")
+ggplot(bara,aes(reorder(car
 ,value),value,color=segment
 ,fill=segment
 )) +
@@ -132,37 +145,11 @@ ggplot(bar1,aes(reorder(car
   theme(legend.position='none')
 ```
 
+# 地图
 
++ 不分面(`facet_wrap`)的笨办法，使用`ggplot2.multiplot`手动合并图形。
 
-## 分组
-
-+ 使用[`modelr`](https://r4ds.had.co.nz/model-basics.html)包进行模型拟合
-
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.8}
-#不同组拟合不同的模型
-ggplot(moto, aes(x, y,group=z)) +
-  geom_point(aes(color = z),size=3) +
-  geom_smooth(method='lm',se=F)
-
-mod1 <- lm(y ~ x + z,data = moto)
-grid <- moto %>%
-data_grid(x,z) %>%
-gather_predictions(mod1)
-knitr::kable(head(grid),caption="数据概要",align='c')
-#不同组拟合同一个模型，控制组z              
-ggplot(moto, aes(x, y,group=z)) +
-  geom_point(aes(color = z),size=3) +
-  geom_line(data = grid, aes(y = pred,x=x),size=0.8,color='blue') +
-  ylim(0.5,2)
-
-
-```
-
-# 地图绘制
-
-+ 不会分面(`facet_wrap`)者的笨办法，使用`ggplot2.multiplot`手动合并图形
-
-```{r,echo=F,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
+```{r,echo=F,message = F, comment = NA,warning = F,cache = T} 
 rm(list=ls())
 china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
 
@@ -270,17 +257,15 @@ in16 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= in16)) +
     plot.margin = unit(c(0.001,0.001,0.001,0.001), "cm")) 
 ```
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
+```{r,message = F,comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
 ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 ```
-
-## 数据长宽转换
 
 + 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
 
 + 使用[`facet_wrap`](https://ggplot2.tidyverse.org/reference/facet_wrap.html)进行分面
 
-[`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
++ [`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
 
 ```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
 long <- melt(china_data, id=c("long", "lat","group"))
@@ -306,7 +291,6 @@ x <- bottom@data
 xs <- data.frame(x,id=seq(0:344)-1)        
 
 china_map <- join(bottomdata, xs, type = "full")          
-
 fills <- read_excel("E:/R_codes/maps/pointmap/citydis.xlsx")
 
 china_map <- join(china_map,fills, type = "full")   
@@ -329,21 +313,24 @@ ggplot(china_map,aes(x=long,y=lat)) +
 
 # 误差可视化
 
-```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='80%'} 
+```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6} 
 df <- data.frame(grp = 1:17, fit = c(1,2,2,3,4,6,7,9,15,16,17,19,18,8,10,11,2), se = 2)
 
-ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+era <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
   geom_point()+
   geom_line()+
   geom_errorbar(width=0.3)
 
-ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+erb <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
   geom_line()+
   geom_linerange()
   
-ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+erc <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
   geom_line()+
-  geom_pointrange()
+  geom_pointrange(size=0.2)
+
+ggplot2.multiplot(era,erb,erc,cols=2)
+
 ```
 
 
