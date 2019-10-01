@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+author: "Malcolm"
+date: "2019/10/1"
+output: html_document
+---
+```{r,message=F,warning=F,error=T,comment = NA}
+library(dplyr)
+library(ggplot2)
+library(modelr)
+```
+
+
+
+
+```{r,message=F,warning=F,error=T,comment = NA}
+sim1a <- tibble(
+x = rep(1:10, each = 3),
+y = x * 1.5 + 6 + rt(length(x), df = 2)
+)
+sim1a
+
+
+
+```
+
