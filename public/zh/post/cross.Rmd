@@ -3,7 +3,7 @@ title: "交叉验证：基于caret包"
 author: ' '
 date: '2019-05-25'
 slug: cross
-tags: ["R","应用统计","机器学习"]
+tags: ["机器学习"]
 output:
   html_document2:
     toc: true
@@ -151,7 +151,8 @@ colnames(pokemon)[4] <- 'Type2'
 pokemon <- pokemon %>%
   drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
   select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %>%
-  mutate(Type1=recode(Type1,'Fairy'='oth','Fighting'='oth','Flying'='oth'),Legendary=as.factor(Legendary),
+  mutate(Legendary=as.factor(Legendary),
+    Type1=recode(Type1,'Fairy'='oth','Fighting'='oth','Flying'='oth')
 )
 
 ```
@@ -162,11 +163,7 @@ ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
 ```
 
 
-## K近邻算法(k-nearest neighbor)
 
-+ K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。
-+ 在样本比较少的情况下，通常使用交叉验证确定K值。
-+ K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
 
 ```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样后',out.width='100%'}
 #过采样
@@ -180,8 +177,13 @@ ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_jitter(size=1.5,height = 10, width = 40)
 ```
 
+## K近邻算法(k-nearest neighbor)
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='K值和准确率的关系',out.width='100%'}
++ K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。
++ 在样本比较少的情况下，通常使用交叉验证确定K值。
++ K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
+
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='k近邻算法的K值和准确率的关系',out.width='100%'}
 trctrl <- trainControl(method = "repeatedcv", number =10,repeats =10, savePredictions
 =T)
 
@@ -227,13 +229,11 @@ rocb <- roc(trainpok$Legendary,pr2)
 
 
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='ROC曲线',out.width='100%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。',out.width='100%'}
 ggroc(list('测试集'=roca,'训练集'=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='dashed')+
   theme(legend.title=element_blank()) 
 ```
-
-
 
 
 

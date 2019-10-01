@@ -143,13 +143,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 455, 457, 455, 455, 455, ... 
+Summary of sample sizes: 457, 456, 454, 456, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.746223  0.6190189  4.092380
-  0.17117244  6.721127  0.4727533  4.958666
-  0.45274420  8.284143  0.3432870  6.021853
+  0.07165784  5.908198  0.5870623  4.367597
+  0.17117244  6.605312  0.4641402  5.024943
+  0.45274420  8.851803  0.2135590  6.428093
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -168,13 +168,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 457, 456, 456, 454, 455, 455, ... 
+Summary of sample sizes: 456, 454, 456, 454, 457, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.730642  0.6107123  4.113779
-  0.17117244  6.616879  0.4754298  4.898243
-  0.45274420  8.375343  0.3124782  6.080709
+  0.07165784  5.753511  0.6084956  4.157572
+  0.17117244  6.750843  0.4593244  5.025272
+  0.45274420  8.373317  0.3160351  6.086552
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -239,11 +239,11 @@ indus    0.2595
 crim     0.2484
 age      0.2089
 b        0.0000
-dis      0.0000
-zn       0.0000
-rad      0.0000
 tax      0.0000
-chas1    0.0000</code></pre>
+chas1    0.0000
+rad      0.0000
+dis      0.0000
+zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -292,7 +292,8 @@ colnames(pokemon)[4] &lt;- &#39;Type2&#39;
 pokemon &lt;- pokemon %&gt;%
   drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
   select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
-  mutate(Type1=recode(Type1,&#39;Fairy&#39;=&#39;oth&#39;,&#39;Fighting&#39;=&#39;oth&#39;,&#39;Flying&#39;=&#39;oth&#39;),Legendary=as.factor(Legendary),
+  mutate(Legendary=as.factor(Legendary),
+    Type1=recode(Type1,&#39;Fairy&#39;=&#39;oth&#39;,&#39;Fighting&#39;=&#39;oth&#39;,&#39;Flying&#39;=&#39;oth&#39;)
 )</code></pre>
 <pre class="r"><code>ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_point(size=3)</code></pre>
@@ -302,13 +303,6 @@ pokemon &lt;- pokemon %&gt;%
 Figure 2: 过采样前
 </p>
 </div>
-<div id="kk-nearest-neighbor" class="section level2">
-<h2>K近邻算法(k-nearest neighbor)</h2>
-<ul>
-<li>K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。</li>
-<li>在样本比较少的情况下，通常使用交叉验证确定K值。</li>
-<li>K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。</li>
-</ul>
 <pre class="r"><code>#过采样
 balance &lt;- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;both&quot;, p=0.5,N=748,seed = 1)$data
 
@@ -324,6 +318,13 @@ ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
 Figure 3: 过采样后
 </p>
 </div>
+<div id="kk-nearest-neighbor" class="section level2">
+<h2>K近邻算法(k-nearest neighbor)</h2>
+<ul>
+<li>K近邻算法对于测试集的给定样本，在训练集中找到与之最邻近的K个样本，把这个给定样本判定为它们的K临近点的多数类。</li>
+<li>在样本比较少的情况下，通常使用交叉验证确定K值。</li>
+<li>K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。</li>
+</ul>
 <pre class="r"><code>trctrl &lt;- trainControl(method = &quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
 =T)
 
@@ -364,9 +365,9 @@ geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="../../post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="K值和准确率的关系" width="100%" />
+<img src="../../post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="k近邻算法的K值和准确率的关系" width="100%" />
 <p class="caption">
-Figure 4: K值和准确率的关系
+Figure 4: k近邻算法的K值和准确率的关系
 </p>
 </div>
 <pre class="r"><code>testpok &lt;- testpok %&gt;%
@@ -450,9 +451,9 @@ rocb &lt;- roc(trainpok$Legendary,pr2)</code></pre>
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;dashed&#39;)+
   theme(legend.title=element_blank()) </code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="../../post/cross_files/figure-html/unnamed-chunk-10-1.png" alt="ROC曲线" width="100%" />
+<img src="../../post/cross_files/figure-html/unnamed-chunk-10-1.png" alt="ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。" width="100%" />
 <p class="caption">
-Figure 5: ROC曲线
+Figure 5: ROC曲线:使用<code>ggroc</code>包绘制。模型在测试集的表现比训练集稍差一些。
 </p>
 </div>
 <p>Python交叉验证</p>

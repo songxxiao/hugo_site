@@ -25,6 +25,8 @@ slug: resource
 
 [XGBoost Documentation](https://xgboost.readthedocs.io/en/latest/index.html)
 
+[datasets（R自带数据包）](https://konelane.github.io/2018/04/15/datasets%EF%BC%88R%E8%87%AA%E5%B8%A6%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%89/)
+
 # Python
 
 [Python -WordCloud 修改色调](https://blog.csdn.net/u010152318/article/details/80242460)   
