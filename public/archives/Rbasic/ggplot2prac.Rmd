@@ -107,15 +107,17 @@ modela <- ggplot(dt, aes(x, y)) +
   geom_smooth(method='lm',se=F)+
   theme(legend.position='none')
 
-moda <- lm(y ~ x + z,data = dt)
+moda <- lm(y ~ x + z,dt)
 grid <- dt %>%
 data_grid(x,z) %>%
 gather_predictions(moda)
           
 modelb <- ggplot() +
   geom_point(data=dt,aes(x, y,color=z,group=z),size=2) +
-  geom_line(data=grid, aes(y = pred,x=x,group=z),size=0.75,color='blue') +
+  geom_line(data=grid, aes(pred,x,group=z),
+            size=0.75,color='blue') +
   ylim(0.3,2.1)+
+  xlim(-0.1,4.1)+
   theme(legend.position='none')
 
 modelc <- ggplot(dt, aes(x, y,group=z)) +

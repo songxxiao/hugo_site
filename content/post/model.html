@@ -1,0 +1,174 @@
+---
+title: 'R模型可视化'
+subtitle: ' '
+author: '[宋骁](https://xsong.ltd)'
+date: '2019-10-01'
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
+slug: model
+---
+
+
+
+<p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
+<p>PDF版本<a href="/r_model_visualization.pdf">下载</a></p>
+<p>模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓<em>模型</em>，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的<code>modelr</code>包提供了重要的用于预测的函数。预测的结果可以直接被<code>ggplot2</code>使用并画图。</p>
+<pre class="r"><code>library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(modelr)
+library(haven)
+library(easyGgplot2)
+`%&gt;%` &lt;- magrittr::`%&gt;%`</code></pre>
+<div id="section" class="section level1">
+<h1>基础回归</h1>
+<p><code>hatdt</code>为作者个人整理的<a href="http://www.isss.pku.edu.cn/cfps/index.htm">中国家庭追踪调查</a>(CFPS)收入数据<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。</p>
+<pre class="r"><code>hatdt &lt;- hatdt %&gt;% 
+  filter(type==&#39;个人收入（元）&#39;) %&gt;% 
+  drop_na(agem,inc,fswt_nat)
+
+set.seed(20191001)
+sample &lt;- sample(1:nrow(hatdt),600,replace = F)
+sampled &lt;- hatdt[sample,]
+
+plota &lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +
+  geom_jitter(data=sampled,height=550,width=5,
+              size =1.5,alpha=1/3) +
+  geom_smooth(span =10,size=1) + 
+  geom_smooth(method=&#39;lm&#39;,size=1,color=&#39;red&#39;) +
+  ylim(0, 20000) +
+  labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
+  theme_bw()
+
+plotb &lt;- ggplot() +
+  geom_jitter(data=sampled,aes(agem,inc),
+              height=550,width=5,size =1.5,alpha=1/3) +
+  geom_quantile(data=hatdt,
+  aes(agem,inc,weight=fswt_nat),
+  size=1,color=&#39;red&#39;)+
+  ylim(0, 20000) +
+  labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
+  theme_bw()</code></pre>
+<pre class="r"><code>ggplot2.multiplot(plota,plotb,cols=2)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="/post/model_files/figure-html/unnamed-chunk-4-1.png" alt="个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。" width="100%" />
+<p class="caption">
+Figure 1: 个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。
+</p>
+</div>
+</div>
+<div id="section-1" class="section level1">
+<h1>多项式回归</h1>
+<pre class="r"><code>set.seed(2019)
+x &lt;- seq(0,4,length=100)
+y &lt;- -x^2 + 3*x + jitter(rep(5:9,each =20),2) +3
+df &lt;- data.frame(x,y)
+
+reg &lt;- lm(y ~ x + I(x^2),df)
+
+grid &lt;- df %&gt;%
+data_grid(x) %&gt;%
+gather_predictions(reg)
+
+ggplot(df,aes(x,y))+
+  geom_point(size =2,alpha=1/3)+
+  geom_line(data=grid,aes(x,pred),size=1,color=&#39;blue&#39;)+
+  theme_bw()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="/post/model_files/figure-html/unnamed-chunk-5-1.png" alt="对一个模拟数据进行二次项回归。" width="100%" />
+<p class="caption">
+Figure 2: 对一个模拟数据进行二次项回归。
+</p>
+</div>
+<p>下面使用多项式回归拟合CFPS数据:</p>
+<p><span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + x_1^2\]</span>
+<span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + x_1^2 + x_1^3\]</span></p>
+<pre class="r"><code>mtrga &lt;- lm(inc~agem+I(agem^2),hatdt)
+mtrgb &lt;- lm(inc~agem+I(agem^2)+I(agem^3),hatdt)
+
+grid &lt;- hatdt %&gt;%
+data_grid(agem) %&gt;%
+gather_predictions(mtrga,mtrgb)
+
+ggplot() +
+  geom_jitter(data=sampled,aes(agem,inc),
+              height=550,width=5,size =1.5,alpha=1/3) +
+  geom_line(data=grid,aes(agem,pred),
+            size=1,color=&#39;blue&#39;)+
+  facet_wrap(~model) +
+  ylim(0, 20000) +
+  labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
+  theme_bw()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="/post/model_files/figure-html/unnamed-chunk-6-1.png" alt=" 分别对CFPS数据进行二次项和三次项回归。三次项导致了过拟合。" width="100%" />
+<p class="caption">
+Figure 3:  分别对CFPS数据进行二次项和三次项回归。三次项导致了过拟合。
+</p>
+</div>
+</div>
+<div id="section-2" class="section level1">
+<h1>交互项</h1>
+<p>交互项是计量经济学和应用统计学常用的机制分析技术。公式如下：</p>
+<p><span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}{x_2} + {\alpha _3}{x_1}{x_2}\]</span></p>
+<p>下面使用R自带数据，1994年加拿大劳动与收入动态调查(SLID)。详细信息请在R中输入<code>?carData::SLID</code>查看。</p>
+<div id="section-3" class="section level2">
+<h2>分类变量与连续变量交互</h2>
+<p>因变量为收入。自变量为教育年限(年)和使用的语言(英语、法语、其他)。下面分别展示了没有交互项和有交互项的模型。</p>
+<pre class="r"><code>#?carData::SLID
+data(SLID,package = &#39;carData&#39;)
+SLID &lt;- SLID %&gt;% drop_na()
+
+mod1 &lt;- lm(wages ~ education + language,SLID)
+mod2 &lt;- lm(wages ~ education * language,SLID)
+
+grid &lt;- SLID %&gt;%
+data_grid(education,language) %&gt;%
+gather_predictions(mod1,mod2)
+
+ggplot(SLID,aes(education,wages))+
+  geom_jitter(size=1,width=2,height=10,alpha=1/7)+
+  geom_line(data=grid,
+            aes(education,pred,color=language),size=1)+
+  facet_wrap(~model)+
+  xlim(0,25)+ ylim(0,40)+
+  theme_bw()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="/post/model_files/figure-html/unnamed-chunk-7-1.png" alt="左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。" width="100%" />
+<p class="caption">
+Figure 4: 左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。
+</p>
+</div>
+</div>
+<div id="section-4" class="section level2">
+<h2>两个连续变量交互</h2>
+<p>对两个连续交互变量的可视化是一个难题。较好的解决办法是分箱。使用<code>modelr</code>的<code>seq_range</code>函数对其中一个连续变量进行分箱。</p>
+<pre class="r"><code>mod1 &lt;- lm(wages ~ education + age,SLID)
+mod2 &lt;- lm(wages ~ education * age,SLID)
+
+grid &lt;- SLID %&gt;%
+data_grid(education,age = seq_range(age, 5)) %&gt;%
+gather_predictions(mod1,mod2)
+
+ggplot(SLID,aes(education,wages))+
+  geom_jitter(size=1,width=2,height=10,alpha=1/7)+
+  geom_line(data=grid,aes(education,pred,
+                          color=age,group=age),size=1)+
+  facet_wrap(~model)+
+  xlim(0,25)+ ylim(0,40)+
+  theme_bw()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/model_files/figure-html/unnamed-chunk-8-1.png" alt="无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。" width="100%" />
+<p class="caption">
+Figure 5: 无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。
+</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>可从<a href="https://github.com/ECSTA7Y/MaLearning/blob/master/aggregrate.csv">Github</a>下载<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

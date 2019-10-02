@@ -2,20 +2,20 @@
 title: 'R模型可视化'
 subtitle: ' '
 author: '[宋骁](https://xsong.ltd)'
-date: ' '
+date: '2019-10-01'
 output:
   bookdown::html_document2:
     toc: true
     theme: readable
-## bookdown themes:https://bookdown.org/yihui/bookdown/theming.html
+slug: model
 ---
 
 ![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
 
+PDF版本[下载](/r_model_visualization.pdf)
+
 
 模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓*模型*，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的`modelr`包提供了重要的用于预测的函数。预测的结果可以直接被`ggplot2`使用并画图。  
-
-
 
 
 ```{r,message=F,warning=F,error=T,comment=NA}

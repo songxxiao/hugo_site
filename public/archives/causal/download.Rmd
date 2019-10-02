@@ -1,0 +1,20 @@
+---
+title: "资源查找"
+author: " "
+date: " "
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+---
+
+[下英文电子书的网站](http://gen.lib.rus.ec/)
+
+下英文论文的网站[Sci-Hub](http://sci-hub.tw/)。需要使用doi码下载。doi码通过百度学术或谷歌学术查找。
+
+[看Sci-Hub网址更新的网站](https://lovescihub.wordpress.com/)
+
+买中文电子书的邮箱，直接把书籍信息发过去：<1542918647@qq.com>
+
+
+
