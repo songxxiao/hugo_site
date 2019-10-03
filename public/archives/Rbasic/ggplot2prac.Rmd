@@ -335,10 +335,38 @@ ggplot2.multiplot(era,erb,erc,cols=2)
 
 ```
 
+# 平行坐标图(Parallel Coordinate Plot)
+
+```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+
+data(kyphosis,package = 'rpart')
+kyphosis <- kyphosis %>% 
+  select(Kyphosis,Age,Start,Number,everything())
+
+library(GGally)
+ggparcoord(kyphosis, columns = 2:4, groupColumn = 1, scale = "uniminmax") + 
+  geom_line(size = 1.2)
+
+```
+
+# 5折交叉验证
+
+使用`modelr`包的函数
+
+```{r,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
+data('titanic_train')
+titanic_train$Pclass <- as.factor(titanic_train$Pclass)
+cv1 <- crossv_kfold(titanic_train, 5)
+library(purrr)
+models <- map(cv1$train, ~ glm(Survived ~ Sex+Age+SibSp+Parch+Fare+Embarked,titanic_train,family=binomial(link='logit')))
+
+errs <- map2_dbl(models, cv1$test, rmse)
+r2 <- map2_dbl(models, cv1$test, rsquare)
+mean(errs)
+hist(r2)
 
 
-
-
+```
 
 
 
