@@ -103,8 +103,8 @@ ggplot(df,aes(x,y))+
 
 下面使用多项式回归拟合CFPS数据:
 
-$$y = {\alpha _0} + {\alpha _1}{x_1} + x_1^2$$
-$$y = {\alpha _0} + {\alpha _1}{x_1} + x_1^2 + x_1^3$$ 
+$$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2$$
+$$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2 + {\alpha _3}x_1^3$$
 
 
 
