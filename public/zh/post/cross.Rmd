@@ -245,16 +245,12 @@ roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, ma
 #ggroc()
 ```
 
+# 泰坦尼克
 
-
-# 5折交叉验证
-
-使用`modelr`包的函数
-
-```{r,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6,results='asis'}
+```{r,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
 library(readxl)
 titanic <- read_excel('E:/MaLearning/titanic.xls')
-sampled <- sample(1:nrow(titanic),nrow(titanic)*0.7,replace=F)
+sampled <- sample(1:nrow(titanic),nrow(titanic)*0.75,replace=F)
 titanic_train <- titanic[sampled,]
 titanic_test <- titanic[-sampled,]
 
@@ -266,7 +262,7 @@ titanic_test <- titanic_test %>%
   drop_na(survived,sex,age,sibsp,parch,fare,embarked) %>% 
   mutate(pclass=as.factor(pclass))
 
-control <- trainControl(method = 'repeatedcv', number =5,repeats =1, savePredictions
+control <- trainControl(method = 'repeatedcv', number =10,repeats =10, savePredictions
 =T)
 
 set.seed(213)
@@ -292,26 +288,25 @@ titanic_train <- titanic_train %>%
 
 prob2 <- predict(logfit,titanic_train)
 
-
 conMatrix1 <- confusionMatrix(titanic_test$pred,titanic_test$survived) 
 matrix <- conMatrix1[["table"]]
-stargazer(matrix,type='html',title='测试集混淆矩阵')
+names(dimnames(matrix))<-c('预测值','真实值')
+matrix
 
 conMatrix2 <- confusionMatrix(titanic_train$pred,titanic_train$survived)
 matrix2 <- conMatrix2[["table"]]
-stargazer(matrix2,type='html',title='训练集混淆矩阵')
 
-#titanic_test$Survived <- as.ordered(titanic_test$Survived)
+names(dimnames(matrix2))<-c('预测值','真实值')
+matrix2
+
+titanic_test$Survived <- as.ordered(titanic_test$survived)
 titanic_train$Survived <- as.ordered(titanic_train$survived)
 
-#roca <- roc(titanic_test$Survived,pr1)
-rocb <- roc(titanic_train$Survived,prob2)
-
-#summary(models)
-
+roca <- roc(titanic_test$survived,prob1)
+rocb <- roc(titanic_train$survived,prob2)
 ```
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap=' ',out.width='100%'}
+```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap=' ',out.width='100%',dev='svg'}
 ggroc(list('test ROC'=roca,'train ROC'=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='solid')+
   theme(legend.title=element_blank()) 
@@ -320,12 +315,5 @@ ggroc(list('test ROC'=roca,'train ROC'=rocb),size=1)+
 Python交叉验证
 
 Sklearn库中的[`cross_val_score`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html)、[`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)和[`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)函数
-
-
-
-
-
-
-
 
 

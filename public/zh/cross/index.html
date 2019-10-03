@@ -144,13 +144,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 457, 456, 454, 455, 455, 456, ... 
+Summary of sample sizes: 455, 456, 456, 455, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.810635  0.6062231  4.271987
-  0.17117244  6.674826  0.4758710  5.008100
-  0.45274420  8.076750  0.3536488  5.885558
+  0.07165784  5.850734  0.5887748  4.270539
+  0.17117244  6.831762  0.4437372  5.101445
+  0.45274420  8.417067  0.2942246  6.236172
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -169,13 +169,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 454, 456, 456, 456, 455, 454, ... 
+Summary of sample sizes: 455, 455, 455, 454, 455, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.676159  0.6226868  4.084573
-  0.17117244  6.562065  0.4860756  4.867698
-  0.45274420  8.306087  0.3230773  6.034753
+  0.07165784  5.706110  0.6167030  4.110792
+  0.17117244  6.608706  0.4803912  4.888109
+  0.45274420  8.374374  0.3213736  6.077478
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -239,12 +239,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-b        0.0000
 dis      0.0000
 chas1    0.0000
-zn       0.0000
+tax      0.0000
 rad      0.0000
-tax      0.0000</code></pre>
+b        0.0000
+zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -460,11 +460,10 @@ Figure 5: ROC曲线:使用<code>ggroc</code>包绘制。模型在测试集的表
 </div>
 </div>
 <div id="section-1" class="section level1">
-<h1>5折交叉验证</h1>
-<p>使用<code>modelr</code>包的函数</p>
+<h1>泰坦尼克</h1>
 <pre class="r"><code>library(readxl)
 titanic &lt;- read_excel(&#39;E:/MaLearning/titanic.xls&#39;)
-sampled &lt;- sample(1:nrow(titanic),nrow(titanic)*0.7,replace=F)
+sampled &lt;- sample(1:nrow(titanic),nrow(titanic)*0.75,replace=F)
 titanic_train &lt;- titanic[sampled,]
 titanic_test &lt;- titanic[-sampled,]
 
@@ -476,7 +475,7 @@ titanic_test &lt;- titanic_test %&gt;%
   drop_na(survived,sex,age,sibsp,parch,fare,embarked) %&gt;% 
   mutate(pclass=as.factor(pclass))
 
-control &lt;- trainControl(method = &#39;repeatedcv&#39;, number =5,repeats =1, savePredictions
+control &lt;- trainControl(method = &#39;repeatedcv&#39;, number =10,repeats =10, savePredictions
 =T)
 
 set.seed(213)
@@ -485,15 +484,18 @@ logfit &lt;- train(survived ~ sex+age+sibsp+parch+fare+embarked,data=titanic_tra
  trControl=control,
  tuneLength = 2)
 logfit</code></pre>
-<p>Generalized Linear Model</p>
-<p>739 samples
-6 predictor</p>
-<p>No pre-processing
-Resampling: Cross-Validated (5 fold, repeated 1 times)
-Summary of sample sizes: 591, 591, 592, 591, 591
-Resampling results:</p>
-<p>RMSE Rsquared MAE<br />
-0.4048682 0.3297742 0.3200084</p>
+<pre><code>Generalized Linear Model 
+
+789 samples
+  6 predictor
+
+No pre-processing
+Resampling: Cross-Validated (10 fold, repeated 10 times) 
+Summary of sample sizes: 710, 710, 711, 710, 710, 710, ... 
+Resampling results:
+
+  RMSE       Rsquared   MAE     
+  0.4033302  0.3396324  0.321572</code></pre>
 <pre class="r"><code>titanic_test &lt;- titanic_test %&gt;% 
   mutate(pred=predict(logfit,titanic_test),
          pred=ifelse(pred&gt;=0.5,&#39;1&#39;,&#39;0&#39;),
@@ -510,197 +512,33 @@ titanic_train &lt;- titanic_train %&gt;%
 
 prob2 &lt;- predict(logfit,titanic_train)
 
-
 conMatrix1 &lt;- confusionMatrix(titanic_test$pred,titanic_test$survived) 
 matrix &lt;- conMatrix1[[&quot;table&quot;]]
-stargazer(matrix,type=&#39;html&#39;,title=&#39;测试集混淆矩阵&#39;)</code></pre>
-<table style="text-align:center">
-<caption>
-<strong>测试集混淆矩阵</strong>
-</caption>
-<tr>
-<td colspan="4" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-0
-</td>
-<td>
-1
-</td>
-<td>
-NA
-</td>
-</tr>
-<tr>
-<td colspan="4" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-1
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-151
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-2
-</td>
-<td>
-1
-</td>
-<td>
-0
-</td>
-<td>
-36
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-3
-</td>
-<td>
-0
-</td>
-<td>
-1
-</td>
-<td>
-35
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-4
-</td>
-<td>
-1
-</td>
-<td>
-1
-</td>
-<td>
-82
-</td>
-</tr>
-<tr>
-<td colspan="4" style="border-bottom: 1px solid black">
-</td>
-</tr>
-</table>
+names(dimnames(matrix))&lt;-c(&#39;预测值&#39;,&#39;真实值&#39;)
+matrix</code></pre>
+<pre><code>      真实值
+预测值   0   1
+     0 127  26
+     1  34  67</code></pre>
 <pre class="r"><code>conMatrix2 &lt;- confusionMatrix(titanic_train$pred,titanic_train$survived)
 matrix2 &lt;- conMatrix2[[&quot;table&quot;]]
-stargazer(matrix2,type=&#39;html&#39;,title=&#39;训练集混淆矩阵&#39;)</code></pre>
-<table style="text-align:center">
-<caption>
-<strong>训练集混淆矩阵</strong>
-</caption>
-<tr>
-<td colspan="4" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-0
-</td>
-<td>
-1
-</td>
-<td>
-NA
-</td>
-</tr>
-<tr>
-<td colspan="4" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-1
-</td>
-<td>
-0
-</td>
-<td>
-0
-</td>
-<td>
-365
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-2
-</td>
-<td>
-1
-</td>
-<td>
-0
-</td>
-<td>
-66
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-3
-</td>
-<td>
-0
-</td>
-<td>
-1
-</td>
-<td>
-95
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-4
-</td>
-<td>
-1
-</td>
-<td>
-1
-</td>
-<td>
-213
-</td>
-</tr>
-<tr>
-<td colspan="4" style="border-bottom: 1px solid black">
-</td>
-</tr>
-</table>
-<pre class="r"><code>#titanic_test$Survived &lt;- as.ordered(titanic_test$Survived)
+
+names(dimnames(matrix2))&lt;-c(&#39;预测值&#39;,&#39;真实值&#39;)
+matrix2</code></pre>
+<pre><code>      真实值
+预测值   0   1
+     0 388 105
+     1  69 227</code></pre>
+<pre class="r"><code>titanic_test$Survived &lt;- as.ordered(titanic_test$survived)
 titanic_train$Survived &lt;- as.ordered(titanic_train$survived)
 
-#roca &lt;- roc(titanic_test$Survived,pr1)
-rocb &lt;- roc(titanic_train$Survived,prob2)
-
-#summary(models)</code></pre>
+roca &lt;- roc(titanic_test$survived,prob1)
+rocb &lt;- roc(titanic_train$survived,prob2)</code></pre>
 <pre class="r"><code>ggroc(list(&#39;test ROC&#39;=roca,&#39;train ROC&#39;=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;solid&#39;)+
   theme(legend.title=element_blank()) </code></pre>
 <div class="figure" style="text-align: center">
-<img src="../../post/cross_files/figure-html/unnamed-chunk-13-1.png" alt=" " width="100%" />
+<img src="../../post/cross_files/figure-html/unnamed-chunk-13-1.svg" alt=" " width="100%" />
 <p class="caption">
 </p>
 </div>
