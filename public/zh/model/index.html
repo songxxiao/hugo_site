@@ -81,14 +81,19 @@
 
 
 <p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
-<p>PDF版本<a href="../../r_model_visualization.pdf">下载</a></p>
-<p>模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓<em>模型</em>，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的<code>modelr</code>包提供了重要的用于预测的函数。预测的结果可以直接被<code>ggplot2</code>使用并画图。</p>
+<p>PDF版本<a href="../../modelpdf.pdf">下载</a></p>
+<p>模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓<em>模型</em>，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的<code>modelr</code>包提供用于预测的函数。预测的结果可以直接被<code>ggplot2</code>使用并画图。<code>modelr</code>支持管道操作，是将数据分析流程化的利器。</p>
+<p><code>modelr</code>包的主要函数有：</p>
+<p><code>data_grid</code>: 生成预测数据</p>
+<p><code>add_predictions</code>: 加入预测值</p>
+<p><code>crossv_kfold</code>、<code>crossv_mc</code>、<code>crossv_loo</code>: 交叉验证</p>
 <pre class="r"><code>library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(modelr)
 library(haven)
 library(easyGgplot2)
+library(stargazer)
 `%&gt;%` &lt;- magrittr::`%&gt;%`</code></pre>
 <div id="section" class="section level1">
 <h1>基础回归</h1>
@@ -230,6 +235,266 @@ ggplot(SLID,aes(education,wages))+
 <img src="../../post/model_files/figure-html/unnamed-chunk-8-1.png" alt="无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。" width="100%" />
 <p class="caption">
 Figure 5: 无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。
+</p>
+</div>
+<p>来个负相关的：</p>
+<pre class="r"><code>data(freeny)
+partial &lt;- lm(y~lag.quarterly.revenue+price.index+
+                income.level+market.potential,freeny)
+
+modela &lt;- lm(y~price.index+market.potential,freeny)
+modelb &lt;- lm(y~price.index*market.potential,freeny)
+
+stargazer(modela,modelb,partial,
+          title=&#39;回归结果&#39;,dep.var.caption=&#39;&#39;,
+          dep.var.labels=&#39;Quarterly Revenue&#39;,
+          header=F,keep.stat=c(&#39;n&#39;,&#39;rsq&#39;), 
+         no.space=T,type=&#39;html&#39;,align=T)</code></pre>
+<table style="text-align:center">
+<caption>
+<strong>回归结果</strong>
+</caption>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td colspan="3">
+Quarterly Revenue
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+lag.quarterly.revenue
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.124
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.142)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+price.index
+</td>
+<td>
+-0.414<sup>*</sup>
+</td>
+<td>
+-39.796<sup>***</sup>
+</td>
+<td>
+-0.754<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.210)
+</td>
+<td>
+(5.737)
+</td>
+<td>
+(0.161)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+income.level
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.767<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.134)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+market.potential
+</td>
+<td>
+4.030<sup>***</sup>
+</td>
+<td>
+-10.270<sup>***</sup>
+</td>
+<td>
+1.331<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.434)
+</td>
+<td>
+(2.102)
+</td>
+<td>
+(0.509)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+price.index:market.potential
+</td>
+<td>
+</td>
+<td>
+2.979<sup>***</sup>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.434)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-41.499<sup>***</sup>
+</td>
+<td>
+147.459<sup>***</sup>
+</td>
+<td>
+-10.473<sup>*</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(6.602)
+</td>
+<td>
+(27.863)
+</td>
+<td>
+(6.022)
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+39
+</td>
+<td>
+39
+</td>
+<td>
+39
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.994
+</td>
+<td>
+0.997
+</td>
+<td>
+0.998
+</td>
+</tr>
+<tr>
+<td colspan="4" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="3" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+<pre class="r"><code>gridt &lt;- freeny %&gt;% 
+  data_grid(price.index,
+            market.potential=
+              seq_range(market.potential,5)) %&gt;%
+  gather_predictions(modela,modelb)
+
+
+ggplot(freeny,aes(price.index,y,
+                  color=market.potential))+
+  geom_point()+
+  geom_line(data=gridt,aes(price.index,pred,
+color=market.potential,group=market.potential))+
+  facet_wrap(~model)+
+  theme_bw()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-9-1.png" alt="左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应" width="100%" />
+<p class="caption">
+Figure 6: 左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应
 </p>
 </div>
 </div>
