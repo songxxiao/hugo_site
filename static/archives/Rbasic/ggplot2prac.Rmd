@@ -79,11 +79,11 @@ set.seed(20191001)
 sample <- sample(1:nrow(hatdt),600,replace = F)
 sampled <- hatdt[sample,]
 
-ggplot(hatdt,aes(x=agem,y=inc,shape=type,color=type,weight=fswt_nat)) +
-  geom_jitter(data = sampled,height=550,width=5,size =1.2) +
-  geom_smooth(span = 10,size=1) + 
+ggplot(hatdt,aes(agem,inc,shape=type,color=type,weight=fswt_nat)) +
+  geom_jitter(data=sampled,height=550,width=5,size =1.2) +
+  geom_smooth(span=10,size=1) + 
   ylim(0, 20000) +
-  labs(title = " ",x = "年龄",y = "人民币(元）") +
+  labs(x = "年龄",y = "人民币(元)") +
   annotate("text", x = 70, y = 100, label="数据来源:CFPS", size = 4) +
   theme_bw()
 ```
@@ -353,7 +353,7 @@ ggparcoord(kyphosis, columns = 2:4, groupColumn = 1, scale = "uniminmax") +
 
 使用`modelr`包的函数
 
-```{r,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
+```{r,eval=F,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
 data('titanic_train')
 titanic_train$Pclass <- as.factor(titanic_train$Pclass)
 cv1 <- crossv_kfold(titanic_train, 5)
