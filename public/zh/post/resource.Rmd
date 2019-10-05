@@ -21,11 +21,8 @@ slug: resource
 
 [统计学与R读书笔记(第六版)](https://cran.rstudio.com/doc/contrib/Xu-Statistics_and_R.pdf)
 
-[Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛](https://pzhaonet.github.io/btcookbook/)
 
-[XGBoost Documentation](https://xgboost.readthedocs.io/en/latest/index.html)
-
-[datasets（R自带数据包）](https://konelane.github.io/2018/04/15/datasets%EF%BC%88R%E8%87%AA%E5%B8%A6%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%89/)
+---
 
 # Python
 
@@ -35,11 +32,23 @@ slug: resource
 
 [超详细：Python(wordcloud+jieba)生成中文词云图](https://www.cnblogs.com/delav/p/7845539.html)
 
+---
 
+# 杂七杂八的链接
 
+[Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛](https://pzhaonet.github.io/btcookbook/)
 
+[XGBoost Documentation](https://xgboost.readthedocs.io/en/latest/index.html)
 
+[datasets（R自带数据包）](https://konelane.github.io/2018/04/15/datasets%EF%BC%88R%E8%87%AA%E5%B8%A6%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%89/)
 
+一个商业爬虫网站：[数说聚合](https://dc.datastory.com.cn/)
+
+词云网站：[1](https://wordart.com/create)  
+
+[2](http://cloud.niucodata.com/)  
+
+[3](https://wordcloud.timdream.org/)  
 
 
 

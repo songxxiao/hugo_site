@@ -1,28 +1,34 @@
 ---
-title: "交叉验证：基于caret包"
+title: '交叉验证：基于caret包'
 author: ' '
 date: '2019-05-25'
 slug: cross
-tags: ["机器学习"]
-output:
-  html_document2:
-    toc: true
-    theme: united
+tags: ['机器学习']
 ---
 
 
 
-<p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
-<div id="section" class="section level1">
+<div id="section" class="section level2">
+<h2><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></h2>
+<p><a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation">Cross-validation: evaluating estimator performance</a></p>
+<hr />
+</div>
+<div id="section-1" class="section level1">
 <h1>基本概念</h1>
 <p>交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。</p>
-<p>划分测试集和训练集同样有助于更加客观地评价模型的泛化能力。同时，交叉验证也是模型调参的过程。</p>
+<p>划分测试集和训练集同样有助于更加客观地评价模型的泛化能力。交叉验证也是模型调节超参数的评价过程。</p>
 <p>交叉验证主要有以下种类：</p>
 <ul>
 <li><p>简单交叉验证 (hold-out cross validation)</p></li>
 <li><p>k折交叉验证 (K-fold cross-validation)</p></li>
 <li><p>留一交叉验证(leave-one-out cross validation)</p></li>
 </ul>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="https://scikit-learn.org/stable/_images/grid_search_cross_validation.png" alt="K折交叉验证原理：所有数据被划分为训练集和测试集。其中，训练集被划分为K份，循环使用其中的K-1份充当训练集，使用剩下的1分充当验证集。" width="100%" />
+<p class="caption">
+Figure 1: K折交叉验证原理：所有数据被划分为训练集和测试集。其中，训练集被划分为K份，循环使用其中的K-1份充当训练集，使用剩下的1分充当验证集。
+</p>
+</div>
 <p>谢益辉的统计动画R包<a href="https://yihui.name/animation/example/cv-ani/">animation</a>直观地展示了交叉验证方法。</p>
 <p>任务：通过一系列特征预测波士顿房价</p>
 <p>输入<code>?mlbench::BostonHousing</code>查看数据集解释。下面主要使用<a href="http://topepo.github.io/caret/index.html">caret</a>包(classification and regression training)进行交叉验证。</p>
@@ -76,17 +82,17 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 456, 456, 455, 456, 455, ... 
+Summary of sample sizes: 456, 457, 455, 456, 454, 456, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.850734  0.5887748  4.270539
-  0.17117244  6.831762  0.4437372  5.101445
-  0.45274420  8.417067  0.2942246  6.236172
+  0.07165784  5.798693  0.6079069  4.150778
+  0.17117244  6.310756  0.5249764  4.646935
+  0.45274420  8.005426  0.3648840  5.767876
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
-<p>将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有“10次10 折交叉验证”。</p>
+<p>将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有“10次10 折交叉验证”。每一次重复都会有不同的训练-测试集划分。</p>
 <pre class="r"><code>repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
 =T)
 rpartFit &lt;- train(medv ~ .,
@@ -101,13 +107,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 455, 455, 454, 455, 456, ... 
+Summary of sample sizes: 457, 456, 454, 456, 456, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.706110  0.6167030  4.110792
-  0.17117244  6.608706  0.4803912  4.888109
-  0.45274420  8.374374  0.3213736  6.077478
+  0.07165784  5.812733  0.6069060  4.175634
+  0.17117244  6.662202  0.4786666  4.904228
+  0.45274420  8.307043  0.3308596  6.034919
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -126,10 +132,10 @@ ggplot(imp,aes(reorder(name,impt),impt)) +
   coord_flip()+
   labs(x=&quot;重要性&quot;,y=&quot;变量名&quot;) + 
   theme_bw()</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-3-1.png" alt="变量重要性" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-4-1.png" alt="变量重要性" width="70%" />
 <p class="caption">
-Figure 1: 变量重要性
+Figure 2: 变量重要性
 </p>
 </div>
 </div>
@@ -171,12 +177,12 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-dis      0.0000
-chas1    0.0000
 tax      0.0000
+zn       0.0000
+dis      0.0000
 rad      0.0000
 b        0.0000
-zn       0.0000</code></pre>
+chas1    0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -230,10 +236,10 @@ pokemon &lt;- pokemon %&gt;%
 )</code></pre>
 <pre class="r"><code>ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_point(size=3)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-7-1.png" alt="过采样前" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-8-1.png" alt="过采样前" width="100%" />
 <p class="caption">
-Figure 2: 过采样前
+Figure 3: 过采样前
 </p>
 </div>
 <pre class="r"><code>#过采样
@@ -245,10 +251,10 @@ testpok &lt;- balance[-sampled,]
 
 ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_jitter(size=1.5,height = 10, width = 40)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-8-1.png" alt="过采样后" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="过采样后" width="100%" />
 <p class="caption">
-Figure 3: 过采样后
+Figure 4: 过采样后
 </p>
 </div>
 <div id="kk-nearest-neighbor" class="section level2">
@@ -297,10 +303,10 @@ ggplot(kacc,aes(k,Accuracy)) +
 geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="k近邻算法的K值和准确率的关系" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-10-1.png" alt="k近邻算法的K值和准确率的关系" width="100%" />
 <p class="caption">
-Figure 4: k近邻算法的K值和准确率的关系
+Figure 5: k近邻算法的K值和准确率的关系
 </p>
 </div>
 <pre class="r"><code>testpok &lt;- testpok %&gt;%
@@ -380,18 +386,19 @@ trainpok$Legendary &lt;- as.ordered(trainpok$Legendary)
 
 roca &lt;- roc(testpok$Legendary,pr1)
 rocb &lt;- roc(trainpok$Legendary,pr2)</code></pre>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html#sklearn.model_selection.learning_curve">学习曲线</a></p>
 <pre class="r"><code>ggroc(list(&#39;测试集&#39;=roca,&#39;训练集&#39;=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;dashed&#39;)+
   theme(legend.title=element_blank()) </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-10-1.png" alt="ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="/post/cross_files/figure-html/unnamed-chunk-11-1.png" alt="ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。" width="100%" />
 <p class="caption">
-Figure 5: ROC曲线:使用<code>ggroc</code>包绘制。模型在测试集的表现比训练集稍差一些。
+Figure 6: ROC曲线:使用<code>ggroc</code>包绘制。模型在测试集的表现比训练集稍差一些。
 </p>
 </div>
 </div>
 </div>
-<div id="section-1" class="section level1">
+<div id="section-2" class="section level1">
 <h1>泰坦尼克</h1>
 <pre class="r"><code>library(readxl)
 titanic &lt;- read_excel(&#39;E:/MaLearning/titanic.xls&#39;)
@@ -470,10 +477,13 @@ rocb &lt;- roc(titanic_train$survived,prob2)</code></pre>
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;solid&#39;)+
   theme(legend.title=element_blank()) </code></pre>
 <div class="figure" style="text-align: center">
-<img src="/post/cross_files/figure-html/unnamed-chunk-13-1.svg" alt=" " width="100%" />
+<img src="/post/cross_files/figure-html/unnamed-chunk-14-1.svg" alt=" " width="100%" />
 <p class="caption">
 </p>
 </div>
 <p>Python交叉验证</p>
-<p>Sklearn库中的<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"><code>cross_val_score</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a>和<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV</code></a>函数</p>
+<p>Sklearn库中的<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold"><code>KFold</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate"><code>cross_validate</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"><code>cross_val_score</code></a>、<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a>和<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV</code></a>等函数实现。</p>
+<p>其中，<code>KFold</code>、<code>cross_validate</code>等是外部的交叉验证。不涉及模型拟合。</p>
+<p>而<code>GridSearchCV</code>等是内部交叉验证。在划分数据集的同时拟合模型。</p>
+<p>还有其他的交叉验证方法诸如随机播种法：<a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit"><code>ShuffleSplit</code></a>。</p>
 </div>

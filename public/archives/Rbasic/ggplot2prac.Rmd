@@ -79,11 +79,11 @@ set.seed(20191001)
 sample <- sample(1:nrow(hatdt),600,replace = F)
 sampled <- hatdt[sample,]
 
-ggplot(hatdt,aes(x=agem,y=inc,shape=type,color=type,weight=fswt_nat)) +
-  geom_jitter(data = sampled,height=550,width=5,size =1.2) +
-  geom_smooth(span = 10,size=1) + 
+ggplot(hatdt,aes(agem,inc,shape=type,color=type,weight=fswt_nat)) +
+  geom_jitter(data=sampled,height=550,width=5,size =1.2) +
+  geom_smooth(span=10,size=1) + 
   ylim(0, 20000) +
-  labs(title = " ",x = "年龄",y = "人民币(元）") +
+  labs(x = "年龄",y = "人民币(元)") +
   annotate("text", x = 70, y = 100, label="数据来源:CFPS", size = 4) +
   theme_bw()
 ```
@@ -160,7 +160,7 @@ mapdata <- as.data.frame(mapdata)
 mapdata <- select(mapdata,-(NAME)) #reverse selection
 china_data <- join(china_map_data, mapdata, type="full")
 
-china_data <- select(china_data,long,lat,group,out12,in12,out14,in14,out16,in16)
+china_data <- select(china_data,long,lat,group,'2011土地租出','2011土地租入','2013土地租出','2013土地租入','2015土地租出','2015土地租入')
 
 out12 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= out12)) +
   geom_polygon(colour="brown",size=0.2) +
@@ -211,7 +211,7 @@ out14 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= out14)) +
     plot.margin = unit(c(0.001,0.001,0.001,0.001), "cm")) 
 
 in14 <- ggplot(china_data, aes(x = long, y = lat, group = group,fill= in14)) +
-  geom_polygon(colour="brown",size=0.2) +
+  geom_polygon(colour='brown',size=0.2) +
   scale_fill_gradientn(colours = c("yellow", "red"),na.value = "white",
                        breaks = c(10,20,30,40),limits=c(0,43), guide = "legend") +  
   coord_map("polyconic") + 
@@ -269,16 +269,15 @@ ggplot2.multiplot(out12,in12,out14,in14,out16,in16, cols=2)
 
 + [`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%'} 
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.cap='中国土地流转的空间分布。北京、天津由于农户过少而设为缺失。CFPS未调查的省份数据缺失。土地流转发生率=当年参与土地流转的农户数/当年农户总数。数据经过加权处理，具有全国代表性。'} 
 long <- melt(china_data, id=c("long", "lat","group"))
 
 ggplot(long, aes(x = long, y = lat, group = group,fill= value)) +
-  geom_polygon(colour="brown",size=0.2) +
-  scale_fill_gradientn(colours = c("yellow", "red"),na.value = "white",breaks = c(10,20,30,40),limits=c(0,43), guide = "legend") +
-  coord_map("polyconic") +  
+  geom_polygon(colour='brown',size=0.2) +
+  scale_fill_gradientn(colours = c('yellow', 'red'),na.value = 'white',breaks = c(10,20,30,40),limits=c(0,43), guide = 'legend') +
+  coord_map('polyconic') +
   facet_wrap(~variable,nrow = 3) +
-  labs(x='经度',y='纬度') +
-  theme(legend.title=element_blank()) +   
+  labs(x='经度',y='纬度',fill = '土地流转发生率') +
   theme_bw()
 
 ```
@@ -308,7 +307,7 @@ ggplot(china_map,aes(x=long,y=lat)) +
   geom_point(mapping = aes(x=long, y=lat, size = freq),data = center, colour = 'red') +
   coord_map("polyconic") +
   labs(x='经度',y='纬度') +
-  theme(legend.title=element_blank()) +   
+  theme(legend.title=element_blank()) + 
   theme_bw()
 
 ```
@@ -353,7 +352,7 @@ ggparcoord(kyphosis, columns = 2:4, groupColumn = 1, scale = "uniminmax") +
 
 使用`modelr`包的函数
 
-```{r,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
+```{r,eval=F,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
 data('titanic_train')
 titanic_train$Pclass <- as.factor(titanic_train$Pclass)
 cv1 <- crossv_kfold(titanic_train, 5)
