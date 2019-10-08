@@ -1,0 +1,10 @@
+base
+dplyr
+tidyr
+ggplot2
+modelr
+haven
+easyGgplot2
+stargazer
+SparseM
+quantreg

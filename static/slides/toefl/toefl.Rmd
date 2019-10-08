@@ -156,6 +156,40 @@ What's more 何况
 class: center, middle
 # 口语经验
 ---
+
+## 评分标准
+
++ 清楚
+
++ 有节奏
+
++ 简单句、复杂句结合
+
++ **切题**、逻辑一致。
+
++ 
+
+---
+
+1. state your point 
+
+2. optional transition
+
+3. point 1.
+
+例子和论理的顺序颠倒。
+
++ Avoiding reapting words
+
+use transitional words.
+
+---
+# Advantage & Disadvantages Templates :
+
++ **undoubtedly**
+
++ Meanwhile, an obvious advantage of ... is...
+---
 ## 地道的表达
 .mid[
 

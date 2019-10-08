@@ -185,6 +185,25 @@ Figure 3:  分别对CFPS数据进行二次项和三次项回归。三次项导�
 <h1>交互项</h1>
 <p>交互项是计量经济学和应用统计学常用的机制分析技术。公式如下：</p>
 <p><span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}{x_2} + {\alpha _3}{x_1}{x_2}\]</span></p>
+<pre class="r"><code>par(mar = c(4,4,1,0.5), mfrow = c(1, 2), cex.main = 1)
+sq = 1:10
+x = rep(sq, 10)
+z = rep(sq, each = 10)
+y = c(outer(sq, sq, function(x, z) 2 + x + 0.5 *
+z + 0.5 * x * z + runif(1)))
+symbols(x, z, y, bg = rgb(0, 1, 0, 0.3), fg = &quot;blue&quot;,
+main = &quot;&quot;,
+inches = 0.4)
+y = c(outer(sq, sq, function(x, z) 2 + x + 0.5 *
+z + runif(1)))
+symbols(x, z, y, bg = rgb(0, 1, 0, 0.3), fg = &quot;blue&quot;,
+main = &quot;&quot;, inches = 0.2)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-7-1.png" alt="左图：$y = 2 + x + 0.5 z + 0.5 x z + \epsilon$。右图：$y = 2 + x + 0.5 z + \epsilon$" width="100%" />
+<p class="caption">
+Figure 4: 左图：<span class="math inline">\(y = 2 + x + 0.5 z + 0.5 x z + \epsilon\)</span>。右图：<span class="math inline">\(y = 2 + x + 0.5 z + \epsilon\)</span>
+</p>
+</div>
 <p>下面使用R自带数据，1994年加拿大劳动与收入动态调查(SLID)。详细信息请在R中输入<code>?carData::SLID</code>查看。</p>
 <div id="section-3" class="section level2">
 <h2>分类变量与连续变量交互</h2>
@@ -207,10 +226,10 @@ ggplot(SLID,aes(education,wages))+
   facet_wrap(~model)+
   xlim(0,25)+ ylim(0,40)+
   theme_bw()</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-7-1.png" alt="左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-8-1.png" alt="左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。" width="100%" />
 <p class="caption">
-Figure 4: 左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。
+Figure 5: 左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。
 </p>
 </div>
 </div>
@@ -231,10 +250,10 @@ ggplot(SLID,aes(education,wages))+
   facet_wrap(~model)+
   xlim(0,25)+ ylim(0,40)+
   theme_bw()</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-8-1.png" alt="无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-9-1.png" alt="无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。" width="100%" />
 <p class="caption">
-Figure 5: 无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。
+Figure 6: 无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。
 </p>
 </div>
 <p>来个负相关的：</p>
@@ -491,13 +510,64 @@ ggplot(freeny,aes(price.index,y,
 color=market.potential,group=market.potential))+
   facet_wrap(~model)+
   theme_bw()</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-9-1.png" alt="左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-10-1.png" alt="左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应" width="100%" />
 <p class="caption">
-Figure 6: 左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应
+Figure 7: 左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应
 </p>
 </div>
+<pre class="r"><code>data(PlantCounts,package = &#39;MSG&#39;)
+par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
+with(PlantCounts, {
+plot(altitude, counts, col = rgb(0, 0, 0, 0.3),
+panel.first = grid())
+for (i in seq(0.01, 1, length = 70)) {
+lines(lowess(altitude, counts, f = i), col = rgb(0.4,i, 0.4), lwd = 1.5)
+ }
+plot(altitude, counts, col = rgb(0, 0, 0, 0.3))
+for (i in 1:200) {
+idx = sample(nrow(PlantCounts), 300, T)
+lines(lowess(altitude[idx], counts[idx]),
+col = rgb(0, 0, 0, 0.1), lwd = 1.5)
+}
+})</code></pre>
+<p><img src="../../post/model_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
+</div>
+<div id="section-5" class="section level1">
+<h1>局部加权回归散点平滑</h1>
+<ul>
+<li>Locally Weighted Scatterplot Smoother，LOWESS</li>
+</ul>
+<pre class="r"><code>g &lt;- ggplot(PlantCounts,aes(altitude, counts)) +
+  geom_point(size=1.5,alpha=1/3) +
+  ylim(0,80)+
+  theme_bw()
+
+for (i in seq(1,1000,10)){
+  col = rgb(0.4,i/1000,0.4)
+  g &lt;- g + stat_smooth(geom=&#39;line&#39;,span=i/1000,
+                       size=0.5,se=F,color=col)
+}
+
+f &lt;- ggplot(PlantCounts,aes(altitude, counts)) +
+  geom_point(size=1.5,alpha=1/3) +
+  ylim(0,80)+
+  theme_bw()
+
+for (i in 1:200) {
+idx &lt;- sample(nrow(PlantCounts),300,T)
+df &lt;- PlantCounts[idx,]
+f &lt;- f + stat_smooth(geom=&#39;line&#39;,data=df,aes(altitude, counts),span=1,size=0.5,se=F,alpha=1/10)
+}
+
+e &lt;- ggplot(PlantCounts,aes(altitude, counts)) +
+  geom_point(size=1.5,alpha=1/3) +
+  geom_smooth(span=1,size=1)+
+  ylim(0,80)+
+  theme_bw()
+ggplot2.multiplot(g,f,e,cols=2)</code></pre>
+<p><img src="../../post/model_files/figure-html/unnamed-chunk-12-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div class="footnotes">
 <hr />

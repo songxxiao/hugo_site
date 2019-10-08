@@ -232,3 +232,57 @@ y <- rnorm(10,2,3)
 scattplot(x,y)
 ```
 
+# 样条
+
+```{r,message = F, comment = NA,warning = F,error=T}
+library(splines)
+n = 100
+x = rnorm(n)
+## Some non-linear function of x
+p = plogis(2 * cos(5 * x) - 1)
+y = rbinom(n, 1, p)
+
+model = glm(y ~ bs(x), family = binomial())
+pred = predict(model, bs(x))
+plot(x, pred)
+```
+
+
+```{r,message = F, comment = NA,warning = F,error=T}
+require(stats); require(graphics)
+bs(women$height, df = 5)
+summary(fm1 <- lm(weight ~ bs(height, df = 5), data = women))
+
+## example of safe prediction
+plot(women, xlab = "Height (in)", ylab = "Weight (lb)")
+ht <- seq(57, 73, length.out = 200)
+lines(ht, predict(fm1, data.frame(height = ht)))
+```
+
+# 广义可加模型(Generalized Additive Models)
+
+```{r,message = F, comment = NA,warning = F,error=T}
+library(mgcv)
+set.seed(2) ## simulate some data... 
+dat <- gamSim(1,n=400,dist="normal",scale=2)
+b <- gam(y~s(x0)+s(x1)+s(x2)+s(x3),data=dat)
+summary(b)
+plot(b,pages=1,residuals=TRUE)  ## show partial residuals
+plot(b,pages=1,seWithMean=TRUE) ## `with intercept' CIs
+## run some basic model checks, including checking
+## smoothing basis dimensions...
+gam.check(b)
+```
+```{r,message = F, comment = NA,warning = F,error=T}
+require(mgcv)
+require(nlme)
+b0 <- lme(travel~1,data=Rail,~1|Rail,method="REML") 
+
+b <- gam(travel~s(Rail,bs="re"),data=Rail,method="REML")
+
+intervals(b0)
+gam.vcomp(b)
+anova(b)
+plot(b)
+```
+

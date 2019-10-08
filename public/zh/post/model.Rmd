@@ -134,6 +134,22 @@ ggplot() +
 
 $$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}{x_2} + {\alpha _3}{x_1}{x_2}$$
 
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.5,fig.cap='左图：$y = 2 + x + 0.5 z + 0.5 x z + \\epsilon$。右图：$y = 2 + x + 0.5 z + \\epsilon$'}
+par(mar = c(4,4,1,0.5), mfrow = c(1, 2), cex.main = 1)
+sq = 1:10
+x = rep(sq, 10)
+z = rep(sq, each = 10)
+y = c(outer(sq, sq, function(x, z) 2 + x + 0.5 *
+z + 0.5 * x * z + runif(1)))
+symbols(x, z, y, bg = rgb(0, 1, 0, 0.3), fg = "blue",
+main = "",
+inches = 0.4)
+y = c(outer(sq, sq, function(x, z) 2 + x + 0.5 *
+z + runif(1)))
+symbols(x, z, y, bg = rgb(0, 1, 0, 0.3), fg = "blue",
+main = "", inches = 0.2)
+```
+
 下面使用R自带数据，1994年加拿大劳动与收入动态调查(SLID)。详细信息请在R中输入`?carData::SLID`查看。
 
 ## 分类变量与连续变量交互
@@ -214,5 +230,58 @@ ggplot(freeny,aes(price.index,y,
 color=market.potential,group=market.potential))+
   facet_wrap(~model)+
   theme_bw()
+```
+
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6}
+data(PlantCounts,package = 'MSG')
+par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
+with(PlantCounts, {
+plot(altitude, counts, col = rgb(0, 0, 0, 0.3),
+panel.first = grid())
+for (i in seq(0.01, 1, length = 70)) {
+lines(lowess(altitude, counts, f = i), col = rgb(0.4,i, 0.4), lwd = 1.5)
+ }
+plot(altitude, counts, col = rgb(0, 0, 0, 0.3))
+for (i in 1:200) {
+idx = sample(nrow(PlantCounts), 300, T)
+lines(lowess(altitude[idx], counts[idx]),
+col = rgb(0, 0, 0, 0.1), lwd = 1.5)
+}
+})
+```
+
+# 局部加权回归散点平滑
+
++ Locally Weighted Scatterplot Smoother，LOWESS
+
+```{r,message=F,warning=F,error=T,comment=NA,cache=T,fig.align='center',out.width='90%',fig.asp=1.2}
+g <- ggplot(PlantCounts,aes(altitude, counts)) +
+  geom_point(size=1.5,alpha=1/3) +
+  ylim(0,80)+
+  theme_bw()
+
+for (i in seq(1,1000,10)){
+  col = rgb(0.4,i/1000,0.4)
+  g <- g + stat_smooth(geom='line',span=i/1000,
+                       size=0.5,se=F,color=col)
+}
+
+f <- ggplot(PlantCounts,aes(altitude, counts)) +
+  geom_point(size=1.5,alpha=1/3) +
+  ylim(0,80)+
+  theme_bw()
+
+for (i in 1:200) {
+idx <- sample(nrow(PlantCounts),300,T)
+df <- PlantCounts[idx,]
+f <- f + stat_smooth(geom='line',data=df,aes(altitude, counts),span=1,size=0.5,se=F,alpha=1/10)
+}
+
+e <- ggplot(PlantCounts,aes(altitude, counts)) +
+  geom_point(size=1.5,alpha=1/3) +
+  geom_smooth(span=1,size=1)+
+  ylim(0,80)+
+  theme_bw()
+ggplot2.multiplot(g,f,e,cols=2)
 ```
 
