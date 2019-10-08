@@ -134,7 +134,7 @@ ggplot() +
 
 $$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}{x_2} + {\alpha _3}{x_1}{x_2}$$
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.5,fig.cap='左图：$y = 2 + x + 0.5 z + 0.5 x z + \\epsilon$。右图：$y = 2 + x + 0.5 z + \\epsilon$。圆圈面积表示因变量$y$的大小。'}
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.5,fig.cap='谢益辉的交互效应表示方法。左图：$y = 2 + x + 0.5 z + 0.5 x z + \\epsilon$。右图：$y = 2 + x + 0.5 z + \\epsilon$。圆圈面积表示因变量$y$的大小；坐标轴分别表示自变量$x$和$z$。'}
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), cex.main = 1)
 sq = 1:10
 x = rep(sq, 10)
@@ -242,7 +242,8 @@ with(PlantCounts, {
 plot(altitude, counts, col = rgb(0, 0, 0, 0.3),
 panel.first = grid())
 for (i in seq(0.01, 1, length = 70)) {
-lines(lowess(altitude, counts, f = i), col = rgb(0.4,i, 0.4), lwd = 1.5)
+lines(lowess(altitude, counts, f = i),
+      col = rgb(0.4,i, 0.4), lwd = 1.5)
  }
 plot(altitude, counts, col = rgb(0, 0, 0, 0.3))
 for (i in 1:200) {

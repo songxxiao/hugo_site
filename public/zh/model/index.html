@@ -199,9 +199,9 @@ z + runif(1)))
 symbols(x, z, y, bg = rgb(0, 1, 0, 0.3), fg = &quot;blue&quot;,
 main = &quot;&quot;, inches = 0.2)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-7-1.png" alt="左图：$y = 2 + x + 0.5 z + 0.5 x z + \epsilon$。右图：$y = 2 + x + 0.5 z + \epsilon$。圆圈面积表示因变量$y$的大小。" width="100%" />
+<img src="../../post/model_files/figure-html/unnamed-chunk-7-1.png" alt="谢益辉的交互效应表示方法。左图：$y = 2 + x + 0.5 z + 0.5 x z + \epsilon$。右图：$y = 2 + x + 0.5 z + \epsilon$。圆圈面积表示因变量$y$的大小；坐标轴分别表示自变量$x$和$z$。" width="100%" />
 <p class="caption">
-Figure 4: 左图：<span class="math inline">\(y = 2 + x + 0.5 z + 0.5 x z + \epsilon\)</span>。右图：<span class="math inline">\(y = 2 + x + 0.5 z + \epsilon\)</span>。圆圈面积表示因变量<span class="math inline">\(y\)</span>的大小。
+Figure 4: 谢益辉的交互效应表示方法。左图：<span class="math inline">\(y = 2 + x + 0.5 z + 0.5 x z + \epsilon\)</span>。右图：<span class="math inline">\(y = 2 + x + 0.5 z + \epsilon\)</span>。圆圈面积表示因变量<span class="math inline">\(y\)</span>的大小；坐标轴分别表示自变量<span class="math inline">\(x\)</span>和<span class="math inline">\(z\)</span>。
 </p>
 </div>
 <p>下面使用R自带数据，1994年加拿大劳动与收入动态调查(SLID)。详细信息请在R中输入<code>?carData::SLID</code>查看。</p>
@@ -525,7 +525,8 @@ with(PlantCounts, {
 plot(altitude, counts, col = rgb(0, 0, 0, 0.3),
 panel.first = grid())
 for (i in seq(0.01, 1, length = 70)) {
-lines(lowess(altitude, counts, f = i), col = rgb(0.4,i, 0.4), lwd = 1.5)
+lines(lowess(altitude, counts, f = i),
+      col = rgb(0.4,i, 0.4), lwd = 1.5)
  }
 plot(altitude, counts, col = rgb(0, 0, 0, 0.3))
 for (i in 1:200) {
