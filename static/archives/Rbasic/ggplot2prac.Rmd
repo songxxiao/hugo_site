@@ -23,6 +23,8 @@ slug: ggplot
 theme(legend.title=element_blank())
 #去除图例
 theme(legend.position='none')
+# 轴标签设置
+grp + scale_x_continuous(breaks=seq(1930, 1940, 1))
 ```
 
 # 笔记
@@ -73,7 +75,7 @@ facet_wrap(~cut, nrow = 2)
 
 # 抽样散点图
 
-```{r 1,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.7,fig.cap='`ggplot2`按图层绘图。为防止散点堆叠，图中散点经过抽样。lowess曲线是根据原始数据绘制。不同图层可使用不同数据。位于`ggplot`下方的图层将被堆叠在上方。'}
+```{r 1,message=F, comment=NA,warning=F,cache=T,fig.align='center',out.width ='80%',fig.asp=0.6,fig.cap='`ggplot2`按图层绘图。为防止散点堆叠，图中散点经过抽样。lowess曲线是根据原始数据绘制。不同图层可使用不同数据。位于`ggplot`下方的图层将被堆叠在上方。'}
 hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
 set.seed(20191001)
 sample <- sample(1:nrow(hatdt),600,replace = F)
