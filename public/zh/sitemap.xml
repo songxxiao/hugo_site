@@ -36,6 +36,16 @@
   <url>
     <loc>/zh/model/</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/modelen/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/model/"
+                />
   </url>
   
   <url>

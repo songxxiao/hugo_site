@@ -18,25 +18,19 @@ output:
 
 $${y_i} = {\beta _{i0}} + {\beta _{i1}}{x_{i1}} + {\beta _{i2}}{x_{i2}} + ... + {\beta _{ik}}{x_{ik}} + {\varepsilon _i}$$
 
-```{r ols, echo=F, fig.cap=" ", out.width = '80%',fig.align='center',fig.asp = 0.618}
+```{r ols, echo=F, fig.cap=" ", out.width = '80%',fig.align='center',fig.asp = 0.8,dev='svg'}
 library(ggplot2)
 set.seed(711)
 x = seq(0, 4, length = 100)
 y = -x + jitter(rep(1:5, each = 20), 2)
 z = rep(1:5, each = 20)
 z <- as.factor(z)
-moto <- data.frame(x,y,z)
-lm1 <- lm(y ~ z,moto)
-moto <- within(moto,res <- residuals(lm1))
-moto1 <- subset(moto,z==1)
-moto2 <- subset(moto,z==2)
-moto3 <- subset(moto,z==3)
-moto4 <- subset(moto,z==4)
-moto5 <- subset(moto,z==5)
+dt <- data.frame(x,y,z)
 
-ggplot(moto, aes(x, y)) +
-  geom_point(aes(color = z)) +
-  geom_smooth(method='lm',se=F)
+ggplot(dt, aes(x, y)) +
+  geom_point(aes(color = z),size=2) +
+  geom_smooth(method='lm',se=F)+
+  theme(legend.position='none')
 ```
 
 ---
@@ -44,14 +38,11 @@ ggplot(moto, aes(x, y)) +
 
 $${y_i} = {\beta _{i0}} + {\beta _{i1}}{x_{i1}} + {\beta _{i2}}{x_{i2}} + ... + {\beta _{ik}}{x_{ik}} + {\varepsilon _i}$$
 
-```{r ols2, echo=F, fig.cap=" ", out.width = '80%',fig.align='center',fig.asp = 0.618}
-ggplot(moto, aes(x,y),group=z)+
-  geom_point(aes(color = z)) +
-  geom_smooth(data = moto1,method='lm',se=F)+
-  geom_smooth(data = moto2,method='lm',se=F)+
-  geom_smooth(data = moto3,method='lm',se=F)+
-  geom_smooth(data = moto4,method='lm',se=F)+
-  geom_smooth(data = moto5,method='lm',se=F)
+```{r ols2, echo=F, fig.cap=" ", out.width = '80%',fig.align='center',fig.asp = 0.8,dev='svg'}
+ggplot(dt, aes(x, y,group=z)) +
+  geom_point(aes(color = z),size=2) +
+  geom_smooth(method='lm',se=F)+
+  theme(legend.position='none')
 ```
 
 

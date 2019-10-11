@@ -1,0 +1,14 @@
+---
+title: "R Model Visualization"
+author: ' '
+date: '2019-10-11'
+slug: modelen
+---
+
+Loading ...
+
+<script>
+
+window.location.replace("https://www.kaggle.com/rikdifos/r-model-visualization-an-r-markdown-report/data")
+
+</script>
