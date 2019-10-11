@@ -26,29 +26,24 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 1
 
 [[languages.zh.menu.main]]
-    name = "GitHub"
-    url = "https://github.com/ECSTA7Y"
-    weight = 4
-
-[[languages.zh.menu.main]]
     name = "Vitae"
     url = "/zh/zhresume/"
     weight = 2
 
 [[languages.zh.menu.main]]
-    name = "Reward"
-    url = "/zh/reward/"
-   weight =5
+    name = "GitHub"
+    url = "https://github.com/ECSTA7Y"
+    weight = 3
 
 [[languages.zh.menu.main]]
-    name = 'Blog'
-    url = "/zh/tags/"
-   weight = 3
+    name = "Reward"
+    url = "/zh/reward/"
+   weight =4
 
 [[languages.zh.menu.main]]
   name = "English"
   url = "/en"
-  weight =6
+  weight =5
   
 [[languages.en.menu.main]]
     name = "Home"
@@ -63,17 +58,12 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[languages.en.menu.main]]
     name = "GitHub"
     url = "https://github.com/ECSTA7Y"
-    weight = 4
-
-[[languages.en.menu.main]]
-    name = 'Blog'
-    url = "/en/tags/"
-   weight = 3
+    weight = 3
 
 [[languages.en.menu.main]]
   name = "Chinese"
   url = "/zh"
-  weight =5
+  weight =4
 
 [params]
     description = "Xiao Song's Website "

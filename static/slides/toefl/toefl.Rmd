@@ -1,7 +1,7 @@
 ---
 title: "TOEFL经验"
 subtitle: "笔记与总结"
-author: "Malcolm"
+author: "[Malcolm](https://xsong.ltd/)"
 date: "2019/06/09"
 output:
   xaringan::moon_reader:
@@ -12,14 +12,7 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-```{r xaringan-themer, include = FALSE}
-library(xaringanthemer)
-mono_light(
-  base_color = "#1c5253",
-  header_font_google = google_font("Noto Serif"),
-  text_font_google   = google_font("Noto Serif"),
-  code_font_google   = google_font("Droid Mono"))
-```
+
 class: center, middle
 # 作文经验  
 <https://xsong.ltd/slides/toefl/toefl#1>
@@ -97,7 +90,7 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 + 首段：Just end your introduction with a thesis statement.
 
 + 结尾段：The concluding paragraph must contain a summary of the key points you
-made in the body and a reiteration o f your thesis statement.
+made in the body and a reiteration of your thesis statement.
 
 
 ---
@@ -124,7 +117,7 @@ made in the body and a reiteration o f your thesis statement.
 |Meanwhile|与此同时|
 |to some extent|在某种程度上|
 |accordingly |1.相应地 2.因此, 于是|
- 
+|hence |因此| 
 
 ---
 ## 一些地道的表达摘录
@@ -145,10 +138,10 @@ qualified 称职的
 下降：decline, reduce, decrease  
 上升：improve, increase, enhance, raise, heighten
 
-prior 先  
-posterior 后
----
 
+---
+prior 先  
+posterior 后  
 What's more 何况
 
 
@@ -191,7 +184,6 @@ use transitional words.
 + Meanwhile, an obvious advantage of ... is...
 ---
 ## 地道的表达
-.mid[
 
 I feel this way because ...  
 There's lot of advantages that  
@@ -204,32 +196,25 @@ turn out 结果是
 conflict 时间冲突  
 throw up 呕吐  
 freak 怪物  
-
-
-
-
-]
-
+tender gentle 温柔的  
+vagina 阴道  
+sober 清醒 
 ---
 ## 地道的表达
-.mid[
-tender gentle 温柔的
 
-vagina 阴道
+freaked out 吓坏了  
+go ahead 继续说  
+exactly 确实是  
+we have nothing in common 我们没有共同点  
+be dying to do sth 十分想做某事  
+highly recommend 推荐   
+durable 耐用的  
+clingy 粘人的(形容女朋友)  
+a big fan of 
+mainstream 主流的
+on trend 流行的
 
-sober 清醒
 
-freaked out 吓坏了
-
-go ahead 继续说
-
-exactly 确实是
-
-we have nothing in common 我们没有共同点
-
-be dying to do sth 十分想做某事
-
-]
 
 ---
 ### 口语：task 4
@@ -240,17 +225,7 @@ be dying to do sth 十分想做某事
 
 + 详细阐述例子。不要说太多理论。把精力放在听力中！
 
-
----
-### 口语：task 5
-
-+ 问题-原因-两个solution-自己的解决办法-原因。
-
-+ The girl has the ... problem because ...
-
-+ the two solutions are 
-
-+ she could either do this or do that
+[2019托福改革删除原先task1和task5](https://www.sohu.com/a/316493115_340226)
 ---
 
 ### 口语：task 6
@@ -284,7 +259,7 @@ class: center, middle
 
 + 开始得别太早，不然会被吵
 
-+ 最后一题总结题注意introductory sentence
++ 最后一题总结题注意**introductory sentence**
 
 ---
 
