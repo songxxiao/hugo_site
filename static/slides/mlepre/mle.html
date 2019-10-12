@@ -19,10 +19,6 @@ class: center, middle, inverse, title-slide
 ---
 
 # Let's Start!
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559987331910&amp;di=a089e476c808440db9f7a356b7096f51&amp;imgtype=0&amp;src=http%3A%2F%2Fpic4.zhimg.com%2Fv2-ea8103bf18ea17c1320dfceadf9f580f_b.gif" alt=" " width="55%" /&gt;
-&lt;p class="caption"&gt; &lt;/p&gt;
-&lt;/div&gt;
 
 ---
 class: center, middle
@@ -82,7 +78,7 @@ class: center, middle
 ## 因变量
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="mle_files/figure-html/512-1.png" alt="收入对数的密度直方图" width="75%" /&gt;
+&lt;img src="mle_files/figure-html/unnamed-chunk-2-1.svg" alt="收入对数的密度直方图" width="75%" /&gt;
 &lt;p class="caption"&gt;收入对数的密度直方图&lt;/p&gt;
 &lt;/div&gt;
 
@@ -101,7 +97,7 @@ class: center, middle
 
 
 ## 零模型(ANOVA)
-.mid[
+
  + 层1： 
  
 `$${y_{ij}} = {\beta _{0j}} + {\varepsilon _{ij}}$$`
@@ -118,7 +114,7 @@ class: center, middle
 `\(\gamma_{00}\)`表示样本整体中因变量的总平均值(grand mean) ,
 
 `\({\mu _{0j}}\)`是与第j个层2单位相联系的随机效应
-]
+
 ---
 ## 随机截距模型
 .mid[
@@ -217,8 +213,7 @@ class: center, middle
 
 + **z**为层2解释变量。1985年和1988年之间各城市工业总产值(GPVI)的变化，&lt;font color=#FF0000&gt; **z**越大，则该城市经济发展越快&lt;/font&gt; 。
 
-```sql
-
+```
 /*零模型*/
 mixed LogY || geo: , variance
 
@@ -230,13 +225,11 @@ mixed LogY x1 || geo: x1, variance
 
 /*完全模型*/
 mixed LogY x1 z x1#z || geo: x1, variance
-
-
 ```
 ---
 ## 对中
 
-```sql
+```
 /*组均值对中*/
 sort geo
 
@@ -249,7 +242,7 @@ g cen_edu = edu - edumean
 
 ## 零模型运行结果
 
-```python 
+``` 
 *. mixed logearn || geo: , variance
 
 Performing EM optimization: 
@@ -276,10 +269,7 @@ Log likelihood = -7978.9487                     Prob &gt; chi2       =          
 
 ---
 
-```python 
-
-
-
+```
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
@@ -300,7 +290,7 @@ LR test vs. linear model: chibar2(01) = 2377.51       Prob &gt;= chibar2 = 0.000
 ---
 ## 随机截距模型
 
-```sql
+```
 *. mixed logearn cen_edu || geo: , variance
 
 Performing EM optimization: 
@@ -326,7 +316,7 @@ Log likelihood = -7838.2144                     Prob &gt; chi2       =     0.000
 ```
 ---
 
-```sql
+```
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
@@ -349,7 +339,7 @@ LR test vs. linear model: chibar2(01) = 2420.35       Prob &gt;= chibar2 = 0.000
 ---
 ## 随机系数模型
 
-```sql
+```
 *. mixed logearn cen_edu || geo: cen_edu, variance
 
 Performing EM optimization: 
@@ -374,7 +364,7 @@ Log likelihood = -7823.6964                     Prob &gt; chi2       =     0.000
 
 ```
 ---
-```sql
+```
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
@@ -399,7 +389,7 @@ Note: LR test is conservative and provided only for reference.
 ---
 ## 完全模型
 
-```sql
+```
 *. mixed logearn cen_edu exp cpc sex gross_d c.cen_edu#c.gross_d || geo:exp cpc sex cen_
 &gt; edu, variance
 
@@ -419,7 +409,7 @@ Log likelihood = -5403.8032                     Prob &gt; chi2       =     0.000
 
 ## 完全模型：固定系数部分
 
-```sql
+```
 
 -------------------------------------------------------------------------------------
             logearn |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
@@ -439,7 +429,7 @@ c.cen_edu#c.gross_d |  -.0120191   .0066043    -1.82   0.069    -.0249633    .00
 ---
 ## 完全模型：随机系数部分
 
-```python
+```
 
 ------------------------------------------------------------------------------
   Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
@@ -460,7 +450,7 @@ Note: LR test is conservative and provided only for reference.
 ---
 ## 组内相关系数
 ### (intraclass correlation, ICC)
-```python
+```
 . estat icc
 
 Conditional intraclass correlation

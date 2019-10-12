@@ -1,11 +1,14 @@
 ---
-title: "TOEFL经验"
-subtitle: "笔记与总结"
+title: 'TOEFL经验'
+subtitle: '笔记与总结'
 author: "[Malcolm](https://xsong.ltd/)"
-date: "2019/06/09"
-output:
+date: '`r Sys.Date()`'
+output:  
   xaringan::moon_reader:
-    css: [default, GBBB.css]
+    includes:
+      in_header:
+        - 'toc.html' 
+    css: GreenLight.css
     lib_dir: libs
     nature:
       highlightStyle: github
@@ -13,11 +16,14 @@ output:
       countIncrementalSlides: false
 ---
 
+class:toc
+## 目录
+
+---
+
 class: center, middle
 # 作文经验  
 <https://xsong.ltd/slides/toefl/toefl#1>
-
-
 
 ---
 ## 作文
@@ -33,8 +39,6 @@ class: center, middle
   + All those kinds of transportation are healthier than cars,<font color=#FF0000> and </font> people will gradually give up driving cars.
   
 ---
-## 作文
-
 ### 不要使用并列连词开始一个句子
 
 + ~~<font color=#FF0000>So</font> it should be worried that the remaining wilderness areas will not be admonished.~~
@@ -65,7 +69,9 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 
 ---
 
-## 综合作文 | Integrate Writing
+## 综合作文  
+
+Integrate Writing
 
 + [综合作文模板教程](https://www.toeflresources.com/writing-section/integrated-writing)
 
@@ -78,9 +84,13 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 | 中文| 英文 | 
 |:------|:------:| 
 | 说 | claim, mention, suggest, state, posit, note, argue | 
+| 说 | He is of the opinion that | 
 
 + The lecturer challenges the claims made by the author.
 
++ 
+
++ The lecturer elaborates on this by ...
 ---
 
 ## 独立作文
@@ -103,27 +113,31 @@ made in the body and a reiteration of your thesis statement.
 |several|~~lots of~~|
 |attend|~~go~~|
 |Hence| ~~So~~|
-|Nevertheless = However| |
+|Nevertheless However instead |~~but~~|
 |Since |That is because |
 
 ---
-## 作文常用连接词
 
 | 连接词| 意义 | 
 |:------|:------:| 
-| since | 既然| 
+|since | 既然| 
 |unless |除非|
 |otherwise|否则|
-|Meanwhile|与此同时|
+|meanwhile|与此同时|
 |to some extent|在某种程度上|
 |accordingly |1.相应地 2.因此, 于是|
-|hence |因此| 
+|hence therefore|因此| 
+|moreover furthermore |此外| 
+|in addition, besides|此外| 
+|Additionally|此外 |
+|in spite of, despite|尽管、虽然|
+|From my standpoint|我认为|
 
 ---
-## 一些地道的表达摘录
+## 一些地道的表达
 
 no longer 不再  
-lead to 导致  
+**lead to 导致**  
 This is evidenced by 被···证实了  
 demand \ request \ ask sb for 要求  
 cherish 珍惜  
@@ -143,7 +157,13 @@ qualified 称职的
 prior 先  
 posterior 后  
 What's more 何况
+Comparatively speaking 相比较而言
 
+用下列词代替very:  
+extremely, highly, amazingly, astonishingly, surprisingly, shockingly, overwhelmingly, strikingly, awfully,
+exceedingly, dramatically, strongly.
+
+ 
 
 ---
 class: center, middle
@@ -160,8 +180,6 @@ class: center, middle
 
 + **切题**、逻辑一致。
 
-+ 
-
 ---
 
 1. state your point 
@@ -177,7 +195,7 @@ class: center, middle
 use transitional words.
 
 ---
-# Advantage & Disadvantages Templates :
+## Advantage & Disadvantages Templates :
 
 + **undoubtedly**
 
@@ -200,7 +218,6 @@ tender gentle 温柔的
 vagina 阴道  
 sober 清醒 
 ---
-## 地道的表达
 
 freaked out 吓坏了  
 go ahead 继续说  
@@ -210,10 +227,11 @@ be dying to do sth 十分想做某事
 highly recommend 推荐   
 durable 耐用的  
 clingy 粘人的(形容女朋友)  
-a big fan of 
-mainstream 主流的
-on trend 流行的
-
+a big fan of  
+mainstream 主流的  
+on trend 流行的  
+glamour 魅力  
+dull 无聊的   
 
 
 ---
@@ -226,6 +244,7 @@ on trend 流行的
 + 详细阐述例子。不要说太多理论。把精力放在听力中！
 
 [2019托福改革删除原先task1和task5](https://www.sohu.com/a/316493115_340226)
+
 ---
 
 ### 口语：task 6
