@@ -14,6 +14,8 @@ slug: model
 
 PDF版本[下载](/modelpdf.pdf)
 
+[English Version](https://www.kaggle.com/rikdifos/r-model-visualization-a-r-markdown-report/report)
+
 
 模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓*模型*，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的`modelr`包提供用于预测的函数。预测的结果可以直接被`ggplot2`使用并画图。`modelr`支持管道操作，是将数据分析流程化的利器。  
 
@@ -43,7 +45,6 @@ library(stargazer)
 
 ```{r,echo=F}
 hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
-
 ```
 
 ```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%'}
@@ -183,7 +184,7 @@ ggplot(SLID,aes(education,wages))+
 
 对两个连续交互变量的可视化是一个难题。较好的解决办法是分箱。使用`modelr`的`seq_range`函数对其中一个连续变量进行分箱。
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.6,fig.cap='无交互效应和有交互效应的区别： 左图体现了同一年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。'}
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.6,fig.cap='无交互效应和有交互效应的区别： 左图体现了不同年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。'}
 mod1 <- lm(wages ~ education + age,SLID)
 mod2 <- lm(wages ~ education * age,SLID)
 
@@ -235,7 +236,7 @@ group=market.potential))+
   theme_bw()
 ```
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='使用R自带作图工具绘图。作图：设置不同贷款进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='使用R自带作图工具绘图。作图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
 data(PlantCounts,package = 'MSG')
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
 with(PlantCounts, {

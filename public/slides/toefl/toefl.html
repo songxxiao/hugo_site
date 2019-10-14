@@ -4,8 +4,28 @@
     <title>TOEFL经验</title>
     <meta charset="utf-8" />
     <meta name="author" content="Malcolm" />
-    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
-    <link rel="stylesheet" href="GBBB.css" type="text/css" />
+    <meta name="date" content="2019-10-14" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+    
+    <script>
+    $(document).ready(function() {
+      var h2 = $( ":not(.toc) > h2" );
+      var items = h2.map(
+        function(){return $(this).text()}
+        ).get()
+      items.shift(); // Remove first item (title)
+      items.pop();   // Remove last item (spurious???)
+      var item_list = items.join("</li><li>");
+      var toc = "<ul><li>" + item_list + "</li></ul>";
+      $(".toc > h2").after(toc);
+    
+    });
+    </script>
+    <link rel="stylesheet" href="GreenLight.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -13,17 +33,20 @@ class: center, middle, inverse, title-slide
 
 # TOEFL经验
 ## 笔记与总结
-### Malcolm
-### 2019/06/09
+### <a href="https://xsong.ltd/">Malcolm</a>
+### 2019-10-14
 
 ---
 
 
+class:toc
+## 目录
+
+---
+
 class: center, middle
 # 作文经验  
 &lt;https://xsong.ltd/slides/toefl/toefl#1&gt;
-
-
 
 ---
 ## 作文
@@ -39,8 +62,6 @@ class: center, middle
   + All those kinds of transportation are healthier than cars,&lt;font color=#FF0000&gt; and &lt;/font&gt; people will gradually give up driving cars.
   
 ---
-## 作文
-
 ### 不要使用并列连词开始一个句子
 
 + ~~&lt;font color=#FF0000&gt;So&lt;/font&gt; it should be worried that the remaining wilderness areas will not be admonished.~~
@@ -71,7 +92,9 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 
 ---
 
-## 综合作文 | Integrate Writing
+## 综合作文  
+
+Integrate Writing
 
 + [综合作文模板教程](https://www.toeflresources.com/writing-section/integrated-writing)
 
@@ -84,9 +107,13 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 | 中文| 英文 | 
 |:------|:------:| 
 | 说 | claim, mention, suggest, state, posit, note, argue | 
+| 说 | He is of the opinion that | 
 
 + The lecturer challenges the claims made by the author.
 
++ 
+
++ The lecturer elaborates on this by ...
 ---
 
 ## 独立作文
@@ -96,7 +123,7 @@ Furthermore, the awareness of protecting the environment is increasing more and 
 + 首段：Just end your introduction with a thesis statement.
 
 + 结尾段：The concluding paragraph must contain a summary of the key points you
-made in the body and a reiteration o f your thesis statement.
+made in the body and a reiteration of your thesis statement.
 
 
 ---
@@ -109,27 +136,39 @@ made in the body and a reiteration o f your thesis statement.
 |several|~~lots of~~|
 |attend|~~go~~|
 |Hence| ~~So~~|
-|Nevertheless = However| |
+|Nevertheless However instead |~~but~~|
 |Since |That is because |
 
 ---
-## 作文常用连接词
 
 | 连接词| 意义 | 
 |:------|:------:| 
-| since | 既然| 
+|since | 既然| 
 |unless |除非|
 |otherwise|否则|
-|Meanwhile|与此同时|
+|meanwhile|与此同时|
 |to some extent|在某种程度上|
 |accordingly |1.相应地 2.因此, 于是|
- 
+|hence therefore|因此| 
+|moreover furthermore |此外| 
+|in addition, besides|此外| 
+|Additionally|此外 |
+|in spite of, despite|尽管、虽然|
+|From my standpoint|我认为|
 
 ---
-## 一些地道的表达摘录
+
+| 中文| 英文 | 
+|:------|:------| 
+|使 降低 | lower reduce | 
+|降低 |reduce decline drop fall|
+|导致 |lead to cause result in create bring about|
+
+---
+## 一些地道的表达
 
 no longer 不再  
-lead to 导致  
+**lead to 导致**  
 This is evidenced by 被···证实了  
 demand \ request \ ask sb for 要求  
 cherish 珍惜  
@@ -144,12 +183,18 @@ qualified 称职的
 下降：decline, reduce, decrease  
 上升：improve, increase, enhance, raise, heighten
 
-prior 先  
-posterior 后
+
 ---
-
+prior 先  
+posterior 后  
 What's more 何况
+Comparatively speaking 相比较而言
 
+用下列词代替very:  
+extremely, highly, amazingly, astonishingly, surprisingly, shockingly, overwhelmingly, strikingly, awfully,
+exceedingly, dramatically, strongly.
+
+ 
 
 ---
 class: center, middle
@@ -166,8 +211,6 @@ class: center, middle
 
 + **切题**、逻辑一致。
 
-+ 
-
 ---
 
 1. state your point 
@@ -183,14 +226,13 @@ class: center, middle
 use transitional words.
 
 ---
-# Advantage &amp; Disadvantages Templates :
+## Advantage &amp; Disadvantages Templates :
 
 + **undoubtedly**
 
 + Meanwhile, an obvious advantage of ... is...
 ---
 ## 地道的表达
-.mid[
 
 I feel this way because ...  
 There's lot of advantages that  
@@ -203,32 +245,25 @@ turn out 结果是
 conflict 时间冲突  
 throw up 呕吐  
 freak 怪物  
-
-
-
-
-]
-
+tender gentle 温柔的  
+vagina 阴道  
+sober 清醒 
 ---
-## 地道的表达
-.mid[
-tender gentle 温柔的
 
-vagina 阴道
+freaked out 吓坏了  
+go ahead 继续说  
+exactly 确实是  
+we have nothing in common 我们没有共同点  
+be dying to do sth 十分想做某事  
+highly recommend 推荐   
+durable 耐用的  
+clingy 粘人的(形容女朋友)  
+a big fan of  
+mainstream 主流的  
+on trend 流行的  
+glamour 魅力  
+dull 无聊的   
 
-sober 清醒
-
-freaked out 吓坏了
-
-go ahead 继续说
-
-exactly 确实是
-
-we have nothing in common 我们没有共同点
-
-be dying to do sth 十分想做某事
-
-]
 
 ---
 ### 口语：task 4
@@ -239,17 +274,8 @@ be dying to do sth 十分想做某事
 
 + 详细阐述例子。不要说太多理论。把精力放在听力中！
 
+[2019托福改革删除原先task1和task5](https://www.sohu.com/a/316493115_340226)
 
----
-### 口语：task 5
-
-+ 问题-原因-两个solution-自己的解决办法-原因。
-
-+ The girl has the ... problem because ...
-
-+ the two solutions are 
-
-+ she could either do this or do that
 ---
 
 ### 口语：task 6
@@ -283,7 +309,7 @@ class: center, middle
 
 + 开始得别太早，不然会被吵
 
-+ 最后一题总结题注意introductory sentence
++ 最后一题总结题注意**introductory sentence**
 
 ---
     </textarea>

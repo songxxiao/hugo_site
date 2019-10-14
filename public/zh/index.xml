@@ -18,13 +18,14 @@
       
       <guid>/zh/model/</guid>
       <description>PDF版本下载
+English Version
 模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓模型，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的modelr包提供用于预测的函数。预测的结果可以直接被ggplot2使用并画图。modelr支持管道操作，是将数据分析流程化的利器。
 modelr包的主要函数有：
 data_grid: 生成预测数据
 add_predictions: 加入预测值
 crossv_kfold、crossv_mc、crossv_loo: 交叉验证
 library(dplyr)library(tidyr)library(ggplot2)library(modelr)library(haven)library(easyGgplot2)library(stargazer)`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`基础回归hatdt为作者个人整理的中国家庭追踪调查(CFPS)收入数据1。
-hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)set.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)sampled &amp;lt;- hatdt[sample,]plota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.5,alpha=1/3) +geom_smooth(span =10,size=1) + geom_smooth(method=&amp;#39;lm&amp;#39;,size=1,color=&amp;#39;red&amp;#39;) +ylim(0, 20000) +labs(x = &amp;quot;年龄&amp;quot;,y = &amp;quot;人民币(元）&amp;quot;) +theme_bw()plotb &amp;lt;- ggplot() +geom_jitter(data=sampled,aes(agem,inc),height=550,width=5,size =1.5,alpha=1/3) +geom_quantile(data=hatdt,aes(agem,inc,weight=fswt_nat),size=1,color=&amp;#39;red&amp;#39;)+ylim(0, 20000) +labs(x = &amp;quot;年龄&amp;quot;,y = &amp;quot;人民币(元）&amp;quot;) +theme_bw()ggplot2.</description>
+hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)set.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)sampled &amp;lt;- hatdt[sample,]plota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.5,alpha=1/3) +geom_smooth(span =10,size=1) + geom_smooth(method=&amp;#39;lm&amp;#39;,size=1,color=&amp;#39;red&amp;#39;) +ylim(0, 20000) +labs(x = &amp;quot;年龄&amp;quot;,y = &amp;quot;人民币(元）&amp;quot;) +theme_bw()plotb &amp;lt;- ggplot() +geom_jitter(data=sampled,aes(agem,inc),height=550,width=5,size =1.</description>
     </item>
     
     <item>
@@ -76,7 +77,7 @@ f.readlines()返回一个列表，列表的数据项为一行的文本[linel, l
       <guid>/zh/xudao/</guid>
       <description>徐正阳是我的小学和初中同学。初中毕业后，我们都没留在原本的学校。我去了一所擅长虐待学生的高中，他则去了另一所高中。没想到这小子又参加艺考最终高中北京电影学院了！
 在故宫和Tom Cruise、Steven Spielberg谈笑风生之后 ，他在大二后自愿成为丘八。临走时填写的入伍志愿地点的是“边远艰苦地区”。在几次失意的网恋，并得到著名相声演员牛群老师的耳提面命之后，他在军队中留下的最后一件大事是拍摄了一部军旅题材的微电影。
-Figure 1: 徐导和Tom Cruise、Steven Spielberg谈笑风生以上照片有点搞笑哈。为了保护徐导的个人隐私，和牛老师的照片我就不放了。
+Figure 1: 徐导和Tom Cruise、Steven Spielberg谈笑风生以上照片有点搞笑哈。为了保护徐导的个人隐私，和牛老师的照片我就不放了。
 和他之前拍摄的作品相比。这部电影故事是原创的。布景也更加宏大。
 以下是徐导以往的作品，如向《喜剧之王》致敬的《外卖》：
 演绎了武侠爱情的《一世安》：

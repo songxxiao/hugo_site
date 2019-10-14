@@ -14,15 +14,11 @@ output:
       
 ---
 # Let's Start!
-``````{r Intro, echo=F, fig.cap=" ", out.width = '55%',fig.align='center'}
-knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559987331910&di=a089e476c808440db9f7a356b7096f51&imgtype=0&src=http%3A%2F%2Fpic4.zhimg.com%2Fv2-ea8103bf18ea17c1320dfceadf9f580f_b.gif")
-
-```
 
 ---
 class: center, middle
 # 数据与变量
-``````{r 2, echo=F, fig.cap=" ", out.width = '55%',fig.cap="姜昱竹 10171170149",fig.align='center'}
+``````{r, echo=F, fig.cap=" ", out.width = '55%',fig.cap="姜昱竹 10171170149",fig.align='center'}
 knitr::include_graphics("zhu.jpg")
 
 ```
@@ -76,15 +72,12 @@ $${Z_j} = \log (GPV{I_{1988}}/GPV{I_{1985}})$$
 ---
 ## 因变量
 
-```{r 512, echo=F, out.width = '75%',fig.align='center',message=F,warning=F,fig.cap="收入对数的密度直方图",fig.asp = 0.75}
-
+```{r, echo=F, out.width = '75%',fig.align='center',message=F,warning=F,fig.cap="收入对数的密度直方图",fig.asp = 0.75,dev='svg',fig.showtext=T}
 library(haven)
-library(tidyverse)
 library(lattice)
-require(stats)
 chip <- read_dta("F:/Mysite/Mysite/static/slides/mlepre/chip88.dta")
 attach(chip)
-histogram(logearn,equal.widths = TRUE, nint = 70, xlab = "收入对数",type = "density",ylab = '密度')
+histogram(logearn,equal.widths =T, nint = 70, xlab = '收入对数',type = 'density',ylab = '密度')
 ```
 
 
@@ -93,7 +86,7 @@ class: center, middle
 
 # 模 型
 
-```{r 3, echo=F, fig.cap="吴迪雅 10161170121", out.width = '35%',fig.align='center'}
+```{r, echo=F, fig.cap="吴迪雅 10161170121", out.width = '35%',fig.align='center'}
 knitr::include_graphics("diya.jpg")
 ```
 
@@ -101,7 +94,7 @@ knitr::include_graphics("diya.jpg")
 
 
 ## 零模型(ANOVA)
-.mid[
+
  + 层1： 
  
 $${y_{ij}} = {\beta _{0j}} + {\varepsilon _{ij}}$$
@@ -118,7 +111,7 @@ ${\beta _{0j}}$是第j个层2单位的平均值,
 $\gamma_{00}$表示样本整体中因变量的总平均值(grand mean) ,
 
 ${\mu _{0j}}$是与第j个层2单位相联系的随机效应
-]
+
 ---
 ## 随机截距模型
 .mid[
@@ -144,7 +137,7 @@ $\gamma_{10}$表示层2 所有单位的回归斜率的平均值。
 ---
 ## 随机截距模型
 
-```{r sur2, echo=F, fig.cap="<font color=#FF0000>各回归直线平行，斜率相同，截距随层2随机变化</font>", out.width = '70%',fig.align='center'}
+```{r, echo=F, fig.cap="<font color=#FF0000>各回归直线平行，斜率相同，截距随层2随机变化</font>", out.width = '70%',fig.align='center'}
 knitr::include_graphics("random.jpg")
 ```
 
@@ -174,7 +167,7 @@ $${{\rm{y}}_{ij}} = \underbrace {{\gamma _{00}} + {\gamma _{10}}({x_{ij}} - {{\b
 ---
 ## 随机系数模型
 
-```{r sur1, echo=F, fig.cap="<font color=#FF0000>各回归直线的截距和斜率均随层2随机变化</font>", out.width = '70%',fig.align='center'}
+```{r, echo=F, fig.cap="<font color=#FF0000>各回归直线的截距和斜率均随层2随机变化</font>", out.width = '70%',fig.align='center'}
 knitr::include_graphics("random2.jpg")
 ```
 
@@ -204,7 +197,7 @@ ${Z_j}$
 class: center, middle
 
 # Stata 命令
-```{r 4, echo=F, fig.cap="宋骁 10161170106", out.width = '35%',fig.align='center'}
+```{r, echo=F, fig.cap="宋骁 10161170106", out.width = '35%',fig.align='center'}
 knitr::include_graphics("xsong.jpg")
 
 ```
@@ -215,8 +208,7 @@ knitr::include_graphics("xsong.jpg")
 
 + **z**为层2解释变量。1985年和1988年之间各城市工业总产值(GPVI)的变化，<font color=#FF0000> **z**越大，则该城市经济发展越快</font> 。
 
-```sql
-
+```
 /*零模型*/
 mixed LogY || geo: , variance
 
@@ -228,13 +220,11 @@ mixed LogY x1 || geo: x1, variance
 
 /*完全模型*/
 mixed LogY x1 z x1#z || geo: x1, variance
-
-
 ```
 ---
 ## 对中
 
-```sql
+```
 /*组均值对中*/
 sort geo
 
@@ -247,7 +237,7 @@ g cen_edu = edu - edumean
 
 ## 零模型运行结果
 
-```python 
+``` 
 *. mixed logearn || geo: , variance
 
 Performing EM optimization: 
@@ -274,10 +264,7 @@ Log likelihood = -7978.9487                     Prob > chi2       =          .
 
 ---
 
-```python 
-
-
-
+```
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
@@ -298,7 +285,7 @@ LR test vs. linear model: chibar2(01) = 2377.51       Prob >= chibar2 = 0.0000
 ---
 ## 随机截距模型
 
-```sql
+```
 *. mixed logearn cen_edu || geo: , variance
 
 Performing EM optimization: 
@@ -324,7 +311,7 @@ Log likelihood = -7838.2144                     Prob > chi2       =     0.0000
 ```
 ---
 
-```sql
+```
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
@@ -347,7 +334,7 @@ LR test vs. linear model: chibar2(01) = 2420.35       Prob >= chibar2 = 0.0000
 ---
 ## 随机系数模型
 
-```sql
+```
 *. mixed logearn cen_edu || geo: cen_edu, variance
 
 Performing EM optimization: 
@@ -372,7 +359,7 @@ Log likelihood = -7823.6964                     Prob > chi2       =     0.0000
 
 ```
 ---
-```sql
+```
 ------------------------------------------------------------------------------
      logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
@@ -397,7 +384,7 @@ Note: LR test is conservative and provided only for reference.
 ---
 ## 完全模型
 
-```sql
+```
 *. mixed logearn cen_edu exp cpc sex gross_d c.cen_edu#c.gross_d || geo:exp cpc sex cen_
 > edu, variance
 
@@ -417,7 +404,7 @@ Log likelihood = -5403.8032                     Prob > chi2       =     0.0000
 
 ## 完全模型：固定系数部分
 
-```sql
+```
 
 -------------------------------------------------------------------------------------
             logearn |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
@@ -437,7 +424,7 @@ c.cen_edu#c.gross_d |  -.0120191   .0066043    -1.82   0.069    -.0249633    .00
 ---
 ## 完全模型：随机系数部分
 
-```python
+```
 
 ------------------------------------------------------------------------------
   Random-effects Parameters  |   Estimate   Std. Err.     [95% Conf. Interval]
@@ -458,7 +445,7 @@ Note: LR test is conservative and provided only for reference.
 ---
 ## 组内相关系数
 ### (intraclass correlation, ICC)
-```python
+```
 . estat icc
 
 Conditional intraclass correlation
@@ -485,7 +472,7 @@ Note: ICC is conditional on zero values of random-effects covariates.
 class: center, middle
 
 # 谢谢!
-``````{r end, echo=F, fig.cap=" ",out.width = '60%',fig.align='center'}
+```{r, echo=F, fig.cap=" ",out.width = '60%',fig.align='center'}
 knitr::include_graphics("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559921618412&di=f118b115bf4ab9ab74be09f366906204&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201809%2F12%2F20180912072220_qivjj.thumb.700_0.gif")
 ```
 
