@@ -1,10 +1,10 @@
 ---
-title: '宋骁'
+title: ' '
 ---
 
 <font size=4.5>**宋 骁**</font>
 
-宋骁。男。生于1997年，[华东师范大学](https://www.ecnu.edu.cn/)本科在读。现居上海。我掌握了数据分析(R, Python, Stata, SPSS, SQL)、编程(Python)的基本知识。我能够使用统计软件对数据进行规整。我学习了基本的统计知识，包括基于因果推断的计量经济学和机器学习方法。业余时间我喜欢听摇滚和说唱音乐，间或鼓捣R和Python。为了更好地完成我的工作，我会使用[Github](https://github.com/ECSTA7Y)。
+男。生于1997年，[华东师范大学](https://www.ecnu.edu.cn/)本科在读。现居上海。我掌握了数据分析(R, Python, Stata, SPSS, SQL)、编程(Python)的基本知识。我能够使用统计软件对数据进行规整。我学习了基本的统计知识，包括基于因果推断的计量经济学和机器学习方法。业余时间我喜欢听摇滚和说唱音乐，间或鼓捣R和Python。为了更好地完成我的工作，我会使用[Github](https://github.com/ECSTA7Y)。
 
 我的中文简历请点击[这里](/zh/zhresume/)，英文简历请点击[这里](/en/enresume/)
 
