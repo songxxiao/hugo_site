@@ -36,14 +36,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 3
 
 [[languages.zh.menu.main]]
-    name = "Reward"
-    url = "/zh/reward/"
-   weight =4
-
-[[languages.zh.menu.main]]
   name = "English"
   url = "/en"
-  weight =5
+  weight =4
   
 [[languages.en.menu.main]]
     name = "Home"

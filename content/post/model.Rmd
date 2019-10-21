@@ -34,7 +34,7 @@ library(tidyr)
 library(ggplot2)
 library(modelr)
 library(haven)
-library(easyGgplot2)
+library(cowplot)
 library(stargazer)
 `%>%` <- magrittr::`%>%`
 ```
@@ -78,7 +78,7 @@ plotb <- ggplot() +
 
 ```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.5,fig.cap='个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。'}
 
-ggplot2.multiplot(plota,plotb,cols=2)
+plot_grid(plota,plotb,ncol = 2)
 
 ```
 
@@ -236,7 +236,7 @@ group=market.potential))+
   theme_bw()
 ```
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='使用R自带作图工具绘图。作图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
 data(PlantCounts,package = 'MSG')
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
 with(PlantCounts, {
@@ -296,6 +296,68 @@ e <- ggplot(PlantCounts,
   geom_smooth(span=1,size=1)+
   ylim(0,80)+
   theme_bw()
-ggplot2.multiplot(g,f,e,cols=2)
+plot_grid(g,f,e,ncol = 2)
+
 ```
+
+# Box-Cox 变换
+
+为保证变量的正态性进行的统计学转换。
+
+```{r,message=F,warning=F,error=T,comment=NA,cache=T,fig.align='center',out.width='90%',fig.cap=' '}
+library(MASS)
+x = rf(500,30,30)
+hist(x,breaks = 12)
+result = boxcox(x~1,lambda = seq(-0.5,0,5))
+mylambda = result$x[which.max(result$y)]
+mylambda
+x2 <- (x^mylambda-1)/mylambda
+x2 = as.data.frame(x2)
+
+ggplot(x2,aes(x2)) +
+  geom_histogram(color='black',
+                 fill='white') 
+```
+
+
+$$
+{y(\lambda)}=\left\{
+\begin{aligned}
+{\textstyle{{{y^\lambda } - 1} \over \lambda }} & , & \mbox{if}\quad\lambda\ne 0 \\
+\log y & , & \mbox{if}\quad\lambda = 0
+\end{aligned}
+\right.
+$$  
+
+
+$$
+{y(\lambda)}=\left\{
+\begin{aligned}
+{\textstyle{{{{(y + {\lambda _2})}^{{\lambda _1}}} - 1} \over {{\lambda _1}}}} & , & \mbox{if}\quad\lambda_1\ne 0 \\
+\log (y + {\lambda _2}{\rm{)}} & , & \mbox{if}\quad\lambda_1 = 0
+\end{aligned}
+\right.
+$$  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

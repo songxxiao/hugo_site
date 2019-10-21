@@ -111,6 +111,7 @@ library(haven)
 library(ggplot2)
 library(dplyr)
 library(ggfortify)
+library(stargazer)
 ```
 
 + 数据介绍：  
@@ -153,7 +154,7 @@ km_fit <- survfit(km ~ 1, data=cwg)
 km_fit #生存分析概要
 ```
 
-```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center',error=T}
 knitr::include_graphics("/img/survival/life.jpg")
 ```
 生存函数的Kaplan–Meier estimator就是$nPx$列的累乘。
@@ -162,7 +163,7 @@ knitr::include_graphics("/img/survival/life.jpg")
 summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
 ```
 
-```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center'}
+```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center',error=T}
 knitr::include_graphics("/img/survival/life2.jpg")
 ```
 
@@ -194,12 +195,20 @@ cwg$age <- as.factor(cwg$age)
 
 coxreg <- coxph(km ~ ec + age + female +black + minc, data = cwg)
 summary(coxreg)
-
 cox_fit <- survfit(coxreg)
 autoplot(cox_fit) #拟合值
 ##C-指数 Harrell's concordance index
 #coxreg$concordance
 concordance(km ~ predict(coxreg), data = cwg)
+```
+
+
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',results='asis'}
+stargazer(coxreg,
+          title='Cox回归结果',
+          header=F,no.space=T,
+          type='html',align=T,
+          keep.stat=c('n','rsq','ll'))
 ```
 
 [生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)

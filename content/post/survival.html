@@ -17,7 +17,7 @@ tags: ["R","应用统计"]
 <p>李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.</p>
 <p>李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.</p>
 <hr />
-<div id="section" class="section level2">
+<div id="第一讲-基本概念" class="section level2">
 <h2>第一讲: 基本概念</h2>
 <ul>
 <li>社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。<strong>在一个状态内待的时间和风险有着密切的关系</strong>。</li>
@@ -38,7 +38,7 @@ tags: ["R","应用统计"]
 </ul>
 <hr />
 </div>
-<div id="mle" class="section level2">
+<div id="第二讲-最大似然估计mle" class="section level2">
 <h2>第二讲: 最大似然估计(MLE)</h2>
 <p>Cox回归避开了模型分布假定的问题。</p>
 <ul>
@@ -54,7 +54,7 @@ tags: ["R","应用统计"]
 <span class="math inline">\(\sum\limits_{}^{} {{t_i}}\)</span>是历险人年数。<span class="math inline">\(n\)</span>是事件发生数。<br />
 <span class="math inline">\(\lambda\)</span>是个概率估计。</li>
 </ul>
-<div id="censored" class="section level3">
+<div id="删截censored样本的似然函数" class="section level3">
 <h3>删截(Censored)样本的似然函数</h3>
 <ul>
 <li>完全样本的似然函数是在该时点t的密度函数<span class="math inline">\(f({t_i})\)</span>。右删截数据是生存函数<span class="math inline">\(S({C_r})\)</span>。左删截数据为累计分布函数<span class="math inline">\(1 - S({C_l})\)</span>。区间删截为在该时段内的发生概率<span class="math inline">\(S(L) - S(R)\)</span>。</li>
@@ -73,14 +73,15 @@ tags: ["R","应用统计"]
 <hr />
 </div>
 </div>
-<div id="section-1" class="section level2">
+<div id="第三讲-生存分析估计" class="section level2">
 <h2>第三讲: 生存分析估计</h2>
 <p>R生存分析介绍：<a href="http://www.openintro.org/stat/surv.php">survival analysis in R</a></p>
 <pre class="r"><code>library(survival)
 library(haven) 
 library(ggplot2)
 library(dplyr)
-library(ggfortify)</code></pre>
+library(ggfortify)
+library(stargazer)</code></pre>
 <ul>
 <li>数据介绍：<br />
 <code>los1</code>:时间变量<br />
@@ -93,7 +94,7 @@ minc=4,$2000+)<br />
 <code>age</code>:年龄<br />
 <code>black</code>:种族</li>
 </ul>
-<div id="kaplanmeier-estimator-" class="section level3">
+<div id="kaplanmeier-estimator-卡普兰迈耶法" class="section level3">
 <h3>Kaplan–Meier estimator | 卡普兰迈耶法</h3>
 <p>又称乘积极限法(Product-Limit Method), 公式如下：</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
@@ -160,7 +161,7 @@ autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
 <p><img src="/post/survival_files/figure-html/unnamed-chunk-7-2.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="cox" class="section level2">
+<div id="cox比例风险模型" class="section level2">
 <h2>Cox比例风险模型</h2>
 <p><span class="math display">\[\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}\]</span></p>
 <ul>
@@ -227,6 +228,249 @@ n= 1278
 Concordance= 0.3518 se= 0.0164
 concordant discordant     tied.x     tied.y    tied.xy 
      96999     179888       2803        246         19 </code></pre>
+<pre class="r"><code>stargazer(coxreg,
+          title=&#39;Cox回归结果&#39;,
+          header=F,no.space=T,
+          type=&#39;html&#39;,align=T,
+          keep.stat=c(&#39;n&#39;,&#39;rsq&#39;,&#39;ll&#39;))</code></pre>
+<table style="text-align:center">
+<caption>
+<strong>Cox回归结果</strong>
+</caption>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+km
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+ec2
+</td>
+<td>
+-0.064
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.156)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+ec3
+</td>
+<td>
+-0.313<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.150)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+age1
+</td>
+<td>
+0.236
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.178)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+age2
+</td>
+<td>
+0.121
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.180)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+age3
+</td>
+<td>
+0.364<sup>**</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.181)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+age4
+</td>
+<td>
+0.185
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.195)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+female
+</td>
+<td>
+0.059
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.116)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+black
+</td>
+<td>
+-0.173
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.129)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+minc2
+</td>
+<td>
+0.866<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.126)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+minc3
+</td>
+<td>
+0.906<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.210)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+minc4
+</td>
+<td>
+1.546<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.308)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+1,278
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.060
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Log Likelihood
+</td>
+<td>
+-2,006.503
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
 <p><a href="https://blog.csdn.net/fjsd155/article/details/84669331">生存模型的C-index（C指数）</a></p>
 <p><a href="https://blog.csdn.net/anshiquanshu/article/details/53438438">C-index/C-statistic 计算的5种不同方法及比较</a></p>
 </div>
@@ -256,8 +500,8 @@ minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
 
 Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
 <pre class="r"><code>autoplot(aaregfit)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="/post/survival_files/figure-html/unnamed-chunk-9-1.png" alt="协变量作用如何随时间变化" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="/post/survival_files/figure-html/unnamed-chunk-10-1.png" alt="协变量作用如何随时间变化" width="100%" />
 <p class="caption">
 Figure 1: 协变量作用如何随时间变化
 </p>

@@ -1,7 +1,7 @@
 ---
 title: "个人陈述草稿"
 author: "[宋骁](https://xsong.ltd/zh/)"
-date: " "
+date: '`r Sys.Date()`'
 output:
   bookdown::html_document2:
     toc: true
@@ -85,11 +85,16 @@ DDL是2.13。
 
 
 
+Certificate of Identification
 
+Name: Xiao Song
+Ethnicity: Han
+Date of Birth: 26th December 1997
+Residential Address: No. 500, Dongchuan Road, Minhang District, Shanghai
+Citizen ID number:652201199712262115
+Cizizen Identity Card of People's Republic of China
+Authority: Shanghai Public Security Bureau Minhang Branch
 
-
-
-
-
+Period of Validity: 10th June 2019- 10th June 2019
 
 

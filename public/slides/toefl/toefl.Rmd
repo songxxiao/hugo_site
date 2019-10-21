@@ -83,7 +83,7 @@ Integrate Writing
 
 | 中文| 英文 | 
 |:------|:------:| 
-| 说 | claim, mention, suggest, state, posit, note, argue | 
+| 说 | claim, mention, suggest, state, posit, note, argue, discuss | 
 | 说 | He is of the opinion that | 
 
 + The lecturer challenges the claims made by the author.
@@ -140,7 +140,7 @@ made in the body and a reiteration of your thesis statement.
 |使 降低 | lower reduce | 
 |降低 |reduce decline drop fall|
 |导致 |lead to cause result in create bring about|
-
+|甚至 更别说|not to say |
 ---
 ## 一些地道的表达
 
@@ -155,7 +155,8 @@ two-edge sword 双刃剑
 nightmares 噩梦  
 double-sided 两面性的  
 conversely 相反地  
-qualified 称职的
+qualified 称职的  
+venture 冒险  
 
 下降：decline, reduce, decrease  
 上升：improve, increase, enhance, raise, heighten

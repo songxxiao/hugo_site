@@ -53,8 +53,6 @@
     
     <li><a href="https://github.com/ECSTA7Y">GitHub</a></li>
     
-    <li><a href="../../zh/reward/">Reward</a></li>
-    
     <li><a href="../../en">English</a></li>
     
   </ul>
@@ -91,10 +89,10 @@ library(tidyr)
 library(ggplot2)
 library(modelr)
 library(haven)
-library(easyGgplot2)
+library(cowplot)
 library(stargazer)
 `%&gt;%` &lt;- magrittr::`%&gt;%`</code></pre>
-<div id="section" class="section level1">
+<div id="基础回归" class="section level1">
 <h1>基础回归</h1>
 <p><code>hatdt</code>为作者个人整理的<a href="http://www.isss.pku.edu.cn/cfps/index.htm">中国家庭追踪调查</a>(CFPS)收入数据<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。</p>
 <pre class="r"><code>hatdt &lt;- hatdt %&gt;% 
@@ -123,7 +121,7 @@ plotb &lt;- ggplot() +
   ylim(0, 20000) +
   labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
   theme_bw()</code></pre>
-<pre class="r"><code>ggplot2.multiplot(plota,plotb,cols=2)</code></pre>
+<pre class="r"><code>plot_grid(plota,plotb,ncol = 2)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="../../post/model_files/figure-html/unnamed-chunk-4-1.png" alt="个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。" width="100%" />
 <p class="caption">
@@ -131,7 +129,7 @@ Figure 1: 个人收入与年龄。左图：红线为线性回归模型。蓝色�
 </p>
 </div>
 </div>
-<div id="section-1" class="section level1">
+<div id="多项式回归" class="section level1">
 <h1>多项式回归</h1>
 <pre class="r"><code>set.seed(2019)
 x &lt;- seq(0,4,length=100)
@@ -180,7 +178,7 @@ Figure 3:  分别对CFPS数据进行二次项和三次项回归。三次项导�
 </p>
 </div>
 </div>
-<div id="section-2" class="section level1">
+<div id="交互项" class="section level1">
 <h1>交互项</h1>
 <p>交互项是计量经济学和应用统计学常用的机制分析技术。公式如下：</p>
 <p><span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}{x_2} + {\alpha _3}{x_1}{x_2}\]</span></p>
@@ -204,7 +202,7 @@ Figure 4: 谢益辉的交互效应表示方法。左图：<span class="math inli
 </p>
 </div>
 <p>下面使用R自带数据，1994年加拿大劳动与收入动态调查(SLID)。详细信息请在R中输入<code>?carData::SLID</code>查看。</p>
-<div id="section-3" class="section level2">
+<div id="分类变量与连续变量交互" class="section level2">
 <h2>分类变量与连续变量交互</h2>
 <p>因变量为收入。自变量为教育年限(年)和使用的语言(英语、法语、其他)。下面分别展示了没有交互项和有交互项的模型。</p>
 <pre class="r"><code>#?carData::SLID
@@ -232,7 +230,7 @@ Figure 5: 左图：语言不与教育年限交互。不同语言使用者的斜�
 </p>
 </div>
 </div>
-<div id="section-4" class="section level2">
+<div id="两个连续变量交互" class="section level2">
 <h2>两个连续变量交互</h2>
 <p>对两个连续交互变量的可视化是一个难题。较好的解决办法是分箱。使用<code>modelr</code>的<code>seq_range</code>函数对其中一个连续变量进行分箱。</p>
 <pre class="r"><code>mod1 &lt;- lm(wages ~ education + age,SLID)
@@ -535,14 +533,14 @@ col = rgb(0, 0, 0, 0.1), lwd = 1.5)
 }
 })</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-11-1.png" alt="使用R自带作图工具绘图。作图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。" width="100%" />
+<img src="../../post/model_files/figure-html/unnamed-chunk-11-1.png" alt="使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。" width="100%" />
 <p class="caption">
-Figure 8: 使用R自带作图工具绘图。作图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
+Figure 8: 使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
 </p>
 </div>
 </div>
 </div>
-<div id="section-5" class="section level1">
+<div id="局部加权回归散点平滑" class="section level1">
 <h1>局部加权回归散点平滑</h1>
 <ul>
 <li>Locally Weighted Scatterplot Smoother，LOWESS</li>
@@ -583,13 +581,61 @@ e &lt;- ggplot(PlantCounts,
   geom_smooth(span=1,size=1)+
   ylim(0,80)+
   theme_bw()
-ggplot2.multiplot(g,f,e,cols=2)</code></pre>
+plot_grid(g,f,e,ncol = 2)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
 <img src="../../post/model_files/figure-html/unnamed-chunk-12-1.png" alt="使用`ggplot2`和`for`循环绘图" width="90%" />
 <p class="caption">
 Figure 9: 使用<code>ggplot2</code>和<code>for</code>循环绘图
 </p>
 </div>
+</div>
+<div id="box-cox-变换" class="section level1">
+<h1>Box-Cox 变换</h1>
+<p>为保证变量的正态性进行的统计学转换。</p>
+<pre class="r"><code>library(MASS)
+x = rf(500,30,30)
+hist(x,breaks = 12)</code></pre>
+<div class="figure" style="text-align: center">
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt=" " width="90%" />
+<p class="caption">
+</p>
+</div>
+<pre class="r"><code>result = boxcox(x~1,lambda = seq(-0.5,0,5))</code></pre>
+<div class="figure" style="text-align: center">
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-2.png" alt=" " width="90%" />
+<p class="caption">
+</p>
+</div>
+<pre class="r"><code>mylambda = result$x[which.max(result$y)]
+mylambda</code></pre>
+<pre><code>[1] -0.5</code></pre>
+<pre class="r"><code>x2 &lt;- (x^mylambda-1)/mylambda
+x2 = as.data.frame(x2)
+
+ggplot(x2,aes(x2)) +
+  geom_histogram(color=&#39;black&#39;,
+                 fill=&#39;white&#39;) </code></pre>
+<div class="figure" style="text-align: center">
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-3.png" alt=" " width="90%" />
+<p class="caption">
+</p>
+</div>
+<p><span class="math display">\[
+{y(\lambda)}=\left\{
+\begin{aligned}
+{\textstyle{{{y^\lambda } - 1} \over \lambda }} &amp; , &amp; \mbox{if}\quad\lambda\ne 0 \\
+\log y &amp; , &amp; \mbox{if}\quad\lambda = 0
+\end{aligned}
+\right.
+\]</span></p>
+<p><span class="math display">\[
+{y(\lambda)}=\left\{
+\begin{aligned}
+{\textstyle{{{{(y + {\lambda _2})}^{{\lambda _1}}} - 1} \over {{\lambda _1}}}} &amp; , &amp; \mbox{if}\quad\lambda_1\ne 0 \\
+\log (y + {\lambda _2}{\rm{)}} &amp; , &amp; \mbox{if}\quad\lambda_1 = 0
+\end{aligned}
+\right.
+\]</span></p>
 </div>
 <div class="footnotes">
 <hr />

@@ -115,8 +115,15 @@ knitr::kable(head(USJudgeRatings$score))
 
 + 最后做判别分析
 
-# 计量经济学：因果推断模型
+# 机器学习笔记
 
++ 机器学习不能解决[不完全信息动态博弈](https://mp.weixin.qq.com/s/Yz7gBKZK9mclVMl1A6hP7w)。
+
++ 深度学习能够解决简单的模式识别问题。
+
+
+
+# 计量经济学：因果推断模型
 
 ## Regression Discontinuity Design
 
@@ -146,9 +153,9 @@ C = simulatedXandC[, 2],
 error = simulatedError)
 df %<>%
 mutate(Y = 10 + 1 * X + 5 * C + error)
-fit <- lm(Y ~ X, data = df)
+fit <- lm(Y ~ X,df)
 summary(fit)
-fit <- lm(Y ~ X + C, data = df)
+fit <- lm(Y ~ X + C,df)
 summary(fit)
 
 df <- data.frame(X = simulatedXandC[, 1],
@@ -157,14 +164,12 @@ T = (simulatedXandC[, 1] > 0),
 error = simulatedError)
 df %<>%
 mutate(Y = 10 + X ^ 3 + 5 * T + 1 * C + error)
-fit <- RDestimate(Y ~ X, data = df)
+fit <- RDestimate(Y ~ X,df)
 summary(fit)
 
-rdplot <- ggplot(data = df, aes(x = X, y = Y, color = (X > 0))) +
+ggplot(df,aes(X,Y,color = (X > 0))) +
 geom_point() +
-geom_smooth(method = lm,
-se = F)
-rdplot
+geom_smooth(method=lm,se = F)
 ```
 
 
@@ -182,10 +187,10 @@ summary(fit)
 dfMean <- df %>%
 group_by(time, treatment) %>%
 summarise(Y = mean(Y))
-ggplot(data = df, aes(x = time, y = Y, color = factor(treatment + 2 * (time >= 0)))) +
+
+ggplot(df, aes(time,Y, color = factor(treatment + 2 * (time >= 0)))) +
 geom_point() +
-geom_smooth(method = lm,
-se = F) +
+geom_smooth(method = lm,se = F) +
 theme(legend.position = "none") +
 scale_color_manual(values = c("#F05253", "#2A73CC", "#F05253", "#2A73CC"))
 ```
@@ -198,9 +203,9 @@ C = round(pmin(2, pmax(-2, simulatedXandC[, 2]))),
 error = simulatedError)
 df %<>%
 mutate(Y = 10 + 1 * X + 5 * C + error)
-fit <- lm(Y ~ X, data = df)
+fit <- lm(Y ~ X,df)
 summary(fit)
-fit <- lm(Y ~ X + factor(C), data = df)
+fit <- lm(Y ~ X + factor(C),df)
 summary(fit)
 ```
 
@@ -215,7 +220,7 @@ df %<>%
 mutate(Y = 10 + 1.0 * X - 2 * C + error)
 
 #Naive regression produces biased estimates
-fit <- lm(Y ~ X, data = df)
+fit <- lm(Y ~ X,df)
 summary(fit, vcov = sandwich)
 
 #IV recovers the underlying model
@@ -240,7 +245,6 @@ $$\hat{\beta_{Lasso}} = arg min_{\beta \in R^d}||Y - X\beta||^2 +\lambda \sum_{j
 
 ```{r,error=T,comment=NA,warning=F,message=F}
 library(haven)
-library(dplyr)
 library(tidyr)
 library(plotmo)
 library(glmnet)
@@ -257,9 +261,7 @@ y_train <- ceps$sdtotal %>%
   unlist() %>%
   as.numeric()
 
-lasso_mod <- glmnet(x_train, 
-                   y_train, 
-                   alpha = 1)
+lasso_mod <- glmnet(x_train,y_train,alpha = 1)
 
 
 plot_glmnet(lasso_mod,xvar='lambda',label=10)
