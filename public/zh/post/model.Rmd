@@ -236,6 +236,13 @@ group=market.potential))+
   theme_bw()
 ```
 
+# 局部加权回归散点平滑
+
++ Locally Weighted Scatterplot Smoother，LOWESS
+
+$${y_i} = g({x_i}) + {\varepsilon _i}$$
+$g$是在$x$带宽$\alpha$范围内进行的多项式回归。
+
 ```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
 data(PlantCounts,package = 'MSG')
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
@@ -255,9 +262,7 @@ col = rgb(0, 0, 0, 0.1), lwd = 1.5)
 })
 ```
 
-# 局部加权回归散点平滑
-
-+ Locally Weighted Scatterplot Smoother，LOWESS
++ `ggplot2`版本
 
 ```{r,message=F,warning=F,error=T,comment=NA,cache=T,fig.align='center',out.width='90%',fig.asp=1.2,fig.cap='使用`ggplot2`和`for`循环绘图'}
 g <- ggplot(PlantCounts,
@@ -297,28 +302,22 @@ e <- ggplot(PlantCounts,
   ylim(0,80)+
   theme_bw()
 plot_grid(g,f,e,ncol = 2)
-
 ```
+
+
+# 样条 
+
++ Splines
+
+
+
+
+
+
 
 # Box-Cox 变换
 
 为保证变量的正态性进行的统计学转换。
-
-```{r,message=F,warning=F,error=T,comment=NA,cache=T,fig.align='center',out.width='90%',fig.cap=' '}
-library(MASS)
-x = rf(500,30,30)
-hist(x,breaks = 12)
-result = boxcox(x~1,lambda = seq(-0.5,0,5))
-mylambda = result$x[which.max(result$y)]
-mylambda
-x2 <- (x^mylambda-1)/mylambda
-x2 = as.data.frame(x2)
-
-ggplot(x2,aes(x2)) +
-  geom_histogram(color='black',
-                 fill='white') 
-```
-
 
 $$
 {y(\lambda)}=\left\{
@@ -337,7 +336,30 @@ $$
 \log (y + {\lambda _2}{\rm{)}} & , & \mbox{if}\quad\lambda_1 = 0
 \end{aligned}
 \right.
-$$  
+$$
+
+
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',fig.asp=0.5,out.width='90%',fig.cap=' '}
+library(MASS)
+x = rf(500,30,30)
+boxa <- ggplot(as.data.frame(x),aes(x))+
+  geom_histogram(color='black',
+                 fill='white') 
+
+result = boxcox(x~1,lambda = seq(-0.5,0,5))
+mylambda = result$x[which.max(result$y)]
+mylambda
+x2 <- (x^mylambda-1)/mylambda
+x2 = as.data.frame(x2)
+
+boxb <- ggplot(x2,aes(x2)) +
+  geom_histogram(color='black',
+                 fill='white') 
+plot_grid(boxa,boxb,ncol = 2)
+```
+
+
+
 
 
 

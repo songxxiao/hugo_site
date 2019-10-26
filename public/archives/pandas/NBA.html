@@ -16454,6 +16454,7 @@ div#notebook {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>众所周知，NBA对比赛的各个方面有着非常详尽的技术统计。而我，喜欢分析有趣的<strong>非调查数据</strong>。NBA技术统计数据则具备了零误差、非抽样、多字段这几个特点，非常适合数据分析的练习。</p>
 <p>不过，NBA并非一开始就进行非常详尽的技术统计。NBA于1973-1974赛季正式引入前后场篮板，抢断，盖帽四项技术统计。失误则是于1977-1978赛季引入。首发与否从81-82开始记录。而近年来，因为<code>Sport VU</code>技术的应用，使更详细的数据收集变得可能，比如：每个球员的总跑动距离、平均跑动距离、平均速度（包括进攻端和防守端的平均移动速度）等等。</p>
+<p>51talk的刘思喆做了一些有趣的<a href="http://bjt.name/2009/03/05/data-2008-2009-rockets.html">NBA数据分析</a>。他的分析以球员的一些指标为特征，用于预测球队的胜负。这些分析同样很有意思。</p>
 
 </div>
 </div>
@@ -16502,7 +16503,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">salary_table</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;E:</span><span class="se">\\</span><span class="s2">R_codes</span><span class="se">\\</span><span class="s2">others</span><span class="se">\\</span><span class="s2">nba</span><span class="se">\\</span><span class="s2">NBA_season1718_salary.csv&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1">#导入清理过后的数据</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">salary_table</span> <span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;E:</span><span class="se">\\</span><span class="s2">R_codes</span><span class="se">\\</span><span class="s2">others</span><span class="se">\\</span><span class="s2">nba</span><span class="se">\\</span><span class="s2">NBA_season1718_salary.csv&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> 
 <span class="n">salary_table</span><span class="o">=</span><span class="n">salary_table</span><span class="p">[[</span><span class="s1">&#39;Player&#39;</span><span class="p">,</span><span class="s1">&#39;season17_18&#39;</span><span class="p">]]</span>
 <span class="n">salary_table</span><span class="o">=</span><span class="n">salary_table</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;season17_18&#39;</span><span class="p">:</span><span class="s1">&#39;salary17_18&#39;</span><span class="p">})</span> <span class="c1">#变量重命名</span>
 <span class="n">salary_table</span><span class="p">[</span><span class="s1">&#39;salary17_18&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">salary_table</span><span class="p">[</span><span class="s1">&#39;salary17_18&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">1000000</span> <span class="c1">#数据单位转化为&#39;百万&#39;</span>
@@ -29237,6 +29238,14 @@ L 387.296875 10.7
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>决定球员薪资的最重要因素是出场时间。当出场时间大于31.4分钟时，球员的预期年薪为1800万美元，这批球员基本属于首发球员。当出场时间小于31.4分钟，球员的预期年薪仅有可怜的518万美元。对于出场时间大于31.4分钟的球员，决定薪资的下一个因素是效率值，其次是年龄。效率值更高，且更有经验的球员倾向于获得更高的薪资。由于决策树模型的不稳健性，每次运行的结果略有差异。</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">

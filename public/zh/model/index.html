@@ -516,6 +516,15 @@ group=market.potential))+
 Figure 7: 左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应
 </p>
 </div>
+</div>
+</div>
+<div id="局部加权回归散点平滑" class="section level1">
+<h1>局部加权回归散点平滑</h1>
+<ul>
+<li>Locally Weighted Scatterplot Smoother，LOWESS</li>
+</ul>
+<p><span class="math display">\[{y_i} = g({x_i}) + {\varepsilon _i}\]</span>
+<span class="math inline">\(g\)</span>是在<span class="math inline">\(x\)</span>带宽<span class="math inline">\(\alpha\)</span>范围内进行的多项式回归。</p>
 <pre class="r"><code>data(PlantCounts,package = &#39;MSG&#39;)
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
 with(PlantCounts, {
@@ -538,12 +547,8 @@ col = rgb(0, 0, 0, 0.1), lwd = 1.5)
 Figure 8: 使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
 </p>
 </div>
-</div>
-</div>
-<div id="局部加权回归散点平滑" class="section level1">
-<h1>局部加权回归散点平滑</h1>
 <ul>
-<li>Locally Weighted Scatterplot Smoother，LOWESS</li>
+<li><code>ggplot2</code>版本</li>
 </ul>
 <pre class="r"><code>g &lt;- ggplot(PlantCounts,
             aes(altitude,counts)) +
@@ -589,37 +594,15 @@ Figure 9: 使用<code>ggplot2</code>和<code>for</code>循环绘图
 </p>
 </div>
 </div>
+<div id="样条" class="section level1">
+<h1>样条</h1>
+<ul>
+<li>Splines</li>
+</ul>
+</div>
 <div id="box-cox-变换" class="section level1">
 <h1>Box-Cox 变换</h1>
 <p>为保证变量的正态性进行的统计学转换。</p>
-<pre class="r"><code>library(MASS)
-x = rf(500,30,30)
-hist(x,breaks = 12)</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt=" " width="90%" />
-<p class="caption">
-</p>
-</div>
-<pre class="r"><code>result = boxcox(x~1,lambda = seq(-0.5,0,5))</code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../post/model_files/figure-html/unnamed-chunk-13-2.png" alt=" " width="90%" />
-<p class="caption">
-</p>
-</div>
-<pre class="r"><code>mylambda = result$x[which.max(result$y)]
-mylambda</code></pre>
-<pre><code>[1] -0.5</code></pre>
-<pre class="r"><code>x2 &lt;- (x^mylambda-1)/mylambda
-x2 = as.data.frame(x2)
-
-ggplot(x2,aes(x2)) +
-  geom_histogram(color=&#39;black&#39;,
-                 fill=&#39;white&#39;) </code></pre>
-<div class="figure" style="text-align: center">
-<img src="../../post/model_files/figure-html/unnamed-chunk-13-3.png" alt=" " width="90%" />
-<p class="caption">
-</p>
-</div>
 <p><span class="math display">\[
 {y(\lambda)}=\left\{
 \begin{aligned}
@@ -636,6 +619,33 @@ ggplot(x2,aes(x2)) +
 \end{aligned}
 \right.
 \]</span></p>
+<pre class="r"><code>library(MASS)
+x = rf(500,30,30)
+boxa &lt;- ggplot(as.data.frame(x),aes(x))+
+  geom_histogram(color=&#39;black&#39;,
+                 fill=&#39;white&#39;) 
+
+result = boxcox(x~1,lambda = seq(-0.5,0,5))</code></pre>
+<div class="figure" style="text-align: center">
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt=" " width="90%" />
+<p class="caption">
+</p>
+</div>
+<pre class="r"><code>mylambda = result$x[which.max(result$y)]
+mylambda</code></pre>
+<pre><code>[1] -0.5</code></pre>
+<pre class="r"><code>x2 &lt;- (x^mylambda-1)/mylambda
+x2 = as.data.frame(x2)
+
+boxb &lt;- ggplot(x2,aes(x2)) +
+  geom_histogram(color=&#39;black&#39;,
+                 fill=&#39;white&#39;) 
+plot_grid(boxa,boxb,ncol = 2)</code></pre>
+<div class="figure" style="text-align: center">
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-2.png" alt=" " width="90%" />
+<p class="caption">
+</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />

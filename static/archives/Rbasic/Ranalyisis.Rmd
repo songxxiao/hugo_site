@@ -123,16 +123,21 @@ knitr::kable(head(USJudgeRatings$score))
 
 
 
-# 计量经济学：因果推断模型
+# 计量经济学
 
-## Regression Discontinuity Design
+教材：[Introduction to Econometrics with R](https://www.econometrics-with-r.org/index.html)
+
+## 断点回归
+
++ Regression Discontinuity Design
 
 ```{r ,message = F, comment = NA,warning = F}
 library(dplyr)
 library(magrittr)
 library(MASS)
 library(rdd)
-
+library(modelr)
+library(cowplot)
 set.seed(1)
 n <- 10 ^ 3
 mu <- matrix(c(0, 0))
@@ -172,8 +177,9 @@ geom_point() +
 geom_smooth(method=lm,se = F)
 ```
 
+## 双重差分
 
-## Difference-in-Differences
++ Difference-in-Differences
 
 ```{r ,message = F, comment = NA,warning = F}
 df <- data.frame(time = 10 * round(runif(n), 1) - 5,
@@ -189,27 +195,96 @@ group_by(time, treatment) %>%
 summarise(Y = mean(Y))
 
 ggplot(df, aes(time,Y, color = factor(treatment + 2 * (time >= 0)))) +
-geom_point() +
+geom_jitter(width=0.5,height=1) +
 geom_smooth(method = lm,se = F) +
 theme(legend.position = "none") +
 scale_color_manual(values = c("#F05253", "#2A73CC", "#F05253", "#2A73CC"))
 ```
 
-## Fixed Effects Regression
+## 固定效应模型
 
-```{r,message = F, comment = NA,warning = F}
-df <- data.frame(X = simulatedXandC[, 1],
-C = round(pmin(2, pmax(-2, simulatedXandC[, 2]))),
-error = simulatedError)
-df %<>%
-mutate(Y = 10 + 1 * X + 5 * C + error)
-fit <- lm(Y ~ X,df)
-summary(fit)
-fit <- lm(Y ~ X + factor(C),df)
-summary(fit)
++ Fixed Effects Regression
+
+```{r,message = F, comment = NA,warning = F,fig.asp=0.4}
+set.seed(222)
+x <- seq(0,4,length = 100)
+y <- -x + jitter(rep(1:5, each = 20), 2)
+z <-  rep(1:5, each = 20) %>% as.factor()
+dt <- data.frame(x,y,z) %>% 
+  group_by(z) %>% 
+  mutate(c=rep(1:20,length = 20),
+         year=as.factor(c))
+#View(dt)
+plta <- ggplot(dt, aes(x, y)) +
+  geom_point(aes(color=year,shape=z),size=2) +
+  geom_smooth(method='lm',se=F,color='red') +
+  theme_bw() +
+  theme(legend.position = 'none')
+
+moda <- lm(y ~ x + z,dt)
+grid <- dt %>%
+data_grid(x,z) %>%
+gather_predictions(moda)
+          
+pltb <- ggplot(dt, aes(x, y)) +
+  geom_point(aes(color=year,shape=z),size=2) +
+  geom_line(data=grid,aes(pred,x,group=z),
+            size=0.75,color='red') +
+  ylim(0.2,1.9)+
+  xlim(0,4)+
+  theme_bw() +
+  theme(legend.position = 'none')
+plot_grid(plta,pltb,ncol = 2)
 ```
 
-## Instrumental Variables
+```{r,message = F, comment = NA,warning = F,fig.asp=0.4}
+data("Grunfeld", package = "plm")
+plta <- ggplot(Grunfeld, aes(value,inv)) +
+  geom_point(aes(color=factor(firm)),size=2) +
+  geom_smooth(method='lm',se=F,color='red') +
+  theme(legend.position = 'none')+
+  theme_bw()  
+
+moda <- lm(inv ~ value + factor(firm),Grunfeld)
+grid <- Grunfeld %>%
+data_grid(value,firm) %>%
+gather_predictions(moda)
+          
+pltb <- ggplot(Grunfeld, aes(value,inv)) +
+  geom_point(aes(color=factor(firm)),size=2) +
+  geom_line(data=grid,aes(value,pred,color=factor(firm),group=factor(firm)),size=0.75) +
+  theme(legend.position = 'none')+
+  theme_bw() 
+plot_grid(plta,pltb,ncol = 2)
+```
+
+```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',results='asis'}
+library(plm)
+ols <- lm(inv ~ value + capital,
+          data = Grunfeld)
+
+fe <- plm(inv ~ value + capital,
+          data = Grunfeld, model = 'within',
+          effect='individual')
+
+tw <- plm(inv ~ value + capital,
+          data = Grunfeld, model = "within", effect = "twoways")
+
+stargazer::stargazer(ols,fe,tw,
+          title='回归结果',
+          dep.var.caption=' ',
+          dep.var.labels=' ',
+          align=T,
+          type='html',column.labels=c('线性回归','组内估计','双重固定'),
+          keep.stat=c('n','rsq','ll'))
+```
+
+
+
+
+## 工具变量
+
++ Instrumental Variables
 
 ```{r,message = F, comment = NA,warning = F}
 df <- data.frame(Z = simulatedZ,
@@ -220,13 +295,22 @@ df %<>%
 mutate(Y = 10 + 1.0 * X - 2 * C + error)
 
 #Naive regression produces biased estimates
-fit <- lm(Y ~ X,df)
+fit1 <- lm(Y ~ X,df)
 summary(fit, vcov = sandwich)
 
 #IV recovers the underlying model
-fit <- ivreg(Y ~ X | Z, data = df)
+fit2 <- ivreg(Y ~ X | Z, data = df)
 summary(fit, vcov = sandwich, df = Inf, diagnostics = T)
+```
 
+```{r,echo=F,results='asis'}
+stargazer::stargazer(fit1,fit2,
+          title='回归结果',
+          dep.var.caption=' ',
+          dep.var.labels=' ',
+          align=T,
+          type='html',
+          keep.stat=c('n','rsq'))
 ```
 
 # LASSO回归
@@ -362,4 +446,153 @@ param <- list(max_depth = 2, eta = 1, silent = 1)
 bst <- xgb.train(param, dtrain, nrounds = 2, watchlist, logregobj, evalerror, maximize = FALSE)
 ```
 
+# 对数线性模型
+
+```{r,eval=F}
+
+## http://ww2.coastal.edu/kingw/statistics/R-tutorials/loglin.html
+
+data(Titanic)
+View(Titanic)
+dimnames(Titanic)
+margin.table(Titanic, c(2,4))
+
+### begin copying script here
+likelihood.test = function(x) {
+  nrows = dim(x)[1]                      # no. of rows in contingency table
+  ncols = dim(x)[2]                      # no. of cols in contingency table
+  chi.out = chisq.test(x,correct=F)      # do a Pearson chi square test
+  table = chi.out[[6]]                   # get the OFs
+  ratios = chi.out[[6]]/chi.out[[7]]     # calculate OF/EF ratios
+  sum = 0                                # storage for the test statistic
+  for (i in 1:nrows) {
+    for (j in 1:ncols) {
+      sum = sum + table[i,j]*log(ratios[i,j])
+    }
+  }
+  sum = 2 * sum                          # the likelihood ratio chi square
+  df = chi.out[[2]]                      # degrees of freedom
+  p = 1 - pchisq(sum,df)                 # p-value
+  out = c(sum, df, p, chi.out[[1]])      # the output vector
+  names(out) = c("LR-chisq","df","p-value","Pears-chisq")
+  round(out,4)                           # done!
+}
+### end copying script here and paste into R Console
+sex.survived = margin.table(Titanic, c(2,4)) 
+summary(Titanic)
+library(MASS)             
+k <- loglm( ~ Sex + Survived, data=sex.survived)
+k
+summary(k)
+
+loglm(~ Class + Sex + Age + Survived, data=Titanic)
+
+loglm(~ Class * Sex * Age * Survived, data=Titanic)
+
+loglm(~ Class * Sex * Age * Survived - Class:Sex:Age:Survived, data=Titanic)
+
+loglm(formula = ~Class + Sex + Age + Survived + 
+        Class:Sex + Class:Age + 
+        Sex:Age + Class:Survived + Age:Survived + Class:Sex:Age + 
+        Class:Age:Survived, data=Titanic)
+
+```
+
+# 有限混合模型
+
+`flexmix`
+
+```{r,error=T,comment=NA,warning=F,message=F}
+library(flexmix)
+data("NPreg", package = "flexmix")
+## mixture of two linear regression models. Note that control parameters
+## can be specified as named list and abbreviated if unique.
+ex1 <- flexmix(yn ~ x + I(x^2), data=NPreg, k=2,
+               control=list(verb=5, iter=100))
+ex1
+summary(ex1)
+plot(ex1)
+```
+
+# 文本分析笔记
+
+中山大学
+
++ $$文本作为数据$$  
+
+
+文本比较 微博情绪研究 情感分析 
+
+网络论坛：天涯、凯迪社区、
+
+媒体数据库：人民日报、纽约时报
+
+网上社区：百度贴吧
+
+中国裁判文书网：法学、犯罪学
+
++ 特征
+
+多种来源  
+非结构化  
+长尾分布  
+词语之间复杂微妙的关系  
+词语模糊性和情景敏感性  
+
++ $$文本数据与外部数据结合$$
+
+微博情绪文本、股票市场  
+重大事件与重大事件的关系  
+政策文本与地方实际表现  
+
++ 机器学习
+
+无监督学习（文本聚类、主题模型）  
+**半监督学习**（随机森林、朴素贝叶斯）
+
++ 新进展  
+
+词向量模型（`Word2vec`）  
+循环神经网络（`RNN`）
+
++ 清理文本  
+
+删除停词  
+大小写  
+删除  
+提取词干  
+去除标点符号  
+去除非字符符号  
+提取标题、作者、日历、电子邮箱、地址等  
+分词
+
+包  
+`text2vec`
+`e1701` 
+`tm` 
+`Snomba`  
+
++ 词汇语义变迁研究  
+特定类型词汇库的完善  
+实体关系或网络构建  
+文本相似性计算  
+情感分析  
+
+# 常见统计检验
+
+
+```{r,error=T,comment=NA,warning=F,message=F}
+t.test(extra ~ group,sleep)
+wilcox.test(extra ~ group,sleep)
+```
+```{r,error=T,comment=NA,warning=F,message=F}
+M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(M) <- list(gender = c("F", "M"),
+                    party = c("Democrat","Independent", "Republican"))
+(Xsq <- chisq.test(M))  # Prints test summary
+Xsq$observed   # observed counts (same as M)
+Xsq$expected   # expected counts under the null
+Xsq$residuals  # Pearson residuals
+Xsq$stdres     # standardized residuals
+```
 

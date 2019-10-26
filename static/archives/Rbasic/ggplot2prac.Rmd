@@ -62,14 +62,10 @@ library(rgdal)
 
 # 密度可视化
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r,message = F, comment = NA,warning = F,fig.align='center',out.width ='100%',fig.asp=0.6}
 data(diamonds)
 ggplot(diamonds, aes(log(carat), log10(price))) +
 geom_bin2d(bins = 50) +
-facet_wrap(~cut, nrow = 2)
-
-ggplot(diamonds, aes(log(carat), log10(price))) +
-geom_hex() +
 facet_wrap(~cut, nrow = 2)
 ```
 
@@ -150,18 +146,7 @@ ggplot(bara,aes(reorder(car
 
 # 地图
 
-+ 不分面(`facet_wrap`)的笨办法，使用`ggplot2.multiplot`手动合并图形。
-
-```{r,echo=F,message = F, comment = NA,warning = F,cache = T} 
-rm(list=ls())
-china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
-
-mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
-mapdata <- as.data.frame(mapdata)
-mapdata <- select(mapdata,-(NAME)) #reverse selection
-china_data <- join(china_map_data, mapdata, type="full")
-
-china_data <- select(china_data,long,lat,group,'2011土地租出','2011土地租入','2013土地租出','2013土地租入','2015土地租出','2015土地租入')
+```{r,eval=F,include=F} 
 
 out12 <- ggplot(china_data, aes(long,lat, group = group,fill= out12)) +
   geom_polygon(colour="brown",size=0.2) +
@@ -260,10 +245,6 @@ in16 <- ggplot(china_data, aes(long,lat, group = group,fill= in16)) +
     plot.margin = unit(c(0.001,0.001,0.001,0.001), "cm")) 
 ```
 
-```{r,message = F,comment = NA,warning = F,fig.align='center',out.width ='100%'} 
-plot_grid(out12,in12,out14,in14,out16,in16, ncol=2)
-
-```
 
 + 使用[`reshape2`](https://seananderson.ca/2013/10/19/reshape/)进行数据长宽转换。
 
@@ -271,7 +252,13 @@ plot_grid(out12,in12,out14,in14,out16,in16, ncol=2)
 
 + [`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.cap='中国土地流转的空间分布。北京、天津由于农户过少而设为缺失。CFPS未调查的省份数据缺失。土地流转发生率=当年参与土地流转的农户数/当年农户总数。数据经过加权处理，具有全国代表性。'} 
+```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.cap='中国土地流转的空间分布。北京、天津由于农户过少而设为缺失。CFPS未调查的省份数据缺失。土地流转发生率=当年参与土地流转的农户数/当年农户总数。数据经过加权处理，具有全国代表性。'}
+china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
+mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
+mapdata <- as.data.frame(mapdata)
+mapdata <- select(mapdata,-(NAME))
+china_data <- join(china_map_data, mapdata, type="full")
+china_data <- select(china_data,long,lat,group,'2011土地租出','2011土地租入','2013土地租出','2013土地租入','2015土地租出','2015土地租入')
 long <- melt(china_data, id=c("long", "lat","group"))
 
 ggplot(long, aes(long,lat,group = group,fill= value)) +
@@ -342,15 +329,9 @@ plot_grid(era,erb,erc,ncol = 2)
 # 平行坐标图(Parallel Coordinate Plot)
 
 ```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
-
-data(kyphosis,package = 'rpart')
-kyphosis <- kyphosis %>% 
-  select(Kyphosis,Age,Start,Number,everything())
-
 library(GGally)
-ggparcoord(kyphosis, columns = 2:4, groupColumn = 1, scale = "uniminmax") + 
+ggparcoord(iris, columns = 1:4, groupColumn = 5, scale = "uniminmax") + 
   geom_line(size = 1.2)
-
 ```
 
 # 5折交叉验证

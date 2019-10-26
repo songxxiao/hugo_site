@@ -35,12 +35,14 @@ hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp
       
       <guid>/zh/resource/</guid>
       <description>教科书R for Data Science
+Advanced R
 ggplot2: Elegant Graphics for Data Analysis
 现代统计图形
 现代统计图形之极乐净土
 caret包
 Fundamentals of Data Visualization
 统计学与R读书笔记(第六版)
+Introduction to Econometrics with R
 PythonPython -WordCloud 修改色调
 Python中WordCloud各参数的含义
 超详细：Python(wordcloud+jieba)生成中文词云图
@@ -84,7 +86,8 @@ f.readlines()返回一个列表，列表的数据项为一行的文本[linel, l
 以下是徐导以往的作品，如向《喜剧之王》致敬的《外卖》：
 演绎了武侠爱情的《一世安》：
 以及，异常青涩的处女作《寻》：
-徐导在不断进步呢。对于我这种半吊子鉴赏者来说。看着朋友一部部推出新作，是件有意思的事情。作为有多年交情的铁子，希望他的作品能早日登录院线:D</description>
+徐导在不断进步呢。对于我这种半吊子鉴赏者来说。看着朋友一部部推出新作，是件有意思的事情。作为有多年交情的铁子，希望他的作品能早日登录院线:D
+这里有一波狗粮。想看的看看吧。</description>
     </item>
     
     <item>

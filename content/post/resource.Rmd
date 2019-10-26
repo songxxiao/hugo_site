@@ -9,6 +9,8 @@ slug: resource
 
 [R for Data Science](https://r4ds.had.co.nz/)
 
+[Advanced R](http://adv-r.had.co.nz/Introduction.html)
+
 [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
 
 [现代统计图形](https://bookdown.org/xiangyun/msg/)
@@ -20,6 +22,8 @@ slug: resource
 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 
 [统计学与R读书笔记(第六版)](https://cran.rstudio.com/doc/contrib/Xu-Statistics_and_R.pdf)
+
+[Introduction to Econometrics with R](https://www.econometrics-with-r.org/index.html)
 
 
 ---
