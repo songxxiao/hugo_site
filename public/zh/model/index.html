@@ -599,6 +599,80 @@ Figure 9: 使用<code>ggplot2</code>和<code>for</code>循环绘图
 <ul>
 <li>Splines</li>
 </ul>
+<pre class="r"><code>library(ISLR)
+library(splines)
+data(wage,package = &#39;ISLR&#39;)
+fita &lt;- lm(wage ~ bs(age,degree=1,knots = c(25,40,60)),Wage)
+fitb &lt;- lm(wage ~ bs(age,knots = c(25,40,60)),Wage)
+summary(fita)</code></pre>
+<pre><code>
+Call:
+lm(formula = wage ~ bs(age, degree = 1, knots = c(25, 40, 60)), 
+    data = Wage)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-99.795 -24.686  -4.856  15.344 204.671 
+
+Coefficients:
+                                            Estimate Std. Error t value
+(Intercept)                                   54.333      5.957   9.120
+bs(age, degree = 1, knots = c(25, 40, 60))1   37.645      6.817   5.522
+bs(age, degree = 1, knots = c(25, 40, 60))2   65.847      6.019  10.940
+bs(age, degree = 1, knots = c(25, 40, 60))3   63.850      6.319  10.104
+bs(age, degree = 1, knots = c(25, 40, 60))4   33.772     10.580   3.192
+                                            Pr(&gt;|t|)    
+(Intercept)                                  &lt; 2e-16 ***
+bs(age, degree = 1, knots = c(25, 40, 60))1 3.64e-08 ***
+bs(age, degree = 1, knots = c(25, 40, 60))2  &lt; 2e-16 ***
+bs(age, degree = 1, knots = c(25, 40, 60))3  &lt; 2e-16 ***
+bs(age, degree = 1, knots = c(25, 40, 60))4  0.00143 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 39.91 on 2995 degrees of freedom
+Multiple R-squared:  0.08665,   Adjusted R-squared:  0.08543 
+F-statistic: 71.03 on 4 and 2995 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>summary(fitb)</code></pre>
+<pre><code>
+Call:
+lm(formula = wage ~ bs(age, knots = c(25, 40, 60)), data = Wage)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-98.832 -24.537  -5.049  15.209 203.207 
+
+Coefficients:
+                                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                       60.494      9.460   6.394 1.86e-10 ***
+bs(age, knots = c(25, 40, 60))1    3.980     12.538   0.317 0.750899    
+bs(age, knots = c(25, 40, 60))2   44.631      9.626   4.636 3.70e-06 ***
+bs(age, knots = c(25, 40, 60))3   62.839     10.755   5.843 5.69e-09 ***
+bs(age, knots = c(25, 40, 60))4   55.991     10.706   5.230 1.81e-07 ***
+bs(age, knots = c(25, 40, 60))5   50.688     14.402   3.520 0.000439 ***
+bs(age, knots = c(25, 40, 60))6   16.606     19.126   0.868 0.385338    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 39.92 on 2993 degrees of freedom
+Multiple R-squared:  0.08642,   Adjusted R-squared:  0.08459 
+F-statistic: 47.19 on 6 and 2993 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>grid &lt;- Wage %&gt;% 
+  data_grid(age) %&gt;%
+  gather_predictions(fita,fitb)
+
+ggplot(Wage,aes(age,wage))+
+  geom_point(size=1,alpha=1/7)+
+  geom_line(data=grid,aes(age,pred),
+            size=1,color=&#39;purple&#39;)+
+  facet_wrap(~model)+
+  theme_bw()</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt="左图：1次项样条。右图：3次项样条" width="100%" />
+<p class="caption">
+Figure 10: 左图：1次项样条。右图：3次项样条
+</p>
+</div>
 </div>
 <div id="box-cox-变换" class="section level1">
 <h1>Box-Cox 变换</h1>
@@ -627,7 +701,7 @@ boxa &lt;- ggplot(as.data.frame(x),aes(x))+
 
 result = boxcox(x~1,lambda = seq(-0.5,0,5))</code></pre>
 <div class="figure" style="text-align: center">
-<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt=" " width="90%" />
+<img src="../../post/model_files/figure-html/unnamed-chunk-14-1.png" alt=" " width="90%" />
 <p class="caption">
 </p>
 </div>
@@ -642,7 +716,7 @@ boxb &lt;- ggplot(x2,aes(x2)) +
                  fill=&#39;white&#39;) 
 plot_grid(boxa,boxb,ncol = 2)</code></pre>
 <div class="figure" style="text-align: center">
-<img src="../../post/model_files/figure-html/unnamed-chunk-13-2.png" alt=" " width="90%" />
+<img src="../../post/model_files/figure-html/unnamed-chunk-14-2.png" alt=" " width="90%" />
 <p class="caption">
 </p>
 </div>

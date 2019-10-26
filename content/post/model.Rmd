@@ -309,10 +309,26 @@ plot_grid(g,f,e,ncol = 2)
 
 + Splines
 
+```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='左图：1次项样条。右图：3次项样条'}
+library(ISLR)
+library(splines)
+data(wage,package = 'ISLR')
+fita <- lm(wage ~ bs(age,degree=1,knots = c(25,40,60)),Wage)
+fitb <- lm(wage ~ bs(age,knots = c(25,40,60)),Wage)
+summary(fita)
+summary(fitb)
 
+grid <- Wage %>% 
+  data_grid(age) %>%
+  gather_predictions(fita,fitb)
 
-
-
+ggplot(Wage,aes(age,wage))+
+  geom_point(size=1,alpha=1/7)+
+  geom_line(data=grid,aes(age,pred),
+            size=1,color='purple')+
+  facet_wrap(~model)+
+  theme_bw()
+```
 
 
 # Box-Cox 变换
