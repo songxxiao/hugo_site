@@ -111,18 +111,101 @@ DDL是2.13。
 --->
 
 
+# BA文书
+
+<!--
+“颜值”真的重要吗？——相貌因素对初婚风险的影响
+在我大二的时候，我曾做过一个这样的社会研究，相貌因素对初婚风险影响有多大，在进行实验的量化分析之前，实验的结果基本已经被大多人所锁定---毫无疑问相貌对男女关系会存在十分大的影响，然而经过层层数学模型与分析统计后，我得到了一个出乎意料的结论：相貌因素并不能影响中国人进入初婚的时间，美丽外貌在婚姻市场的作用易被年龄效应和同质婚效应掩盖；论文的结论引起了一定的关注，也被选入中国社会学年会，而我也从此被数据的力量所深深折服，决定要在数据领域展开更深度的学习与研究
+
+- 强调已经满足了先修课
+在大学四年间，我以年纪前10%的成绩完成了ba的先修课，包括回归分析，概率论、stata、spss等，并主导了多次强数据导向的社会研究，均取得一定成果（eg）
+
+--->
 
 
-Certificate of Identification
+## 兴趣起源段
 
-Name: Xiao Song
-Ethnicity: Han
-Date of Birth: 26th December 1997
-Residential Address: No. 500, Dongchuan Road, Minhang District, Shanghai
-Citizen ID number:652201199712262115
-Cizizen Identity Card of People's Republic of China
-Authority: Shanghai Public Security Bureau Minhang Branch
+学术背景 职业背景
 
-Period of Validity: 10th June 2019- 10th June 2019
+我是谁
+
+为啥对这个感兴趣？
+
+论据：为啥我可以。使用经历
+
+短期 长期目标
+
+为啥是这个学校，不是其他学校，双向选择的匹配。
+
+Why School
+
+相貌对初婚时间的影响。很多申请者不具备这个话题。本科早期做的。时间点能够串得上。
+
+本来对社会学研究。
+
+*矛盾点？*。相貌毫无疑问很重要。结果被锁定。被数据讲故事后。结论出乎意料。相貌不能影响。很多东西不能用经验所判断。需要用数据！过渡到为什么要申请研究生。
+
+引入数据分析高度相关的例子。
+
+数据改变了很多人的预先判断。社会学
+
+不要写自己的模型。经过数据模型和分析统计后。balabala。
+结论写出来。论文的结论引起一定关注。论文被印。我被数据分析的魅力深深折服。
+
+为什么要写这个专业
+
+我的年级排名为前%几。包括统计学、概率论、线性代数。
+
+## 第二段
+
+继续的社会研究。
+
+土地流转研究-和实习经历
+
+对颜值的研究之后。进行了数据导向的研究。如何通过数据？
+
+用R做了地理信息可视化。输出了什么有价值的东西。**数据分析和专业研究领域**。BA是横向限制职能的专业。**数据能力在场景中的应用: 扣题**
+
+## 第三段
+
+信用卡(30%)和iresearch(70%)。第二段1.5倍。为了进一步提升数据解决能力。侧重交代数据分析能力。用了什么工具搞模型。量化分析能力。数据专业水平。如何做特征选择、清理数据。强化讲技能点。
+
+下一段的探索。用什么方法做了什么。取得了什么成就。对公司有什么影响。我用了机器学习。具体讲贡献。如何在商业领域应用数据分析？
+
+
+## 第四段
+
++ 职业规划 10%
+
+引导我产生的什么目标。希望涉及机器学习领域。通过数据挖掘产生商业价值。用数据的方式理解社会科学？毕业后进入咨询行业。打通数据导入、清理、建模、赋能商业价值。
+
+长期目标，简写一下，最终想成为用数据推动商业智能化。
+
+数据驱动商业决策。咨询行业的数据专家。
+
+Data Driven 
+
+## Why School?
+
+为啥是这个学校，不是其他学校，双向选择的匹配。本身发展计划和项目契合点。就是想涉足机器学习领域。从事编程！Practical。想参加实践项目。这个项目和我要的是契合的。课程设置。特殊课程、机器学习、深度学习。专业的地理位置优势。**能给学院带来什么？** 数据是一个日新月异的领域。如何弥补？利用学校的校友会。从事社会工作的。组建Data Science交流会。校友会来。社会学背景可以带来对这方面的补充。个人背景对学校的补充。
+
+## 描述挑战
+
+>Describe a challenge related to data or analytics that you have encountered. How did you resolve this challenge, and did you succeed?
+Your response should be no more than 250 words.
+
+放iresearch。讲核心矛盾。Optional essay. 自己要
+
+>At Johns Hopkins Carey Business School, we shape business leaders who seize opportunity, inspire change, and create lasting value. How is your future industry evolving and in what ways do you hope to inspire change and create lasting value?
+
+明确发展方向。
+
+往物联网进行发展。酒店。贡献的方向和自己的背景结合起来。
+
+
+
+
+
+
 
 

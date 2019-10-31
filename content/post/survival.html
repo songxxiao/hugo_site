@@ -1,10 +1,7 @@
 ---
-title: "生存分析云笔记" 
-author: ' '
+title: '生存分析云笔记'
 date: '2019-05-23'
 slug: survival
-tags: ["R","应用统计"]
-
 ---
 
 
@@ -17,8 +14,8 @@ tags: ["R","应用统计"]
 <p>李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.</p>
 <p>李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.</p>
 <hr />
-<div id="第一讲-基本概念" class="section level2">
-<h2>第一讲: 基本概念</h2>
+<div id="基本概念" class="section level1">
+<h1>基本概念</h1>
 <ul>
 <li>社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。<strong>在一个状态内待的时间和风险有着密切的关系</strong>。</li>
 </ul>
@@ -38,8 +35,8 @@ tags: ["R","应用统计"]
 </ul>
 <hr />
 </div>
-<div id="第二讲-最大似然估计mle" class="section level2">
-<h2>第二讲: 最大似然估计(MLE)</h2>
+<div id="最大似然估计mle" class="section level1">
+<h1>最大似然估计(MLE)</h1>
 <p>Cox回归避开了模型分布假定的问题。</p>
 <ul>
 <li><p>假定数据独立同分布。</p>
@@ -73,15 +70,17 @@ tags: ["R","应用统计"]
 <hr />
 </div>
 </div>
-<div id="第三讲-生存分析估计" class="section level2">
-<h2>第三讲: 生存分析估计</h2>
+<div id="生存分析估计" class="section level1">
+<h1>生存分析估计</h1>
 <p>R生存分析介绍：<a href="http://www.openintro.org/stat/surv.php">survival analysis in R</a></p>
 <pre class="r"><code>library(survival)
 library(haven) 
 library(ggplot2)
 library(dplyr)
 library(ggfortify)
-library(stargazer)</code></pre>
+library(stargazer)
+library(rpart)
+library(rpart.plot)</code></pre>
 <ul>
 <li>数据介绍：<br />
 <code>los1</code>:时间变量<br />
@@ -94,8 +93,8 @@ minc=4,$2000+)<br />
 <code>age</code>:年龄<br />
 <code>black</code>:种族</li>
 </ul>
-<div id="kaplanmeier-estimator-卡普兰迈耶法" class="section level3">
-<h3>Kaplan–Meier estimator | 卡普兰迈耶法</h3>
+<div id="kaplanmeier-estimator-卡普兰迈耶法" class="section level2">
+<h2>Kaplan–Meier estimator | 卡普兰迈耶法</h2>
 <p>又称乘积极限法(Product-Limit Method), 公式如下：</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
@@ -114,12 +113,12 @@ km_fit #生存分析概要</code></pre>
 
       n  events  median 0.95LCL 0.95UCL 
    1278     300      NA      NA      NA </code></pre>
-<div class="figure" style="text-align: center">
-<img src="/img/survival/life.jpg" alt=" " width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="/img/survival/life.jpg" alt="生存函数的Kaplan–Meier estimator是生命表$nPx$列的累乘。" width="100%" />
 <p class="caption">
+Figure 1: 生存函数的Kaplan–Meier estimator是生命表<span class="math inline">\(nPx\)</span>列的累乘。
 </p>
 </div>
-<p>生存函数的Kaplan–Meier estimator就是<span class="math inline">\(nPx\)</span>列的累乘。</p>
 <pre class="r"><code>summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
 <pre><code>Call: survfit(formula = km ~ 1, data = cwg)
 
@@ -149,21 +148,24 @@ km_fit #生存分析概要</code></pre>
   4.6   1008       4    0.913 0.00821        0.897        0.929
   4.8    991       8    0.905 0.00853        0.889        0.922
   5.0    977       7    0.899 0.00881        0.882        0.916</code></pre>
-<div class="figure" style="text-align: center">
-<img src="/img/survival/life2.jpg" alt=" " width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="/img/survival/life2.jpg" alt="生命表示例" width="100%" />
 <p class="caption">
+Figure 2: 生命表示例
 </p>
 </div>
-<pre class="r"><code>autoplot(km_fit) #ggplot2风格KM图</code></pre>
-<p><img src="/post/survival_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>km_trt_fit &lt;- survfit(km ~ female, data=cwg)#分性别KM估计
-autoplot(km_trt_fit) #图中+号可能是&quot;打结&quot; ties?</code></pre>
-<p><img src="/post/survival_files/figure-html/unnamed-chunk-7-2.png" width="70%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>km_trt_fit &lt;- survfit(km ~ female, data=cwg)
+autoplot(km_trt_fit)  </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/survival_files/figure-html/unnamed-chunk-8-1.png" alt="Kaplan Meier Survival Curve" width="100%" />
+<p class="caption">
+Figure 3: Kaplan Meier Survival Curve
+</p>
 </div>
 </div>
 <div id="cox比例风险模型" class="section level2">
 <h2>Cox比例风险模型</h2>
-<p><span class="math display">\[\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}\]</span></p>
+<p><span class="math display">\[\ln{h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}\]</span></p>
 <ul>
 <li><span class="math inline">\({h_i}(t)\)</span>是个体i在时间t时的风险值。<span class="math inline">\({h_0}(t)\)</span>是所有个体在时间t时的非参数风险函数值。<span class="math inline">\({\beta_p}{X_p}\)</span>是对个体i的解释变量和系数。</li>
 </ul>
@@ -216,9 +218,8 @@ Likelihood ratio test= 79.58  on 11 df,   p=2e-12
 Wald test            = 83.79  on 11 df,   p=3e-13
 Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
 <pre class="r"><code>cox_fit &lt;- survfit(coxreg)
-autoplot(cox_fit) #拟合值</code></pre>
-<p><img src="/post/survival_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>##C-指数 Harrell&#39;s concordance index
+#autoplot(cox_fit) #拟合值
+##C-指数 Harrell&#39;s concordance index
 #coxreg$concordance
 concordance(km ~ predict(coxreg), data = cwg)</code></pre>
 <pre><code>Call:
@@ -228,249 +229,6 @@ n= 1278
 Concordance= 0.3518 se= 0.0164
 concordant discordant     tied.x     tied.y    tied.xy 
      96999     179888       2803        246         19 </code></pre>
-<pre class="r"><code>stargazer(coxreg,
-          title=&#39;Cox回归结果&#39;,
-          header=F,no.space=T,
-          type=&#39;html&#39;,align=T,
-          keep.stat=c(&#39;n&#39;,&#39;rsq&#39;,&#39;ll&#39;))</code></pre>
-<table style="text-align:center">
-<caption>
-<strong>Cox回归结果</strong>
-</caption>
-<tr>
-<td colspan="2" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-<em>Dependent variable:</em>
-</td>
-</tr>
-<tr>
-<td>
-</td>
-<td colspan="1" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-km
-</td>
-</tr>
-<tr>
-<td colspan="2" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-ec2
-</td>
-<td>
--0.064
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.156)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-ec3
-</td>
-<td>
--0.313<sup>**</sup>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.150)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-age1
-</td>
-<td>
-0.236
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.178)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-age2
-</td>
-<td>
-0.121
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.180)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-age3
-</td>
-<td>
-0.364<sup>**</sup>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.181)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-age4
-</td>
-<td>
-0.185
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.195)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-female
-</td>
-<td>
-0.059
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.116)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-black
-</td>
-<td>
--0.173
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.129)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-minc2
-</td>
-<td>
-0.866<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.126)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-minc3
-</td>
-<td>
-0.906<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.210)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-minc4
-</td>
-<td>
-1.546<sup>***</sup>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-(0.308)
-</td>
-</tr>
-<tr>
-<td colspan="2" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Observations
-</td>
-<td>
-1,278
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-R<sup>2</sup>
-</td>
-<td>
-0.060
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-Log Likelihood
-</td>
-<td>
--2,006.503
-</td>
-</tr>
-<tr>
-<td colspan="2" style="border-bottom: 1px solid black">
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-<em>Note:</em>
-</td>
-<td style="text-align:right">
-<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
-</td>
-</tr>
-</table>
 <p><a href="https://blog.csdn.net/fjsd155/article/details/84669331">生存模型的C-index（C指数）</a></p>
 <p><a href="https://blog.csdn.net/anshiquanshu/article/details/53438438">C-index/C-statistic 计算的5种不同方法及比较</a></p>
 </div>
@@ -501,9 +259,80 @@ minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
 Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
 <pre class="r"><code>autoplot(aaregfit)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="/post/survival_files/figure-html/unnamed-chunk-10-1.png" alt="协变量作用如何随时间变化" width="100%" />
+<img src="/post/survival_files/figure-html/unnamed-chunk-10-1.png" alt="协变量作用随时间变化" width="100%" />
 <p class="caption">
-Figure 1: 协变量作用如何随时间变化
+Figure 4: 协变量作用随时间变化
 </p>
+</div>
+</div>
+<div id="cart树生存分析" class="section level2">
+<h2>CART树生存分析</h2>
+<pre class="r"><code>fit &lt;- rpart(Surv(pgtime , pgstat)~age +
+eet + g2 + grade + gleason + ploidy,stagec,method=&#39;exp&#39;)
+fit</code></pre>
+<pre><code>n= 146 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+ 1) root 146 192.111100 1.0000000  
+   2) grade&lt; 2.5 61  44.799010 0.3634439  
+     4) g2&lt; 11.36 33   9.117405 0.1229835 *
+     5) g2&gt;=11.36 28  27.602190 0.7345610  
+      10) gleason&lt; 5.5 20  14.297110 0.5304115 *
+      11) gleason&gt;=5.5 8  11.094650 1.3069940 *
+   3) grade&gt;=2.5 85 122.441500 1.6148600  
+     6) age&gt;=56.5 75 103.062900 1.4255040  
+      12) gleason&lt; 7.5 50  66.119800 1.1407320  
+        24) g2&lt; 13.475 24  27.197170 0.8007306 *
+        25) g2&gt;=13.475 26  36.790960 1.4570210  
+          50) g2&gt;=17.915 15  20.332740 0.9789825 *
+          51) g2&lt; 17.915 11  13.459010 2.1714480 *
+      13) gleason&gt;=7.5 25  33.487250 2.0307290  
+        26) g2&gt;=15.29 10  11.588480 1.2156230 *
+        27) g2&lt; 15.29 15  18.939150 2.7053610 *
+     7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
+<pre class="r"><code>rpart.plot(fit,shadow.col = &#39;gray&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="/post/survival_files/figure-html/unnamed-chunk-11-1.png" alt="CART树剪枝前" width="100%" />
+<p class="caption">
+Figure 5: CART树剪枝前
+</p>
+</div>
+<pre class="r"><code>print(fit)</code></pre>
+<pre><code>n= 146 
+
+node), split, n, deviance, yval
+      * denotes terminal node
+
+ 1) root 146 192.111100 1.0000000  
+   2) grade&lt; 2.5 61  44.799010 0.3634439  
+     4) g2&lt; 11.36 33   9.117405 0.1229835 *
+     5) g2&gt;=11.36 28  27.602190 0.7345610  
+      10) gleason&lt; 5.5 20  14.297110 0.5304115 *
+      11) gleason&gt;=5.5 8  11.094650 1.3069940 *
+   3) grade&gt;=2.5 85 122.441500 1.6148600  
+     6) age&gt;=56.5 75 103.062900 1.4255040  
+      12) gleason&lt; 7.5 50  66.119800 1.1407320  
+        24) g2&lt; 13.475 24  27.197170 0.8007306 *
+        25) g2&gt;=13.475 26  36.790960 1.4570210  
+          50) g2&gt;=17.915 15  20.332740 0.9789825 *
+          51) g2&lt; 17.915 11  13.459010 2.1714480 *
+      13) gleason&gt;=7.5 25  33.487250 2.0307290  
+        26) g2&gt;=15.29 10  11.588480 1.2156230 *
+        27) g2&lt; 15.29 15  18.939150 2.7053610 *
+     7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
+<pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.016)
+rpart.plot(fit2,shadow.col = &#39;gray&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="/post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝后" width="100%" />
+<p class="caption">
+Figure 6: CART树剪枝后
+</p>
+</div>
+<pre class="r"><code>temp &lt;- snip.rpart(fit2, 6)
+km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
+autoplot(km)</code></pre>
+<p><img src="/post/survival_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 </div>

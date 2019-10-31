@@ -1,0 +1,101 @@
+---
+title: '2018-2019 NBA Champion Toronto Raptors Analysis'
+author: ''
+date: '2019-10-30'
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
+slug: raptors
+---
+
+
+
+<p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
+<p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="/img/vignette/raptors.jpg" alt="Kawhi Leonard vesus KD, who was injured during G5" width="100%" />
+<p class="caption">
+Figure 1: Kawhi Leonard vesus KD, who was injured during G5
+</p>
+</div>
+<pre class="r"><code>library(readr)
+library(dplyr)
+library(tidyr)
+library(reshape2)
+library(magrittr)
+library(party)
+library(rpart)
+library(rpart.plot)
+library(ggplot2)</code></pre>
+<div id="playoffs" class="section level1">
+<h1>Playoffs</h1>
+<pre class="r"><code>playoffs &lt;- raptorsplayoffs %&gt;% 
+  arrange(DATE) %&gt;% 
+  na_if(&#39;-&#39;) %&gt;% 
+  rename(&#39;TPP&#39;=&#39;3P%&#39;,&#39;FTP&#39;=&#39;FT%&#39;,
+         &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;% 
+  mutate_if(sapply(.,is.character),as.factor)
+
+formula &lt;- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
+
+tree &lt;- ctree(formula,playoffs,
+              controls = ctree_control(mincriterion = 0.01,minsplit=3))
+
+plot(tree)</code></pre>
+<p><img src="/post/raptors.en_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>treept &lt;- rpart(formula,playoffs,
+                control = rpart.control(cp=0.001,minsplit=3))
+
+rpart.plot(treept, branch = 0.4)</code></pre>
+<p><img src="/post/raptors.en_files/figure-html/unnamed-chunk-6-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Since the quantity of playoff data is too small, the results of the trees are unstable. Even discrepencies between the <code>rpart</code> and <code>ctree</code> function are huge. Now let us analyze the Regular Season data, which contains 82 games.</li>
+</ul>
+</div>
+<div id="regular-season" class="section level1">
+<h1>Regular Season</h1>
+<pre class="r"><code>regular&lt;- raptorsreg %&gt;% 
+  arrange(DATE) %&gt;% 
+  na_if(&#39;-&#39;) %&gt;% 
+  rename(&#39;TPP&#39;=&#39;3P%&#39;,&#39;FTP&#39;=&#39;FT%&#39;,
+         &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;%
+  mutate_if(sapply(.,is.character),as.factor)
+
+tree &lt;- ctree(formula,regular,
+              controls = ctree_control(mincriterion = 0.01,minsplit=3))
+#plot(tree)
+plot(tree,type = &quot;simple&quot;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="/post/raptors.en_files/figure-html/unnamed-chunk-7-1.png" alt="The tree using `party` package." width="100%" />
+<p class="caption">
+Figure 2: The tree using <code>party</code> package.
+</p>
+</div>
+<pre class="r"><code>treept &lt;- rpart(formula,regular,
+                control = rpart.control(cp=0.05,minsplit=3))
+
+rpart.plot(treept, branch = 0.4)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="/post/raptors.en_files/figure-html/unnamed-chunk-8-1.png" alt="When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose." width="100%" />
+<p class="caption">
+Figure 3: When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.
+</p>
+</div>
+<p>As you could see, the two trees are much same than before.</p>
+<pre class="r"><code>ggplot(regular)+
+  geom_point(aes(PTS,FGA,
+                 shape=win,col=win)) +
+  geom_segment(aes(111,81,
+                   xend = 111,yend = 110),
+               col=&#39;red&#39;) +
+  geom_segment(aes(111,81,
+                   xend = 141,yend = 81),
+               col=&#39;red&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
+<img src="/post/raptors.en_files/figure-html/unnamed-chunk-9-1.png" alt="Partition borders of the CART tree." width="100%" />
+<p class="caption">
+Figure 4: Partition borders of the CART tree.
+</p>
+</div>
+</div>

@@ -1,0 +1,117 @@
+---
+title: '2018-2019 NBA Champion Toronto Raptors Analysis'
+author: ''
+date: '2019-10-30'
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
+slug: raptors
+---
+
+![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
+
+
+
+Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find [datas](https://stats.nba.com/) of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable.
+
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+```
+
+```{r,echo=F,fig.cap='Kawhi Leonard vesus KD, who was injured during G5'}
+knitr::include_graphics('/img/vignette/raptors.jpg')
+```
+
+```{r}
+library(readr)
+library(dplyr)
+library(tidyr)
+library(reshape2)
+library(magrittr)
+library(party)
+library(rpart)
+library(rpart.plot)
+library(ggplot2)
+```
+
+```{r,include=F,echo=F}
+raptorsplayoffs <- read_csv("E:/MaLearning/nba/raptorsplayoffs.csv")
+raptorsreg <- read_csv("E:/MaLearning/nba/raptors_regulars.csv")
+```
+
+
+```{r,eval=F,include=F}
+raptors_players <- read_csv("E:/MaLearning/nba/raptors_players.csv")
+raptors_players <- raptors_players %>% 
+  arrange(DATE) %>% 
+  na_if('-') 
+#long to wide
+players <- raptors_players %>% 
+  dcast(DATE~PLAYER)
+```
+
+# Playoffs
+
+```{r}
+playoffs <- raptorsplayoffs %>% 
+  arrange(DATE) %>% 
+  na_if('-') %>% 
+  rename('TPP'='3P%','FTP'='FT%',
+         'FGP'='FG%','win'='W/L') %>% 
+  mutate_if(sapply(.,is.character),as.factor)
+
+formula <- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
+
+tree <- ctree(formula,playoffs,
+              controls = ctree_control(mincriterion = 0.01,minsplit=3))
+
+plot(tree)
+
+treept <- rpart(formula,playoffs,
+                control = rpart.control(cp=0.001,minsplit=3))
+
+rpart.plot(treept, branch = 0.4)
+```
+
++ Since the quantity of playoff data is too small, the results of the trees are unstable. Even discrepencies between the `rpart` and `ctree` function are huge. Now let us analyze the Regular Season data, which contains 82 games.
+
+# Regular Season
+
+```{r,fig.cap='The tree using `party` package.'}
+regular<- raptorsreg %>% 
+  arrange(DATE) %>% 
+  na_if('-') %>% 
+  rename('TPP'='3P%','FTP'='FT%',
+         'FGP'='FG%','win'='W/L') %>%
+  mutate_if(sapply(.,is.character),as.factor)
+
+tree <- ctree(formula,regular,
+              controls = ctree_control(mincriterion = 0.01,minsplit=3))
+#plot(tree)
+plot(tree,type = "simple")
+```
+
+```{r,fig.cap='When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.'}
+treept <- rpart(formula,regular,
+                control = rpart.control(cp=0.05,minsplit=3))
+
+rpart.plot(treept, branch = 0.4)
+
+```
+
+As you could see, the two trees are much same than before.
+
+
+```{r,fig.cap='Partition borders of the CART tree.'}
+ggplot(regular)+
+  geom_point(aes(PTS,FGA,
+                 shape=win,col=win)) +
+  geom_segment(aes(111,81,
+                   xend = 111,yend = 110),
+               col='red') +
+  geom_segment(aes(111,81,
+                   xend = 141,yend = 81),
+               col='red')
+```
+

@@ -1,7 +1,7 @@
 ---
-title: "R数据分析"
-author: " "
-date: " "
+title: 'R数据分析'
+author: 
+date: 
 output:
   bookdown::html_document2:
     toc: true
@@ -15,7 +15,12 @@ slug: ranalysis
 
 [k-means in R](https://uc-r.github.io/kmeans_clustering)
 
-```{r,message = F, comment = NA,warning = F,fig.align='center',out.width ='100%',fig.asp=0.7}
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+```
+
+
+```{r,fig.asp=0.7}
 #葡萄酒数据
 data(wine, package="rattle")
 knitr::kable(head(wine))
@@ -50,7 +55,7 @@ points(cl$centers, col = 1:2, pch = 8, cex = 2)
 
 ## 系统聚类
 
-```{r,message = F, comment = NA,warning = F,fig.align='center',out.width ='95%',fig.asp=0.7}
+```{r,fig.asp=0.7}
 Rclass=read.csv("E:/R_codes/others/Rdclass.csv",header=T)
 Rclass1=Rclass[,-c(1,6,7,8)]
 rownames(Rclass1)=Rclass$Name
@@ -64,7 +69,7 @@ rect.hclust(h, k=7, border = "red")
 
 # 词云图
 
-```{r ,message = F, comment = NA,warning = F,cache=T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r,fig.asp=0.6,cache=T}
 library(wordcloud2)
 library(jiebaR)
 text <- readLines("E:/R_codes/others/Rkws.csv",encoding = "UTF-8")
@@ -79,7 +84,7 @@ wordcloud2(freq,size = 1, color = "random-light")
 
 # 主成分分析
 
-```{r ,message = F, comment = NA,warning = F,cache=T,fig.align='center',out.width ='90%',fig.asp=0.8}
+```{r,fig.asp=0.8}
 #数据:USJudgeRatings
 knitr::kable(head(USJudgeRatings))
 library(psych)
@@ -131,7 +136,7 @@ knitr::kable(head(USJudgeRatings$score))
 
 + Regression Discontinuity Design
 
-```{r ,message = F, comment = NA,warning = F}
+```{r}
 library(dplyr)
 library(magrittr)
 library(MASS)
@@ -181,7 +186,7 @@ geom_smooth(method=lm,se = F)
 
 + Difference-in-Differences
 
-```{r ,message = F, comment = NA,warning = F}
+```{r}
 df <- data.frame(time = 10 * round(runif(n), 1) - 5,
 treatment = group,
 error = simulatedError)
@@ -205,7 +210,7 @@ scale_color_manual(values = c("#F05253", "#2A73CC", "#F05253", "#2A73CC"))
 
 + Fixed Effects Regression
 
-```{r,message = F, comment = NA,warning = F,fig.asp=0.4}
+```{r,fig.asp=0.4,fig.cap= '$x$为自变量，$y$为因变量。形状代表不同个体，颜色代表多个调查年份。左图：合并回归(Pooled OLS)，将所有点视为一个个体。右图：组内估计量(within-group)，控制个体，观测每个个体随调查时间的变化。'}
 set.seed(222)
 x <- seq(0,4,length = 100)
 y <- -x + jitter(rep(1:5, each = 20), 2)
@@ -234,31 +239,64 @@ pltb <- ggplot(dt, aes(x, y)) +
   xlim(0,4)+
   theme_bw() +
   theme(legend.position = 'none')
+
 plot_grid(plta,pltb,ncol = 2)
 ```
 
-```{r,message = F, comment = NA,warning = F,fig.asp=0.4}
-data("Grunfeld", package = "plm")
-plta <- ggplot(Grunfeld, aes(value,inv)) +
-  geom_point(aes(color=factor(firm)),size=2) +
-  geom_smooth(method='lm',se=F,color='red') +
-  theme(legend.position = 'none')+
-  theme_bw()  
+```{r,fig.asp=0.8,fig.cap='左上：线性回归。右上：分年份拟合。左下：固定效应。右下：时间固定效应。'}
+data('Grunfeld', package = 'plm')
 
-moda <- lm(inv ~ value + factor(firm),Grunfeld)
+Grunfeld <- Grunfeld %>% 
+  filter(year<1940,firm<6) %>% 
+  mutate(year=as.factor(year),
+         firm=as.factor(firm))
+
+plta <- ggplot(Grunfeld, aes(value,capital)) +
+  geom_point(aes(col=firm,shape=year),size=2) +
+  geom_smooth(method='lm',se=F,color='red') +
+  theme_bw() +
+  theme(legend.position = 'none')+
+  ylim(0,400)
+
+pltb <- ggplot(Grunfeld, aes(value,capital,group=year)) +
+  geom_point(aes(col=firm,shape=year),size=2) +
+  geom_smooth(method='lm',se=F,color='red') +
+  theme_bw() +
+  theme(legend.position = 'none')+
+  ylim(0,400)
+
+moda <- lm(capital ~ value + firm,Grunfeld)
 grid <- Grunfeld %>%
 data_grid(value,firm) %>%
 gather_predictions(moda)
           
-pltb <- ggplot(Grunfeld, aes(value,inv)) +
-  geom_point(aes(color=factor(firm)),size=2) +
-  geom_line(data=grid,aes(value,pred,color=factor(firm),group=factor(firm)),size=0.75) +
+pltc <- ggplot(Grunfeld, aes(value,capital)) +
+  geom_point(aes(col=firm,shape=year),size=2) +
+  geom_line(data=grid,aes(value,pred,
+                          color=firm,
+                          group=firm),size=0.75) +
+  theme_bw() +
   theme(legend.position = 'none')+
-  theme_bw() 
-plot_grid(plta,pltb,ncol = 2)
+  ylim(0,400)
+
+modc <- lm(capital ~ value + year,Grunfeld)
+grid <- Grunfeld %>%
+data_grid(value,year) %>%
+gather_predictions(modc)
+          
+pltd <- ggplot(Grunfeld, aes(value,capital)) +
+  geom_point(aes(col=firm,shape=year),size=2) +
+  geom_line(data=grid,aes(value,pred,
+                          color=year,
+                          group=year),size=0.75) +
+  theme_bw() +
+  theme(legend.position = 'none')+
+  ylim(0,400)
+
+plot_grid(plta,pltb,pltc,pltd,ncol = 2)
 ```
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',results='asis'}
+```{r,out.width ='100%',results='asis'}
 library(plm)
 ols <- lm(inv ~ value + capital,
           data = Grunfeld)
@@ -268,14 +306,15 @@ fe <- plm(inv ~ value + capital,
           effect='individual')
 
 tw <- plm(inv ~ value + capital,
-          data = Grunfeld, model = "within", effect = "twoways")
+          data = Grunfeld, model = 'within', effect = 'twoways')
 
 stargazer::stargazer(ols,fe,tw,
           title='回归结果',
           dep.var.caption=' ',
           dep.var.labels=' ',
           align=T,
-          type='html',column.labels=c('线性回归','组内估计','双重固定'),
+          type='html',
+          column.labels=c('线性回归','组内估计','双重固定'),
           keep.stat=c('n','rsq','ll'))
 ```
 
@@ -286,7 +325,7 @@ stargazer::stargazer(ols,fe,tw,
 
 + Instrumental Variables
 
-```{r,message = F, comment = NA,warning = F}
+```{r}
 df <- data.frame(Z = simulatedZ,
 X = simulatedXandC[, 1] + simulatedZ,
 C = simulatedXandC[, 2],
@@ -327,7 +366,7 @@ $$\hat{\beta_{Lasso}} = arg min_{\beta \in R^d}||Y - X\beta||^2 +\lambda \sum_{j
 
 
 
-```{r,error=T,comment=NA,warning=F,message=F}
+```{r}
 library(haven)
 library(tidyr)
 library(plotmo)
@@ -335,7 +374,7 @@ library(glmnet)
 library(readr)
 `%>%` <- magrittr::`%>%`
 
-ceps <- read_csv("C:/Users/xsong/Desktop/table/ceps.imputed.csv")
+ceps <- read_csv('C:/Users/xsong/Desktop/table/ceps.imputed.csv')
 
 ceps <- na.omit(ceps)
 
@@ -406,7 +445,7 @@ plot(cvfit)
   </tr>
 </table>
 
-```{r,error=T,comment=NA,warning=F,message=F,dev='svg',fig.showtext=T,out.width='80%',fig.show=T}
+```{r,dev='svg'}
 library(xgboost)
 library(rpart.plot)
 data(agaricus.train, package='xgboost')
@@ -424,7 +463,7 @@ pred <- predict(bst, test$data)
 ```
 
 
-```{r,error=T,comment=NA,warning=F,message=F}
+```{r}
 logregobj <- function(preds, dtrain) {
 labels <- getinfo(dtrain, "label")
 preds <- 1/(1 + exp(-preds))
@@ -502,7 +541,7 @@ loglm(formula = ~Class + Sex + Age + Survived +
 
 `flexmix`
 
-```{r,error=T,comment=NA,warning=F,message=F}
+```{r}
 library(flexmix)
 data("NPreg", package = "flexmix")
 ## mixture of two linear regression models. Note that control parameters
@@ -581,11 +620,12 @@ plot(ex1)
 # 常见统计检验
 
 
-```{r,error=T,comment=NA,warning=F,message=F}
+```{r}
 t.test(extra ~ group,sleep)
 wilcox.test(extra ~ group,sleep)
 ```
-```{r,error=T,comment=NA,warning=F,message=F}
+
+```{r}
 M <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
 dimnames(M) <- list(gender = c("F", "M"),
                     party = c("Democrat","Independent", "Republican"))
@@ -595,4 +635,38 @@ Xsq$expected   # expected counts under the null
 Xsq$residuals  # Pearson residuals
 Xsq$stdres     # standardized residuals
 ```
+
+
+# 时间序列分析
+
+[使用`tsibble`](https://mp.weixin.qq.com/s/EjCTFsvzYV7o5Q-V3GmBRA)
+
+```{r}
+library(tsibble)
+USAccDeaths
+USAccDeaths %>% as_tsibble() %>% head()
+
+tourism %>%
+  filter(Purpose == "Holiday") %>%
+  group_by(State) %>%
+  summarise(Trips = sum(Trips)) %>%
+  head()
+
+tourism %>%
+  mutate(Year = lubridate::year(Quarter)) %>%
+  index_by(Year) %>%
+  group_by(Region, State, Purpose) %>%
+  summarise(Trips = sum(Trips)) %>%
+  ungroup()
+
+pedestrian %>%
+  mutate(
+    Day = lubridate::wday(Date, label = TRUE),
+    Weekend = (Day %in% c("周六", "周日"))
+  ) %>%
+  ggplot() +
+  geom_line(aes(Time,Count,col = Weekend,group = Date)) +
+  facet_grid(Sensor ~ .)
+```
+
 

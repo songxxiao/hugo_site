@@ -27,8 +27,11 @@ PDF版本[下载](/modelpdf.pdf)
 
 `crossv_kfold`、`crossv_mc`、`crossv_loo`: 交叉验证
 
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%',fig.showtext= T)
+```
 
-```{r,message=F,warning=F,error=T,comment=NA}
+```{r}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -47,7 +50,7 @@ library(stargazer)
 hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
 ```
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%'}
+```{r}
 hatdt <- hatdt %>% 
   filter(type=='个人收入（元）') %>% 
   drop_na(agem,inc,fswt_nat)
@@ -76,66 +79,18 @@ plotb <- ggplot() +
   theme_bw()
 ```
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.5,fig.cap='个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。'}
+```{r,fig.asp=0.5,fig.cap='个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。'}
 
 plot_grid(plota,plotb,ncol = 2)
 
 ```
-
-# 多项式回归
-
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.cap='对一个模拟数据进行二次项回归。'}
-set.seed(2019)
-x <- seq(0,4,length=100)
-y <- -x^2 + 3*x + jitter(rep(5:9,each =20),2) +3
-df <- data.frame(x,y)
-
-reg <- lm(y ~ x + I(x^2),df)
-
-grid <- df %>%
-data_grid(x) %>%
-gather_predictions(reg)
-
-ggplot(df,aes(x,y))+
-  geom_point(size =2,alpha=1/3)+
-  geom_line(data=grid,aes(x,pred),size=1,color='blue')+
-  theme_bw()
-```
-
-下面使用多项式回归拟合CFPS数据:
-
-$$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2$$
-$$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2 + {\alpha _3}x_1^3$$
-
-
-
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.6,fig.cap=' 分别对CFPS数据进行二次项和三次项回归。三次项导致了过拟合。'}
-mtrga <- lm(inc~agem+I(agem^2),hatdt)
-mtrgb <- lm(inc~agem+I(agem^2)+I(agem^3),hatdt)
-
-grid <- hatdt %>%
-data_grid(agem) %>%
-gather_predictions(mtrga,mtrgb)
-
-ggplot() +
-  geom_jitter(data=sampled,aes(agem,inc),
-              height=550,width=5,size =1.5,alpha=1/3) +
-  geom_line(data=grid,aes(agem,pred),
-            size=1,color='blue')+
-  facet_wrap(~model) +
-  ylim(0, 20000) +
-  labs(x = "年龄",y = "人民币(元）") +
-  theme_bw()
-```
-
-
 
 # 交互项
 交互项是计量经济学和应用统计学常用的机制分析技术。公式如下：
 
 $$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}{x_2} + {\alpha _3}{x_1}{x_2}$$
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.5,fig.cap='谢益辉的交互效应表示方法。左图：$y = 2 + x + 0.5 z + 0.5 x z + \\epsilon$。右图：$y = 2 + x + 0.5 z + \\epsilon$。圆圈面积表示因变量$y$的大小；坐标轴分别表示自变量$x$和$z$。'}
+```{r,fig.asp=0.5,fig.cap='谢益辉的交互效应表示方法。左图：$y = 2 + x + 0.5 z + 0.5 x z + \\epsilon$。右图：$y = 2 + x + 0.5 z + \\epsilon$。圆圈面积表示因变量$y$的大小；坐标轴分别表示自变量$x$和$z$。'}
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), cex.main = 1)
 sq = 1:10
 x = rep(sq, 10)
@@ -158,8 +113,9 @@ main = "", inches = 0.2)
 因变量为收入。自变量为教育年限(年)和使用的语言(英语、法语、其他)。下面分别展示了没有交互项和有交互项的模型。
 
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.6,fig.cap='左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。'}
+```{r,fig.asp=0.6,fig.cap='左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。'}
 #?carData::SLID
+
 data(SLID,package = 'carData')
 SLID <- SLID %>% drop_na()
 
@@ -184,7 +140,7 @@ ggplot(SLID,aes(education,wages))+
 
 对两个连续交互变量的可视化是一个难题。较好的解决办法是分箱。使用`modelr`的`seq_range`函数对其中一个连续变量进行分箱。
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.6,fig.cap='无交互效应和有交互效应的区别： 左图体现了不同年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。'}
+```{r,fig.asp=0.6,fig.cap='无交互效应和有交互效应的区别： 左图体现了不同年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。'}
 mod1 <- lm(wages ~ education + age,SLID)
 mod2 <- lm(wages ~ education * age,SLID)
 
@@ -204,7 +160,7 @@ ggplot(SLID,aes(education,wages))+
 
 来个负相关的：
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.showtext= T,fig.asp=0.6,results='asis',fig.cap='左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应'}
+```{r,fig.asp=0.6,results='asis',fig.cap='左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应'}
 data(freeny)
 partial <- lm(y~lag.quarterly.revenue+price.index+
                 income.level+market.potential,freeny)
@@ -236,6 +192,55 @@ group=market.potential))+
   theme_bw()
 ```
 
+# 多项式回归
+
++ 多项式回归是平滑方法的基础。
+
+```{r,fig.cap='对一个模拟数据进行二次项回归。'}
+set.seed(2019)
+x <- seq(0,4,length=100)
+y <- -x^2 + 3*x + jitter(rep(5:9,each =20),2) +3
+df <- data.frame(x,y)
+
+reg <- lm(y ~ x + I(x^2),df)
+
+grid <- df %>%
+data_grid(x) %>%
+gather_predictions(reg)
+
+ggplot(df,aes(x,y))+
+  geom_point(size =2,alpha=1/3)+
+  geom_line(data=grid,aes(x,pred),size=1,color='blue')+
+  theme_bw()
+```
+
+下面使用多项式回归拟合CFPS数据:
+
+$$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2$$
+$$y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2 + {\alpha _3}x_1^3$$
+
+
+
+```{r,fig.asp=0.6,fig.cap='分别对CFPS数据进行二次项和三次项回归。三次项导致了过拟合。'}
+mtrga <- lm(inc~agem+I(agem^2),hatdt)
+mtrgb <- lm(inc~agem+I(agem^2)+I(agem^3),hatdt)
+
+grid <- hatdt %>%
+data_grid(agem) %>%
+gather_predictions(mtrga,mtrgb)
+
+ggplot() +
+  geom_jitter(data=sampled,aes(agem,inc),
+              height=550,width=5,size =1.5,alpha=1/3) +
+  geom_line(data=grid,aes(agem,pred),
+            size=1,color='blue')+
+  facet_wrap(~model) +
+  ylim(0, 20000) +
+  labs(x = "年龄",y = "人民币(元）") +
+  theme_bw()
+```
+
+
 # 局部加权回归散点平滑
 
 + Locally Weighted Scatterplot Smoother，LOWESS
@@ -243,7 +248,7 @@ group=market.potential))+
 $${y_i} = g({x_i}) + {\varepsilon _i}$$
 $g$是在$x$带宽$\alpha$范围内进行的多项式回归。
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
+```{r,fig.asp=0.6,fig.cap='使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
 data(PlantCounts,package = 'MSG')
 par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
 with(PlantCounts, {
@@ -264,7 +269,7 @@ col = rgb(0, 0, 0, 0.1), lwd = 1.5)
 
 + `ggplot2`版本
 
-```{r,message=F,warning=F,error=T,comment=NA,cache=T,fig.align='center',out.width='90%',fig.asp=1.2,fig.cap='使用`ggplot2`和`for`循环绘图'}
+```{r,cache=T,out.width='90%',fig.asp=1.2,fig.cap='使用`ggplot2`和`for`循环绘图'}
 g <- ggplot(PlantCounts,
             aes(altitude,counts)) +
   geom_point(size=1.5,alpha=1/3) +
@@ -309,7 +314,13 @@ plot_grid(g,f,e,ncol = 2)
 
 + Splines
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',out.width='100%',fig.asp=0.6,fig.cap='左图：1次项样条。右图：3次项样条'}
++ 结点为$a$, $b$, $c$的样条回归函数为：
+
+$$y = \alpha  + {\beta _1}x + {\beta _2}{(x - a)_ + } + {\beta _3}{(x - b)_ + } + {\beta _4}{(x - c)_ + }$$
+
+${(\mu )_ + } = \mu$ 当 $\mu>0$，否则${(\mu )_ + } = 0$。
+
+```{r,out.width='100%',fig.asp=0.6,fig.cap='左图：1次项样条。右图：3次项样条'}
 library(ISLR)
 library(splines)
 data(wage,package = 'ISLR')
@@ -342,7 +353,7 @@ $$
 \log y & , & \mbox{if}\quad\lambda = 0
 \end{aligned}
 \right.
-$$  
+$$
 
 
 $$
@@ -355,7 +366,7 @@ $$
 $$
 
 
-```{r,message=F,warning=F,error=T,comment=NA,fig.align='center',fig.asp=0.5,out.width='90%',fig.cap=' '}
+```{r,fig.asp=0.5,out.width='90%'}
 library(MASS)
 x = rf(500,30,30)
 boxa <- ggplot(as.data.frame(x),aes(x))+
@@ -371,12 +382,12 @@ x2 = as.data.frame(x2)
 boxb <- ggplot(x2,aes(x2)) +
   geom_histogram(color='black',
                  fill='white') 
-plot_grid(boxa,boxb,ncol = 2)
 ```
 
 
-
-
+```{r,fig.asp=0.5,out.width='90%',fig.cap='左图：原分布。右图：变换后的分布'}
+plot_grid(boxa,boxb,ncol = 2)
+```
 
 
 

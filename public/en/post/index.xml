@@ -6,10 +6,20 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2018-2019 NBA Champion Toronto Raptors Analysis</title>
+      <link>/en/raptors/</link>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/en/raptors/</guid>
+      <description>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find datas of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable.
+Figure 1: Kawhi Leonard vesus KD, who was injured during G5library(readr)library(dplyr)library(tidyr)library(reshape2)library(magrittr)library(party)library(rpart)library(rpart.</description>
+    </item>
     
     <item>
       <title>R Model Visualization</title>

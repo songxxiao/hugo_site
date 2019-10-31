@@ -19,7 +19,11 @@ slug: basicr
 
 ## 数组和矩阵
 
-```{r ,message = F, comment = NA,warning = F}
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+```
+
+```{r}
 library(dplyr)
 library(ggplot2)
 library(magrittr)
@@ -60,7 +64,7 @@ result[,,'Matrix2'] #索引
 
 # 循环
 `for`循环
-```{r,message = F, comment = NA,warning = F}
+```{r}
 pp <- c("Peter", "Piper", "picked", "a", "peck", "of", "pickled", "peppers")
 for(i in seq_along(pp)) print(pp[i])
 ```
@@ -76,7 +80,7 @@ for(i in seq_along(pp)) print(pp[i])
 
 `aggregate()`类似于`dplyr::group_by`
 
-```{r,message = F, comment = NA,warning = F}
+```{r}
 sapply(iris, class)
 ```
 
@@ -87,7 +91,7 @@ sapply(iris, class)
 # `dplyr`处理缺失值
 
 
-```{r,message = F, comment = NA,warning = F}
+```{r}
 stocks <- tibble(
 year = c(2015, NA, 2015, 2015, NA, 2016, 2016),
 qtr = c( 1, 2, NA, NA, 2, NA, 4),
@@ -102,7 +106,7 @@ knitr::kable(stocks,caption = '数据概要')
 
 + `dplyr::recode`无法给出条件
 
-```{r ,message = F, comment = NA,warning = F}
+```{r}
 stocks %>% mutate(year= ifelse(is.na(qtr),9999,year))
 
 stocks %>% mutate(year=case_when(
@@ -119,7 +123,7 @@ stocks %>% mutate(year=replace(year,is.na(qtr),9999))
 
 + 使用`na_if`。但是无法给出条件。
 
-```{r ,message = F, comment = NA,warning = F}
+```{r}
 stocks %>% mutate(return=ifelse(year==2016,NA,return))
 
 stocks %>% mutate(return=replace(return,year==2016,NA))
@@ -138,7 +142,7 @@ stocks %>% mutate(return=na_if(year==2016,return))
 
 + `dplyr`的`join`方法
 
-```{r ,message = F, comment = NA,warning = F,error=T,cache=T}
+```{r,cache=T}
 
 myData <- data.frame(
     nation=rep(c('USA','Japan','Libya'),3),
@@ -179,7 +183,7 @@ install_local("C:/Users/lenovo/Desktop/REmap-master.zip") #设置正确的本地
 
 `%$%`
 
-```{r ,message = F, comment = NA,warning = F,error=T}
+```{r }
 rnorm(100) %>%
 matrix(ncol = 2) %T>%
 plot() %>%
@@ -199,7 +203,7 @@ myData %$%
 
 + 自己编写一个绘制交互表图形的函数`plot_table`。其中`x`为行向量，`y`为列向量，`xlab`为行标签，`ylab`为列标签。
 
-```{r,message = F, comment = NA,warning = F,error=T,out.width='80%',fig.align='center'}
+```{r,out.width='80%'}
 plot_table <- function(x,y,xlab=x,ylab=y){
   mar <- as.data.frame(table(x,y))
   ggplot2::ggplot(mar,aes(mar[,1],mar[,2])) +
@@ -222,7 +226,7 @@ plot_table(Sex,Survived,"性别","是否生存")
 ```
 
 
-```{r,message = F, comment = NA,warning = F,error=T}
+```{r}
 scattplot <- function(x,y){
   plot(x,y)
   return(x+y)
@@ -241,7 +245,7 @@ write.dta(`2011`,'C:/Users/201108.dta')
 
 # 样条
 
-```{r,message = F, comment = NA,warning = F,error=T}
+```{r}
 library(splines)
 n = 100
 x = rnorm(n)
@@ -255,7 +259,7 @@ plot(x, pred)
 ```
 
 
-```{r,message = F, comment = NA,warning = F,error=T}
+```{r}
 require(stats); require(graphics)
 bs(women$height, df = 5)
 summary(fm1 <- lm(weight ~ bs(height, df = 5), data = women))
@@ -273,7 +277,7 @@ lines(ht, predict(fm1, data.frame(height = ht)))
 $$y = {\beta _0} + {f_1}({x_1}) + {f_2}({x_2}) +  \cdot  \cdot  \cdot  + {f_m}({x_m})$$
 $f(x)$可以是样条、Lowess(局部多项式)等平滑方法。它和多元线性回归类似，但将$\beta x$替换为平滑函数。GAM使用backfitting algorithm使损失函数最小。
 
-```{r,message = F, comment = NA,warning = F,error=T}
+```{r}
 library(mgcv)
 set.seed(2) ## simulate some data... 
 dat <- gamSim(1,n=400,dist="normal",scale=2)
@@ -285,7 +289,7 @@ plot(b,pages=1,seWithMean=TRUE) ## `with intercept' CIs
 ## smoothing basis dimensions...
 gam.check(b)
 ```
-```{r,message = F, comment = NA,warning = F,error=T}
+```{r}
 require(mgcv)
 require(nlme)
 b0 <- lme(travel~1,data=Rail,~1|Rail,method="REML") 
@@ -520,7 +524,7 @@ detach(eg)
 
 [Who knew likelihood functions could be so pretty?](https://www.r-bloggers.com/who-knew-likelihood-functions-could-be-so-pretty/)
 
-```{r}
+```{r,eval=F}
 LL <- function(X, theta)
 {
   mu <- theta[1]

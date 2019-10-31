@@ -1,11 +1,9 @@
 ---
-title: "生存分析云笔记" 
-author: ' '
+title: '生存分析云笔记'
 date: '2019-05-23'
 slug: survival
-tags: ["R","应用统计"]
-
 ---
+
 ![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
 
 本文系复旦大学人口学系[张震](http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html)老师和华东师范大学人口研究所[李强](https://faculty.ecnu.edu.cn/s/2160/main.jspy)老师的数据分析课程笔记。
@@ -22,7 +20,7 @@ tags: ["R","应用统计"]
 
 ---
 
-## 第一讲: 基本概念
+# 基本概念
 
 + 社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。**在一个状态内待的时间和风险有着密切的关系**。
 
@@ -54,7 +52,7 @@ $h(t)$不是密度也不是概率。
 
 ---
 
-## 第二讲: 最大似然估计(MLE)
+# 最大似然估计(MLE)
 
  Cox回归避开了模型分布假定的问题。
 
@@ -99,19 +97,23 @@ $$\hat \lambda  = \frac{d}{{\sum {{t_i} - (n - d) \cdot 40} }}$$
 
 ---
 
-## 第三讲: 生存分析估计
+# 生存分析估计
 
 R生存分析介绍：[survival analysis in R](http://www.openintro.org/stat/surv.php)
 
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+```
 
-
-```{r,comment = NA,warning = F,message = F}
+```{r}
 library(survival)
 library(haven) 
 library(ggplot2)
 library(dplyr)
 library(ggfortify)
 library(stargazer)
+library(rpart)
+library(rpart.plot)
 ```
 
 + 数据介绍：  
@@ -125,7 +127,7 @@ minc=4,$2000+)
 `age`:年龄  
 `black`:种族  
 
-```{r ,comment = NA,warning = F,message = F,fig.align='center',include = F}
+```{r,include = F}
 cwg <- read_dta("E:/R_codes/others/cwg.dta")
 #变量排序
 cwg$event[cwg$cen_r ==0] <- 1
@@ -136,7 +138,7 @@ cwg <- select(cwg,cen_r,event, los1,everything())
 #head(cwg)#数据
 ```
 
-### Kaplan–Meier estimator | 卡普兰迈耶法
+## Kaplan–Meier estimator | 卡普兰迈耶法
 
 又称乘积极限法(Product-Limit Method), 公式如下：
 
@@ -144,7 +146,7 @@ $${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\li
 
 $n_i$是在时间$t_i$中的历险人数，$d_i$是事件发生数。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+```{r}
 table(cwg$event)
 # Kaplan Meier Survival Curve
 km <- with(cwg, Surv(los1, event == 1))
@@ -154,30 +156,28 @@ km_fit <- survfit(km ~ 1, data=cwg)
 km_fit #生存分析概要
 ```
 
-```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center',error=T}
+```{r, echo=F,fig.cap='生存函数的Kaplan–Meier estimator是生命表$nPx$列的累乘。'}
 knitr::include_graphics("/img/survival/life.jpg")
 ```
-生存函数的Kaplan–Meier estimator就是$nPx$列的累乘。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
+
+```{r}
 summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
 ```
 
-```{r, echo=F, fig.cap=" ", out.width = '100%',fig.align='center',error=T}
+```{r, echo=F,fig.cap='生命表示例'}
 knitr::include_graphics("/img/survival/life2.jpg")
 ```
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='70%'}
-autoplot(km_fit) #ggplot2风格KM图
-
-km_trt_fit <- survfit(km ~ female, data=cwg)#分性别KM估计
-autoplot(km_trt_fit) #图中+号可能是"打结" ties?
+```{r,fig.cap='Kaplan Meier Survival Curve'}
+km_trt_fit <- survfit(km ~ female, data=cwg)
+autoplot(km_trt_fit)  
 
 ```
 
 ## Cox比例风险模型
 
-$$\ln {h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
+$$\ln{h_i}(t) = \ln {h_0}(t) + {\beta _1}{X_1} + {\beta _2}{X_2} +  \cdot  \cdot  \cdot  + {\beta _p}{X_p}$$
 
 + ${h_i}(t)$是个体i在时间t时的风险值。${h_0}(t)$是所有个体在时间t时的非参数风险函数值。${\beta_p}{X_p}$是对个体i的解释变量和系数。
 
@@ -187,8 +187,7 @@ $${{h(t|{X_i})} \over {h(t|{X_j})}} = {{{h_0}(t)\exp (X_i^T\beta )} \over {{h_0}
 
 + ${h_i}(t)$和${h_0}(t)$随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%'}
-
+```{r}
 cwg$ec <- as.factor(cwg$ec)
 cwg$minc <- as.factor(cwg$minc)
 cwg$age <- as.factor(cwg$age)
@@ -196,19 +195,10 @@ cwg$age <- as.factor(cwg$age)
 coxreg <- coxph(km ~ ec + age + female +black + minc, data = cwg)
 summary(coxreg)
 cox_fit <- survfit(coxreg)
-autoplot(cox_fit) #拟合值
+#autoplot(cox_fit) #拟合值
 ##C-指数 Harrell's concordance index
 #coxreg$concordance
 concordance(km ~ predict(coxreg), data = cwg)
-```
-
-
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',results='asis'}
-stargazer(coxreg,
-          title='Cox回归结果',
-          header=F,no.space=T,
-          type='html',align=T,
-          keep.stat=c('n','rsq','ll'))
 ```
 
 [生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
@@ -217,10 +207,30 @@ stargazer(coxreg,
 
 ## [Aalen’s additive regression model](http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf)
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',out.width ='100%',fig.cap='协变量作用如何随时间变化'}
+```{r,fig.cap='协变量作用随时间变化'}
 aaregfit <-aareg(km ~ ec + age + female +black + minc, data = cwg)
 aaregfit
 autoplot(aaregfit)
 ```
 
+## CART树生存分析
+
+```{r,fig.cap='CART树剪枝前'}
+fit <- rpart(Surv(pgtime , pgstat)~age +
+eet + g2 + grade + gleason + ploidy,stagec,method='exp')
+fit
+rpart.plot(fit,shadow.col = 'gray')
+```
+
+```{r,fig.cap='CART树剪枝后'}
+print(fit)
+fit2 <- prune(fit, cp = 0.016)
+rpart.plot(fit2,shadow.col = 'gray')
+```
+
+```{r}
+temp <- snip.rpart(fit2, 6)
+km <- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
+autoplot(km)
+```
 
