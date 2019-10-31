@@ -19,7 +19,7 @@ Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I 
 knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
 ```
 
-```{r,echo=F,fig.cap='Kawhi Leonard vesus KD, who was injured during G5'}
+```{r,echo=F,fig.cap='Kawhi Leonard versus KD, who was injured during G5'}
 knitr::include_graphics('/img/vignette/raptors.jpg')
 ```
 

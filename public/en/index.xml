@@ -18,7 +18,7 @@
       
       <guid>/en/raptors/</guid>
       <description>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find datas of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable.
-Figure 1: Kawhi Leonard vesus KD, who was injured during G5library(readr)library(dplyr)library(tidyr)library(reshape2)library(magrittr)library(party)library(rpart)library(rpart.</description>
+Figure 1: Kawhi Leonard versus KD, who was injured during G5library(readr)library(dplyr)library(tidyr)library(reshape2)library(magrittr)library(party)library(rpart)library(rpart.</description>
     </item>
     
     <item>

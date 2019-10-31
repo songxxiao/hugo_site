@@ -292,7 +292,7 @@ node), split, n, deviance, yval
         26) g2&gt;=15.29 10  11.588480 1.2156230 *
         27) g2&lt; 15.29 15  18.939150 2.7053610 *
      7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
-<pre class="r"><code>rpart.plot(fit,shadow.col = &#39;gray&#39;)</code></pre>
+<pre class="r"><code>rpart.plot(fit,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
 <img src="/post/survival_files/figure-html/unnamed-chunk-11-1.png" alt="CART树剪枝前" width="100%" />
 <p class="caption">
@@ -323,7 +323,7 @@ node), split, n, deviance, yval
         27) g2&lt; 15.29 15  18.939150 2.7053610 *
      7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
 <pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.016)
-rpart.plot(fit2,shadow.col = &#39;gray&#39;)</code></pre>
+rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
 <img src="/post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝后" width="100%" />
 <p class="caption">

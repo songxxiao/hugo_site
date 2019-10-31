@@ -219,13 +219,13 @@ autoplot(aaregfit)
 fit <- rpart(Surv(pgtime , pgstat)~age +
 eet + g2 + grade + gleason + ploidy,stagec,method='exp')
 fit
-rpart.plot(fit,shadow.col = 'gray')
+rpart.plot(fit,shadow.col = 'gray',branch = 0.4)
 ```
 
 ```{r,fig.cap='CART树剪枝后'}
 print(fit)
 fit2 <- prune(fit, cp = 0.016)
-rpart.plot(fit2,shadow.col = 'gray')
+rpart.plot(fit2,shadow.col = 'gray',branch = 0.4)
 ```
 
 ```{r}
