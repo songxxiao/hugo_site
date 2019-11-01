@@ -223,14 +223,22 @@ rpart.plot(fit,shadow.col = 'gray',branch = 0.4)
 ```
 
 ```{r,fig.cap='CART树剪枝后'}
-print(fit)
-fit2 <- prune(fit, cp = 0.016)
+fit2 <- prune(fit, cp = 0.017)
+fit2$cptable
 rpart.plot(fit2,shadow.col = 'gray',branch = 0.4)
 ```
 
-```{r}
-temp <- snip.rpart(fit2, 6)
+```{r,fig.cap='每个结点患者的生存风险估计'}
+temp <- snip.rpart(fit2,6)
+fit2
 km <- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
 autoplot(km)
+```
+
+```{r,fig.cap='年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系'}
+ggplot(stagec)+
+  geom_point(aes(age,g2,shape=factor(pgstat),
+                 col=factor(pgstat)))+
+  facet_wrap(~grade)
 ```
 

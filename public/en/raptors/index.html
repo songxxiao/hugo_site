@@ -77,7 +77,7 @@
 
 
 <p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
-<p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable.</p>
+<p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="../../img/vignette/raptors.jpg" alt="Kawhi Leonard versus KD, who was injured during G5" width="100%" />
 <p class="caption">
@@ -153,10 +153,13 @@ Figure 3: When raptors score more than 111 and the field goals attempted more th
                  shape=win,col=win)) +
   geom_segment(aes(111,81,
                    xend = 111,yend = 110),
-               col=&#39;red&#39;) +
+               col=&#39;purple&#39;) +
   geom_segment(aes(111,81,
                    xend = 141,yend = 81),
-               col=&#39;red&#39;)</code></pre>
+               col=&#39;purple&#39;)+
+  annotate(&#39;text&#39;, x =130,y=95, label=&#39;Win&#39;, size=10,color=&#39;turquoise4&#39;) +
+  annotate(&#39;text&#39;, x =95,y=85, label=&#39;Lose&#39;, size=10,color=&#39;tomato&#39;) +
+  labs(x=&#39;Points&#39;,y=&#39;Field Goals Attempted&#39;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
 <img src="../../post/raptors.en_files/figure-html/unnamed-chunk-9-1.png" alt="Partition borders of the CART tree." width="100%" />
 <p class="caption">

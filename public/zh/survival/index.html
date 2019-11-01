@@ -369,7 +369,23 @@ node), split, n, deviance, yval
 Figure 5: CART树剪枝前
 </p>
 </div>
-<pre class="r"><code>print(fit)</code></pre>
+<pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.017)
+fit2$cptable</code></pre>
+<pre><code>          CP nsplit rel error    xerror       xstd
+1 0.12945955      0 1.0000000 1.0045566 0.07019126
+2 0.04205598      1 0.8705405 0.8874852 0.07377709
+3 0.02919986      2 0.8284845 0.8881050 0.07749942
+4 0.01798864      3 0.7992846 0.9101703 0.07852036
+5 0.01700000      4 0.7812960 0.9340807 0.08349374</code></pre>
+<pre class="r"><code>rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝后" width="100%" />
+<p class="caption">
+Figure 6: CART树剪枝后
+</p>
+</div>
+<pre class="r"><code>temp &lt;- snip.rpart(fit2,6)
+fit2</code></pre>
 <pre><code>n= 146 
 
 node), split, n, deviance, yval
@@ -378,32 +394,30 @@ node), split, n, deviance, yval
  1) root 146 192.111100 1.0000000  
    2) grade&lt; 2.5 61  44.799010 0.3634439  
      4) g2&lt; 11.36 33   9.117405 0.1229835 *
-     5) g2&gt;=11.36 28  27.602190 0.7345610  
-      10) gleason&lt; 5.5 20  14.297110 0.5304115 *
-      11) gleason&gt;=5.5 8  11.094650 1.3069940 *
+     5) g2&gt;=11.36 28  27.602190 0.7345610 *
    3) grade&gt;=2.5 85 122.441500 1.6148600  
      6) age&gt;=56.5 75 103.062900 1.4255040  
-      12) gleason&lt; 7.5 50  66.119800 1.1407320  
-        24) g2&lt; 13.475 24  27.197170 0.8007306 *
-        25) g2&gt;=13.475 26  36.790960 1.4570210  
-          50) g2&gt;=17.915 15  20.332740 0.9789825 *
-          51) g2&lt; 17.915 11  13.459010 2.1714480 *
-      13) gleason&gt;=7.5 25  33.487250 2.0307290  
-        26) g2&gt;=15.29 10  11.588480 1.2156230 *
-        27) g2&lt; 15.29 15  18.939150 2.7053610 *
+      12) gleason&lt; 7.5 50  66.119800 1.1407320 *
+      13) gleason&gt;=7.5 25  33.487250 2.0307290 *
      7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
-<pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.016)
-rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝后" width="100%" />
+<pre class="r"><code>km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
+autoplot(km)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-13-1.png" alt="每个结点患者的生存风险估计" width="100%" />
 <p class="caption">
-Figure 6: CART树剪枝后
+Figure 7: 每个结点患者的生存风险估计
 </p>
 </div>
-<pre class="r"><code>temp &lt;- snip.rpart(fit2, 6)
-km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
-autoplot(km)</code></pre>
-<p><img src="../../post/survival_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(stagec)+
+  geom_point(aes(age,g2,shape=factor(pgstat),
+                 col=factor(pgstat)))+
+  facet_wrap(~grade)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-14-1.png" alt="年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系" width="100%" />
+<p class="caption">
+Figure 8: 年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系
+</p>
+</div>
 </div>
 </div>
 

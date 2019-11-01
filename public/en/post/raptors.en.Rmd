@@ -13,7 +13,7 @@ slug: raptors
 
 
 
-Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find [datas](https://stats.nba.com/) of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable.
+Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find [datas](https://stats.nba.com/) of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.
 
 ```{r,include=F}
 knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
@@ -109,9 +109,12 @@ ggplot(regular)+
                  shape=win,col=win)) +
   geom_segment(aes(111,81,
                    xend = 111,yend = 110),
-               col='red') +
+               col='purple') +
   geom_segment(aes(111,81,
                    xend = 141,yend = 81),
-               col='red')
+               col='purple')+
+  annotate('text', x =130,y=95, label='Win', size=10,color='turquoise4') +
+  annotate('text', x =95,y=85, label='Lose', size=10,color='tomato') +
+  labs(x='Points',y='Field Goals Attempted')
 ```
 
