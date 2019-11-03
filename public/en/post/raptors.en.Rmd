@@ -20,7 +20,7 @@ knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='cent
 ```
 
 ```{r,echo=F,fig.cap='Kawhi Leonard versus KD, who was injured during G5'}
-#knitr::include_graphics('/img/vignette/raptors.jpg')
+knitr::include_graphics('/img/vignette/raptors.jpg')
 ```
 
 ```{r}
@@ -80,7 +80,8 @@ treept <- rpart(win~.,players,
 rpart.plot(treept, branch = 0.4)
 
 players %>% 
-  rename('TPP_Kyle_Lowry'='TPP_Kyle Lowry','MIN_Pascal_Siakam'='MIN_Pascal Siakam') %>% 
+  rename('TPP_Kyle_Lowry'='TPP_Kyle Lowry',
+         'MIN_Pascal_Siakam'='MIN_Pascal Siakam') %>% 
 ggplot() +
   geom_point(aes(TPP_Kyle_Lowry,MIN_Pascal_Siakam,shape=win,col=win))
 ```

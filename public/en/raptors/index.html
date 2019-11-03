@@ -78,6 +78,12 @@
 
 <p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
 <p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="../../img/vignette/raptors.jpg" alt="Kawhi Leonard versus KD, who was injured during G5" width="100%" />
+<p class="caption">
+Figure 1: Kawhi Leonard versus KD, who was injured during G5
+</p>
+</div>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(tidyr)
@@ -126,7 +132,8 @@ plot(tree)</code></pre>
 rpart.plot(treept, branch = 0.4)</code></pre>
 <p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-2.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>players %&gt;% 
-  rename(&#39;TPP_Kyle_Lowry&#39;=&#39;TPP_Kyle Lowry&#39;,&#39;MIN_Pascal_Siakam&#39;=&#39;MIN_Pascal Siakam&#39;) %&gt;% 
+  rename(&#39;TPP_Kyle_Lowry&#39;=&#39;TPP_Kyle Lowry&#39;,
+         &#39;MIN_Pascal_Siakam&#39;=&#39;MIN_Pascal Siakam&#39;) %&gt;% 
 ggplot() +
   geom_point(aes(TPP_Kyle_Lowry,MIN_Pascal_Siakam,shape=win,col=win))</code></pre>
 <p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-3.png" width="100%" style="display: block; margin: auto;" /></p>
@@ -171,7 +178,7 @@ plot(tree,type = &quot;simple&quot;)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
 <img src="../../post/raptors.en_files/figure-html/unnamed-chunk-8-1.png" alt="The tree using `party` package." width="100%" />
 <p class="caption">
-Figure 1: The tree using <code>party</code> package.
+Figure 2: The tree using <code>party</code> package.
 </p>
 </div>
 <pre class="r"><code>treept &lt;- rpart(formula,regular,
@@ -181,7 +188,7 @@ rpart.plot(treept, branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
 <img src="../../post/raptors.en_files/figure-html/unnamed-chunk-9-1.png" alt="When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose." width="100%" />
 <p class="caption">
-Figure 2: When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.
+Figure 3: When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.
 </p>
 </div>
 <p>As you could see, the two trees are much same than before.</p>
@@ -200,7 +207,7 @@ Figure 2: When raptors score more than 111 and the field goals attempted more th
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
 <img src="../../post/raptors.en_files/figure-html/unnamed-chunk-10-1.png" alt="Partition borders of the CART tree." width="100%" />
 <p class="caption">
-Figure 3: Partition borders of the CART tree.
+Figure 4: Partition borders of the CART tree.
 </p>
 </div>
 </div>
