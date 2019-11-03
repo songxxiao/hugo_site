@@ -231,7 +231,7 @@ grid <- dt %>%
 data_grid(x,z) %>%
 gather_predictions(moda)
           
-pltb <- ggplot(dt, aes(x, y)) +
+pltb <- ggplot(dt,aes(x, y)) +
   geom_point(aes(color=year,shape=z),size=2) +
   geom_line(data=grid,aes(pred,x,group=z),
             size=0.75,color='red') +

@@ -28,19 +28,13 @@ library(party)
 library(rpart)
 library(rpart.plot)
 library(ggplot2)</code></pre>
-<pre class="r"><code>#Kawhi Leonard Kyle Lowry Malcolm Miller
-#Serge Ibaka Danny Green
-regular_players &lt;- regular_players %&gt;% 
+<pre class="r"><code>regular_players &lt;- regular_players %&gt;% 
   na_if(&#39;-&#39;) %&gt;%
   rename(&#39;TPP&#39;=&#39;3P%&#39;,&#39;FTP&#39;=&#39;FT%&#39;,
          &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;% 
   mutate_if(sapply(.,is.character),as.factor) %&gt;% 
   select(-&#39;+/-&#39;)
-
 #long to wide
-players &lt;- raptors_players %&gt;% 
-  dcast(DATE~PLAYER)
-#date=group, player=time
 library(tidyr)
 players &lt;- regular_players %&gt;%
   gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %&gt;%
@@ -90,7 +84,6 @@ plot(tree)</code></pre>
 <p><img src="/post/raptors.en_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>treept &lt;- rpart(formula,playoffs,
                 control = rpart.control(cp=0.001,minsplit=3))
-
 rpart.plot(treept, branch = 0.4)</code></pre>
 <p><img src="/post/raptors.en_files/figure-html/unnamed-chunk-7-2.png" width="100%" style="display: block; margin: auto;" /></p>
 <ul>
