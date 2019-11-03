@@ -20,7 +20,7 @@ knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='cent
 ```
 
 ```{r,echo=F,fig.cap='Kawhi Leonard versus KD, who was injured during G5'}
-knitr::include_graphics('/img/vignette/raptors.jpg')
+#knitr::include_graphics('/img/vignette/raptors.jpg')
 ```
 
 ```{r}
@@ -38,18 +38,53 @@ library(ggplot2)
 ```{r,include=F,echo=F}
 raptorsplayoffs <- read_csv("E:/MaLearning/nba/raptorsplayoffs.csv")
 raptorsreg <- read_csv("E:/MaLearning/nba/raptors_regulars.csv")
+raptors_players <- read_csv("E:/MaLearning/nba/raptors_players.csv")
+regular_players <- read_csv("E:/MaLearning/nba/regular_players.csv")
 ```
 
 
-```{r,eval=F,include=F}
-raptors_players <- read_csv("E:/MaLearning/nba/raptors_players.csv")
-raptors_players <- raptors_players %>% 
-  arrange(DATE) %>% 
-  na_if('-') 
+```{r}
+#Kawhi Leonard Kyle Lowry Malcolm Miller
+#Serge Ibaka Danny Green
+regular_players <- regular_players %>% 
+  na_if('-') %>%
+  rename('TPP'='3P%','FTP'='FT%',
+         'FGP'='FG%','win'='W/L') %>% 
+  mutate_if(sapply(.,is.character),as.factor) %>% 
+  select(-'+/-')
+
 #long to wide
 players <- raptors_players %>% 
   dcast(DATE~PLAYER)
+#date=group, player=time
+library(tidyr)
+players <- regular_players %>%
+  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %>%
+  unite(col, key,PLAYER) %>%
+  spread(col,value) %>% 
+  select(-TEAM,-MATCHUP,-DATE) %>% 
+  replace(is.na(.), 0) %>% 
+  mutate_if(sapply(.,is.character),as.numeric) 
+
 ```
+
+```{r}
+head(data.frame(players)[1:5])
+tree <- ctree(win~.,players,
+              controls = ctree_control(mincriterion = 0.00001,minsplit=9))
+plot(tree)
+
+treept <- rpart(win~.,players,
+                control = rpart.control(cp=0.0001,minsplit=6))
+
+rpart.plot(treept, branch = 0.4)
+
+players %>% 
+  rename('TPP_Kyle_Lowry'='TPP_Kyle Lowry','MIN_Pascal_Siakam'='MIN_Pascal Siakam') %>% 
+ggplot() +
+  geom_point(aes(TPP_Kyle_Lowry,MIN_Pascal_Siakam,shape=win,col=win))
+```
+
 
 # Playoffs
 
@@ -59,7 +94,7 @@ playoffs <- raptorsplayoffs %>%
   na_if('-') %>% 
   rename('TPP'='3P%','FTP'='FT%',
          'FGP'='FG%','win'='W/L') %>% 
-  mutate_if(sapply(.,is.character),as.factor)
+  mutate_if(sapply(.,is.character),as.factor) 
 
 formula <- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
 

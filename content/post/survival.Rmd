@@ -230,7 +230,6 @@ rpart.plot(fit2,shadow.col = 'gray',branch = 0.4)
 
 ```{r,fig.cap='每个结点患者的生存风险估计'}
 temp <- snip.rpart(fit2,6)
-fit2
 km <- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
 autoplot(km)
 ```

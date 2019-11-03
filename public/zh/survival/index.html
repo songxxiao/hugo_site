@@ -372,11 +372,11 @@ Figure 5: CART树剪枝前
 <pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.017)
 fit2$cptable</code></pre>
 <pre><code>          CP nsplit rel error    xerror       xstd
-1 0.12945955      0 1.0000000 1.0045566 0.07019126
-2 0.04205598      1 0.8705405 0.8874852 0.07377709
-3 0.02919986      2 0.8284845 0.8881050 0.07749942
-4 0.01798864      3 0.7992846 0.9101703 0.07852036
-5 0.01700000      4 0.7812960 0.9340807 0.08349374</code></pre>
+1 0.12945955      0 1.0000000 1.0078611 0.07024720
+2 0.04205598      1 0.8705405 0.9160116 0.07480704
+3 0.02919986      2 0.8284845 1.0039927 0.09085090
+4 0.01798864      3 0.7992846 1.0354470 0.09555009
+5 0.01700000      4 0.7812960 1.0475619 0.10212746</code></pre>
 <pre class="r"><code>rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
 <img src="../../post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝后" width="100%" />
@@ -385,22 +385,7 @@ Figure 6: CART树剪枝后
 </p>
 </div>
 <pre class="r"><code>temp &lt;- snip.rpart(fit2,6)
-fit2</code></pre>
-<pre><code>n= 146 
-
-node), split, n, deviance, yval
-      * denotes terminal node
-
- 1) root 146 192.111100 1.0000000  
-   2) grade&lt; 2.5 61  44.799010 0.3634439  
-     4) g2&lt; 11.36 33   9.117405 0.1229835 *
-     5) g2&gt;=11.36 28  27.602190 0.7345610 *
-   3) grade&gt;=2.5 85 122.441500 1.6148600  
-     6) age&gt;=56.5 75 103.062900 1.4255040  
-      12) gleason&lt; 7.5 50  66.119800 1.1407320 *
-      13) gleason&gt;=7.5 25  33.487250 2.0307290 *
-     7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
-<pre class="r"><code>km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
+km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
 autoplot(km)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
 <img src="../../post/survival_files/figure-html/unnamed-chunk-13-1.png" alt="每个结点患者的生存风险估计" width="100%" />
