@@ -1,18 +1,157 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	
-	<sitemap>
-	   	<loc>/en/sitemap.xml</loc>
-		
-	   	<lastmod>2019-10-30T00:00:00+00:00</lastmod>
-		
-	</sitemap>
-	
-	<sitemap>
-	   	<loc>/zh/sitemap.xml</loc>
-		
-	   	<lastmod>2019-10-01T00:00:00+00:00</lastmod>
-		
-	</sitemap>
-	
-</sitemapindex>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://xsong.ltd/zh/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/zhresume/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/reward/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/tags/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/enresume/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/pyscore/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/nba/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/rsweave/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/cross/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/survival/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/pyobject/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/suanfa/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/vignette/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/chnxsong.pdf</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/archives/pandas/scorecard</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/land.pdf</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/archives/causal/causal</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/tags/%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/tags/python/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/tags/r/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/tags/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/nba/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/xsong_en.pdf</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/tags/python/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/tags/machine-learning/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://xsong.ltd/en/tags/applied-statistics/</loc>
+  <lastmod>2019-08-19T09:26:52+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
+</urlset>

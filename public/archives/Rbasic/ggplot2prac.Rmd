@@ -59,10 +59,13 @@ library(rgdal)
 `%>%` <- magrittr::`%>%`
 ```
 
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%',fig.showtext= T)
+```
 
 # 密度可视化
 
-```{r,message = F, comment = NA,warning = F,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r,fig.asp=0.6}
 data(diamonds)
 ggplot(diamonds, aes(log(carat), log10(price))) +
 geom_bin2d(bins = 50) +
@@ -71,7 +74,7 @@ facet_wrap(~cut, nrow = 2)
 
 # 抽样散点图
 
-```{r 1,message=F, comment=NA,warning=F,cache=T,fig.align='center',out.width ='80%',fig.asp=0.6,fig.cap='`ggplot2`按图层绘图。为防止散点堆叠，图中散点经过抽样。lowess曲线是根据原始数据绘制。不同图层可使用不同数据。位于`ggplot`下方的图层将被堆叠在上方。'}
+```{r,out.width ='80%',fig.asp=0.6,fig.cap='`ggplot2`按图层绘图。为防止散点堆叠，图中散点经过抽样。lowess曲线是根据原始数据绘制。不同图层可使用不同数据。位于`ggplot`下方的图层将被堆叠在上方。'}
 hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
 set.seed(20191001)
 sample <- sample(1:nrow(hatdt),600,replace = F)
@@ -92,7 +95,7 @@ ggplot(hatdt,aes(agem,inc,shape=type,color=type,weight=fswt_nat)) +
 
 + 使用[`modelr`](https://r4ds.had.co.nz/model-basics.html)包进行模型拟合。
 
-```{r 2,message = F, comment = NA,warning = F,fig.align='center',out.width ='100%',fig.asp=0.8,fig.cap='散点图的颜色代表不同组。左上:简单OLS拟合。右上:令每个组斜率相同、截距不同(固定效应)。相当于将组别变量`z`作为控制变量。原本的正相关相关关系颠倒为负相关。左下:对每个组分别拟合线性模型。各组斜率不同，截距也不同。'}
+```{r,fig.asp=0.8,fig.cap='散点图的颜色代表不同组。左上:简单OLS拟合。右上:令每个组斜率相同、截距不同(固定效应)。相当于将组别变量`z`作为控制变量。原本的正相关相关关系颠倒为负相关。左下:对每个组分别拟合线性模型。各组斜率不同，截距也不同。'}
 set.seed(91)
 x <- seq(0, 4, length = 100)
 y <- -x + jitter(rep(1:5, each = 20), 2)
@@ -129,7 +132,7 @@ plot_grid(modela,modelb,modelc,ncol = 2)
 
 + 基于两个变量的分面:`facet_grid`
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='80%',fig.asp=0.6}
+```{r,out.width ='80%',fig.asp=0.6}
 bara <- read_csv("F:/Mysite/Mysite/static/slides/mlepre/bar1.csv")
 ggplot(bara,aes(reorder(car
 ,value),value,color=segment
@@ -252,7 +255,7 @@ in16 <- ggplot(china_data, aes(long,lat, group = group,fill= in16)) +
 
 + [`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
 
-```{r,message = F, comment = NA,warning = F,cache = T,fig.align='center',out.width ='100%',fig.cap='中国土地流转的空间分布。北京、天津由于农户过少而设为缺失。CFPS未调查的省份数据缺失。土地流转发生率=当年参与土地流转的农户数/当年农户总数。数据经过加权处理，具有全国代表性。'}
+```{r,fig.cap='中国土地流转的空间分布。北京、天津由于农户过少而设为缺失。CFPS未调查的省份数据缺失。土地流转发生率=当年参与土地流转的农户数/当年农户总数。数据经过加权处理，具有全国代表性。'}
 china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
 mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
 mapdata <- as.data.frame(mapdata)
@@ -273,7 +276,7 @@ ggplot(long, aes(long,lat,group = group,fill= value)) +
 
 ## 气泡地图
 
-```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%'} 
+```{r} 
 bottom  <- readOGR(dsn = "E:/R_codes/maps/CHN_adm/CHN_adm2.shp",stringsAsFactors=F)
 
 bottomdata <- fortify(bottom)         
@@ -305,9 +308,27 @@ ggplot(china_map,aes(long,lat)) +
 
 ```
 
+## 世界地图
+
+```{r,fig.asp=0.4}
+WorldData <- map_data('world') %>% 
+  filter(region != "Antarctica") %>% 
+  fortify
+
+earthquake <- read_csv("E:/MaLearning/earthquake20190630.csv", locale = readr::locale(encoding = "gb18030"))
+
+ggplot() +
+geom_polygon(data=WorldData,
+             aes(long,lat, group = group),
+               fill="white",color="black",
+               size=0.1) + 
+    geom_point(data = earthquake,
+               aes(`经度(°)`,`纬度(°)`,color=`震级(M)`),size=0.8)
+```
+
 # 误差可视化
 
-```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6} 
+```{r,fig.asp=0.6} 
 df <- data.frame(grp = 1:17, fit = c(1,2,2,3,4,6,7,9,15,16,17,19,18,8,10,11,2), se = 2)
 
 era <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
@@ -328,7 +349,7 @@ plot_grid(era,erb,erc,ncol = 2)
 
 # 平行坐标图(Parallel Coordinate Plot)
 
-```{r,message = F, comment = NA, warning = F,cache = T,fig.align='center',out.width ='100%',fig.asp=0.6}
+```{r,fig.asp=0.6}
 library(GGally)
 ggparcoord(iris, columns = 1:4, groupColumn = 5, scale = "uniminmax") + 
   geom_line(size = 1.2)
@@ -338,7 +359,7 @@ ggparcoord(iris, columns = 1:4, groupColumn = 5, scale = "uniminmax") +
 
 使用`modelr`包的函数
 
-```{r,eval=F,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
+```{r,eval=F,fig.asp=0.6}
 data('titanic_train')
 titanic_train$Pclass <- as.factor(titanic_train$Pclass)
 cv1 <- crossv_kfold(titanic_train, 5)

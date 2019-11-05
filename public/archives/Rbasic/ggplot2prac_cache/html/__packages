@@ -4,11 +4,10 @@ dplyr
 plyr
 readxl
 modelr
-easyGgplot2
+haven
+readr
+cowplot
 reshape2
 sp
 rgdal
-haven
-readr
-hexbin
 GGally
