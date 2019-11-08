@@ -248,39 +248,19 @@ ggplot() +
 $${y_i} = g({x_i}) + {\varepsilon _i}$$
 $g$是在$x$带宽$\alpha$范围内进行的多项式回归。
 
-```{r,fig.asp=0.6,fig.cap='使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
+```{r,fig.asp=1.1,fig.cap='左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。'}
 data(PlantCounts,package = 'MSG')
-par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
-with(PlantCounts, {
-plot(altitude, counts, col = rgb(0, 0, 0, 0.3),
-panel.first = grid())
-for (i in seq(0.01, 1, length = 70)) {
-lines(lowess(altitude, counts, f = i),
-      col = rgb(0.4,i, 0.4), lwd = 1.5)
- }
-plot(altitude, counts, col = rgb(0, 0, 0, 0.3))
-for (i in 1:200) {
-idx = sample(nrow(PlantCounts), 300, T)
-lines(lowess(altitude[idx], counts[idx]),
-col = rgb(0, 0, 0, 0.1), lwd = 1.5)
-}
-})
-```
-
-+ `ggplot2`版本
-
-```{r,cache=T,out.width='90%',fig.asp=1.2,fig.cap='使用`ggplot2`和`for`循环绘图'}
 g <- ggplot(PlantCounts,
             aes(altitude,counts)) +
   geom_point(size=1.5,alpha=1/3) +
   ylim(0,80)+
   theme_bw()
 
-for (i in seq(1,1000,10)){
-  col = rgb(0.4,i/1000,0.4)
+for (i in seq(1,1700,10)){
+  col = rgb(0.4,i/1700,0.4)
   g <- g + stat_smooth(geom='line',
                        span=i/1000,
-                       size=0.5,
+                       size=0.6,
                        se=F,color=col)
 }
 
@@ -308,7 +288,6 @@ e <- ggplot(PlantCounts,
   theme_bw()
 plot_grid(g,f,e,ncol = 2)
 ```
-
 
 # 样条 
 

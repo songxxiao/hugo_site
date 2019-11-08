@@ -17,8 +17,9 @@
       <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/en/raptors/</guid>
-      <description>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find datas of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.
-library(readr)library(dplyr)library(tidyr)library(magrittr)library(party)library(rpart)library(rpart.</description>
+      <description>A Kaggle version is here
+Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I found datas of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.
+Figure 1: Kawhi Leonard versus KD, who was injured during G5library(readr)library(dplyr)library(tidyr)library(magrittr)library(party)library(rpart)library(rpart.</description>
     </item>
     
     <item>
@@ -28,7 +29,7 @@ library(readr)library(dplyr)library(tidyr)library(magrittr)library(party)li
       
       <guid>/en/modelen/</guid>
       <description>Loading …
-window.location.replace(&#34;https://www.kaggle.com/rikdifos/r-model-visualization-a-r-markdown-report/report&#34;)</description>
+window.location.replace(&#34;https://www.kaggle.com/rikdifos/r-model-visualization&#34;)</description>
     </item>
     
     <item>

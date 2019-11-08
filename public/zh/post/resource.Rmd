@@ -5,7 +5,7 @@ date: '2019-09-23'
 slug: resource
 ---
 
-# 教科书
+# R
 
 [R for Data Science](https://r4ds.had.co.nz/)
 
@@ -25,10 +25,13 @@ slug: resource
 
 [Introduction to Econometrics with R](https://www.econometrics-with-r.org/index.html)
 
+[Text Mining with R:A Tidy Approach](https://www.tidytextmining.com/)
 
 ---
 
 # Python
+
+[Python机器学习](https://ljalphabeta.gitbooks.io/python-/content/)
 
 [Python -WordCloud 修改色调](https://blog.csdn.net/u010152318/article/details/80242460)   
 

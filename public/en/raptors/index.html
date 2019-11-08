@@ -76,8 +76,15 @@
       
 
 
+<p>A Kaggle version is <a href="https://www.kaggle.com/rikdifos/2018-2019-nba-champion-toronto-raptors-analysis">here</a></p>
 <p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
-<p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I find <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.</p>
+<p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I found <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="../../img/vignette/raptors.jpg" alt="Kawhi Leonard versus KD, who was injured during G5" width="100%" />
+<p class="caption">
+Figure 1: Kawhi Leonard versus KD, who was injured during G5
+</p>
+</div>
 <pre class="r"><code>library(readr)
 library(dplyr)
 library(tidyr)
@@ -87,6 +94,7 @@ library(rpart)
 library(rpart.plot)
 library(ggplot2)
 library(corrplot)</code></pre>
+<p>In order to explore effect of every player to games’ result, the data has been transformed to wide format, which every column represents a player’s statistic, including points, mins per game and field goals points etc. Moreover, I do not want to conclude unnecessary noise in datasets because some substitute players actually contribute very little. I remove those rows too.</p>
 <pre class="r"><code>players &lt;- regular_players %&gt;% 
   na_if(&#39;-&#39;) %&gt;%
   filter(PLAYER!=&#39;Jodie Meeks&#39;,PLAYER!= &#39;Eric Moreland&#39;,
@@ -123,29 +131,23 @@ ncol(players)</code></pre>
 4                  0
 5                  6
 6                  5</code></pre>
-<pre class="r"><code>tree &lt;- ctree(win~.,players,
-              controls = ctree_control(mincriterion = 0.00001,minsplit=9))
-plot(tree)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>treept &lt;- rpart(win~.,players,
+<pre class="r"><code>#tree &lt;- ctree(win~.,players,
+#             controls = #ctree_control(mincriterion = 0.00001,minsplit=9))
+#plot(tree)
+
+treept &lt;- rpart(win~.,players,
                 control = rpart.control(cp=0.0001,minsplit=6))
 
 rpart.plot(treept, branch = 0.4)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>players %&gt;% 
   rename(&#39;TPP_Kyle_Lowry&#39;=&#39;TPP_Kyle Lowry&#39;,
          &#39;MIN_Pascal_Siakam&#39;=&#39;MIN_Pascal Siakam&#39;,
          &#39;MIN_Kawhi_Leonard&#39;=&#39;MIN_Kawhi Leonard&#39;) %&gt;% 
 ggplot() +
-  geom_point(aes(TPP_Kyle_Lowry,MIN_Pascal_Siakam,shape=win,col=win))</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-3.png" width="100%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>players %&gt;% 
-  rename(&#39;TPP_Kyle_Lowry&#39;=&#39;TPP_Kyle Lowry&#39;,
-         &#39;MIN_Pascal_Siakam&#39;=&#39;MIN_Pascal Siakam&#39;,
-         &#39;PTS_Kawhi_Leonard&#39;=&#39;PTS_Kawhi Leonard&#39;) %&gt;% 
-ggplot(.,aes(win,PTS_Kawhi_Leonard))+
-  geom_boxplot()</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-4.png" width="100%" style="display: block; margin: auto;" /></p>
+  geom_point(aes(TPP_Kyle_Lowry,MIN_Pascal_Siakam,shape=win,col=win))+
+  labs(x=&#39;3 point percent of Kyle Lowry&#39;,y=&#39;Minutes per game of Siakam&#39;)</code></pre>
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-2.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>From the tree, Kyle Lowry’s 3 points accuracy is really important for win. It is surprise that Kawhi Leonard does not appear on the tree. It is opporiate to our common sense. It does not mean that Leonard is not significant, as a superstar, he really helps when pivotal time comes, and that contribution might not be reflected from models.</p>
 <div id="playoffs" class="section level1">
 <h1>Playoffs</h1>
@@ -187,22 +189,16 @@ corrplot(cor(regular %&gt;%
                select(., PTS:PF), 
              use = &#39;complete.obs&#39;), 
          method = &#39;circle&#39;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-81"></span>
-<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-8-1.png" alt="The tree using `party` package." width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-8-1.png" alt="Correlation Plot" width="100%" />
 <p class="caption">
-Figure 1: The tree using <code>party</code> package.
+Figure 2: Correlation Plot
 </p>
 </div>
-<pre class="r"><code>tree &lt;- ctree(formula,regular,
-              controls = ctree_control(mincriterion = 0.01,minsplit=3))
+<pre class="r"><code>#tree &lt;- ctree(formula,regular,
+#              controls = #ctree_control(mincriterion = 0.01,minsplit=3))
 #plot(tree)
-plot(tree,type = &quot;simple&quot;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
-<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-8-2.png" alt="The tree using `party` package." width="100%" />
-<p class="caption">
-Figure 2: The tree using <code>party</code> package.
-</p>
-</div>
+#plot(tree,type = &quot;simple&quot;)</code></pre>
 <pre class="r"><code>treept &lt;- rpart(formula,regular,
                 control = rpart.control(cp=0.05,minsplit=3))
 
@@ -232,9 +228,11 @@ Figure 3: When raptors score more than 111 and the field goals attempted more th
 Figure 4: Partition borders of the CART tree.
 </p>
 </div>
-</div>
-<div id="combine-collective-data-and-players-personal-data" class="section level1">
-<h1>Combine collective data and players’ personal data</h1>
+<div id="combine-collective-data-and-players-personal-data" class="section level2">
+<h2>Combine collective data and players’ personal data</h2>
+<ul>
+<li>Since I have not seen Leonard, I decide to combine personal data and collective data of whole team. Besides, since team’s points are too important and directly related to wining or not, I removed it.</li>
+</ul>
 <pre class="r"><code>players &lt;- regular_players %&gt;% 
   na_if(&#39;-&#39;) %&gt;%
   filter(PLAYER!=&#39;Jodie Meeks&#39;,PLAYER!= &#39;Eric Moreland&#39;,
@@ -248,9 +246,9 @@ Figure 4: Partition borders of the CART tree.
          &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;% 
   mutate_if(sapply(.,is.character),as.factor) %&gt;% 
   select(-&#39;+/-&#39;) %&gt;% 
-  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %&gt;% # long to wide
-  unite(col, key,PLAYER) %&gt;%
-  spread(col,value) %&gt;% 
+  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %&gt;% # wide to long
+  unite(col,key,PLAYER) %&gt;%
+  spread(col,value) %&gt;% # long to wide
   select(-TEAM,-MATCHUP) %&gt;%
   replace(is.na(.),0) %&gt;% 
   mutate_if(sapply(.,is.character),as.numeric)
@@ -265,6 +263,12 @@ tree &lt;- rpart(win~.,intedt,
 rpart.plot(tree, branch = 0.4)</code></pre>
 <p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
 PF: personal fouls</p>
+<p>Now we could see Leonard appear on the tree. Except collective features(The total points has been deleted), Leonard and Siakam are players first appear on the tree, thus they are testified to be very important.</p>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>It is hard to draw a final conclusion because datasets are too small, and I have not found ways to handle missing values, which mean one player does not play at that game. Now I just filled them with 0. <code>party</code> and <code>rpart</code> always give me different results. Considering the length of passage, I do not display all results.</p>
 </div>
 
     </div>

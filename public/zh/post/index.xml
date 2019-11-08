@@ -34,7 +34,7 @@ hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp
       <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/resource/</guid>
-      <description>教科书R for Data Science
+      <description>RR for Data Science
 Advanced R
 ggplot2: Elegant Graphics for Data Analysis
 现代统计图形
@@ -43,7 +43,9 @@ caret包
 Fundamentals of Data Visualization
 统计学与R读书笔记(第六版)
 Introduction to Econometrics with R
-PythonPython -WordCloud 修改色调
+Text Mining with R:A Tidy Approach
+PythonPython机器学习
+Python -WordCloud 修改色调
 Python中WordCloud各参数的含义
 超详细：Python(wordcloud+jieba)生成中文词云图
 杂七杂八的链接Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛

@@ -530,41 +530,17 @@ Figure 7: 分别对CFPS数据进行二次项和三次项回归。三次项导致
 <p><span class="math display">\[{y_i} = g({x_i}) + {\varepsilon _i}\]</span>
 <span class="math inline">\(g\)</span>是在<span class="math inline">\(x\)</span>带宽<span class="math inline">\(\alpha\)</span>范围内进行的多项式回归。</p>
 <pre class="r"><code>data(PlantCounts,package = &#39;MSG&#39;)
-par(mar = c(4,4,1,0.5), mfrow = c(1, 2), pch = 20)
-with(PlantCounts, {
-plot(altitude, counts, col = rgb(0, 0, 0, 0.3),
-panel.first = grid())
-for (i in seq(0.01, 1, length = 70)) {
-lines(lowess(altitude, counts, f = i),
-      col = rgb(0.4,i, 0.4), lwd = 1.5)
- }
-plot(altitude, counts, col = rgb(0, 0, 0, 0.3))
-for (i in 1:200) {
-idx = sample(nrow(PlantCounts), 300, T)
-lines(lowess(altitude[idx], counts[idx]),
-col = rgb(0, 0, 0, 0.1), lwd = 1.5)
-}
-})</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-12-1.png" alt="使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。" width="100%" />
-<p class="caption">
-Figure 8: 使用R自带作图工具绘图。左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
-</p>
-</div>
-<ul>
-<li><code>ggplot2</code>版本</li>
-</ul>
-<pre class="r"><code>g &lt;- ggplot(PlantCounts,
+g &lt;- ggplot(PlantCounts,
             aes(altitude,counts)) +
   geom_point(size=1.5,alpha=1/3) +
   ylim(0,80)+
   theme_bw()
 
-for (i in seq(1,1000,10)){
-  col = rgb(0.4,i/1000,0.4)
+for (i in seq(1,1700,10)){
+  col = rgb(0.4,i/1700,0.4)
   g &lt;- g + stat_smooth(geom=&#39;line&#39;,
                        span=i/1000,
-                       size=0.5,
+                       size=0.6,
                        se=F,color=col)
 }
 
@@ -591,10 +567,10 @@ e &lt;- ggplot(PlantCounts,
   ylim(0,80)+
   theme_bw()
 plot_grid(g,f,e,ncol = 2)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt="使用`ggplot2`和`for`循环绘图" width="90%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-12-1.png" alt="左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。" width="100%" />
 <p class="caption">
-Figure 9: 使用<code>ggplot2</code>和<code>for</code>循环绘图
+Figure 8: 左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
 </p>
 </div>
 </div>
@@ -674,10 +650,10 @@ ggplot(Wage,aes(age,wage))+
             size=1,color=&#39;purple&#39;)+
   facet_wrap(~model)+
   theme_bw()</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-14-1.png" alt="左图：1次项样条。右图：3次项样条" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-13-1.png" alt="左图：1次项样条。右图：3次项样条" width="100%" />
 <p class="caption">
-Figure 10: 左图：1次项样条。右图：3次项样条
+Figure 9: 左图：1次项样条。右图：3次项样条
 </p>
 </div>
 </div>
@@ -707,7 +683,7 @@ boxa &lt;- ggplot(as.data.frame(x),aes(x))+
                  fill=&#39;white&#39;) 
 
 result = boxcox(x~1,lambda = seq(-0.5,0,5))</code></pre>
-<p><img src="../../post/model_files/figure-html/unnamed-chunk-15-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/model_files/figure-html/unnamed-chunk-14-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>mylambda = result$x[which.max(result$y)]
 mylambda</code></pre>
 <pre><code>[1] -0.5</code></pre>
@@ -718,10 +694,10 @@ boxb &lt;- ggplot(x2,aes(x2)) +
   geom_histogram(color=&#39;black&#39;,
                  fill=&#39;white&#39;) </code></pre>
 <pre class="r"><code>plot_grid(boxa,boxb,ncol = 2)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
-<img src="../../post/model_files/figure-html/unnamed-chunk-16-1.png" alt="左图：原分布。右图：变换后的分布" width="90%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="../../post/model_files/figure-html/unnamed-chunk-15-1.png" alt="左图：原分布。右图：变换后的分布" width="90%" />
 <p class="caption">
-Figure 11: 左图：原分布。右图：变换后的分布
+Figure 10: 左图：原分布。右图：变换后的分布
 </p>
 </div>
 </div>

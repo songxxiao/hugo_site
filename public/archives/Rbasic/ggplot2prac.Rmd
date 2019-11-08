@@ -255,6 +255,8 @@ in16 <- ggplot(china_data, aes(long,lat, group = group,fill= in16)) +
 
 + [`facet_grid()`介绍](https://ggplot2.tidyverse.org/reference/facet_grid.html#examples)
 
+使用对比色增加对颜色尺度的感知。
+
 ```{r,fig.cap='中国土地流转的空间分布。北京、天津由于农户过少而设为缺失。CFPS未调查的省份数据缺失。土地流转发生率=当年参与土地流转的农户数/当年农户总数。数据经过加权处理，具有全国代表性。'}
 china_map_data <- read_dta("E:/R_codes/maps/nomissing/chnprovcd.dta")
 mapdata <- read_excel("E:/R_codes/ggplot2map/geodata0131.xlsx")
@@ -266,7 +268,7 @@ long <- melt(china_data, id=c("long", "lat","group"))
 
 ggplot(long, aes(long,lat,group = group,fill= value)) +
   geom_polygon(colour='brown',size=0.2) +
-  scale_fill_gradientn(colours = c('yellow', 'red'),na.value = 'white',breaks = c(10,20,30,40),limits=c(0,43), guide = 'legend') +
+  scale_fill_gradientn(colours = c('yellow', 'navyblue'),na.value = 'white',breaks = c(10,20,30,40),limits=c(0,43), guide = 'legend') +
   coord_map('polyconic') +
   facet_wrap(~variable,nrow = 3) +
   labs(x='经度',y='纬度',fill = '土地流转发生率') +
