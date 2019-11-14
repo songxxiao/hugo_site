@@ -31,6 +31,8 @@ slug: resource
 
 # Python
 
+[Python帮助系统](https://blog.csdn.net/qq_40418612/article/details/82470055)
+
 [Python机器学习](https://ljalphabeta.gitbooks.io/python-/content/)
 
 [Python -WordCloud 修改色调](https://blog.csdn.net/u010152318/article/details/80242460)   
@@ -60,6 +62,9 @@ slug: resource
 
 [3](https://wordcloud.timdream.org/)  
 
+---
+
+图床：<https://sm.ms/>
 
 
 

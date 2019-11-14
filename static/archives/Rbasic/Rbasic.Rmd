@@ -20,7 +20,7 @@ slug: basicr
 ## 数组和矩阵
 
 ```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width='90%')
 ```
 
 ```{r}

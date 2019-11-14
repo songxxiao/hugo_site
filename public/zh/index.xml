@@ -44,7 +44,8 @@ Fundamentals of Data Visualization
 统计学与R读书笔记(第六版)
 Introduction to Econometrics with R
 Text Mining with R:A Tidy Approach
-PythonPython机器学习
+PythonPython帮助系统
+Python机器学习
 Python -WordCloud 修改色调
 Python中WordCloud各参数的含义
 超详细：Python(wordcloud+jieba)生成中文词云图
@@ -57,6 +58,7 @@ datasets（R自带数据包）
 1
 2
 3
+图床：https://sm.ms/
 </description>
     </item>
     
@@ -210,7 +212,7 @@ R Markdown: The Definitive Guide
       <description>本文系复旦大学人口学系张震老师和华东师范大学人口研究所李强老师的数据分析课程笔记。
 一个R生存分析应用的介绍网页Survival Analysis with R
 生存分析应用：移动通讯运营商的用户流失问题分析
-两篇重要的中文文献：
+两篇中文文献：
 李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
 李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.
 基本概念社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道

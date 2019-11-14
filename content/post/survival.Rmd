@@ -2,7 +2,12 @@
 title: '生存分析云笔记'
 date: '2019-05-23'
 slug: survival
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
 ---
+
 
 ![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
 
@@ -12,7 +17,7 @@ slug: survival
 
 生存分析应用：[移动通讯运营商的用户流失问题分析](https://mp.weixin.qq.com/s/XrL2CmoxmJwdvnUDMMYT6w)
 
-两篇重要的中文文献：
+两篇中文文献：
 
 李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
 
@@ -52,6 +57,8 @@ $h(t)$不是密度也不是概率。
 
 ---
 
+<https://cmdlinetips.com/2019/03/introduction-to-maximum-likelihood-estimation-in-r/>
+
 # 最大似然估计(MLE)
 
  Cox回归避开了模型分布假定的问题。
@@ -70,6 +77,67 @@ $$P(T = t) \approx 2\delta f(t)$$
 $$\widehat \lambda  = \frac{1}{{\bar t }} = \frac{n}{{\sum\limits_{}^{} {{t_i}} }}$$
 $\sum\limits_{}^{} {{t_i}}$是历险人年数。$n$是事件发生数。  
  $\lambda$是个概率估计。
+ 
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message=F,warning=F,fig.align='center',out.width='90%')
+```
+
+```{r}
+library(survival)
+library(haven) 
+library(ggplot2)
+library(dplyr)
+library(ggfortify)
+library(survminer)
+library(rpart)
+library(rpart.plot)
+library(stats4)
+```
+ 
+```{r}
+y <- rpois(n=10000, lambda=7)
+df_Poisson <- data.frame(data=y)
+#df_Poisson
+df_Poisson %>% 
+  ggplot(aes(data))+ 
+  geom_histogram() +
+  ylab("Count")+ xlab("data")+
+  theme_bw(base_size = 16) +
+  ggtitle("Poisson Distribution: rpois(10000,7)")
+
+NROW(df_Poisson)
+
+llh_poisson <- function(lambda,y){
+  # log(likelihood) by summing 
+   llh <- sum(dpois(df_Poisson$data,lambda, log=T))
+   return(llh)
+}
+
+lambdas <- seq(1,15, by=0.2)
+ll <- sapply(lambdas,llh_poisson)
+ 
+# save the lambdas and log-likelihoods in a data frame
+df <- data.frame(ll=ll, lambda=lambdas)
+
+
+df %>% 
+  ggplot(aes(lambda,ll))+
+  geom_point(size=4,color="dodgerblue")+
+  xlab("Lambda") +
+  ylab("Log Likelihood")+
+  theme_bw(base_size = 16) +
+  geom_vline(xintercept = lambdas[which.max(ll)], color="red",size=2)
+
+ll <- function(lambda){
+  # log(likelihood) by summing 
+   -sum(dpois(df_Poisson$data,lambda, log=T))
+}
+
+fit0 <- mle(ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
+fit0
+summary(fit0)
+```
+
 
 ### 删截(Censored)样本的似然函数
 
@@ -101,63 +169,40 @@ $$\hat \lambda  = \frac{d}{{\sum {{t_i} - (n - d) \cdot 40} }}$$
 
 R生存分析介绍：[survival analysis in R](http://www.openintro.org/stat/surv.php)
 
-```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
-```
 
-```{r}
-library(survival)
-library(haven) 
-library(ggplot2)
-library(dplyr)
-library(ggfortify)
-library(stargazer)
-library(rpart)
-library(rpart.plot)
-```
 
-+ 数据介绍：  
-`los1`:时间变量  
-`cen_r`:事件是否发生,被收养成功  
-`female`:性别  
-`ec`:进入队列   
-`minc`:母亲月均收入  
-(minc=1, \$0-\$299; minc=2, \$300-\$999; minc=3, \$1,000-\$1,999;
-minc=4,$2000+)  
-`age`:年龄  
-`black`:种族  
+使用`?rpart::stagec`查看数据
 
 ```{r,include = F}
-cwg <- read_dta("E:/R_codes/others/cwg.dta")
+#cwg <- read_dta("E:/R_codes/others/cwg.dta")
 #变量排序
-cwg$event[cwg$cen_r ==0] <- 1
-cwg$event[cwg$cen_r ==1] <- 0
-cwg$los1 <- cwg$los1/30
+#cwg$event[cwg$cen_r ==0] <- 1
+#cwg$event[cwg$cen_r ==1] <- 0
+#cwg$los1 <- cwg$los1/30
 
-cwg <- select(cwg,cen_r,event, los1,everything())
+#cwg <- select(cwg,cen_r,event, los1,everything())
 #head(cwg)#数据
 ```
 
 ## Kaplan–Meier estimator | 卡普兰迈耶法
 
-又称乘积极限法(Product-Limit Method), 公式如下：
+卡普兰迈耶法又称乘积极限法(Product-Limit Method), 公式如下：
 
 $${\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}$$
 
 $n_i$是在时间$t_i$中的历险人数，$d_i$是事件发生数。
 
 ```{r}
-table(cwg$event)
-# Kaplan Meier Survival Curve
-km <- with(cwg, Surv(los1, event == 1))
-head(km,10) #删截后面有+号
+table(stagec$pgstat)
+km <- with(stagec, Surv(pgtime, pgstat == 1))
+head(km,10) 
 
-km_fit <- survfit(km ~ 1, data=cwg)
-km_fit #生存分析概要
+km_fit <- survfit(km ~ 1, stagec)
+km_fit 
 ```
 
 ```{r, echo=F,fig.cap='生存函数的Kaplan–Meier estimator是生命表$nPx$列的累乘。'}
-knitr::include_graphics("/img/survival/life.jpg")
+knitr::include_graphics('https://i.loli.net/2019/11/13/aKTArE51ROidC7t.jpg')
 ```
 
 
@@ -166,13 +211,15 @@ summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
 ```
 
 ```{r, echo=F,fig.cap='生命表示例'}
-knitr::include_graphics("/img/survival/life2.jpg")
+knitr::include_graphics('https://i.loli.net/2019/11/13/sy7eklhjXZBLrTM.jpg')
 ```
 
 ```{r,fig.cap='Kaplan Meier Survival Curve'}
-km_trt_fit <- survfit(km ~ female, data=cwg)
-autoplot(km_trt_fit)  
+kme <- survfit(Surv(pgtime, pgstat) ~ 1,stagec)
+autoplot(kme, surv.colour = 'orange', censor.colour = 'red')
 
+km_trt_fit <- survfit(Surv(pgtime, pgstat) ~ grade,stagec)
+autoplot(km_trt_fit)  
 ```
 
 ## Cox比例风险模型
@@ -188,28 +235,44 @@ $${{h(t|{X_i})} \over {h(t|{X_j})}} = {{{h_0}(t)\exp (X_i^T\beta )} \over {{h_0}
 + ${h_i}(t)$和${h_0}(t)$随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。
 
 ```{r}
-cwg$ec <- as.factor(cwg$ec)
-cwg$minc <- as.factor(cwg$minc)
-cwg$age <- as.factor(cwg$age)
-
-coxreg <- coxph(km ~ ec + age + female +black + minc, data = cwg)
+coxreg <- coxph(Surv(pgtime , pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
 summary(coxreg)
-cox_fit <- survfit(coxreg)
+coxreg
+
+ggforest(coxreg,stagec)
+
+#library(rms)
+#dd=datadist(stagec)
+#options(datadist="dd")
+#f2 <- psm(Surv(time,status) ~ age+gender+grade,data =  #LIHC, dist='lognormal')
+#med <- Quantile(f2) # 计算中位生存时间
+#surv <- Survival(f2) # 构建生存概率函数
+
+## 绘制COX回归中位生存时间的Nomogram图
+#nom <- nomogram(f2, fun=function(x) #med(lp=x),funlabel="Median Survival Time")
+
+#plot(nom)
+
+#cox_fit <- survfit(coxreg)
 #autoplot(cox_fit) #拟合值
 ##C-指数 Harrell's concordance index
 #coxreg$concordance
-concordance(km ~ predict(coxreg), data = cwg)
+#concordance(Surv(pgtime , pgstat) ~ predict(coxreg),stagec)
 ```
 
+<!---
 [生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
 
 [C-index/C-statistic 计算的5种不同方法及比较](https://blog.csdn.net/anshiquanshu/article/details/53438438)
+--->
 
 ## [Aalen’s additive regression model](http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf)
 
-```{r,fig.cap='协变量作用随时间变化'}
-aaregfit <-aareg(km ~ ec + age + female +black + minc, data = cwg)
+```{r,fig.cap=' '}
+aaregfit <- aareg(Surv(pgtime, pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
 aaregfit
+
+ggforest(aaregfit,stagec)
 autoplot(aaregfit)
 ```
 
@@ -239,5 +302,9 @@ ggplot(stagec)+
   geom_point(aes(age,g2,shape=factor(pgstat),
                  col=factor(pgstat)))+
   facet_wrap(~grade)
+```
+
+```{r}
+
 ```
 

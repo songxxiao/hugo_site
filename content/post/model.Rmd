@@ -321,7 +321,7 @@ ggplot(Wage,aes(age,wage))+
 ```
 
 
-# Box-Cox 变换
+# [Box-Cox 变换](http://onlinestatbook.com/2/transformations/box-cox.html)
 
 为保证变量的正态性进行的统计学转换。
 
@@ -368,7 +368,7 @@ boxb <- ggplot(x2,aes(x2)) +
 plot_grid(boxa,boxb,ncol = 2)
 ```
 
-
+Python中的做法：`scipy.special.boxcox1p`
 
 
 

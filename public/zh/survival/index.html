@@ -80,7 +80,7 @@
 <p>本文系复旦大学人口学系<a href="http://www.ssdpp.fudan.edu.cn/portal/1e2812ee711c4175a3304c7dbc7071e0/70VhqG.html">张震</a>老师和华东师范大学人口研究所<a href="https://faculty.ecnu.edu.cn/s/2160/main.jspy">李强</a>老师的数据分析课程笔记。</p>
 <p>一个R生存分析应用的介绍网页<a href="https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/">Survival Analysis with R</a></p>
 <p>生存分析应用：<a href="https://mp.weixin.qq.com/s/XrL2CmoxmJwdvnUDMMYT6w">移动通讯运营商的用户流失问题分析</a></p>
-<p>两篇重要的中文文献：</p>
+<p>两篇中文文献：</p>
 <p>李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.</p>
 <p>李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.</p>
 <hr />
@@ -104,6 +104,7 @@
 <li><p>能活到预期寿命者总是62%</p></li>
 </ul>
 <hr />
+<p><a href="https://cmdlinetips.com/2019/03/introduction-to-maximum-likelihood-estimation-in-r/" class="uri">https://cmdlinetips.com/2019/03/introduction-to-maximum-likelihood-estimation-in-r/</a></p>
 </div>
 <div id="最大似然估计mle" class="section level1">
 <h1>最大似然估计(MLE)</h1>
@@ -121,6 +122,73 @@
 <span class="math inline">\(\sum\limits_{}^{} {{t_i}}\)</span>是历险人年数。<span class="math inline">\(n\)</span>是事件发生数。<br />
 <span class="math inline">\(\lambda\)</span>是个概率估计。</li>
 </ul>
+<pre class="r"><code>library(survival)
+library(haven) 
+library(ggplot2)
+library(dplyr)
+library(ggfortify)
+library(survminer)
+library(rpart)
+library(rpart.plot)
+library(stats4)</code></pre>
+<pre class="r"><code>y &lt;- rpois(n=10000, lambda=7)
+df_Poisson &lt;- data.frame(data=y)
+#df_Poisson
+df_Poisson %&gt;% 
+  ggplot(aes(data))+ 
+  geom_histogram() +
+  ylab(&quot;Count&quot;)+ xlab(&quot;data&quot;)+
+  theme_bw(base_size = 16) +
+  ggtitle(&quot;Poisson Distribution: rpois(10000,7)&quot;)</code></pre>
+<p><img src="../../post/survival_files/figure-html/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>NROW(df_Poisson)</code></pre>
+<pre><code>[1] 10000</code></pre>
+<pre class="r"><code>llh_poisson &lt;- function(lambda,y){
+  # log(likelihood) by summing 
+   llh &lt;- sum(dpois(df_Poisson$data,lambda, log=T))
+   return(llh)
+}
+
+lambdas &lt;- seq(1,15, by=0.2)
+ll &lt;- sapply(lambdas,llh_poisson)
+ 
+# save the lambdas and log-likelihoods in a data frame
+df &lt;- data.frame(ll=ll, lambda=lambdas)
+
+
+df %&gt;% 
+  ggplot(aes(lambda,ll))+
+  geom_point(size=4,color=&quot;dodgerblue&quot;)+
+  xlab(&quot;Lambda&quot;) +
+  ylab(&quot;Log Likelihood&quot;)+
+  theme_bw(base_size = 16) +
+  geom_vline(xintercept = lambdas[which.max(ll)], color=&quot;red&quot;,size=2)</code></pre>
+<p><img src="../../post/survival_files/figure-html/unnamed-chunk-3-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ll &lt;- function(lambda){
+  # log(likelihood) by summing 
+   -sum(dpois(df_Poisson$data,lambda, log=T))
+}
+
+fit0 &lt;- mle(ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
+fit0</code></pre>
+<pre><code>
+Call:
+mle(minuslogl = ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
+
+Coefficients:
+ lambda 
+7.00488 </code></pre>
+<pre class="r"><code>summary(fit0)</code></pre>
+<pre><code>Maximum likelihood estimation
+
+Call:
+mle(minuslogl = ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
+
+Coefficients:
+       Estimate Std. Error
+lambda  7.00488 0.02646689
+
+-2 log L: 47766.8 </code></pre>
 <div id="删截censored样本的似然函数" class="section level3">
 <h3>删截(Censored)样本的似然函数</h3>
 <ul>
@@ -143,93 +211,80 @@
 <div id="生存分析估计" class="section level1">
 <h1>生存分析估计</h1>
 <p>R生存分析介绍：<a href="http://www.openintro.org/stat/surv.php">survival analysis in R</a></p>
-<pre class="r"><code>library(survival)
-library(haven) 
-library(ggplot2)
-library(dplyr)
-library(ggfortify)
-library(stargazer)
-library(rpart)
-library(rpart.plot)</code></pre>
-<ul>
-<li>数据介绍：<br />
-<code>los1</code>:时间变量<br />
-<code>cen_r</code>:事件是否发生,被收养成功<br />
-<code>female</code>:性别<br />
-<code>ec</code>:进入队列<br />
-<code>minc</code>:母亲月均收入<br />
-(minc=1, $0-$299; minc=2, $300-$999; minc=3, $1,000-$1,999;
-minc=4,$2000+)<br />
-<code>age</code>:年龄<br />
-<code>black</code>:种族</li>
-</ul>
+<p>使用<code>?rpart::stagec</code>查看数据</p>
 <div id="kaplanmeier-estimator-卡普兰迈耶法" class="section level2">
 <h2>Kaplan–Meier estimator | 卡普兰迈耶法</h2>
-<p>又称乘积极限法(Product-Limit Method), 公式如下：</p>
+<p>卡普兰迈耶法又称乘积极限法(Product-Limit Method), 公式如下：</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
-<pre class="r"><code>table(cwg$event)</code></pre>
+<pre class="r"><code>table(stagec$pgstat)</code></pre>
 <pre><code>
-  0   1 
-978 300 </code></pre>
-<pre class="r"><code># Kaplan Meier Survival Curve
-km &lt;- with(cwg, Surv(los1, event == 1))
-head(km,10) #删截后面有+号</code></pre>
-<pre><code> [1]  4.30000000+  6.00000000  21.00000000+  0.03333333  10.63333333 
- [6]  4.43333333+  6.86666667+  4.46666667+  2.40000000+  9.00000000 </code></pre>
-<pre class="r"><code>km_fit &lt;- survfit(km ~ 1, data=cwg)
-km_fit #生存分析概要</code></pre>
-<pre><code>Call: survfit(formula = km ~ 1, data = cwg)
+ 0  1 
+92 54 </code></pre>
+<pre class="r"><code>km &lt;- with(stagec, Surv(pgtime, pgstat == 1))
+head(km,10) </code></pre>
+<pre><code> [1]  6.1+  9.4+  5.2   3.2   1.9   4.8+  5.8+  7.3+  3.7  15.9+</code></pre>
+<pre class="r"><code>km_fit &lt;- survfit(km ~ 1, stagec)
+km_fit </code></pre>
+<pre><code>Call: survfit(formula = km ~ 1, data = stagec)
 
       n  events  median 0.95LCL 0.95UCL 
-   1278     300      NA      NA      NA </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="../../img/survival/life.jpg" alt="生存函数的Kaplan–Meier estimator是生命表$nPx$列的累乘。" width="100%" />
+  146.0    54.0      NA     7.7      NA </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="https://i.loli.net/2019/11/13/aKTArE51ROidC7t.jpg" alt="生存函数的Kaplan–Meier estimator是生命表$nPx$列的累乘。" width="90%" />
 <p class="caption">
 Figure 1: 生存函数的Kaplan–Meier estimator是生命表<span class="math inline">\(nPx\)</span>列的累乘。
 </p>
 </div>
 <pre class="r"><code>summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
-<pre><code>Call: survfit(formula = km ~ 1, data = cwg)
+<pre><code>Call: survfit(formula = km ~ 1, data = stagec)
 
  time n.risk n.event survival std.err lower 95% CI upper 95% CI
-  0.2   1237      24    0.981 0.00382        0.974        0.989
-  0.4   1226       5    0.977 0.00420        0.969        0.985
-  0.6   1219       0    0.977 0.00420        0.969        0.985
-  0.8   1215       1    0.976 0.00427        0.968        0.985
-  1.0   1211       3    0.974 0.00448        0.965        0.983
-  1.2   1199       3    0.972 0.00468        0.962        0.981
-  1.4   1187       1    0.971 0.00475        0.961        0.980
-  1.6   1183       2    0.969 0.00488        0.960        0.979
-  1.8   1175       1    0.968 0.00494        0.959        0.978
-  2.0   1163       4    0.965 0.00520        0.955        0.975
-  2.2   1160       1    0.964 0.00526        0.954        0.974
-  2.4   1141       3    0.962 0.00544        0.951        0.972
-  2.6   1134       4    0.958 0.00568        0.947        0.969
-  2.8   1105      11    0.949 0.00628        0.937        0.961
-  3.0   1098       0    0.949 0.00628        0.937        0.961
-  3.2   1083       7    0.943 0.00665        0.930        0.956
-  3.4   1062      10    0.934 0.00714        0.920        0.948
-  3.6   1055       3    0.931 0.00728        0.917        0.946
-  3.8   1046       3    0.929 0.00742        0.914        0.943
-  4.0   1041       4    0.925 0.00760        0.910        0.940
-  4.2   1031       7    0.919 0.00791        0.904        0.935
-  4.4   1019       3    0.916 0.00804        0.901        0.932
-  4.6   1008       4    0.913 0.00821        0.897        0.929
-  4.8    991       8    0.905 0.00853        0.889        0.922
-  5.0    977       7    0.899 0.00881        0.882        0.916</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="../../img/survival/life2.jpg" alt="生命表示例" width="100%" />
+  0.2    146       0    1.000 0.00000        1.000        1.000
+  0.4    144       2    0.986 0.00962        0.968        1.000
+  0.6    143       1    0.979 0.01174        0.957        1.000
+  0.8    143       0    0.979 0.01174        0.957        1.000
+  1.0    143       2    0.966 0.01505        0.937        0.996
+  1.2    139       2    0.952 0.01768        0.918        0.987
+  1.4    138       1    0.945 0.01883        0.909        0.983
+  1.6    135       4    0.918 0.02273        0.874        0.963
+  1.8    132       1    0.911 0.02357        0.866        0.958
+  2.0    130       3    0.890 0.02589        0.841        0.942
+  2.2    128       1    0.883 0.02659        0.833        0.937
+  2.4    126       1    0.876 0.02727        0.825        0.932
+  2.6    125       3    0.856 0.02916        0.800        0.915
+  2.8    122       1    0.849 0.02974        0.792        0.909
+  3.0    120       3    0.828 0.03135        0.769        0.892
+  3.2    118       2    0.814 0.03235        0.753        0.880
+  3.4    111       4    0.786 0.03414        0.722        0.856
+  3.6    111       0    0.786 0.03414        0.722        0.856
+  3.8    106       3    0.764 0.03538        0.698        0.837
+  4.0    106       0    0.764 0.03538        0.698        0.837
+  4.2    105       2    0.750 0.03615        0.682        0.824
+  4.4    103       1    0.743 0.03653        0.674        0.818
+  4.6    101       0    0.743 0.03653        0.674        0.818
+  4.8     97       2    0.728 0.03727        0.658        0.805
+  5.0     94       1    0.720 0.03763        0.650        0.798</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="https://i.loli.net/2019/11/13/sy7eklhjXZBLrTM.jpg" alt="生命表示例" width="90%" />
 <p class="caption">
 Figure 2: 生命表示例
 </p>
 </div>
-<pre class="r"><code>km_trt_fit &lt;- survfit(km ~ female, data=cwg)
-autoplot(km_trt_fit)  </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-8-1.png" alt="Kaplan Meier Survival Curve" width="100%" />
+<pre class="r"><code>kme &lt;- survfit(Surv(pgtime, pgstat) ~ 1,stagec)
+autoplot(kme, surv.colour = &#39;orange&#39;, censor.colour = &#39;red&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-9-1.png" alt="Kaplan Meier Survival Curve" width="90%" />
 <p class="caption">
 Figure 3: Kaplan Meier Survival Curve
+</p>
+</div>
+<pre class="r"><code>km_trt_fit &lt;- survfit(Surv(pgtime, pgstat) ~ grade,stagec)
+autoplot(km_trt_fit)  </code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-9-2.png" alt="Kaplan Meier Survival Curve" width="90%" />
+<p class="caption">
+Figure 4: Kaplan Meier Survival Curve
 </p>
 </div>
 </div>
@@ -244,94 +299,109 @@ Figure 3: Kaplan Meier Survival Curve
 <li><p>两个分别具有协变量<span class="math inline">\({X_i}\)</span>和<span class="math inline">\({X_j}\)</span>的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）</p></li>
 <li><p><span class="math inline">\({h_i}(t)\)</span>和<span class="math inline">\({h_0}(t)\)</span>随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。</p></li>
 </ul>
-<pre class="r"><code>cwg$ec &lt;- as.factor(cwg$ec)
-cwg$minc &lt;- as.factor(cwg$minc)
-cwg$age &lt;- as.factor(cwg$age)
-
-coxreg &lt;- coxph(km ~ ec + age + female +black + minc, data = cwg)
+<pre class="r"><code>coxreg &lt;- coxph(Surv(pgtime , pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
 summary(coxreg)</code></pre>
 <pre><code>Call:
-coxph(formula = km ~ ec + age + female + black + minc, data = cwg)
+coxph(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
+    gleason + ploidy, data = stagec)
 
-  n= 1278, number of events= 300 
+  n= 134, number of events= 49 
+   (12 observations deleted due to missingness)
 
-           coef exp(coef) se(coef)      z Pr(&gt;|z|)    
-ec2    -0.06402   0.93799  0.15623 -0.410   0.6820    
-ec3    -0.31251   0.73161  0.15042 -2.078   0.0377 *  
-age1    0.23566   1.26575  0.17845  1.321   0.1866    
-age2    0.12146   1.12915  0.18000  0.675   0.4998    
-age3    0.36410   1.43921  0.18088  2.013   0.0441 *  
-age4    0.18543   1.20374  0.19518  0.950   0.3421    
-female  0.05917   1.06095  0.11604  0.510   0.6101    
-black  -0.17321   0.84096  0.12882 -1.345   0.1788    
-minc2   0.86616   2.37777  0.12615  6.866 6.60e-12 ***
-minc3   0.90591   2.47418  0.21039  4.306 1.66e-05 ***
-minc4   1.54650   4.69499  0.30848  5.013 5.35e-07 ***
+                     coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+age              -0.01859   0.98158  0.02899 -0.641  0.52139   
+eet               0.09073   1.09498  0.37418  0.242  0.80840   
+g2               -0.05569   0.94583  0.02664 -2.091  0.03654 * 
+grade             1.37745   3.96478  0.43615  3.158  0.00159 **
+gleason           0.21023   1.23397  0.17099  1.230  0.21887   
+ploidytetraploid  0.98917   2.68901  0.42622  2.321  0.02030 * 
+ploidyaneuploid   1.22007   3.38742  0.66723  1.829  0.06747 . 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-       exp(coef) exp(-coef) lower .95 upper .95
-ec2       0.9380     1.0661    0.6906    1.2740
-ec3       0.7316     1.3669    0.5448    0.9825
-age1      1.2657     0.7900    0.8922    1.7957
-age2      1.1291     0.8856    0.7935    1.6068
-age3      1.4392     0.6948    1.0096    2.0516
-age4      1.2037     0.8307    0.8211    1.7647
-female    1.0610     0.9425    0.8451    1.3319
-black     0.8410     1.1891    0.6533    1.0825
-minc2     2.3778     0.4206    1.8569    3.0447
-minc3     2.4742     0.4042    1.6381    3.7369
-minc4     4.6950     0.2130    2.5648    8.5944
+                 exp(coef) exp(-coef) lower .95 upper .95
+age                 0.9816     1.0188    0.9274    1.0390
+eet                 1.0950     0.9133    0.5259    2.2799
+g2                  0.9458     1.0573    0.8977    0.9965
+grade               3.9648     0.2522    1.6864    9.3212
+gleason             1.2340     0.8104    0.8826    1.7252
+ploidytetraploid    2.6890     0.3719    1.1663    6.2000
+ploidyaneuploid     3.3874     0.2952    0.9161   12.5261
 
-Concordance= 0.648  (se = 0.016 )
-Likelihood ratio test= 79.58  on 11 df,   p=2e-12
-Wald test            = 83.79  on 11 df,   p=3e-13
-Score (logrank) test = 90.95  on 11 df,   p=1e-14</code></pre>
-<pre class="r"><code>cox_fit &lt;- survfit(coxreg)
+Concordance= 0.777  (se = 0.032 )
+Likelihood ratio test= 47.93  on 7 df,   p=4e-08
+Wald test            = 40.97  on 7 df,   p=8e-07
+Score (logrank) test = 47.66  on 7 df,   p=4e-08</code></pre>
+<pre class="r"><code>coxreg</code></pre>
+<pre><code>Call:
+coxph(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
+    gleason + ploidy, data = stagec)
+
+                     coef exp(coef) se(coef)      z       p
+age              -0.01859   0.98158  0.02899 -0.641 0.52139
+eet               0.09073   1.09498  0.37418  0.242 0.80840
+g2               -0.05569   0.94583  0.02664 -2.091 0.03654
+grade             1.37745   3.96478  0.43615  3.158 0.00159
+gleason           0.21023   1.23397  0.17099  1.230 0.21887
+ploidytetraploid  0.98917   2.68901  0.42622  2.321 0.02030
+ploidyaneuploid   1.22007   3.38742  0.66723  1.829 0.06747
+
+Likelihood ratio test=47.93  on 7 df, p=3.67e-08
+n= 134, number of events= 49 
+   (12 observations deleted due to missingness)</code></pre>
+<pre class="r"><code>ggforest(coxreg,stagec)</code></pre>
+<p><img src="../../post/survival_files/figure-html/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#library(rms)
+#dd=datadist(stagec)
+#options(datadist=&quot;dd&quot;)
+#f2 &lt;- psm(Surv(time,status) ~ age+gender+grade,data =  #LIHC, dist=&#39;lognormal&#39;)
+#med &lt;- Quantile(f2) # 计算中位生存时间
+#surv &lt;- Survival(f2) # 构建生存概率函数
+
+## 绘制COX回归中位生存时间的Nomogram图
+#nom &lt;- nomogram(f2, fun=function(x) #med(lp=x),funlabel=&quot;Median Survival Time&quot;)
+
+#plot(nom)
+
+#cox_fit &lt;- survfit(coxreg)
 #autoplot(cox_fit) #拟合值
 ##C-指数 Harrell&#39;s concordance index
 #coxreg$concordance
-concordance(km ~ predict(coxreg), data = cwg)</code></pre>
-<pre><code>Call:
-concordance.formula(object = km ~ predict(coxreg), data = cwg)
+#concordance(Surv(pgtime , pgstat) ~ predict(coxreg),stagec)</code></pre>
+<!---
+[生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
 
-n= 1278 
-Concordance= 0.3518 se= 0.0164
-concordant discordant     tied.x     tied.y    tied.xy 
-     96999     179888       2803        246         19 </code></pre>
-<p><a href="https://blog.csdn.net/fjsd155/article/details/84669331">生存模型的C-index（C指数）</a></p>
-<p><a href="https://blog.csdn.net/anshiquanshu/article/details/53438438">C-index/C-statistic 计算的5种不同方法及比较</a></p>
+[C-index/C-statistic 计算的5种不同方法及比较](https://blog.csdn.net/anshiquanshu/article/details/53438438)
+--->
 </div>
 <div id="aalens-additive-regression-model" class="section level2">
 <h2><a href="http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf">Aalen’s additive regression model</a></h2>
-<pre class="r"><code>aaregfit &lt;-aareg(km ~ ec + age + female +black + minc, data = cwg)
+<pre class="r"><code>aaregfit &lt;- aareg(Surv(pgtime, pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
 aaregfit</code></pre>
 <pre><code>Call:
-aareg(formula = km ~ ec + age + female + black + minc, data = cwg)
+aareg(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
+    gleason + ploidy, data = stagec)
 
-  n= 1278 
-    152 out of 152 unique event times used
+  n=134 (12 observations deleted due to missingness)
+    38 out of 38 unique event times used
 
-             slope      coef se(coef)      z        p
-Intercept  0.02740  8.65e-04 0.000222  3.900 9.64e-05
-ec2       -0.00728 -7.42e-05 0.000182 -0.406 6.84e-01
-ec3       -0.01410 -3.27e-04 0.000167 -1.960 5.01e-02
-age1       0.00411  1.92e-04 0.000176  1.090 2.77e-01
-age2       0.00114  6.14e-05 0.000167  0.367 7.13e-01
-age3       0.01330  3.32e-04 0.000199  1.670 9.50e-02
-age4       0.00431  1.31e-04 0.000198  0.663 5.07e-01
-female     0.00517  6.42e-05 0.000123  0.522 6.02e-01
-black     -0.00856 -1.81e-04 0.000151 -1.200 2.32e-01
-minc2      0.03100  1.02e-03 0.000177  5.740 9.66e-09
-minc3      0.02080  1.15e-03 0.000363  3.180 1.49e-03
-minc4      0.08800  2.66e-03 0.000980  2.720 6.60e-03
+                    slope      coef se(coef)      z       p
+Intercept        -0.16500 -0.008530 0.022600 -0.377 0.70600
+age              -0.00230 -0.000206 0.000312 -0.660 0.50900
+eet              -0.01000 -0.001460 0.003910 -0.374 0.70900
+g2               -0.00598 -0.000649 0.000246 -2.640 0.00832
+grade             0.12200  0.010800 0.004560  2.380 0.01740
+gleason           0.02260  0.001750 0.002250  0.780 0.43500
+ploidytetraploid  0.09670  0.010700 0.004330  2.480 0.01320
+ploidyaneuploid   0.37900  0.021700 0.019900  1.090 0.27400
 
-Chisq=59.53 on 11 df, p=1.13e-08; test weights=aalen</code></pre>
+Chisq=29.68 on 7 df, p=0.000109; test weights=aalen</code></pre>
+<pre class="r"><code>ggforest(aaregfit,stagec)</code></pre>
+<pre><code>Error in ggforest(aaregfit, stagec): 不是所有的class(model) == &quot;coxph&quot;都是TRUE</code></pre>
 <pre class="r"><code>autoplot(aaregfit)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-10-1.png" alt="协变量作用随时间变化" width="100%" />
+<div class="figure" style="text-align: center">
+<img src="../../post/survival_files/figure-html/unnamed-chunk-11-1.png" alt=" " width="90%" />
 <p class="caption">
-Figure 4: 协变量作用随时间变化
 </p>
 </div>
 </div>
@@ -363,8 +433,8 @@ node), split, n, deviance, yval
         27) g2&lt; 15.29 15  18.939150 2.7053610 *
      7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
 <pre class="r"><code>rpart.plot(fit,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-11-1.png" alt="CART树剪枝前" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝前" width="90%" />
 <p class="caption">
 Figure 5: CART树剪枝前
 </p>
@@ -372,14 +442,14 @@ Figure 5: CART树剪枝前
 <pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.017)
 fit2$cptable</code></pre>
 <pre><code>          CP nsplit rel error    xerror       xstd
-1 0.12945955      0 1.0000000 1.0078611 0.07024720
-2 0.04205598      1 0.8705405 0.9160116 0.07480704
-3 0.02919986      2 0.8284845 1.0039927 0.09085090
-4 0.01798864      3 0.7992846 1.0354470 0.09555009
-5 0.01700000      4 0.7812960 1.0475619 0.10212746</code></pre>
+1 0.12945955      0 1.0000000 1.0044808 0.07011258
+2 0.04205598      1 0.8705405 0.8818044 0.07347477
+3 0.02919986      2 0.8284845 0.8982644 0.07797793
+4 0.01798864      3 0.7992846 0.9176689 0.08186875
+5 0.01700000      4 0.7812960 0.9778645 0.08680235</code></pre>
 <pre class="r"><code>rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝后" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-13-1.png" alt="CART树剪枝后" width="90%" />
 <p class="caption">
 Figure 6: CART树剪枝后
 </p>
@@ -387,8 +457,8 @@ Figure 6: CART树剪枝后
 <pre class="r"><code>temp &lt;- snip.rpart(fit2,6)
 km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
 autoplot(km)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-13-1.png" alt="每个结点患者的生存风险估计" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-14-1.png" alt="每个结点患者的生存风险估计" width="90%" />
 <p class="caption">
 Figure 7: 每个结点患者的生存风险估计
 </p>
@@ -397,8 +467,8 @@ Figure 7: 每个结点患者的生存风险估计
   geom_point(aes(age,g2,shape=factor(pgstat),
                  col=factor(pgstat)))+
   facet_wrap(~grade)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-14-1.png" alt="年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系" width="100%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-15-1.png" alt="年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系" width="90%" />
 <p class="caption">
 Figure 8: 年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系
 </p>

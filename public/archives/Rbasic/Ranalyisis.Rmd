@@ -16,7 +16,7 @@ slug: ranalysis
 [k-means in R](https://uc-r.github.io/kmeans_clustering)
 
 ```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+knitr::opts_chunk$set(comment=NA,error=T,message=F,warning=F,fig.align='center',out.width ='100%')
 ```
 
 
@@ -617,8 +617,21 @@ plot(ex1)
 文本相似性计算  
 情感分析  
 
-# 常见统计检验
+TF-IDF is a combination of two terms. Term frequency and Inverse Document frequency.
 
+```
+TF  = (Frequency of a word in the document)/(Total words in the document)
+
+IDF = Log((Total number of docs)/(Number of docs containing the word))
+```
+
+```{r}
+
+```
+
+
+
+# 常见统计检验
 
 ```{r}
 t.test(extra ~ group,sleep)

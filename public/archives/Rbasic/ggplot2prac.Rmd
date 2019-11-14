@@ -268,12 +268,19 @@ long <- melt(china_data, id=c("long", "lat","group"))
 
 ggplot(long, aes(long,lat,group = group,fill= value)) +
   geom_polygon(colour='brown',size=0.2) +
-  scale_fill_gradientn(colours = c('yellow', 'navyblue'),na.value = 'white',breaks = c(10,20,30,40),limits=c(0,43), guide = 'legend') +
+  scale_fill_gradientn(colours = c('navyblue','yellow'),na.value = 'white',breaks = c(40,30,20,10),limits=c(0,43), guide = 'legend') +
   coord_map('polyconic') +
   facet_wrap(~variable,nrow = 3) +
   labs(x='经度',y='纬度',fill = '土地流转发生率') +
   theme_bw()
 
+ggplot(long, aes(long,lat,group = group,col= value,fill= value)) +
+  geom_polygon(col='brown',size=0.2) +
+  scale_fill_viridis_c(na.value = "white", guide = "colourbar", aesthetics = "fill")+
+  coord_map('polyconic') +
+  facet_wrap(~variable,nrow = 3) +
+  labs(x='经度',y='纬度',fill = '土地流转发生率') +
+  theme_bw()
 ```
 
 ## 气泡地图
