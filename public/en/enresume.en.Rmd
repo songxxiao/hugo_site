@@ -2,7 +2,7 @@
 title: 'Xiao Song'
 author: 
 slug: enresume
-comments: false
+disable_comments: true
 ---
 
 [Chinese version](/zh/zhresume/)  

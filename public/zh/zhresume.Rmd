@@ -2,7 +2,7 @@
 title: "宋 骁-简 历"
 author: " "
 slug: zhresume
-comments: false
+disable_comments: true
 ---
 
 [English Version](/en/enresume/)  
