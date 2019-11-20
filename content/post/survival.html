@@ -110,8 +110,8 @@ Call:
 mle(minuslogl = ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
 
 Coefficients:
- lambda 
-7.00488 </code></pre>
+  lambda 
+6.994883 </code></pre>
 <pre class="r"><code>summary(fit0)</code></pre>
 <pre><code>Maximum likelihood estimation
 
@@ -120,9 +120,9 @@ mle(minuslogl = ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
 
 Coefficients:
        Estimate Std. Error
-lambda  7.00488 0.02646689
+lambda 6.994883   0.026448
 
--2 log L: 47766.8 </code></pre>
+-2 log L: 47719.87 </code></pre>
 <div id="删截censored样本的似然函数" class="section level3">
 <h3>删截(Censored)样本的似然函数</h3>
 <ul>
@@ -330,9 +330,8 @@ ploidytetraploid  0.09670  0.010700 0.004330  2.480 0.01320
 ploidyaneuploid   0.37900  0.021700 0.019900  1.090 0.27400
 
 Chisq=29.68 on 7 df, p=0.000109; test weights=aalen</code></pre>
-<pre class="r"><code>ggforest(aaregfit,stagec)</code></pre>
-<pre><code>Error in ggforest(aaregfit, stagec): 不是所有的class(model) == &quot;coxph&quot;都是TRUE</code></pre>
-<pre class="r"><code>autoplot(aaregfit)</code></pre>
+<pre class="r"><code>#ggforest(aaregfit,stagec)
+autoplot(aaregfit)</code></pre>
 <div class="figure" style="text-align: center">
 <img src="/post/survival_files/figure-html/unnamed-chunk-11-1.png" alt=" " width="90%" />
 <p class="caption">
@@ -376,11 +375,11 @@ Figure 5: CART树剪枝前
 <pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.017)
 fit2$cptable</code></pre>
 <pre><code>          CP nsplit rel error    xerror       xstd
-1 0.12945955      0 1.0000000 1.0044808 0.07011258
-2 0.04205598      1 0.8705405 0.8818044 0.07347477
-3 0.02919986      2 0.8284845 0.8982644 0.07797793
-4 0.01798864      3 0.7992846 0.9176689 0.08186875
-5 0.01700000      4 0.7812960 0.9778645 0.08680235</code></pre>
+1 0.12945955      0 1.0000000 1.0069687 0.07052688
+2 0.04205598      1 0.8705405 0.8845400 0.07348637
+3 0.02919986      2 0.8284845 0.9008440 0.07885173
+4 0.01798864      3 0.7992846 0.9220202 0.08917590
+5 0.01700000      4 0.7812960 0.9643422 0.09336500</code></pre>
 <pre class="r"><code>rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
 <img src="/post/survival_files/figure-html/unnamed-chunk-13-1.png" alt="CART树剪枝后" width="90%" />

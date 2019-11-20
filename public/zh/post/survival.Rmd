@@ -272,7 +272,7 @@ ggforest(coxreg,stagec)
 aaregfit <- aareg(Surv(pgtime, pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
 aaregfit
 
-ggforest(aaregfit,stagec)
+#ggforest(aaregfit,stagec)
 autoplot(aaregfit)
 ```
 
