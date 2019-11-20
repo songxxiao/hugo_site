@@ -16,11 +16,11 @@ A Kaggle version is [here](https://www.kaggle.com/rikdifos/2018-2019-nba-champio
 Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I found [datas](https://stats.nba.com/) of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.
 
 ```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
 ```
 
 ```{r,echo=F,fig.cap='Kawhi Leonard versus KD, who was injured during G5'}
-knitr::include_graphics('/img/vignette/raptors.jpg')
+knitr::include_graphics('https://raw.githubusercontent.com/ECSTA7Y/Mysite/master/static/img/vignette/raptors.jpg')
 ```
 
 ```{r}
@@ -42,7 +42,67 @@ raptors_players <- read_csv("E:/MaLearning/nba/raptors_players.csv")
 regular_players <- read_csv("E:/MaLearning/nba/regular_players.csv")
 ```
 
-In order to explore effect of every player to games' result, the data has been transformed to wide format, which every column represents a player's statistic, including points, mins per game and field goals points etc. Moreover, I do not want to conclude unnecessary noise in datasets because some substitute players actually contribute very little. I remove those rows too.
+# Regular Season
+
+First I try to analyze raptors' collective data.
+
+```{r,fig.cap='Correlation Plot'}
+regular<- raptorsreg %>% 
+  arrange(DATE) %>% 
+  na_if('-') %>% 
+  rename('TPP'='3P%','FTP'='FT%',
+         'FGP'='FG%','win'='W/L') %>%
+  mutate_if(sapply(.,is.character),as.factor)
+
+corrplot(cor(regular %>% 
+               select(., PTS:PF), 
+             use = 'complete.obs'), 
+         method = 'circle')
+
+#tree <- ctree(formula,regular,
+#              controls = #ctree_control(mincriterion = 0.01,minsplit=3))
+#plot(tree)
+#plot(tree,type = "simple")
+```
+
+```{r,fig.cap='When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.'}
+formula <- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
+treept <- rpart(formula,regular,
+                control = rpart.control(cp=0.05,minsplit=3))
+
+rpart.plot(treept, branch = 0.4)
+```
+
+
+```{r,fig.cap='Partition borders of the CART tree.'}
+ggplot(regular)+
+  geom_point(aes(PTS,FGA,
+                 shape=win,col=win)) +
+  geom_segment(aes(111,81,
+                   xend = 111,yend = 110),
+               col='purple') +
+  geom_segment(aes(111,81,
+                   xend = 141,yend = 81),
+               col='purple')+
+  annotate('text', x =130,y=95, label='Win', size=10,color='turquoise4') +
+  annotate('text', x =95,y=85, label='Lose', size=10,color='tomato') +
+  labs(x='Points',y='Field Goals Attempted')
+```
+
+## Players Variable Effect
+
+In order to explore effect of every player to games' result, the data has been transformed to wide format, which every column represents a player's statistic, including points, mins per game and field goals points etc. Be careful that converting multiple columns into wide format is a little bit difficult, and I will give my solution below.
+
+Moreover, I do not want to conclude unnecessary noise in datasets because some substitute players actually contribute very little. I remove those rows too. 
+
+As we know, Leonard, who is absolutely a superstar, could maintain high efficiency and high attempt of shooting almost every game. I really hope to see his effect in this analyze. Actually, Leonard ranked 5th in historical playoffs scoring list. Also, his effiecency is really amazing! Not to say his outstanding defence.
+
+the [list](https://www.reddit.com/r/nba/comments/cfzpss/kawhi_leonards_732_points_in_the_2019_nba/?utm_medium=android_app&utm_source=share) of the top 12 highest scoring post seasons, as well as how many field goals were attempted:
+
+<table style="border-collapse:collapse;border-spacing:0;border-color:#ccc;table-layout: fixed; width: 330px" class="tg"><colgroup><col style="width: 43px"><col style="width: 146px"><col style="width: 45px"><col style="width: 51px"><col style="width: 45px"></colgroup><tr><th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:middle">Rank</th><th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:middle">Player</th><th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:middle">Year</th><th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:top">Points</th><th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:top">FGAs</th></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">1</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">Michael Jordan</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">1992</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">759</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">581</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">2</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">LeBron James</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">2018</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">748</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">510</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">3</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">Kawhi Leonard</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">2019</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">732</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">496</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">4</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Hakeem Olajuwon</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">1995</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">725</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">576</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">5</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Allen Iverson</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">2001</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">723</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">661</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">6</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Shaquille O’Neal</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">2000</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">707</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">505</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">7</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">LeBron James</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">2012</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">697</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">502</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">8</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Kobe Bryant</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">2009</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">695</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">530</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">9</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Michael Jordan</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">1998</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">680</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">526</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">10</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Kobe Bryant</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">2010</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">671</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">511</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">11</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Michael Jordan</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">1993</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">666</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">528</td></tr><tr><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">12</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">Hakeem Olajuwon</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">1994</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">664</td><td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">514</td></tr></table>
+
+Leonard is the only player use only less than 500 times of field goals in this list. However, compared with Leonard, Iverson was really inefficient.
+
 
 ```{r}
 players <- regular_players %>% 
@@ -58,9 +118,9 @@ players <- regular_players %>%
          'FGP'='FG%','win'='W/L') %>% 
   mutate_if(sapply(.,is.character),as.factor) %>% 
   select(-'+/-') %>% 
-  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %>% # long to wide
-  unite(col, key,PLAYER) %>%
-  spread(col,value) %>% 
+  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %>% #convert wide to long, one column is stat name, another is value
+  unite(col,key,PLAYER) %>% #combine player's name and stat name, which will be column name later.
+  spread(col,value) %>%  # convert long to wide
   select(-TEAM,-MATCHUP,-DATE) %>%
   replace(is.na(.),0) %>% 
   mutate_if(sapply(.,is.character),as.numeric)
@@ -87,7 +147,7 @@ ggplot() +
   labs(x='3 point percent of Kyle Lowry',y='Minutes per game of Siakam')
 ```
 
-From the tree, Kyle Lowry's 3 points accuracy is really important for win. It is surprise that Kawhi Leonard does not appear on the tree. It is opporiate to our common sense. It does not mean that Leonard is not significant, as a superstar, he really helps when pivotal time comes, and that contribution might not be reflected from models.
+From the tree, Kyle Lowry's 3 points accuracy is really important for win. It is surprising that Kawhi Leonard does not appear on the tree. It is opporiate to our common sense. It does not mean that Leonard is not significant, as a superstar, he really helps when pivotal time comes, and that contribution might not be reflected from models. Besides, Leonard only attended 60 games during 2018-2019 season. He might wanted to keep fit by absent at regular season to prepare for playoffs. Or, he might did not do better than what he did on post seasons.
 
 # Playoffs
 
@@ -99,7 +159,7 @@ playoffs <- raptorsplayoffs %>%
          'FGP'='FG%','win'='W/L') %>% 
   mutate_if(sapply(.,is.character),as.factor) 
 
-formula <- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
+
 
 tree <- ctree(formula,playoffs,
               controls = ctree_control(mincriterion = 0.01,minsplit=3))
@@ -111,55 +171,7 @@ treept <- rpart(formula,playoffs,
 rpart.plot(treept, branch = 0.4)
 ```
 
-+ Since the quantity of playoff data is too small, the results of the trees are unstable. Even discrepencies between the `rpart` and `ctree` function are huge. Now let us analyze the Regular Season data, which contains 82 games.
-
-# Regular Season
-
-+ Now we begin to analyze raptors' collective data.
-
-```{r,fig.cap='Correlation Plot'}
-regular<- raptorsreg %>% 
-  arrange(DATE) %>% 
-  na_if('-') %>% 
-  rename('TPP'='3P%','FTP'='FT%',
-         'FGP'='FG%','win'='W/L') %>%
-  mutate_if(sapply(.,is.character),as.factor)
-
-corrplot(cor(regular %>% 
-               select(., PTS:PF), 
-             use = 'complete.obs'), 
-         method = 'circle')
-
-#tree <- ctree(formula,regular,
-#              controls = #ctree_control(mincriterion = 0.01,minsplit=3))
-#plot(tree)
-#plot(tree,type = "simple")
-```
-
-```{r,fig.cap='When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.'}
-treept <- rpart(formula,regular,
-                control = rpart.control(cp=0.05,minsplit=3))
-
-rpart.plot(treept, branch = 0.4)
-```
-
-As you could see, the two trees are much same than before. 
-
-
-```{r,fig.cap='Partition borders of the CART tree.'}
-ggplot(regular)+
-  geom_point(aes(PTS,FGA,
-                 shape=win,col=win)) +
-  geom_segment(aes(111,81,
-                   xend = 111,yend = 110),
-               col='purple') +
-  geom_segment(aes(111,81,
-                   xend = 141,yend = 81),
-               col='purple')+
-  annotate('text', x =130,y=95, label='Win', size=10,color='turquoise4') +
-  annotate('text', x =95,y=85, label='Lose', size=10,color='tomato') +
-  labs(x='Points',y='Field Goals Attempted')
-```
++ Since the quantity of playoff data is too small, the results of the trees are unstable. Even discrepencies between the `rpart` and `ctree` function are huge. 
 
 ## Combine collective data and players' personal data
 
@@ -199,10 +211,9 @@ PF: personal fouls
 
 Now we could see Leonard appear on the tree. Except collective features(The total points has been deleted), Leonard and Siakam are players first appear on the tree, thus they are testified to be very important.
 
-
 # Conclusion
 
-It is hard to draw a final conclusion because datasets are too small, and I have not found ways to handle missing values, which mean one player does not play at that game. Now I just filled them with 0. `party` and `rpart` always give me different results. Considering the length of passage, I do not display all results.
+It is hard to draw a final conclusion because datasets are too small, and I have not found ways to handle missing values, which mean one player does not play at that game. Now I just filled them with 0. `party` and `rpart` always give me different results. Considering the length of passage, I do not display all results. In 2019-2020 season, after transfering to L.A. Clippers, Leonard still often be absent at games, especially back to backs. If he could keep healthy til end of regular seasons, will he play as good as last season?
 
 
 

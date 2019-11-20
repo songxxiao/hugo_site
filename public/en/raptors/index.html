@@ -80,7 +80,7 @@
 <p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
 <p>Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I found <a href="https://stats.nba.com/">datas</a> of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="../../img/vignette/raptors.jpg" alt="Kawhi Leonard versus KD, who was injured during G5" width="100%" />
+<img src="https://raw.githubusercontent.com/ECSTA7Y/Mysite/master/static/img/vignette/raptors.jpg" alt="Kawhi Leonard versus KD, who was injured during G5" width="90%" />
 <p class="caption">
 Figure 1: Kawhi Leonard versus KD, who was injured during G5
 </p>
@@ -94,7 +94,296 @@ library(rpart)
 library(rpart.plot)
 library(ggplot2)
 library(corrplot)</code></pre>
-<p>In order to explore effect of every player to games’ result, the data has been transformed to wide format, which every column represents a player’s statistic, including points, mins per game and field goals points etc. Moreover, I do not want to conclude unnecessary noise in datasets because some substitute players actually contribute very little. I remove those rows too.</p>
+<div id="regular-season" class="section level1">
+<h1>Regular Season</h1>
+<p>First I try to analyze raptors’ collective data.</p>
+<pre class="r"><code>regular&lt;- raptorsreg %&gt;% 
+  arrange(DATE) %&gt;% 
+  na_if(&#39;-&#39;) %&gt;% 
+  rename(&#39;TPP&#39;=&#39;3P%&#39;,&#39;FTP&#39;=&#39;FT%&#39;,
+         &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;%
+  mutate_if(sapply(.,is.character),as.factor)
+
+corrplot(cor(regular %&gt;% 
+               select(., PTS:PF), 
+             use = &#39;complete.obs&#39;), 
+         method = &#39;circle&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-5-1.png" alt="Correlation Plot" width="90%" />
+<p class="caption">
+Figure 2: Correlation Plot
+</p>
+</div>
+<pre class="r"><code>#tree &lt;- ctree(formula,regular,
+#              controls = #ctree_control(mincriterion = 0.01,minsplit=3))
+#plot(tree)
+#plot(tree,type = &quot;simple&quot;)</code></pre>
+<pre class="r"><code>formula &lt;- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
+treept &lt;- rpart(formula,regular,
+                control = rpart.control(cp=0.05,minsplit=3))
+
+rpart.plot(treept, branch = 0.4)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-1.png" alt="When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose." width="90%" />
+<p class="caption">
+Figure 3: When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.
+</p>
+</div>
+<pre class="r"><code>ggplot(regular)+
+  geom_point(aes(PTS,FGA,
+                 shape=win,col=win)) +
+  geom_segment(aes(111,81,
+                   xend = 111,yend = 110),
+               col=&#39;purple&#39;) +
+  geom_segment(aes(111,81,
+                   xend = 141,yend = 81),
+               col=&#39;purple&#39;)+
+  annotate(&#39;text&#39;, x =130,y=95, label=&#39;Win&#39;, size=10,color=&#39;turquoise4&#39;) +
+  annotate(&#39;text&#39;, x =95,y=85, label=&#39;Lose&#39;, size=10,color=&#39;tomato&#39;) +
+  labs(x=&#39;Points&#39;,y=&#39;Field Goals Attempted&#39;)</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-7-1.png" alt="Partition borders of the CART tree." width="90%" />
+<p class="caption">
+Figure 4: Partition borders of the CART tree.
+</p>
+</div>
+<div id="players-variable-effect" class="section level2">
+<h2>Players Variable Effect</h2>
+<p>In order to explore effect of every player to games’ result, the data has been transformed to wide format, which every column represents a player’s statistic, including points, mins per game and field goals points etc. Be careful that converting multiple columns into wide format is a little bit difficult, and I will give my solution below.</p>
+<p>Moreover, I do not want to conclude unnecessary noise in datasets because some substitute players actually contribute very little. I remove those rows too.</p>
+<p>As we know, Leonard, who is absolutely a superstar, could maintain high efficiency and high attempt of shooting almost every game. I really hope to see his effect in this analyze. Actually, Leonard ranked 5th in historical playoffs scoring list. Also, his effiecency is really amazing! Not to say his outstanding defence.</p>
+<p>the <a href="https://www.reddit.com/r/nba/comments/cfzpss/kawhi_leonards_732_points_in_the_2019_nba/?utm_medium=android_app&amp;utm_source=share">list</a> of the top 12 highest scoring post seasons, as well as how many field goals were attempted:</p>
+<table style="border-collapse:collapse;border-spacing:0;border-color:#ccc;table-layout: fixed; width: 330px" class="tg">
+<colgroup>
+<col style="width: 43px">
+<col style="width: 146px">
+<col style="width: 45px">
+<col style="width: 51px">
+<col style="width: 45px">
+</colgroup>
+<tr>
+<th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:middle">
+Rank
+</th>
+<th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:middle">
+Player
+</th>
+<th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:middle">
+Year
+</th>
+<th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:top">
+Points
+</th>
+<th style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;text-align:left;vertical-align:top">
+FGAs
+</th>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">
+1
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">
+Michael Jordan
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">
+1992
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+759
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+581
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">
+2
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">
+LeBron James
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;color:#333;background-color:#fff;text-align:left;vertical-align:middle">
+2018
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+748
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+510
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">
+3
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">
+Kawhi Leonard
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">
+2019
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">
+732
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;font-weight:bold;text-align:left;vertical-align:top">
+496
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+4
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Hakeem Olajuwon
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+1995
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+725
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+576
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+5
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Allen Iverson
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+2001
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+723
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+661
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+6
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Shaquille O’Neal
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+2000
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+707
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+505
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+7
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+LeBron James
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+2012
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+697
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+502
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+8
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Kobe Bryant
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+2009
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+695
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+530
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+9
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Michael Jordan
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+1998
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+680
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+526
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+10
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Kobe Bryant
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+2010
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+671
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+511
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+11
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Michael Jordan
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+1993
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+666
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+528
+</td>
+</tr>
+<tr>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+12
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+Hakeem Olajuwon
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+1994
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+664
+</td>
+<td style="font-family:Arial, Helvetica, sans-serif !important;;font-size:12px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;text-align:left;vertical-align:top">
+514
+</td>
+</tr>
+</table>
+<p>Leonard is the only player use only less than 500 times of field goals in this list. However, compared with Leonard, Iverson was really inefficient.</p>
 <pre class="r"><code>players &lt;- regular_players %&gt;% 
   na_if(&#39;-&#39;) %&gt;%
   filter(PLAYER!=&#39;Jodie Meeks&#39;,PLAYER!= &#39;Eric Moreland&#39;,
@@ -108,9 +397,9 @@ library(corrplot)</code></pre>
          &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;% 
   mutate_if(sapply(.,is.character),as.factor) %&gt;% 
   select(-&#39;+/-&#39;) %&gt;% 
-  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %&gt;% # long to wide
-  unite(col, key,PLAYER) %&gt;%
-  spread(col,value) %&gt;% 
+  gather(key,value,-TEAM,-MATCHUP,-DATE,-PLAYER,-win) %&gt;% #convert wide to long, one column is stat name, another is value
+  unite(col,key,PLAYER) %&gt;% #combine player&#39;s name and stat name, which will be column name later.
+  spread(col,value) %&gt;%  # convert long to wide
   select(-TEAM,-MATCHUP,-DATE) %&gt;%
   replace(is.na(.),0) %&gt;% 
   mutate_if(sapply(.,is.character),as.numeric)
@@ -139,7 +428,7 @@ treept &lt;- rpart(win~.,players,
                 control = rpart.control(cp=0.0001,minsplit=6))
 
 rpart.plot(treept, branch = 0.4)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>players %&gt;% 
   rename(&#39;TPP_Kyle_Lowry&#39;=&#39;TPP_Kyle Lowry&#39;,
          &#39;MIN_Pascal_Siakam&#39;=&#39;MIN_Pascal Siakam&#39;,
@@ -147,8 +436,10 @@ rpart.plot(treept, branch = 0.4)</code></pre>
 ggplot() +
   geom_point(aes(TPP_Kyle_Lowry,MIN_Pascal_Siakam,shape=win,col=win))+
   labs(x=&#39;3 point percent of Kyle Lowry&#39;,y=&#39;Minutes per game of Siakam&#39;)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-6-2.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>From the tree, Kyle Lowry’s 3 points accuracy is really important for win. It is surprise that Kawhi Leonard does not appear on the tree. It is opporiate to our common sense. It does not mean that Leonard is not significant, as a superstar, he really helps when pivotal time comes, and that contribution might not be reflected from models.</p>
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-9-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>From the tree, Kyle Lowry’s 3 points accuracy is really important for win. It is surprising that Kawhi Leonard does not appear on the tree. It is opporiate to our common sense. It does not mean that Leonard is not significant, as a superstar, he really helps when pivotal time comes, and that contribution might not be reflected from models. Besides, Leonard only attended 60 games during 2018-2019 season. He might wanted to keep fit by absent at regular season to prepare for playoffs. Or, he might did not do better than what he did on post seasons.</p>
+</div>
+</div>
 <div id="playoffs" class="section level1">
 <h1>Playoffs</h1>
 <pre class="r"><code>playoffs &lt;- raptorsplayoffs %&gt;% 
@@ -158,76 +449,20 @@ ggplot() +
          &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;% 
   mutate_if(sapply(.,is.character),as.factor) 
 
-formula &lt;- win~PTS+FGM+FGA+FTM+FTA+OREB+DREB+REB+AST+STL+BLK+TOV+PF+FTP+TPP+FGP
+
 
 tree &lt;- ctree(formula,playoffs,
               controls = ctree_control(mincriterion = 0.01,minsplit=3))
 
 plot(tree)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>treept &lt;- rpart(formula,playoffs,
                 control = rpart.control(cp=0.001,minsplit=3))
 rpart.plot(treept, branch = 0.4)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-7-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-10-2.png" width="90%" style="display: block; margin: auto;" /></p>
 <ul>
-<li>Since the quantity of playoff data is too small, the results of the trees are unstable. Even discrepencies between the <code>rpart</code> and <code>ctree</code> function are huge. Now let us analyze the Regular Season data, which contains 82 games.</li>
+<li>Since the quantity of playoff data is too small, the results of the trees are unstable. Even discrepencies between the <code>rpart</code> and <code>ctree</code> function are huge.</li>
 </ul>
-</div>
-<div id="regular-season" class="section level1">
-<h1>Regular Season</h1>
-<ul>
-<li>Now we begin to analyze raptors’ collective data.</li>
-</ul>
-<pre class="r"><code>regular&lt;- raptorsreg %&gt;% 
-  arrange(DATE) %&gt;% 
-  na_if(&#39;-&#39;) %&gt;% 
-  rename(&#39;TPP&#39;=&#39;3P%&#39;,&#39;FTP&#39;=&#39;FT%&#39;,
-         &#39;FGP&#39;=&#39;FG%&#39;,&#39;win&#39;=&#39;W/L&#39;) %&gt;%
-  mutate_if(sapply(.,is.character),as.factor)
-
-corrplot(cor(regular %&gt;% 
-               select(., PTS:PF), 
-             use = &#39;complete.obs&#39;), 
-         method = &#39;circle&#39;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-8-1.png" alt="Correlation Plot" width="100%" />
-<p class="caption">
-Figure 2: Correlation Plot
-</p>
-</div>
-<pre class="r"><code>#tree &lt;- ctree(formula,regular,
-#              controls = #ctree_control(mincriterion = 0.01,minsplit=3))
-#plot(tree)
-#plot(tree,type = &quot;simple&quot;)</code></pre>
-<pre class="r"><code>treept &lt;- rpart(formula,regular,
-                control = rpart.control(cp=0.05,minsplit=3))
-
-rpart.plot(treept, branch = 0.4)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-9-1.png" alt="When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose." width="100%" />
-<p class="caption">
-Figure 3: When raptors score more than 111 and the field goals attempted more than 81, they will win in a high chance. If they get less than 111 points and shoot more than 82 times, they will definitely lose.
-</p>
-</div>
-<p>As you could see, the two trees are much same than before.</p>
-<pre class="r"><code>ggplot(regular)+
-  geom_point(aes(PTS,FGA,
-                 shape=win,col=win)) +
-  geom_segment(aes(111,81,
-                   xend = 111,yend = 110),
-               col=&#39;purple&#39;) +
-  geom_segment(aes(111,81,
-                   xend = 141,yend = 81),
-               col=&#39;purple&#39;)+
-  annotate(&#39;text&#39;, x =130,y=95, label=&#39;Win&#39;, size=10,color=&#39;turquoise4&#39;) +
-  annotate(&#39;text&#39;, x =95,y=85, label=&#39;Lose&#39;, size=10,color=&#39;tomato&#39;) +
-  labs(x=&#39;Points&#39;,y=&#39;Field Goals Attempted&#39;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="../../post/raptors.en_files/figure-html/unnamed-chunk-10-1.png" alt="Partition borders of the CART tree." width="100%" />
-<p class="caption">
-Figure 4: Partition borders of the CART tree.
-</p>
-</div>
 <div id="combine-collective-data-and-players-personal-data" class="section level2">
 <h2>Combine collective data and players’ personal data</h2>
 <ul>
@@ -261,14 +496,14 @@ tree &lt;- rpart(win~.,intedt,
                 control = rpart.control(cp=0.0001,minsplit=6))
 
 rpart.plot(tree, branch = 0.4)</code></pre>
-<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-11-1.png" width="100%" style="display: block; margin: auto;" />
+<p><img src="../../post/raptors.en_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" />
 PF: personal fouls</p>
 <p>Now we could see Leonard appear on the tree. Except collective features(The total points has been deleted), Leonard and Siakam are players first appear on the tree, thus they are testified to be very important.</p>
 </div>
 </div>
 <div id="conclusion" class="section level1">
 <h1>Conclusion</h1>
-<p>It is hard to draw a final conclusion because datasets are too small, and I have not found ways to handle missing values, which mean one player does not play at that game. Now I just filled them with 0. <code>party</code> and <code>rpart</code> always give me different results. Considering the length of passage, I do not display all results.</p>
+<p>It is hard to draw a final conclusion because datasets are too small, and I have not found ways to handle missing values, which mean one player does not play at that game. Now I just filled them with 0. <code>party</code> and <code>rpart</code> always give me different results. Considering the length of passage, I do not display all results. In 2019-2020 season, after transfering to L.A. Clippers, Leonard still often be absent at games, especially back to backs. If he could keep healthy til end of regular seasons, will he play as good as last season?</p>
 </div>
 
     </div>

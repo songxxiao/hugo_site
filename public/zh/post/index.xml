@@ -34,16 +34,16 @@ hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp
       <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/resource/</guid>
-      <description>RR for Data Science
-Advanced R
+      <description>RR for Data Science
 ggplot2: Elegant Graphics for Data Analysis
+Advanced R
 现代统计图形
 现代统计图形之极乐净土
-caret包
-Fundamentals of Data Visualization
-统计学与R读书笔记(第六版)
 Introduction to Econometrics with R
 Text Mining with R:A Tidy Approach
+caret
+Glmnet Vignette
+统计学与R读书笔记(第六版)
 PythonPython帮助系统
 Python机器学习
 Python -WordCloud 修改色调
@@ -51,15 +51,16 @@ Python中WordCloud各参数的含义
 超详细：Python(wordcloud+jieba)生成中文词云图
 杂七杂八的链接Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛
 R语言忍者秘笈
-XGBoost Documentation
 datasets（R自带数据包）
 一个商业爬虫网站：数说聚合
 词云网站：
 1
 2
 3
+Fundamentals of Data Visualization
 图床：https://sm.ms/
-</description>
+机器学习XGBoost Documentation
+Random Forests 商业版本</description>
     </item>
     
     <item>

@@ -189,14 +189,19 @@ bigram_graph
 
 set.seed(2016)
 
-a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+a <- grid::arrow(type = "open", length = unit(.05, "inches"))
 
 ggraph(bigram_graph, layout = "fr") +
-  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
-                 arrow = a, end_cap = circle(.07, 'inches')) +
-  geom_node_point(color = "lightblue", size = 5) +
-  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  geom_edge_link(show.legend = F,arrow = a,edge_colour='blue',edge_width=0.5) +
+  geom_node_point(color = "red", size = 1) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1,col='purple') +
   theme_void()
+
+#set.seed(2017)
+#ggraph(bigram_graph, layout = "fr") +
+#  geom_edge_link() +
+#  geom_node_point() +
+#  geom_node_text(aes(label =name), vjust = 1, hjust = 1)
 ```
 
 ```{r}
@@ -220,7 +225,7 @@ Zipf’s law states that the frequency that a word appears is inversely proporti
 
 Kaggle Notebooks:
 
-[SMS_Spam_ML](https://www.kaggle.com/benjaminlott/basic-machine-learning-of-spam-text-analysis/data)
+[SMS_Spam_ML](https://www.kaggle.com/benjaminlott/basic-machine-learning-of-spam-text-analysis/)
 
 [Basic NLP with NLTK](https://www.kaggle.com/alvations/basic-nlp-with-nltk)
 
@@ -285,7 +290,45 @@ rap %>%
 
 ```
 
+```{r}
+totalword <- wdf %>% 
+  group_by(rapper) %>% 
+  summarize(total = sum(n))
 
+book_words <- left_join(wdf, totalword)
+totalword
+book_words
+
+ggplot(book_words, aes(n/total)) +
+  geom_histogram(show.legend = F) 
+
+```
+
+```{r,fig.asp=1.2}
+ggplot(book_words, aes(n/total, fill = rapper)) +
+  geom_histogram(show.legend = F) +
+  facet_wrap(~rapper, ncol = 6, scales = "free_y")
+```
+
+
+```{r,fig.asp=4}
+book_words <- book_words %>%
+  bind_tf_idf(word,rapper, n)
+
+book_words
+
+book_words %>%
+  mutate(word = factor(word, levels = rev(unique(word)))) %>% 
+  group_by(rapper) %>% 
+  top_n(15) %>% 
+  ungroup() %>%
+  ggplot(aes(reorder(word,tf_idf), 
+             tf_idf, fill = rapper)) +
+  geom_col(show.legend = F) +
+  labs(x = NULL, y = "tf-idf") +
+  facet_wrap(~rapper, ncol = 3, scales = "free") +
+  coord_flip()
+```
 
 
 

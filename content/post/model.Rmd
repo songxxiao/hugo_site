@@ -9,8 +9,9 @@ output:
     theme: readable
 slug: model
 ---
-
+<!--
 ![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
+--->
 
 PDF版本[下载](/modelpdf.pdf)
 
@@ -28,7 +29,7 @@ PDF版本[下载](/modelpdf.pdf)
 `crossv_kfold`、`crossv_mc`、`crossv_loo`: 交叉验证
 
 ```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%',fig.showtext= T)
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%',fig.showtext= T)
 ```
 
 ```{r}
@@ -320,10 +321,41 @@ ggplot(Wage,aes(age,wage))+
   theme_bw()
 ```
 
+# 广义可加模型
+
+$${y_i} = {\beta _0} + {f_1}({x_1}) + {f_2}({x_2}) +  \cdot  \cdot  \cdot  + {f_k}({x_k})$$
+
+```{r,echo=F}
+knitr::include_graphics('https://multithreaded.stitchfix.com/assets/images/blog/fig1.svg')
+```
+
+```{r,fig.cap='教育年限，年龄与收入'}
+library(mgcv)
+par(mfrow=c(1,1),mar=c(2,2,2,2))
+
+gamfit <- gam(wages~ s(education)+bs(age, degree = 2, knots = c(20,30,40,55)),data=SLID)
+summary(gamfit)
+vis.gam(gamfit,color='terrain',
+        theta=30, phi=30,
+        zlab='Wage')
+
+```
+
+```{r,fig.cap='教育年限，年龄与对数收入'}
+SLID <- SLID %>% 
+  mutate(lgwage=log1p(wages))
+gamfit2 <- gam(lgwage ~ s(education)+ bs(age, degree = 2, knots = c(20,30,40,55)),data = SLID)
+summary(gamfit2)
+vis.gam(gamfit2,color='heat',
+        theta=30, phi=30,
+        zlab='log(Wage)')
+```
+
+
 
 # [Box-Cox 变换](http://onlinestatbook.com/2/transformations/box-cox.html)
 
-为保证变量的正态性进行的统计学转换。
+为保证变量的正态性进行的统计学转换。它同样是Power transform的一种。
 
 $$
 {y(\lambda)}=\left\{
@@ -334,6 +366,7 @@ $$
 \right.
 $$
 
+注意Box-Cox 变换只能应用于正数值。如果数据中有负数$y<0$, $y$ 会被整体加上一个 $\lambda _2$ 值。如下所示：
 
 $$
 {y(\lambda)}=\left\{
@@ -345,31 +378,41 @@ $$
 $$
 
 
-```{r,fig.asp=0.5,out.width='90%'}
+```{r,out.width='90%',fig.cap='紫色密度图为原分布；绿色密度图为Box-Cox 变换后的分布'}
 library(MASS)
 x = rf(500,30,30)
-boxa <- ggplot(as.data.frame(x),aes(x))+
-  geom_histogram(color='black',
-                 fill='white') 
-
-result = boxcox(x~1,lambda = seq(-0.5,0,5))
+result = boxcox(x~1,lambda = seq(-0.5,0,5),
+                plotit = F)
 mylambda = result$x[which.max(result$y)]
 mylambda
 x2 <- (x^mylambda-1)/mylambda
 x2 = as.data.frame(x2)
 
-boxb <- ggplot(x2,aes(x2)) +
-  geom_histogram(color='black',
-                 fill='white') 
+ggplot(x2,aes(x2)) +
+  geom_density(data=as.data.frame(x),
+               aes(x),fill='purple',
+               col='purple',alpha=1/5)+
+  geom_density(data=as.data.frame(x2),
+               aes(x2),fill='green',
+               col='green',alpha=1/5) +
+  labs(x='')
 ```
 
+Python中的做法：`scipy.special.boxcox`
 
-```{r,fig.asp=0.5,out.width='90%',fig.cap='左图：原分布。右图：变换后的分布'}
-plot_grid(boxa,boxb,ncol = 2)
+```python
+import numpy as np
+import seaborn as sns
+from scipy.stats import f
+from scipy.stats import boxcox
+
+r = f.rvs(30, 30, size=500)
+np.random.seed(1234) 
+transformed,fitted_lambda = boxcox(r)
+print('lambda=',fitted_lambda)
+sns.distplot(r, rug=True,color='green')
+sns.distplot(transformed, rug=True)
 ```
-
-Python中的做法：`scipy.special.boxcox1p`
-
 
 
 
