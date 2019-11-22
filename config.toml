@@ -6,13 +6,8 @@ defaultContentLanguageInSubdir = true
 
 [languages.en]
   languageCode = "en-us"
+  title = "Xiao Song"
 
-title = "Xiao Song"
-author = "Xiao Song"
-theme = "hugo-lithium"
-googleAnalytics = "UA-144652310-1"
-disqusShortname = "Xiao Song"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [languages.zh]
   languageCode = "zh-cn"
