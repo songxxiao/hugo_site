@@ -7,6 +7,7 @@ defaultContentLanguageInSubdir = true
 [languages.en]
   languageCode = "en-us"
   title = "Xiao Song"
+  googleAnalytics = "UA-144652310-1"
 
 
 [languages.zh]
