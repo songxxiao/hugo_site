@@ -3,6 +3,8 @@ title: 'Xiao Song'
 author: 
 slug: enresume
 disable_comments: true
+comments: false
+comment: false
 ---
 
 [Chinese version](/zh/zhresume/)  
@@ -13,6 +15,8 @@ disable_comments: true
 + Email：<malcolm@xsong.ltd>
 + Github：<https://github.com/ECSTA7Y>
 + Website：<https://xsong.ltd>
++ Kaggle：<https://www.kaggle.com/rikdifos>
+
 <!--
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 -->

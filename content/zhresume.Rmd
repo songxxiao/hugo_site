@@ -3,6 +3,8 @@ title: "宋 骁-简 历"
 author: " "
 slug: zhresume
 disable_comments: true
+comments: false
+comment: false
 ---
 
 [English Version](/en/enresume/)  
@@ -13,6 +15,8 @@ disable_comments: true
 + 邮箱：<malcolm@xsong.ltd>
 + Github：<https://github.com/ECSTA7Y>
 + 个人主页：<https://xsong.ltd>
++ Kaggle：<https://www.kaggle.com/rikdifos>
+
 <!--
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 -->
