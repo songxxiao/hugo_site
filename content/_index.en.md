@@ -16,4 +16,3 @@ You can find my resume attached [here](/en/enresume/).
 &emsp;
 
 
-
