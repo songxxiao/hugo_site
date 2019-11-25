@@ -318,7 +318,8 @@ book_words <- book_words %>%
 book_words
 
 book_words %>%
-  mutate(word = factor(word, levels = rev(unique(word)))) %>% 
+  mutate(word = factor(word,
+                       levels = rev(unique(word)))) %>% 
   group_by(rapper) %>% 
   top_n(15) %>% 
   ungroup() %>%

@@ -1,0 +1,51 @@
+---
+title: 'Text Mining2'
+author: 'Malcolm'
+date: '`r Sys.Date()`'
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
+---
+
+```{r, include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
+```
+
+文献计量学三大定律：
+
+1. Zipf's law
+
+> given some corpus of natural language utterances, the frequency of any word is inversely proportional to its rank in the frequency table. Thus the most frequent word will occur approximately twice as often as the second most frequent word, three times as often as the third most frequent word
+
+```{r, echo=F,fig.cap='Zipf\'s law'}
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/7/70/Zipf_distribution_PMF.png')
+```
+
+
+
+2. Bradford's law
+
+本质是Pareto distribution.
+
+
+3. Lotka's Law
+
+
+```{r, echo=F,fig.cap='Lotka\'s law'}
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/1/1e/Lotka_plot.png')
+```
+
+```{r}
+library(dplyr)
+
+df <- tibble(x = c(1, NA, 3))
+
+
+w <- c(3,6,7,0,1,11,7)
+w <- c(5,4,3,2)
+
+rank(w)
+
+```
+

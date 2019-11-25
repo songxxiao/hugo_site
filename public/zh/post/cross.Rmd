@@ -4,9 +4,16 @@ author: ' '
 date: '2019-05-25'
 slug: cross
 tags: ['机器学习']
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
 ---
 
 ![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
+
+
+
 ---
 
 [Cross-validation: evaluating estimator performance](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation)
@@ -28,20 +35,20 @@ tags: ['机器学习']
 
 + 留一交叉验证(leave-one-out cross validation)
 
-
-```{r, echo=F, fig.cap='K折交叉验证原理：所有数据被划分为训练集和测试集。其中，训练集被划分为K份，循环使用其中的K-1份充当训练集，使用剩下的1分充当验证集。', out.width = '100%',fig.align='center'}
-knitr::include_graphics('https://scikit-learn.org/stable/_images/grid_search_cross_validation.png')
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message=F,warning=F,fig.align='center',out.width='90%')
 ```
 
 
+```{r, echo=F,fig.cap='K折交叉验证原理：所有数据被划分为训练集和测试集。其中，训练集被划分为K份，循环使用其中的K-1份充当训练集，使用剩下的1分充当验证集。'}
+knitr::include_graphics('https://scikit-learn.org/stable/_images/grid_search_cross_validation.png')
+```
 
-谢益辉的统计动画R包[animation](https://yihui.name/animation/example/cv-ani/)直观地展示了交叉验证方法。
-
-任务：通过一系列特征预测波士顿房价
++ 波士顿房价预测
 
 输入`?mlbench::BostonHousing`查看数据集解释。下面主要使用[caret](http://topepo.github.io/caret/index.html)包(classification and regression training)进行交叉验证。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center'}
+```{r}
 `%>%` <- magrittr::`%>%`
 library(caret)
 library(readr)
@@ -57,7 +64,7 @@ library(ROSE)
 
 ## 10折交叉验证 (K-fold cross-validation)
 
-```{r,comment = NA,warning = F,message = F,fig.align='center'}
+```{r}
 rfControl <-trainControl( #10折交叉验证
 method ="cv", 
 number =10 
@@ -78,7 +85,7 @@ rpartFit
 将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有"10次10 折交叉验证"。每一次重复都会有不同的训练-测试集划分。
 
 
-```{r,comment=NA,warning = F,message=F,fig.align='center',out.width='70%',fig.asp=1.2,fig.cap='变量重要性'} 
+```{r,out.width='70%',fig.asp=1.2,fig.cap='变量重要性'} 
 repeatedcv <-trainControl(method ="repeatedcv", number =10,repeats =10, savePredictions
 =T)
 rpartFit <- train(medv ~ .,
@@ -114,7 +121,7 @@ ggplot(imp,aes(reorder(name,impt),impt,color=impt,fill=impt)) +
 
 
 ## 留一交叉验证(leave-one-out cross validation)
-```{r,comment = NA,warning = F,message = F,fig.align='center'}
+```{r}
 rfControl <-trainControl(
 method ="LOOCV"
 ) #留一交叉验证
@@ -151,7 +158,7 @@ varImp(rpartFit, scale = F)
 [代码参考](https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/)
 
 
-```{r,comment = NA,warning = F,message = F}
+```{r}
 pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
 colnames(pokemon)[1] <- 'id' #修改变量名
 colnames(pokemon)[3] <- 'Type1'
@@ -166,7 +173,7 @@ pokemon <- pokemon %>%
 
 ```
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样前',out.width='100%'}
+```{r,fig.cap='过采样前'}
 ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_point(size=3)
 ```
@@ -174,7 +181,7 @@ ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
 
 
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='过采样后',out.width='100%'}
+```{r,fig.cap='过采样后'}
 #过采样
 balance <- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = "both", p=0.5,N=748,seed = 1)$data
 
@@ -192,7 +199,7 @@ ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
 + 在样本比较少的情况下，通常使用交叉验证确定K值。
 + K越大，模型越简单；K越小，模型越复杂，越容易发生过拟合。
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='k近邻算法的K值和准确率的关系',out.width='100%'}
+```{r,fig.cap='k近邻算法的K值和准确率的关系'}
 trctrl <- trainControl(method = "repeatedcv", number =10,repeats =10, savePredictions
 =T)
 
@@ -238,7 +245,7 @@ rocb <- roc(trainpok$Legendary,pr2)
 
 [学习曲线](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html#sklearn.model_selection.learning_curve)
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap='ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。',out.width='100%'}
+```{r,fig.cap='ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。'}
 ggroc(list('测试集'=roca,'训练集'=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='dashed')+
   theme(legend.title=element_blank()) 
@@ -253,11 +260,12 @@ roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, ma
 #ggroc()
 ```
 
-# 泰坦尼克
+# 泰坦尼克生存预测
 
-```{r,message = F, comment = NA, warning = F,out.width ='100%',fig.asp=0.6}
-library(readxl)
-titanic <- read_excel('E:/MaLearning/titanic.xls')
+```{r,fig.asp=0.6}
+library(readr)
+titanic <- read_csv("E:/MaLearning/titanic/titanic.csv")
+
 sampled <- sample(1:nrow(titanic),nrow(titanic)*0.75,replace=F)
 titanic_train <- titanic[sampled,]
 titanic_test <- titanic[-sampled,]
@@ -274,7 +282,8 @@ control <- trainControl(method = 'repeatedcv', number =10,repeats =10, savePredi
 =T)
 
 set.seed(213)
-logfit <- train(survived ~ sex+age+sibsp+parch+fare+embarked,data=titanic_train,
+logfit <- train(survived ~ sex+age+sibsp+parch+fare+embarked,
+                data=titanic_train,
                  method='glm',family='binomial',
  trControl=control,
  tuneLength = 2)
@@ -314,18 +323,41 @@ roca <- roc(titanic_test$survived,prob1)
 rocb <- roc(titanic_train$survived,prob2)
 ```
 
-```{r,comment = NA,warning = F,message = F,fig.align='center',fig.cap=' ',out.width='100%',dev='svg'}
-ggroc(list('test ROC'=roca,'train ROC'=rocb),size=1)+
-  geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color='black', linetype='solid')+
+```{r,fig.cap='ROC'}
+list('test ROC'=roca,
+     'train ROC'=rocb) %>% 
+ggroc(.,size=1)+
+  geom_segment(aes(x=1,y=0,
+                   xend=0,yend=1),
+               color='black',linetype='solid')+
   theme(legend.title=element_blank()) 
 ```
 
-Python交叉验证
+# `Sklearn`交叉验证API
 
-Sklearn库中的[`KFold`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold)、[`cross_validate`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate)、[`cross_val_score`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html)、[`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)和[`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)等函数实现。
+`Sklearn`中有关交叉验证的API位于`sklearn.model_selection`中。
 
-其中，`KFold`、`cross_validate`等是外部的交叉验证。不涉及模型拟合。
+用于模型检验和评估的函数：
 
-而`GridSearchCV`等是内部交叉验证。在划分数据集的同时拟合模型。
+[`cross_validate`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate)  
+[`cross_val_score`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html)
 
-还有其他的交叉验证方法诸如随机播种法：[`ShuffleSplit`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit)。
+用于数据集划分方式的函数为：
+
+K折交叉验证：[`KFold`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold)  
+分层K折交叉验证：[`StratifiedKFold`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html)  
+随机播种法：[`ShuffleSplit`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.ShuffleSplit.html#sklearn.model_selection.ShuffleSplit)   
+分组K折交叉验证：[`GroupKFold`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html#sklearn.model_selection.GroupKFold)  
+重复K折交叉验证：[`RepeatedKFold`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RepeatedKFold.html#sklearn.model_selection.RepeatedKFold)   
+重复分层K折交叉验证：[`RepeatedStratifiedKFold`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RepeatedStratifiedKFold.html#sklearn.model_selection.RepeatedStratifiedKFold)
+
+可以作为交叉验证方法代入：
+
+```python
+kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+grid_search = GridSearchCV(model, param_grid, scoring="neg_log_loss", cv = kfold)
+```
+用于参数调优的函数为：
+
+[`learn.model_selection.GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)  
+[`learn.model_selection.RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html)

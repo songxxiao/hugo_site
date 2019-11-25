@@ -274,9 +274,12 @@ ggplot(long, aes(long,lat,group = group,fill= value)) +
   labs(x='经度',y='纬度',fill = '土地流转发生率') +
   theme_bw()
 
-ggplot(long, aes(long,lat,group = group,col= value,fill= value)) +
+ggplot(long, aes(long,lat,group = group,
+                 col= value,fill= value)) +
   geom_polygon(col='brown',size=0.2) +
-  scale_fill_viridis_c(na.value = "white", guide = "colourbar", aesthetics = "fill")+
+  scale_fill_viridis_c(na.value = "white",
+                       guide = "colourbar",
+                       aesthetics = "fill")+
   coord_map('polyconic') +
   facet_wrap(~variable,nrow = 3) +
   labs(x='经度',y='纬度',fill = '土地流转发生率') +
@@ -294,25 +297,30 @@ xs <- data.frame(x,id=seq(0:344)-1)
 
 china_map <- join(bottomdata, xs, type = "full")          
 fills <- read_excel("E:/R_codes/maps/pointmap/citydis.xlsx")
+china_map <- join(china_map,fills, type = "full") 
 
-china_map <- join(china_map,fills, type = "full")   
-point <- china_map
-point <- na.omit(point)
-midpos <- function(x) mean(range(x,na.rm=T)) 
+point <- china_map %>% 
+  na.omit()
+
+midpos <- function(x) {
+  mean(range(x,na.rm=T))
+}
+
 centres <- ddply(china_map,.(NAME_2),colwise(midpos,.(long,lat)))
-center <- join(centres,fills, type = "full") 
-center  <- na.omit(center)
+center <- join(centres,fills, type = "full") %>% 
+  na.omit()
 
 ggplot(china_map,aes(long,lat)) + 
   geom_polygon(aes(group = group),
-               fill="white",color="black",
+               fill="white",col="black",
                size=0.1) + 
   geom_point(data = center,
-             aes(long,lat, size=freq),
-             color='red') +
+             aes(long,lat, size=freq,
+                 col=freq)) +
+  scale_colour_gradient(low='blue',high='red') +
   coord_map('polyconic') +
+  theme(legend.position='none') + 
   labs(x='经度',y='纬度') +
-  theme(legend.title=element_blank()) + 
   theme_bw()
 
 ```
@@ -324,15 +332,18 @@ WorldData <- map_data('world') %>%
   filter(region != "Antarctica") %>% 
   fortify
 
-earthquake <- read_csv("E:/MaLearning/earthquake20190630.csv", locale = readr::locale(encoding = "gb18030"))
+earthquake <- read_csv("E:/MaLearning/earthquake20190630.csv",
+                       locale = readr::locale(encoding = "gb18030"))
 
 ggplot() +
 geom_polygon(data=WorldData,
              aes(long,lat, group = group),
-               fill="white",color="black",
+               fill="white",col="black",
                size=0.1) + 
     geom_point(data = earthquake,
-               aes(`经度(°)`,`纬度(°)`,color=`震级(M)`),size=0.8)
+               aes(`经度(°)`,`纬度(°)`,
+                   col =`震级(M)`),size=0.8) +
+    scale_colour_viridis_c()
 ```
 
 # 误差可视化
@@ -340,16 +351,19 @@ geom_polygon(data=WorldData,
 ```{r,fig.asp=0.6} 
 df <- data.frame(grp = 1:17, fit = c(1,2,2,3,4,6,7,9,15,16,17,19,18,8,10,11,2), se = 2)
 
-era <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+era <- ggplot(df,aes(grp,fit,
+                     ymin=fit-se,ymax=fit+se)) +
   geom_point()+
   geom_line()+
   geom_errorbar(width=0.3)
 
-erb <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+erb <- ggplot(df,aes(grp,fit,
+                     ymin=fit-se,ymax=fit+se)) +
   geom_line()+
   geom_linerange()
   
-erc <- ggplot(df,aes(grp,fit,ymin=fit-se,ymax=fit+se)) +
+erc <- ggplot(df,aes(grp,fit,
+                     ymin=fit-se,ymax=fit+se)) +
   geom_line()+
   geom_pointrange(size=0.2)
 
@@ -368,7 +382,7 @@ ggparcoord(iris, columns = 1:4, groupColumn = 5, scale = "uniminmax") +
 
 使用`modelr`包的函数
 
-```{r,eval=F,fig.asp=0.6}
+```{r,eval=F}
 data('titanic_train')
 titanic_train$Pclass <- as.factor(titanic_train$Pclass)
 cv1 <- crossv_kfold(titanic_train, 5)
