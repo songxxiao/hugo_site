@@ -8,6 +8,7 @@ defaultContentLanguageInSubdir = true
   languageCode = "en-us"
   title = "Xiao Song"
   googleAnalytics = "UA-144652310-1"
+  disqusShortname = "Xiao Song"
 
 
 [languages.zh]
@@ -34,14 +35,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 2
 
 [[languages.zh.menu.main]]
-    name = "GitHub"
-    url = "https://github.com/ECSTA7Y"
-    weight = 3
-
-[[languages.zh.menu.main]]
   name = "English"
   url = "/en"
-  weight =4
+  weight =3
   
 [[languages.en.menu.main]]
     name = "Home"
@@ -54,14 +50,9 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
    weight = 2
  
 [[languages.en.menu.main]]
-    name = "GitHub"
-    url = "https://github.com/ECSTA7Y"
-    weight = 3
-
-[[languages.en.menu.main]]
   name = "Chinese"
   url = "/zh"
-  weight =4
+  weight = 3
 
 [params]
     description = "Xiao Song's Website "

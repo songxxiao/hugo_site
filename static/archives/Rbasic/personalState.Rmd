@@ -14,8 +14,6 @@ slug: ps
 
 今天的日期是`r Sys.Date()`
 
-
-
 # QMSS
 
 作为一名社会学系本科生。我在本科期间修读了若干课程，如性别社会学、人口与社会、经济社会学等，这些课程均要求提交一份经验性研究。在性别社会学课程上，我接触到了男女不平等这一社会现象，我刚结婚的表姐也向我们家人透露过她在职场上遭到的不平等待遇，很多用人单位在招女员工的时候，会在面试阶段就询问有没有生育的打算，并且很多岗位都明确只招男生。带着对这个问题的兴趣，我访谈了我的表姐。我在这个过程中学会了如何独立做一个完整的研究，如进行文献综述、收集经验材料等。访谈法代表的定性研究帮助我直观地从感性层面了解社会现象。
@@ -209,132 +207,20 @@ Your response should be no more than 250 words.
 ---
 
 
-在我大二的时候，我曾做过一个这样的社会研究《“颜值”真的重要吗？——相貌因素对初婚风险的影响》，相貌因素对初婚风险影响有多大，在进行实验的量化分析之前，实验的结果基本已经被大多人所锁定---毫无疑问相貌对男女关系会存在十分大的影响，然而经过严谨的统计学分析后，我得到了一个出乎意料的结论：相貌因素并不能影响中国人进入初婚的时间，美丽外貌在婚姻市场的作用易被年龄效应和同质婚效应掩盖；论文的结论引起了一定的关注，也被选入中国社会学论坛，而我也从此被数据的力量所深深折服，决定要在数据领域展开更深度的学习与研究。数据能够科学地验证人们的常识。而经验和直觉往往是不可靠的。
+在我大二的时候，我曾做过一个这样的社会研究《“颜值”真的重要吗？——相貌因素对初婚风险的影响》(Does Appearance Attraction Really Matters? —The Effects of Attractiveness on First Marriage)。我讨论了相貌因素对中国人结婚时间的影响，在进行量化分析之前，实验的结果基本已经被大多人所锁定---毫无疑问相貌对男女关系会存在十分大的影响，然而经过严谨的统计学分析后，我得到了一个出乎意料的结论：相貌因素并不能影响中国人进入初婚的时间，美丽外貌在婚姻市场的作用易被年龄效应和同质婚效应(assortative mating effect)掩盖；论文的结论引起了一定的关注，也被选入中国社会学论坛，而我也从此被数据的力量所深深折服，决定要在数据领域展开更深度的学习与研究。数据能够科学地验证人们的常识。而经验和直觉往往是不可靠的。
 
-在选修了更深层次的因果推断技术后。我将土地流转研究作为了我的学年论文题目。在这个研究中，我将中国的土地流转数据进行了地理信息可视化。在模型方面，我使用面板数据分析(Panel Data)的方法，讨论土地流转行为对中国农户的家庭收入的影响。同时，我还使用了分位数回归(Quantile regression)的办法估计社会不平等问题。
+在选修了更深层次的因果推断技术后。我将土地流转(Land transfer)研究作为了我的学年论文题目。在这个研究中，我将中国的土地流转数据进行了地理信息可视化。在模型方面，我使用面板数据分析(Panel Data Analysis)的方法，讨论土地流转行为对中国农户的家庭收入的影响。同时，我还使用了分位数回归(Quantile regression)的办法估计社会不平等问题。
 
-为了进一步提升数据分析应用的能力。我在数据科学平台上(如Kaggle)和网络课程上学习了基于Python和R实现的机器学习模型。为了加强对数据和算法的理解。我参与了北京大学的在线培训项目：应用卡评分模型。通过使用真实的信用卡申请数据。这个数据集包含了很多信用卡申请者的个人特征，如性别、出生日期、婚姻状况和教育状况等。通过这些特征预测未来可能的拖欠风险。我注重数据的特征工程问题。在做这个项目的过程中，违约客户样本过少的问题困扰了我。我通过SMOTE技术处理样本不平衡问题。最终获得了很好的预测准确率。
+为了进一步提升数据分析应用的能力。我在数据科学平台上(如Kaggle)和网络课程上学习了基于Python和R实现的机器学习模型。为了加强对数据和算法的理解。我参与了北京大学的在线培训项目：信用卡评分模型(credit card score)。通过使用真实的信用卡申请数据。这个数据集包含了很多信用卡申请者的个人特征，如性别、出生日期、婚姻状况和教育状况等。通过这些特征(features)预测未来可能的拖欠风险。我注重数据的特征工程问题。在做这个项目的过程中，违约客户样本过少的问题困扰了我。我通过SMOTE技术处理样本类别不平衡(class imbalanced)问题。最终获得了很好的预测准确率。
 
-此外。我学习了基本的网页技术(html、CSS、JavaScript)。这些知识是处理非结构化数据(比如文本数据)的必要基础。使用Github和Netlify部署并开通了我的个人网站xong.ltd/en。它使我能在几分钟内将数据分析结果分享到网络上和大家交流。为了深入了解实际业务场景中的数据分析。我去了艾瑞(iresearch)集团进行了数据分析助理的实习。我做了许多数据分析工作。包括对业务数据进行查询和分组统计（基于MySQL）。我还对社交媒体的文本数据进行了词云的可视化工作。咨询公司的实习经历让我看到了数据分析产生商业价值的可能性。
+此外。我学习了基本的网页技术(html、CSS、JavaScript)。这些知识是处理非结构化数据(比如文本数据)的必要基础。使用Github和Netlify部署并开通了我的个人网站xong.ltd/en。它使我能在几分钟内将数据分析结果分享到网络上和大家交流。
 
-我毕业后的职业目标是进入咨询公司任职。通过数据驱动商业决策，进而达到商业智能化的目的。由于如今各行各业的公司都会在业务中收集大量的数据，我希望能在真实的业务场景中让数据产生价值。并且能将数据思维引入到我今后将会进入的行业中去。咨询领域的数据专家不仅需要数据科学知识还需要商业的领域知识，最终用数据推动商业智能化。
+为了深入了解实际业务场景中的数据分析。我去了艾瑞(iresearch)集团进行了数据分析助理的实习。我做了许多数据分析工作。包括对业务数据进行查询和分组统计（基于MySQL）。在关于著名玩具企业的研究项目中，需要分析从社交媒体中爬取的文本数据。通过对文本数据去除停止词(Stop Words)、提取词干；我得到了在特定时间段中人们对于玩具评价的主题(如好玩、有趣、配送慢、价格贵等)。通过这些反馈的主题，可以得到用户关于玩具反馈的重要信息。此外，还能够通过情感分析(sentiment analysis)的方式分析人们是否积极地评价这些产品。最后我还对社交媒体的文本数据进行了词云(Word Cloud)的可视化工作。这些工作使得玩具企业能够实时地得到用户的反馈。从而对产品的缺陷加以改进，对优点进一步贯彻。
+
+
+咨询公司的实习经历让我看到了数据分析产生商业价值的可能性。我毕业后的职业目标是进入咨询公司任职。通过数据驱动商业决策，进而达到商业智能化(business intelligence)的目的。由于如今各行各业的公司都会在业务中收集大量的数据，我希望能在真实的业务场景中让数据产生价值。并且能将数据思维引入到我今后将会进入的行业中去。咨询领域的数据专家不仅需要数据科学知识还需要商业的领域知识，最终用数据推动商业智能化。
 
 我想通过硕士阶段的学习更深入地学习数据科学，包括机器学习方法。基于Python与R的数据科学编程方法是我通过数据产生商业价值不可或缺的训练。通过数据科学和机器学习的训练，这些方法能够促进我胜任生产环境中数据分析任务。同时，一些更有挑战性的深度学习、文本挖掘和数据库的知识。其次，虽然我本科的专业是社会学。但我主动选修了线性代数、概率论与数理统计等BA先修课程。我在入学后，会利用校友会资源，组建Data Science交流会，讨论Data Science技术问题以及Kaggle平台的数据分享及交流。我的加入能为这个项目带来多样性。
 
-
-
-
-
-
-When I try to knit a .Rmd file with a simple trunk of python code, it failed. However, when I use `repl_python()` function in `reticulate` package, all python code runs smoothly in console command line.
-
-When typing `py_available()`, it returns `TRUE`. 
-
-Hence, I think there's no error of my Python configuration. I cannot figure out what's wrong with my R Markdown file. 
-
-
-````
----
-title: "Untitled"
-author: "Malcolm"
-date: "2019/11/21"
-output: html_document
----
-
-```{r setup}
-library(reticulate)
-#conda_create("r-reticulate") # I created a new conda environment
-#conda_install("r-reticulate", "scipy") # and I installed all python libraries I need.
-#conda_install("r-reticulate", "pandas")
-#conda_install("r-reticulate", "seaborn")
-use_condaenv("r-reticulate")
-py_module_available('pandas')
-```
-
-```{python}
-import numpy as np
-import seaborn as sns
-from scipy.stats import f
-from scipy.stats import boxcox
-
-r = f.rvs(30, 30, size=500)
-np.random.seed(1234) 
-transformed,fitted_lambda = boxcox(r)
-print('lambda=',fitted_lambda)
-sns.distplot(r, rug=True,color='green')
-sns.distplot(transformed, rug=True)
-```
-````
-
-And the result turns out:
-
-```
-Quitting from lines 34-37 (reticulate.Rmd) 
-Error in py_call_impl(callable, dots$args, dots$keywords) : ImportError: 
-
-IMPORTANT: PLEASE READ THIS FOR ADVICE ON HOW TO SOLVE THIS ISSUE!
-
-Importing the numpy c-extensions failed.
-- Try uninstalling and reinstalling numpy.
-- If you have already done that, then:
-  1. Check that you expected to use Python3.8 from "C:\PROGRA~1\R\R-36~1.1\bin\x64\Rterm.exe",
-     and that you have no directories in your PATH or PYTHONPATH that can
-     interfere with the Python and numpy version "1.17.3" you're trying to use.
-  2. If (1) looks fine, you can open a new issue at
-     https://github.com/numpy/numpy/issues.  Please include details on:
-     - how you installed Python
-     - how you installed numpy
-     - your operating system
-     - whether or not you have multiple versions of Python installed
-     - if you built from source, your compiler versions and ideally a build log
-
-- If you're working with a numpy git repository, try `git clean -xdf`
-  (removes all files not under version control) and rebuild numpy.
-
-Note: this error has many possible
-Calls: <Anonymous> ... py_capture_output -> force -> <Anonymous> -> py_call_impl
-停止执行
-
-```
-
-P.S.  When I use `py_module_available('libraryname')` to check the packages needed, they all return `FALSE`.  Although I use `conda_install("r-reticulate", "libraryname")`, it does not work. Could anyone successfully knit my simple Python code above using your R Markdown?
-
-I tried both CRAN and development version of `reticulate`, which all failed.
-
-my R environment is :
-
-```
-sessionInfo()
-```
-
-```
-R version 3.6.1 (2019-07-05)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 17763)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=Chinese (Simplified)_China.936 
-[2] LC_CTYPE=Chinese (Simplified)_China.936   
-[3] LC_MONETARY=Chinese (Simplified)_China.936
-[4] LC_NUMERIC=C                              
-[5] LC_TIME=Chinese (Simplified)_China.936    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets 
-[6] methods   base     
-
-other attached packages:
-[1] reticulate_1.13
-
-loaded via a namespace (and not attached):
- [1] Rcpp_1.0.2      lattice_0.20-38 png_0.1-7      
- [4] digest_0.6.21   grid_3.6.1      jsonlite_1.6   
- [7] evaluate_0.14   blogdown_0.16   rlang_0.4.0    
-[10] Matrix_1.2-17   rmarkdown_1.16  tools_3.6.1    
-[13] xfun_0.10       yaml_2.2.0      compiler_3.6.1 
-[16] htmltools_0.4.0 knitr_1.25
-```
 
 
