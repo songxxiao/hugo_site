@@ -27,16 +27,6 @@ f.readlines()返回一个列表，列表的数据项为一行的文本[linel, l
     </item>
     
     <item>
-      <title>NBA球员薪资分析：基于AdaBoost算法的Python实战</title>
-      <link>/zh/nba/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/nba/</guid>
-      <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/nba&#34;)</description>
-    </item>
-    
-    <item>
       <title>Python面向对象基础</title>
       <link>/zh/pyobject/</link>
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>

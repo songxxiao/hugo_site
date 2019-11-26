@@ -25,7 +25,7 @@ rpart的官方主页如下所示：
 由于R在下载程序包时，已将小品文下载下来。我们可以使用utils包(这个包含许多有用函数的包不需要加载)中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
 vignette(, package = &amp;quot;rpart&amp;quot;)输出结果如下所示：
 Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
-vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
+第一篇《Introduction to Rpart》的pdf便会自动跳出：
 然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：
 browseVignettes(package = &amp;quot;rpart&amp;quot;)很多R包的小品文是PDF版本，当然还有的是html形式的，如ggplot2的小品文：
 vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)</description>

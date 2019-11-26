@@ -22,13 +22,13 @@
     </item>
     
     <item>
-      <title>NBA Player Salary Prediction: Python Application Using AdaBoost Algorithm</title>
-      <link>/en/nba/</link>
+      <title>NBA Player Salary Prediction</title>
+      <link>/en/nbasalary/</link>
       <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/en/nba/</guid>
+      <guid>/en/nbasalary/</guid>
       <description>Loading …
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/nba_en&#34;)</description>
+window.location.replace(&#34;https://xsong.ltd/archives/pandas/nbasalary_en&#34;)</description>
     </item>
     
   </channel>

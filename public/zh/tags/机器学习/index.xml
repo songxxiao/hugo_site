@@ -22,16 +22,6 @@
     </item>
     
     <item>
-      <title>NBA球员薪资分析：基于AdaBoost算法的Python实战</title>
-      <link>/zh/nba/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/nba/</guid>
-      <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/nba&#34;)</description>
-    </item>
-    
-    <item>
       <title>交叉验证：基于caret包</title>
       <link>/zh/cross/</link>
       <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>

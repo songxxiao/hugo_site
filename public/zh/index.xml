@@ -6,10 +6,24 @@
     <description>Recent content in   on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>还有人用RSS吗？</title>
+      <link>/zh/rssuse/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/rssuse/</guid>
+      <description>我出生第22年才知道有RSS这东西。是的，你没看错。我猜大多数人也不知道它是啥。现在我下好了RSS 阅读器并且订阅了自己的博客(没错，就是此站)。想看看自己网站的推送长啥样。
+自从我得到了第一个智能手机以来。我被迫接受微博、微信公众号、抖音、快手等等各种信息的喂养。事实是，我对这些社交媒体与公号的评价并不高。尤其是微信公众号。一般那些抓人眼球的推送套路是：先充分强调一个东西的重要性(比如学Python的重要性)。然后猝不及防给你来段广告(Python 999课程。不拿到offer不要钱)。
+熟悉我的人(当然我朋友很少。)都知道我爱听说唱和摇滚乐。除了以上音乐的乐评公众号,我几乎很难从微信公众号中挖掘到真正有趣、有内容的信息。
+至于微博，则靠大量色情擦边球、短视频、明星绯闻八卦破事儿来吸引人们的眼球。抖音也是。这导致我间歇性地要卸载微博。不过好像事实是，色情信息是网络第一生产力。我承认这一点。微博完全不看也不成，因为它好歹是个大网络对吧？
+那么微信朋友圈呢？可能是我不会拍照吧。我常常在编辑朋友圈的时候丧失发朋友圈的冲动。首先，在编辑朋友圈“文案”的时候我会想：“这个有发的意义吗？”、“有人给我点赞吗？”、“会不会有人误解我的意思？”、“别人看到我发的东西会不会觉得我是个沙雕？？”。其次，因为朋友圈的复制粘贴导致文字选择不全的功能，假如在其他平台编辑好复制就会只显示一行文字。这也很令人抓狂。
+好吧。我承认这些东西被生灌多了容易丧失判断力。但是什么是好什么是差我还是知道的。我虽然混不了学术圈也进不了码农圈，但技术博客和学术博客倒是看得一手。这些博客有趣、实用。有时还能看到一些真知灼见。比如之前看到的一篇博客关于练车的看法，对我有极大的参考价值(我正在学车)。</description>
+    </item>
     
     <item>
       <title>R模型可视化</title>
@@ -139,13 +153,13 @@ W3school SQL教程
     </item>
     
     <item>
-      <title>NBA球员薪资分析：基于AdaBoost算法的Python实战</title>
-      <link>/zh/nba/</link>
+      <title>NBA球员薪资分析</title>
+      <link>/zh/nbasalary/</link>
       <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/zh/nba/</guid>
+      <guid>/zh/nbasalary/</guid>
       <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/nba&#34;)</description>
+window.location.replace(&#34;https://xsong.ltd/archives/pandas/nbasalary&#34;)</description>
     </item>
     
     <item>
@@ -256,7 +270,7 @@ rpart的官方主页如下所示：
 由于R在下载程序包时，已将小品文下载下来。我们可以使用utils包(这个包含许多有用函数的包不需要加载)中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
 vignette(, package = &amp;quot;rpart&amp;quot;)输出结果如下所示：
 Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
-vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
+第一篇《Introduction to Rpart》的pdf便会自动跳出：
 然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：
 browseVignettes(package = &amp;quot;rpart&amp;quot;)很多R包的小品文是PDF版本，当然还有的是html形式的，如ggplot2的小品文：
 vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)</description>

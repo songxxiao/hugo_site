@@ -1,5 +1,5 @@
 ---
-title: 'Text Mining2'
+title: '文本分析笔记'
 author: 'Malcolm'
 date: '`r Sys.Date()`'
 output:
@@ -48,7 +48,7 @@ w <- c(5,4,3,2)
 rank(w)
 
 ```
-```{r}
+```{r,eval=F}
 #清除内存空间
 rm(list=ls()) 
 #导入tm包
@@ -127,8 +127,82 @@ windows()
 biplot(k)
 ```
 
+
+文本分析
+
+去除停止词
+
+去除标点符号
+
+去除数字
+
+提取词干
+
+文档矩阵
+文本向量化的三种基本的编码方式
+
+countvectorize
+
+tf-idf
+
+hashing
   
-  
-  
-  
+机器学习
+
+概率图模型
+
+# 支持向量机
+
+```{r}
+library(e1071)
+data(iris)
+attach(iris)
+
+## classification mode
+# default with factor response:
+model <- svm(Species ~ ., data = iris)
+
+# alternatively the traditional interface:
+x <- subset(iris, select = -Species)
+y <- Species
+model <- svm(x, y) 
+
+print(model)
+summary(model)
+```
+
+
+# 朴素贝叶斯
+
+```{r}
+## Categorical data only:
+data(HouseVotes84, package = "mlbench")
+model <- naiveBayes(Class ~ ., data = HouseVotes84)
+predict(model, HouseVotes84[1:10,])
+predict(model, HouseVotes84[1:10,], type = "raw")
+
+pred <- predict(model, HouseVotes84)
+table(pred, HouseVotes84$Class)
+
+## using laplace smoothing:
+model <- naiveBayes(Class ~ ., data = HouseVotes84, laplace = 3)
+pred <- predict(model, HouseVotes84[,-1])
+table(pred, HouseVotes84$Class)
+
+
+## Example of using a contingency table:
+data(Titanic)
+m <- naiveBayes(Survived ~ ., data = Titanic)
+m
+predict(m, as.data.frame(Titanic))
+
+## Example with metric predictors:
+data(iris)
+m <- naiveBayes(Species ~ ., data = iris)
+## alternatively:
+m <- naiveBayes(iris[,-5], iris[,5])
+m
+table(predict(m, iris), iris[,5])
+```
+
   

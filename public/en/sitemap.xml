@@ -91,17 +91,17 @@
   </url>
   
   <url>
-    <loc>/en/nba/</loc>
+    <loc>/en/nbasalary/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="/zh/nba/"
+                href="/zh/nbasalary/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/en/nba/"
+                href="/en/nbasalary/"
                 />
   </url>
   

@@ -7,8 +7,8 @@
 <meta name="generator" content="Hugo 0.55.5" />
 
 
-<title>如何查看R包中的小品文?  - Xiao Song</title>
-<meta property="og:title" content="如何查看R包中的小品文?  - Xiao Song">
+<title>还有人用RSS吗？ - Xiao Song</title>
+<meta property="og:title" content="还有人用RSS吗？ - Xiao Song">
 
 
   <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -20,11 +20,6 @@
 
 
 
-
-
-
-
-<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
 
 
 
@@ -63,40 +58,23 @@
 
   <article class="article">
 
-    <h1 class="article-title">如何查看R包中的小品文? </h1>
+    <h1 class="article-title">还有人用RSS吗？</h1>
 
     
-    <span class="article-date">2019-05-07</span>
+    <span class="article-date">2019-11-26</span>
     
 
     <div class="article-content">
       
 
 
-<p>用R实现各种分析任务需要学习不同的R包。学习R包的同时需要结合统计理论。因此仅仅看帮助文档和用户手册（Reference manual）是不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习R包和其中思想的好材料。下文讲解如何使用<code>vignette</code>和<code>browseVignettes</code>两个函数获取R包的官方小品文。</p>
-<p>在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。</p>
-<p><code>rpart</code>的官方主页如下所示：</p>
-<p><img src="../../img/vignette/Capture.png" width="90%" style="display: block; margin: auto;" /></p>
-<p>其中，<code>Downloads</code>一栏下便有用户手册和小品文的下载按钮，点击即可下载。</p>
-<p><img src="../../img/vignette/Capture2.png" width="90%" style="display: block; margin: auto;" /></p>
-<p>这种方法其实多此一举了！</p>
-<p>由于R在下载程序包时，已将小品文下载下来。我们可以使用<code>utils</code>包(这个包含许多有用函数的包不需要加载)中的<code>vignette</code>函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：</p>
-<pre class="r"><code>vignette(, package = &quot;rpart&quot;)</code></pre>
-<p>输出结果如下所示：</p>
-<pre class="r"><code>Vignettes in package ‘rpart’:
-
-longintro   Introduction to Rpart 
-            (source, pdf)
-usercode    User Written Split
-            Functions (source, pdf)</code></pre>
-<p>可以发现，<code>rpart</code>包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：</p>
-<p>第一篇《Introduction to Rpart》的pdf便会自动跳出：</p>
-<p><img src="../../img/vignette/Capture3.png" width="90%" style="display: block; margin: auto;" /></p>
-<p>然后便可以阅读了。这里更推荐使用<code>browseVignettes</code>函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：</p>
-<pre class="r"><code>browseVignettes(package = &quot;rpart&quot;)</code></pre>
-<p>很多R包的小品文是PDF版本，当然还有的是html形式的，如<code>ggplot2</code>的小品文：</p>
-<pre class="r"><code>vignette(&quot;ggplot2-specs&quot;, package = &quot;ggplot2&quot;)</code></pre>
-<p><img src="../../img/vignette/Capture4.png" width="90%" style="display: block; margin: auto;" /></p>
+<p>我出生第22年才知道有RSS这东西。是的，你没看错。我猜大多数人也不知道它是啥。现在我下好了RSS 阅读器并且订阅了自己的博客(没错，就是此站)。想看看自己网站的推送长啥样。</p>
+<p>自从我得到了第一个智能手机以来。我被迫接受微博、微信公众号、抖音、快手等等各种信息的喂养。事实是，我对这些社交媒体与公号的评价并不高。尤其是微信公众号。一般那些抓人眼球的推送套路是：先充分强调一个东西的重要性(比如学Python的重要性)。然后猝不及防给你来段广告(Python 999课程。不拿到offer不要钱)。</p>
+<p>熟悉我的人(当然我朋友很少。)都知道我爱听说唱和摇滚乐。除了以上音乐的乐评公众号,我几乎很难从微信公众号中挖掘到真正有趣、有内容的信息。</p>
+<p><img src="https://media.giphy.com/media/3oKIPz5FmZylDU7S24/giphy.gif" width="90%" style="display: block; margin: auto;" /></p>
+<p>至于微博，则靠大量色情擦边球、短视频、明星绯闻八卦破事儿来吸引人们的眼球。抖音也是。这导致我间歇性地要卸载微博。不过好像事实是，色情信息是网络第一生产力。我承认这一点。微博完全不看也不成，因为它好歹是个大网络对吧？</p>
+<p>那么微信朋友圈呢？可能是我不会拍照吧。我常常在编辑朋友圈的时候丧失发朋友圈的冲动。首先，在编辑朋友圈“文案”的时候我会想：“这个有发的意义吗？”、“有人给我点赞吗？”、“会不会有人误解我的意思？”、“别人看到我发的东西会不会觉得我是个沙雕？？”。其次，因为朋友圈的复制粘贴导致文字选择不全的功能，假如在其他平台编辑好复制就会只显示一行文字。这也很令人抓狂。</p>
+<p>好吧。我承认这些东西被生灌多了容易丧失判断力。但是什么是好什么是差我还是知道的。我虽然混不了学术圈也进不了码农圈，但技术博客和学术博客倒是看得一手。这些博客有趣、实用。有时还能看到一些真知灼见。比如之前看到的一篇博客关于<a href="https://songchunlin.net/cn/2018/04/driving-in-America/">练车</a>的看法，对我有极大的参考价值(我正在学车)。</p>
 
     </div>
   </article>
@@ -161,18 +139,6 @@ s.setAttribute('data-timestamp', +new Date());
 
     </div>
     
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
     
 
