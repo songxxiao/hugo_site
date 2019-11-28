@@ -1,0 +1,228 @@
+---
+title: 'Python Geographic Data Visualization'
+author: ' '
+date: '2019-11-28'
+slug: pygeo
+---
+
+A very simple example to show how to plot a scatter map using Python [geopandas](http://geopandas.org/) library. The data is from this [link](https://wp-contents.netlify.com/data/earthquake20190630.csv). Attention that some columns' names are Chinese characters. I give methods to change those names below.
+
+
+```python
+import os
+import pandas as pd    
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import geopandas as gp
+sns.set_style("whitegrid")
+```
+
+
+```python
+%matplotlib inline
+%config InlineBackend.figure_format = 'svg'
+```
+
+
+```python
+world = gp.read_file(gp.datasets.get_path('naturalearth_lowres'))
+```
+
+
+```python
+earthquake = pd.read_csv("E:\\MaLearning\\earthquake20190630.csv",encoding = 'gb18030') 
+```
+
+
+```python
+earthquake.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>发震时刻</th>
+      <th>震级(M)</th>
+      <th>纬度(°)</th>
+      <th>经度(°)</th>
+      <th>深度(千米)</th>
+      <th>参考位置</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-06-30 21:44:44</td>
+      <td>3.0</td>
+      <td>27.56</td>
+      <td>112.10</td>
+      <td>6.0</td>
+      <td>湖南娄底市双峰县</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-06-30 21:32:29</td>
+      <td>3.1</td>
+      <td>28.44</td>
+      <td>104.81</td>
+      <td>8.0</td>
+      <td>四川宜宾市长宁县</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-06-30 12:14:25</td>
+      <td>3.0</td>
+      <td>28.43</td>
+      <td>104.77</td>
+      <td>9.0</td>
+      <td>四川宜宾市珙县</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-06-30 03:44:11</td>
+      <td>4.8</td>
+      <td>22.43</td>
+      <td>122.31</td>
+      <td>30.0</td>
+      <td>台湾台东县海域</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-06-30 03:09:29</td>
+      <td>3.1</td>
+      <td>31.00</td>
+      <td>98.96</td>
+      <td>7.0</td>
+      <td>四川甘孜州白玉县</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+colname = ['Time','Degree','latitude(°)', 'longitude(°)',
+           'depth(km)', 'position']
+newdata = np.array(earthquake)
+earthquake2 = pd.DataFrame(newdata,columns = colname)
+earthquake2.head()
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Time</th>
+      <th>Degree</th>
+      <th>latitude(°)</th>
+      <th>longitude(°)</th>
+      <th>depth(km)</th>
+      <th>position</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2019-06-30 21:44:44</td>
+      <td>3</td>
+      <td>27.56</td>
+      <td>112.1</td>
+      <td>6</td>
+      <td>湖南娄底市双峰县</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2019-06-30 21:32:29</td>
+      <td>3.1</td>
+      <td>28.44</td>
+      <td>104.81</td>
+      <td>8</td>
+      <td>四川宜宾市长宁县</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2019-06-30 12:14:25</td>
+      <td>3</td>
+      <td>28.43</td>
+      <td>104.77</td>
+      <td>9</td>
+      <td>四川宜宾市珙县</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2019-06-30 03:44:11</td>
+      <td>4.8</td>
+      <td>22.43</td>
+      <td>122.31</td>
+      <td>30</td>
+      <td>台湾台东县海域</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019-06-30 03:09:29</td>
+      <td>3.1</td>
+      <td>31</td>
+      <td>98.96</td>
+      <td>7</td>
+      <td>四川甘孜州白玉县</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+world.plot(color='white', edgecolor='black',figsize=(11,9))
+sns.scatterplot(x='longitude(°)',y='latitude(°)',linewidth=0,data=earthquake2,s=3, color='red')
+```
+
+
+
+
+    <matplotlib.axes._subplots.AxesSubplot at 0x230b317bb38>
+
+
+
+<!---
+![svg](output_8_1.svg)
+-->

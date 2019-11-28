@@ -12,15 +12,14 @@
     
     
     <item>
-      <title>Python有用的函数</title>
+      <title>Python小抄</title>
       <link>/zh/pybasic/</link>
       <pubDate>Wed, 11 Sep 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/pybasic/</guid>
-      <description>一本Python书
-Python数据分析小抄
+      <description>下面是我积累的Python 实用小技巧。会根据经验增长持续更新，给自己也给可能需要的人做个备份。
 从文件中读取数据文件类提供了三种方法读取文本文件的内容，分别是：
-f.read(size)返回一个字符串，内容为长度为size的文本。参数size表示读取的数扯，可以省略。如果省略size参数，则表示读取文件所有内容，作为一个字符串返回。
+f.read(size)返回一个字符串，内容为长度为size的文本。参数size可以省略。如果省略size参数，则表示读取文件所有内容，作为一个字符串返回。
 f.readline()返回一个字符串，内容为文件当前一行的文本。
 f.readlines()返回一个列表，列表的数据项为一行的文本[linel, line2, ···,lineN] 。再通过循环操作可以逐行访问列表中每一行的内容。
 mode解释r以只读方式打开w以写方式打开一个文件，当这个文件存在时，覆盖原来的内容。当这个文件不存在时，创建这个文件x创建一个新文件，以写方式打开，当文件已存在， 报错FileExistsErrora以写方式打开，写人内容追加在文件的末尾b表示二进制文件，添加在其他控制字符后t表示文本文件，默认值+以修改方式打开，支持读写设置工作目录获取当前工作目录：import osos.</description>

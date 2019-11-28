@@ -12,7 +12,7 @@
 
 <meta name="author" content="Malcolm" />
 
-<meta name="date" content="2019-11-26" />
+<meta name="date" content="2019-11-27" />
 
 <title>文本分析笔记</title>
 
@@ -377,7 +377,7 @@ summary {
 
 <h1 class="title toc-ignore">文本分析笔记</h1>
 <h4 class="author">Malcolm</h4>
-<h4 class="date">2019-11-26</h4>
+<h4 class="date">2019-11-27</h4>
 
 </div>
 
@@ -527,157 +527,338 @@ x &lt;- subset(iris, select = -Species)
 y &lt;- Species
 model &lt;- svm(x, y) 
 
-print(model)</code></pre>
-<pre><code>
-Call:
-svm.default(x = x, y = y)
-
-
-Parameters:
-   SVM-Type:  C-classification 
- SVM-Kernel:  radial 
-       cost:  1 
-      gamma:  0.25 
-
-Number of Support Vectors:  51</code></pre>
-<pre class="r"><code>summary(model)</code></pre>
-<pre><code>
-Call:
-svm.default(x = x, y = y)
-
-
-Parameters:
-   SVM-Type:  C-classification 
- SVM-Kernel:  radial 
-       cost:  1 
-      gamma:  0.25 
-
-Number of Support Vectors:  51
-
- ( 8 22 21 )
-
-
-Number of Classes:  3 
-
-Levels: 
- setosa versicolor virginica</code></pre>
+print(model)
+summary(model)</code></pre>
 </div>
 <div id="朴素贝叶斯" class="section level1">
 <h1><span class="header-section-number">2</span> 朴素贝叶斯</h1>
 <pre class="r"><code>## Categorical data only:
 data(HouseVotes84, package = &quot;mlbench&quot;)
 model &lt;- naiveBayes(Class ~ ., data = HouseVotes84)
-predict(model, HouseVotes84[1:10,])</code></pre>
-<pre><code> [1] republican republican republican democrat   democrat   democrat  
- [7] republican republican republican democrat  
-Levels: democrat republican</code></pre>
-<pre class="r"><code>predict(model, HouseVotes84[1:10,], type = &quot;raw&quot;)</code></pre>
-<pre><code>          democrat   republican
- [1,] 1.029209e-07 9.999999e-01
- [2,] 5.820415e-08 9.999999e-01
- [3,] 5.684937e-03 9.943151e-01
- [4,] 9.985798e-01 1.420152e-03
- [5,] 9.666720e-01 3.332802e-02
- [6,] 8.121430e-01 1.878570e-01
- [7,] 1.751512e-04 9.998248e-01
- [8,] 8.300100e-06 9.999917e-01
- [9,] 8.277705e-08 9.999999e-01
-[10,] 1.000000e+00 5.029425e-11</code></pre>
-<pre class="r"><code>pred &lt;- predict(model, HouseVotes84)
-table(pred, HouseVotes84$Class)</code></pre>
-<pre><code>            
-pred         democrat republican
-  democrat        238         13
-  republican       29        155</code></pre>
-<pre class="r"><code>## using laplace smoothing:
+predict(model, HouseVotes84[1:10,])
+predict(model, HouseVotes84[1:10,], type = &quot;raw&quot;)
+
+pred &lt;- predict(model, HouseVotes84)
+table(pred, HouseVotes84$Class)
+
+## using laplace smoothing:
 model &lt;- naiveBayes(Class ~ ., data = HouseVotes84, laplace = 3)
 pred &lt;- predict(model, HouseVotes84[,-1])
-table(pred, HouseVotes84$Class)</code></pre>
-<pre><code>            
-pred         democrat republican
-  democrat        237         12
-  republican       30        156</code></pre>
-<pre class="r"><code>## Example of using a contingency table:
+table(pred, HouseVotes84$Class)
+
+
+## Example of using a contingency table:
 data(Titanic)
 m &lt;- naiveBayes(Survived ~ ., data = Titanic)
-m</code></pre>
-<pre><code>
-Naive Bayes Classifier for Discrete Predictors
+m
+predict(m, as.data.frame(Titanic))
 
-Call:
-naiveBayes.formula(formula = Survived ~ ., data = Titanic)
-
-A-priori probabilities:
-Survived
-      No      Yes 
-0.676965 0.323035 
-
-Conditional probabilities:
-        Class
-Survived        1st        2nd        3rd       Crew
-     No  0.08187919 0.11208054 0.35436242 0.45167785
-     Yes 0.28551336 0.16596343 0.25035162 0.29817159
-
-        Sex
-Survived       Male     Female
-     No  0.91543624 0.08456376
-     Yes 0.51617440 0.48382560
-
-        Age
-Survived      Child      Adult
-     No  0.03489933 0.96510067
-     Yes 0.08016878 0.91983122</code></pre>
-<pre class="r"><code>predict(m, as.data.frame(Titanic))</code></pre>
-<pre><code> [1] Yes No  No  No  Yes Yes Yes Yes No  No  No  No  Yes Yes Yes Yes Yes
-[18] No  No  No  Yes Yes Yes Yes No  No  No  No  Yes Yes Yes Yes
-Levels: No Yes</code></pre>
-<pre class="r"><code>## Example with metric predictors:
+## Example with metric predictors:
 data(iris)
 m &lt;- naiveBayes(Species ~ ., data = iris)
 ## alternatively:
 m &lt;- naiveBayes(iris[,-5], iris[,5])
-m</code></pre>
-<pre><code>
-Naive Bayes Classifier for Discrete Predictors
+m
+table(predict(m, iris), iris[,5])</code></pre>
+<pre class="r"><code>library(tm)
+library(tidytext)
+data(&quot;crude&quot;)
+crude</code></pre>
+<pre><code>&lt;&lt;VCorpus&gt;&gt;
+Metadata:  corpus specific: 0, document level (indexed): 0
+Content:  documents: 20</code></pre>
+<pre class="r"><code>inspect(crude)</code></pre>
+<pre><code>&lt;&lt;VCorpus&gt;&gt;
+Metadata:  corpus specific: 0, document level (indexed): 0
+Content:  documents: 20
 
-Call:
-naiveBayes.default(x = iris[, -5], y = iris[, 5])
+$`reut-00001.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 527
 
-A-priori probabilities:
-iris[, 5]
-    setosa versicolor  virginica 
- 0.3333333  0.3333333  0.3333333 
+$`reut-00002.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 2634
 
-Conditional probabilities:
-            Sepal.Length
-iris[, 5]     [,1]      [,2]
-  setosa     5.006 0.3524897
-  versicolor 5.936 0.5161711
-  virginica  6.588 0.6358796
+$`reut-00004.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 330
 
-            Sepal.Width
-iris[, 5]     [,1]      [,2]
-  setosa     3.428 0.3790644
-  versicolor 2.770 0.3137983
-  virginica  2.974 0.3224966
+$`reut-00005.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 394
 
-            Petal.Length
-iris[, 5]     [,1]      [,2]
-  setosa     1.462 0.1736640
-  versicolor 4.260 0.4699110
-  virginica  5.552 0.5518947
+$`reut-00006.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 552
 
-            Petal.Width
-iris[, 5]     [,1]      [,2]
-  setosa     0.246 0.1053856
-  versicolor 1.326 0.1977527
-  virginica  2.026 0.2746501</code></pre>
-<pre class="r"><code>table(predict(m, iris), iris[,5])</code></pre>
-<pre><code>            
-             setosa versicolor virginica
-  setosa         50          0         0
-  versicolor      0         47         3
-  virginica       0          3        47</code></pre>
+$`reut-00007.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 2774
+
+$`reut-00008.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 2747
+
+$`reut-00009.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 930
+
+$`reut-00010.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 2115
+
+$`reut-00011.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 2066
+
+$`reut-00012.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 2241
+
+$`reut-00013.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 593
+
+$`reut-00014.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 621
+
+$`reut-00015.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 591
+
+$`reut-00016.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 629
+
+$`reut-00018.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 876
+
+$`reut-00019.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 1166
+
+$`reut-00021.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 463
+
+$`reut-00022.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 1797
+
+$`reut-00023.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  15
+Content:  chars: 360</code></pre>
+<pre class="r"><code>print(crude) </code></pre>
+<pre><code>&lt;&lt;VCorpus&gt;&gt;
+Metadata:  corpus specific: 0, document level (indexed): 0
+Content:  documents: 20</code></pre>
+<pre class="r"><code>summary(crude)</code></pre>
+<pre><code>    Length Class             Mode
+127 2      PlainTextDocument list
+144 2      PlainTextDocument list
+191 2      PlainTextDocument list
+194 2      PlainTextDocument list
+211 2      PlainTextDocument list
+236 2      PlainTextDocument list
+237 2      PlainTextDocument list
+242 2      PlainTextDocument list
+246 2      PlainTextDocument list
+248 2      PlainTextDocument list
+273 2      PlainTextDocument list
+349 2      PlainTextDocument list
+352 2      PlainTextDocument list
+353 2      PlainTextDocument list
+368 2      PlainTextDocument list
+489 2      PlainTextDocument list
+502 2      PlainTextDocument list
+543 2      PlainTextDocument list
+704 2      PlainTextDocument list
+708 2      PlainTextDocument list</code></pre>
+<pre class="r"><code>#crude &lt;- VCorpus(crude)
+
+library(dplyr)
+library(tidytext)
+
+#ap_td &lt;- tidy(crude)
+#ap_td
+
+#crude &lt;- Terms(crude)
+#head(crude)
+
+crude &lt;- tm_map(crude,PlainTextDocument)#将reuters转化为纯文本文件，去除标签
+inspect(crude[[1]])</code></pre>
+<pre><code>&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 527
+
+Diamond Shamrock Corp said that
+effective today it had cut its contract prices for crude oil by
+1.50 dlrs a barrel.
+    The reduction brings its posted price for West Texas
+Intermediate to 16.00 dlrs a barrel, the copany said.
+    &quot;The price reduction today was made in the light of falling
+oil product prices and a weak crude oil market,&quot; a company
+spokeswoman said.
+    Diamond is the latest in a line of U.S. oil companies that
+have cut its contract, or posted, prices over the last two days
+citing weak oil markets.
+ Reuter</code></pre>
+<pre class="r"><code>crude &lt;- tm_map(crude, stripWhitespace)#去掉空白
+inspect(crude[[1]])</code></pre>
+<pre><code>&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 514
+
+Diamond Shamrock Corp said that effective today it had cut its contract prices for crude oil by 1.50 dlrs a barrel. The reduction brings its posted price for West Texas Intermediate to 16.00 dlrs a barrel, the copany said. &quot;The price reduction today was made in the light of falling oil product prices and a weak crude oil market,&quot; a company spokeswoman said. Diamond is the latest in a line of U.S. oil companies that have cut its contract, or posted, prices over the last two days citing weak oil markets. Reuter</code></pre>
+<pre class="r"><code>crude &lt;- tm_map(crude,
+                  removeWords,stopwords(&quot;english&quot;))#去停用词
+inspect(crude[[1]])</code></pre>
+<pre><code>&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 439
+
+Diamond Shamrock Corp said  effective today   cut  contract prices  crude oil  1.50 dlrs  barrel. The reduction brings  posted price  West Texas Intermediate  16.00 dlrs  barrel,  copany said. &quot;The price reduction today  made   light  falling oil product prices   weak crude oil market,&quot;  company spokeswoman said. Diamond   latest   line  U.S. oil companies   cut  contract,  posted, prices   last two days citing weak oil markets. Reuter</code></pre>
+<pre class="r"><code>crude &lt;- tm_map(crude, content_transformer(tolower))#转换为小写
+inspect(crude[[1]])</code></pre>
+<pre><code>&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 439
+
+diamond shamrock corp said  effective today   cut  contract prices  crude oil  1.50 dlrs  barrel. the reduction brings  posted price  west texas intermediate  16.00 dlrs  barrel,  copany said. &quot;the price reduction today  made   light  falling oil product prices   weak crude oil market,&quot;  company spokeswoman said. diamond   latest   line  u.s. oil companies   cut  contract,  posted, prices   last two days citing weak oil markets. reuter</code></pre>
+<pre class="r"><code>crude &lt;- tm_map(crude, stemDocument)
+inspect(crude[[1]])</code></pre>
+<pre><code>&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 382
+
+diamond shamrock corp said effect today cut contract price crude oil 1.50 dlrs barrel. the reduct bring post price west texa intermedi 16.00 dlrs barrel, copani said. &quot;the price reduct today made light fall oil product price weak crude oil market,&quot; compani spokeswoman said. diamond latest line u.s. oil compani cut contract, posted, price last two day cite weak oil markets. reuter</code></pre>
+<pre class="r"><code>inspect(crude)</code></pre>
+<pre><code>&lt;&lt;VCorpus&gt;&gt;
+Metadata:  corpus specific: 0, document level (indexed): 0
+Content:  documents: 20
+
+$`reut-00001.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 382
+
+$`reut-00002.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1774
+
+$`reut-00004.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 263
+
+$`reut-00005.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 300
+
+$`reut-00006.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 365
+
+$`reut-00007.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1815
+
+$`reut-00008.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1895
+
+$`reut-00009.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 668
+
+$`reut-00010.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1514
+
+$`reut-00011.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1410
+
+$`reut-00012.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1632
+
+$`reut-00013.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 422
+
+$`reut-00014.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 440
+
+$`reut-00015.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 386
+
+$`reut-00016.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 433
+
+$`reut-00018.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 585
+
+$`reut-00019.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 767
+
+$`reut-00021.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 351
+
+$`reut-00022.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 1262
+
+$`reut-00023.xml`
+&lt;&lt;PlainTextDocument&gt;&gt;
+Metadata:  7
+Content:  chars: 302</code></pre>
 </div>
 
 

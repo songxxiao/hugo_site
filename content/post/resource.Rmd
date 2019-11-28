@@ -31,6 +31,11 @@ slug: resource
 
 # Python
 
+
+[一本Python书](http://funhacks.net/explore-python/)
+
+[Python数据分析小抄](http://www.utc.fr/~jlaforet/Suppl/python-cheatsheets.pdf)
+
 [Python帮助系统](https://blog.csdn.net/qq_40418612/article/details/82470055)
 
 [Python机器学习](https://ljalphabeta.gitbooks.io/python-/content/)

@@ -1,22 +1,19 @@
 ---
-title: "Python有用的函数"
-author: " "
-date: "2019-09-11"
+title: 'Python小抄'
+author: 
+date: '2019-09-11'
 categories: Python
 slug: pybasic
-tags: ['Python']
 ---
 
 
 
-<p><img src="https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg" /></p>
-<p><a href="http://funhacks.net/explore-python/">一本Python书</a></p>
-<p><a href="http://www.utc.fr/~jlaforet/Suppl/python-cheatsheets.pdf">Python数据分析小抄</a></p>
-<div id="section" class="section level1">
+<p>下面是我积累的Python 实用小技巧。会根据经验增长持续更新，给自己也给可能需要的人做个备份。</p>
+<div id="从文件中读取数据" class="section level1">
 <h1>从文件中读取数据</h1>
 <p>文件类提供了三种方法读取文本文件的内容，分别是：</p>
 <pre class="python"><code>f.read(size)</code></pre>
-<p>返回一个字符串，内容为长度为size的文本。参数size表示读取的数扯，可以省略。如果省略size参数，则表示<strong>读取文件所有内容，作为一个字符串返回</strong>。</p>
+<p>返回一个字符串，内容为长度为size的文本。参数size可以省略。如果省略size参数，则表示<strong>读取文件所有内容，作为一个字符串返回</strong>。</p>
 <pre class="python"><code>f.readline()</code></pre>
 <p>返回一个字符串，内容为文件当前一行的文本。</p>
 <pre class="python"><code>f.readlines()</code></pre>
@@ -88,7 +85,7 @@ t
 </tr>
 </table>
 </div>
-<div id="section-1" class="section level1">
+<div id="设置工作目录" class="section level1">
 <h1>设置工作目录</h1>
 <ul>
 <li>获取当前工作目录：</li>
@@ -100,21 +97,22 @@ os.getcwd(&#39; &#39;)    </code></pre>
 </ul>
 <pre class="python"><code>os.chdir(&#39; &#39;) </code></pre>
 </div>
-<div id="jupyter-notebook" class="section level1">
+<div id="设置jupyter-notebook图片输出格式" class="section level1">
 <h1>设置<code>Jupyter Notebook</code>图片输出格式</h1>
 <ul>
-<li>SVG格式</li>
+<li><p>SVG格式</p></li>
+<li><p>Jupyter Notebook魔术命令</p></li>
 </ul>
 <pre class="python"><code>%matplotlib inline
 %config InlineBackend.figure_format = &#39;svg&#39;</code></pre>
 </div>
-<div id="section-2" class="section level1">
+<div id="让图片说中文" class="section level1">
 <h1>让图片说中文</h1>
 <pre class="python"><code>import matplotlib.pyplot as plt
 plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
 plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
 </div>
-<div id="section-3" class="section level1">
+<div id="异常处理" class="section level1">
 <h1>异常处理</h1>
 <pre class="python"><code>a=3
 b=2
@@ -132,10 +130,22 @@ division by zero
 -2.0
 -1.0</code></pre>
 </div>
-<div id="sklearn-pipeline" class="section level1">
-<h1>管道(Sklearn Pipeline)</h1>
-<pre class="python"><code></code></pre>
-</div>
-<div id="section-4" class="section level1">
-<h1></h1>
+<div id="anaconda-或python-从本地离线安装第三方包" class="section level1">
+<h1>Anaconda 或Python 从本地离线安装第三方包</h1>
+<p>很多时候使用<code>conda install</code> 或<code>pip install</code> 都无法安装包。只好使用本地安装的方法去安装Github开发版。这很像R语言的<code>devtools::install_local</code>函数。下面是具体的做法。</p>
+<p>首先确保已将Python添加入环境变量。由于我的电脑上使用的Anaconda而不是Python，我添加的是对应的Anaconda3文件夹(包含python.exe的文件夹)</p>
+<ol style="list-style-type: decimal">
+<li><p>首先从github上clone或者直接下载zip文件并解压到目录A。</p></li>
+<li><p>目录A下有setup等文件：</p></li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/20190124095012527.png" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>如果是windows系统，在目录A下，在未选择任何文件的情况下(可以先左键单击空白处)按住Shift的同时在空白处单击右键，调出菜单。此时点击【在此处打开命令窗口】的选项。</p></li>
+<li><p>在弹出的命令窗口中输入：</p></li>
+</ol>
+<pre><code>python setup.py install</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>安装完成!</li>
+</ol>
+<p>如果同时安装了Anaconda 和Python可能会出问题。因为Anaconda 自带了一个Python。如果只在一个路径中安装的话另一个仍是没有安装的。</p>
 </div>

@@ -153,7 +153,7 @@ hashing
 
 # 支持向量机
 
-```{r}
+```{r,eval=F}
 library(e1071)
 data(iris)
 attach(iris)
@@ -174,7 +174,7 @@ summary(model)
 
 # 朴素贝叶斯
 
-```{r}
+```{r,eval=F}
 ## Categorical data only:
 data(HouseVotes84, package = "mlbench")
 model <- naiveBayes(Class ~ ., data = HouseVotes84)
@@ -205,4 +205,43 @@ m
 table(predict(m, iris), iris[,5])
 ```
 
+```{r}
+library(tm)
+library(tidytext)
+data("crude")
+crude
+
+inspect(crude)
+print(crude) 
+summary(crude)
+#crude <- VCorpus(crude)
+
+library(dplyr)
+library(tidytext)
+
+#ap_td <- tidy(crude)
+#ap_td
+
+#crude <- Terms(crude)
+#head(crude)
+
+crude <- tm_map(crude,PlainTextDocument)#将reuters转化为纯文本文件，去除标签
+inspect(crude[[1]])
+
+crude <- tm_map(crude, stripWhitespace)#去掉空白
+inspect(crude[[1]])
+
+crude <- tm_map(crude,
+                  removeWords,stopwords("english"))#去停用词
+inspect(crude[[1]])
+
+crude <- tm_map(crude, content_transformer(tolower))#转换为小写
+inspect(crude[[1]])
+
+crude <- tm_map(crude, stemDocument)
+inspect(crude[[1]])
+
+#inspect(crude)
+```
+  
   
