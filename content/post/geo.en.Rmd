@@ -5,6 +5,10 @@ date: '2019-11-28'
 slug: pygeo
 ---
 
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='100%')
+```
+
 A very simple example to show how to plot a scatter map using Python [geopandas](http://geopandas.org/) library. The data is from this [link](https://wp-contents.netlify.com/data/earthquake20190630.csv). Attention that some columns' names are Chinese characters. I give methods to change those names below.
 
 
@@ -213,7 +217,8 @@ earthquake2.head()
 
 ```python
 world.plot(color='white', edgecolor='black',figsize=(11,9))
-sns.scatterplot(x='longitude(°)',y='latitude(°)',linewidth=0,data=earthquake2,s=3, color='red')
+sns.scatterplot(x='longitude(°)',
+y='latitude(°)',linewidth=0,data=earthquake2,s=3, color='red')
 ```
 
 
@@ -223,8 +228,7 @@ sns.scatterplot(x='longitude(°)',y='latitude(°)',linewidth=0,data=earthquake2,
 
 
 
-```{r,echo=F,fig.cap='A map shows earthquakes happened during '}
+```{r,echo=F,fig.cap='A map shows earthquakes happened worldwide during 2017-2019'}
 knitr::include_graphics('/img/vignette/geo.svg')
 ```
-
 

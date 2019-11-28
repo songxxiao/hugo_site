@@ -36,6 +36,31 @@
   <url>
     <loc>/en/pygeo/</loc>
     <lastmod>2019-11-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/pygeo/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/pygeo/"
+                />
+  </url>
+  
+  <url>
+    <loc>/en/pygeo/</loc>
+    <lastmod>2019-11-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/pygeo/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/pygeo/"
+                />
   </url>
   
   <url>
