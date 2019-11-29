@@ -62,6 +62,7 @@ Glmnet Vignette
 Python数据分析小抄
 Python帮助系统
 Python机器学习
+Python 文本数据分析初学指南
 Python -WordCloud 修改色调
 Python中WordCloud各参数的含义
 超详细：Python(wordcloud+jieba)生成中文词云图
@@ -75,8 +76,7 @@ datasets（R自带数据包）
 3
 Fundamentals of Data Visualization
 图床：https://sm.ms/
-机器学习XGBoost Documentation
-Random Forests 商业版本</description>
+机器学习XGBoost Documentation</description>
     </item>
     
     <item>

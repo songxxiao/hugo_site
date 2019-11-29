@@ -40,6 +40,8 @@ slug: resource
 
 [Python机器学习](https://ljalphabeta.gitbooks.io/python-/content/)
 
+[Python 文本数据分析初学指南](https://datartisan.gitbooks.io/begining-text-mining-with-python/)
+
 [Python -WordCloud 修改色调](https://blog.csdn.net/u010152318/article/details/80242460)   
 
 [Python中WordCloud各参数的含义](https://blog.csdn.net/kouyi5627/article/details/80530569)  
