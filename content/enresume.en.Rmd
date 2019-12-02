@@ -67,6 +67,8 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### HONORS AND AWARDS 
 
++ 2019&emsp;Kaggle Competition [Titanic: Machine Learning from Disaster](https://www.kaggle.com/c/titanic)&emsp;Top 12%
+
 + 2019&emsp;Third Class Academic Honors (East China Normal University)  
 + 2019&emsp;**Daxia Cup** Student Academic Works Competition in ECNU &emsp;Third Award 
 
@@ -92,8 +94,8 @@ Forum hosts：Wei Li
 ### WORK & INTERNSHIP EXPERIENCE
 
 + [iRESEARCH](http://www.iresearchchina.com/)&emsp;Data Analyst&emsp;2019-07~Today
-   + Using R and SPSS to analysis profile of  Class B cars' users. Through PCA and Cluster analysis,I catogorized survey data and found cars users' attitude difference.
-  + Using DBeaver database to explore Mobil Oil H5 online data. 
+   + Using R and SPSS to analysis profile of cars' users. Through PCA and Cluster analysis, I catogorized survey data and found cars users' attitude difference.
+  + Using MySQL database to explore users' database. 
    
 &nbsp; 
 
@@ -107,8 +109,8 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 + **[GRE](https://www.ets.org/gre)**: 321   
 (*Verbal*: 154, *Quantity*: 167, *Writing*: 3.5)  
 
-+ **[TOEFL](https://www.ets.org/toefl)**: 100   
-(*Reading*: 29, *Listening*: 24, *Speaking*: 21, *Writing*: 26)[^toefl]
++ **[TOEFL](https://www.ets.org/toefl)**: 103   
+(*Reading*: 29, *Listening*: 27, *Speaking*: 21, *Writing*: 26)[^toefl]
 
 + **[CET-6](http://cet.neea.edu.cn/)**[^cet] : 549
 + **[CET-4](http://cet.neea.edu.cn/)**: 614

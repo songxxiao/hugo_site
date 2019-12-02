@@ -62,7 +62,7 @@ comment: false
 
 ### 获奖情况 
 
-+ Kaggle机器学习竞赛 [泰坦尼克号幸存者预测](https://www.kaggle.com/c/titanic) 排名前12%
++ 2019年 Kaggle机器学习竞赛 [泰坦尼克号幸存者预测](https://www.kaggle.com/c/titanic)&emsp;排名前12%
 
 + 2019年 华东师范大学优秀学生三等奖学金
 + 2019年 华东师范大学第二十七届 **大夏杯** 大学生课外学术科技作品竞赛&emsp;三等奖  
@@ -85,7 +85,7 @@ comment: false
 ### 实习经历
 
 + [艾瑞咨询](https://www.iresearch.com.cn/)&emsp;数据分析&emsp;2019年7月-至今  
-   + 使用R、SPSS软件对汽车用户进行用户画像分析工作。使用主成分分析、聚类分析法对线下数据进行无监督学习，研究不同车系用户态度区分。对汽车生产商决策提供重要参考意见。最终将结果进行数据可视化描述。
+   + 使用R、SPSS软件对汽车用户进行用户画像分析工作。使用主成分分析、聚类分析法对线下数据进行无监督学习，研究不同车系用户态度区分。对汽车生产商决策提供重要参考意见，最终将结果进行数据可视化描述。
    + 使用MySQL数据库查询客户线上数据。   
 
 &nbsp;   
@@ -99,8 +99,8 @@ comment: false
 + **[GRE](https://www.ets.org/gre)**: 321   
 (*Verbal*: 154, *Quantity*: 167, *Writing*: 3.5)  
 
-+ **[TOEFL](https://www.ets.org/toefl)**: 100   
-(*Reading*: 29, *Listening*: 24, *Speaking*: 21, *Writing*: 26)[^toefl]
++ **[TOEFL](https://www.ets.org/toefl)**: 103   
+(*Reading*: 29, *Listening*: 27, *Speaking*: 21, *Writing*: 26)[^toefl]
 
 + **[CET-6](http://cet.neea.edu.cn/)**: 549
 + **[CET-4](http://cet.neea.edu.cn/)**: 614
