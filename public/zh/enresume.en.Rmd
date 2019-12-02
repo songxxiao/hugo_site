@@ -1,5 +1,5 @@
 ---
-title: 'Xiao Song'
+title: 'Résumé - Xiao Song '
 author: 
 slug: enresume
 disable_comments: true
@@ -22,8 +22,8 @@ comment: false
 -->
 
 ### SOFTWARE & Programming SKILLS
-+ R, LaTeX, Stata 
-+ Python, SQL, SPSS 
++ R&emsp;LaTeX&emsp;Stata 
++ Python&emsp;SQL&emsp;SPSS 
 
 <!--
 ### RELEVANT COURSES
@@ -45,11 +45,11 @@ School of Social Development&emsp;(Overall GPA：3.64 /4 | Top 10%)
 ### TRAINING EXPERIENCE
 
 + [Gouxionghui](http://www.xiong99.com.cn/about.php)&emsp;2019-05  
-Online internship&emsp;[Credit Card Approval Analysis](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)   
+Online Internship&emsp;[Credit Card Approval Analysis](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)   
 Using Python's `Pandas`, `Numpy`, and `scikit-learn` libraries for data wrangling and modeling. A credit card application model was built using machine learning models like Random Forest. The model is trained by the Cross-Validation method to predict the probability that a credit card applicant will default on the bill. The result is a complete data analysis [report](https://xsong.ltd/archives/pandas/scorecard_en).
 
 + Peking University&emsp;2018-08  
-Summer workshop  
+Summer Workshop  
 [General Designs and Sensitivity Analysis for Causal Inference](http://www.oir.pku.edu.cn/umich/jxsz1/nsqkczsjz2018.htm)&emsp;(Grade：94/100)
 
 + Nanjing University&emsp;2018-01  
@@ -106,22 +106,31 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 
 ### STANDARDIZED TEST
 
-+ **[GRE](https://www.ets.org/gre)**: 321   
-(*Verbal*: 154, *Quantity*: 167, *Writing*: 3.5)  
++ **[GRE](https://www.ets.org/gre)**&emsp;
 
-+ **[TOEFL](https://www.ets.org/toefl)**: 103   
-(*Reading*: 29, *Listening*: 27, *Speaking*: 21, *Writing*: 26)[^toefl]
+<center>  
+ <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 219px" class="tg"><colgroup><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"></colgroup><tr><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:middle">Verbal</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:middle">Quantity</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:middle">Writing</th></tr><tr><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:middle">154</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:middle">167</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:middle">3.5</td></tr></table>
+</center>
 
-+ **[CET-6](http://cet.neea.edu.cn/)**[^cet] : 549
-+ **[CET-4](http://cet.neea.edu.cn/)**: 614
++ **[TOEFL](https://www.ets.org/toefl)**[^toefl]&emsp;103  
+
+
+<center>  
+<table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 292px" class="tg"><colgroup><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"></colgroup><tr><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Reading</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Listening</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Speaking</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">Writing</th></tr><tr><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">29</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">27</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">21</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">26</td></tr></table>   
+
+</center>
+
++ **[CET-6](http://cet.neea.edu.cn/)**[^cet]&emsp;549
++ **[CET-4](http://cet.neea.edu.cn/)**&emsp;614
 
 [^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
+
 [^cet]: [College English Test](http://www.cet.edu.cn/)
 
 ### OTHER EXPERIENCE
 
 + 2018-2019 East China Normal University   
-Regression Analysis and Stata Application([Shisong Qing](https://faculty.ecnu.edu.cn/s/2136/main.jspy))  
+Regression Analysis and Stata Application&emsp;([Shisong Qing](https://faculty.ecnu.edu.cn/s/2136/main.jspy))  
 Teaching Assistant
 
 
