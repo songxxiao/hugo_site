@@ -244,4 +244,32 @@ inspect(crude[[1]])
 #inspect(crude)
 ```
   
+```{r}
+setwd('D:/RapLyrics-Scraper-master/lyrics_US')
+library(tidytext)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(purrr)
+`%>%` <- magrittr::`%>%`
+data(stop_words)
+temp = list.files(path = 'D:/RapLyrics-Scraper-master/lyrics_US',
+  pattern='*.txt')
+name = strsplit(temp,"_lyrics.txt") %>% as.character()
+for (i in 1:length(temp)) {
+  assign(name[i],read_csv(temp[i],col_names = F) %>% 
+  as.character() %>% 
+  tibble(text = .) %>% 
+  unnest_tokens(word,text) %>% 
+  anti_join(stop_words) %>% 
+  mutate(rapper=name[i]))
+}
+rm('stop_words')
+dfs = sapply(.GlobalEnv, is.data.frame) 
+rap <- do.call(rbind, mget(names(dfs)[dfs]))
+kponlydt <- ls()[ls()!= 'rap']
+rm(list = kponlydt)
+```
+  
   
