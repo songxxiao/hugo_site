@@ -1,0 +1,175 @@
+---
+title: SMS spam text classification
+author:  
+date: 2019/12/1
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: readable
+---
+
+[Text-Classification](https://cfss.uchicago.edu/notes/supervised-text-classification/)
+
+```{r, include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
+```
+
+# 首先...
+
+使用`read_csv`读取数据后无需使用`tibble`函数转化。`read_csv`能够直接得到`tibble`对象。不然会报错。
+
+R在构建文档-词语矩阵的有许多实现方式。下面使用了`tm::DocumentTermMatrix`函数实现。在此之前，我尝试了`quanteda::dfm_weight`函数，但是在我的本地R软件中总是报错（在Kaggle上的R Notebook能够运行）。另一个可能的路径是使用`tidytext::unnest_tokens`等函数进行去除停止词、去除数字和标点符号、提取词干等一系列操作；再通过`tidytext::cast_dtm`转化成`DocumentTermMatrix`对象。但这么做会导致因变量和特征矩阵行数不一致的问题。由于我无法解决它，我采用了下面的方案。当然使用Python是非常好的选择，我在[这里](https://www.kaggle.com/rikdifos/sms-text-classification)给出了基于Python的做法。相比R，Python的可视化能力略显不足。
+
+我认为`tidytext`十分适合对文本信息进行探索和可视化，而`tm`则适合构建矩阵进行建模。如果将二者混用则可能导致问题。
+
+# 上代码
+
+```{r}
+library(magrittr)
+library(quanteda)
+library(tidytext)
+library(dplyr)
+library(tm)
+library(readr)
+sms <- read_csv("E:/MaLearning/SPAM text message 20170820 - Data.csv")
+sms %>% count(Category)
+```
+
+```{r}
+smswd <- sms %>%
+  rename(message = Message,tag=Category) %>% 
+  mutate(ID = row_number())
+head(smswd)
+Y <- as.factor(smswd$tag)
+ms_corpus <- VCorpus(VectorSource(smswd$message))
+
+sms_dtm <- DocumentTermMatrix(ms_corpus, control =
+                                 list(tolower = T,
+                                      removeNumbers = T,
+                                      stopwords = T,
+                                      removePunctuation = T,
+                                      stemming = T))
+
+dim(sms_dtm) #5572
+
+sms_dtm1 <- removeSparseTerms(sms_dtm, sparse = .98)
+smsmat <- as.matrix(sms_dtm1)
+#head(smsmat)
+dim(smsmat)
+```
+
+原本的文档-词语频率矩阵有`r dim(sms_dtm)[2]`个特征，维度过高且过于稀疏。经过`removeSparseTerms`函数处理后保留了`r dim(smsmat)[2]`个特征。
+
+```{r}
+library(caret)
+library(e1071)
+svmc <- svm(smsmat, Y)
+print(svmc)
+summary(svmc)
+pred <- predict(svmc,smsmat)
+
+conMatrix <- confusionMatrix(pred,Y) 
+conMatrix[["table"]]
+
+
+nb <- naiveBayes(smsmat, Y)
+#print(nb)
+summary(nb)
+pred1 <- predict(nb,smsmat)
+
+conMatrix1 <- confusionMatrix(pred1,Y) 
+#混淆矩阵
+conMatrix1[["table"]]
+```
+
+支持向量机算法的准确率为`r conMatrix[["overall"]][["Accuracy"]]`，平衡准确率为`r conMatrix[["byClass"]][["Balanced Accuracy"]]`。
+
+朴素贝叶斯算法的准确率为`r conMatrix1[["overall"]][["Accuracy"]]`，平衡准确率为`r conMatrix1[["byClass"]][["Balanced Accuracy"]]`
+
+
+```{r,eval=F,include=F}
+library(stringr)
+smswd
+smswd <- smswd %>% 
+  filter(!str_detect(message, "^[0-9]*$")) 
+smswd
+
+smswd <- smswd %>% 
+  unnest_tokens(word,message,drop=F) %>%                  
+  anti_join(stop_words) %>%
+  mutate(word = SnowballC::wordStem(word))
+tail(smswd)
+
+
+```
+
+
+```{r,eval=F,include=F}
+library(tm)
+#smswddm <- smswd %>% 
+#   count(ID,word) %>% 
+#   cast_dtm(ID,word,n)
+
+smswddm
+
+inspect(smswddm)
+
+smswddm<- removeSparseTerms(smswddm, sparse=0.985)
+
+inspect(smswddm)
+smswddm
+smswddm <- as.matrix(smswddm)
+head(smswddm)
+
+library(e1071)
+model <- svm(smswddm, Y)
+print(model)
+summary(model)
+
+```
+
+```{r,eval=F,include=F}
+library(tm)
+library(Matrix)
+smswddm <- smswd %>% 
+   count(ID,word) %>% 
+   cast_sparse(ID,word,n)
+```
+
+
+```{r,eval=F,include=F}
+docvars(sms.corpus, "Category") <- data$Category
+
+spam.plot <- corpus_subset(sms.corpus, docvar1 == "spam")  
+spam.plot <- dfm(spam.plot, tolower = TRUE, remove_punct = TRUE, remove_twitter = TRUE, remove_numbers = TRUE, remove=stopwords("SMART"))
+spam.col <- brewer.pal(10, "BrBG")  
+
+spam.cloud <- textplot_wordcloud(spam.plot, min.freq = 16, color = spam.col)  
+title("Spam Wordcloud", col.main = "grey14")  
+
+ham.plot <- corpus_subset(sms.corpus, docvar1 == "ham")  
+ham.plot <- dfm(ham.plot, tolower = TRUE, removePunct = TRUE, removeTwitter = TRUE, removeNumbers = TRUE, remove=c("gt", "lt", stopwords("SMART")))  
+ham.col <- brewer.pal(10, "BrBG")  
+textplot_wordcloud(ham.plot, min.freq = 50, colors = ham.col, fixed.asp = TRUE)  
+title("Ham Wordcloud", col.main = "grey14")
+
+
+```
+```{r,eval=F,include=F}
+sms.dfm <- dfm(sms.corpus, tolower = TRUE)  
+sms.dfm <- dfm_trim(sms.dfm, min_count = 5, min_docfreq = 3)  
+sms.dfm <- dfm_weight(sms.dfm, type = "tfidf")  
+
+sms.raw.train <- raw.data[1:4738,]  
+sms.raw.test <- raw.data[4739:nrow(raw.data),]
+
+
+sms.dfm.train <- sms.dfm[1:4738,]  
+sms.dfm.test <- sms.dfm[4739:nrow(raw.data),]  
+sms.classifier <- textmodel_nb(sms.dfm.train, sms.raw.train$Category)  
+
+
+sms.predictions <- predict(sms.classifier, newdata = sms.dfm.test)  
+table(sms.predictions$nb.predicted, sms.raw.test$Category)  
+```
+
