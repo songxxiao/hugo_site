@@ -18,6 +18,7 @@ library(ggplot2)
 library(dplyr)
 library(purrr)
 `%>%` <- magrittr::`%>%`
+library(stringr)
 ```
 
 
@@ -32,9 +33,11 @@ name = strsplit(temp,"_lyrics.txt") %>% as.character()
 for (i in 1:length(temp)) {
   assign(name[i],read_csv(temp[i],col_names = F) %>% 
   as.character() %>% 
-  tibble(text = .) %>% 
+  tibble(text = .) %>%  
   unnest_tokens(word,text) %>% 
+  filter(!str_detect(word, "^[0-9]*$")) %>%
   anti_join(stop_words) %>% 
+  mutate(word = SnowballC::wordStem(word)) %>% 
   mutate(rapper=name[i]))
 }
 rm('stop_words')
@@ -71,9 +74,11 @@ fusion <- tibble(text = fusion)
 fusion
 data(stop_words)
 
-text_df <- fusion %>% 
-  unnest_tokens(word,text) %>% 
-  anti_join(stop_words)
+text_df <- fusion %>%
+  unnest_tokens(word,text) %>%
+  filter(!str_detect(word, "^[0-9]*$")) %>%
+  anti_join(stop_words) %>% 
+  mutate(word = SnowballC::wordStem(word))
 
 head(text_df,10)
 

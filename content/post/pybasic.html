@@ -18,6 +18,7 @@ slug: pybasic
 <p>返回一个字符串，内容为文件当前一行的文本。</p>
 <pre class="python"><code>f.readlines()</code></pre>
 <p>返回一个列表，列表的数据项为一行的文本[linel, line2, ···,lineN] 。再通过循环操作可以逐行访问列表中每一行的内容。</p>
+<center>
 <table style="border-collapse:collapse;border-spacing:0" class="tg">
 <tr>
 <th style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:top">
@@ -84,6 +85,7 @@ t
 </td>
 </tr>
 </table>
+</center>
 </div>
 <div id="设置工作目录" class="section level1">
 <h1>设置工作目录</h1>
@@ -111,6 +113,13 @@ os.getcwd(&#39; &#39;)    </code></pre>
 <pre class="python"><code>import matplotlib.pyplot as plt
 plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
 plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
+</div>
+<div id="jupyter-notebook-更换主题背景" class="section level1">
+<h1>Jupyter Notebook 更换主题背景</h1>
+<p>长时间编程会导致眼睛疲劳，深色编程背景不可或缺，下面的代码提供了Jupyter Notebook 的深色主题。直接在Anaconda Prompt中输入就好：</p>
+<pre><code>jt -t monokai -f roboto -nf robotosans -tf robotosans -N -T -cellw 70% -dfs 10 -ofs 10</code></pre>
+<p>下面的主题更适合输出成网页：</p>
+<pre><code>jt -t grade3</code></pre>
 </div>
 <div id="异常处理" class="section level1">
 <h1>异常处理</h1>
@@ -148,4 +157,16 @@ division by zero
 <li>安装完成!</li>
 </ol>
 <p>如果同时安装了Anaconda 和Python可能会出问题。因为Anaconda 自带了一个Python。如果只在一个路径中安装的话另一个仍是没有安装的。</p>
+</div>
+<div id="在r-studio中运行python" class="section level1">
+<h1>在R Studio中运行Python</h1>
+<p>Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。<a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。</p>
+<p>其中，<code>reticulate::repl_python()</code>能够实现在R Studio Console中运行Python代码。但是目前这个函数无法显示Python运行出的图片。如果想退出Python环境回到R，则输入<code>exit</code>。</p>
+<p>其次，<code>reticulate</code>还能够支持Python代码<a href="https://rstudio.github.io/reticulate/#python-in-r-markdown">在R Markdown中的编译</a>。这个功能目前似乎还不够完善，至少在我的电脑上，很多时候无法成功编译。</p>
+<p>目前<a href="https://yihui.org/cn/2019/07/hidden-gem/#comment-4698181689">谢益辉</a>的<code>xfun</code>包的<a href="https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html"><code>convert_ipynb</code>函数</a>可以将后缀为.ipynb的文件完美转化为.Rmd文件，用法如下：</p>
+<pre class="r"><code>nb_rmd = rmarkdown:::convert_ipynb(nb_file)
+xfun::file_string(nb_rmd)
+rmarkdown:::convert_ipynb(&quot;XXX.ipynb&quot;,
+                          output = &quot;YYY.Rmd&quot;)</code></pre>
+<p>如果<code>reticulate</code>有一天功能足够完善，可以用它支持的<code>knitr</code>编译，从而替代不能控制输出格式的Jupyter Notebook。那么R Studio也能成为一款非常出色的Python IDE。</p>
 </div>

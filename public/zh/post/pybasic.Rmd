@@ -29,7 +29,9 @@ f.readlines()
 ```
 返回一个列表，列表的数据项为一行的文本[linel, line2, ···,lineN] 。再通过循环操作可以逐行访问列表中每一行的内容。
 
+<center>
 <table style="border-collapse:collapse;border-spacing:0" class="tg"><tr><th style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:top">mode </th><th style="font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:center;vertical-align:top">解释</th></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">r </td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">以只读方式打开</td></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">w</td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">以写方式打开一个文件，当这个文件存在时，覆盖原来的内容。当这个文件不存在时，创建这个文件</td></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">x</td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">创建一个新文件，以写方式打开，当文件已存在， 报错FileExistsError</td></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">a </td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">以写方式打开，写人内容追加在文件的末尾</td></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">b </td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">表示二进制文件，添加在其他控制字符后</td></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">t</td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">表示文本文件，默认值</td></tr><tr><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">+</td><td style="font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:inherit;text-align:left;vertical-align:top">以修改方式打开，支持读写</td></tr></table>
+</center>
 
 # 设置工作目录
 
@@ -61,6 +63,19 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=['SimHei']
 plt.rcParams['axes.unicode_minus']=False
 ```
+# Jupyter Notebook 更换主题背景
+
+长时间编程会导致眼睛疲劳，深色编程背景不可或缺，下面的代码提供了Jupyter Notebook 的深色主题。直接在Anaconda Prompt中输入就好：
+
+```
+jt -t monokai -f roboto -nf robotosans -tf robotosans -N -T -cellw 70% -dfs 10 -ofs 10
+```
+下面的主题更适合输出成网页：
+
+```
+jt -t grade3
+```
+
 # 异常处理
 
 ```python
@@ -108,4 +123,28 @@ python setup.py install
 5. 安装完成!
 
 如果同时安装了Anaconda 和Python可能会出问题。因为Anaconda 自带了一个Python。如果只在一个路径中安装的话另一个仍是没有安装的。
+
+# 在R Studio中运行Python
+
+Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。[`reticulate`](https://rstudio.github.io/reticulate/)包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。
+
+其中，`reticulate::repl_python()`能够实现在R Studio Console中运行Python代码。但是目前这个函数无法显示Python运行出的图片。如果想退出Python环境回到R，则输入`exit`。
+
+其次，`reticulate`还能够支持Python代码[在R Markdown中的编译](https://rstudio.github.io/reticulate/#python-in-r-markdown)。这个功能目前似乎还不够完善，至少在我的电脑上，很多时候无法成功编译。
+
+目前[谢益辉](https://yihui.org/cn/2019/07/hidden-gem/#comment-4698181689)的`xfun`包的[`convert_ipynb`函数](https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html)可以将后缀为.ipynb的文件完美转化为.Rmd文件，用法如下：
+
+```r
+nb_rmd = rmarkdown:::convert_ipynb(nb_file)
+xfun::file_string(nb_rmd)
+rmarkdown:::convert_ipynb("XXX.ipynb",
+                          output = "YYY.Rmd")
+```
+
+如果`reticulate`有一天功能足够完善，可以用它支持的`knitr`编译，从而替代不能控制输出格式的Jupyter Notebook。那么R Studio也能成为一款非常出色的Python IDE。
+
+
+
+
+
 

@@ -531,8 +531,7 @@ detach(eg)
 [Who knew likelihood functions could be so pretty?](https://www.r-bloggers.com/who-knew-likelihood-functions-could-be-so-pretty/)
 
 ```{r,eval=F}
-LL <- function(X, theta)
-{
+LL <- function(X, theta){
   mu <- theta[1]
   sigma2 <- theta[2]
   log.likelihood <- 0

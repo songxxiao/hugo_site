@@ -28,12 +28,26 @@ R在构建文档-词语矩阵的有许多实现方式。下面使用了`tm::Docu
 library(magrittr)
 library(quanteda)
 library(tidytext)
+library(ggplot2)
 library(dplyr)
 library(tm)
 library(readr)
-sms <- read_csv("E:/MaLearning/SPAM text message 20170820 - Data.csv")
-sms %>% count(Category)
+library(stringr)
 ```
+
+```{r}
+sms <- read_csv("E:/MaLearning/SPAM text message 20170820 - Data.csv")
+```
+
+原数据共两列，其中一列记录了是否为垃圾短信的标签。另一列是短信文本内容。其中，非垃圾邮件的比例约为`r  round(prop.table(table(sms$Category))[1],2)`，垃圾邮件的比例为`r  round(prop.table(table(sms$Category))[2],2)`。
+
+```{r}
+sms %>% count(Category)
+#sms %$% prop.table(table(Category))[1]
+```
+
+
+数据概览如下：
 
 ```{r}
 smswd <- sms %>%
@@ -41,6 +55,54 @@ smswd <- sms %>%
   mutate(ID = row_number())
 head(smswd)
 Y <- as.factor(smswd$tag)
+```
+
+
+```{r}
+smsvis <- smswd %>%
+  unnest_tokens(word,message) %>%
+  filter(!str_detect(word, "^[0-9]*$")) %>%
+  anti_join(stop_words) %>% 
+  mutate(word = SnowballC::wordStem(word))
+head(smsvis)
+
+library(reshape2)
+library(wordcloud)
+smsvis %>%
+  count(word, tag, sort = T) %>%
+  acast(word ~ tag, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = c("blue", "red"),max.words = 50)
+
+smsvis %>%
+  count(tag, word) %>%
+  group_by(tag) %>%
+  top_n(15) %>%
+  ggplot() +
+  geom_col(aes(reorder(word, n), 
+               n, fill = tag),
+           show.legend = F) +
+  facet_wrap(~tag, scales = "free_y") +
+  coord_flip()
+
+smsvis %>%
+  count(tag, word) %>%
+  bind_tf_idf(word,tag,n) %>% 
+  group_by(tag) %>%
+  top_n(10) %>%
+ggplot() + 
+  geom_col(aes(reorder(word,tf_idf), 
+             tf_idf, fill = tag),
+           show.legend = F) +
+  facet_wrap(~tag, scales = "free_y") +
+  coord_flip()
+
+
+
+```
+
+
+```{r}
+
 ms_corpus <- VCorpus(VectorSource(smswd$message))
 
 sms_dtm <- DocumentTermMatrix(ms_corpus, control =
@@ -60,6 +122,10 @@ dim(smsmat)
 
 原本的文档-词语频率矩阵有`r dim(sms_dtm)[2]`个特征，维度过高且过于稀疏。经过`removeSparseTerms`函数处理后保留了`r dim(smsmat)[2]`个特征。
 
+# 算法
+
+朴素贝叶斯常常被用作文本分类的基线模型。因为文本数据满足每个单词相互独立。而且，一个单词的位置不依赖于另一个单词。也就是说，用于建模的文档-词语频率矩阵(DTM)各列独立，这满足了朴素贝叶斯的独立性假设。此外，为了提高准确率，我还进一步使用了支持向量机方法。
+
 ```{r}
 library(caret)
 library(e1071)
@@ -67,24 +133,99 @@ svmc <- svm(smsmat, Y)
 print(svmc)
 summary(svmc)
 pred <- predict(svmc,smsmat)
-
-conMatrix <- confusionMatrix(pred,Y) 
+#confusionMatrix(pred,Y,positive ='spam',mode="prec_recall")
+conMatrix <- confusionMatrix(pred,Y,
+                             positive ='spam',
+                             mode="prec_recall") 
 conMatrix[["table"]]
 
 
 nb <- naiveBayes(smsmat, Y)
 #print(nb)
-summary(nb)
+#summary(nb)
 pred1 <- predict(nb,smsmat)
 
-conMatrix1 <- confusionMatrix(pred1,Y) 
+conMatrix1 <- confusionMatrix(pred1,Y,
+                              positive ='spam',
+                              mode="prec_recall") 
 #混淆矩阵
 conMatrix1[["table"]]
+
+prop.table(conMatrix1[["table"]],1)
 ```
 
-支持向量机算法的准确率为`r conMatrix[["overall"]][["Accuracy"]]`，平衡准确率为`r conMatrix[["byClass"]][["Balanced Accuracy"]]`。
+支持向量机算法的准确率为`r round(conMatrix[["overall"]][["Accuracy"]],2)`，平衡准确率为`r round(conMatrix[["byClass"]][["Balanced Accuracy"]],2)`。
 
-朴素贝叶斯算法的准确率为`r conMatrix1[["overall"]][["Accuracy"]]`，平衡准确率为`r conMatrix1[["byClass"]][["Balanced Accuracy"]]`
+朴素贝叶斯算法的准确率为`r round(conMatrix1[["overall"]][["Accuracy"]],2)`，平衡准确率为`r round(conMatrix1[["byClass"]][["Balanced Accuracy"]],2)`。
+
+编写一个对混淆矩阵进行可视化的函数：
+
+```{r,fig.asp=0.8}
+plot_table <- function(x,xlab='Predicted label',
+                       ylab='True label',
+                       normalize = F){
+  if(normalize){
+    x <- round(prop.table(x,1), 2)
+    mar <- as.data.frame(x)
+  }
+  else{
+    mar <- as.data.frame(x)
+  }
+  ggplot2::ggplot(mar,aes(mar[,2],mar[,1])) +
+    geom_tile(aes(fill=Freq),color='black') +
+    scale_fill_gradientn(colours = c('gray98',
+                                     'steelblue1',
+                                     'midnightblue'))+
+    geom_label(aes(label = Freq)) +
+     labs(fill='',x=xlab,y=ylab) +
+     ylim(rev(levels(mar[,2])))+
+     scale_y_discrete(expand=c(0,0))+
+     scale_x_discrete(expand=c(0,0))
+}
+
+plot_table(conMatrix1[["table"]],'Reference','Prediction')+
+  theme_bw()
+
+plot_table(conMatrix1[["table"]])+
+  theme_bw()
+
+plot_table(conMatrix1[["table"]],'Reference','Prediction',normalize=T)+
+  theme_bw()
+```
+
+抛开准确率问题不谈，这里有另一个问题，为了避免不必要的损失，大部分人更希望过滤系统尽可能不要把有用的信息删掉。也就是说：
+
+>宁可放过一千也不要错杀一个。
+
+所以，对于这个任务来说，算法的精确率越高越好，召回率(或者说查全率)越低越好。根据混淆矩阵，SVM的召回率为`r round(conMatrix[["byClass"]][["Recall"]],2)`，朴素贝叶斯的召回率为`r round(conMatrix1[["byClass"]][["Recall"]],2)`。SVM的精确率为`r round(conMatrix[["byClass"]][["Precision"]],2)`，朴素贝叶斯的精确率为`r round(conMatrix1[["byClass"]][["Precision"]],2)`。从混淆矩阵中我们也能看出，朴素贝叶斯算法将更多普通短信归类于垃圾短信了。因此SVM显然是更佳的模型。
+
+# 应用
+
+下面我们用自己输入的短信文本放入朴素贝叶斯模型进行评价。同样，我们编写一个函数，输入短信字符串，输出判别结果。
+
+
+```{r}
+new <- 'please go home at 4 o clock bro' 
+
+new2 <- 'We are trying to contact you.Please call our customer service representative on FREEPHONE.Claim code S89. Valid 12hrs only'
+
+test_result <- function(model,string){
+  ms_corpus <- VCorpus(VectorSource(string))
+test_dtm <- DocumentTermMatrix(ms_corpus, control =
+                                 list(tolower = T,
+                                      removeNumbers = T,
+                                      stopwords = T,
+                                      removePunctuation = T,
+                                      stemming = T))
+test_dtmx <- as.matrix(test_dtm)
+result <- predict(model,test_dtmx)
+return(result)
+}
+
+test_result(nb,new)
+test_result(nb,new2)
+```
+
 
 
 ```{r,eval=F,include=F}
@@ -99,7 +240,6 @@ smswd <- smswd %>%
   anti_join(stop_words) %>%
   mutate(word = SnowballC::wordStem(word))
 tail(smswd)
-
 
 ```
 
