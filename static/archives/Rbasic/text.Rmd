@@ -1,11 +1,11 @@
 ---
-title: 'Text Mining'
-author: 'Malcolm'
-date: '2019-10-30'
+title: 'Rap Lyrics Text Ming'
+author: "[Xiao Song](https://xsong.ltd/zh/)"
+date: '`r Sys.Date()`'
 output:
   bookdown::html_document2:
     toc: true
-    theme: readable
+    theme: united
 ---
 
 ```{r,include=F}
@@ -334,6 +334,8 @@ book_words %>%
   labs(x = NULL, y = "tf-idf") +
   facet_wrap(~rapper, ncol = 3, scales = "free") +
   coord_flip()
+
+
 ```
 
 

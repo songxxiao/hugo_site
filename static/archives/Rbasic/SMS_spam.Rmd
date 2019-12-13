@@ -59,11 +59,13 @@ Y <- as.factor(smswd$tag)
 
 
 ```{r}
+smswd$message <- lapply(smswd$message , iconv, "UTF-8", "ASCII", sub="")
+
 smsvis <- smswd %>%
   unnest_tokens(word,message) %>%
   filter(!str_detect(word, "^[0-9]*$")) %>%
   anti_join(stop_words) %>% 
-  mutate(word = SnowballC::wordStem(word))
+  mutate(word = SnowballC::wordStem(word,language = "english"))
 head(smsvis)
 
 library(reshape2)
@@ -140,7 +142,13 @@ conMatrix <- confusionMatrix(pred,Y,
 conMatrix[["table"]]
 
 
-nb <- naiveBayes(smsmat, Y)
+nb <- naiveBayes(smsmat, Y) # klaR包也能够实现NaiveBayes.
+
+#setwd('F:/Mysite/Mysite/static/archives/Rbasic')
+#saveRDS(nb, "naiveBayes.rds")
+#save(nb,"naiveBayes.RData")
+##下次需要使用时
+#load("naiveBayes.RData")
 #print(nb)
 #summary(nb)
 pred1 <- predict(nb,smsmat)
@@ -222,34 +230,32 @@ result <- predict(model,test_dtmx)
 return(result)
 }
 
+
+
 test_result(nb,new)
 test_result(nb,new2)
 ```
 
+经过检验，支持向量机不能支持新数据的预测。如果新的测试集的变量超出了训练集的变量，就无法运行。而朴素贝叶斯可以(我没弄清楚为什么)，所以我们可以使用训练好的模型任意输入新的短信文本进行判断。
 
+另外，为了更好地分享短信过滤程序，我将训练好的朴素贝叶斯模型保存下来并编写成Shiny App。使得用户输入任意短信文本就能在用户友好的图形界面的得到判定结果。用户可以点击[这里](https://github.com/ECSTA7Y/txtnb)查看Shiny App的源代码。你也可以在本地的R中输入以下代码下载并运行这个程序：
 
-```{r,eval=F,include=F}
-library(stringr)
-smswd
-smswd <- smswd %>% 
-  filter(!str_detect(message, "^[0-9]*$")) 
-smswd
-
-smswd <- smswd %>% 
-  unnest_tokens(word,message,drop=F) %>%                  
-  anti_join(stop_words) %>%
-  mutate(word = SnowballC::wordStem(word))
-tail(smswd)
+```r
+library(shiny)
+runGitHub( "txtnb", "ECSTA7Y")
 
 ```
 
 
-```{r,eval=F,include=F}
-library(tm)
-#smswddm <- smswd %>% 
-#   count(ID,word) %>% 
-#   cast_dtm(ID,word,n)
 
+
+
+
+
+
+
+
+```{r,eval=F,include=F}
 smswddm
 
 inspect(smswddm)
@@ -265,19 +271,12 @@ library(e1071)
 model <- svm(smswddm, Y)
 print(model)
 summary(model)
-
-```
-
-```{r,eval=F,include=F}
 library(tm)
 library(Matrix)
 smswddm <- smswd %>% 
    count(ID,word) %>% 
    cast_sparse(ID,word,n)
-```
 
-
-```{r,eval=F,include=F}
 docvars(sms.corpus, "Category") <- data$Category
 
 spam.plot <- corpus_subset(sms.corpus, docvar1 == "spam")  

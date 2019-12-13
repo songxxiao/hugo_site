@@ -1,0 +1,171 @@
+---
+title: 'Rap Lyrics Text Mining'
+author: "[Xiao Song](https://xsong.ltd/en/)"
+date: '`r Sys.Date()`'
+output:
+  bookdown::html_document2:
+    toc: true
+    theme: united
+---
+
+[A Kaggle Version](https://www.kaggle.com/rikdifos/rap-lyrics-text-ming)
+
+[A website Version](https://www.kaggle.com/rikdifos/rap-lyrics-text-ming)
+
+```{r, include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
+```
+
+
+
+As a rap listener and a data analyst, I'm willing to combine my hobbies. Until I found suitable data, I could achieve it. 
+
+I found a github [repo](https://github.com/fpaupier/RapLyrics-Scraper) contains famous rappers' lyrics, shout out to the author. I know and listened 90% of them. They are all widely accepted greatest rappers. Notice that those lyrics mostly are relatively old rappers, and you could go to figure \@ref(fig:list) to check full rappers list. 
+
+I use R because it could easily do nice data visualization. However, Python has better features for Machine Learning. Since our dataset has no label for Classification. This dataset will be only used to do some basic analysis and text metrics.
+
+
+
+```{r}
+`%>%` <- magrittr::`%>%`
+library(readr)
+library(ggplot2)
+library(dplyr)
+library(purrr)
+library(stringr)
+library(tidytext)
+library(dplyr)
+```
+
+```{r}
+rap <- read_csv("D:/RapLyrics/lyrics_US/rap_all.csv")
+```
+
+
+```{r}
+# remove non-english
+rap$text <- lapply(rap$text, iconv, "UTF-8", "ASCII", sub="")
+
+rap1 <- rap %>%
+  unnest_tokens(word,text) %>% 
+  anti_join(stop_words) %>% 
+  mutate(word = SnowballC::wordStem(word)) %>% 
+  filter(!str_detect(word, "^[0-9]*$")) %>%
+  filter(str_detect(word, "^[a-z]+$")) # match only english alphabet
+
+wdf <- rap1 %>%
+  group_by(rapper) %>% 
+  count(word, sort = T) %>% 
+  mutate(word = reorder(word, n),
+         word=as.character(word)) %>% 
+  filter(word!='na') 
+wdf
+```
+
+
+
+```{r,fig.cap='Word Cloud'}
+library(wordcloud)
+rap1 %>%
+  count(word) %>%
+  filter(word!='na',word!='00a0') %>% 
+  with(wordcloud(word, n, max.words = 100))
+```
+
+Wow! Rappers really love N-words and F-words. Don't feel shocked, If you go deeper, this is very common in rap songs.
+
+Furthermore, We could analysis sentiment of those words. I plot them into different colors. Although these lyrics contians a lot of negative words, rappers still want to show love & peace to the world.
+
+```{r,fig.cap='Word Cloud by sentiment'}
+library(reshape2)
+
+rap1 %>%
+  inner_join(get_sentiments("bing")) %>% # use bing sentiment lexicon
+  count(word, sentiment, sort = T) %>%
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = c("blue", "red"),max.words = 100)
+```
+
+Now we test Zipf's Law, which indicates that a terms' frequencies are inversely proportional to their ranks. E.g., If rappers love to use *Nxgga* mostly, the term frequency of secondly used word  *Fxxk* will be half of  *Nxgga*. 
+
+
+Now we plot it and use eye-ball test. Every color means a rapper's words of lyrics. Figure \@ref(fig:zipf) shows a log-log scale of the two variables, while Figure \@ref(fig:zipff) shows origin relation between TF and rank.
+
+
+```{r zipf,fig.cap='Test Zipf\'s Law: log-log scale.',fig.asp=0.9}
+total_words <- wdf %>% 
+  group_by(rapper) %>% 
+  summarize(total = sum(n))
+
+new_words <- left_join(wdf, total_words)
+
+song_words <- new_words %>% 
+  group_by(rapper) %>% 
+  mutate(rank = row_number(), 
+         `term frequency` = n/total)
+
+song_words %>% 
+  ggplot(aes(log10(rank), log10(`term frequency`),
+             col = rapper)) + 
+  geom_line(size = 1.1, alpha = 0.8,
+            show.legend = F) 
+```
+
+```{r zipff,fig.cap='Test Zipf\'s Law: original scale.',fig.asp=0.9}
+song_words %>% 
+  ggplot(aes(rank, `term frequency`,
+             col = rapper)) + 
+  geom_line(size = 1.1, alpha = 0.8, 
+            show.legend = F) +
+  xlim(0, 500) +
+  ylim(0, 0.01)
+```
+
+In order to discern every rapper's difference, I will calculate every word's tf-idf value, which represents the importance of specific word for a rapper. E.g., *Yeezy* for Kanye West; *Slim Shady* for Eminem. Attention that featuring songs (Working with other rappers) might bring some noise to this dataset. For instance, *Runaway* is a Kanye West's song features Push-T, who contributes a verse to the song. Nevertheless, this song belongs to Kanye completely in the dataset.
+
+Now see the result:
+
+```{r list,fig.asp=4,fig.cap='Tf-Idf value and Top words for every rapper'}
+totalword <- wdf %>% 
+  group_by(rapper) %>% 
+  summarize(total = sum(n))
+
+book_words <- left_join(wdf, totalword)
+totalword
+
+book_words <- book_words %>%
+  bind_tf_idf(word,rapper, n)
+
+book_words
+book_words %>%
+  mutate(word = factor(word,
+                       levels = rev(unique(word)))) %>% 
+  group_by(rapper) %>% 
+  top_n(15) %>% 
+  ungroup() %>%
+  ggplot(aes(reorder(word,tf_idf), 
+             tf_idf, fill = rapper)) +
+  geom_col(show.legend = F) +
+  labs(x = NULL, y = "tf-idf") +
+  facet_wrap(~rapper, ncol = 3, scales = "free") +
+  coord_flip()
+```
+
+Famous rappers always have their own slang, like . Like Lil Wayne also known as *Weezy* or *Carter*. Similarly, The Notorious B.I.G call himself *Biggie Smalls*, or *Big Poppa*. It could be seen from figure \@ref(fig:list)
+
+> I love it when you call me big poppa
+
+
+
+R.I.P Biggie!
+
+
+
+We could see that some vocabularies are ended by *i*, for example, *reply* will be converted to *repli* by `SnowballC::wordStem`.
+
+```{r}
+SnowballC::wordStem('reply',language = "eng")
+```
+
+I don't know why it appears that, could someone explain it?
+

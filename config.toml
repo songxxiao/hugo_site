@@ -9,6 +9,8 @@ defaultContentLanguageInSubdir = true
   title = "Xiao Song"
   googleAnalytics = "UA-144652310-1"
   disqusShortname = "Xiao Song"
+    # path to the favicon, under "static"
+  favicon = "favicon.ico"
 
 
 [languages.zh]

@@ -1,0 +1,32 @@
+---
+title: "data.table"
+author: "Malcolm"
+date: "2019/12/10"
+output: html_document
+---
+```{r,include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width='90%')
+```
+
+```{r}
+library(data.table)
+library(tidyr)
+mtcars
+dtcars <- as.data.table(mtcars)
+dtcars
+
+# 选择行
+dtcars <- dtcars[hp > 90 & cyl <= 4]
+head(dtcars)
+
+# 排序
+dtcars <- dtcars[order(disp)]
+head(dtcars)
+
+#选择列
+dtcars <- dtcars[, .(wt,qsec)]
+head(dtcars)
+
+
+```
+

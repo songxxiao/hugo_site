@@ -291,7 +291,8 @@ class: center, middle
 
 ---
 
-
+class: center, middle, inverse
+### Progress bar for 2018：▓▓▓▓▓▓▓▓▓▓▓▓▓▓░     97%
 
 
 

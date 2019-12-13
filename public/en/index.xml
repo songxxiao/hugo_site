@@ -6,10 +6,22 @@
     <description>Recent content in   on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rap Lyrics Text Mining</title>
+      <link>/en/rap-lyrics-text-mining/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/en/rap-lyrics-text-mining/</guid>
+      <description>A Kaggle Version
+A website Version
+As a rap listener and a data analyst, I’m willing to combine my hobbies. Until I found suitable data, I could achieve it.
+I found a github repo contains famous rappers’ lyrics, shout out to the author. I know and listened 90% of them. They are all widely accepted greatest rappers. Notice that those lyrics mostly are relatively old rappers, and you could go to figure 5 to check full rappers list.</description>
+    </item>
     
     <item>
       <title>Python Geographic Data Visualization</title>
