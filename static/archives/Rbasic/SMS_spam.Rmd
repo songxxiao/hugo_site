@@ -1,5 +1,5 @@
 ---
-title: SMS spam text classification
+title: 垃圾短信过滤程序
 author:  
 date: 2019/12/1
 output:
@@ -15,6 +15,8 @@ knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='cent
 ```
 
 # 首先...
+
+
 
 使用`read_csv`读取数据后无需使用`tibble`函数转化。`read_csv`能够直接得到`tibble`对象。不然会报错。
 

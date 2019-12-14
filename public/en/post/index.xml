@@ -6,7 +6,7 @@
     <description>Recent content in Posts on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 14 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Rap Lyrics Text Mining</title>
       <link>/en/rap-lyrics-text-mining/</link>
-      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 14 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>/en/rap-lyrics-text-mining/</guid>
       <description>A Kaggle Version
@@ -24,12 +24,12 @@ I found a github repo contains famous rappers’ lyrics, shout out to the author
     </item>
     
     <item>
-      <title>Python Geographic Data Visualization</title>
-      <link>/en/pygeo/</link>
+      <title>Geographic Data Visualization Methods</title>
+      <link>/en/geomd/</link>
       <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>/en/pygeo/</guid>
-      <description>A very simple example to show how to plot a scatter map using Python geopandas library. The data is from this link. Attention that some columns’ names are Chinese characters. I give methods to change those names below.
+      <guid>/en/geomd/</guid>
+      <description>Python MapsA very simple example to show how to plot a scatter map using Python geopandas library. The data is from this link. Attention that some columns’ names are Chinese characters. I give methods to change those names below.
 import osimport pandas as pd import numpy as npimport seaborn as snsimport matplotlib.pyplot as pltimport geopandas as gpsns.set_style(&amp;quot;whitegrid&amp;quot;)%matplotlib inline%config InlineBackend.figure_format = &amp;#39;svg&amp;#39;world = gp.</description>
     </item>
     
