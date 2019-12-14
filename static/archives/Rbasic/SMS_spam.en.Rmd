@@ -14,15 +14,20 @@ output:
 knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
 ```
 
-# 首先...
+# Intro
 
-使用`read_csv`读取数据后无需使用`tibble`函数转化。`read_csv`能够直接得到`tibble`对象。不然会报错。
+Spam messages are really troublesome, thus people invent  algorithms to block them. Naive Bayes is a basic model for text classification. I will use that to build a text message filter system. Finaly I will integrate it into [a Shiny App](https://github.com/ECSTA7Y/txtnb_en). 
 
-R在构建文档-词语矩阵的有许多实现方式。下面使用了`tm::DocumentTermMatrix`函数实现。在此之前，我尝试了`quanteda::dfm_weight`函数，但是在我的本地R软件中总是报错（在Kaggle上的R Notebook能够运行）。另一个可能的路径是使用`tidytext::unnest_tokens`等函数进行去除停止词、去除数字和标点符号、提取词干等一系列操作；再通过`tidytext::cast_dtm`转化成`DocumentTermMatrix`对象。但这么做会导致因变量和特征矩阵行数不一致的问题。由于我无法解决它，我采用了下面的方案。当然使用Python是非常好的选择，我在[这里](https://www.kaggle.com/rikdifos/sms-text-classification)给出了基于Python的做法。相比R，Python的可视化能力略显不足。
+Now I will use R `tidytext` to do some basic visualization and analysis, use `tm` package to build Document-Term-Matrix (DTM), thus algorithms will understand information in text data.
 
-我认为`tidytext`十分适合对文本信息进行探索和可视化，而`tm`则适合构建矩阵进行建模。如果将二者混用则可能导致问题。
+After doing my analysis, I 'd like to share some experience.
+First, after using `read_csv` to import data, you should not use  `tibble` to convert, because `read_csv` could directly get `tibble`. Otherwise you will receive ERROR.
 
-# 上代码
+There are lot of ways to generate DTM in R. Before deciding use `tm::DocumentTermMatrix`, I tried `quanteda::dfm_weight`. However, it always returns ERROR. Also, I tried to use `tidytext` to remove stop word, numbers, and then use `tidytext::cast_dtm` to convert `DocumentTermMatrix` object. It will cause problems because my class tag variable is inconsistent with my DTM. I could not solve, thus my method remains. I recommend not to mix `tidytext` and `tm` frame work, or your problem will be complex.
+
+I also use Python did [a similar analysis](https://www.kaggle.com/rikdifos/sms-text-classification). 
+
+# How to do ?
 
 ```{r}
 library(magrittr)
@@ -39,7 +44,7 @@ library(stringr)
 sms <- read_csv("E:/MaLearning/SPAM text message 20170820 - Data.csv")
 ```
 
-原数据共两列，其中一列记录了是否为垃圾短信的标签。另一列是短信文本内容。其中，非垃圾邮件的比例约为`r  round(prop.table(table(sms$Category))[1],2)`，垃圾邮件的比例为`r  round(prop.table(table(sms$Category))[2],2)`。
+There are two columns in original data, the first is tag record(ham or spam), another is text content. The proportion of ham messages is about`r  round(prop.table(table(sms$Category))[1],2)`, The proportion of spam messages is about`r  round(prop.table(table(sms$Category))[2],2)`.
 
 ```{r}
 sms %>% count(Category)
@@ -47,7 +52,7 @@ sms %>% count(Category)
 ```
 
 
-数据概览如下：
+Our data looks like:
 
 ```{r}
 smswd <- sms %>%
@@ -59,7 +64,7 @@ Y <- as.factor(smswd$tag)
 
 
 ```{r}
-smswd$message <- lapply(smswd$message , iconv, "UTF-8", "ASCII", sub="")
+smswd$message <- lapply(smswd$message , iconv, "UTF-8", "ASCII", sub="") # remove other language
 
 smsvis <- smswd %>%
   unnest_tokens(word,message) %>%
@@ -122,11 +127,12 @@ smsmat <- as.matrix(sms_dtm1)
 dim(smsmat)
 ```
 
-原本的文档-词语频率矩阵有`r dim(sms_dtm)[2]`个特征，维度过高且过于稀疏。经过`removeSparseTerms`函数处理后保留了`r dim(smsmat)[2]`个特征。
+Original DTM has `r dim(sms_dtm)[2]` features, which is High-dimensional and very sparse. I use `removeSparseTerms` to keep `r dim(smsmat)[2]` features.
 
-# 算法
+# Algorithms
 
-朴素贝叶斯常常被用作文本分类的基线模型。因为文本数据满足每个单词相互独立。而且，一个单词的位置不依赖于另一个单词。也就是说，用于建模的文档-词语频率矩阵(DTM)各列独立，这满足了朴素贝叶斯的独立性假设。此外，为了提高准确率，我还进一步使用了支持向量机方法。
+Navies Bayes is used as basic method for text classification. Since every word in text data is independent. That is to say, one word 's location is not depend on another word, which satisfy Navies Bayes hypothesis of independence. Besides, I used Support Vector Machine method.
+
 
 ```{r}
 library(caret)
@@ -142,12 +148,12 @@ conMatrix <- confusionMatrix(pred,Y,
 conMatrix[["table"]]
 
 
-nb <- naiveBayes(smsmat, Y) # klaR包也能够实现NaiveBayes.
+nb <- naiveBayes(smsmat, Y) # klaR could also do NaiveBayes.
 
 #setwd('F:/Mysite/Mysite/static/archives/Rbasic')
 #saveRDS(nb, "naiveBayes.rds")
 #save(nb,"naiveBayes.RData")
-##下次需要使用时
+## save model
 #load("naiveBayes.RData")
 #print(nb)
 #summary(nb)
@@ -156,17 +162,17 @@ pred1 <- predict(nb,smsmat)
 conMatrix1 <- confusionMatrix(pred1,Y,
                               positive ='spam',
                               mode="prec_recall") 
-#混淆矩阵
+#confusionMatrix
 conMatrix1[["table"]]
 
 prop.table(conMatrix1[["table"]],1)
 ```
 
-支持向量机算法的准确率为`r round(conMatrix[["overall"]][["Accuracy"]],2)`，平衡准确率为`r round(conMatrix[["byClass"]][["Balanced Accuracy"]],2)`。
+SVM's accuracy is `r round(conMatrix[["overall"]][["Accuracy"]],2)`, balanced  accuracy is `r round(conMatrix[["byClass"]][["Balanced Accuracy"]],2)`。
 
-朴素贝叶斯算法的准确率为`r round(conMatrix1[["overall"]][["Accuracy"]],2)`，平衡准确率为`r round(conMatrix1[["byClass"]][["Balanced Accuracy"]],2)`。
+Naive Bayes 's accuracy is `r round(conMatrix1[["overall"]][["Accuracy"]],2)`, balanced  accuracy is `r round(conMatrix1[["byClass"]][["Balanced Accuracy"]],2)` .
 
-编写一个对混淆矩阵进行可视化的函数：
+Now I write a function to plot confusion matrix using `ggplot2`:
 
 ```{r,fig.asp=0.8}
 plot_table <- function(x,xlab='Predicted label',
@@ -203,11 +209,11 @@ plot_table(conMatrix1[["table"]],'Reference','Prediction',normalize=T)+
 
 抛开准确率问题不谈，这里有另一个问题，为了避免不必要的损失，大部分人更希望过滤系统尽可能不要把有用的信息删掉。也就是说：
 
->宁可放过一千也不要错杀一个。
+> Better to let go of a thousand than kill one by mistake.
 
 所以，对于这个任务来说，算法的精确率越高越好，召回率(或者说查全率)越低越好。根据混淆矩阵，SVM的召回率为`r round(conMatrix[["byClass"]][["Recall"]],2)`，朴素贝叶斯的召回率为`r round(conMatrix1[["byClass"]][["Recall"]],2)`。SVM的精确率为`r round(conMatrix[["byClass"]][["Precision"]],2)`，朴素贝叶斯的精确率为`r round(conMatrix1[["byClass"]][["Precision"]],2)`。从混淆矩阵中我们也能看出，朴素贝叶斯算法将更多普通短信归类于垃圾短信了。因此SVM显然是更佳的模型。
 
-# 应用
+# Application
 
 下面我们用自己输入的短信文本放入朴素贝叶斯模型进行评价。同样，我们编写一个函数，输入短信字符串，输出判别结果。
 
@@ -242,8 +248,7 @@ test_result(nb,new2)
 
 ```r
 library(shiny)
-runGitHub( "txtnb", "ECSTA7Y")
-
+runGitHub( "txtnb_en", "ECSTA7Y")
 ```
 
 

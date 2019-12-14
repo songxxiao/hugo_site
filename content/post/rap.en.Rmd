@@ -38,6 +38,7 @@ library(dplyr)
 ```
 
 ```{r}
+#../input/rap-lyrics-from-36-rappers/rap_all.csv
 rap <- read_csv("D:/RapLyrics/lyrics_US/rap_all.csv")
 ```
 

@@ -86,7 +86,8 @@ library(purrr)
 library(stringr)
 library(tidytext)
 library(dplyr)</code></pre>
-<pre class="r"><code>rap &lt;- read_csv(&quot;D:/RapLyrics/lyrics_US/rap_all.csv&quot;)</code></pre>
+<pre class="r"><code>#../input/rap-lyrics-from-36-rappers/rap_all.csv
+rap &lt;- read_csv(&quot;D:/RapLyrics/lyrics_US/rap_all.csv&quot;)</code></pre>
 <pre class="r"><code># remove non-english
 rap$text &lt;- lapply(rap$text, iconv, &quot;UTF-8&quot;, &quot;ASCII&quot;, sub=&quot;&quot;)
 
