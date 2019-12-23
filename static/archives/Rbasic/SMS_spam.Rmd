@@ -119,9 +119,61 @@ sms_dtm <- DocumentTermMatrix(ms_corpus, control =
 dim(sms_dtm) #5572
 
 sms_dtm1 <- removeSparseTerms(sms_dtm, sparse = .98)
-smsmat <- as.matrix(sms_dtm1)
+smsmat <- as.matrix(sms_dtm1) # 训练数据集
 #head(smsmat)
 dim(smsmat)
+colnames(smsmat)
+
+for (i in colnames(smsmat)){
+  print(i)
+}
+
+#对于新数据集。判断DTM的每一列是否在训练集中出现。出现保留，没出现剔除，补充空列。
+
+test_dtmx <- function(string){ # 得到新数据的DTM
+test_dtm = VCorpus(VectorSource(string)) %>% 
+  DocumentTermMatrix(., control = list(tolower = T,
+                                      removeNumbers = T,
+                                      stopwords = T,
+                                      removePunctuation = T,
+                                      stemming = T)) %>% 
+  as.matrix()
+return(test_dtm)
+}
+
+new = 'We are trying to contact you.Please call our customer service representative on FREEPHONE.Claim code S89. Valid 12hrs only' 
+newdt = convert_dtm(new)
+newdt
+colnames(newdt)
+colnames(smsmat)
+
+for (i in colnames(newdt)){
+  if(i %in% colnames(smsmat)){
+    print(i)
+  }
+}
+
+new = smsmat[3,]
+new = as.data.frame(new)
+new = t(new)
+new[1,] = 0
+#new[1,]
+decide_in = function(x){
+  if(x %in% colnames(new)){
+    new = mutate(new,x=1) 
+  }
+}
+
+colnames(new) %in% colnames(newdt)
+
+decide_in('call')
+
+sapply(colnames(newdt),decide_in)
+
+sapply(s,print)
+
+s = as.data.frame(s)
+class(s)
 ```
 
 原本的文档-词语频率矩阵有`r dim(sms_dtm)[2]`个特征，维度过高且过于稀疏。经过`removeSparseTerms`函数处理后保留了`r dim(smsmat)[2]`个特征。
@@ -211,8 +263,7 @@ plot_table(conMatrix1[["table"]],'Reference','Prediction',normalize=T)+
 
 # 应用
 
-下面我们用自己输入的短信文本放入朴素贝叶斯模型进行评价。同样，我们编写一个函数，输入短信字符串，输出判别结果。
-
+下面我们用自己输入的短信文本放入朴素贝叶斯模型进行评价。同样，我们编写一个函数，输入短信字符串，输出判别结果：
 
 ```{r}
 new <- 'please go home at 4 o clock bro' 
@@ -232,10 +283,22 @@ result <- predict(model,test_dtmx)
 return(result)
 }
 
-
+test_dtmx <- function(string){ # 得到新数据的DTM
+test_dtm = VCorpus(VectorSource(string)) %>% 
+  DocumentTermMatrix(., control = list(tolower = T,
+                                      removeNumbers = T,
+                                      stopwords = T,
+                                      removePunctuation = T,
+                                      stemming = T)) %>% 
+  as.matrix()
+return(test_dtm)
+}
 
 test_result(nb,new)
 test_result(nb,new2)
+new <- 'please go home at 4 o clock bro' 
+newdt = convert_dtm(new)
+newdt
 ```
 
 经过检验，支持向量机不能支持新数据的预测。如果新的测试集的变量超出了训练集的变量，就无法运行。而朴素贝叶斯可以(我没弄清楚为什么)，所以我们可以使用训练好的模型任意输入新的短信文本进行判断。
@@ -245,7 +308,6 @@ test_result(nb,new2)
 ```r
 library(shiny)
 runGitHub( "txtnb", "ECSTA7Y")
-
 ```
 
 

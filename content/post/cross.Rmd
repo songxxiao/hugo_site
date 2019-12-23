@@ -2,8 +2,7 @@
 title: '交叉验证：基于caret包'
 author: ' '
 date: '2019-05-25'
-slug: cross
-tags: ['机器学习']
+slug: cross 
 output:
   bookdown::html_document2:
     toc: true
