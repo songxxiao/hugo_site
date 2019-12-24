@@ -24,7 +24,9 @@ I found a github [repo](https://github.com/fpaupier/RapLyrics-Scraper) contains 
 
 I use R because it could easily do nice data visualization. However, Python has better features for Machine Learning. Since our dataset has no label for Classification. This dataset will be only used to do some basic analysis and text metrics.
 
-
+```{r, echo=F,out.width ='70%'}
+knitr::include_graphics('https://i.loli.net/2019/12/24/LewKQVYmCWlqox3.gif')
+```
 
 ```{r}
 `%>%` <- magrittr::`%>%`
@@ -39,7 +41,7 @@ library(dplyr)
 
 ```{r}
 #../input/rap-lyrics-from-36-rappers/rap_all.csv
-rap <- read_csv("D:/RapLyrics/lyrics_US/rap_all.csv")
+rap <- read_csv("E:/RapLyrics/lyrics_US/rap_all.csv")
 ```
 
 

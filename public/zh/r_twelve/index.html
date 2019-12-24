@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <base target="_blank">
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.5" />
+
+
+<title>第十二届中国R语言大会 - Xiao Song</title>
+<meta property="og:title" content="第十二届中国R语言大会 - Xiao Song">
+
+
+  <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="fixed-top">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../" class="nav-logo">
+    <img src="../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../">Home</a></li>
+    
+    <li><a href="../../zh/zhresume/">Vitae</a></li>
+    
+    <li><a href="../../en">English</a></li>
+    
+  </ul>
+</nav>
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+
+    <h1 class="article-title">第十二届中国R语言大会</h1>
+
+    
+    <span class="article-date">0001-01-01</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>咳咳，先说点题外话。这个公号搁置很久了。不是因为懒，而是因为微信公众系统之烦。我写个文章需要各种排版。尤其是有代码、图片的文章，极其繁琐复杂。所以有些做好的分析就直接Post在个人网站上了。当然坏处就是阅读量少。不过我相信真正愿意重复我代码的同学是一定会访问我网站的。不然也没有读应用文章的需求。现在我更喜欢分享Notebook的一个平台是Kaggle。代码写好后，直接放在Docker云容器上跑，算力顶呱呱。</p>
+<p><a href="https://mp.weixin.qq.com/s/rQk5l1uChY56Hn1c7KW7Xw" class="uri">https://mp.weixin.qq.com/s/rQk5l1uChY56Hn1c7KW7Xw</a></p>
+<p>言归正传。</p>
+<p>2019年12月21日。我来华东师范大学参加了第十二届中国R会议。R会议一年一次。北京上海广州都有。某大佬曰过：</p>
+<blockquote>
+<p>没有记录下来的事情就没有发生</p>
+</blockquote>
+<p>本着这种精神，也因为信息接收过多，我决定写篇小文总结一下。</p>
+<p>因为会议是9点开始。因此我7点多起床，吃饭然后提前到。直奔中北校区科学会堂。整个大会非常朴素，处处体现出民间论坛的“草根”性质。</p>
+<p>首先是华东师范大学统计系汤银才教授简单介绍了华师大统计系。他的讲座讨论了统计学习与机器学习的关系。实际上，人们通常并不区分这两个术语的细微差异。但传统统计与机器学习的争论由来已久。这点在Leo Breiman 《Two Cultures》有所体现。总之，这两个领域总是在用不同的术语讨论相同的东西。如“变量”与“特征”。而Logistic模型也不过是神经元模型非常相似。只不过一个说“连接函数”，一个说激活函数等等。剩下的都是老生常谈啦。</p>
+<p>第二位讲者是来自香港中文大学的成生辉。他分享了他所在研究院的一款BI产品。具体就是输入数据进行无代码可视化的交互界面。这个我可能用不到。</p>
+<p>第三位比较印象深刻。是饿了么的李哲。他带来了一个有趣的工业应用案例：使用知识图谱优化餐饮产品的构建。这位大佬令我印象最深刻的是他讲清楚了知识图谱的概念。知识图谱比深度学习的模式识别更为高级的AI应用。它能够回答诸如“饿了么的公司名称叫什么？”、“阿里投资了哪些公司？”这种需要人类经验积累的问题。</p>
+<p>下一位是来自云筏科技。这个公司类似R Studio，是为广大的R个体用户提供服务的商业公司。同时。</p>
+<p>后面是统计之都李舰的演讲。之前我读过舰哥的一本R语言教程和他的《统计之美》。这回总算见到真人了。舰哥的演讲介绍了一个国产的操作系统。以及基于它之上的数据科学平台。</p>
+<p>下一个是中科院的刘心广博士。他介绍了人工智能在工业中的应用。类似于R对机器焊点的实时监测和分析。其他内容太专业了听不懂。</p>
+<p>后面的讲座比较有趣。讲的是我比较感兴趣的NLP。讲者李翛然分享了他所在公司对吉林大学第一医院的病历数据进行分析的业务，以及相关的经验。这个数据库号称全中国(也许是全球)最大的肺癌结构化知识数据库。作为商业公司，最重要的是一开始和甲方确定工程的标准，如正确率多少以上。下一步便是具体实施了。实际业务场景的数据不同于竞赛、示例数据。数据的预处理是非常令人头疼的问题。李翛然说数据的读取阶段就遇到了困难(xml文件无法解析)。而后，基本的分词也很令人头疼。原因是医学语料库与通常的分词工具(如Jieba)的不兼容。于是需要自己整理词典。其中提到了一个<a href="https://github.com/Wall-ee/chinese2digits">中文数字提取工具</a>挺好玩的。</p>
+<p>来自美团点评的朱俊辉分享了基于Tidyverse包的应用。其中主要是进行风控工作。如观测被破坏的共享单车的运动轨迹等。这里面涉及了很多Spark和Hadoop等大数据架构的技术。他推荐了 <em>Mastering Spark with R</em> 一书。</p>
+<p>e成科技的刘洋分享了基于招聘App的AI技术。招聘软件需要能够实现对用户上传的各种奇怪格式的简历文件进行识别和分析。如命名实体识别等等。客观评判一个求职者的能力和技能点。这样就可以进行人岗匹配等工作。他提到了不同的业务场景对算法准确性的要求不同。如抖音短视频推荐可以推错。但职位匹配可能就事关重大。这一点我深为赞同。</p>
+<p>下一个演讲者是华师大博士周世荣。他分享的是较为传统的可靠性统计。比如分析华为手机的电池寿命问题(这不就是生存分析嘛！我感觉我也能做)。重要的是要将整个分析过程产品化，这就需要Shiny App了。好好学Shiny App吧！</p>
+<p>来自微软中国的赵明杰介绍了微软研发的一款产品: Azure。它也是一款对各种格式文档内容进行分析的软件。这个软件的使用说明、软件下载、示例都在网上可以找到。因此不详细介绍了。</p>
+<p>第一天的会议到此结束。</p>
+<hr />
+<p>总之，听完这一系列报告，我愈发感觉到自己决定从社科转到DS是正确的选择。毕竟，社科的领域更为传统、保守，离工业界更远。同时，关于Shiny App、Docker、Spark、Linux等知识是很好的触发点。未来应该补全自己在这些方面的空白。当然重中之重是学好NLP技术。</p>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://xiao-song.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+ 
+
+
+
+</main>
+
+  <center>
+   <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
+  </center>
+
+<footer class="footer">
+        <ul class="footer-links">
+            <a href="https://github.com/ECSTA7Y" class="footer-links-kudos"> <img src="../../images/git.svg" alt=" " width="15" height="15"></a>
+            <a href="https://www.linkedin.com/in/xiao-song-a1ab5318b/" class="footer-links-kudos"> <img src="../../images/linkedin.svg" alt=" " width="15" height="15"></a>
+            <a href="https://www.kaggle.com/rikdifos" class="footer-links-kudos"> <img src="../../images/kaggle.png" alt=" " width="15.2" height="14.5"></a>
+            <a href="../../archives/subscribe" class="footer-links-kudos"> <img src="../../images/rss.svg" alt=" " width="14.5" height="15"></a>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-144652310-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+</html>

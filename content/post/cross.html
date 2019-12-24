@@ -2,8 +2,7 @@
 title: '交叉验证：基于caret包'
 author: ' '
 date: '2019-05-25'
-slug: cross
-tags: ['机器学习']
+slug: cross 
 output:
   bookdown::html_document2:
     toc: true
@@ -86,13 +85,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 454, 455, 455, 457, 455, 455, ... 
+Summary of sample sizes: 454, 455, 455, 456, 455, 455, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  6.080659  0.5713037  4.464616
-  0.17117244  6.574715  0.4930976  4.888008
-  0.45274420  8.553470  0.2819024  6.155561
+  0.07165784  5.588616  0.6269803  4.070556
+  0.17117244  6.469882  0.4916301  4.754804
+  0.45274420  8.007824  0.3468167  5.776638
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -111,13 +110,13 @@ rpartFit</code></pre>
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 455, 456, 456, 455, 456, 456, ... 
+Summary of sample sizes: 455, 456, 457, 455, 455, 454, ... 
 Resampling results across tuning parameters:
 
   cp          RMSE      Rsquared   MAE     
-  0.07165784  5.735743  0.6105229  4.121806
-  0.17117244  6.705300  0.4671661  4.976147
-  0.45274420  8.400437  0.3153622  6.100661
+  0.07165784  5.734821  0.6148287  4.190676
+  0.17117244  6.542388  0.4901976  4.895224
+  0.45274420  8.341693  0.3282671  6.053019
 
 RMSE was used to select the optimal model using the smallest value.
 The final value used for the model was cp = 0.07165784.</code></pre>
@@ -181,11 +180,11 @@ rm       0.4527
 indus    0.2595
 crim     0.2484
 age      0.2089
-tax      0.0000
 b        0.0000
 rad      0.0000
-dis      0.0000
+tax      0.0000
 chas1    0.0000
+dis      0.0000
 zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
@@ -227,40 +226,36 @@ zn       0.0000</code></pre>
 </ul>
 </blockquote>
 <p><a href="https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/">代码参考</a></p>
-<pre class="r"><code>pokemon &lt;- read_csv(&quot;E:/R_codes/others/Pokemon.csv&quot;)
-colnames(pokemon)[1] &lt;- &#39;id&#39; #修改变量名
-colnames(pokemon)[3] &lt;- &#39;Type1&#39;
-colnames(pokemon)[4] &lt;- &#39;Type2&#39;
-
-pokemon &lt;- pokemon %&gt;%
+<pre class="r"><code>pokemon &lt;- read_csv(&quot;E:/R_codes/others/Pokemon.csv&quot;)</code></pre>
+<pre><code>Error: &#39;E:/R_codes/others/Pokemon.csv&#39; does not exist.</code></pre>
+<pre class="r"><code>colnames(pokemon)[1] &lt;- &#39;id&#39; #修改变量名</code></pre>
+<pre><code>Error in colnames(pokemon)[1] &lt;- &quot;id&quot;: 找不到对象&#39;pokemon&#39;</code></pre>
+<pre class="r"><code>colnames(pokemon)[3] &lt;- &#39;Type1&#39;</code></pre>
+<pre><code>Error in colnames(pokemon)[3] &lt;- &quot;Type1&quot;: 找不到对象&#39;pokemon&#39;</code></pre>
+<pre class="r"><code>colnames(pokemon)[4] &lt;- &#39;Type2&#39;</code></pre>
+<pre><code>Error in colnames(pokemon)[4] &lt;- &quot;Type2&quot;: 找不到对象&#39;pokemon&#39;</code></pre>
+<pre class="r"><code>pokemon &lt;- pokemon %&gt;%
   drop_na(Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
   select(Legendary,Type1,Type2,Total,HP,Defense,Attack,Speed,Generation) %&gt;%
   mutate(Legendary=as.factor(Legendary),
     Type1=recode(Type1,&#39;Fairy&#39;=&#39;oth&#39;,&#39;Fighting&#39;=&#39;oth&#39;,&#39;Flying&#39;=&#39;oth&#39;)
 )</code></pre>
+<pre><code>Error in eval(lhs, parent, parent): 找不到对象&#39;pokemon&#39;</code></pre>
 <pre class="r"><code>ggplot(pokemon,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_point(size=3)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-9-1.png" alt="过采样前" width="90%" />
-<p class="caption">
-Figure 3: 过采样前
-</p>
-</div>
+<pre><code>Error in ggplot(pokemon, aes(Total, Attack, shape = Legendary, color = Legendary)): 找不到对象&#39;pokemon&#39;</code></pre>
 <pre class="r"><code>#过采样
-balance &lt;- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;both&quot;, p=0.5,N=748,seed = 1)$data
-
-sampled &lt;- sample(1:nrow(balance),nrow(balance)*0.7,replace=F)
-trainpok &lt;- balance[sampled,]
-testpok &lt;- balance[-sampled,]
-
-ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
+balance &lt;- ovun.sample(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = pokemon, method = &quot;both&quot;, p=0.5,N=748,seed = 1)$data</code></pre>
+<pre><code>Error in adj.formula(formula, data): 找不到对象&#39;pokemon&#39;</code></pre>
+<pre class="r"><code>sampled &lt;- sample(1:nrow(balance),nrow(balance)*0.7,replace=F)</code></pre>
+<pre><code>Error in nrow(balance): 找不到对象&#39;balance&#39;</code></pre>
+<pre class="r"><code>trainpok &lt;- balance[sampled,]</code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;balance&#39;</code></pre>
+<pre class="r"><code>testpok &lt;- balance[-sampled,]</code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;balance&#39;</code></pre>
+<pre class="r"><code>ggplot(balance,aes(Total,Attack,shape=Legendary,color=Legendary)) +
   geom_jitter(size=1.5,height = 10, width = 40)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-10-1.png" alt="过采样后" width="90%" />
-<p class="caption">
-Figure 4: 过采样后
-</p>
-</div>
+<pre><code>Error in ggplot(balance, aes(Total, Attack, shape = Legendary, color = Legendary)): 找不到对象&#39;balance&#39;</code></pre>
 <div id="k近邻算法k-nearest-neighbor" class="section level2">
 <h2>K近邻算法(k-nearest neighbor)</h2>
 <ul>
@@ -274,132 +269,56 @@ Figure 4: 过采样后
 set.seed(213)
 knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = trainpok, method = &quot;knn&quot;,
  trControl=trctrl,
- tuneLength = 10)
-knn_fit</code></pre>
-<pre><code>k-Nearest Neighbors 
-
-523 samples
-  8 predictor
-  2 classes: &#39;FALSE&#39;, &#39;TRUE&#39; 
-
-No pre-processing
-Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 471, 470, 470, 471, 471, 470, ... 
-Resampling results across tuning parameters:
-
-  k   Accuracy   Kappa    
-   5  0.9523902  0.9049491
-   7  0.9518130  0.9038010
-   9  0.9514357  0.9030465
-  11  0.9512506  0.9026794
-  13  0.9518166  0.9038074
-  15  0.9512470  0.9026798
-  17  0.9487760  0.8977514
-  19  0.9506809  0.9015500
-  21  0.9506809  0.9015439
-  23  0.9493457  0.8988832
-
-Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was k = 5.</code></pre>
-<pre class="r"><code>kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) 
-kacc &lt;- kacc[,1:2]
-ggplot(kacc,aes(k,Accuracy)) +
+ tuneLength = 10)</code></pre>
+<pre><code>Error in eval(expr, p): 找不到对象&#39;trainpok&#39;</code></pre>
+<pre class="r"><code>knn_fit</code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;knn_fit&#39;</code></pre>
+<pre class="r"><code>kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) </code></pre>
+<pre><code>Error in as.data.frame(knn_fit[[&quot;results&quot;]]): 找不到对象&#39;knn_fit&#39;</code></pre>
+<pre class="r"><code>kacc &lt;- kacc[,1:2]</code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;kacc&#39;</code></pre>
+<pre class="r"><code>ggplot(kacc,aes(k,Accuracy)) +
 geom_line() +
 geom_point() +
 scale_x_continuous(breaks=seq(5,26,1))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-11-1.png" alt="k近邻算法的K值和准确率的关系" width="90%" />
-<p class="caption">
-Figure 5: k近邻算法的K值和准确率的关系
-</p>
-</div>
+<pre><code>Error in ggplot(kacc, aes(k, Accuracy)): 找不到对象&#39;kacc&#39;</code></pre>
 <pre class="r"><code>testpok &lt;- testpok %&gt;%
-  mutate(pred=predict(knn_fit,testpok))
-
-prob1 &lt;- predict(knn_fit,testpok,type=&#39;prob&#39;)
-pr1 &lt;- prob1[,2] 
-
-trainpok &lt;- trainpok %&gt;%
-  mutate(pred=predict(knn_fit,trainpok))
-
-prob2 &lt;- predict(knn_fit,trainpok,type=&#39;prob&#39;)
-pr2 &lt;- prob2[,2] 
-
-conMatrix1 &lt;- confusionMatrix(testpok$pred,testpok$Legendary) 
-#matrix &lt;- conMatrix1[[&quot;table&quot;]]
+  mutate(pred=predict(knn_fit,testpok))</code></pre>
+<pre><code>Error in eval(lhs, parent, parent): 找不到对象&#39;testpok&#39;</code></pre>
+<pre class="r"><code>prob1 &lt;- predict(knn_fit,testpok,type=&#39;prob&#39;)</code></pre>
+<pre><code>Error in predict(knn_fit, testpok, type = &quot;prob&quot;): 找不到对象&#39;knn_fit&#39;</code></pre>
+<pre class="r"><code>pr1 &lt;- prob1[,2] </code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;prob1&#39;</code></pre>
+<pre class="r"><code>trainpok &lt;- trainpok %&gt;%
+  mutate(pred=predict(knn_fit,trainpok))</code></pre>
+<pre><code>Error in eval(lhs, parent, parent): 找不到对象&#39;trainpok&#39;</code></pre>
+<pre class="r"><code>prob2 &lt;- predict(knn_fit,trainpok,type=&#39;prob&#39;)</code></pre>
+<pre><code>Error in predict(knn_fit, trainpok, type = &quot;prob&quot;): 找不到对象&#39;knn_fit&#39;</code></pre>
+<pre class="r"><code>pr2 &lt;- prob2[,2] </code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;prob2&#39;</code></pre>
+<pre class="r"><code>conMatrix1 &lt;- confusionMatrix(testpok$pred,testpok$Legendary) </code></pre>
+<pre><code>Error in confusionMatrix(testpok$pred, testpok$Legendary): 找不到对象&#39;testpok&#39;</code></pre>
+<pre class="r"><code>#matrix &lt;- conMatrix1[[&quot;table&quot;]]
 conMatrix1</code></pre>
-<pre><code>Confusion Matrix and Statistics
-
-          Reference
-Prediction FALSE TRUE
-     FALSE   105    0
-     TRUE     13  107
-                                          
-               Accuracy : 0.9422          
-                 95% CI : (0.9032, 0.9689)
-    No Information Rate : 0.5244          
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-                                          
-                  Kappa : 0.8848          
-                                          
- Mcnemar&#39;s Test P-Value : 0.0008741       
-                                          
-            Sensitivity : 0.8898          
-            Specificity : 1.0000          
-         Pos Pred Value : 1.0000          
-         Neg Pred Value : 0.8917          
-             Prevalence : 0.5244          
-         Detection Rate : 0.4667          
-   Detection Prevalence : 0.4667          
-      Balanced Accuracy : 0.9449          
-                                          
-       &#39;Positive&#39; Class : FALSE           
-                                          </code></pre>
-<pre class="r"><code>conMatrix2 &lt;- confusionMatrix(trainpok$pred,trainpok$Legendary)
-#matrix &lt;- conMatrix[[&quot;table&quot;]]
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;conMatrix1&#39;</code></pre>
+<pre class="r"><code>conMatrix2 &lt;- confusionMatrix(trainpok$pred,trainpok$Legendary)</code></pre>
+<pre><code>Error in confusionMatrix(trainpok$pred, trainpok$Legendary): 找不到对象&#39;trainpok&#39;</code></pre>
+<pre class="r"><code>#matrix &lt;- conMatrix[[&quot;table&quot;]]
 conMatrix2</code></pre>
-<pre><code>Confusion Matrix and Statistics
-
-          Reference
-Prediction FALSE TRUE
-     FALSE   244    0
-     TRUE     22  257
-                                         
-               Accuracy : 0.9579         
-                 95% CI : (0.937, 0.9735)
-    No Information Rate : 0.5086         
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
-                                         
-                  Kappa : 0.916          
-                                         
- Mcnemar&#39;s Test P-Value : 7.562e-06      
-                                         
-            Sensitivity : 0.9173         
-            Specificity : 1.0000         
-         Pos Pred Value : 1.0000         
-         Neg Pred Value : 0.9211         
-             Prevalence : 0.5086         
-         Detection Rate : 0.4665         
-   Detection Prevalence : 0.4665         
-      Balanced Accuracy : 0.9586         
-                                         
-       &#39;Positive&#39; Class : FALSE          
-                                         </code></pre>
-<pre class="r"><code>testpok$Legendary &lt;- as.ordered(testpok$Legendary)
-trainpok$Legendary &lt;- as.ordered(trainpok$Legendary)
-
-roca &lt;- roc(testpok$Legendary,pr1)
-rocb &lt;- roc(trainpok$Legendary,pr2)</code></pre>
+<pre><code>Error in eval(expr, envir, enclos): 找不到对象&#39;conMatrix2&#39;</code></pre>
+<pre class="r"><code>testpok$Legendary &lt;- as.ordered(testpok$Legendary)</code></pre>
+<pre><code>Error in is.ordered(x): 找不到对象&#39;testpok&#39;</code></pre>
+<pre class="r"><code>trainpok$Legendary &lt;- as.ordered(trainpok$Legendary)</code></pre>
+<pre><code>Error in is.ordered(x): 找不到对象&#39;trainpok&#39;</code></pre>
+<pre class="r"><code>roca &lt;- roc(testpok$Legendary,pr1)</code></pre>
+<pre><code>Error in roc(testpok$Legendary, pr1): 找不到对象&#39;testpok&#39;</code></pre>
+<pre class="r"><code>rocb &lt;- roc(trainpok$Legendary,pr2)</code></pre>
+<pre><code>Error in roc(trainpok$Legendary, pr2): 找不到对象&#39;trainpok&#39;</code></pre>
 <p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html#sklearn.model_selection.learning_curve">学习曲线</a></p>
 <pre class="r"><code>ggroc(list(&#39;测试集&#39;=roca,&#39;训练集&#39;=rocb),size=1)+
   geom_segment(aes(x = 1, xend = 0, y = 0, yend = 1), color=&#39;black&#39;, linetype=&#39;dashed&#39;)+
   theme(legend.title=element_blank()) </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
-<img src="/post/cross_files/figure-html/unnamed-chunk-12-1.png" alt="ROC曲线:使用`ggroc`包绘制。模型在测试集的表现比训练集稍差一些。" width="90%" />
-<p class="caption">
-Figure 6: ROC曲线:使用<code>ggroc</code>包绘制。模型在测试集的表现比训练集稍差一些。
-</p>
-</div>
+<pre><code>Error in ggroc(list(测试集 = roca, 训练集 = rocb), size = 1): 找不到对象&#39;roca&#39;</code></pre>
 </div>
 </div>
 <div id="泰坦尼克生存预测" class="section level1">
@@ -431,16 +350,16 @@ logfit &lt;- train(survived ~ sex+age+sibsp+parch+fare+embarked,
 logfit</code></pre>
 <pre><code>Generalized Linear Model 
 
-779 samples
+778 samples
   6 predictor
 
 No pre-processing
 Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 701, 701, 701, 701, 701, 701, ... 
+Summary of sample sizes: 700, 700, 700, 700, 700, 700, ... 
 Resampling results:
 
-  RMSE       Rsquared  MAE    
-  0.3996116  0.345518  0.31574</code></pre>
+  RMSE       Rsquared   MAE      
+  0.3987183  0.3484352  0.3149894</code></pre>
 <pre class="r"><code>titanic_test &lt;- titanic_test %&gt;% 
   mutate(pred=predict(logfit,titanic_test),
          pred=ifelse(pred&gt;=0.5,&#39;1&#39;,&#39;0&#39;),
@@ -463,8 +382,8 @@ names(dimnames(matrix))&lt;-c(&#39;预测值&#39;,&#39;真实值&#39;)
 matrix</code></pre>
 <pre><code>      真实值
 预测值   0   1
-     0 135  38
-     1  25  66</code></pre>
+     0 134  37
+     1  24  70</code></pre>
 <pre class="r"><code>conMatrix2 &lt;- confusionMatrix(titanic_train$pred,titanic_train$survived)
 matrix2 &lt;- conMatrix2[[&quot;table&quot;]]
 
@@ -472,8 +391,8 @@ names(dimnames(matrix2))&lt;-c(&#39;预测值&#39;,&#39;真实值&#39;)
 matrix2</code></pre>
 <pre><code>      真实值
 预测值   0   1
-     0 385  94
-     1  73 227</code></pre>
+     0 388  95
+     1  72 223</code></pre>
 <pre class="r"><code>titanic_test$Survived &lt;- as.ordered(titanic_test$survived)
 titanic_train$Survived &lt;- as.ordered(titanic_train$survived)
 
@@ -489,7 +408,7 @@ ggroc(.,size=1)+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
 <img src="/post/cross_files/figure-html/unnamed-chunk-15-1.png" alt="ROC" width="90%" />
 <p class="caption">
-Figure 7: ROC
+Figure 3: ROC
 </p>
 </div>
 </div>

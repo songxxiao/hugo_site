@@ -130,7 +130,7 @@ for (i in colnames(smsmat)){
 
 #对于新数据集。判断DTM的每一列是否在训练集中出现。出现保留，没出现剔除，补充空列。
 
-test_dtmx <- function(string){ # 得到新数据的DTM
+convert_dtm <- function(string){ # 得到新数据的DTM
 test_dtm = VCorpus(VectorSource(string)) %>% 
   DocumentTermMatrix(., control = list(tolower = T,
                                       removeNumbers = T,
@@ -157,6 +157,7 @@ new = smsmat[3,]
 new = as.data.frame(new)
 new = t(new)
 new[1,] = 0
+
 #new[1,]
 decide_in = function(x){
   if(x %in% colnames(new)){

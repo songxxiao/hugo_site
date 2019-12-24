@@ -66,7 +66,7 @@
     <h1 class="article-title">Rap Lyrics Text Mining</h1>
 
     
-    <span class="article-date">2019-12-14</span>
+    <span class="article-date">2019-12-24</span>
     
 
     <div class="article-content">
@@ -78,6 +78,7 @@
 <p>As a rap listener and a data analyst, I’m willing to combine my hobbies. Until I found suitable data, I could achieve it.</p>
 <p>I found a github <a href="https://github.com/fpaupier/RapLyrics-Scraper">repo</a> contains famous rappers’ lyrics, shout out to the author. I know and listened 90% of them. They are all widely accepted greatest rappers. Notice that those lyrics mostly are relatively old rappers, and you could go to figure <a href="#fig:list">5</a> to check full rappers list.</p>
 <p>I use R because it could easily do nice data visualization. However, Python has better features for Machine Learning. Since our dataset has no label for Classification. This dataset will be only used to do some basic analysis and text metrics.</p>
+<p><img src="https://i.loli.net/2019/12/24/LewKQVYmCWlqox3.gif" width="70%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>`%&gt;%` &lt;- magrittr::`%&gt;%`
 library(readr)
 library(ggplot2)
@@ -87,7 +88,7 @@ library(stringr)
 library(tidytext)
 library(dplyr)</code></pre>
 <pre class="r"><code>#../input/rap-lyrics-from-36-rappers/rap_all.csv
-rap &lt;- read_csv(&quot;D:/RapLyrics/lyrics_US/rap_all.csv&quot;)</code></pre>
+rap &lt;- read_csv(&quot;E:/RapLyrics/lyrics_US/rap_all.csv&quot;)</code></pre>
 <pre class="r"><code># remove non-english
 rap$text &lt;- lapply(rap$text, iconv, &quot;UTF-8&quot;, &quot;ASCII&quot;, sub=&quot;&quot;)
 
@@ -125,8 +126,8 @@ rap1 %&gt;%
   count(word) %&gt;%
   filter(word!=&#39;na&#39;,word!=&#39;00a0&#39;) %&gt;% 
   with(wordcloud(word, n, max.words = 100))</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="../../post/rap.en_files/figure-html/unnamed-chunk-5-1.png" alt="Word Cloud" width="90%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="../../post/rap.en_files/figure-html/unnamed-chunk-6-1.png" alt="Word Cloud" width="90%" />
 <p class="caption">
 Figure 1: Word Cloud
 </p>
@@ -140,8 +141,8 @@ rap1 %&gt;%
   count(word, sentiment, sort = T) %&gt;%
   acast(word ~ sentiment, value.var = &quot;n&quot;, fill = 0) %&gt;%
   comparison.cloud(colors = c(&quot;blue&quot;, &quot;red&quot;),max.words = 100)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="../../post/rap.en_files/figure-html/unnamed-chunk-6-1.png" alt="Word Cloud by sentiment" width="90%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="../../post/rap.en_files/figure-html/unnamed-chunk-7-1.png" alt="Word Cloud by sentiment" width="90%" />
 <p class="caption">
 Figure 2: Word Cloud by sentiment
 </p>
