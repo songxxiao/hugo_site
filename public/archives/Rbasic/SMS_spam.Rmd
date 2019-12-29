@@ -144,7 +144,7 @@ return(test_dtm)
 new = 'We are trying to contact you.Please call our customer service representative on FREEPHONE.Claim code S89. Valid 12hrs only' 
 newdt = convert_dtm(new)
 newdt
-colnames(newdt)
+colnames(newdt) # 
 colnames(smsmat)
 
 for (i in colnames(newdt)){
@@ -153,28 +153,16 @@ for (i in colnames(newdt)){
   }
 }
 
-new = smsmat[3,]
-new = as.data.frame(new)
-new = t(new)
-new[1,] = 0
+smmat = smsmat[3,]
+smmat = as.data.frame(smmat)
+smmat = t(smmat)
+smmat[1,] = 0
 
-#new[1,]
-decide_in = function(x){
-  if(x %in% colnames(new)){
-    new = mutate(new,x=1) 
-  }
-}
+sample = colnames(smmat) %in% colnames(newdt)
+smmat[,sample] = 1 # 提取在训练集中出现的列，将对应的值重编码为1
 
-colnames(new) %in% colnames(newdt)
 
-decide_in('call')
 
-sapply(colnames(newdt),decide_in)
-
-sapply(s,print)
-
-s = as.data.frame(s)
-class(s)
 ```
 
 原本的文档-词语频率矩阵有`r dim(sms_dtm)[2]`个特征，维度过高且过于稀疏。经过`removeSparseTerms`函数处理后保留了`r dim(smsmat)[2]`个特征。

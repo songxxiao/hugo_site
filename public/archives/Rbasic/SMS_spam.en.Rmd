@@ -148,18 +148,18 @@ conMatrix <- confusionMatrix(pred,Y,
 conMatrix[["table"]]
 
 
-nb <- naiveBayes(smsmat, Y) # klaR could also do NaiveBayes.
-
+nb = naiveBayes(smsmat, Y) # klaR could also do NaiveBayes.
+#train = smsmat[1:2,]
 #setwd('F:/Mysite/Mysite/static/archives/Rbasic')
-#saveRDS(nb, "naiveBayes.rds")
+#saveRDS(train, "train.rds")
 #save(nb,"naiveBayes.RData")
 ## save model
 #load("naiveBayes.RData")
 #print(nb)
 #summary(nb)
-pred1 <- predict(nb,smsmat)
+pred1 = predict(nb,smsmat)
 
-conMatrix1 <- confusionMatrix(pred1,Y,
+conMatrix1 = confusionMatrix(pred1,Y,
                               positive ='spam',
                               mode="prec_recall") 
 #confusionMatrix
@@ -248,10 +248,12 @@ test_result(nb,new2)
 
 ```r
 library(shiny)
-runGitHub( "txtnb_en", "ECSTA7Y")
+runGitHub( "txtnb", "ECSTA7Y")
 ```
-
-
+```{r, include=F}
+knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
+```
+https://i.loli.net/2019/12/25/lQ3mIj5iDNFzUMx.gif
 
 
 

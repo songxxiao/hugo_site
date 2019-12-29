@@ -20,9 +20,10 @@ library(rvest)
 library(magrittr)
 library(xml2)
 library(selectr)#解析器,少了这个包，后面会报错
+library(stringr)
 
-get_text <- function(url,w){ # 读取特定html节点的函数
-text <- url %>%
+get_text = function(url,w){ # 读取特定html节点的函数
+text = url %>%
   read_html() %>% 
   html_nodes(.,w) %>% 
   html_text()
@@ -30,12 +31,12 @@ return(text)
 }
 
 # 测试
-get_text("https://xsong.ltd/zh/pybasic/",'h1')
+#get_text("https://xsong.ltd/zh/pybasic/",'h1')
 
 ```
 
 
-```{r,cache=T}
+```{r}
 library(stringr)
 txturl = ''
 for (i in 1:20){
@@ -46,6 +47,7 @@ for (i in 1:20){
   txturl = c(txturl,getext)
 }
 head(txturl,10)
+
 ```
 
 
@@ -64,17 +66,27 @@ head(txturl,10)
 ```{r}
 library(dplyr)
 library(stringr)
-long <- str_length(txturl)
-long <- long %>% 
-  data.frame(.)
-colnames(long)[1] <- 'long'
-long <- long %>% filter(long!=0)
-dim(long)
+
+long = str_length(txturl)
+cosdf = tibble(cap = txturl,long = long)
+cosdf
+
+cosdf = cosdf %>% filter(long!=0)
+dim(cosdf)
+
+svlong = cosdf %>% select(long) 
+svlong
+setwd('C:/Users/xsong/Desktop/table')
+#saveRDS(svlong, "svlong.rds")
+#saveRDS(cosdf, "cosdf.rds")
+
 library(ggplot2)
-ggplot(long,aes(long,..density..))+
+ggplot(svlong,aes(long,..density..))+
   geom_histogram(col='black',
                  fill = 'white')+
   geom_density(alpha=.2,
                fill="#FF6666") 
+
+
 ```
 
