@@ -26,8 +26,8 @@
 R在构建文档-词语矩阵的有许多实现方式。下面使用了tm::DocumentTermMatrix函数实现。在此之前，我尝试了quanteda::dfm_weight函数，但是在我的本地R软件中总是报错（在Kaggle上的R Notebook能够运行）。另一个可能的路径是使用tidytext::unnest_tokens等函数进行去除停止词、去除数字和标点符号、提取词干等一系列操作；再通过tidytext::cast_dtm转化成DocumentTermMatrix对象。但这么做会导致因变量和特征矩阵行数不一致的问题。由于我无法解决它，我采用了下面的方案。当然使用Python是非常好的选择，我在这里给出了基于Python的做法。相比R，Python的可视化能力略显不足。
 我认为tidytext十分适合对文本信息进行探索和可视化，而tm则适合构建矩阵进行建模。如果将二者混用则可能导致问题。
 上代码library(magrittr)library(quanteda)library(tidytext)library(ggplot2)library(dplyr)library(tm)library(readr)library(stringr)sms = read_csv(&amp;quot;E:/MaLearning/SPAM text message 20170820 - Data.csv&amp;quot;)原数据共两列，其中一列记录了是否为垃圾短信的标签。垃圾邮件记为spam，非垃圾邮件记为ham。另一列是短信文本内容。其中，非垃圾邮件的比例约为0.87，垃圾邮件的比例为0.13。
-#因变量比例sms %&amp;gt;% count(Category)# A tibble: 2 x 2Category n&amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;1 ham 48252 spam 747#sms %$% prop.table(table(Category))[1]数据概览如下，数据共2列，第1列为标签，第2列为文本内容：
-smswd = sms %&amp;gt;%rename(message = Message,tag=Category) %&amp;gt;% mutate(ID = row_number())head(smswd)# A tibble: 6 x 3tag message ID&amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;1 ham Go until jurong point, crazy.</description>
+#因变量比例sms %&amp;gt;% count(Category)# # A tibble: 2 x 2# Category n# &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;# 1 ham 4825# 2 spam 747#sms %$% prop.table(table(Category))[1]数据概览如下，数据共2列，第1列为标签，第2列为文本内容：
+smswd = sms %&amp;gt;%rename(message = Message,tag=Category) %&amp;gt;% mutate(ID = row_number())head(smswd)# # A tibble: 6 x 3# tag message ID# &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;# 1 ham Go until jurong point, crazy.</description>
     </item>
     
     <item>

@@ -16,7 +16,7 @@ A Kaggle version is [here](https://www.kaggle.com/rikdifos/2018-2019-nba-champio
 Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I found [datas](https://stats.nba.com/) of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.
 
 ```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
+knitr::opts_chunk$set(comment='#',error=T,message = F,warning = F,fig.align='center',out.width ='90%')
 ```
 
 ```{r,echo=F,fig.cap='Kawhi Leonard versus KD, who was injured during G5'}

@@ -35,26 +35,26 @@ library(stringr)</code></pre>
 <p>原数据共两列，其中一列记录了是否为垃圾短信的标签。垃圾邮件记为<code>spam</code>，非垃圾邮件记为<code>ham</code>。另一列是短信文本内容。其中，非垃圾邮件的比例约为0.87，垃圾邮件的比例为0.13。</p>
 <pre class="r"><code>#因变量比例
 sms %&gt;% count(Category)</code></pre>
-<pre><code># A tibble: 2 x 2
-  Category     n
-  &lt;chr&gt;    &lt;int&gt;
-1 ham       4825
-2 spam       747</code></pre>
+<pre><code># # A tibble: 2 x 2
+#   Category     n
+#   &lt;chr&gt;    &lt;int&gt;
+# 1 ham       4825
+# 2 spam       747</code></pre>
 <pre class="r"><code>#sms %$% prop.table(table(Category))[1]</code></pre>
 <p>数据概览如下，数据共2列，第1列为标签，第2列为文本内容：</p>
 <pre class="r"><code>smswd = sms %&gt;%
   rename(message = Message,tag=Category) %&gt;% 
   mutate(ID = row_number())
 head(smswd)</code></pre>
-<pre><code># A tibble: 6 x 3
-  tag   message                                                          ID
-  &lt;chr&gt; &lt;chr&gt;                                                         &lt;int&gt;
-1 ham   Go until jurong point, crazy.. Available only in bugis n gre~     1
-2 ham   Ok lar... Joking wif u oni...                                     2
-3 spam  Free entry in 2 a wkly comp to win FA Cup final tkts 21st Ma~     3
-4 ham   U dun say so early hor... U c already then say...                 4
-5 ham   Nah I don&#39;t think he goes to usf, he lives around here though     5
-6 spam  FreeMsg Hey there darling it&#39;s been 3 week&#39;s now and no word~     6</code></pre>
+<pre><code># # A tibble: 6 x 3
+#   tag   message                                                          ID
+#   &lt;chr&gt; &lt;chr&gt;                                                         &lt;int&gt;
+# 1 ham   Go until jurong point, crazy.. Available only in bugis n gre~     1
+# 2 ham   Ok lar... Joking wif u oni...                                     2
+# 3 spam  Free entry in 2 a wkly comp to win FA Cup final tkts 21st Ma~     3
+# 4 ham   U dun say so early hor... U c already then say...                 4
+# 5 ham   Nah I don&#39;t think he goes to usf, he lives around here though     5
+# 6 spam  FreeMsg Hey there darling it&#39;s been 3 week&#39;s now and no word~     6</code></pre>
 <pre class="r"><code>Y = as.factor(smswd$tag)</code></pre>
 <pre class="r"><code>smswd$message = lapply(smswd$message , iconv, &quot;UTF-8&quot;, &quot;ASCII&quot;, sub=&quot;&quot;)
 
@@ -64,15 +64,15 @@ smsvis = smswd %&gt;%
   anti_join(stop_words) %&gt;% # 去除停止词
   mutate(word = SnowballC::wordStem(word,language = &quot;english&quot;)) # 提取词干
 head(smsvis)</code></pre>
-<pre><code># A tibble: 6 x 3
-  tag      ID word  
-  &lt;chr&gt; &lt;int&gt; &lt;chr&gt; 
-1 ham       1 jurong
-2 ham       1 crazi 
-3 ham       1 bugi  
-4 ham       1 world 
-5 ham       1 la    
-6 ham       1 buffet</code></pre>
+<pre><code># # A tibble: 6 x 3
+#   tag      ID word  
+#   &lt;chr&gt; &lt;int&gt; &lt;chr&gt; 
+# 1 ham       1 jurong
+# 2 ham       1 crazi 
+# 3 ham       1 bugi  
+# 4 ham       1 world 
+# 5 ham       1 la    
+# 6 ham       1 buffet</code></pre>
 <pre class="r"><code>library(reshape2)
 library(wordcloud)
 smsvis %&gt;% # 词云图，颜色代表不同类别
@@ -118,19 +118,19 @@ sms_dtm = DocumentTermMatrix(ms_corpus, control =
                                       stemming = T))
 
 dim(sms_dtm) #5572</code></pre>
-<pre><code>[1] 5572 6953</code></pre>
+<pre><code># [1] 5572 6953</code></pre>
 <pre class="r"><code>sms_dtm1 = removeSparseTerms(sms_dtm, sparse = .98)
 smsmat = as.matrix(sms_dtm1) # 训练数据集
 dim(smsmat)</code></pre>
-<pre><code>[1] 5572   51</code></pre>
+<pre><code># [1] 5572   51</code></pre>
 <pre class="r"><code>colnames(smsmat)</code></pre>
-<pre><code> [1] &quot;ask&quot;   &quot;back&quot;  &quot;call&quot;  &quot;can&quot;   &quot;come&quot;  &quot;day&quot;   &quot;dont&quot;  &quot;free&quot; 
- [9] &quot;get&quot;   &quot;give&quot;  &quot;good&quot;  &quot;got&quot;   &quot;home&quot;  &quot;hope&quot;  &quot;just&quot;  &quot;know&quot; 
-[17] &quot;later&quot; &quot;like&quot;  &quot;lor&quot;   &quot;love&quot;  &quot;ltgt&quot;  &quot;make&quot;  &quot;meet&quot;  &quot;mobil&quot;
-[25] &quot;need&quot;  &quot;new&quot;   &quot;now&quot;   &quot;one&quot;   &quot;phone&quot; &quot;pleas&quot; &quot;repli&quot; &quot;say&quot;  
-[33] &quot;see&quot;   &quot;send&quot;  &quot;sorri&quot; &quot;still&quot; &quot;stop&quot;  &quot;take&quot;  &quot;tell&quot;  &quot;text&quot; 
-[41] &quot;think&quot; &quot;time&quot;  &quot;today&quot; &quot;tri&quot;   &quot;txt&quot;   &quot;want&quot;  &quot;week&quot;  &quot;well&quot; 
-[49] &quot;will&quot;  &quot;work&quot;  &quot;you&quot;  </code></pre>
+<pre><code>#  [1] &quot;ask&quot;   &quot;back&quot;  &quot;call&quot;  &quot;can&quot;   &quot;come&quot;  &quot;day&quot;   &quot;dont&quot;  &quot;free&quot; 
+#  [9] &quot;get&quot;   &quot;give&quot;  &quot;good&quot;  &quot;got&quot;   &quot;home&quot;  &quot;hope&quot;  &quot;just&quot;  &quot;know&quot; 
+# [17] &quot;later&quot; &quot;like&quot;  &quot;lor&quot;   &quot;love&quot;  &quot;ltgt&quot;  &quot;make&quot;  &quot;meet&quot;  &quot;mobil&quot;
+# [25] &quot;need&quot;  &quot;new&quot;   &quot;now&quot;   &quot;one&quot;   &quot;phone&quot; &quot;pleas&quot; &quot;repli&quot; &quot;say&quot;  
+# [33] &quot;see&quot;   &quot;send&quot;  &quot;sorri&quot; &quot;still&quot; &quot;stop&quot;  &quot;take&quot;  &quot;tell&quot;  &quot;text&quot; 
+# [41] &quot;think&quot; &quot;time&quot;  &quot;today&quot; &quot;tri&quot;   &quot;txt&quot;   &quot;want&quot;  &quot;week&quot;  &quot;well&quot; 
+# [49] &quot;will&quot;  &quot;work&quot;  &quot;you&quot;</code></pre>
 <p>原本的文档-词语频率矩阵有6953个特征，维度过高且过于稀疏。经过<code>removeSparseTerms</code>函数处理后保留了51个特征。</p>
 </div>
 <div id="算法" class="section level1">
@@ -147,49 +147,49 @@ library(e1071)
 svmc = svm(smsmat, Y)
 #saveRDS(svmc, &quot;svmc.rds&quot;)
 print(svmc)</code></pre>
-<pre><code>
-Call:
-svm.default(x = smsmat, y = Y)
-
-
-Parameters:
-   SVM-Type:  C-classification 
- SVM-Kernel:  radial 
-       cost:  1 
-      gamma:  0.01960784 
-
-Number of Support Vectors:  1386</code></pre>
+<pre><code># 
+# Call:
+# svm.default(x = smsmat, y = Y)
+# 
+# 
+# Parameters:
+#    SVM-Type:  C-classification 
+#  SVM-Kernel:  radial 
+#        cost:  1 
+#       gamma:  0.01960784 
+# 
+# Number of Support Vectors:  1386</code></pre>
 <pre class="r"><code>summary(svmc)</code></pre>
-<pre><code>
-Call:
-svm.default(x = smsmat, y = Y)
-
-
-Parameters:
-   SVM-Type:  C-classification 
- SVM-Kernel:  radial 
-       cost:  1 
-      gamma:  0.01960784 
-
-Number of Support Vectors:  1386
-
- ( 855 531 )
-
-
-Number of Classes:  2 
-
-Levels: 
- ham spam</code></pre>
+<pre><code># 
+# Call:
+# svm.default(x = smsmat, y = Y)
+# 
+# 
+# Parameters:
+#    SVM-Type:  C-classification 
+#  SVM-Kernel:  radial 
+#        cost:  1 
+#       gamma:  0.01960784 
+# 
+# Number of Support Vectors:  1386
+# 
+#  ( 855 531 )
+# 
+# 
+# Number of Classes:  2 
+# 
+# Levels: 
+#  ham spam</code></pre>
 <pre class="r"><code>pred = predict(svmc,smsmat)
 #confusionMatrix(pred,Y,positive =&#39;spam&#39;,mode=&quot;prec_recall&quot;)
 conMatrix = confusionMatrix(pred,Y,
                              positive =&#39;spam&#39;,
                              mode=&quot;prec_recall&quot;) 
 conMatrix[[&quot;table&quot;]]</code></pre>
-<pre><code>          Reference
-Prediction  ham spam
-      ham  4757  124
-      spam   68  623</code></pre>
+<pre><code>#           Reference
+# Prediction  ham spam
+#       ham  4757  124
+#       spam   68  623</code></pre>
 <pre class="r"><code># klaR包也能够实现NaiveBayes.
 nb = naiveBayes(smsmat, Y) # 得到模型
 
@@ -207,16 +207,16 @@ conMatrix1 = confusionMatrix(pred1,Y,
                               mode=&quot;prec_recall&quot;) 
 #混淆矩阵
 conMatrix1[[&quot;table&quot;]]</code></pre>
-<pre><code>          Reference
-Prediction  ham spam
-      ham  1991   48
-      spam 2834  699</code></pre>
+<pre><code>#           Reference
+# Prediction  ham spam
+#       ham  1991   48
+#       spam 2834  699</code></pre>
 <pre class="r"><code>#混淆矩阵
 prop.table(conMatrix1[[&quot;table&quot;]],1)</code></pre>
-<pre><code>          Reference
-Prediction        ham       spam
-      ham  0.97645905 0.02354095
-      spam 0.80215115 0.19784885</code></pre>
+<pre><code>#           Reference
+# Prediction        ham       spam
+#       ham  0.97645905 0.02354095
+#       spam 0.80215115 0.19784885</code></pre>
 <p>限于精力，我就不调参了。
 支持向量机算法的准确率为0.97，平衡准确率为0.91。</p>
 <p>朴素贝叶斯算法的准确率为0.48，平衡准确率为0.67。</p>
@@ -313,23 +313,23 @@ return(result)
 
 #可以看出&#39;call&#39;的词频为2
 convert_dtm(new2)</code></pre>
-<pre><code>      ask back call can come day dont free get give good got home hope
-smmat   0    0    2   0    0   0    0    0   0    0    0   0    0    0
-      just know later like lor love ltgt make meet mobil need new now one
-smmat    0    0     0    0   0    0    0    0    0     0    0   0   0   0
-      phone pleas repli say see send sorri still stop take tell text think
-smmat     0     0     0   0   0    0     0     0    0    0    0    0     0
-      time today tri txt want week well will work you
-smmat    0     0   1   0    0    0    0    0    0   0</code></pre>
+<pre><code>#       ask back call can come day dont free get give good got home hope
+# smmat   0    0    2   0    0   0    0    0   0    0    0   0    0    0
+#       just know later like lor love ltgt make meet mobil need new now one
+# smmat    0    0     0    0   0    0    0    0    0     0    0   0   0   0
+#       phone pleas repli say see send sorri still stop take tell text think
+# smmat     0     0     0   0   0    0     0     0    0    0    0    0     0
+#       time today tri txt want week well will work you
+# smmat    0     0   1   0    0    0    0    0    0   0</code></pre>
 <pre class="r"><code># 现在进行结果预测
 test_result(nb,new)</code></pre>
-<pre><code>[1] &quot;ham&quot;</code></pre>
+<pre><code># [1] &quot;ham&quot;</code></pre>
 <pre class="r"><code>test_result(nb,new2)</code></pre>
-<pre><code>[1] &quot;spam&quot;</code></pre>
+<pre><code># [1] &quot;spam&quot;</code></pre>
 <pre class="r"><code>test_result(svmc,new)</code></pre>
-<pre><code>[1] &quot;ham&quot;</code></pre>
+<pre><code># [1] &quot;ham&quot;</code></pre>
 <pre class="r"><code>test_result(svmc,new2)</code></pre>
-<pre><code>[1] &quot;spam&quot;</code></pre>
+<pre><code># [1] &quot;spam&quot;</code></pre>
 <p>经过检验，支持向量机不能支持新数据的预测。如果新的测试集的变量超出了训练集的变量，就无法运行。而朴素贝叶斯可以(我没弄清楚为什么)。不过无所谓，我们的<code>test_result</code>函数完美解决了这个问题。理论上我们可以训练任何一种模型然后测试新数据。</p>
 <p>另外，为了更好地分享短信过滤程序，我将训练好的新模型保存下来并编写成Shiny App。使得用户输入任意短信文本就能在用户友好的图形界面的得到判定结果。用户可以点击<a href="https://github.com/ECSTA7Y/txtnb">这里</a>查看Shiny App的源代码。本来我将这个App部署到了<a href="https://xiaosong.shinyapps.io/txtnb/">shinyapps.io</a>这个网站上，但它免费版的服务非常不靠谱，几乎是点进去就崩溃。所以想使用它的话，可以在本地的R中输入代码下载并运行这个程序：</p>
 <pre class="r"><code>library(shiny)
