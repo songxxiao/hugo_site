@@ -46,6 +46,7 @@ read2 = str_c(read1,sep='',collapse ='')
 read2
 '\bs\S*?e\b'
 ```
+
 ```{r}
 
 library(readr)

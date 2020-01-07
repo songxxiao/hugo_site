@@ -9,7 +9,7 @@ slug: sms
 --->
 
 ```{r, include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message = F,warning = F,fig.align='center',out.width ='90%')
+knitr::opts_chunk$set(comment='#',error=T,message = F,warning = F,fig.align='center',out.width ='90%')
 ```
 
 使用文本分类的方法判别垃圾短信的方法是NLP领域的一个非常经典的应用。其实简单来讲就是让人类的自然语言转化成模型能够“读懂”的矩阵语言。其次，数据集必须有标签，这样才能使用SVM等方法进行有监督学习。
