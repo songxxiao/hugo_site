@@ -27,12 +27,12 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:slug/"
 
 [[languages.zh.menu.main]]
-    name = "Home"
+    name = "首页"
     url = "/"
     weight = 1
 
 [[languages.zh.menu.main]]
-    name = "Vitae"
+    name = "简历"
     url = "/zh/zhresume/"
     weight = 2
 

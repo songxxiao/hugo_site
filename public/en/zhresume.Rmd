@@ -13,7 +13,7 @@ comment: false
 ### 联系方式
 
 + 邮箱：<malcolm@xsong.ltd>
-+ Github：<https://github.com/ECSTA7Y>
++ Github：<https://github.com/songxxiao>
 + 个人主页：<https://xsong.ltd>
 + Kaggle：<https://www.kaggle.com/rikdifos>
 

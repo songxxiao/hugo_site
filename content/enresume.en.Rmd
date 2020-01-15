@@ -13,7 +13,7 @@ comment: false
 ### CONTACT
 
 + Email：<malcolm@xsong.ltd>
-+ Github：<https://github.com/ECSTA7Y>
++ Github：<https://github.com/songxxiao>
 + Website：<https://xsong.ltd>
 + Kaggle：<https://www.kaggle.com/rikdifos>
 
