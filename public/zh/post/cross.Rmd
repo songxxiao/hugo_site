@@ -158,7 +158,7 @@ varImp(rpartFit, scale = F)
 
 
 ```{r}
-pokemon <- read_csv("E:/R_codes/others/Pokemon.csv")
+pokemon <- read_csv("E:/MaLearning/Pokemon.csv")
 colnames(pokemon)[1] <- 'id' #修改变量名
 colnames(pokemon)[3] <- 'Type1'
 colnames(pokemon)[4] <- 'Type2'

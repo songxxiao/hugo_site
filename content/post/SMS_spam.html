@@ -217,7 +217,7 @@ prop.table(conMatrix1[[&quot;table&quot;]],1)</code></pre>
 # Prediction        ham       spam
 #       ham  0.97645905 0.02354095
 #       spam 0.80215115 0.19784885</code></pre>
-<p>限于精力，我就不调参了。
+<p>限于精力，我就不调参了。<br />
 支持向量机算法的准确率为0.97，平衡准确率为0.91。</p>
 <p>朴素贝叶斯算法的准确率为0.48，平衡准确率为0.67。</p>
 <p>编写一个对混淆矩阵进行可视化的函数<code>plot_table</code>。这个函数其实就是对<code>ggplot2</code>进行了一个简单封装。如果你经常浏览Kaggle的Kernels，你会发现很多人使用这种矩阵图：</p>
@@ -243,7 +243,9 @@ prop.table(conMatrix1[[&quot;table&quot;]],1)</code></pre>
      scale_x_discrete(expand=c(0,0))
 }
 
-plot_table(conMatrix1[[&quot;table&quot;]],&#39;Reference&#39;,&#39;Prediction&#39;)+
+class(conMatrix1[[&quot;table&quot;]])</code></pre>
+<pre><code># [1] &quot;table&quot;</code></pre>
+<pre class="r"><code>plot_table(conMatrix1[[&quot;table&quot;]],&#39;Reference&#39;,&#39;Prediction&#39;)+
   theme_bw()</code></pre>
 <p><img src="/post/SMS_spam_files/figure-html/unnamed-chunk-11-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>plot_table(conMatrix1[[&quot;table&quot;]])+
@@ -333,6 +335,6 @@ test_result(nb,new)</code></pre>
 <p>经过检验，支持向量机不能支持新数据的预测。如果新的测试集的变量超出了训练集的变量，就无法运行。而朴素贝叶斯可以(我没弄清楚为什么)。不过无所谓，我们的<code>test_result</code>函数完美解决了这个问题。理论上我们可以训练任何一种模型然后测试新数据。</p>
 <p>另外，为了更好地分享短信过滤程序，我将训练好的新模型保存下来并编写成Shiny App。使得用户输入任意短信文本就能在用户友好的图形界面的得到判定结果。用户可以点击<a href="https://github.com/ECSTA7Y/txtnb">这里</a>查看Shiny App的源代码。本来我将这个App部署到了<a href="https://xiaosong.shinyapps.io/txtnb/">shinyapps.io</a>这个网站上，但它免费版的服务非常不靠谱，几乎是点进去就崩溃。所以想使用它的话，可以在本地的R中输入代码下载并运行这个程序：</p>
 <pre class="r"><code>library(shiny)
-runGitHub( &quot;txtnb&quot;, &quot;ECSTA7Y&quot;)</code></pre>
+runGitHub( &quot;txtnb&quot;, &quot;songxxiao&quot;)</code></pre>
 <p><img src="https://i.loli.net/2019/12/25/lQ3mIj5iDNFzUMx.gif" width="70%" style="display: block; margin: auto;" /></p>
 </div>

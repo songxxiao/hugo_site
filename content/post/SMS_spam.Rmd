@@ -179,7 +179,7 @@ conMatrix1[["table"]]
 prop.table(conMatrix1[["table"]],1)
 ```
 
-限于精力，我就不调参了。
+限于精力，我就不调参了。  
 支持向量机算法的准确率为`r round(conMatrix[["overall"]][["Accuracy"]],2)`，平衡准确率为`r round(conMatrix[["byClass"]][["Balanced Accuracy"]],2)`。
 
 朴素贝叶斯算法的准确率为`r round(conMatrix1[["overall"]][["Accuracy"]],2)`，平衡准确率为`r round(conMatrix1[["byClass"]][["Balanced Accuracy"]],2)`。
@@ -208,6 +208,8 @@ plot_table = function(x,xlab='Predicted label',
      scale_y_discrete(expand=c(0,0))+
      scale_x_discrete(expand=c(0,0))
 }
+
+class(conMatrix1[["table"]])
 
 plot_table(conMatrix1[["table"]],'Reference','Prediction')+
   theme_bw()
@@ -296,7 +298,7 @@ test_result(svmc,new2)
 
 ```r
 library(shiny)
-runGitHub( "txtnb", "ECSTA7Y")
+runGitHub( "txtnb", "songxxiao")
 ```
 
 
