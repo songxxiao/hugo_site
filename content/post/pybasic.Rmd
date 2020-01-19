@@ -48,6 +48,7 @@ os.chdir(' ')
 
 # 设置`Jupyter Notebook`图片输出格式
 
+[Jupyter Notebook魔术命令](http://blog.rexking6.top/2019/11/20/7%E4%B8%AAPython%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/)
 + SVG格式
 
 + Jupyter Notebook魔术命令
@@ -74,29 +75,6 @@ jt -t monokai -f roboto -nf robotosans -tf robotosans -N -T -cellw 70% -dfs 10 -
 
 ```
 jt -t grade3
-```
-
-# 异常处理
-
-```python
-a=3
-b=2
-for i in range(5):
-    try:
-        a = a - 1
-        c=b/a
-        print(c)
-
-    except Exception as e:
-        print(e)#输出异常行为名称
-```
-
-```python
-1.0
-2.0
-division by zero
--2.0
--1.0
 ```
 
 # Anaconda 或Python 从本地离线安装第三方包
