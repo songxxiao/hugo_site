@@ -6,10 +6,29 @@
     <description>Recent content in   on 宋骁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 25 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>英国之行的几个瞬间</title>
+      <link>/zh/en_moments/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/en_moments/</guid>
+      <description> 本来想在泰晤士河边散步的时候打开网易云收听《London Calling》这首歌。发现网易云有版权限制。
+ 在湖区遇到了一个会说中文的公交车司机爷爷。
+ 住一个带有公共厨房的旅舍多么重要。出门一定要记得带好购物袋，不然付费使用的塑料袋贵死你。
+ 感觉英国人衣品很好并且很有礼貌。还好自己的英文口语足够应付日常对话。
+ 从伦敦回国的航班非常适合观看《Spider-Man: Far From Home》这部电影。伦敦塔桥被关闭了2年，我十分怀疑是被剧组租用了。
+ 爱丁堡旅游区商店中的服务员都是和我一般大的中国大学生。
+ 一直不喜欢旅游。觉得又累又贵。后来发现旅游不是为了看风景，是为了探索和你一同出游的人的共同生活方式。
+ Jet lag需要好几天才能调整过来。
+ 旅游期间鼓捣了我的Ubuntu 18.04 系统，从此陷入Ubuntu 和Windows不停切换的怪圈。不过，有时候命令行工具真的挺好用的（不论是cmd还是terminal）。特别是git。
+ 在英国感冒了。买了感冒药。我发现感冒药一定要坚持吃到症状完全消失而不是好转了就停药。
+  </description>
+    </item>
     
     <item>
       <title>垃圾短信过滤程序</title>

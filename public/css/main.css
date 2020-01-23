@@ -54,7 +54,12 @@ a {
 }
 
 code {
-  font-family:'consolas','SimSun';
+  font-family:'consolas',Fira Code, Monaco;
+  background-color: #F8F8F8;
+}
+
+code.hljs {
+  font-family:'consolas',Fira Code, Monaco;
   background-color: #F8F8F8;
   border:1px solid #ddd;
   box-shadow:3px 3px 3px #eee;
