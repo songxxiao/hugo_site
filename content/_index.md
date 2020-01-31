@@ -19,3 +19,11 @@ You can find my English résumé attached [here](/en/enresume/), and my Chinese 
 
 &emsp;
 
+  <center>
+   <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
+  </center>
+
+
+<script>
+
+document.getElementById("archive-title").style.display="none"

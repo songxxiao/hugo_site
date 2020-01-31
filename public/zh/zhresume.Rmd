@@ -1,5 +1,5 @@
 ---
-title: "宋 骁-简 历"
+title: "宋 骁 简 历"
 author: " "
 slug: zhresume
 disable_comments: true
@@ -52,17 +52,20 @@ comment: false
 课程：[信用卡申请评分模型](https://mp.weixin.qq.com/s/bbxWicZfk5ZMl27LbI0E1Q)  
 使用Python的`Pandas`、`Numpy`和`scikit-learn`库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的[数据分析报告](https://xsong.ltd/archives/pandas/scorecard)。
 
+### 个人作品
+
++ 2020年 [txtnb](https://github.com/songxxiao/txtnb) 垃圾信息判别 R Shiny App程序(双语版)
+
 
 ### 科研经历
 
-+ **土地流转的福利效应与社会不平等——基于中国家庭追踪调查面板数据的分析**&emsp;2018年-2019年   
++ **土地流转的福利效应与社会不平等:基于中国家庭追踪调查面板数据的分析**&emsp;2018年-2019年   
 国家大学生创新训练项目&emsp;独立作者  
 使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。([PDF](/land.pdf))  
 导师：[卿石松](https://faculty.ecnu.edu.cn/s/2136/main.jspy)
 
 ### 获奖情况 
 
-+ 2019年 Kaggle机器学习竞赛 [泰坦尼克号幸存者预测](https://www.kaggle.com/c/titanic)&emsp;排名前12%
 
 + 2019年 华东师范大学优秀学生三等奖学金
 + 2019年 华东师范大学第二十七届 **大夏杯** 大学生课外学术科技作品竞赛&emsp;三等奖  

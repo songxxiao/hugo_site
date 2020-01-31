@@ -27,6 +27,20 @@ slug: resource
 
 [统计学与R读书笔记(第六版)](https://cran.rstudio.com/doc/contrib/Xu-Statistics_and_R.pdf)
 
+[Mastering Spark with R](https://therinspark.com/)
+
+---
+
+## R包开发
+
+[9分钟写个R语言包：菜鸟致简速成](https://www.pzhao.org/zh/post/rmickey/)
+
+[开发 R 程序包之忍者篇](https://cos.name/2011/05/write-r-packages-like-a-ninja/)
+
+[R语言忍者秘笈](https://bookdown.org/yihui/r-ninja/#terms)
+
+[R packages](http://r-pkgs.had.co.nz/)
+
 ---
 
 # Python
@@ -45,7 +59,6 @@ slug: resource
 [TextBlob](https://textblob.readthedocs.io/en/dev/)
 
 [Python -WordCloud 修改色调](https://blog.csdn.net/u010152318/article/details/80242460)   
-
 [Python中WordCloud各参数的含义](https://blog.csdn.net/kouyi5627/article/details/80530569)  
 
 [超详细：Python(wordcloud+jieba)生成中文词云图](https://www.cnblogs.com/delav/p/7845539.html)
@@ -56,18 +69,16 @@ slug: resource
 
 [Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛](https://pzhaonet.github.io/btcookbook/)
 
-[R语言忍者秘笈](https://bookdown.org/yihui/r-ninja/#terms)
 
 [datasets（R自带数据包）](https://konelane.github.io/2018/04/15/datasets%EF%BC%88R%E8%87%AA%E5%B8%A6%E6%95%B0%E6%8D%AE%E5%8C%85%EF%BC%89/)
 
 一个商业爬虫网站：[数说聚合](https://dc.datastory.com.cn/)
 
-词云网站：  
-[1](https://wordart.com/create)  
+[词云网站1](https://wordart.com/create)  
 
-[2](http://cloud.niucodata.com/)  
+[词云网站2](http://cloud.niucodata.com/)  
 
-[3](https://wordcloud.timdream.org/)  
+[词云网站3](https://wordcloud.timdream.org/)  
 
 [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/)
 

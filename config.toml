@@ -37,9 +37,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     weight = 2
 
 [[languages.zh.menu.main]]
+    name = "文章"
+    url = "/zh/post/"
+    weight = 3
+
+[[languages.zh.menu.main]]
   name = "English"
   url = "/en"
-  weight =3
+  weight = 4
   
 [[languages.en.menu.main]]
     name = "Home"
@@ -50,11 +55,16 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "Vitae"
     url = "/en/enresume/"
    weight = 2
+
+[[languages.en.menu.main]]
+    name = "Posts"
+    url = "/en/post/"
+   weight = 3
  
 [[languages.en.menu.main]]
   name = "中文"
   url = "/zh"
-  weight = 3
+  weight = 4
 
 [params]
     description = "Xiao Song's Website "

@@ -37,7 +37,7 @@ world = gp.read_file(gp.datasets.get_path('naturalearth_lowres'))
 
 
 ```python
-earthquake = pd.read_csv("E:\\MaLearning\\earthquake20190630.csv",encoding = 'gb18030') 
+earthquake = pd.read_csv("E:/MaLearning/earthquake20190630.csv",encoding = 'gb18030') 
 ```
 
 

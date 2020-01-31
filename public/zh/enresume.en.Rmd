@@ -21,7 +21,7 @@ comment: false
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 -->
 
-### SOFTWARE & Programming SKILLS
+### SOFTWARE & PROGRAMMING SKILLS
 + R&emsp;LaTeX&emsp;Stata 
 + Python&emsp;SQL&emsp;SPSS 
 
@@ -59,6 +59,11 @@ Summer Workshop
 [6th Training Workshop on Applied Social Science Research Methods](http://caser.ust.hk/?act=course_main&id=16)  
 Course: Regression Analysis and Stata Application,  Categorical Data Analysis
 
+### WORKS
+
++ 2020 [txtnb](https://github.com/songxxiao/txtnb) Spam Message Dectection R Shiny App(Chinese and English bilingual)
+
+
 ### ACADEMIC RESEARCH
 
 + Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS&emsp;2018-2019    
@@ -66,8 +71,6 @@ National Innovation Training Program for College Students,  Independent author
 The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using R's `ggplot2` software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. ([PDF](http://www.baige.me/v?i=Rwy))
 
 ### HONORS AND AWARDS 
-
-+ 2019&emsp;Kaggle Competition [Titanic: Machine Learning from Disaster](https://www.kaggle.com/c/titanic)&emsp;Top 12%
 
 + 2019&emsp;Third Class Academic Honors (East China Normal University)  
 + 2019&emsp;**Daxia Cup** Student Academic Works Competition in ECNU &emsp;Third Award 
