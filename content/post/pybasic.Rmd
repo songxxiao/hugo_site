@@ -38,7 +38,7 @@ f.readlines()
 + 获取当前工作目录：
 ```python
 import os
-os.getcwd(' ')    
+os.getcwd()    
 ```
 + 设置工作目录
 
@@ -102,7 +102,7 @@ python setup.py install
 
 如果同时安装了Anaconda 和Python可能会出问题。因为Anaconda 自带了一个Python。如果只在一个路径中安装的话另一个仍是没有安装的。
 
-# 在R Studio中运行Python
+# 在RStudio中运行Python
 
 Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。[`reticulate`](https://rstudio.github.io/reticulate/)包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。
 
