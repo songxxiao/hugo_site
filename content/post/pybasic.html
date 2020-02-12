@@ -93,11 +93,11 @@ t
 <li>获取当前工作目录：</li>
 </ul>
 <pre class="python"><code>import os
-os.getcwd(&#39; &#39;)    </code></pre>
+os.getcwd()    </code></pre>
 <ul>
 <li>设置工作目录</li>
 </ul>
-<pre class="python"><code>os.chdir(&#39; &#39;) </code></pre>
+<pre class="python"><code>os.chdir(&#39;./mynotebook&#39;) </code></pre>
 </div>
 <div id="设置jupyter-notebook图片输出格式" class="section level1">
 <h1>设置<code>Jupyter Notebook</code>图片输出格式</h1>
@@ -141,8 +141,8 @@ plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
 </ol>
 <p>如果同时安装了Anaconda 和Python可能会出问题。因为Anaconda 自带了一个Python。如果只在一个路径中安装的话另一个仍是没有安装的。</p>
 </div>
-<div id="在r-studio中运行python" class="section level1">
-<h1>在R Studio中运行Python</h1>
+<div id="在rstudio中运行python" class="section level1">
+<h1>在RStudio中运行Python</h1>
 <p>Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。<a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。</p>
 <p>其中，<code>reticulate::repl_python()</code>能够实现在R Studio Console中运行Python代码。但是目前这个函数无法显示Python运行出的图片。如果想退出Python环境回到R，则输入<code>exit</code>。</p>
 <p>其次，<code>reticulate</code>还能够支持Python代码<a href="https://rstudio.github.io/reticulate/#python-in-r-markdown">在R Markdown中的编译</a>。这个功能目前似乎还不够完善，至少在我的电脑上，很多时候无法成功编译。</p>

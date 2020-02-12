@@ -43,7 +43,7 @@ os.getcwd()
 + 设置工作目录
 
 ```python
-os.chdir(' ') 
+os.chdir('./mynotebook') 
 ```
 
 # 设置`Jupyter Notebook`图片输出格式

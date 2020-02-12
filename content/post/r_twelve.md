@@ -1,5 +1,5 @@
 ---
-title: '第十二届中国R会议小记'
+title: '第十二届中国R会议小记(附会议幻灯片下载)'
 author: ''
 date: '2019-12-25'
 slug: r_twelve
@@ -67,7 +67,20 @@ e成科技的刘洋分享了基于招聘App的AI技术。招聘软件需要能�
 总之，听完这一系列报告，我愈发感觉到自己决定从社科转到DS是正确的选择。毕竟，社科的领域更为传统、保守，离工业界更远。同时，关于Shiny App、Docker、Spark、Linux等知识是很好的触发点。未来应该补全自己在这些方面的空白。当然重中之重是学好NLP技术。
 
 
+附：第十二届中国R会议 幻灯片 公开合集
 
+
+
+>**链接1**:  
+https://pan.baidu.com/s/1hAU9C1wdnrzYrJfawMFLaw  
+提取码：vtyf  
+**链接2**:  
+https://pan.baidu.com/s/1-y_EQgrZq_EBTYzM3G5cdQ  
+提取码：0994
+
+
+
+注：2个链接内容一致。其中空缺的属于材料敏感无法共享。
 
 
 
