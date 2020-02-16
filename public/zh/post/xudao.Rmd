@@ -3,7 +3,6 @@ title: '徐导发片了'
 author: '宋骁'
 date: '2019-09-06'
 slug: xudao
-tags: ['意识之流']
 ---
 
 [徐正阳](https://mp.weixin.qq.com/s/2I_GAaCp9m4SFXWOPSsHUQ)是我的小学和初中同学。初中毕业后，我们都没留在原本的学校。我去了一所擅长虐待学生的高中，他则去了另一所高中。没想到这小子又参加艺考最终高中北京电影学院了！  

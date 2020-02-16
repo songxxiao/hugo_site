@@ -5,7 +5,7 @@
     <meta name="baidu-site-verification" content="XQ7m1PA0VK" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Hugo 0.55.5" />
+<meta name="generator" content="Hugo 0.64.0" />
 
 
 <title>Geographic Data Visualization Methods - Xiao Song</title>
@@ -54,6 +54,10 @@
     
     <li><a href="../../en/post/">Posts</a></li>
     
+    <li><a href="https://www.kaggle.com/rikdifos">Kaggle</a></li>
+    
+    <li><a href="https://github.com/songxxiao">Github</a></li>
+    
     <li><a href="../../zh">中文</a></li>
     
   </ul>
@@ -89,7 +93,7 @@ sns.set_style(&quot;whitegrid&quot;)</code></pre>
 <pre class="python"><code>%matplotlib inline
 %config InlineBackend.figure_format = &#39;svg&#39;</code></pre>
 <pre class="python"><code>world = gp.read_file(gp.datasets.get_path(&#39;naturalearth_lowres&#39;))</code></pre>
-<pre class="python"><code>earthquake = pd.read_csv(&quot;E:/MaLearning/earthquake20190630.csv&quot;,encoding = &#39;gb18030&#39;) </code></pre>
+<pre class="python"><code>earthquake = pd.read_csv(&quot;./data/earthquake20190630.csv&quot;,encoding = &#39;gb18030&#39;) </code></pre>
 <pre class="python"><code>earthquake.head()</code></pre>
 <div>
 <style scoped>
@@ -432,7 +436,7 @@ library(magrittr)
 library(viridis)
 library(dplyr)
 library(readr)
-election &lt;- read_csv(&quot;E:/elections.csv&quot;) # import data
+election &lt;- read_csv(&quot;./data/elections.csv&quot;) # import data
 
 election &lt;- election %&gt;% 
   mutate(sharedem = dem/(rep+dem+other),
@@ -459,7 +463,7 @@ fr &lt;- rgb(fo[,1],fo[,2],fo[,3])
 colors = c(fr,thr,se,fi) # legend colors
 
 library(readr)
-setwd(&#39;C:/Users/xsong/Desktop/table&#39;) # your output folder
+setwd(&#39;./output&#39;) # your output folder
 
 presidenten &lt;- read_csv(&quot;president_en.csv&quot;) %&gt;% 
   as.data.frame()

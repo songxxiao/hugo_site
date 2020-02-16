@@ -3,7 +3,6 @@ title: "如何查看R包中的小品文? "
 author: " "
 date: "2019-05-07"
 slug: vignette
-tags: ["R"]
 ---
 
 ```{r,include=F}
@@ -47,7 +46,7 @@ usercode    User Written Split
 
 可以发现，`rpart`包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为"longintro"和"usercode"。现在，就可以根据简称提取小品文了，输入：
 
-```{r}
+```r
 vignette("longintro", package = "rpart")
 ```
 

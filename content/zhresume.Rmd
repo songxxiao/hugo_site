@@ -54,7 +54,9 @@ comment: false
 
 ### 个人作品
 
-+ 2020年 [txtnb](https://github.com/songxxiao/txtnb) 垃圾信息判别 R Shiny App程序(双语版)
++ 2020年  垃圾信息判别网页应用(双语界面)   [地址](https://xiaosong.shinyapps.io/spam_text/)
+[源代码](https://github.com/songxxiao/txtnb)
+
 
 
 ### 科研经历

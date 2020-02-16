@@ -4,7 +4,6 @@ title: "排序和查找算法(Python实现)"
 author: ' '
 date: '2019-05-09'
 slug: suanfa
-tags: ['Python','编程基础']
 ---
 
 ## 排序算法

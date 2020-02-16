@@ -7,7 +7,6 @@ output:
     toc: true
     theme: united
 slug: sql
-tags: ['编程基础']
 ---
 
 

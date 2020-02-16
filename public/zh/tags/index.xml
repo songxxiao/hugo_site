@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 宋骁</title>
@@ -6,28 +6,10 @@
     <description>Recent content in Tags on 宋骁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 06 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>意识之流</title>
-      <link>/zh/tags/%E6%84%8F%E8%AF%86%E4%B9%8B%E6%B5%81/</link>
-      <pubDate>Fri, 06 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/tags/%E6%84%8F%E8%AF%86%E4%B9%8B%E6%B5%81/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>编程基础</title>
-      <link>/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>机器学习</title>
@@ -44,15 +26,6 @@
       <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/zh/tags/r/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/tags/r/</guid>
       <description></description>
     </item>
     

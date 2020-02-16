@@ -61,8 +61,8 @@ Course: Regression Analysis and Stata Application,  Categorical Data Analysis
 
 ### WORKS
 
-+ 2020 [txtnb](https://github.com/songxxiao/txtnb) Spam Message Dectection R Shiny App(Chinese and English bilingual)
-
++ 2020 Spam Message Dectection R Shiny App(Chinese and English bilingual)  
+[url](https://xiaosong.shinyapps.io/spam_text/)&emsp;[github](https://github.com/songxxiao/txtnb)
 
 ### ACADEMIC RESEARCH
 

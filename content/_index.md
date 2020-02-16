@@ -6,9 +6,8 @@ title: ' '
 
 &emsp;
 
-宋骁。[华东师范大学](https://www.ecnu.edu.cn/)本科在读。我掌握了数据分析和机器学习的基本知识(使用R, Python, SQL实现)。我能够对数据实现特征工程，并基于领域知识进行建模。业余时间我喜欢听摇滚和说唱音乐，间或鼓捣R和Python。为了更好地完成工作，我使用[Github](https://github.com/ECSTA7Y)。目前我花精力比较多的领域是基于文本数据的挖掘、可视化和分析。本站欢迎你的评论，希望能交到更多的朋友！
+宋骁，一个左手Python右手R的数据分析者。我能够从表格和文本数据挖掘出有价值的信息。我乐于使用编程语言实现数据分析想法。我常出没于[Kaggle](https://www.kaggle.com/rikdifos)和[Github](https://github.com/songxxiao)。我对数据和web技术充满好奇。业余时间里，我喜欢听摇滚和说唱音乐。也许，通过不太正经的自我介绍能够更好地了解我。我推崇好玩有用的数据分析。目前，基于文本数据的挖掘、可视化和分析最能吸引我。未来计划学习JavaScript。我的中文简历请点击[这里](/zh/zhresume/)，英文简历请点击[这里](/en/enresume/)
 
-我的中文简历请点击[这里](/zh/zhresume/)，英文简历请点击[这里](/en/enresume/)
 
 &emsp;
 
@@ -23,7 +22,3 @@ You can find my English résumé attached [here](/en/enresume/), and my Chinese 
    <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
   </center>
 
-
-<script>
-
-document.getElementById("archive-title").style.display="none"

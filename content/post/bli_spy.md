@@ -9,8 +9,3 @@ slug: bilispy
 
 <https://mp.weixin.qq.com/s/eVgs3NWPMQRKDzgmnA6T9g>
 
-<script>
-
-window.location.replace("https://mp.weixin.qq.com/s/eVgs3NWPMQRKDzgmnA6T9g")
-
-</script>

@@ -20,7 +20,7 @@ sns.set_style(&quot;whitegrid&quot;)</code></pre>
 <pre class="python"><code>%matplotlib inline
 %config InlineBackend.figure_format = &#39;svg&#39;</code></pre>
 <pre class="python"><code>world = gp.read_file(gp.datasets.get_path(&#39;naturalearth_lowres&#39;))</code></pre>
-<pre class="python"><code>earthquake = pd.read_csv(&quot;E:/MaLearning/earthquake20190630.csv&quot;,encoding = &#39;gb18030&#39;) </code></pre>
+<pre class="python"><code>earthquake = pd.read_csv(&quot;./data/earthquake20190630.csv&quot;,encoding = &#39;gb18030&#39;) </code></pre>
 <pre class="python"><code>earthquake.head()</code></pre>
 <div>
 <style scoped>
@@ -363,7 +363,7 @@ library(magrittr)
 library(viridis)
 library(dplyr)
 library(readr)
-election &lt;- read_csv(&quot;E:/elections.csv&quot;) # import data
+election &lt;- read_csv(&quot;./data/elections.csv&quot;) # import data
 
 election &lt;- election %&gt;% 
   mutate(sharedem = dem/(rep+dem+other),
@@ -390,7 +390,7 @@ fr &lt;- rgb(fo[,1],fo[,2],fo[,3])
 colors = c(fr,thr,se,fi) # legend colors
 
 library(readr)
-setwd(&#39;C:/Users/xsong/Desktop/table&#39;) # your output folder
+setwd(&#39;./output&#39;) # your output folder
 
 presidenten &lt;- read_csv(&quot;president_en.csv&quot;) %&gt;% 
   as.data.frame()

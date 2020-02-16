@@ -18,7 +18,7 @@ defaultContentLanguageInSubdir = true
 
 title = "宋骁"
 author = "Xiao Song"
-theme = "hugo-lithium"
+theme = "lithium"
 googleAnalytics = "UA-144652310-1"
 disqusShortname = "Xiao Song"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
@@ -40,11 +40,21 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "文章"
     url = "/zh/post/"
     weight = 3
-
+    
+[[languages.zh.menu.main]]
+    name = "Kaggle"
+    url = "https://www.kaggle.com/rikdifos"
+   weight = 4
+  
+[[languages.zh.menu.main]]
+    name = "Github"
+    url = "https://github.com/songxxiao"
+   weight = 5
+   
 [[languages.zh.menu.main]]
   name = "English"
   url = "/en"
-  weight = 4
+  weight = 6
   
 [[languages.en.menu.main]]
     name = "Home"
@@ -60,11 +70,21 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "Posts"
     url = "/en/post/"
    weight = 3
- 
+
+[[languages.en.menu.main]]
+    name = "Kaggle"
+    url = "https://www.kaggle.com/rikdifos"
+   weight = 4
+  
+[[languages.en.menu.main]]
+    name = "Github"
+    url = "https://github.com/songxxiao"
+   weight = 5
+   
 [[languages.en.menu.main]]
   name = "中文"
   url = "/zh"
-  weight = 4
+  weight = 6
 
 [params]
     description = "Xiao Song's Website "

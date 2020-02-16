@@ -5,7 +5,7 @@
     <meta name="baidu-site-verification" content="XQ7m1PA0VK" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Hugo 0.55.5" />
+<meta name="generator" content="Hugo 0.64.0" />
 
 
 <title>如何查看R包中的小品文?  - 宋骁</title>
@@ -54,6 +54,10 @@
     
     <li><a href="../../zh/post/">文章</a></li>
     
+    <li><a href="https://www.kaggle.com/rikdifos">Kaggle</a></li>
+    
+    <li><a href="https://github.com/songxxiao">Github</a></li>
+    
     <li><a href="../../en">English</a></li>
     
   </ul>
@@ -93,6 +97,7 @@ longintro   Introduction to Rpart
 usercode    User Written Split
             Functions (source, pdf)</code></pre>
 <p>可以发现，<code>rpart</code>包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：</p>
+<pre class="r"><code>vignette(&quot;longintro&quot;, package = &quot;rpart&quot;)</code></pre>
 <p>第一篇《Introduction to Rpart》的pdf便会自动跳出：</p>
 <p><img src="../../img/vignette/Capture3.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>然后便可以阅读了。这里更推荐使用<code>browseVignettes</code>函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：</p>

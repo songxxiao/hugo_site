@@ -10,11 +10,5 @@ slug: rap_metrics
 <https://mp.weixin.qq.com/s/SueKxPibp4f74QFaYWUwdA>
 
 
-<script>
-  if (confirm("是否跳转到微信页面？")) {
-    window.location.replace("https://mp.weixin.qq.com/s/SueKxPibp4f74QFaYWUwdA")
-  } else {
 
-  }
-</script>
 
