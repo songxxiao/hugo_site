@@ -6,10 +6,19 @@
     <description>Recent content in   on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Outliers and Other Fragmented Works</title>
+      <link>/en/march_works/</link>
+      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/en/march_works/</guid>
+      <description>Practice builds experience. A few weeks ago, I finished several very fragmented works, which needs to be summerized.First is outliers detection. Until joining in House Prediction Competiton did I realized how important outliers handling is! At first I recode outliers (I define outliers by histogram) to a high quantile. I gradually found this is wrong. It will generate accumulation of special values. Then, it does no good to prediction.</description>
+    </item>
     
     <item>
       <title>Rap Lyrics Text Mining</title>
@@ -82,7 +91,7 @@ Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I 
       <guid>/en/enresume/</guid>
       <description>Chinese version
 PDF
-CONTACTEmail：malcolm@xsong.ltdGithub：https://github.com/songxxiaoWebsite：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosSOFTWARE &amp;amp; PROGRAMMING SKILLSR LaTeX StataPython SQL SPSSEDUCATIONEast China Normal University 2016-09~Today
+CONTACTEmail: malcolm@xsong.ltdGithub: https://github.com/songxxiaoWebsite: https://xsong.ltdKaggle: https://www.kaggle.com/rikdifosLinkedin: https://www.linkedin.com/in/xiaosongmalcolm/SOFTWARE &amp;amp; PROGRAMMING SKILLSR LaTeX StataPython SQL SPSSEDUCATIONEast China Normal University 2016-09~Today
 School of Social Development (Overall GPA：3.64 /4 | Top 10%)Sun Yat-Sun University Exchange Student 2018-02~2018-07TRAINING EXPERIENCEGouxionghui 2019-05
 Online Internship Credit Card Approval Analysis
 Using Python’s Pandas, Numpy, and scikit-learn libraries for data wrangling and modeling.</description>

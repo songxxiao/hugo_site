@@ -95,4 +95,4 @@ slug: resource
 
 [Random Forests 商业版本](https://www.stat.berkeley.edu/~breiman/RandomForests/)
 
-
+[Keras文档](http://faroit.com/keras-docs/1.2.2/)

@@ -16,6 +16,7 @@ comment: false
 + Github：<https://github.com/songxxiao>
 + 个人主页：<https://xsong.ltd>
 + Kaggle：<https://www.kaggle.com/rikdifos>
++ Linkedin: <https://www.linkedin.com/in/xiaosongmalcolm/>
 
 <!--
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)

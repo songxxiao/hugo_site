@@ -382,15 +382,14 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
       <guid>/zh/zhresume/</guid>
       <description>English Version
 PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifos软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: https://www.linkedin.com/in/xiaosongmalcolm/软件技能R, LaTeX, Stata (熟练)Python, SQL, SPSS (了解)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
 上海大学 第6届·应用社会科学研究方法研修班 2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
 狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的Pandas、Numpy和scikit-learn库进行数据清理、建模。使用Logistic模型和决策树模型建立信用卡评分模型。通过交叉验证(Cross-Validation)的方法训练模型，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
 个人作品2020年 垃圾信息判别网页应用(双语界面) 地址源代码科研经历土地流转的福利效应与社会不平等:基于中国家庭追踪调查面板数据的分析 2018年-2019年
-国家大学生创新训练项目 独立作者
-使用中国家庭追踪调查(CFPS)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用ggplot2软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。(PDF)</description>
+国家大学生创新训练项目 独立作者</description>
     </item>
     
   </channel>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <base target="_blank">
+    <meta name="baidu-site-verification" content="XQ7m1PA0VK" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.64.0" />
+
+
+<title>Outliers and Other Fragmented Works - Xiao Song</title>
+<meta property="og:title" content="Outliers and Other Fragmented Works - Xiao Song">
+
+
+  <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="fixed-top">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../" class="nav-logo">
+    <img src="../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../en">Home</a></li>
+    
+    <li><a href="../../en/enresume/">Vitae</a></li>
+    
+    <li><a href="../../en/post/">Posts</a></li>
+    
+    <li><a href="https://www.kaggle.com/rikdifos">Kaggle</a></li>
+    
+    <li><a href="https://github.com/songxxiao">Github</a></li>
+    
+    <li><a href="../../zh">中文</a></li>
+    
+  </ul>
+</nav>
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+
+    <h1 class="article-title">Outliers and Other Fragmented Works</h1>
+
+    
+    <span class="article-date">2020-03-16</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>Practice builds experience. A few weeks ago, I finished several very fragmented works, which needs to be summerized.
+First is outliers detection. Until joining in <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview">House Prediction Competiton</a> did I realized how important outliers handling is! At first I recode outliers (I define <em>outliers</em> by histogram) to a high quantile. I gradually found this is wrong. It will generate accumulation of special values. Then, it does no good to prediction. I posted <a href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/discussion/132754#765810">this question</a> and read others tutorial notebooks. I found using binary distibution plot (scatter plot) is helpful. Those points who are opposite to main distribution should be dropped. It really improve my LB ranking.</p>
+<p>However, there’s no free lunch, dropping samples will cause sample size reduction. The first method will not lose samples. This is a trade-off. Another way for tackling outliers is <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html">IsolationForest</a>, but I haven’t tried it.</p>
+<hr />
+<p>A <a href="http://www.win-vector.com/blog/2013/05/bayesian-and-frequentist-approaches-ask-the-right-question/">post</a> written by Nina Zumel focuses on Bayesian approach is really easy to understand. It introduce a simple framework of Bayesian inference. Although the data is simple, it reminds me that</p>
+<blockquote>
+<p>Common statistical tests are linear models</p>
+</blockquote>
+<p>written by <a href="https://lindeloev.github.io/tests-as-linear/">Jonas Kristoffer Lindeløv</a>. The simple framework could be generilzed to regression analysis.</p>
+<hr />
+<p>Some papers written by big professors not teaching you technic, but improve your <em>data IQ</em>. The first one is <em>Statistical Modeling: The Two Cultures</em> by Leo Brieman. Others could be found at <a href="https://cosx.org/2020/03/what-it-creates-is-natural-ds-ai-development/">this article</a>’s reference list. Those papers are great help to my thesis.</p>
+<hr />
+<p>After finishing a text classification task (a semi-intern), I found it’s important to make columns 1:1 corresponding between train set and test set, or the result will be totally messed up. I write this:</p>
+<pre class="python"><code>def consist_train_test(test):
+    &#39;&#39;&#39;
+    make test set columns corresponding to train set
+    &#39;&#39;&#39;
+    new_df = pd.DataFrame()
+    for i in train_col: # train_col = train.columns
+        if i in test.columns:
+            new_df[i] = test[i]
+        else:
+            new_df[i] = 0
+    new_df.fillna(0, inplace = True)
+    order = train_col
+    new_df[order] # order data
+    return new_df</code></pre>
+<p>This actually a practical trick. Some algorithms will throw an error if you don’t do this. Similarly, I solved this problem at my <a href="https://xiaosong.shinyapps.io/spam_text/">shiny app</a>.</p>
+
+    </div>
+  </article>
+
+  
+
+
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://xiao-song.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  <center>
+   <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
+  </center>
+
+<footer class="footer">
+        <ul class="footer-links">
+            <a href="https://github.com/songxxiao" class="footer-links-kudos"> <img src="../../images/git.svg" alt=" " width="15" height="15"></a>
+            <a href="https://www.linkedin.com/in/xiao-song-a1ab5318b/" class="footer-links-kudos"> <img src="../../images/linkedin.svg" alt=" " width="15" height="15"></a>
+            <a href="https://www.kaggle.com/rikdifos" class="footer-links-kudos"> <img src="../../images/kaggle.png" alt=" " width="15.2" height="14.5"></a>
+            <a href="../../archives/subscribe" class="footer-links-kudos"> <img src="../../images/rss.svg" alt=" " width="14.5" height="15"></a>
+        </ul>
+</footer>
+
+
+</main>
+
+  <center>
+   <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
+  </center>
+
+<footer class="footer">
+
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-144652310-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+</html>

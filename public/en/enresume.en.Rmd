@@ -12,10 +12,11 @@ comment: false
 
 ### CONTACT
 
-+ Email：<malcolm@xsong.ltd>
-+ Github：<https://github.com/songxxiao>
-+ Website：<https://xsong.ltd>
-+ Kaggle：<https://www.kaggle.com/rikdifos>
++ Email: <malcolm@xsong.ltd>
++ Github: <https://github.com/songxxiao>
++ Website: <https://xsong.ltd>
++ Kaggle: <https://www.kaggle.com/rikdifos>
++ Linkedin: <https://www.linkedin.com/in/xiaosongmalcolm/>
 
 <!--
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
