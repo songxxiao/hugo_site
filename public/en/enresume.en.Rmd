@@ -23,11 +23,9 @@ comment: false
 -->
 
 ### SOFTWARE & PROGRAMMING SKILLS
-+ R&emsp;LaTeX&emsp;Stata 
-+ Python&emsp;SQL&emsp;SPSS 
 
-+ Python, R, SQL (Including MySQL, SQL Sever, SQLite)
-+ SPSS, Stata, MS Office, LaTeX, Git
++ Python&emsp;R&emsp;SQL (Including MySQL, SQL Sever, SQLite)
++ SPSS&emsp;Stata&emsp;MS Office&emsp;LaTeX&emsp;Git
 
 <!--
 ### RELEVANT COURSES
@@ -70,8 +68,9 @@ Course: Regression Analysis and Stata Application,  Categorical Data Analysis
 
 ### WORKS & PROJECTS
 
-+ 2020 Spam Message Dectection R Shiny App(Chinese and English bilingual)  
-This program uses 5567 pieces of English short message data as a training set and trains algorithms such as Logistic Regression, Naive Bayes, Decision Tree, Random Forest, and Support Vector Machine. The trained model is written as a Shiny App based on the R language. The user can enter a text message and select a classifier to get the classification result of the text.  
++ Spam Message Dectection R Shiny App&emsp;  
+2018-2019  
+This program uses 5567 pieces of English short message data as a training set and trains algorithms such as Logistic Regression, Naive Bayes, Decision Tree, Random Forest, and Support Vector Machine. The trained model is written as a Shiny App based on the R language. The user can enter a text message and select a classifier to get the classification result of the text. Considering the user's language habits, a Chinese-English bilingual interface switching function is specially set up. 
 [url](https://xiaosong.shinyapps.io/spam_text/)&emsp;[github](https://github.com/songxxiao/txtnb)
 
 ### ACADEMIC RESEARCH
