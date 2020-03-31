@@ -24,8 +24,8 @@ comment: false
 
 ### SOFTWARE & PROGRAMMING SKILLS
 
-+ Python&emsp;R&emsp;SQL (Including MySQL, SQL Sever, SQLite)
-+ SPSS&emsp;Stata&emsp;MS Office&emsp;$\LaTeX$&emsp;Git
++ Python, R, SQL (Including MySQL, SQL Sever, SQLite)
++ SPSS, Stata, MS Office, $\rm{\LaTeX}$, Git
 
 <!--
 ### RELEVANT COURSES

@@ -275,17 +275,16 @@ R Markdown: The Definitive Guide
 宋春林：用LaTeX写学位论文
 用 knitr 写作业
 在R Markdown文档中使用中文
-我一开始使用\(\LaTeX\)写论文。我一直以来用的是MikTeX。
+我一开始使用\(\rm{\LaTeX}\) 写论文。我一直以来用的是MikTeX。
 而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
 Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到RStudio也大大提升了工作效率。如何做到这一点呢？
-首先要安装\(\LaTeX\)环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
+首先要安装\(\rm{\LaTeX}\) 环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
 后续需要安装一些R包，如Knitr，tinytex等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。
 然后需要配置一下RStudio的环境:
-Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，R Sweave Rnw files using选knitr。想要写中文\(\LaTeX\)文档必须选XeLaTeX环境。
-我们点击Open File打开一个\(\LaTeX\)文档：
-Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译\(\LaTeX\)文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的\(\LaTeX\) Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype或者这个在线工具。Mathtype的好处在于可以直接将公式复制为\(\LaTeX\)代码(需要事先设置好剪切和复制预置选项)：</description>
+Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，R Sweave Rnw files using选knitr。想要写中文\(\rm{\LaTeX}\) 文档必须选XeLaTeX环境。
+我们点击Open File打开一个\(\rm{\LaTeX}\) 文档：
+Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译\(\rm{\LaTeX}\) 文档，如图：
+Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的[\(\rm{\LaTeX}\) Beamer](http://deic.</description>
     </item>
     
     <item>
@@ -382,7 +381,7 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
       <guid>/zh/zhresume/</guid>
       <description>English Version
 PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, MS Office, \(\LaTeX\), Git教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, MS Office, \(\rm{\LaTeX}\), Git教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的pandas库进行数据清理、探索性数据分析和可视化。使用IV和WOE方法分析各个特征对于因变量的预测能力。使用Logistic回归、CART决策树、随机森林、KNN、GBDT、Xgboost等方法建立信用卡评分模型。使用sklearn库的交叉验证(Cross-Validation)的方法训练模型并调参，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
 北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
