@@ -8,8 +8,8 @@
 <meta name="generator" content="Hugo 0.64.0" />
 
 
-<title>SQL查询语句 - 宋骁</title>
-<meta property="og:title" content="SQL查询语句 - 宋骁">
+<title>SQL增删改查 - 宋骁</title>
+<meta property="og:title" content="SQL增删改查 - 宋骁">
 
 
   <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
@@ -70,7 +70,7 @@
 
   <article class="article">
 
-    <h1 class="article-title">SQL查询语句</h1>
+    <h1 class="article-title">SQL增删改查</h1>
 
     
     <span class="article-date">2019-08-25</span>
@@ -81,8 +81,7 @@
 
 
 <blockquote>
-<p>学而时习之，不亦乐乎？<br />
-——孔子</p>
+<p>学而时习之，不亦乐乎？</p>
 </blockquote>
 <hr />
 <p><a href="https://www.cnblogs.com/vuenote/archive/2018/10/13/9783463.html">MySQL安装(基于Windows)</a></p>
@@ -92,11 +91,14 @@
 <hr />
 <ul>
 <li><p>数据：<a href="https://www.kaggle.com/drgilermo/nba-players-stats">NBA技术统计</a>和<a href="https://www.kaggle.com/koki25ando/salary">球员薪酬</a>数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。</p></li>
-<li><p>本文基于MySQL。</p></li>
+<li><p>本文基于MySQL。此处建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。</p></li>
+<li><p>SQLite文件见<a href="https://www.kaggle.com/rikdifos/nba-salary-and-statistics-201617">这里</a></p></li>
 </ul>
 <div id="变量排序" class="section level1">
 <h1>变量排序</h1>
-<pre class="sql"><code>SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;</code></pre>
+<pre class="sql"><code>SELECT salary17_18,Player 
+FROM salary 
+ORDER BY salary17_18 DESC;</code></pre>
 </div>
 <div id="删除-增添列" class="section level1">
 <h1>删除 &amp; 增添列</h1>
@@ -226,7 +228,9 @@ DET
 <ul>
 <li><code>DISTINCT</code>按选中的列去重。得到高龄球员榜</li>
 </ul>
-<pre class="sql"><code>SELECT DISTINCT Player,Age FROM seasons ORDER BY Age DESC;</code></pre>
+<pre class="sql"><code>SELECT DISTINCT Player,Age 
+FROM seasons 
+ORDER BY Age DESC;</code></pre>
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
@@ -292,7 +296,9 @@ WHERE pubid= &#39;20&#39; AND adfmt &lt;&gt; &#39;chip&#39; AND event = &#39;ac&
 <ul>
 <li>使用<code>WHERE</code>子句保留2017年之后的数据</li>
 </ul>
-<pre class="sql"><code>SELECT * FROM seasons WHERE Year&gt;=2017</code></pre>
+<pre class="sql"><code>SELECT * 
+FROM seasons 
+WHERE Year&gt;=2017</code></pre>
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
@@ -544,7 +550,8 @@ ORDER BY Player</code></pre>
 <li><p>删除斯蒂芬·库里</p></li>
 <li><p><code>LIMIT</code>语句控制结果显示的行数</p></li>
 </ul>
-<pre class="sql"><code>DELETE FROM salary WHERE Player=&#39;Stephen Curry&#39;;
+<pre class="sql"><code>DELETE FROM salary 
+WHERE Player=&#39;Stephen Curry&#39;;
 SELECT * FROM salary LIMIT 5</code></pre>
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -745,7 +752,8 @@ Kyle Lowry
 </table>
 <div id="从视图中查询" class="section level2">
 <h2>从视图中查询</h2>
-<pre class="sql"><code>SELECT COUNT(DISTINCT Tm) FROM teamage;</code></pre>
+<pre class="sql"><code>SELECT COUNT(DISTINCT Tm) 
+FROM teamage;</code></pre>
 </div>
 </div>
 

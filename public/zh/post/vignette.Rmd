@@ -27,7 +27,7 @@ knitr::include_graphics("/img/vignette/Capture2.png")
 
 这种方法其实多此一举了！
 
-由于R在下载程序包时，已将小品文下载下来。我们可以使用`utils`包(这个包含许多有用函数的包不需要加载)中的`vignette`函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：  
+由于R在下载程序包时，已将小品文下载下来。我们可以使用`utils`包(这个包含许多有用函数的包，不需要加载)中的`vignette`函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：  
 
 ```r
 vignette(, package = "rpart")
@@ -56,7 +56,7 @@ vignette("longintro", package = "rpart")
 knitr::include_graphics("/img/vignette/Capture3.png")
 ```
 
-然后便可以阅读了。这里更推荐使用`browseVignettes`函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：
+然后便可以阅读了。这里更推荐使用`browseVignettes`函数，操作更为简单，弹出的小品文列表直接点击就可以阅读：
 
 ```r
 browseVignettes(package = "rpart")

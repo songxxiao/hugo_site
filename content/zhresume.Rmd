@@ -28,7 +28,7 @@ comment: false
 + Python, SQL, SPSS &emsp;(了解)
 -->
 + Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)
-+ SPSS, Stata, MS Office, LaTeX, Git
++ SPSS, Stata, MS Office, $\LaTeX$, Git
 
 <!--
 ### 相关课程

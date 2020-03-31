@@ -225,19 +225,19 @@ f.readlines()返回一个列表，列表的数据项为一行的文本[linel, l
     </item>
     
     <item>
-      <title>SQL查询语句</title>
+      <title>SQL增删改查</title>
       <link>/zh/sql/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/sql/</guid>
       <description>学而时习之，不亦乐乎？
-——孔子
 MySQL安装(基于Windows)
 MySQL 教程
 廖雪峰SQL教程
 W3school SQL教程
 数据：NBA技术统计和球员薪酬数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
-本文基于MySQL。
+本文基于MySQL。此处建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。
+SQLite文件见这里
 变量排序SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;删除 &amp;amp; 增添列ALTER TABLE salary DROP COLUMN TmADD COLUMN Team VARCHAR;重编码新变量ALTER TABLE salary ADD salary17_18 FLOAT;UPDATE salary SET salary17_18 = season17_18/1000000.tg {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}f1PlayerTmseason17_18salary17_181Stephen CurryGSW3468255034.</description>
     </item>
     
@@ -275,17 +275,17 @@ R Markdown: The Definitive Guide
 宋春林：用LaTeX写学位论文
 用 knitr 写作业
 在R Markdown文档中使用中文
-我一开始使用LaTeX写论文。我一直以来用的是MikTeX。
+我一开始使用\(\LaTeX\)写论文。我一直以来用的是MikTeX。
 而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
-Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到R Studio也大大提升了工作效率。如何做到这一点呢？
-首先要安装LaTeX环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
+Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到RStudio也大大提升了工作效率。如何做到这一点呢？
+首先要安装\(\LaTeX\)环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
 后续需要安装一些R包，如Knitr，tinytex等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。
-然后需要配置一下R Studio的环境:
-Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，Weave Rnw files using选knitr。想要写中文LaTeX文档必须选XeLaTeX环境。
-我们点击Open File打开一个LaTeX文档：
-Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译LaTeX文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的LaTeX Beamer）如图：
-Figure 5: 编译好的PDF文档编辑公式我使用Mathtype或者这个在线工具。Mathtype的好处在于可以直接将公式复制为LaTeX代码(需要事先设置好剪切和复制预置选项)：</description>
+然后需要配置一下RStudio的环境:
+Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，R Sweave Rnw files using选knitr。想要写中文\(\LaTeX\)文档必须选XeLaTeX环境。
+我们点击Open File打开一个\(\LaTeX\)文档：
+Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译\(\LaTeX\)文档，如图：
+Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的\(\LaTeX\) Beamer）如图：
+Figure 5: 编译好的PDF文档编辑公式我使用Mathtype或者这个在线工具。Mathtype的好处在于可以直接将公式复制为\(\LaTeX\)代码(需要事先设置好剪切和复制预置选项)：</description>
     </item>
     
     <item>
@@ -356,11 +356,11 @@ R Markdown: The Definitive Guide
 rpart的官方主页如下所示：
 其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。
 这种方法其实多此一举了！
-由于R在下载程序包时，已将小品文下载下来。我们可以使用utils包(这个包含许多有用函数的包不需要加载)中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
+由于R在下载程序包时，已将小品文下载下来。我们可以使用utils包(这个包含许多有用函数的包，不需要加载)中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
 vignette(, package = &amp;quot;rpart&amp;quot;)输出结果如下所示：
 Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
 vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
-然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单。弹出的小品文列表直接点击就可以阅读：
+然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单，弹出的小品文列表直接点击就可以阅读：
 browseVignettes(package = &amp;quot;rpart&amp;quot;)很多R包的小品文是PDF版本，当然还有的是html形式的，如ggplot2的小品文：
 vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)</description>
     </item>
