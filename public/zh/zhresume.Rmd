@@ -22,13 +22,13 @@ comment: false
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
 -->
 
-### 软件技能
+### 编程/软件技能
 
 <!--
 + Python, SQL, SPSS &emsp;(了解)
 -->
 + Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)
-+ SPSS, Stata, MS Office, $\rm{\LaTeX}$, Git
++ SPSS, Stata, Git, MS Office, $\rm{\LaTeX}$
 
 <!--
 ### 相关课程
@@ -59,19 +59,23 @@ comment: false
 + 上海大学  [第6届·应用社会科学研究方法研修班](http://caser.ust.hk/?act=course_main&id=16) &emsp;2017年7月  
 课程：Stata与应用回归分析基础，类别数据分析
 
-### 项目
+### 项目经历
 
 + 垃圾信息判别网页应用  
 2020年    
 本程序使用5567条英文短信数据作为训练集，训练了Logistic回归、朴素贝叶斯、决策树、随机森林、支持向量机等算法。训练好的模型被编写成基于R 语言的Shiny App。用户输入一段短信内容文本，并选择一个分类器，就能得到该文本的分类结果。考虑到用户的语言习惯，特别设置了中英双语界面的切换功能。
-[地址](https://xiaosong.shinyapps.io/spam_text/)
+[在线app](https://xiaosong.shinyapps.io/spam_text/)
 [源代码](https://github.com/songxxiao/txtnb)
 
 ### 科研经历
 
++ **机器学习在社会科学实证研究中的应用:以中国教育追踪调查数据为例**&emsp;2020年  
+学士学位论文  
+
+
 + **土地流转的福利效应与社会不平等:基于中国家庭追踪调查面板数据的分析**&emsp;2018年-2019年   
 国家大学生创新训练项目&emsp;独立作者  
-使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。输出图表并最终形成约12000 字的研究论文。([PDF](/land.pdf))  
+使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。([PDF](/land.pdf))  
 导师：[卿石松](https://faculty.ecnu.edu.cn/s/2136/main.jspy)
 
 ### 获奖情况 
@@ -88,22 +92,23 @@ comment: false
 
 ### 会议报告
 
++ 2018年7月 中国社会学年会 [大型学术调查反思与社会质量研究 论坛](http://css.cssn.cn/xsdt/zwdt/201805/t20180531_4323061.shtml) 南京大学    
+论坛主持人：李炜
+
 + 2017年11月 中国社会学会 [社会分层与流动冬季论坛](http://sociology.cssn.cn/xstt/xhzywyh/201712/t20171220_3786193.shtml) 西安交通大学  
 口头报告  
 论坛主持人：[吴愈晓](https://sociology.nju.edu.cn/99/2b/c17737a301355/page.htm)、[李煜](http://www.ssdpp.fudan.edu.cn/portal/f02f3f0f152247628e5e173df9bcecfd/orotsd.html)
 
-+ 2018年7月 中国社会学年会 [大型学术调查反思与社会质量研究 论坛](http://css.cssn.cn/xsdt/zwdt/201805/t20180531_4323061.shtml) 南京大学    
-论坛主持人：李炜
-
 ### 实习经历
 
-+ 中南财经政法大学&emsp;数据分析顾问&emsp;2020年2月-3月 
-   远程实习。使用Xgboost，RandomForest，LightGBM等算法对法律文本数据进行分类(multiclass)。使用词频法构建特征矩阵，并利用交叉验证训练模型(Sklearn)，最终得到0.75的交叉验证准确率。最后，编写Api封装训练好的算法。对新数据进行预测，使得预测结果能够运用到任何一个新数据中。
++ 中南财经政法大学&emsp;数据分析顾问&emsp;2020年2月-4月 
+   远程实习。使用Xgboost，RandomForest，LightGBM等算法对法律文本数据进行分类(multiclass)。使用词频法构建特征矩阵，并利用交叉验证训练模型(Sklearn)，最终得到0.75的交叉验证准确率。最后，编写程序封装训练好的算法。对新数据进行预测，使得预测结果能够运用到任何一个新数据中。
 
 
 + [艾瑞咨询](https://www.iresearch.com.cn/)&emsp;数据分析&emsp;2019年7月-9月 
    + 使用R、SPSS软件对汽车用户进行用户画像分析工作。使用主成分分析、聚类分析法对线下数据进行无监督学习，研究不同车系用户态度区分。对汽车生产商决策提供重要参考意见，最终使用Python将结果进行数据可视化描述。
-   + 使用MySQL、DBeaver数据库协助查询客户线上数据。   
+   + 使用MySQL数据库协助数据分析、清理。 
+   + 使用Hive SQL访问数据库集群。
 
 &nbsp;   
 
@@ -124,7 +129,7 @@ comment: false
 
 + 英语
 
-  + **[托福](https://www.ets.org/toefl)**[^toefl]&emsp;103  
+  + **[托福](https://www.ets.org/toefl)**&emsp;103  
   
 <center>  
 <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 292px" class="tg"><colgroup><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"></colgroup><tr><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Reading</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Listening</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Speaking</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">Writing</th></tr><tr><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">29</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">27</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">21</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">26</td></tr></table>   
@@ -134,7 +139,7 @@ comment: false
   + **[大学6级](http://cet.neea.edu.cn/)**&emsp;549
   + **[大学4级](http://cet.neea.edu.cn/)**&emsp;614  
 
-[^toefl]: [My Best Score成绩](https://www.ets.org/toefl/institutions/scores/)
+
 
 
 

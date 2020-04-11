@@ -1,5 +1,5 @@
 ---
-title: 'Résumé - Xiao Song '
+title: 'Curriculum Vitae - Xiao Song'
 author: 
 slug: enresume
 disable_comments: true
@@ -25,7 +25,7 @@ comment: false
 ### SOFTWARE & PROGRAMMING SKILLS
 
 + Python, R, SQL (Including MySQL, SQL Sever, SQLite)
-+ SPSS, Stata, MS Office, $\rm{\LaTeX}$, Git
++ SPSS, Stata, Git, MS Office, $\rm{\LaTeX}$
 
 <!--
 ### RELEVANT COURSES
@@ -95,26 +95,28 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 
 ### CONFERENCE PRESENTATIONS 
 
++ 2018-7&emsp;Chinese Sociological Association Annual Meeting [Large Academic Survey Reflection and Social Quality Research Forum](http://css.cssn.cn/xsdt/zwdt/201805/t20180531_4323061.shtml) Nanjing University    
+Forum hosts：Wei Li
+
 + 2017-11&emsp;Chinese Sociological Association   
 [Winter Meeting of Social Stratification and Mobility Committee](http://sociology.nju.edu.cn/so_en/e9/79/c18475a321913/page.htm)  
 [Xi’an Jiaotong University](http://en.xjtu.edu.cn/)    
 Forum hosts：[Yu Xiao Wu](https://sociology.nju.edu.cn/99/2b/c17737a301355/page.htm)、[Yu Li](http://www.ssdpp.fudan.edu.cn/portal/f02f3f0f152247628e5e173df9bcecfd/orotsd.html)
 
-+ 2018-7&emsp;Chinese Sociological Association Annual Meeting [Large Academic Survey Reflection and Social Quality Research Forum](http://css.cssn.cn/xsdt/zwdt/201805/t20180531_4323061.shtml) Nanjing University    
-Forum hosts：Wei Li
-
 ### WORK & INTERNSHIP EXPERIENCE
 
-+ Zhongnan University of Economics and Law&emsp;Data Consultant&emsp;2020-02~2020-03 
++ Zhongnan University of Economics and Law&emsp;Data Consultant&emsp;2020-02~2020-04 
    Remote internship. Use Xgboost, RandomForest, LightGBM and other algorithms to classify (multiclass) legal text data. The word frequency method is used to construct the feature matrix, and the cross-validation training model (sklearn) is used to obtain the cross-validation accuracy of 0.75. I write a program to make predictions on new data, so that the prediction results can be applied to any new data set.
 
 
 
-+ [iRESEARCH](http://www.iresearchchina.com/)&emsp;Data Analyst&emsp;2019-07~2019-09
++ [iResearch](http://www.iresearchchina.com/)&emsp;Data Analyst&emsp;2019-07~2019-09
   + Using R and SPSS to analysis profile of cars' users. Through PCA and Cluster analysis, I catogorized survey data and found cars users' attitude difference.
-  + Using MySQL database to explore users' database. 
+  + Using MySQL database to help analyze users' data. 
+  + Using Hive SQL to help access Hadoop database.
    
 &nbsp; 
+
 <!---
 + [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362)&emsp;Campus Manager&emsp;2017-09~2018-01  
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
@@ -140,7 +142,7 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 + **[CET-6](http://cet.neea.edu.cn/)**[^cet]&emsp;549
 + **[CET-4](http://cet.neea.edu.cn/)**&emsp;614
 
-[^toefl]: [My Best Score](https://www.ets.org/toefl/institutions/scores/)
+
 
 [^cet]: [College English Test](http://www.cet.edu.cn/)
 

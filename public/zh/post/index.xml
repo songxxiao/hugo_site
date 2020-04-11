@@ -284,7 +284,7 @@ R Markdown: The Definitive Guide
 Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，R Sweave Rnw files using选knitr。想要写中文\(\rm{\LaTeX}\) 文档必须选XeLaTeX环境。
 我们点击Open File打开一个\(\rm{\LaTeX}\) 文档：
 Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译\(\rm{\LaTeX}\) 文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的[\(\rm{\LaTeX}\) Beamer](http://deic.</description>
+Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档如图：</description>
     </item>
     
     <item>

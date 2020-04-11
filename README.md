@@ -1,30 +1,37 @@
+---
+title: ' '
+---
 
-# [xsong.ltd](https://xsong.ltd/)
+# A Hugo Theme Based on Lithium
+
+I modified [lithium](https://themes.gohugo.io/hugo-lithium-theme/) theme, in short, I changed CSS colors and fonts. I use a darker background color to protect programmers' eyes. Default articles list has been deleted.
+
+
+This theme has been use on my personal website:<https://xsong.ltd/>
+
+
+Some references when building this hugo/blogdown website:
+
++ [two-language mode](https://www.pzhao.org/zh/post/hugo-multilingual/)
+
++ buliding your blog using blogdown [link 1](http://xuer.dapengde.com/post/hugo-blogdown/) [link 2](https://cosx.org/2018/01/build-blog-with-blogdown-hugo-netlify-github/)
+
+<!---
 
 ![](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-brightgreen.svg)
 
+--->
+Theme Preview:
 
-## INTRODUCTION
+![](https://i.loli.net/2020/04/11/FEaG2ojdDpWZ1lQ.jpg)
 
-This is Xiao Song's personal website.
-The url is [https://xsong.ltd/](https://xsong.ltd/)
+## How to Use?
 
-Thanks to [Yihui](https://yihui.name/)'s [`blogdown`](https://bookdown.org/yihui/blogdown/) package.
+clone this repo:
 
-+ The website is built by `hugo`'s [theme](https://themes.gohugo.io/) `lithium`, and it is deployed by `github` and [`netlify`](https://www.netlify.com/).
-
-+ I use this website to help my work and study.
-
-+ This website will be updated very frequently.
-
-+ The webite's English font is [TeX Gyre Pagella](https://www.fontsquirrel.com/fonts/tex-gyre-pagella).
-
-+ The `bookdown` themes please click [here](https://bookdown.org/yihui/bookdown/theming.html).
-
-+ [This](http://xuer.dapengde.com/post/hugo-blogdown/) and [This](https://cosx.org/2018/01/build-blog-with-blogdown-hugo-netlify-github/) passage have helped me a lot when making the website. Without them, I might had more trouble. Thanks to the authors!
-
-+ I followed [this](https://www.pzhao.org/zh/post/hugo-multilingual/) instruction to build the two-language
-function.
-
+```
+git clone git@github.com:songxxiao/Mysite.git
+```
+or download [release version](https://github.com/songxxiao/Mysite/releases), then put this lithium folder on theme folder.
 
 

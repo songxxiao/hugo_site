@@ -284,7 +284,7 @@ R Markdown: The Definitive Guide
 Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，R Sweave Rnw files using选knitr。想要写中文\(\rm{\LaTeX}\) 文档必须选XeLaTeX环境。
 我们点击Open File打开一个\(\rm{\LaTeX}\) 文档：
 Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译\(\rm{\LaTeX}\) 文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档（是我用于某课程pre的[\(\rm{\LaTeX}\) Beamer](http://deic.</description>
+Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档如图：</description>
     </item>
     
     <item>
@@ -374,6 +374,15 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
     </item>
     
     <item>
+      <title>不正经的自我介绍</title>
+      <link>/zh/selfintro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/selfintro/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>宋 骁 简 历</title>
       <link>/zh/zhresume/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -381,15 +390,15 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
       <guid>/zh/zhresume/</guid>
       <description>English Version
 PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, MS Office, \(\rm{\LaTeX}\), Git教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里编程/软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的pandas库进行数据清理、探索性数据分析和可视化。使用IV和WOE方法分析各个特征对于因变量的预测能力。使用Logistic回归、CART决策树、随机森林、KNN、GBDT、Xgboost等方法建立信用卡评分模型。使用sklearn库的交叉验证(Cross-Validation)的方法训练模型并调参，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
 北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
 上海大学 第6届·应用社会科学研究方法研修班 2017年7月
 课程：Stata与应用回归分析基础，类别数据分析
-项目垃圾信息判别网页应用
+项目经历垃圾信息判别网页应用
 2020年
-本程序使用5567条英文短信数据作为训练集，训练了Logistic回归、朴素贝叶斯、决策树、随机森林、支持向量机等算法。训练好的模型被编写成基于R 语言的Shiny App。用户输入一段短信内容文本，并选择一个分类器，就能得到该文本的分类结果。考虑到用户的语言习惯，特别设置了中英双语界面的切换功能。地址源代码科研经历土地流转的福利效应与社会不平等:基于中国家庭追踪调查面板数据的分析 2018年-2019年</description>
+本程序使用5567条英文短信数据作为训练集，训练了Logistic回归、朴素贝叶斯、决策树、随机森林、支持向量机等算法。训练好的模型被编写成基于R 语言的Shiny App。用户输入一段短信内容文本，并选择一个分类器，就能得到该文本的分类结果。考虑到用户的语言习惯，特别设置了中英双语界面的切换功能。在线app源代码科研经历机器学习在社会科学实证研究中的应用:以中国教育追踪调查数据为例 2020年</description>
     </item>
     
   </channel>

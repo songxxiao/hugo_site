@@ -61,7 +61,7 @@ knitr::include_graphics("/img/sweave/tempsnip2.png")
 ```
 
 
-编译成功的PDF文档（是我用于某课程pre的[$\rm{\LaTeX}$ Beamer](http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html)）如图：
+编译成功的PDF文档如图：
 
 ```{r, echo=F, out.width = '70%',fig.align='center',fig.cap='编译好的PDF文档'}
 knitr::include_graphics("/img/sweave/beamer.jpg")
