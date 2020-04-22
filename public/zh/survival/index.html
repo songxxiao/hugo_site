@@ -126,6 +126,7 @@
 <span class="math inline">\(\sum\limits_{}^{} {{t_i}}\)</span>是历险人年数。<span class="math inline">\(n\)</span>是事件发生数。<br />
 <span class="math inline">\(\lambda\)</span>是个概率估计。</li>
 </ul>
+<p>求解参数问题是以对数似然函数为目标函数的最优化问题，下面</p>
 <pre class="r"><code>library(survival)
 library(haven) 
 library(ggplot2)
@@ -134,65 +135,66 @@ library(ggfortify)
 library(survminer)
 library(rpart)
 library(rpart.plot)
-library(stats4)</code></pre>
-<pre class="r"><code>y &lt;- rpois(n=10000, lambda=7)
-df_Poisson &lt;- data.frame(data=y)
-#df_Poisson
-df_Poisson %&gt;% 
-  ggplot(aes(data))+ 
-  geom_histogram() +
-  ylab(&quot;Count&quot;)+ xlab(&quot;data&quot;)+
-  theme_bw(base_size = 16) +
-  ggtitle(&quot;Poisson Distribution: rpois(10000,7)&quot;)</code></pre>
-<p><img src="../../post/survival_files/figure-html/unnamed-chunk-3-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>NROW(df_Poisson)</code></pre>
-<pre><code>[1] 10000</code></pre>
-<pre class="r"><code>llh_poisson &lt;- function(lambda,y){
-  # log(likelihood) by summing 
-   llh &lt;- sum(dpois(df_Poisson$data,lambda, log=T))
+library(stats4)
+# 简单的一维MLE
+y = rpois(n=10000, lambda=7) # 人造一个泊松分布，10000个数据
+df_Poisson = data.frame(data=y)  # 变成数据框
+nrow(df_Poisson) # 行数
+#&gt; [1] 10000
+#df_Poisson 
+df_Poisson %&gt;%  # 画直方图
+  ggplot(aes(data)) + 
+  geom_histogram(col=&#39;black&#39;, fill = &#39;white&#39;)+
+  labs(title = &#39;Poisson Distribution: rpois(10000,7)&#39;, 
+       x = &#39;Count&#39;, y = &#39;data&#39;) +
+  theme_bw()</code></pre>
+<p><img src="../../post/survival_files/figure-html/unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+log_sum_density = function(lambda,y){ # 累加数据框的对数密度
+   llh = sum(dpois(df_Poisson$data,lambda, log=T))
    return(llh)
 }
 
-lambdas &lt;- seq(1,15, by=0.2)
-ll &lt;- sapply(lambdas,llh_poisson)
+lambdas = seq(1,15, by=0.2) # 生成1-15的lambdas
+ll = sapply(lambdas,log_sum_density) 
  
 # save the lambdas and log-likelihoods in a data frame
-df &lt;- data.frame(ll=ll, lambda=lambdas)
-
+df = data.frame(`likelihood` = ll, lambda=lambdas)
 
 df %&gt;% 
-  ggplot(aes(lambda,ll))+
-  geom_point(size=4,color=&quot;dodgerblue&quot;)+
-  xlab(&quot;Lambda&quot;) +
-  ylab(&quot;Log Likelihood&quot;)+
+  ggplot(aes(lambda,likelihood))+
+  geom_point(size = 4,color = &#39;dodgerblue&#39;)+
+  labs(x = &#39;Lambda&#39;,y = &#39;Log Likelihood&#39;) +
   theme_bw(base_size = 16) +
-  geom_vline(xintercept = lambdas[which.max(ll)], color=&quot;red&quot;,size=2)</code></pre>
-<p><img src="../../post/survival_files/figure-html/unnamed-chunk-3-2.png" width="90%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ll &lt;- function(lambda){
-  # log(likelihood) by summing 
-   -sum(dpois(df_Poisson$data,lambda, log=T))
+  geom_vline(xintercept = lambdas[which.max(df$likelihood)],
+             color=&#39;red&#39;,size=2)</code></pre>
+<p><img src="../../post/survival_files/figure-html/unnamed-chunk-2-2.png" width="90%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+log_sum_density0 = function(lambda){ 
+   -sum(dpois(df_Poisson$data, lambda, log = T)) 
 }
 
-fit0 &lt;- mle(ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
-fit0</code></pre>
-<pre><code>
-Call:
-mle(minuslogl = ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
-
-Coefficients:
-  lambda 
-6.994883 </code></pre>
-<pre class="r"><code>summary(fit0)</code></pre>
-<pre><code>Maximum likelihood estimation
-
-Call:
-mle(minuslogl = ll, start = list(lambda = 1), nobs = NROW(df_Poisson))
-
-Coefficients:
-       Estimate Std. Error
-lambda 6.994883   0.026448
-
--2 log L: 47719.87 </code></pre>
+fit0 = mle(log_sum_density0, start = list(lambda = 1),# 使用最大似然法估计参数
+           nobs = nrow(df_Poisson))
+fit0
+#&gt; 
+#&gt; Call:
+#&gt; mle(minuslogl = log_sum_density0, start = list(lambda = 1), nobs = nrow(df_Poisson))
+#&gt; 
+#&gt; Coefficients:
+#&gt;   lambda 
+#&gt; 7.018077
+summary(fit0)
+#&gt; Maximum likelihood estimation
+#&gt; 
+#&gt; Call:
+#&gt; mle(minuslogl = log_sum_density0, start = list(lambda = 1), nobs = nrow(df_Poisson))
+#&gt; 
+#&gt; Coefficients:
+#&gt;        Estimate Std. Error
+#&gt; lambda 7.018077  0.0264918
+#&gt; 
+#&gt; -2 log L: 47526.32</code></pre>
 <div id="删截censored样本的似然函数" class="section level3">
 <h3>删截(Censored)样本的似然函数</h3>
 <ul>
@@ -221,72 +223,74 @@ lambda 6.994883   0.026448
 <p>卡普兰迈耶法又称乘积极限法(Product-Limit Method), 公式如下：</p>
 <p><span class="math display">\[{\rm{\hat S}}(t) = \prod\limits_{{t_i} \le t} {(1 - {{\hat q}_i})}  = \prod\limits_{{t_i} \le t} {(1 - {{{d_i}} \over {{n_i}}})}\]</span></p>
 <p><span class="math inline">\(n_i\)</span>是在时间<span class="math inline">\(t_i\)</span>中的历险人数，<span class="math inline">\(d_i\)</span>是事件发生数。</p>
-<pre class="r"><code>table(stagec$pgstat)</code></pre>
-<pre><code>
- 0  1 
-92 54 </code></pre>
-<pre class="r"><code>km &lt;- with(stagec, Surv(pgtime, pgstat == 1))
-head(km,10) </code></pre>
-<pre><code> [1]  6.1+  9.4+  5.2   3.2   1.9   4.8+  5.8+  7.3+  3.7  15.9+</code></pre>
-<pre class="r"><code>km_fit &lt;- survfit(km ~ 1, stagec)
-km_fit </code></pre>
-<pre><code>Call: survfit(formula = km ~ 1, data = stagec)
+<pre class="r"><code>table(stagec$pgstat)
+#&gt; 
+#&gt;  0  1 
+#&gt; 92 54
+km = with(stagec, Surv(pgtime, pgstat == 1))
+head(km,10) 
+#&gt;  [1]  6.1+  9.4+  5.2   3.2   1.9   4.8+  5.8+  7.3+  3.7  15.9+
 
-      n  events  median 0.95LCL 0.95UCL 
-  146.0    54.0      NA     7.7      NA </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+km_fit = survfit(km ~ 1, stagec)
+km_fit 
+#&gt; Call: survfit(formula = km ~ 1, data = stagec)
+#&gt; 
+#&gt;       n  events  median 0.95LCL 0.95UCL 
+#&gt;   146.0    54.0      NA     7.7      NA</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
 <img src="https://i.loli.net/2019/11/13/aKTArE51ROidC7t.jpg" alt="生存函数的Kaplan–Meier estimator是生命表$nPx$列的累乘。" width="90%" />
 <p class="caption">
 Figure 1: 生存函数的Kaplan–Meier estimator是生命表<span class="math inline">\(nPx\)</span>列的累乘。
 </p>
 </div>
-<pre class="r"><code>summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价</code></pre>
-<pre><code>Call: survfit(formula = km ~ 1, data = stagec)
-
- time n.risk n.event survival std.err lower 95% CI upper 95% CI
-  0.2    146       0    1.000 0.00000        1.000        1.000
-  0.4    144       2    0.986 0.00962        0.968        1.000
-  0.6    143       1    0.979 0.01174        0.957        1.000
-  0.8    143       0    0.979 0.01174        0.957        1.000
-  1.0    143       2    0.966 0.01505        0.937        0.996
-  1.2    139       2    0.952 0.01768        0.918        0.987
-  1.4    138       1    0.945 0.01883        0.909        0.983
-  1.6    135       4    0.918 0.02273        0.874        0.963
-  1.8    132       1    0.911 0.02357        0.866        0.958
-  2.0    130       3    0.890 0.02589        0.841        0.942
-  2.2    128       1    0.883 0.02659        0.833        0.937
-  2.4    126       1    0.876 0.02727        0.825        0.932
-  2.6    125       3    0.856 0.02916        0.800        0.915
-  2.8    122       1    0.849 0.02974        0.792        0.909
-  3.0    120       3    0.828 0.03135        0.769        0.892
-  3.2    118       2    0.814 0.03235        0.753        0.880
-  3.4    111       4    0.786 0.03414        0.722        0.856
-  3.6    111       0    0.786 0.03414        0.722        0.856
-  3.8    106       3    0.764 0.03538        0.698        0.837
-  4.0    106       0    0.764 0.03538        0.698        0.837
-  4.2    105       2    0.750 0.03615        0.682        0.824
-  4.4    103       1    0.743 0.03653        0.674        0.818
-  4.6    101       0    0.743 0.03653        0.674        0.818
-  4.8     97       2    0.728 0.03727        0.658        0.805
-  5.0     94       1    0.720 0.03763        0.650        0.798</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<pre class="r"><code>summary(km_fit, times = c(0.2*(1:25))) #这个表和生命表等价
+#&gt; Call: survfit(formula = km ~ 1, data = stagec)
+#&gt; 
+#&gt;  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+#&gt;   0.2    146       0    1.000 0.00000        1.000        1.000
+#&gt;   0.4    144       2    0.986 0.00962        0.968        1.000
+#&gt;   0.6    143       1    0.979 0.01174        0.957        1.000
+#&gt;   0.8    143       0    0.979 0.01174        0.957        1.000
+#&gt;   1.0    143       2    0.966 0.01505        0.937        0.996
+#&gt;   1.2    139       2    0.952 0.01768        0.918        0.987
+#&gt;   1.4    138       1    0.945 0.01883        0.909        0.983
+#&gt;   1.6    135       4    0.918 0.02273        0.874        0.963
+#&gt;   1.8    132       1    0.911 0.02357        0.866        0.958
+#&gt;   2.0    130       3    0.890 0.02589        0.841        0.942
+#&gt;   2.2    128       1    0.883 0.02659        0.833        0.937
+#&gt;   2.4    126       1    0.876 0.02727        0.825        0.932
+#&gt;   2.6    125       3    0.856 0.02916        0.800        0.915
+#&gt;   2.8    122       1    0.849 0.02974        0.792        0.909
+#&gt;   3.0    120       3    0.828 0.03135        0.769        0.892
+#&gt;   3.2    118       2    0.814 0.03235        0.753        0.880
+#&gt;   3.4    111       4    0.786 0.03414        0.722        0.856
+#&gt;   3.6    111       0    0.786 0.03414        0.722        0.856
+#&gt;   3.8    106       3    0.764 0.03538        0.698        0.837
+#&gt;   4.0    106       0    0.764 0.03538        0.698        0.837
+#&gt;   4.2    105       2    0.750 0.03615        0.682        0.824
+#&gt;   4.4    103       1    0.743 0.03653        0.674        0.818
+#&gt;   4.6    101       0    0.743 0.03653        0.674        0.818
+#&gt;   4.8     97       2    0.728 0.03727        0.658        0.805
+#&gt;   5.0     94       1    0.720 0.03763        0.650        0.798</code></pre>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="https://i.loli.net/2019/11/13/sy7eklhjXZBLrTM.jpg" alt="生命表示例" width="90%" />
 <p class="caption">
 Figure 2: 生命表示例
 </p>
 </div>
-<pre class="r"><code>kme &lt;- survfit(Surv(pgtime, pgstat) ~ 1,stagec)
+<pre class="r"><code>kme = survfit(Surv(pgtime, pgstat) ~ 1,stagec)
 autoplot(kme, surv.colour = &#39;orange&#39;, censor.colour = &#39;red&#39;)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-9-1.png" alt="Kaplan Meier Survival Curve" width="90%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-81"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-8-1.png" alt="Kaplan Meier Survival Curve" width="90%" />
 <p class="caption">
 Figure 3: Kaplan Meier Survival Curve
 </p>
 </div>
-<pre class="r"><code>km_trt_fit &lt;- survfit(Surv(pgtime, pgstat) ~ grade,stagec)
+<pre class="r"><code>
+km_trt_fit = survfit(Surv(pgtime, pgstat) ~ grade,stagec)
 autoplot(km_trt_fit)  </code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-92"></span>
-<img src="../../post/survival_files/figure-html/unnamed-chunk-9-2.png" alt="Kaplan Meier Survival Curve" width="90%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-82"></span>
+<img src="../../post/survival_files/figure-html/unnamed-chunk-8-2.png" alt="Kaplan Meier Survival Curve" width="90%" />
 <p class="caption">
 Figure 4: Kaplan Meier Survival Curve
 </p>
@@ -303,75 +307,59 @@ Figure 4: Kaplan Meier Survival Curve
 <li><p>两个分别具有协变量<span class="math inline">\({X_i}\)</span>和<span class="math inline">\({X_j}\)</span>的个体，其风险函数之比为相对危险度（risk ration，RR）或风险比（hazard ration，HR）</p></li>
 <li><p><span class="math inline">\({h_i}(t)\)</span>和<span class="math inline">\({h_0}(t)\)</span>随时间变化。在满足比例风险假定后，不同特征样本的风险比（hazard ration，HR）不随时间变化。所以系数是固定的。无时变变量的Cox模型为宽数据(wide data)。</p></li>
 </ul>
-<pre class="r"><code>coxreg &lt;- coxph(Surv(pgtime , pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
-summary(coxreg)</code></pre>
-<pre><code>Call:
-coxph(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
-    gleason + ploidy, data = stagec)
+<pre class="r"><code>coxreg = coxph(Surv(pgtime , pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
+summary(coxreg)
+#&gt; Call:
+#&gt; coxph(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
+#&gt;     gleason + ploidy, data = stagec)
+#&gt; 
+#&gt;   n= 134, number of events= 49 
+#&gt;    (12 observations deleted due to missingness)
+#&gt; 
+#&gt;                      coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+#&gt; age              -0.01859   0.98158  0.02899 -0.641  0.52139   
+#&gt; eet               0.09073   1.09498  0.37418  0.242  0.80840   
+#&gt; g2               -0.05569   0.94583  0.02664 -2.091  0.03654 * 
+#&gt; grade             1.37745   3.96478  0.43615  3.158  0.00159 **
+#&gt; gleason           0.21023   1.23397  0.17099  1.230  0.21887   
+#&gt; ploidytetraploid  0.98917   2.68901  0.42622  2.321  0.02030 * 
+#&gt; ploidyaneuploid   1.22007   3.38742  0.66723  1.829  0.06747 . 
+#&gt; ---
+#&gt; Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+#&gt; 
+#&gt;                  exp(coef) exp(-coef) lower .95 upper .95
+#&gt; age                 0.9816     1.0188    0.9274    1.0390
+#&gt; eet                 1.0950     0.9133    0.5259    2.2799
+#&gt; g2                  0.9458     1.0573    0.8977    0.9965
+#&gt; grade               3.9648     0.2522    1.6864    9.3212
+#&gt; gleason             1.2340     0.8104    0.8826    1.7252
+#&gt; ploidytetraploid    2.6890     0.3719    1.1663    6.2000
+#&gt; ploidyaneuploid     3.3874     0.2952    0.9161   12.5261
+#&gt; 
+#&gt; Concordance= 0.777  (se = 0.032 )
+#&gt; Likelihood ratio test= 47.93  on 7 df,   p=4e-08
+#&gt; Wald test            = 40.97  on 7 df,   p=8e-07
+#&gt; Score (logrank) test = 47.66  on 7 df,   p=4e-08
+coxreg
+#&gt; Call:
+#&gt; coxph(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
+#&gt;     gleason + ploidy, data = stagec)
+#&gt; 
+#&gt;                      coef exp(coef) se(coef)      z       p
+#&gt; age              -0.01859   0.98158  0.02899 -0.641 0.52139
+#&gt; eet               0.09073   1.09498  0.37418  0.242 0.80840
+#&gt; g2               -0.05569   0.94583  0.02664 -2.091 0.03654
+#&gt; grade             1.37745   3.96478  0.43615  3.158 0.00159
+#&gt; gleason           0.21023   1.23397  0.17099  1.230 0.21887
+#&gt; ploidytetraploid  0.98917   2.68901  0.42622  2.321 0.02030
+#&gt; ploidyaneuploid   1.22007   3.38742  0.66723  1.829 0.06747
+#&gt; 
+#&gt; Likelihood ratio test=47.93  on 7 df, p=3.67e-08
+#&gt; n= 134, number of events= 49 
+#&gt;    (12 observations deleted due to missingness)
 
-  n= 134, number of events= 49 
-   (12 observations deleted due to missingness)
-
-                     coef exp(coef) se(coef)      z Pr(&gt;|z|)   
-age              -0.01859   0.98158  0.02899 -0.641  0.52139   
-eet               0.09073   1.09498  0.37418  0.242  0.80840   
-g2               -0.05569   0.94583  0.02664 -2.091  0.03654 * 
-grade             1.37745   3.96478  0.43615  3.158  0.00159 **
-gleason           0.21023   1.23397  0.17099  1.230  0.21887   
-ploidytetraploid  0.98917   2.68901  0.42622  2.321  0.02030 * 
-ploidyaneuploid   1.22007   3.38742  0.66723  1.829  0.06747 . 
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-                 exp(coef) exp(-coef) lower .95 upper .95
-age                 0.9816     1.0188    0.9274    1.0390
-eet                 1.0950     0.9133    0.5259    2.2799
-g2                  0.9458     1.0573    0.8977    0.9965
-grade               3.9648     0.2522    1.6864    9.3212
-gleason             1.2340     0.8104    0.8826    1.7252
-ploidytetraploid    2.6890     0.3719    1.1663    6.2000
-ploidyaneuploid     3.3874     0.2952    0.9161   12.5261
-
-Concordance= 0.777  (se = 0.032 )
-Likelihood ratio test= 47.93  on 7 df,   p=4e-08
-Wald test            = 40.97  on 7 df,   p=8e-07
-Score (logrank) test = 47.66  on 7 df,   p=4e-08</code></pre>
-<pre class="r"><code>coxreg</code></pre>
-<pre><code>Call:
-coxph(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
-    gleason + ploidy, data = stagec)
-
-                     coef exp(coef) se(coef)      z       p
-age              -0.01859   0.98158  0.02899 -0.641 0.52139
-eet               0.09073   1.09498  0.37418  0.242 0.80840
-g2               -0.05569   0.94583  0.02664 -2.091 0.03654
-grade             1.37745   3.96478  0.43615  3.158 0.00159
-gleason           0.21023   1.23397  0.17099  1.230 0.21887
-ploidytetraploid  0.98917   2.68901  0.42622  2.321 0.02030
-ploidyaneuploid   1.22007   3.38742  0.66723  1.829 0.06747
-
-Likelihood ratio test=47.93  on 7 df, p=3.67e-08
-n= 134, number of events= 49 
-   (12 observations deleted due to missingness)</code></pre>
-<pre class="r"><code>ggforest(coxreg,stagec)</code></pre>
-<p><img src="../../post/survival_files/figure-html/unnamed-chunk-10-1.png" width="90%" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>#library(rms)
-#dd=datadist(stagec)
-#options(datadist=&quot;dd&quot;)
-#f2 &lt;- psm(Surv(time,status) ~ age+gender+grade,data =  #LIHC, dist=&#39;lognormal&#39;)
-#med &lt;- Quantile(f2) # 计算中位生存时间
-#surv &lt;- Survival(f2) # 构建生存概率函数
-
-## 绘制COX回归中位生存时间的Nomogram图
-#nom &lt;- nomogram(f2, fun=function(x) #med(lp=x),funlabel=&quot;Median Survival Time&quot;)
-
-#plot(nom)
-
-#cox_fit &lt;- survfit(coxreg)
-#autoplot(cox_fit) #拟合值
-##C-指数 Harrell&#39;s concordance index
-#coxreg$concordance
-#concordance(Surv(pgtime , pgstat) ~ predict(coxreg),stagec)</code></pre>
+ggforest(coxreg,stagec)</code></pre>
+<p><img src="../../post/survival_files/figure-html/unnamed-chunk-9-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <!---
 [生存模型的C-index（C指数）](https://blog.csdn.net/fjsd155/article/details/84669331)
 
@@ -380,27 +368,28 @@ n= 134, number of events= 49
 </div>
 <div id="aalens-additive-regression-model" class="section level2">
 <h2><a href="http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf">Aalen’s additive regression model</a></h2>
-<pre class="r"><code>aaregfit &lt;- aareg(Surv(pgtime, pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
-aaregfit</code></pre>
-<pre><code>Call:
-aareg(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
-    gleason + ploidy, data = stagec)
+<pre class="r"><code>aaregfit = aareg(Surv(pgtime, pgstat)~age + eet + g2 + grade + gleason + ploidy,stagec)
+aaregfit
+#&gt; Call:
+#&gt; aareg(formula = Surv(pgtime, pgstat) ~ age + eet + g2 + grade + 
+#&gt;     gleason + ploidy, data = stagec)
+#&gt; 
+#&gt;   n=134 (12 observations deleted due to missingness)
+#&gt;     38 out of 38 unique event times used
+#&gt; 
+#&gt;                     slope      coef se(coef)      z       p
+#&gt; Intercept        -0.16500 -0.008530 0.022600 -0.377 0.70600
+#&gt; age              -0.00230 -0.000206 0.000312 -0.660 0.50900
+#&gt; eet              -0.01000 -0.001460 0.003910 -0.374 0.70900
+#&gt; g2               -0.00598 -0.000649 0.000246 -2.640 0.00832
+#&gt; grade             0.12200  0.010800 0.004560  2.380 0.01740
+#&gt; gleason           0.02260  0.001750 0.002250  0.780 0.43500
+#&gt; ploidytetraploid  0.09670  0.010700 0.004330  2.480 0.01320
+#&gt; ploidyaneuploid   0.37900  0.021700 0.019900  1.090 0.27400
+#&gt; 
+#&gt; Chisq=29.68 on 7 df, p=0.000109; test weights=aalen
 
-  n=134 (12 observations deleted due to missingness)
-    38 out of 38 unique event times used
-
-                    slope      coef se(coef)      z       p
-Intercept        -0.16500 -0.008530 0.022600 -0.377 0.70600
-age              -0.00230 -0.000206 0.000312 -0.660 0.50900
-eet              -0.01000 -0.001460 0.003910 -0.374 0.70900
-g2               -0.00598 -0.000649 0.000246 -2.640 0.00832
-grade             0.12200  0.010800 0.004560  2.380 0.01740
-gleason           0.02260  0.001750 0.002250  0.780 0.43500
-ploidytetraploid  0.09670  0.010700 0.004330  2.480 0.01320
-ploidyaneuploid   0.37900  0.021700 0.019900  1.090 0.27400
-
-Chisq=29.68 on 7 df, p=0.000109; test weights=aalen</code></pre>
-<pre class="r"><code>#ggforest(aaregfit,stagec)
+#ggforest(aaregfit,stagec)
 autoplot(aaregfit)</code></pre>
 <div class="figure" style="text-align: center">
 <img src="../../post/survival_files/figure-html/unnamed-chunk-11-1.png" alt=" " width="90%" />
@@ -410,55 +399,55 @@ autoplot(aaregfit)</code></pre>
 </div>
 <div id="cart树生存分析" class="section level2">
 <h2>CART树生存分析</h2>
-<pre class="r"><code>fit &lt;- rpart(Surv(pgtime , pgstat)~age +
+<pre class="r"><code>fit = rpart(Surv(pgtime , pgstat)~age +
 eet + g2 + grade + gleason + ploidy,stagec,method=&#39;exp&#39;)
-fit</code></pre>
-<pre><code>n= 146 
-
-node), split, n, deviance, yval
-      * denotes terminal node
-
- 1) root 146 192.111100 1.0000000  
-   2) grade&lt; 2.5 61  44.799010 0.3634439  
-     4) g2&lt; 11.36 33   9.117405 0.1229835 *
-     5) g2&gt;=11.36 28  27.602190 0.7345610  
-      10) gleason&lt; 5.5 20  14.297110 0.5304115 *
-      11) gleason&gt;=5.5 8  11.094650 1.3069940 *
-   3) grade&gt;=2.5 85 122.441500 1.6148600  
-     6) age&gt;=56.5 75 103.062900 1.4255040  
-      12) gleason&lt; 7.5 50  66.119800 1.1407320  
-        24) g2&lt; 13.475 24  27.197170 0.8007306 *
-        25) g2&gt;=13.475 26  36.790960 1.4570210  
-          50) g2&gt;=17.915 15  20.332740 0.9789825 *
-          51) g2&lt; 17.915 11  13.459010 2.1714480 *
-      13) gleason&gt;=7.5 25  33.487250 2.0307290  
-        26) g2&gt;=15.29 10  11.588480 1.2156230 *
-        27) g2&lt; 15.29 15  18.939150 2.7053610 *
-     7) age&lt; 56.5 10  13.769010 3.1822320 *</code></pre>
-<pre class="r"><code>rpart.plot(fit,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
+fit
+#&gt; n= 146 
+#&gt; 
+#&gt; node), split, n, deviance, yval
+#&gt;       * denotes terminal node
+#&gt; 
+#&gt;  1) root 146 192.111100 1.0000000  
+#&gt;    2) grade&lt; 2.5 61  44.799010 0.3634439  
+#&gt;      4) g2&lt; 11.36 33   9.117405 0.1229835 *
+#&gt;      5) g2&gt;=11.36 28  27.602190 0.7345610  
+#&gt;       10) gleason&lt; 5.5 20  14.297110 0.5304115 *
+#&gt;       11) gleason&gt;=5.5 8  11.094650 1.3069940 *
+#&gt;    3) grade&gt;=2.5 85 122.441500 1.6148600  
+#&gt;      6) age&gt;=56.5 75 103.062900 1.4255040  
+#&gt;       12) gleason&lt; 7.5 50  66.119800 1.1407320  
+#&gt;         24) g2&lt; 13.475 24  27.197170 0.8007306 *
+#&gt;         25) g2&gt;=13.475 26  36.790960 1.4570210  
+#&gt;           50) g2&gt;=17.915 15  20.332740 0.9789825 *
+#&gt;           51) g2&lt; 17.915 11  13.459010 2.1714480 *
+#&gt;       13) gleason&gt;=7.5 25  33.487250 2.0307290  
+#&gt;         26) g2&gt;=15.29 10  11.588480 1.2156230 *
+#&gt;         27) g2&lt; 15.29 15  18.939150 2.7053610 *
+#&gt;      7) age&lt; 56.5 10  13.769010 3.1822320 *
+rpart.plot(fit,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
 <img src="../../post/survival_files/figure-html/unnamed-chunk-12-1.png" alt="CART树剪枝前" width="90%" />
 <p class="caption">
 Figure 5: CART树剪枝前
 </p>
 </div>
-<pre class="r"><code>fit2 &lt;- prune(fit, cp = 0.017)
-fit2$cptable</code></pre>
-<pre><code>          CP nsplit rel error    xerror       xstd
-1 0.12945955      0 1.0000000 1.0069687 0.07052688
-2 0.04205598      1 0.8705405 0.8845400 0.07348637
-3 0.02919986      2 0.8284845 0.9008440 0.07885173
-4 0.01798864      3 0.7992846 0.9220202 0.08917590
-5 0.01700000      4 0.7812960 0.9643422 0.09336500</code></pre>
-<pre class="r"><code>rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
+<pre class="r"><code>fit2 = prune(fit, cp = 0.017)
+fit2$cptable
+#&gt;           CP nsplit rel error    xerror       xstd
+#&gt; 1 0.12945955      0 1.0000000 1.0083688 0.07022542
+#&gt; 2 0.04205598      1 0.8705405 0.8892725 0.07380900
+#&gt; 3 0.02919986      2 0.8284845 0.9072099 0.07757807
+#&gt; 4 0.01798864      3 0.7992846 0.9607955 0.08987181
+#&gt; 5 0.01700000      4 0.7812960 0.9682238 0.09234577
+rpart.plot(fit2,shadow.col = &#39;gray&#39;,branch = 0.4)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
 <img src="../../post/survival_files/figure-html/unnamed-chunk-13-1.png" alt="CART树剪枝后" width="90%" />
 <p class="caption">
 Figure 6: CART树剪枝后
 </p>
 </div>
-<pre class="r"><code>temp &lt;- snip.rpart(fit2,6)
-km &lt;- survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
+<pre class="r"><code>temp = snip.rpart(fit2,6)
+km = survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
 autoplot(km)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
 <img src="../../post/survival_files/figure-html/unnamed-chunk-14-1.png" alt="每个结点患者的生存风险估计" width="90%" />
@@ -476,6 +465,9 @@ Figure 7: 每个结点患者的生存风险估计
 Figure 8: 年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系
 </p>
 </div>
+<!---
+>   这是一个引用的地方这是一个引用的地方这是一个引用的地方这是一个引用的地方这是一个引用的地方
+--->
 </div>
 </div>
 

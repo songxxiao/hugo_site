@@ -33,24 +33,26 @@ library(stargazer)
 <div id="基础回归" class="section level1">
 <h1>基础回归</h1>
 <p><code>hatdt</code>为作者个人整理的<a href="http://www.isss.pku.edu.cn/cfps/index.htm">中国家庭追踪调查</a>(CFPS)收入数据<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>。</p>
+<pre><code>Error: &#39;E:/R_codes/capplot/aggregrate.dta&#39; does not exist.</code></pre>
 <pre class="r"><code>hatdt &lt;- hatdt %&gt;% 
   filter(type==&#39;个人收入（元）&#39;) %&gt;% 
-  drop_na(agem,inc,fswt_nat)
-
-set.seed(20191001)
-sample &lt;- sample(1:nrow(hatdt),600,replace = F)
-sampled &lt;- hatdt[sample,]
-
-plota &lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +
+  drop_na(agem,inc,fswt_nat)</code></pre>
+<pre><code>Error in eval(lhs, parent, parent): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>set.seed(20191001)
+sample &lt;- sample(1:nrow(hatdt),600,replace = F)</code></pre>
+<pre><code>Error in nrow(hatdt): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>sampled &lt;- hatdt[sample,]</code></pre>
+<pre><code>Error in eval(expr, envir, enclos): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>plota &lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +
   geom_jitter(data=sampled,height=550,width=5,
               size =1.5,alpha=1/3) +
   geom_smooth(span =10,size=1) + 
   geom_smooth(method=&#39;lm&#39;,size=1,color=&#39;red&#39;) +
   ylim(0, 20000) +
   labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
-  theme_bw()
-
-plotb &lt;- ggplot() +
+  theme_bw()</code></pre>
+<pre><code>Error in ggplot(hatdt, aes(agem, inc, weight = fswt_nat)): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>plotb &lt;- ggplot() +
   geom_jitter(data=sampled,aes(agem,inc),
               height=550,width=5,size =1.5,alpha=1/3) +
   geom_quantile(data=hatdt,
@@ -59,13 +61,9 @@ plotb &lt;- ggplot() +
   ylim(0, 20000) +
   labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
   theme_bw()</code></pre>
+<pre><code>Error in fortify(data): object &#39;sampled&#39; not found</code></pre>
 <pre class="r"><code>plot_grid(plota,plotb,ncol = 2)</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="/post/model_files/figure-html/unnamed-chunk-5-1.png" alt="个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。" width="90%" />
-<p class="caption">
-Figure 1: 个人收入与年龄。左图：红线为线性回归模型。蓝色曲线为非参数回归。右图：三条线分别是分位数回归。高收入者收入随年龄下降的速度快于低收入者。可将中位数回归与左图线性回归相比较，观测其中的差异。
-</p>
-</div>
+<pre><code>Error in plot_grid(plota, plotb, ncol = 2): object &#39;plota&#39; not found</code></pre>
 </div>
 <div id="交互项" class="section level1">
 <h1>交互项</h1>
@@ -87,7 +85,7 @@ main = &quot;&quot;, inches = 0.2)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-6-1.png" alt="谢益辉的交互效应表示方法。左图：$y = 2 + x + 0.5 z + 0.5 x z + \epsilon$。右图：$y = 2 + x + 0.5 z + \epsilon$。圆圈面积表示因变量$y$的大小；坐标轴分别表示自变量$x$和$z$。" width="90%" />
 <p class="caption">
-Figure 2: 谢益辉的交互效应表示方法。左图：<span class="math inline">\(y = 2 + x + 0.5 z + 0.5 x z + \epsilon\)</span>。右图：<span class="math inline">\(y = 2 + x + 0.5 z + \epsilon\)</span>。圆圈面积表示因变量<span class="math inline">\(y\)</span>的大小；坐标轴分别表示自变量<span class="math inline">\(x\)</span>和<span class="math inline">\(z\)</span>。
+Figure 1: 谢益辉的交互效应表示方法。左图：<span class="math inline">\(y = 2 + x + 0.5 z + 0.5 x z + \epsilon\)</span>。右图：<span class="math inline">\(y = 2 + x + 0.5 z + \epsilon\)</span>。圆圈面积表示因变量<span class="math inline">\(y\)</span>的大小；坐标轴分别表示自变量<span class="math inline">\(x\)</span>和<span class="math inline">\(z\)</span>。
 </p>
 </div>
 <p>下面使用R自带数据，1994年加拿大劳动与收入动态调查(SLID)。详细信息请在R中输入<code>?carData::SLID</code>查看。</p>
@@ -95,7 +93,6 @@ Figure 2: 谢益辉的交互效应表示方法。左图：<span class="math inli
 <h2>分类变量与连续变量交互</h2>
 <p>因变量为收入。自变量为教育年限(年)和使用的语言(英语、法语、其他)。下面分别展示了没有交互项和有交互项的模型。</p>
 <pre class="r"><code>#?carData::SLID
-
 data(SLID,package = &#39;carData&#39;)
 SLID &lt;- SLID %&gt;% drop_na()
 
@@ -116,7 +113,7 @@ ggplot(SLID,aes(education,wages))+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-7-1.png" alt="左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。" width="90%" />
 <p class="caption">
-Figure 3: 左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。
+Figure 2: 左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。
 </p>
 </div>
 </div>
@@ -141,7 +138,7 @@ ggplot(SLID,aes(education,wages))+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-8-1.png" alt="无交互效应和有交互效应的区别： 左图体现了不同年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。" width="90%" />
 <p class="caption">
-Figure 4: 无交互效应和有交互效应的区别： 左图体现了不同年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。
+Figure 3: 无交互效应和有交互效应的区别： 左图体现了不同年龄段者的教育回报率相同(斜率相同)。右图体现了一个因素的大小随着另一个因素的变化而变化。随着年龄的升高教育回报率也在升高。
 </p>
 </div>
 <p>来个负相关的：</p>
@@ -403,7 +400,7 @@ group=market.potential))+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-9-1.png" alt="左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应" width="90%" />
 <p class="caption">
-Figure 5: 左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应
+Figure 4: 左图无交互效应，可视为控制变量。右图为两个连续变量的交互效应
 </p>
 </div>
 </div>
@@ -431,20 +428,21 @@ ggplot(df,aes(x,y))+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-10-1.png" alt="对一个模拟数据进行二次项回归。" width="90%" />
 <p class="caption">
-Figure 6: 对一个模拟数据进行二次项回归。
+Figure 5: 对一个模拟数据进行二次项回归。
 </p>
 </div>
 <p>下面使用多项式回归拟合CFPS数据:</p>
 <p><span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2\]</span>
 <span class="math display">\[y = {\alpha _0} + {\alpha _1}{x_1} + {\alpha _2}x_1^2 + {\alpha _3}x_1^3\]</span></p>
-<pre class="r"><code>mtrga &lt;- lm(inc~agem+I(agem^2),hatdt)
-mtrgb &lt;- lm(inc~agem+I(agem^2)+I(agem^3),hatdt)
-
-grid &lt;- hatdt %&gt;%
+<pre class="r"><code>mtrga &lt;- lm(inc~agem+I(agem^2),hatdt)</code></pre>
+<pre><code>Error in is.data.frame(data): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>mtrgb &lt;- lm(inc~agem+I(agem^2)+I(agem^3),hatdt)</code></pre>
+<pre><code>Error in is.data.frame(data): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>grid &lt;- hatdt %&gt;%
 data_grid(agem) %&gt;%
-gather_predictions(mtrga,mtrgb)
-
-ggplot() +
+gather_predictions(mtrga,mtrgb)</code></pre>
+<pre><code>Error in eval(lhs, parent, parent): object &#39;hatdt&#39; not found</code></pre>
+<pre class="r"><code>ggplot() +
   geom_jitter(data=sampled,aes(agem,inc),
               height=550,width=5,size =1.5,alpha=1/3) +
   geom_line(data=grid,aes(agem,pred),
@@ -453,12 +451,7 @@ ggplot() +
   ylim(0, 20000) +
   labs(x = &quot;年龄&quot;,y = &quot;人民币(元）&quot;) +
   theme_bw()</code></pre>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
-<img src="/post/model_files/figure-html/unnamed-chunk-11-1.png" alt="分别对CFPS数据进行二次项和三次项回归。三次项导致了过拟合。" width="90%" />
-<p class="caption">
-Figure 7: 分别对CFPS数据进行二次项和三次项回归。三次项导致了过拟合。
-</p>
-</div>
+<pre><code>Error in fortify(data): object &#39;sampled&#39; not found</code></pre>
 </div>
 <div id="局部加权回归散点平滑" class="section level1">
 <h1>局部加权回归散点平滑</h1>
@@ -508,7 +501,7 @@ plot_grid(g,f,e,ncol = 2)</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-12-1.png" alt="左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。" width="90%" />
 <p class="caption">
-Figure 8: 左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
+Figure 6: 左图：设置不同带宽进行LOWESS回归。右图：Bootstrap重抽样200次的结果。
 </p>
 </div>
 </div>
@@ -591,7 +584,7 @@ ggplot(Wage,aes(age,wage))+
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-13-1.png" alt="左图：1次项样条。右图：3次项样条" width="100%" />
 <p class="caption">
-Figure 9: 左图：1次项样条。右图：3次项样条
+Figure 7: 左图：1次项样条。右图：3次项样条
 </p>
 </div>
 </div>
@@ -613,22 +606,22 @@ wages ~ s(education) + bs(age, degree = 2, knots = c(20, 30,
     40, 55))
 
 Parametric coefficients:
-                                                Estimate Std. Error
-(Intercept)                                       9.9635     0.8844
-bs(age, degree = 2, knots = c(20, 30, 40, 55))1  -1.9846     1.1801
-bs(age, degree = 2, knots = c(20, 30, 40, 55))2   1.2099     0.9411
-bs(age, degree = 2, knots = c(20, 30, 40, 55))3   7.6049     0.9651
-bs(age, degree = 2, knots = c(20, 30, 40, 55))4   8.7600     0.9630
-bs(age, degree = 2, knots = c(20, 30, 40, 55))5   8.7637     1.1253
-bs(age, degree = 2, knots = c(20, 30, 40, 55))6   5.0601     1.8398
-                                                t value Pr(&gt;|t|)    
-(Intercept)                                      11.266  &lt; 2e-16 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))1  -1.682  0.09271 .  
-bs(age, degree = 2, knots = c(20, 30, 40, 55))2   1.286  0.19869    
-bs(age, degree = 2, knots = c(20, 30, 40, 55))3   7.880 4.20e-15 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))4   9.096  &lt; 2e-16 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))5   7.788 8.62e-15 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))6   2.750  0.00598 ** 
+                                                Estimate Std. Error t value
+(Intercept)                                       9.9635     0.8844  11.266
+bs(age, degree = 2, knots = c(20, 30, 40, 55))1  -1.9846     1.1801  -1.682
+bs(age, degree = 2, knots = c(20, 30, 40, 55))2   1.2099     0.9411   1.286
+bs(age, degree = 2, knots = c(20, 30, 40, 55))3   7.6049     0.9651   7.880
+bs(age, degree = 2, knots = c(20, 30, 40, 55))4   8.7600     0.9630   9.096
+bs(age, degree = 2, knots = c(20, 30, 40, 55))5   8.7637     1.1253   7.788
+bs(age, degree = 2, knots = c(20, 30, 40, 55))6   5.0601     1.8398   2.750
+                                                Pr(&gt;|t|)    
+(Intercept)                                      &lt; 2e-16 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))1  0.09271 .  
+bs(age, degree = 2, knots = c(20, 30, 40, 55))2  0.19869    
+bs(age, degree = 2, knots = c(20, 30, 40, 55))3 4.20e-15 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))4  &lt; 2e-16 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))5 8.62e-15 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))6  0.00598 ** 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -646,7 +639,7 @@ GCV = 43.394  Scale est. = 43.259    n = 3987</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-15-1.png" alt="教育年限，年龄与收入" width="90%" />
 <p class="caption">
-Figure 10: 教育年限，年龄与收入
+Figure 8: 教育年限，年龄与收入
 </p>
 </div>
 <pre class="r"><code>SLID &lt;- SLID %&gt;% 
@@ -662,22 +655,22 @@ lgwage ~ s(education) + bs(age, degree = 2, knots = c(20, 30,
     40, 55))
 
 Parametric coefficients:
-                                                Estimate Std. Error
-(Intercept)                                      2.20610    0.05091
-bs(age, degree = 2, knots = c(20, 30, 40, 55))1 -0.10426    0.06794
-bs(age, degree = 2, knots = c(20, 30, 40, 55))2  0.29695    0.05418
-bs(age, degree = 2, knots = c(20, 30, 40, 55))3  0.62907    0.05556
-bs(age, degree = 2, knots = c(20, 30, 40, 55))4  0.68858    0.05544
-bs(age, degree = 2, knots = c(20, 30, 40, 55))5  0.67619    0.06478
-bs(age, degree = 2, knots = c(20, 30, 40, 55))6  0.41298    0.10589
-                                                t value Pr(&gt;|t|)    
-(Intercept)                                      43.330  &lt; 2e-16 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))1  -1.535    0.125    
-bs(age, degree = 2, knots = c(20, 30, 40, 55))2   5.481 4.49e-08 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))3  11.322  &lt; 2e-16 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))4  12.421  &lt; 2e-16 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))5  10.438  &lt; 2e-16 ***
-bs(age, degree = 2, knots = c(20, 30, 40, 55))6   3.900 9.77e-05 ***
+                                                Estimate Std. Error t value
+(Intercept)                                      2.20610    0.05091  43.330
+bs(age, degree = 2, knots = c(20, 30, 40, 55))1 -0.10426    0.06794  -1.535
+bs(age, degree = 2, knots = c(20, 30, 40, 55))2  0.29695    0.05418   5.481
+bs(age, degree = 2, knots = c(20, 30, 40, 55))3  0.62907    0.05556  11.322
+bs(age, degree = 2, knots = c(20, 30, 40, 55))4  0.68858    0.05544  12.421
+bs(age, degree = 2, knots = c(20, 30, 40, 55))5  0.67619    0.06478  10.438
+bs(age, degree = 2, knots = c(20, 30, 40, 55))6  0.41298    0.10589   3.900
+                                                Pr(&gt;|t|)    
+(Intercept)                                      &lt; 2e-16 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))1    0.125    
+bs(age, degree = 2, knots = c(20, 30, 40, 55))2 4.49e-08 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))3  &lt; 2e-16 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))4  &lt; 2e-16 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))5  &lt; 2e-16 ***
+bs(age, degree = 2, knots = c(20, 30, 40, 55))6 9.77e-05 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -695,7 +688,7 @@ GCV = 0.14374  Scale est. = 0.14329   n = 3987</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-16-1.png" alt="教育年限，年龄与对数收入" width="90%" />
 <p class="caption">
-Figure 11: 教育年限，年龄与对数收入
+Figure 9: 教育年限，年龄与对数收入
 </p>
 </div>
 </div>
@@ -740,7 +733,7 @@ ggplot(x2,aes(x2)) +
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
 <img src="/post/model_files/figure-html/unnamed-chunk-17-1.png" alt="紫色密度图为原分布；绿色密度图为Box-Cox 变换后的分布" width="90%" />
 <p class="caption">
-Figure 12: 紫色密度图为原分布；绿色密度图为Box-Cox 变换后的分布
+Figure 10: 紫色密度图为原分布；绿色密度图为Box-Cox 变换后的分布
 </p>
 </div>
 <p>Python中的做法：<code>scipy.special.boxcox</code></p>

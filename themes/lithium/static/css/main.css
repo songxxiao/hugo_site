@@ -49,28 +49,50 @@ h6 {
 font-size: 16px
 }
 
-
 a {
   outline: none;
 }
 
 code {
-  font-family:'consolas',Fira Code, Monaco;
-  color:  #900B09;
+  font-family:'consolas', SimSun, Fira Code, Monaco;
+  color: #900B09;
   font-size: 16px;
   border:1px solid #ddd;
   background-color: #F8F8F8;
   border-radius:4px;
 }
 
-code.hljs {
-  font-family:'consolas',Fira Code, Monaco;
+.hljs {
+  font-family:'consolas', SimSun, Fira Code, Monaco;
   background-color: #F8F8F8;
   border:1px solid #ddd;
   box-shadow:3px 3px 3px #D3D3D3;
   font-size: 18px;
   border-radius:2px;
 }
+
+.hljs-comment, .hljs-quote { /*coerce code comment style as normal*/
+    color: #998;
+    font-style:normal;
+}
+
+/*
+.home blockquote, .cn blockquote {
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'STKaiti', 'KaiTi', '楷体', 'SimKai', 'DFKai-SB', 'NSimSun', serif;
+}*/
+
+blockquote {
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'STKaiti', 'KaiTi', '楷体', 'SimKai', 'DFKai-SB', 'NSimSun', serif;
+    margin: 1em 0;
+    display: block;
+    padding: 0 2em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    /*margin-inline-end: 40px;*/
+    border-left: 3px solid #cdcdcd ;
+}
+
 
 .wrapper {
   overflow: hidden;

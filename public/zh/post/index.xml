@@ -6,10 +6,21 @@
     <description>Recent content in Posts on 宋骁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>stringr 与 regex 函数对应关系</title>
+      <link>/zh/stringr/</link>
+      <pubDate>Tue, 14 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/stringr/</guid>
+      <description>转载自谢士晨个人博客
+stringr 是 Hadley 大神写的 tidyverse 系列数据处理包中专门用于处理文本数据的，其函数命名统一易于记忆。而 R 基础包中的文本处理函数(regex)的命名规则不是特别统一。下表给出了主要函数之间的映射关系，便于以后查看。
+stringr包中函数功能说明R Base 中对应函数使用正则表达式的函数str_extract()提取首个匹配模式的字符regmatches()str_extract_all()提取所有匹配模式的字符regmatches()str_locate()返回首个匹配模式的字符的位置regexpr()str_locate_all()返回所有匹配模式的字符的位置gregexpr()str_replace()替换首个匹配模式sub()str_replace_all()替换所有匹配模式gsub()str_split()按照模式分割字符串strsplit()str_split_fixed()按照模式将字符串分割成指定个数-str_detect()检测字符是否存在某些指定模式grepl()str_count()返回指定模式出现的次数-其他重要函数str_sub()提取指定位置的字符regmatches()str_dup()丢弃指定位置的字符-str_length()返回字符的长度nchar()str_pad()填补字符-str_trim()丢弃填充，如去掉字符前后的空格-str_c()连接字符paste(),paste0()stringr网站也给出了两者的映射关系</description>
+    </item>
     
     <item>
       <title>计量统计和说唱音乐的神秘联系</title>
@@ -140,7 +151,7 @@ data_grid: 生成预测数据
 add_predictions: 加入预测值
 crossv_kfold、crossv_mc、crossv_loo: 交叉验证
 library(dplyr)library(tidyr)library(ggplot2)library(modelr)library(haven)library(cowplot)library(stargazer)`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`基础回归hatdt为作者个人整理的中国家庭追踪调查(CFPS)收入数据1。
-hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)set.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)sampled &amp;lt;- hatdt[sample,]plota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.5,alpha=1/3) +geom_smooth(span =10,size=1) + geom_smooth(method=&amp;#39;lm&amp;#39;,size=1,color=&amp;#39;red&amp;#39;) +ylim(0, 20000) +labs(x = &amp;quot;年龄&amp;quot;,y = &amp;quot;人民币(元）&amp;quot;) +theme_bw()plotb &amp;lt;- ggplot() +geom_jitter(data=sampled,aes(agem,inc),height=550,width=5,size =1.</description>
+Error: &amp;#39;E:/R_codes/capplot/aggregrate.dta&amp;#39; does not exist.hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)Error in eval(lhs, parent, parent): object &amp;#39;hatdt&amp;#39; not foundset.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)Error in nrow(hatdt): object &amp;#39;hatdt&amp;#39; not foundsampled &amp;lt;- hatdt[sample,]Error in eval(expr, envir, enclos): object &amp;#39;hatdt&amp;#39; not foundplota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.</description>
     </item>
     
     <item>
@@ -301,7 +312,7 @@ R Markdown: The Definitive Guide
 k折交叉验证 (K-fold cross-validation)
 留一交叉验证(leave-one-out cross validation)
 Figure 1: K折交叉验证原理：所有数据被划分为训练集和测试集。其中，训练集被划分为K份，循环使用其中的K-1份充当训练集，使用剩下的1分充当验证集。波士顿房价预测输入?mlbench::BostonHousing查看数据集解释。下面主要使用caret包(classification and regression training)进行交叉验证。
-`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`library(caret)library(readr)library(tidyr)library(dplyr)library(ggplot2)library(pROC)library(stargazer)library(ROSE)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing) crim zn indus chas nox rm age dis rad tax ptratio b1 0.</description>
+`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`library(caret)library(readr)library(tidyr)library(dplyr)library(ggplot2)library(pROC)library(stargazer)library(ROSE)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing)#&amp;gt; crim zn indus chas nox rm age dis rad tax ptratio b lstat#&amp;gt; 1 0.</description>
     </item>
     
     <item>

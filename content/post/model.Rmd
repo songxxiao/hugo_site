@@ -116,7 +116,6 @@ main = "", inches = 0.2)
 
 ```{r,fig.asp=0.6,fig.cap='左图：语言不与教育年限交互。不同语言使用者的斜率相同但截距不同。右图：交互模型，英语使用者的工资随教育回报率更高，假定其他条件不变。英语使用者在15年处超越了其他语言使用者。'}
 #?carData::SLID
-
 data(SLID,package = 'carData')
 SLID <- SLID %>% drop_na()
 

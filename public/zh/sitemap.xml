@@ -4,7 +4,7 @@
   
   <url>
     <loc>/zh/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>/zh/post/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -30,6 +30,11 @@
                 hreflang="zh"
                 href="/zh/post/"
                 />
+  </url>
+  
+  <url>
+    <loc>/zh/stringr/</loc>
+    <lastmod>2020-04-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>

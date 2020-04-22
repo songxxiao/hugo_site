@@ -35,7 +35,7 @@ output:
 + 留一交叉验证(leave-one-out cross validation)
 
 ```{r,include=F}
-knitr::opts_chunk$set(comment=NA,error=T,message=F,warning=F,fig.align='center',out.width='90%')
+knitr::opts_chunk$set(comment='#>',error=T,message=F,warning=F,fig.align='center',out.width='90%',collapse = T)
 ```
 
 
@@ -263,7 +263,7 @@ roc(balanced$test_pred,balanced$Legendary,plot=T, print.auc=T, auc.polygon=T, ma
 
 ```{r,fig.asp=0.6}
 library(readr)
-titanic <- read_csv("E:/MaLearning/titanic/titanic.csv")
+titanic <- read_csv("C:/Users/xsong/titanic_code/data/titanic.csv")
 
 sampled <- sample(1:nrow(titanic),nrow(titanic)*0.75,replace=F)
 titanic_train <- titanic[sampled,]
@@ -332,9 +332,9 @@ ggroc(.,size=1)+
   theme(legend.title=element_blank()) 
 ```
 
-# `Sklearn`交叉验证API
+# `sklearn`交叉验证API
 
-`Sklearn`中有关交叉验证的API位于`sklearn.model_selection`中。
+`sklearn`中有关交叉验证的API位于`sklearn.model_selection`中。
 
 用于模型检验和评估的函数：
 

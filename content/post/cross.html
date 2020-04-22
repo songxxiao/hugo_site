@@ -56,45 +56,46 @@ number =10
 
 library(mlbench) #加载数据集
 data(BostonHousing)
-head(BostonHousing)</code></pre>
-<pre><code>     crim zn indus chas   nox    rm  age    dis rad tax ptratio      b
-1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90
-2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90
-3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83
-4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63
-5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90
-6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12
-  lstat medv
-1  4.98 24.0
-2  9.14 21.6
-3  4.03 34.7
-4  2.94 33.4
-5  5.33 36.2
-6  5.21 28.7</code></pre>
-<pre class="r"><code>nrow(BostonHousing) #样本量</code></pre>
-<pre><code>[1] 506</code></pre>
-<pre class="r"><code>rpartFit &lt;- train(medv ~ .,
+head(BostonHousing)
+#&gt;      crim zn indus chas   nox    rm  age    dis rad tax ptratio      b lstat
+#&gt; 1 0.00632 18  2.31    0 0.538 6.575 65.2 4.0900   1 296    15.3 396.90  4.98
+#&gt; 2 0.02731  0  7.07    0 0.469 6.421 78.9 4.9671   2 242    17.8 396.90  9.14
+#&gt; 3 0.02729  0  7.07    0 0.469 7.185 61.1 4.9671   2 242    17.8 392.83  4.03
+#&gt; 4 0.03237  0  2.18    0 0.458 6.998 45.8 6.0622   3 222    18.7 394.63  2.94
+#&gt; 5 0.06905  0  2.18    0 0.458 7.147 54.2 6.0622   3 222    18.7 396.90  5.33
+#&gt; 6 0.02985  0  2.18    0 0.458 6.430 58.7 6.0622   3 222    18.7 394.12  5.21
+#&gt;   medv
+#&gt; 1 24.0
+#&gt; 2 21.6
+#&gt; 3 34.7
+#&gt; 4 33.4
+#&gt; 5 36.2
+#&gt; 6 28.7
+nrow(BostonHousing) #样本量
+#&gt; [1] 506
+
+rpartFit &lt;- train(medv ~ .,
                   data = BostonHousing,
                   method = &quot;rpart&quot;,
                   trControl = rfControl)
-rpartFit</code></pre>
-<pre><code>CART 
-
-506 samples
- 13 predictor
-
-No pre-processing
-Resampling: Cross-Validated (10 fold) 
-Summary of sample sizes: 455, 454, 457, 457, 455, 455, ... 
-Resampling results across tuning parameters:
-
-  cp          RMSE      Rsquared   MAE     
-  0.07165784  5.661389  0.6248821  4.041822
-  0.17117244  6.552057  0.4987070  4.762268
-  0.45274420  8.198282  0.3316401  5.971694
-
-RMSE was used to select the optimal model using the smallest value.
-The final value used for the model was cp = 0.07165784.</code></pre>
+rpartFit
+#&gt; CART 
+#&gt; 
+#&gt; 506 samples
+#&gt;  13 predictor
+#&gt; 
+#&gt; No pre-processing
+#&gt; Resampling: Cross-Validated (10 fold) 
+#&gt; Summary of sample sizes: 456, 456, 455, 455, 454, 456, ... 
+#&gt; Resampling results across tuning parameters:
+#&gt; 
+#&gt;   cp          RMSE      Rsquared   MAE     
+#&gt;   0.07165784  5.499046  0.6371284  3.942789
+#&gt;   0.17117244  6.874506  0.4322510  5.177036
+#&gt;   0.45274420  7.977208  0.3649644  5.807824
+#&gt; 
+#&gt; RMSE was used to select the optimal model using the smallest value.
+#&gt; The final value used for the model was cp = 0.07165784.</code></pre>
 <p>将数据集D划分为K个子集同样存在多种划分方式。为减小因样本划分不同而引入的差别，k折交叉验证通常要随机使用不同的划分重复p次，最终的评估结果是这p 次k折交叉验证结果的均值， 例如常见的有“10次10 折交叉验证”。每一次重复都会有不同的训练-测试集划分。</p>
 <pre class="r"><code>repeatedcv &lt;-trainControl(method =&quot;repeatedcv&quot;, number =10,repeats =10, savePredictions
 =T)
@@ -102,25 +103,26 @@ rpartFit &lt;- train(medv ~ .,
                   data = BostonHousing,
                   method = &quot;rpart&quot;,
                   trControl = repeatedcv)
-rpartFit</code></pre>
-<pre><code>CART 
+rpartFit
+#&gt; CART 
+#&gt; 
+#&gt; 506 samples
+#&gt;  13 predictor
+#&gt; 
+#&gt; No pre-processing
+#&gt; Resampling: Cross-Validated (10 fold, repeated 10 times) 
+#&gt; Summary of sample sizes: 455, 456, 455, 456, 455, 455, ... 
+#&gt; Resampling results across tuning parameters:
+#&gt; 
+#&gt;   cp          RMSE      Rsquared   MAE     
+#&gt;   0.07165784  5.737457  0.6143723  4.159446
+#&gt;   0.17117244  6.574678  0.4868092  4.913991
+#&gt;   0.45274420  8.424123  0.3121447  6.095523
+#&gt; 
+#&gt; RMSE was used to select the optimal model using the smallest value.
+#&gt; The final value used for the model was cp = 0.07165784.
 
-506 samples
- 13 predictor
-
-No pre-processing
-Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 456, 454, 456, 456, 455, 456, ... 
-Resampling results across tuning parameters:
-
-  cp          RMSE      Rsquared   MAE     
-  0.07165784  5.701353  0.6191279  4.105649
-  0.17117244  6.582801  0.4859836  4.871801
-  0.45274420  8.338183  0.3233111  6.073149
-
-RMSE was used to select the optimal model using the smallest value.
-The final value used for the model was cp = 0.07165784.</code></pre>
-<pre class="r"><code>importance &lt;- varImp(rpartFit, scale = F)
+importance &lt;- varImp(rpartFit, scale = F)
 imp &lt;- as.data.frame(importance[[&quot;importance&quot;]])
 
 imp &lt;- imp %&gt;%
@@ -151,41 +153,42 @@ rpartFit &lt;- train(medv ~ .,
                   data = BostonHousing,
                   method = &quot;rpart&quot;,
                   trControl = rfControl)
-rpartFit</code></pre>
-<pre><code>CART 
+rpartFit
+#&gt; CART 
+#&gt; 
+#&gt; 506 samples
+#&gt;  13 predictor
+#&gt; 
+#&gt; No pre-processing
+#&gt; Resampling: Leave-One-Out Cross-Validation 
+#&gt; Summary of sample sizes: 505, 505, 505, 505, 505, 505, ... 
+#&gt; Resampling results across tuning parameters:
+#&gt; 
+#&gt;   cp          RMSE      Rsquared      MAE     
+#&gt;   0.07165784  6.060240  0.5665051649  4.289854
+#&gt;   0.17117244  7.489499  0.3524415744  6.088882
+#&gt;   0.45274420  9.700709  0.0008358062  7.539715
+#&gt; 
+#&gt; RMSE was used to select the optimal model using the smallest value.
+#&gt; The final value used for the model was cp = 0.07165784.
 
-506 samples
- 13 predictor
-
-No pre-processing
-Resampling: Leave-One-Out Cross-Validation 
-Summary of sample sizes: 505, 505, 505, 505, 505, 505, ... 
-Resampling results across tuning parameters:
-
-  cp          RMSE      Rsquared      MAE     
-  0.07165784  6.060240  0.5665051649  4.289854
-  0.17117244  7.489499  0.3524415744  6.088882
-  0.45274420  9.700709  0.0008358062  7.539715
-
-RMSE was used to select the optimal model using the smallest value.
-The final value used for the model was cp = 0.07165784.</code></pre>
-<pre class="r"><code>varImp(rpartFit, scale = F)</code></pre>
-<pre><code>rpart variable importance
-
-        Overall
-lstat    0.8646
-nox      0.5008
-ptratio  0.4643
-rm       0.4527
-indus    0.2595
-crim     0.2484
-age      0.2089
-b        0.0000
-tax      0.0000
-dis      0.0000
-zn       0.0000
-rad      0.0000
-chas1    0.0000</code></pre>
+varImp(rpartFit, scale = F)
+#&gt; rpart variable importance
+#&gt; 
+#&gt;         Overall
+#&gt; lstat    0.8646
+#&gt; nox      0.5008
+#&gt; ptratio  0.4643
+#&gt; rm       0.4527
+#&gt; indus    0.2595
+#&gt; crim     0.2484
+#&gt; age      0.2089
+#&gt; dis      0.0000
+#&gt; tax      0.0000
+#&gt; chas1    0.0000
+#&gt; zn       0.0000
+#&gt; rad      0.0000
+#&gt; b        0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -274,33 +277,34 @@ set.seed(213)
 knn_fit &lt;- train(Legendary ~ Type1 + Type2 + Total+ HP + Defense+ Attack + Speed + Generation, data = trainpok, method = &quot;knn&quot;,
  trControl=trctrl,
  tuneLength = 10)
-knn_fit</code></pre>
-<pre><code>k-Nearest Neighbors 
+knn_fit
+#&gt; k-Nearest Neighbors 
+#&gt; 
+#&gt; 523 samples
+#&gt;   8 predictor
+#&gt;   2 classes: &#39;FALSE&#39;, &#39;TRUE&#39; 
+#&gt; 
+#&gt; No pre-processing
+#&gt; Resampling: Cross-Validated (10 fold, repeated 10 times) 
+#&gt; Summary of sample sizes: 471, 470, 470, 471, 471, 470, ... 
+#&gt; Resampling results across tuning parameters:
+#&gt; 
+#&gt;   k   Accuracy   Kappa    
+#&gt;    5  0.9523902  0.9049491
+#&gt;    7  0.9518130  0.9038010
+#&gt;    9  0.9514357  0.9030465
+#&gt;   11  0.9512506  0.9026794
+#&gt;   13  0.9518166  0.9038074
+#&gt;   15  0.9512470  0.9026798
+#&gt;   17  0.9487760  0.8977514
+#&gt;   19  0.9506809  0.9015500
+#&gt;   21  0.9506809  0.9015439
+#&gt;   23  0.9493457  0.8988832
+#&gt; 
+#&gt; Accuracy was used to select the optimal model using the largest value.
+#&gt; The final value used for the model was k = 5.
 
-523 samples
-  8 predictor
-  2 classes: &#39;FALSE&#39;, &#39;TRUE&#39; 
-
-No pre-processing
-Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 471, 470, 470, 471, 471, 470, ... 
-Resampling results across tuning parameters:
-
-  k   Accuracy   Kappa    
-   5  0.9523902  0.9049491
-   7  0.9518130  0.9038010
-   9  0.9514357  0.9030465
-  11  0.9512506  0.9026794
-  13  0.9518166  0.9038074
-  15  0.9512470  0.9026798
-  17  0.9487760  0.8977514
-  19  0.9506809  0.9015500
-  21  0.9506809  0.9015439
-  23  0.9493457  0.8988832
-
-Accuracy was used to select the optimal model using the largest value.
-The final value used for the model was k = 5.</code></pre>
-<pre class="r"><code>kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) 
+kacc &lt;- as.data.frame(knn_fit[[&quot;results&quot;]]) 
 kacc &lt;- kacc[,1:2]
 ggplot(kacc,aes(k,Accuracy)) +
 geom_line() +
@@ -312,7 +316,8 @@ scale_x_continuous(breaks=seq(5,26,1))</code></pre>
 Figure 5: k近邻算法的K值和准确率的关系
 </p>
 </div>
-<pre class="r"><code>testpok &lt;- testpok %&gt;%
+<pre class="r"><code>
+testpok &lt;- testpok %&gt;%
   mutate(pred=predict(knn_fit,testpok))
 
 prob1 &lt;- predict(knn_fit,testpok,type=&#39;prob&#39;)
@@ -326,65 +331,67 @@ pr2 &lt;- prob2[,2]
 
 conMatrix1 &lt;- confusionMatrix(testpok$pred,testpok$Legendary) 
 #matrix &lt;- conMatrix1[[&quot;table&quot;]]
-conMatrix1</code></pre>
-<pre><code>Confusion Matrix and Statistics
+conMatrix1
+#&gt; Confusion Matrix and Statistics
+#&gt; 
+#&gt;           Reference
+#&gt; Prediction FALSE TRUE
+#&gt;      FALSE   105    0
+#&gt;      TRUE     13  107
+#&gt;                                           
+#&gt;                Accuracy : 0.9422          
+#&gt;                  95% CI : (0.9032, 0.9689)
+#&gt;     No Information Rate : 0.5244          
+#&gt;     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+#&gt;                                           
+#&gt;                   Kappa : 0.8848          
+#&gt;                                           
+#&gt;  Mcnemar&#39;s Test P-Value : 0.0008741       
+#&gt;                                           
+#&gt;             Sensitivity : 0.8898          
+#&gt;             Specificity : 1.0000          
+#&gt;          Pos Pred Value : 1.0000          
+#&gt;          Neg Pred Value : 0.8917          
+#&gt;              Prevalence : 0.5244          
+#&gt;          Detection Rate : 0.4667          
+#&gt;    Detection Prevalence : 0.4667          
+#&gt;       Balanced Accuracy : 0.9449          
+#&gt;                                           
+#&gt;        &#39;Positive&#39; Class : FALSE           
+#&gt; 
 
-          Reference
-Prediction FALSE TRUE
-     FALSE   105    0
-     TRUE     13  107
-                                          
-               Accuracy : 0.9422          
-                 95% CI : (0.9032, 0.9689)
-    No Information Rate : 0.5244          
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
-                                          
-                  Kappa : 0.8848          
-                                          
- Mcnemar&#39;s Test P-Value : 0.0008741       
-                                          
-            Sensitivity : 0.8898          
-            Specificity : 1.0000          
-         Pos Pred Value : 1.0000          
-         Neg Pred Value : 0.8917          
-             Prevalence : 0.5244          
-         Detection Rate : 0.4667          
-   Detection Prevalence : 0.4667          
-      Balanced Accuracy : 0.9449          
-                                          
-       &#39;Positive&#39; Class : FALSE           
-                                          </code></pre>
-<pre class="r"><code>conMatrix2 &lt;- confusionMatrix(trainpok$pred,trainpok$Legendary)
+conMatrix2 &lt;- confusionMatrix(trainpok$pred,trainpok$Legendary)
 #matrix &lt;- conMatrix[[&quot;table&quot;]]
-conMatrix2</code></pre>
-<pre><code>Confusion Matrix and Statistics
+conMatrix2
+#&gt; Confusion Matrix and Statistics
+#&gt; 
+#&gt;           Reference
+#&gt; Prediction FALSE TRUE
+#&gt;      FALSE   244    0
+#&gt;      TRUE     22  257
+#&gt;                                          
+#&gt;                Accuracy : 0.9579         
+#&gt;                  95% CI : (0.937, 0.9735)
+#&gt;     No Information Rate : 0.5086         
+#&gt;     P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
+#&gt;                                          
+#&gt;                   Kappa : 0.916          
+#&gt;                                          
+#&gt;  Mcnemar&#39;s Test P-Value : 7.562e-06      
+#&gt;                                          
+#&gt;             Sensitivity : 0.9173         
+#&gt;             Specificity : 1.0000         
+#&gt;          Pos Pred Value : 1.0000         
+#&gt;          Neg Pred Value : 0.9211         
+#&gt;              Prevalence : 0.5086         
+#&gt;          Detection Rate : 0.4665         
+#&gt;    Detection Prevalence : 0.4665         
+#&gt;       Balanced Accuracy : 0.9586         
+#&gt;                                          
+#&gt;        &#39;Positive&#39; Class : FALSE          
+#&gt; 
 
-          Reference
-Prediction FALSE TRUE
-     FALSE   244    0
-     TRUE     22  257
-                                         
-               Accuracy : 0.9579         
-                 95% CI : (0.937, 0.9735)
-    No Information Rate : 0.5086         
-    P-Value [Acc &gt; NIR] : &lt; 2.2e-16      
-                                         
-                  Kappa : 0.916          
-                                         
- Mcnemar&#39;s Test P-Value : 7.562e-06      
-                                         
-            Sensitivity : 0.9173         
-            Specificity : 1.0000         
-         Pos Pred Value : 1.0000         
-         Neg Pred Value : 0.9211         
-             Prevalence : 0.5086         
-         Detection Rate : 0.4665         
-   Detection Prevalence : 0.4665         
-      Balanced Accuracy : 0.9586         
-                                         
-       &#39;Positive&#39; Class : FALSE          
-                                         </code></pre>
-<pre class="r"><code>testpok$Legendary &lt;- as.ordered(testpok$Legendary)
+testpok$Legendary &lt;- as.ordered(testpok$Legendary)
 trainpok$Legendary &lt;- as.ordered(trainpok$Legendary)
 
 roca &lt;- roc(testpok$Legendary,pr1)
@@ -404,7 +411,7 @@ Figure 6: ROC曲线:使用<code>ggroc</code>包绘制。模型在测试集的表
 <div id="泰坦尼克生存预测" class="section level1">
 <h1>泰坦尼克生存预测</h1>
 <pre class="r"><code>library(readr)
-titanic &lt;- read_csv(&quot;E:/MaLearning/titanic/titanic.csv&quot;)
+titanic &lt;- read_csv(&quot;C:/Users/xsong/titanic_code/data/titanic.csv&quot;)
 
 sampled &lt;- sample(1:nrow(titanic),nrow(titanic)*0.75,replace=F)
 titanic_train &lt;- titanic[sampled,]
@@ -427,20 +434,21 @@ logfit &lt;- train(survived ~ sex+age+sibsp+parch+fare+embarked,
                  method=&#39;glm&#39;,family=&#39;binomial&#39;,
  trControl=control,
  tuneLength = 2)
-logfit</code></pre>
-<pre><code>Generalized Linear Model 
+logfit
+#&gt; Generalized Linear Model 
+#&gt; 
+#&gt; 779 samples
+#&gt;   6 predictor
+#&gt; 
+#&gt; No pre-processing
+#&gt; Resampling: Cross-Validated (10 fold, repeated 10 times) 
+#&gt; Summary of sample sizes: 701, 701, 701, 701, 701, 701, ... 
+#&gt; Resampling results:
+#&gt; 
+#&gt;   RMSE       Rsquared  MAE    
+#&gt;   0.3996116  0.345518  0.31574
 
-779 samples
-  6 predictor
-
-No pre-processing
-Resampling: Cross-Validated (10 fold, repeated 10 times) 
-Summary of sample sizes: 701, 701, 701, 701, 701, 701, ... 
-Resampling results:
-
-  RMSE       Rsquared  MAE    
-  0.3996116  0.345518  0.31574</code></pre>
-<pre class="r"><code>titanic_test &lt;- titanic_test %&gt;% 
+titanic_test &lt;- titanic_test %&gt;% 
   mutate(pred=predict(logfit,titanic_test),
          pred=ifelse(pred&gt;=0.5,&#39;1&#39;,&#39;0&#39;),
          pred=as.factor(pred),
@@ -459,21 +467,23 @@ prob2 &lt;- predict(logfit,titanic_train)
 conMatrix1 &lt;- confusionMatrix(titanic_test$pred,titanic_test$survived) 
 matrix &lt;- conMatrix1[[&quot;table&quot;]]
 names(dimnames(matrix))&lt;-c(&#39;预测值&#39;,&#39;真实值&#39;)
-matrix</code></pre>
-<pre><code>      真实值
-预测值   0   1
-     0 135  38
-     1  25  66</code></pre>
-<pre class="r"><code>conMatrix2 &lt;- confusionMatrix(titanic_train$pred,titanic_train$survived)
+matrix
+#&gt;       真实值
+#&gt; 预测值   0   1
+#&gt;      0 135  38
+#&gt;      1  25  66
+
+conMatrix2 &lt;- confusionMatrix(titanic_train$pred,titanic_train$survived)
 matrix2 &lt;- conMatrix2[[&quot;table&quot;]]
 
 names(dimnames(matrix2))&lt;-c(&#39;预测值&#39;,&#39;真实值&#39;)
-matrix2</code></pre>
-<pre><code>      真实值
-预测值   0   1
-     0 385  94
-     1  73 227</code></pre>
-<pre class="r"><code>titanic_test$Survived &lt;- as.ordered(titanic_test$survived)
+matrix2
+#&gt;       真实值
+#&gt; 预测值   0   1
+#&gt;      0 385  94
+#&gt;      1  73 227
+
+titanic_test$Survived &lt;- as.ordered(titanic_test$survived)
 titanic_train$Survived &lt;- as.ordered(titanic_train$survived)
 
 roca &lt;- roc(titanic_test$survived,prob1)
@@ -493,8 +503,8 @@ Figure 7: ROC
 </div>
 </div>
 <div id="sklearn交叉验证api" class="section level1">
-<h1><code>Sklearn</code>交叉验证API</h1>
-<p><code>Sklearn</code>中有关交叉验证的API位于<code>sklearn.model_selection</code>中。</p>
+<h1><code>sklearn</code>交叉验证API</h1>
+<p><code>sklearn</code>中有关交叉验证的API位于<code>sklearn.model_selection</code>中。</p>
 <p>用于模型检验和评估的函数：</p>
 <p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate"><code>cross_validate</code></a><br />
 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html"><code>cross_val_score</code></a></p>
