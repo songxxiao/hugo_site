@@ -86,13 +86,13 @@ rpartFit
 #&gt; 
 #&gt; No pre-processing
 #&gt; Resampling: Cross-Validated (10 fold) 
-#&gt; Summary of sample sizes: 456, 456, 455, 455, 454, 456, ... 
+#&gt; Summary of sample sizes: 456, 456, 455, 455, 455, 455, ... 
 #&gt; Resampling results across tuning parameters:
 #&gt; 
 #&gt;   cp          RMSE      Rsquared   MAE     
-#&gt;   0.07165784  5.499046  0.6371284  3.942789
-#&gt;   0.17117244  6.874506  0.4322510  5.177036
-#&gt;   0.45274420  7.977208  0.3649644  5.807824
+#&gt;   0.07165784  5.769342  0.6032229  4.178218
+#&gt;   0.17117244  6.657791  0.4702024  4.983792
+#&gt;   0.45274420  8.622942  0.2826953  6.269414
 #&gt; 
 #&gt; RMSE was used to select the optimal model using the smallest value.
 #&gt; The final value used for the model was cp = 0.07165784.</code></pre>
@@ -111,13 +111,13 @@ rpartFit
 #&gt; 
 #&gt; No pre-processing
 #&gt; Resampling: Cross-Validated (10 fold, repeated 10 times) 
-#&gt; Summary of sample sizes: 455, 456, 455, 456, 455, 455, ... 
+#&gt; Summary of sample sizes: 455, 456, 456, 456, 456, 454, ... 
 #&gt; Resampling results across tuning parameters:
 #&gt; 
 #&gt;   cp          RMSE      Rsquared   MAE     
-#&gt;   0.07165784  5.737457  0.6143723  4.159446
-#&gt;   0.17117244  6.574678  0.4868092  4.913991
-#&gt;   0.45274420  8.424123  0.3121447  6.095523
+#&gt;   0.07165784  5.812499  0.6045421  4.209373
+#&gt;   0.17117244  6.661892  0.4771410  4.952895
+#&gt;   0.45274420  8.334699  0.3252958  6.057794
 #&gt; 
 #&gt; RMSE was used to select the optimal model using the smallest value.
 #&gt; The final value used for the model was cp = 0.07165784.
@@ -183,12 +183,12 @@ varImp(rpartFit, scale = F)
 #&gt; indus    0.2595
 #&gt; crim     0.2484
 #&gt; age      0.2089
-#&gt; dis      0.0000
 #&gt; tax      0.0000
-#&gt; chas1    0.0000
-#&gt; zn       0.0000
 #&gt; rad      0.0000
-#&gt; b        0.0000</code></pre>
+#&gt; b        0.0000
+#&gt; dis      0.0000
+#&gt; chas1    0.0000
+#&gt; zn       0.0000</code></pre>
 <ul>
 <li>我们发现个别变量对于预测完全没有帮助，故可以将这些变量在之后的分析中删除。</li>
 </ul>
@@ -201,32 +201,19 @@ varImp(rpartFit, scale = F)
 <li>任务：通过各种属性预测神奇宝贝是否为传说级别</li>
 </ul>
 <blockquote>
-<ul>
-<li>ID,每只神奇宝贝的ID<br />
-</li>
-<li>Name,每只神奇宝贝的名字<br />
-</li>
-<li>Type1:每只神奇宝贝的类型，比如说水系，比如说火系<br />
-</li>
-<li>Type2:由于有特殊的神奇宝贝拥有复数以上的属性。<br />
-</li>
-<li>Total:指每只神奇宝贝的强度，一般越高越强<br />
-</li>
-<li>HP：指每只神奇宝贝的生命值<br />
-</li>
-<li>Attack:指每只神奇宝贝的攻击力<br />
-</li>
-<li>Defense:指每只神奇宝贝的防御力<br />
-</li>
-<li>SP Attack:指每只神奇宝贝面对相克属性神奇宝贝时的攻击力，通常会比普通攻击力高<br />
-</li>
-<li>SP Defense:指每只神奇宝贝面对相克属性神奇宝贝时的防御力，通常会比普通防御力高。<br />
-</li>
-<li>Speed:指每只神奇宝贝的速度<br />
-</li>
-<li>Generation：指每一只神奇宝贝属于哪一部神奇宝贝的，目前分为五部。</li>
-<li>Legendary:指每一只神奇宝贝是不是属于传说级别的神奇宝贝，比如麒麟，超梦，梦幻之类的。</li>
-</ul>
+<p>ID:每只神奇宝贝的ID<br />
+Name:每只神奇宝贝的名字<br />
+Type1:每只神奇宝贝的类型，比如说水系，比如说火系<br />
+Type2:由于有特殊的神奇宝贝拥有复数以上的属性。<br />
+Total:指每只神奇宝贝的强度，一般越高越强<br />
+HP：指每只神奇宝贝的生命值<br />
+Attack:指每只神奇宝贝的攻击力<br />
+Defense:指每只神奇宝贝的防御力<br />
+SP Attack:指每只神奇宝贝面对相克属性神奇宝贝时的攻击力，通常会比普通攻击力高<br />
+SP Defense:指每只神奇宝贝面对相克属性神奇宝贝时的防御力，通常会比普通防御力高。<br />
+Speed:指每只神奇宝贝的速度<br />
+Generation：指每一只神奇宝贝属于哪一部神奇宝贝的，目前分为五部。<br />
+Legendary:指每一只神奇宝贝是不是属于传说级别的神奇宝贝，比如麒麟，超梦，梦幻之类的。</p>
 </blockquote>
 <p><a href="https://dataaspirant.com/2017/01/09/knn-implementation-r-using-caret-package/">代码参考</a></p>
 <pre class="r"><code>pokemon &lt;- read_csv(&quot;E:/MaLearning/Pokemon.csv&quot;)
