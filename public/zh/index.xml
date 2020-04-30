@@ -385,12 +385,24 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
     </item>
     
     <item>
-      <title>不正经的自我介绍</title>
+      <title>一份不正经的自我介绍</title>
       <link>/zh/selfintro/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/selfintro/</guid>
-      <description></description>
+      <description>呃，大家好，我叫宋骁。一个出生于新疆(不是少数民族)，居住于上海的数据民工。
+自大二开始，我对数据分析产生了浓厚兴趣。因此在今后的几年本科生涯中，我依次学习了统计模型、机器学习算法(调包侠)、数据可视化(现代统计图形)、SQL(操纵数据的“真香”语言)。
+由于专业原因，我几乎只处理社会科学数据。但我对小样本的调查数据持谨慎态度。
+操纵数据工具千万条，操纵第一条。我前前后后学的数据操纵工具大概不下10种(如果硬要算上Excel这类的话)，它们居然都是用来操纵数据的。增删改查等等。真的很心累啊。为啥要重复学习这么多呢。最早是Stata，SPSS。后来发现这两种工具的局限性(不好装逼)后果断弃坑开始学习开源软件。总体来说，我还是Python，R两手抓的。
+自己比较熟悉的还是基于R的极乐净土dplyr工具，尤其是近些年dtplyr，dbplyr，sparklyr的出现使它成为了通用性接口语言，前景巨大。甚至Python中也出现了与它对标的dplython。然鹅，它也有局限性不是。
+所以data.table也不得不抓起来。
+R的老对手Python这边机器学习这么强，也得兼顾不是。pandas这个库是很好用的。其中我觉得最好用的黑科技就是pandas.Series.apply这个方法。配合自编函数及其好用。
+SQL就不用说了。以我目前的经验来看最适合初学者的是SQLite。SQL最坑爹的就是不同平台语法有细微的区别。目前RStudio出的DBI, dbplyr这两个似乎有一统江湖的趋势。需要分析一连接，就可以用净土那一套直接操作了。
+机器学习机器学习我几乎只用Python，原因就不用多说了。sklearn的各种方法都非常好用，推荐入门的同学好好试试。目前我正在学习Keras这个库，深度学习这一块得好好整，虽然我觉得进公司了也不会让我做这个。
+写作受益辉的影响，我用基于RStudio RMarkdown的那套knitr，bookdown设备。写起东西来好用得一腿。尤其配合RStudio的黑色背景，保护视力哈哈哈。
+操作系统我会点Linux命令，用Ubuntu几乎只是放狗搜的节奏。不过目前学Keras需要多用了。
+前端做网页、爬虫之类的肯定要懂点前端技能来着。html/css尚能掌握，使用chrome调css颜色布局非常让人上瘾，乐此不疲。本站就是长期调的结果。
+</description>
     </item>
     
     <item>
