@@ -1,5 +1,5 @@
 ---
-title: 'Python小抄'
+title: 'Python奇技淫巧'
 author: 
 date: '2019-09-11'
 categories: Python
@@ -46,17 +46,29 @@ os.getcwd()
 os.chdir('./mynotebook') 
 ```
 
-# 设置`Jupyter Notebook`图片输出格式
+# Jupyter Notebook魔术命令
 
 [Jupyter Notebook魔术命令](http://blog.rexking6.top/2019/11/20/7%E4%B8%AAPython%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/)
-+ SVG格式
-
-+ Jupyter Notebook魔术命令
 
 ```python
-%matplotlib inline
-%config InlineBackend.figure_format = 'svg'
+%matplotlib inline # 直接输出图像
+%config InlineBackend.figure_format = 'svg' # 设置图片输出格式
 ```
+
+查看全局变量：
+
+```python
+%who # 展示环境中的变量列表
+%who_ls # 以列表的方式展示
+%whos # 类似%who，给出更详细的信息
+```
+交互式 debug：
+
+```python
+%debug
+```
+
+
 # 让图片说中文
 
 ```python
@@ -106,9 +118,9 @@ python setup.py install
 
 Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。[`reticulate`](https://rstudio.github.io/reticulate/)包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。
 
-其中，`reticulate::repl_python()`能够实现在R Studio Console中运行Python代码。但是目前这个函数无法显示Python运行出的图片。如果想退出Python环境回到R，则输入`exit`。
+其中，`reticulate::repl_python()`能够实现在R Studio Console中运行Python代码。如果想退出Python环境回到R，则输入`exit`。
 
-其次，`reticulate`还能够支持Python代码[在R Markdown中的编译](https://rstudio.github.io/reticulate/#python-in-r-markdown)。这个功能目前似乎还不够完善，至少在我的电脑上，很多时候无法成功编译。
+其次，`reticulate`还能够支持Python代码[在R Markdown中的编译](https://rstudio.github.io/reticulate/#python-in-r-markdown)。
 
 目前[谢益辉](https://yihui.org/cn/2019/07/hidden-gem/#comment-4698181689)的`xfun`包的[`convert_ipynb`函数](https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html)可以将后缀为.ipynb的文件完美转化为.Rmd文件，用法如下：
 

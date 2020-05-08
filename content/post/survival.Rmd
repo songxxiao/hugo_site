@@ -3,7 +3,7 @@ title: '生存分析云笔记'
 date: '2019-05-23'
 slug: survival
 output:
-  bookdown::html_document2:
+  html_document:
     toc: true
     theme: readable
 ---
@@ -94,6 +94,7 @@ library(survminer)
 library(rpart)
 library(rpart.plot)
 library(stats4)
+library(plotly)
 # 简单的一维MLE
 y = rpois(n=10000, lambda=7) # 人造一个泊松分布，10000个数据
 df_Poisson = data.frame(data=y)  # 变成数据框
@@ -216,7 +217,7 @@ kme = survfit(Surv(pgtime, pgstat) ~ 1,stagec)
 autoplot(kme, surv.colour = 'orange', censor.colour = 'red')
 
 km_trt_fit = survfit(Surv(pgtime, pgstat) ~ grade,stagec)
-autoplot(km_trt_fit)  
+autoplot(km_trt_fit)
 ```
 
 ## Cox比例风险模型
@@ -297,11 +298,13 @@ km = survfit(Surv(pgtime, pgstat) ~ temp$where, stagec)
 autoplot(km)
 ```
 
-```{r,fig.cap='年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系'}
-ggplot(stagec)+
+```{r,fig.cap='年龄、G2阶段的瘤细胞比例、肿瘤等级grade的关系',out.width='100%'}
+rela = ggplot(stagec)+
   geom_point(aes(age,g2,shape=factor(pgstat),
                  col=factor(pgstat)))+
   facet_wrap(~grade)
+
+ggplotly(rela)
 ```
 
 <!---

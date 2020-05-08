@@ -1,5 +1,5 @@
 ---
-title: 'Python小抄'
+title: 'Python奇技淫巧'
 author: 
 date: '2019-09-11'
 categories: Python
@@ -99,15 +99,17 @@ os.getcwd()    </code></pre>
 </ul>
 <pre class="python"><code>os.chdir(&#39;./mynotebook&#39;) </code></pre>
 </div>
-<div id="设置jupyter-notebook图片输出格式" class="section level1">
-<h1>设置<code>Jupyter Notebook</code>图片输出格式</h1>
-<p><a href="http://blog.rexking6.top/2019/11/20/7%E4%B8%AAPython%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/">Jupyter Notebook魔术命令</a>
-+ SVG格式</p>
-<ul>
-<li>Jupyter Notebook魔术命令</li>
-</ul>
-<pre class="python"><code>%matplotlib inline
-%config InlineBackend.figure_format = &#39;svg&#39;</code></pre>
+<div id="jupyter-notebook魔术命令" class="section level1">
+<h1>Jupyter Notebook魔术命令</h1>
+<p><a href="http://blog.rexking6.top/2019/11/20/7%E4%B8%AAPython%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/">Jupyter Notebook魔术命令</a></p>
+<pre class="python"><code>%matplotlib inline # 直接输出图像
+%config InlineBackend.figure_format = &#39;svg&#39; # 设置图片输出格式</code></pre>
+<p>查看全局变量：</p>
+<pre class="python"><code>%who # 展示环境中的变量列表
+%who_ls # 以列表的方式展示
+%whos # 类似%who，给出更详细的信息</code></pre>
+<p>交互式 debug：</p>
+<pre class="python"><code>%debug</code></pre>
 </div>
 <div id="让图片说中文" class="section level1">
 <h1>让图片说中文</h1>
@@ -144,8 +146,8 @@ plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
 <div id="在rstudio中运行python" class="section level1">
 <h1>在RStudio中运行Python</h1>
 <p>Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。<a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。</p>
-<p>其中，<code>reticulate::repl_python()</code>能够实现在R Studio Console中运行Python代码。但是目前这个函数无法显示Python运行出的图片。如果想退出Python环境回到R，则输入<code>exit</code>。</p>
-<p>其次，<code>reticulate</code>还能够支持Python代码<a href="https://rstudio.github.io/reticulate/#python-in-r-markdown">在R Markdown中的编译</a>。这个功能目前似乎还不够完善，至少在我的电脑上，很多时候无法成功编译。</p>
+<p>其中，<code>reticulate::repl_python()</code>能够实现在R Studio Console中运行Python代码。如果想退出Python环境回到R，则输入<code>exit</code>。</p>
+<p>其次，<code>reticulate</code>还能够支持Python代码<a href="https://rstudio.github.io/reticulate/#python-in-r-markdown">在R Markdown中的编译</a>。</p>
 <p>目前<a href="https://yihui.org/cn/2019/07/hidden-gem/#comment-4698181689">谢益辉</a>的<code>xfun</code>包的<a href="https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html"><code>convert_ipynb</code>函数</a>可以将后缀为.ipynb的文件完美转化为.Rmd文件，用法如下：</p>
 <pre class="r"><code>nb_rmd = rmarkdown:::convert_ipynb(nb_file)
 xfun::file_string(nb_rmd)
