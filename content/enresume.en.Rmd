@@ -75,6 +75,9 @@ This program uses 5567 pieces of English short message data as a training set an
 
 ### ACADEMIC RESEARCH
 
++ Machine Learning in Social Sciences: Based on China Education Panel Survey&emsp;2020   
+Bachelor Degree Thesis
+
 + Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS&emsp;2018-2019    
 National Innovation Training Program for College Students,  Independent author  
 The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/) were used for data cleaning and econometric analysis through Stata and R. Using Unconditional Quantile Regression and Fixed Effect Model estimate the welfare effect of land transfer behavior and its impact on social inequality. Using R's `ggplot2` software package to visualize geographic information. Output chart and finally form about 12,000 words of research papers. ([PDF](http://www.baige.me/v?i=Rwy))
@@ -93,7 +96,9 @@ The data of [China Family Panel Survey (CFPS)](http://www.isss.pku.edu.cn/cfps/)
 + 2017&emsp;Second Class Academic Honors (East China Normal University)
 + 2017&emsp;The 12th **Wisdom Cup** Philosophical Essay Competition in ECNU&emsp;First Award
 
-### CONFERENCE PRESENTATIONS 
+### CONFERENCE PRESENTATIONS
+
++ 2020-5&emsp;Machine Learning in Social Sciences, Dissertation Defense of Bachelor Degree, East China Normal University
 
 + 2018-7&emsp;Chinese Sociological Association Annual Meeting [Large Academic Survey Reflection and Social Quality Research Forum](http://css.cssn.cn/xsdt/zwdt/201805/t20180531_4323061.shtml) Nanjing University    
 Forum hosts：Wei Li
