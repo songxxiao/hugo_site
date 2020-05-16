@@ -6,10 +6,20 @@
     <description>Recent content in Posts on 宋骁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 14 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Keras入门示范</title>
+      <link>/zh/keras_example/</link>
+      <pubDate>Sat, 16 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/keras_example/</guid>
+      <description>页面跳转中···
+window.location.replace(&#34;https://xsong.ltd/archives/dl/house_price_predict&#34;)</description>
+    </item>
     
     <item>
       <title>stringr 与 regex 函数对应关系</title>
