@@ -6,10 +6,22 @@
     <description>Recent content on Xiao Song</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/en/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Guide to Keras Deep Learning</title>
+      <link>/en/keras_example/</link>
+      <pubDate>Sat, 16 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/en/keras_example/</guid>
+      <description>Xiao Song
+https://xsong.ltd/
+As a beginner, it’s necessary to write some simple guides using simple data.
+import numpy as np import pandas as pdX_train = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/train1.csv&amp;#39;) # prepare dataX_test = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/test1.csv&amp;#39;)Y_train = np.array(X_train[&amp;#39;SalePrice&amp;#39;])Y_train = np.log1p(Y_train)X_train.drop([&amp;#39;SalePrice&amp;#39;],axis = 1, inplace = True)Y_train#&amp;gt; array([12.24769912, 12.10901644, 12.31717117, ..., 12.25486757,#&amp;gt; 12.49313327, 11.86446927])X_train.shape#&amp;gt; (1436, 109)X_test.shape#&amp;gt; (1459, 109)Feature StandardizationStandardize features by removing the mean and scaling to unit variance:\[z = {{x - u} \over s}\]</description>
+    </item>
     
     <item>
       <title>Avoid Nested for-loop</title>

@@ -20,6 +20,16 @@
   <url>
     <loc>/zh/keras_example/</loc>
     <lastmod>2020-05-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/keras_example/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/keras_example/"
+                />
   </url>
   
   <url>

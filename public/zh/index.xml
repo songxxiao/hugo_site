@@ -17,8 +17,10 @@
       <pubDate>Sat, 16 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/zh/keras_example/</guid>
-      <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/dl/house_price_predict&#34;)</description>
+      <description>Xiao Song
+https://xsong.ltd/
+As a beginner, it’s necessary to write some simple guides using simple data.
+import numpy as np import pandas as pdX_train = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/train1.csv&amp;#39;) # prepare dataX_test = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/test1.csv&amp;#39;)Y_train = np.array(X_train[&amp;#39;SalePrice&amp;#39;])Y_train = np.log1p(Y_train)X_train.drop([&amp;#39;SalePrice&amp;#39;],axis = 1, inplace = True)Y_train#&amp;gt; array([12.24769912, 12.10901644, 12.31717117, ..., 12.25486757,#&amp;gt; 12.49313327, 11.86446927])X_train.shape#&amp;gt; (1436, 109)X_test.shape#&amp;gt; (1459, 109)Feature StandardizationStandardize features by removing the mean and scaling to unit variance:\[z = {{x - u} \over s}\]</description>
     </item>
     
     <item>
@@ -251,13 +253,12 @@ f.readlines()返回一个列表，列表的数据项为一行的文本[linel, l
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/zh/sql/</guid>
-      <description>学而时习之，不亦乐乎？
-MySQL安装(基于Windows)
+      <description>MySQL安装(基于Windows)
 MySQL 教程
 廖雪峰SQL教程
 W3school SQL教程
 数据：NBA技术统计和球员薪酬数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
-本文基于MySQL。此处建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。
+本文基于MySQL。此外建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。但是不同的SQL数据库语法略有区别。
 SQLite文件见这里
 变量排序SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;删除 &amp;amp; 增添列ALTER TABLE salary DROP COLUMN TmADD COLUMN Team VARCHAR;重编码新变量ALTER TABLE salary ADD salary17_18 FLOAT;UPDATE salary SET salary17_18 = season17_18/1000000.tg {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}f1PlayerTmseason17_18salary17_181Stephen CurryGSW3468255034.</description>
     </item>

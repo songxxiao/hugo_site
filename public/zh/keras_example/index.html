@@ -24,6 +24,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="../../css/fonts.css" media="all">
 <link rel="stylesheet" href="../../css/main.css" media="all">
 
@@ -75,12 +80,370 @@
       
 
 
-<p>页面跳转中···</p>
-<script>
+<p>Xiao Song</p>
+<p><a href="https://xsong.ltd/" class="uri">https://xsong.ltd/</a></p>
+<p>As a beginner, it’s necessary to write some simple guides using simple data.</p>
+<pre class="python"><code>import numpy as np 
+import pandas as pd
 
-window.location.replace("https://xsong.ltd/archives/dl/house_price_predict")
+X_train = pd.read_csv(&#39;E:/some_code/py_basic/house_price/data/train1.csv&#39;) # prepare data
+X_test = pd.read_csv(&#39;E:/some_code/py_basic/house_price/data/test1.csv&#39;)
 
-</script>
+Y_train = np.array(X_train[&#39;SalePrice&#39;])
+Y_train = np.log1p(Y_train)
+
+X_train.drop([&#39;SalePrice&#39;],axis = 1, inplace = True)</code></pre>
+<pre class="python"><code>Y_train
+#&gt; array([12.24769912, 12.10901644, 12.31717117, ..., 12.25486757,
+#&gt;        12.49313327, 11.86446927])</code></pre>
+<pre class="python"><code>X_train.shape
+#&gt; (1436, 109)</code></pre>
+<pre class="python"><code>X_test.shape
+#&gt; (1459, 109)</code></pre>
+<div id="feature-standardization" class="section level1">
+<h1>Feature Standardization</h1>
+<p>Standardize features by removing the mean and scaling to unit variance:
+<span class="math display">\[z = {{x - u} \over s}\]</span></p>
+<p><span class="math inline">\(z\)</span> is standardize feature of <span class="math inline">\(x\)</span>, u is the mean of <span class="math inline">\(x\)</span>, and <span class="math inline">\(s\)</span> is the standard deviation of <span class="math inline">\(x\)</span>.</p>
+<pre class="python"><code>#from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import StandardScaler
+
+def standardize(df):
+    &#39;&#39;&#39;standardize features&#39;&#39;&#39;
+    transformer = StandardScaler().fit(df) 
+    newX = transformer.transform(df)
+    X = pd.DataFrame(newX,columns = df.columns)
+    return X
+
+X_train = standardize(X_train) # X train
+X_test = standardize(X_test) </code></pre>
+<pre class="python"><code>X_train
+#&gt;       MSSubClass  MSZoningRM  ...  SaleTypeWD  SaleConditionOth
+#&gt; 0       0.074674   -0.517138  ...    0.389312         -0.465778
+#&gt; 1      -0.874282   -0.517138  ...    0.389312         -0.465778
+#&gt; 2       0.074674   -0.517138  ...    0.389312         -0.465778
+#&gt; 3       0.311913   -0.517138  ...    0.389312          2.146946
+#&gt; 4       0.074674   -0.517138  ...    0.389312         -0.465778
+#&gt; ...          ...         ...  ...         ...               ...
+#&gt; 1431   -0.874282    1.933720  ...    0.389312         -0.465778
+#&gt; 1432    0.074674   -0.517138  ...    0.389312         -0.465778
+#&gt; 1433   -0.874282   -0.517138  ...    0.389312         -0.465778
+#&gt; 1434    0.311913   -0.517138  ...    0.389312         -0.465778
+#&gt; 1435   -0.874282   -0.517138  ...    0.389312         -0.465778
+#&gt; 
+#&gt; [1436 rows x 109 columns]</code></pre>
+<pre class="python"><code>X_train.describe()
+#&gt;          MSSubClass    MSZoningRM  ...    SaleTypeWD  SaleConditionOth
+#&gt; count  1.436000e+03  1.436000e+03  ...  1.436000e+03      1.436000e+03
+#&gt; mean  -5.721205e-17  3.101821e-16  ... -3.223203e-16     -1.622039e-16
+#&gt; std    1.000348e+00  1.000348e+00  ...  1.000348e+00      1.000348e+00
+#&gt; min   -8.742817e-01 -5.171379e-01  ... -2.568635e+00     -4.657780e-01
+#&gt; 25%   -8.742817e-01 -5.171379e-01  ...  3.893119e-01     -4.657780e-01
+#&gt; 50%   -1.625649e-01 -5.171379e-01  ...  3.893119e-01     -4.657780e-01
+#&gt; 75%    3.119131e-01 -5.171379e-01  ...  3.893119e-01     -4.657780e-01
+#&gt; max    3.158781e+00  1.933720e+00  ...  3.893119e-01      2.146946e+00
+#&gt; 
+#&gt; [8 rows x 109 columns]</code></pre>
+<pre class="python"><code>X_train.shape[1]
+#&gt; 109</code></pre>
+</div>
+<div id="neural-network-building" class="section level1">
+<h1>Neural Network Building</h1>
+<pre class="python"><code>from keras import models
+#&gt; Using TensorFlow backend.
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:516: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:517: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:518: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:519: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:520: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:525: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:541: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:542: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:543: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:544: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:545: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
+#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:550: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
+#&gt;   np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
+from keras import layers
+
+model = models.Sequential()
+model.add(layers.Dense(64, activation=&#39;relu&#39;,input_shape=(X_train.shape[1],)))
+model.add(layers.Dense(64, activation=&#39;relu&#39;))
+model.add(layers.Dense(1))
+
+model.compile(optimizer=&#39;rmsprop&#39;, loss=&#39;mse&#39;, metrics=[&#39;mae&#39;])
+model.summary()
+#&gt; Model: &quot;sequential_1&quot;
+#&gt; _________________________________________________________________
+#&gt; Layer (type)                 Output Shape              Param #   
+#&gt; =================================================================
+#&gt; dense_1 (Dense)              (None, 64)                7040      
+#&gt; _________________________________________________________________
+#&gt; dense_2 (Dense)              (None, 64)                4160      
+#&gt; _________________________________________________________________
+#&gt; dense_3 (Dense)              (None, 1)                 65        
+#&gt; =================================================================
+#&gt; Total params: 11,265
+#&gt; Trainable params: 11,265
+#&gt; Non-trainable params: 0
+#&gt; _________________________________________________________________</code></pre>
+<pre class="python"><code>#?models.Sequential.fit</code></pre>
+<pre class="python"><code>model.fit(X_train,Y_train,
+    epochs = 20, # Number of epochs to train the model
+    batch_size = 512) # Number of samples per gradient update.
+#&gt; Epoch 1/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 124.9478 - mae: 11.1519
+#&gt; 1436/1436 [==============================] - 0s 192us/step - loss: 112.4666 - mae: 10.5637
+#&gt; Epoch 2/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 89.2538 - mae: 9.3994
+#&gt; 1436/1436 [==============================] - 0s 10us/step - loss: 82.3854 - mae: 9.0132
+#&gt; Epoch 3/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 66.3523 - mae: 8.0543
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 61.0314 - mae: 7.7097
+#&gt; Epoch 4/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 48.1578 - mae: 6.8073
+#&gt; 1436/1436 [==============================] - 0s 10us/step - loss: 43.7894 - mae: 6.4515
+#&gt; Epoch 5/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 33.0511 - mae: 5.5414
+#&gt; 1436/1436 [==============================] - 0s 15us/step - loss: 30.0785 - mae: 5.2299
+#&gt; Epoch 6/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 22.2379 - mae: 4.3810
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 19.8087 - mae: 4.0900
+#&gt; Epoch 7/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 14.2264 - mae: 3.3643
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 12.7182 - mae: 3.1208
+#&gt; Epoch 8/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 8.9251 - mae: 2.5148
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 8.2958 - mae: 2.4063
+#&gt; Epoch 9/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 6.3577 - mae: 2.0390
+#&gt; 1436/1436 [==============================] - 0s 15us/step - loss: 5.7656 - mae: 1.9494
+#&gt; Epoch 10/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 4.4762 - mae: 1.7021
+#&gt; 1436/1436 [==============================] - 0s 10us/step - loss: 4.3529 - mae: 1.6689
+#&gt; Epoch 11/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 3.5257 - mae: 1.5134
+#&gt; 1436/1436 [==============================] - 0s 7us/step - loss: 3.5197 - mae: 1.4885
+#&gt; Epoch 12/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 3.1143 - mae: 1.3782
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 2.9462 - mae: 1.3546
+#&gt; Epoch 13/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.6755 - mae: 1.2721
+#&gt; 1436/1436 [==============================] - 0s 47us/step - loss: 2.5275 - mae: 1.2485
+#&gt; Epoch 14/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.1991 - mae: 1.1560
+#&gt; 1436/1436 [==============================] - 0s 10us/step - loss: 2.1965 - mae: 1.1612
+#&gt; Epoch 15/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.9140 - mae: 1.0955
+#&gt; 1436/1436 [==============================] - 0s 15us/step - loss: 1.9303 - mae: 1.0859
+#&gt; Epoch 16/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.8288 - mae: 1.0674
+#&gt; 1436/1436 [==============================] - 0s 7us/step - loss: 1.7149 - mae: 1.0246
+#&gt; Epoch 17/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.6749 - mae: 1.0285
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 1.5363 - mae: 0.9696
+#&gt; Epoch 18/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.3922 - mae: 0.9191
+#&gt; 1436/1436 [==============================] - 0s 21us/step - loss: 1.3858 - mae: 0.9209
+#&gt; Epoch 19/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.1759 - mae: 0.8531
+#&gt; 1436/1436 [==============================] - 0s 9us/step - loss: 1.2575 - mae: 0.8741
+#&gt; Epoch 20/20
+#&gt; 
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.0248 - mae: 0.8071
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 1.1476 - mae: 0.8387
+#&gt; &lt;keras.callbacks.callbacks.History object at 0x0000000059D08278&gt;
+#&gt; 
+#&gt; WARNING:tensorflow:From C:\ProgramData\Anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.</code></pre>
+</div>
+<div id="validation-data" class="section level1">
+<h1>Validation data</h1>
+<p>first I create validation set:</p>
+<pre class="python"><code>x_val = X_train[:1000]
+partial_x_train = X_train[1000:]
+y_val = Y_train[:1000]
+partial_y_train = Y_train[1000:]</code></pre>
+<pre class="python"><code>history = model.fit(partial_x_train,partial_y_train,
+    epochs=20,
+    batch_size=512,
+    validation_data=(x_val, y_val))
+#&gt; Train on 436 samples, validate on 1000 samples
+#&gt; Epoch 1/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 137us/step - loss: 1.0678 - mae: 0.8205 - val_loss: 1.0351 - val_mae: 0.7901
+#&gt; Epoch 2/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 0.9658 - mae: 0.7794 - val_loss: 1.0345 - val_mae: 0.7904
+#&gt; Epoch 3/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 34us/step - loss: 0.8868 - mae: 0.7488 - val_loss: 1.0350 - val_mae: 0.7901
+#&gt; Epoch 4/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 0.8191 - mae: 0.7194 - val_loss: 1.0346 - val_mae: 0.7900
+#&gt; Epoch 5/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.7595 - mae: 0.6929 - val_loss: 1.0344 - val_mae: 0.7897
+#&gt; Epoch 6/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 0.7061 - mae: 0.6672 - val_loss: 1.0334 - val_mae: 0.7892
+#&gt; Epoch 7/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 32us/step - loss: 0.6578 - mae: 0.6432 - val_loss: 1.0324 - val_mae: 0.7886
+#&gt; Epoch 8/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 27us/step - loss: 0.6138 - mae: 0.6210 - val_loss: 1.0309 - val_mae: 0.7879
+#&gt; Epoch 9/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.5733 - mae: 0.5999 - val_loss: 1.0293 - val_mae: 0.7870
+#&gt; Epoch 10/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.5357 - mae: 0.5795 - val_loss: 1.0270 - val_mae: 0.7860
+#&gt; Epoch 11/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.5008 - mae: 0.5600 - val_loss: 1.0250 - val_mae: 0.7847
+#&gt; Epoch 12/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 27us/step - loss: 0.4685 - mae: 0.5410 - val_loss: 1.0220 - val_mae: 0.7832
+#&gt; Epoch 13/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 23us/step - loss: 0.4383 - mae: 0.5231 - val_loss: 1.0196 - val_mae: 0.7815
+#&gt; Epoch 14/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 30us/step - loss: 0.4100 - mae: 0.5053 - val_loss: 1.0159 - val_mae: 0.7798
+#&gt; Epoch 15/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.3835 - mae: 0.4882 - val_loss: 1.0137 - val_mae: 0.7780
+#&gt; Epoch 16/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.3587 - mae: 0.4711 - val_loss: 1.0094 - val_mae: 0.7765
+#&gt; Epoch 17/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.3360 - mae: 0.4556 - val_loss: 1.0106 - val_mae: 0.7757
+#&gt; Epoch 18/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 66us/step - loss: 0.3169 - mae: 0.4413 - val_loss: 1.0142 - val_mae: 0.7799
+#&gt; Epoch 19/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.3080 - mae: 0.4365 - val_loss: 1.0562 - val_mae: 0.7963
+#&gt; Epoch 20/20
+#&gt; 
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 0.3314 - mae: 0.4511 - val_loss: 1.1284 - val_mae: 0.8368</code></pre>
+<p>Extract cross validation information:</p>
+<pre class="python"><code>history_dict = history.history
+loss_values = history_dict[&#39;loss&#39;]
+val_loss_values = history_dict[&#39;val_loss&#39;]
+epochs = range(1, len(loss_values) + 1)
+cv_info = pd.DataFrame({&#39;epochs&#39;:epochs,&#39;loss_values&#39;:loss_values,&#39;val_loss_values&#39;:val_loss_values})  </code></pre>
+<pre class="python"><code>cv_info
+#&gt;     epochs  loss_values  val_loss_values
+#&gt; 0        1     1.067770         1.035130
+#&gt; 1        2     0.965842         1.034503
+#&gt; 2        3     0.886769         1.035040
+#&gt; 3        4     0.819059         1.034595
+#&gt; 4        5     0.759454         1.034365
+#&gt; 5        6     0.706111         1.033356
+#&gt; 6        7     0.657841         1.032399
+#&gt; 7        8     0.613790         1.030917
+#&gt; 8        9     0.573268         1.029322
+#&gt; 9       10     0.535707         1.027038
+#&gt; 10      11     0.500791         1.025017
+#&gt; 11      12     0.468498         1.021985
+#&gt; 12      13     0.438323         1.019609
+#&gt; 13      14     0.410035         1.015942
+#&gt; 14      15     0.383458         1.013665
+#&gt; 15      16     0.358692         1.009389
+#&gt; 16      17     0.335995         1.010574
+#&gt; 17      18     0.316914         1.014165
+#&gt; 18      19     0.307995         1.056198
+#&gt; 19      20     0.331350         1.128353</code></pre>
+<pre class="python"><code>cv_info = pd.melt(cv_info, id_vars=[&#39;epochs&#39;], value_vars=[&#39;loss_values&#39;, &#39;val_loss_values&#39;]) </code></pre>
+<pre class="python"><code>from plotnine import *
+
+(
+ggplot(cv_info,aes(&#39;epochs&#39;,&#39;value&#39;,color = &#39;variable&#39;)) +
+geom_line() +
+geom_point()
+)
+#&gt; &lt;ggplot: (112688013)&gt;</code></pre>
+<p><img src="../../post/keras_example_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="prediction" class="section level1">
+<h1>Prediction</h1>
+<pre class="python"><code>Y_pred = model.predict(X_test)
+Y_pred
+#&gt; array([[11.815959],
+#&gt;        [12.516096],
+#&gt;        [10.935606],
+#&gt;        ...,
+#&gt;        [14.42096 ],
+#&gt;        [10.74923 ],
+#&gt;        [11.005993]], dtype=float32)</code></pre>
+<pre class="python"><code>Y_pred.shape
+#&gt; (1459, 1)</code></pre>
+<pre class="python"><code>Y_pred = np.concatenate(Y_pred).ravel() # to flatten 2 dimition array
+Y_pred = np.expm1(Y_pred)
+Y_pred
+#&gt; array([ 135394.98 ,  272690.44 ,   56139.12 , ..., 1832075.2  ,
+#&gt;          46593.156,   60233.04 ], dtype=float32)</code></pre>
+<pre class="python"><code>test = pd.read_csv(&#39;./data/test.csv&#39;)
+#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): FileNotFoundError: [Errno 2] File ./data/test.csv does not exist: &#39;./data/test.csv&#39;
+#&gt; 
+#&gt; Detailed traceback: 
+#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
+#&gt;   File &quot;C:\ProgramData\Anaconda3\lib\site-packages\pandas\io\parsers.py&quot;, line 676, in parser_f
+#&gt;     return _read(filepath_or_buffer, kwds)
+#&gt;   File &quot;C:\ProgramData\Anaconda3\lib\site-packages\pandas\io\parsers.py&quot;, line 448, in _read
+#&gt;     parser = TextFileReader(fp_or_buf, **kwds)
+#&gt;   File &quot;C:\ProgramData\Anaconda3\lib\site-packages\pandas\io\parsers.py&quot;, line 880, in __init__
+#&gt;     self._make_engine(self.engine)
+#&gt;   File &quot;C:\ProgramData\Anaconda3\lib\site-packages\pandas\io\parsers.py&quot;, line 1114, in _make_engine
+#&gt;     self._engine = CParserWrapper(self.f, **self.options)
+#&gt;   File &quot;C:\ProgramData\Anaconda3\lib\site-packages\pandas\io\parsers.py&quot;, line 1891, in __init__
+#&gt;     self._reader = parsers.TextReader(src, **kwds)
+#&gt;   File &quot;pandas\_libs\parsers.pyx&quot;, line 374, in pandas._libs.parsers.TextReader.__cinit__
+#&gt;   File &quot;pandas\_libs\parsers.pyx&quot;, line 673, in pandas._libs.parsers.TextReader._setup_parser_source
+submission = pd.DataFrame({&#39;id&#39;: test[&#39;Id&#39;], &#39;SalePrice&#39;: Y_pred})
+#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name &#39;test&#39; is not defined
+#&gt; 
+#&gt; Detailed traceback: 
+#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;
+submission.head(10)
+#&gt; Error in py_call_impl(callable, dots$args, dots$keywords): NameError: name &#39;submission&#39; is not defined
+#&gt; 
+#&gt; Detailed traceback: 
+#&gt;   File &quot;&lt;string&gt;&quot;, line 1, in &lt;module&gt;</code></pre>
+<pre class="python"><code>#submission.to_csv(&#39;./output/keras.csv&#39;,index = False) # save result</code></pre>
+</div>
 
     </div>
   </article>
@@ -154,7 +517,22 @@ s.setAttribute('data-timestamp', +new Date());
     </div>
     
 
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
     
+<script src="../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
 <script type="application/javascript">

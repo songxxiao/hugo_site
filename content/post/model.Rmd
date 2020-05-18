@@ -4,7 +4,7 @@ subtitle: ' '
 author: '[宋骁](https://xsong.ltd)'
 date: '2019-10-01'
 output:
-  bookdown::html_document2:
+  html_document:
     toc: true
     theme: readable
 slug: model
@@ -195,6 +195,8 @@ group=market.potential))+
 # 多项式回归
 
 + 多项式回归是平滑方法的基础。
+
+类似于泰勒公式的思想，即使用多项式函数去拟合光滑函数。
 
 ```{r,fig.cap='对一个模拟数据进行二次项回归。'}
 set.seed(2019)

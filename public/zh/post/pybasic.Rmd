@@ -116,24 +116,20 @@ python setup.py install
 
 # 在RStudio中运行Python
 
-Python和R都是数据科学的必备工具。熟悉R的人都知道，R Studio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。[`reticulate`](https://rstudio.github.io/reticulate/)包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。
+Python和R都是数据科学领域的重要工具。熟悉R的人都知道，RStudio是一款非常出色的R语言IDE。但一直以来，Python和R都是割裂的。[`reticulate`](https://rstudio.github.io/reticulate/)包能够为我们提供一些Python的调用功能。包括两个语言中对象的相互转化。
 
-其中，`reticulate::repl_python()`能够实现在R Studio Console中运行Python代码。如果想退出Python环境回到R，则输入`exit`。
+其中，`reticulate::repl_python()`能够实现在RStudio Console中运行Python代码。如果想退出Python环境回到R，则输入`exit`。
 
-其次，`reticulate`还能够支持Python代码[在R Markdown中的编译](https://rstudio.github.io/reticulate/#python-in-r-markdown)。
+其次，`reticulate`还能够支持Python代码[在R Markdown中的编译](https://rstudio.github.io/reticulate/#python-in-r-markdown)。甚至能在同一个RMarkdown文档中混合执行R和Python代码。
 
-目前[谢益辉](https://yihui.org/cn/2019/07/hidden-gem/#comment-4698181689)的`xfun`包的[`convert_ipynb`函数](https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html)可以将后缀为.ipynb的文件完美转化为.Rmd文件，用法如下：
+目前`rmarkdown`包的[`convert_ipynb`函数](https://rmarkdown.rstudio.com/docs/reference/convert_ipynb.html)可以将后缀为.ipynb的文件完美转化为.Rmd文件，用法如下：
 
 ```r
-nb_rmd = rmarkdown:::convert_ipynb(nb_file)
-xfun::file_string(nb_rmd)
-rmarkdown:::convert_ipynb("XXX.ipynb",
-                          output = "YYY.Rmd")
+rmarkdown:::convert_ipynb("./input.ipynb",
+                          output = "./output.Rmd")
 ```
 
-如果`reticulate`有一天功能足够完善，可以用它支持的`knitr`编译，从而替代不能控制输出格式的Jupyter Notebook。那么R Studio也能成为一款非常出色的Python IDE。
-
-
+[谢益辉相关博文](https://yihui.org/cn/2019/07/hidden-gem/#comment-4698181689)
 
 
 

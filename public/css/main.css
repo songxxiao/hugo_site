@@ -109,6 +109,7 @@ blockquote {
   background: #BEBEBE;
   border-bottom: 1px solid #ADADAD;
   box-shadow: 0 0.125rem 0.25rem 0 #ADADAD;
+  z-index:10
 }
 
 .nav {

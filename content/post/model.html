@@ -4,7 +4,7 @@ subtitle: ' '
 author: '[宋骁](https://xsong.ltd)'
 date: '2019-10-01'
 output:
-  bookdown::html_document2:
+  html_document:
     toc: true
     theme: readable
 slug: model
@@ -410,6 +410,7 @@ Figure 4: 左图无交互效应，可视为控制变量。右图为两个连续�
 <ul>
 <li>多项式回归是平滑方法的基础。</li>
 </ul>
+<p>类似于泰勒公式的思想，即使用多项式函数去拟合光滑函数。</p>
 <pre class="r"><code>set.seed(2019)
 x &lt;- seq(0,4,length=100)
 y &lt;- -x^2 + 3*x + jitter(rep(5:9,each =20),2) +3

@@ -2,18 +2,11 @@
 title: 'SQL增删改查'
 author: "宋骁"
 date: '2019-08-25'
-output:
-  bookdown::html_document2:
-    toc: true
-    theme: united
 slug: sql
 ---
 
 
 
-<blockquote>
-<p>学而时习之，不亦乐乎？</p>
-</blockquote>
 <hr />
 <p><a href="https://www.cnblogs.com/vuenote/archive/2018/10/13/9783463.html">MySQL安装(基于Windows)</a></p>
 <p><a href="http://www.runoob.com/mysql/mysql-tutorial.html">MySQL 教程</a></p>
@@ -22,7 +15,7 @@ slug: sql
 <hr />
 <ul>
 <li><p>数据：<a href="https://www.kaggle.com/drgilermo/nba-players-stats">NBA技术统计</a>和<a href="https://www.kaggle.com/koki25ando/salary">球员薪酬</a>数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。</p></li>
-<li><p>本文基于MySQL。此处建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。</p></li>
+<li><p>本文基于MySQL。此外建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。但是不同的SQL数据库语法略有区别。</p></li>
 <li><p>SQLite文件见<a href="https://www.kaggle.com/rikdifos/nba-salary-and-statistics-201617">这里</a></p></li>
 </ul>
 <div id="变量排序" class="section level1">
@@ -681,9 +674,42 @@ Kyle Lowry
 </td>
 </tr>
 </table>
-<div id="从视图中查询" class="section level2">
-<h2>从视图中查询</h2>
+<p>从视图中查询:</p>
 <pre class="sql"><code>SELECT COUNT(DISTINCT Tm) 
 FROM teamage;</code></pre>
 </div>
+<div id="空值的处理" class="section level1">
+<h1>空值的处理</h1>
+<p>来一道简单的Leecode题</p>
+<p>某网站包含两个表，Customers 表和 Orders 表。编写一个 SQL 查询，找出所有从不订购任何东西的客户。</p>
+<p>Customers 表：</p>
+<pre><code>+----+-------+
+| Id | Name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+</code></pre>
+<p>Orders 表：</p>
+<pre><code>+----+------------+
+| Id | CustomerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+</code></pre>
+<p>例如给定上述表格，你的查询应返回：</p>
+<pre><code>+-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+</code></pre>
+<pre class="sql"><code>SELECT L1.Name AS Customers
+FROM Customers AS L1
+LEFT JOIN Orders ON Orders.CustomerId = L1.Id
+WHERE Orders.CustomerId IS NULL;</code></pre>
+<blockquote>
+<p>只能采用IS NULL或IS NOT NULL，而不能采用=, &lt;, &lt;&gt;, !=这些操作符来判断NULL</p>
+</blockquote>
 </div>

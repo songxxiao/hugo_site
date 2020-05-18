@@ -1,5 +1,5 @@
 ---
-title: Keras入门示范
+title: Guide to Keras Deep Learning 
 slug: keras_example
 author: ' '
 date: '2020-05-16'
@@ -171,5 +171,4 @@ submission.head(10)
 ```{python}
 #submission.to_csv('./output/keras.csv',index = False) # save result
 ```
-
 
