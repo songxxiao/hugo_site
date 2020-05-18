@@ -1,41 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>编程基础 on 宋骁</title>
-    <link>/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/</link>
-    <description>Recent content in 编程基础 on 宋骁</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/zh/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>SQL查询语句</title>
-      <link>/zh/sql/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/sql/</guid>
-      <description>学而时习之，不亦乐乎？
-——孔子
-MySQL安装(基于Windows)
-MySQL 教程
-廖雪峰SQL教程
-W3school SQL教程
-数据：NBA技术统计和球员薪酬数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
-本文基于MySQL。
-变量排序SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;删除 &amp;amp; 增添列ALTER TABLE salary DROP COLUMN TmADD COLUMN Team VARCHAR;重编码新变量ALTER TABLE salary ADD salary17_18 FLOAT;UPDATE salary SET salary17_18 = season17_18/1000000.tg {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}f1PlayerTmseason17_18salary17_181Stephen CurryGSW3468255034.</description>
-    </item>
-    
-    <item>
-      <title>排序和查找算法(Python实现)</title>
-      <link>/zh/suanfa/</link>
-      <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/suanfa/</guid>
-      <description>排序算法冒泡排序法def bubble(List):for j in range(len(List)-1,0,-1):print(List)for i in range(0,j):if List[i]&amp;gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]return List testlist = [49,38,65,97,76,13,27,49]print(&amp;#39;结果：&amp;#39;,bubble(testlist))[49, 38, 65, 97, 76, 13, 27, 49][38, 49, 65, 76, 13, 27, 49, 97][38, 49, 65, 13, 27, 49, 76, 97][38, 49, 13, 27, 49, 65, 76, 97][38, 13, 27, 49, 49, 65, 76, 97][13, 27, 38, 49, 49, 65, 76, 97][13, 27, 38, 49, 49, 65, 76, 97]结果： [13, 27, 38, 49, 49, 65, 76, 97]选择排序算法#选择排序算法：程序填空def selection_sort(L):N = len(L) #提取列表长度Nexchange_count = 0for i in range(0, N-1): #从0开始循环min_index = i #排序序列的末尾位置for j in range(i+1,N): #嵌套循环if L[min_index] &amp;gt; L[j]: #第一次循环L[0]&amp;gt;L[1] min_index = j #第一次循环min_index=1 j是二者最小值的列表索引。 #min_index永远等于最小值索引#以下是移动程序if min_index!</description>
-    </item>
-    
-  </channel>
-</rss>

@@ -163,7 +163,7 @@ Y_pred
 ```
 
 ```{python}
-test = pd.read_csv('./data/test.csv')
+test = pd.read_csv('E:/some_code/py_basic/house_price/data/test.csv')
 submission = pd.DataFrame({'id': test['Id'], 'SalePrice': Y_pred})
 submission.head(10)
 ```
