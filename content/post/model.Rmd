@@ -37,7 +37,6 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(modelr)
-library(haven)
 library(cowplot)
 library(stargazer)
 `%>%` <- magrittr::`%>%`
@@ -47,13 +46,12 @@ library(stargazer)
 
 `hatdt`为作者个人整理的[中国家庭追踪调查](http://www.isss.pku.edu.cn/cfps/index.htm)(CFPS)收入数据^[可从[Github](https://github.com/ECSTA7Y/MaLearning/blob/master/aggregrate.csv)下载]。
 
-```{r,echo=F}
-hatdt <- read_dta('E:/R_codes/capplot/aggregrate.dta')
-```
-
 ```{r}
+library(readr)
+hatdt = read_csv('E:/some_code/capplot/aggregrate.csv', locale = readr::locale(encoding = "gb18030"))
+
 hatdt <- hatdt %>% 
-  filter(type=='个人收入（元）') %>% 
+  filter(`type` == '个人收入（元）') %>% 
   drop_na(agem,inc,fswt_nat)
 
 set.seed(20191001)

@@ -162,8 +162,8 @@ modelr包的主要函数有：
 data_grid: 生成预测数据
 add_predictions: 加入预测值
 crossv_kfold、crossv_mc、crossv_loo: 交叉验证
-library(dplyr)library(tidyr)library(ggplot2)library(modelr)library(haven)library(cowplot)library(stargazer)`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`基础回归hatdt为作者个人整理的中国家庭追踪调查(CFPS)收入数据1。
-Error: &amp;#39;E:/R_codes/capplot/aggregrate.dta&amp;#39; does not exist.hatdt &amp;lt;- hatdt %&amp;gt;% filter(type==&amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)Error in eval(lhs, parent, parent): object &amp;#39;hatdt&amp;#39; not foundset.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)Error in nrow(hatdt): object &amp;#39;hatdt&amp;#39; not foundsampled &amp;lt;- hatdt[sample,]Error in eval(expr, envir, enclos): object &amp;#39;hatdt&amp;#39; not foundplota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.</description>
+library(dplyr)library(tidyr)library(ggplot2)library(modelr)library(cowplot)library(stargazer)`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`基础回归hatdt为作者个人整理的中国家庭追踪调查(CFPS)收入数据1。
+library(readr)hatdt = read_csv(&amp;#39;E:/some_code/capplot/aggregrate.csv&amp;#39;, locale = readr::locale(encoding = &amp;quot;gb18030&amp;quot;))hatdt &amp;lt;- hatdt %&amp;gt;% filter(`type` == &amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)set.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)sampled &amp;lt;- hatdt[sample,]plota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.5,alpha=1/3) +geom_smooth(span =10,size=1) + geom_smooth(method=&amp;#39;lm&amp;#39;,size=1,color=&amp;#39;red&amp;#39;) +ylim(0, 20000) +labs(x = &amp;quot;年龄&amp;quot;,y = &amp;quot;人民币(元）&amp;quot;) +theme_bw()plotb &amp;lt;- ggplot() +geom_jitter(data=sampled,aes(agem,inc),height=550,width=5,size =1.</description>
     </item>
     
     <item>
