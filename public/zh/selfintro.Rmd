@@ -44,9 +44,11 @@ SQL就不用说了。以我目前的经验来看最适合初学者的是`SQLite`
 
 做网页、爬虫之类的肯定要懂点前端技能来着。html/css尚能掌握，使用chrome调css颜色布局非常让人上瘾，乐此不疲。本站就是长期调的结果。另外我正在学习JavaScript。
 
+### IDE
 
-
-
++ Python Jupyter Lab, VS Code, Jupyter Notebook 混用
++ R语言 RStudio VS Code 混用
++ 
 
 
 

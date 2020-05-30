@@ -76,7 +76,7 @@ This program uses 5567 pieces of English short message data as a training set an
 ### ACADEMIC RESEARCH
 
 + Machine Learning in Social Sciences: Based on China Education Panel Survey&emsp;2020   
-Bachelor Degree Thesis
+Bachelor Degree Thesis ([PDF](/mlinss.pdf))  
 
 + Welfare Effect and Social Inequality of Land Transfer: Empirical Analysis Based on CFPS&emsp;2018-2019    
 National Innovation Training Program for College Students,  Independent author  
