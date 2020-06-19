@@ -45,6 +45,7 @@ slug: resource
 
 # Python
 
+[A Byte of Python](https://python.swaroopch.com/)
 
 [一本Python书](http://funhacks.net/explore-python/)
 
@@ -53,6 +54,8 @@ slug: resource
 [Python帮助系统](https://blog.csdn.net/qq_40418612/article/details/82470055)
 
 [Python机器学习](https://ljalphabeta.gitbooks.io/python-/content/)
+
+[Python3网络爬虫开发实战](https://python3webspider.cuiqingcai.com/)
 
 [Python 文本数据分析初学指南](https://datartisan.gitbooks.io/begining-text-mining-with-python/)
 

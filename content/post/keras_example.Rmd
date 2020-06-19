@@ -16,6 +16,8 @@ knitr::opts_chunk$set(comment='#>',error=T,message = F,warning = F,fig.align='ce
 ```
 
 ```{python}
+import warnings
+warnings.filterwarnings('ignore')
 import numpy as np 
 import pandas as pd
 

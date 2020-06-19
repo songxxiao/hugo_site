@@ -1,6 +1,3 @@
----
-title: ' '
----
 
 # A Hugo Theme Based on Lithium
 

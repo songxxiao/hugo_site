@@ -20,7 +20,7 @@
       <description>Xiao Song
 https://xsong.ltd/
 As a beginner, it’s necessary to write some simple guides using simple data.
-import numpy as np import pandas as pdX_train = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/train1.csv&amp;#39;) # prepare dataX_test = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/test1.csv&amp;#39;)Y_train = np.array(X_train[&amp;#39;SalePrice&amp;#39;])Y_train = np.log1p(Y_train)X_train.drop([&amp;#39;SalePrice&amp;#39;],axis = 1, inplace = True)Y_train#&amp;gt; array([12.24769912, 12.10901644, 12.31717117, ..., 12.25486757,#&amp;gt; 12.49313327, 11.86446927])X_train.shape#&amp;gt; (1436, 109)X_test.shape#&amp;gt; (1459, 109)Feature StandardizationStandardize features by removing the mean and scaling to unit variance:\[z = {{x - u} \over s}\]</description>
+import warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)import numpy as np import pandas as pdX_train = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/train1.csv&amp;#39;) # prepare dataX_test = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/test1.csv&amp;#39;)Y_train = np.array(X_train[&amp;#39;SalePrice&amp;#39;])Y_train = np.log1p(Y_train)X_train.drop([&amp;#39;SalePrice&amp;#39;],axis = 1, inplace = True)Y_train#&amp;gt; array([12.24769912, 12.10901644, 12.31717117, ..., 12.25486757,#&amp;gt; 12.49313327, 11.86446927])X_train.shape#&amp;gt; (1436, 109)X_test.shape#&amp;gt; (1459, 109)Feature StandardizationStandardize features by removing the mean and scaling to unit variance:\[z = {{x - u} \over s}\]</description>
     </item>
     
     <item>
@@ -187,17 +187,18 @@ R包开发9分钟写个R语言包：菜鸟致简速成
 开发 R 程序包之忍者篇
 R语言忍者秘笈
 R packages
-Python一本Python书
+PythonA Byte of Python
+一本Python书
 Python数据分析小抄
 Python帮助系统
 Python机器学习
+Python3网络爬虫开发实战
 Python 文本数据分析初学指南
 TextBlob
 Python -WordCloud 修改色调
 Python中WordCloud各参数的含义
 超详细：Python(wordcloud+jieba)生成中文词云图
-杂七杂八的链接Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛
-datasets（R自带数据包）</description>
+杂七杂八的链接Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛</description>
     </item>
     
     <item>

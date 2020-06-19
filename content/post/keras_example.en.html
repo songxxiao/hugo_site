@@ -10,7 +10,9 @@ date: '2020-05-16'
 <p>Xiao Song</p>
 <p><a href="https://xsong.ltd/" class="uri">https://xsong.ltd/</a></p>
 <p>As a beginner, it’s necessary to write some simple guides using simple data.</p>
-<pre class="python"><code>import numpy as np 
+<pre class="python"><code>import warnings
+warnings.filterwarnings(&#39;ignore&#39;)
+import numpy as np 
 import pandas as pd
 
 X_train = pd.read_csv(&#39;E:/some_code/py_basic/house_price/data/train1.csv&#39;) # prepare data
@@ -78,30 +80,6 @@ X_test = standardize(X_test) </code></pre>
 <h1>Neural Network Building</h1>
 <pre class="python"><code>from keras import models
 #&gt; Using TensorFlow backend.
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:516: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:517: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:518: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:519: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:520: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorflow\python\framework\dtypes.py:525: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:541: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:542: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_quint8 = np.dtype([(&quot;quint8&quot;, np.uint8, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:543: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_qint16 = np.dtype([(&quot;qint16&quot;, np.int16, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:544: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_quint16 = np.dtype([(&quot;quint16&quot;, np.uint16, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:545: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   _np_qint32 = np.dtype([(&quot;qint32&quot;, np.int32, 1)])
-#&gt; C:\ProgramData\Anaconda3\lib\site-packages\tensorboard\compat\tensorflow_stub\dtypes.py:550: FutureWarning: Passing (type, 1) or &#39;1type&#39; as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / &#39;(1,)type&#39;.
-#&gt;   np_resource = np.dtype([(&quot;resource&quot;, np.ubyte, 1)])
 from keras import layers
 
 model = models.Sequential()
@@ -131,85 +109,85 @@ model.summary()
     batch_size = 512) # Number of samples per gradient update.
 #&gt; Epoch 1/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 151.0962 - mae: 12.2742
-#&gt; 1436/1436 [==============================] - 0s 199us/step - loss: 135.3658 - mae: 11.5974
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 167.8134 - mae: 12.9369
+#&gt; 1436/1436 [==============================] - 0s 192us/step - loss: 156.0890 - mae: 12.4727
 #&gt; Epoch 2/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 108.7183 - mae: 10.3854
-#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 101.2545 - mae: 10.0123
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 136.8971 - mae: 11.6853
+#&gt; 1436/1436 [==============================] - 0s 20us/step - loss: 131.2387 - mae: 11.4348
 #&gt; Epoch 3/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 85.4372 - mae: 9.1780
-#&gt; 1436/1436 [==============================] - 0s 10us/step - loss: 78.4810 - mae: 8.7784
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 117.9680 - mae: 10.8331
+#&gt; 1436/1436 [==============================] - 0s 31us/step - loss: 114.3489 - mae: 10.6617
 #&gt; Epoch 4/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 65.0962 - mae: 7.9595
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 59.7942 - mae: 7.6039
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 103.1571 - mae: 10.1137
+#&gt; 1436/1436 [==============================] - 0s 22us/step - loss: 99.2716 - mae: 9.9125
 #&gt; Epoch 5/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 48.6309 - mae: 6.8086
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 44.1790 - mae: 6.4470
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 88.5128 - mae: 9.3423
+#&gt; 1436/1436 [==============================] - 0s 12us/step - loss: 84.9596 - mae: 9.1413
 #&gt; Epoch 6/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 33.5527 - mae: 5.5194
-#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 31.4665 - mae: 5.3223
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 76.1017 - mae: 8.6295
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 71.2614 - mae: 8.3335
 #&gt; Epoch 7/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 24.0546 - mae: 4.5429
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 21.6761 - mae: 4.2684
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 61.3726 - mae: 7.7027
+#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 58.3051 - mae: 7.4878
 #&gt; Epoch 8/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 16.1410 - mae: 3.5735
-#&gt; 1436/1436 [==============================] - 0s 4us/step - loss: 14.6640 - mae: 3.3825
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 51.2731 - mae: 6.9841
+#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 46.3172 - mae: 6.6052
 #&gt; Epoch 9/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 11.0938 - mae: 2.8590
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 9.9929 - mae: 2.6920
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 38.8166 - mae: 5.9853
+#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 35.6208 - mae: 5.7022
 #&gt; Epoch 10/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 7.9501 - mae: 2.3592
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 7.0364 - mae: 2.1884
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 28.9294 - mae: 5.0723
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 26.5030 - mae: 4.8105
 #&gt; Epoch 11/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 6.0162 - mae: 2.0298
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 5.2163 - mae: 1.8504
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 21.0600 - mae: 4.1822
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 19.1521 - mae: 3.9743
 #&gt; Epoch 12/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 3.9778 - mae: 1.5933
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 4.0612 - mae: 1.6228
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 14.8703 - mae: 3.4164
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 13.5940 - mae: 3.2470
 #&gt; Epoch 13/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 3.5841 - mae: 1.5480
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 3.2758 - mae: 1.4584
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 10.3402 - mae: 2.7747
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 9.6409 - mae: 2.6591
 #&gt; Epoch 14/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.7712 - mae: 1.3477
-#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 2.7333 - mae: 1.3287
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 8.0521 - mae: 2.4184
+#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 6.9790 - mae: 2.2061
 #&gt; Epoch 15/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.4645 - mae: 1.2552
-#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 2.3305 - mae: 1.2254
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 5.8970 - mae: 1.9865
+#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 5.2444 - mae: 1.8725
 #&gt; Epoch 16/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.2311 - mae: 1.1872
-#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 2.0266 - mae: 1.1405
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 4.2722 - mae: 1.6932
+#&gt; 1436/1436 [==============================] - 0s 8us/step - loss: 4.0995 - mae: 1.6362
 #&gt; Epoch 17/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.8472 - mae: 1.1000
-#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 1.7764 - mae: 1.0659
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 3.3181 - mae: 1.4729
+#&gt; 1436/1436 [==============================] - 0s 5us/step - loss: 3.3192 - mae: 1.4555
 #&gt; Epoch 18/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.5746 - mae: 1.0130
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 1.5834 - mae: 1.0052
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 3.0040 - mae: 1.3727
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 2.7599 - mae: 1.3189
 #&gt; Epoch 19/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.4648 - mae: 0.9598
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 1.4131 - mae: 0.9512
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.1934 - mae: 1.1728
+#&gt; 1436/1436 [==============================] - 0s 4us/step - loss: 2.3355 - mae: 1.2080
 #&gt; Epoch 20/20
 #&gt; 
-#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 1.2469 - mae: 0.8895
-#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 1.2894 - mae: 0.9093
-#&gt; &lt;keras.callbacks.callbacks.History object at 0x0000000059D70780&gt;
+#&gt;  512/1436 [=========&gt;....................] - ETA: 0s - loss: 2.1857 - mae: 1.1770
+#&gt; 1436/1436 [==============================] - 0s 6us/step - loss: 2.0144 - mae: 1.1152
+#&gt; &lt;keras.callbacks.callbacks.History object at 0x0000000055D1E7F0&gt;
 #&gt; 
 #&gt; WARNING:tensorflow:From C:\ProgramData\Anaconda3\lib\site-packages\keras\backend\tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.</code></pre>
 </div>
@@ -227,64 +205,64 @@ partial_y_train = Y_train[1000:]</code></pre>
 #&gt; Train on 436 samples, validate on 1000 samples
 #&gt; Epoch 1/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 82us/step - loss: 1.0230 - mae: 0.8044 - val_loss: 1.2331 - val_mae: 0.8914
+#&gt; 436/436 [==============================] - 0s 91us/step - loss: 1.7173 - mae: 1.0405 - val_loss: 1.8037 - val_mae: 1.0472
 #&gt; Epoch 2/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.9380 - mae: 0.7748 - val_loss: 1.2222 - val_mae: 0.8869
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 1.5934 - mae: 0.9974 - val_loss: 1.7621 - val_mae: 1.0344
 #&gt; Epoch 3/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.8750 - mae: 0.7495 - val_loss: 1.2142 - val_mae: 0.8839
+#&gt; 436/436 [==============================] - 0s 32us/step - loss: 1.4883 - mae: 0.9604 - val_loss: 1.7243 - val_mae: 1.0229
 #&gt; Epoch 4/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.8200 - mae: 0.7264 - val_loss: 1.2062 - val_mae: 0.8807
+#&gt; 436/436 [==============================] - 0s 23us/step - loss: 1.3960 - mae: 0.9270 - val_loss: 1.6895 - val_mae: 1.0122
 #&gt; Epoch 5/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 15us/step - loss: 0.7705 - mae: 0.7045 - val_loss: 1.1986 - val_mae: 0.8777
+#&gt; 436/436 [==============================] - 0s 14us/step - loss: 1.3135 - mae: 0.8962 - val_loss: 1.6574 - val_mae: 1.0019
 #&gt; Epoch 6/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.7253 - mae: 0.6843 - val_loss: 1.1911 - val_mae: 0.8747
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 1.2386 - mae: 0.8681 - val_loss: 1.6276 - val_mae: 0.9919
 #&gt; Epoch 7/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.6837 - mae: 0.6651 - val_loss: 1.1835 - val_mae: 0.8712
+#&gt; 436/436 [==============================] - 0s 14us/step - loss: 1.1705 - mae: 0.8418 - val_loss: 1.6002 - val_mae: 0.9827
 #&gt; Epoch 8/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 15us/step - loss: 0.6453 - mae: 0.6467 - val_loss: 1.1764 - val_mae: 0.8679
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 1.1080 - mae: 0.8182 - val_loss: 1.5747 - val_mae: 0.9741
 #&gt; Epoch 9/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.6095 - mae: 0.6287 - val_loss: 1.1691 - val_mae: 0.8643
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 1.0504 - mae: 0.7967 - val_loss: 1.5509 - val_mae: 0.9658
 #&gt; Epoch 10/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 17us/step - loss: 0.5758 - mae: 0.6111 - val_loss: 1.1620 - val_mae: 0.8608
+#&gt; 436/436 [==============================] - 0s 18us/step - loss: 0.9969 - mae: 0.7762 - val_loss: 1.5284 - val_mae: 0.9580
 #&gt; Epoch 11/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 13us/step - loss: 0.5441 - mae: 0.5941 - val_loss: 1.1553 - val_mae: 0.8575
+#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.9469 - mae: 0.7570 - val_loss: 1.5073 - val_mae: 0.9510
 #&gt; Epoch 12/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.5141 - mae: 0.5772 - val_loss: 1.1481 - val_mae: 0.8540
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 0.9002 - mae: 0.7386 - val_loss: 1.4875 - val_mae: 0.9441
 #&gt; Epoch 13/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.4857 - mae: 0.5606 - val_loss: 1.1417 - val_mae: 0.8508
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.8564 - mae: 0.7209 - val_loss: 1.4690 - val_mae: 0.9375
 #&gt; Epoch 14/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 11us/step - loss: 0.4589 - mae: 0.5445 - val_loss: 1.1346 - val_mae: 0.8475
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.8152 - mae: 0.7037 - val_loss: 1.4513 - val_mae: 0.9312
 #&gt; Epoch 15/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.4334 - mae: 0.5287 - val_loss: 1.1286 - val_mae: 0.8446
+#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.7761 - mae: 0.6872 - val_loss: 1.4346 - val_mae: 0.9251
 #&gt; Epoch 16/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.4094 - mae: 0.5136 - val_loss: 1.1220 - val_mae: 0.8416
+#&gt; 436/436 [==============================] - 0s 21us/step - loss: 0.7389 - mae: 0.6714 - val_loss: 1.4185 - val_mae: 0.9192
 #&gt; Epoch 17/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.3867 - mae: 0.4985 - val_loss: 1.1162 - val_mae: 0.8389
+#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.7035 - mae: 0.6557 - val_loss: 1.4032 - val_mae: 0.9137
 #&gt; Epoch 18/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.3651 - mae: 0.4839 - val_loss: 1.1094 - val_mae: 0.8357
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.6697 - mae: 0.6406 - val_loss: 1.3886 - val_mae: 0.9085
 #&gt; Epoch 19/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 14us/step - loss: 0.3446 - mae: 0.4697 - val_loss: 1.1043 - val_mae: 0.8332
+#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.6376 - mae: 0.6257 - val_loss: 1.3746 - val_mae: 0.9037
 #&gt; Epoch 20/20
 #&gt; 
-#&gt; 436/436 [==============================] - 0s 16us/step - loss: 0.3251 - mae: 0.4561 - val_loss: 1.0965 - val_mae: 0.8298</code></pre>
+#&gt; 436/436 [==============================] - 0s 11us/step - loss: 0.6069 - mae: 0.6108 - val_loss: 1.3612 - val_mae: 0.8993</code></pre>
 <p>Extract cross validation information:</p>
 <pre class="python"><code>history_dict = history.history
 loss_values = history_dict[&#39;loss&#39;]
@@ -293,26 +271,26 @@ epochs = range(1, len(loss_values) + 1)
 cv_info = pd.DataFrame({&#39;epochs&#39;:epochs,&#39;loss_values&#39;:loss_values,&#39;val_loss_values&#39;:val_loss_values})  </code></pre>
 <pre class="python"><code>cv_info
 #&gt;     epochs  loss_values  val_loss_values
-#&gt; 0        1     1.023004         1.233107
-#&gt; 1        2     0.937960         1.222195
-#&gt; 2        3     0.875026         1.214215
-#&gt; 3        4     0.819979         1.206171
-#&gt; 4        5     0.770477         1.198560
-#&gt; 5        6     0.725280         1.191091
-#&gt; 6        7     0.683680         1.183486
-#&gt; 7        8     0.645255         1.176383
-#&gt; 8        9     0.609498         1.169093
-#&gt; 9       10     0.575821         1.162020
-#&gt; 10      11     0.544090         1.155334
-#&gt; 11      12     0.514143         1.148096
-#&gt; 12      13     0.485749         1.141719
-#&gt; 13      14     0.458888         1.134641
-#&gt; 14      15     0.433444         1.128641
-#&gt; 15      16     0.409398         1.121972
-#&gt; 16      17     0.386678         1.116163
-#&gt; 17      18     0.365066         1.109400
-#&gt; 18      19     0.344581         1.104280
-#&gt; 19      20     0.325092         1.096466</code></pre>
+#&gt; 0        1     1.717334         1.803684
+#&gt; 1        2     1.593355         1.762118
+#&gt; 2        3     1.488282         1.724254
+#&gt; 3        4     1.396037         1.689537
+#&gt; 4        5     1.313484         1.657389
+#&gt; 5        6     1.238639         1.627649
+#&gt; 6        7     1.170498         1.600241
+#&gt; 7        8     1.108029         1.574710
+#&gt; 8        9     1.050379         1.550859
+#&gt; 9       10     0.996855         1.528398
+#&gt; 10      11     0.946863         1.507346
+#&gt; 11      12     0.900190         1.487519
+#&gt; 12      13     0.856390         1.469003
+#&gt; 13      14     0.815178         1.451284
+#&gt; 14      15     0.776070         1.434589
+#&gt; 15      16     0.738918         1.418455
+#&gt; 16      17     0.703458         1.403198
+#&gt; 17      18     0.669743         1.388627
+#&gt; 18      19     0.637636         1.374586
+#&gt; 19      20     0.606895         1.361161</code></pre>
 <pre class="python"><code>cv_info = pd.melt(cv_info, id_vars=[&#39;epochs&#39;], value_vars=[&#39;loss_values&#39;, &#39;val_loss_values&#39;]) </code></pre>
 <pre class="python"><code>from plotnine import *
 
@@ -321,40 +299,40 @@ ggplot(cv_info,aes(&#39;epochs&#39;,&#39;value&#39;,color = &#39;variable&#39;))
 geom_line() +
 geom_point()
 )
-#&gt; &lt;ggplot: (112683391)&gt;</code></pre>
+#&gt; &lt;ggplot: (-9223372036742099754)&gt;</code></pre>
 <p><img src="/post/keras_example.en_files/figure-html/unnamed-chunk-17-1.png" width="90%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="prediction" class="section level1">
 <h1>Prediction</h1>
 <pre class="python"><code>Y_pred = model.predict(X_test)
 Y_pred
-#&gt; array([[11.546236],
-#&gt;        [12.2388  ],
-#&gt;        [12.317739],
+#&gt; array([[12.1244545],
+#&gt;        [11.108633 ],
+#&gt;        [11.637138 ],
 #&gt;        ...,
-#&gt;        [11.350479],
-#&gt;        [10.587808],
-#&gt;        [12.461804]], dtype=float32)</code></pre>
+#&gt;        [13.850517 ],
+#&gt;        [11.266023 ],
+#&gt;        [10.169427 ]], dtype=float32)</code></pre>
 <pre class="python"><code>Y_pred.shape
 #&gt; (1459, 1)</code></pre>
 <pre class="python"><code>Y_pred = np.concatenate(Y_pred).ravel() # to flatten 2 dimition array
 Y_pred = np.expm1(Y_pred)
 Y_pred
-#&gt; array([103386.16, 206652.77, 223626.84, ...,  85005.17,  39647.47,
-#&gt;        258280.25], dtype=float32)</code></pre>
+#&gt; array([ 184323.77 ,   66743.89 ,  113224.69 , ..., 1035625.7  ,
+#&gt;          78120.664,   26092.12 ], dtype=float32)</code></pre>
 <pre class="python"><code>test = pd.read_csv(&#39;E:/some_code/py_basic/house_price/data/test.csv&#39;)
 submission = pd.DataFrame({&#39;id&#39;: test[&#39;Id&#39;], &#39;SalePrice&#39;: Y_pred})
 submission.head(10)
 #&gt;      id      SalePrice
-#&gt; 0  1461  103386.156250
-#&gt; 1  1462  206652.765625
-#&gt; 2  1463  223626.843750
-#&gt; 3  1464  182581.406250
-#&gt; 4  1465  269515.000000
-#&gt; 5  1466  143906.703125
-#&gt; 6  1467   25592.142578
-#&gt; 7  1468  377555.125000
-#&gt; 8  1469   57377.015625
-#&gt; 9  1470  185135.921875</code></pre>
+#&gt; 0  1461  184323.765625
+#&gt; 1  1462   66743.890625
+#&gt; 2  1463  113224.687500
+#&gt; 3  1464   35646.246094
+#&gt; 4  1465   73891.406250
+#&gt; 5  1466  113308.296875
+#&gt; 6  1467    5187.318359
+#&gt; 7  1468  121809.898438
+#&gt; 8  1469   19249.541016
+#&gt; 9  1470  121370.992188</code></pre>
 <pre class="python"><code>#submission.to_csv(&#39;./output/keras.csv&#39;,index = False) # save result</code></pre>
 </div>
