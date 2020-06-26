@@ -4,7 +4,7 @@
   
   <url>
     <loc>/zh/</loc>
-    <lastmod>2020-05-16T00:00:00+00:00</lastmod>
+    <lastmod>2020-06-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,6 +15,26 @@
                 hreflang="zh"
                 href="/zh/"
                 />
+  </url>
+  
+  <url>
+    <loc>/zh/post/</loc>
+    <lastmod>2020-06-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="/zh/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/zh/should-not-teach-business-software/</loc>
+    <lastmod>2020-06-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -29,21 +49,6 @@
                 rel="alternate"
                 hreflang="zh"
                 href="/zh/keras_example/"
-                />
-  </url>
-  
-  <url>
-    <loc>/zh/post/</loc>
-    <lastmod>2020-05-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/post/"
                 />
   </url>
   
