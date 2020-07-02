@@ -452,7 +452,7 @@ SQL就不用说了。以我目前的经验来看最适合初学者的是SQLite�
       <guid>/zh/zhresume/</guid>
       <description>English Version
 PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里编程/软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里微信公众号 : ApocalypseNow编程/软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的pandas库进行数据清理、探索性数据分析和可视化。使用IV和WOE方法分析各个特征对于因变量的预测能力。使用Logistic回归、CART决策树、随机森林、KNN、GBDT、Xgboost等方法建立信用卡评分模型。使用sklearn库的交叉验证(Cross-Validation)的方法训练模型并调参，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
 北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)

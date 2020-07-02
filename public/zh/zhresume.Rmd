@@ -17,6 +17,7 @@ comment: false
 + 个人主页：<https://xsong.ltd>
 + Kaggle：<https://www.kaggle.com/rikdifos>
 + Linkedin: [点击这里](<https://www.linkedin.com/in/xiaosongmalcolm/?locale=zh_CN>)
++ 微信公众号 : ApocalypseNow
 
 <!--
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
@@ -80,6 +81,13 @@ comment: false
 
 ### 获奖情况 
 
++ 2020年 Kaggle M5 [沃尔玛销量时间序列预测 - Accuracy](https://www.kaggle.com/c/m5-forecasting-accuracy)  
+103rd/5558 Top2%&emsp;银牌
+
++ 2020年 Kaggle M5 [沃尔玛销量时间序列预测 - Uncertainty](https://www.kaggle.com/c/m5-forecasting-uncertainty)  
+18th/909 Top2%&emsp;银牌
+
+
 
 + 2019年 华东师范大学优秀学生三等奖学金
 + 2019年 华东师范大学第二十七届 **大夏杯** 大学生课外学术科技作品竞赛&emsp;三等奖  
@@ -88,7 +96,7 @@ comment: false
 + 2018年 华东师范大学第二十六届 **大夏杯** 大学生课外学术科技作品竞赛&emsp;二等奖  
 + 2018年 华东师范大学优秀学生二等奖学金
 + 2017年 华东师范大学优秀学生二等奖学金
-+ 2017年 华东师范大学 智慧杯 [哲学写作](https://xsong.ltd/archives/causal/causal)比赛&emsp;一等奖
++ 2017年 华东师范大学 智慧杯 哲学写作比赛&emsp;一等奖
 
 ### 会议报告
 
