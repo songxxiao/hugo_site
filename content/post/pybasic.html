@@ -123,6 +123,22 @@ plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
 <pre><code>jt -t monokai -f roboto -nf robotosans -tf robotosans -N -T -cellw 70% -dfs 10 -ofs 10</code></pre>
 <p>下面的主题更适合输出成网页：</p>
 <pre><code>jt -t grade3</code></pre>
+<p>Jupyter Notebook默认输出html的代码不是等宽字体，为了它更加美观，可以在任意Markdown cell里加入如下css样式：</p>
+<pre><code>&lt;style&gt;
+code, kbd, pre, samp {
+    font-family:&#39;consolas&#39;, Lucida Console, SimSun, Fira Code, Monaco !important;
+    font-size: 11pt !important;
+}
+
+div.output_area pre {
+    font-family: &#39;consolas&#39;, Lucida Console, SimSun, Fira Code, Monaco !important;
+    font-size:  10pt !important;
+}
+
+div.output_area img, div.output_area svg {
+    background-color: #FFFFFF !important;
+}
+&lt;/style&gt;</code></pre>
 </div>
 <div id="anaconda-或python-从本地离线安装第三方包" class="section level1">
 <h1>Anaconda 或Python 从本地离线安装第三方包</h1>

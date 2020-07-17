@@ -89,6 +89,26 @@ jt -t monokai -f roboto -nf robotosans -tf robotosans -N -T -cellw 70% -dfs 10 -
 jt -t grade3
 ```
 
+Jupyter Notebook默认输出html的代码不是等宽字体，为了它更加美观，可以在任意Markdown cell里加入如下css样式：
+
+```
+<style>
+code, kbd, pre, samp {
+    font-family:'consolas', Lucida Console, SimSun, Fira Code, Monaco !important;
+    font-size: 11pt !important;
+}
+
+div.output_area pre {
+    font-family: 'consolas', Lucida Console, SimSun, Fira Code, Monaco !important;
+    font-size:  10pt !important;
+}
+
+div.output_area img, div.output_area svg {
+    background-color: #FFFFFF !important;
+}
+</style>
+```
+
 # Anaconda 或Python 从本地离线安装第三方包
 
 很多时候使用`conda install` 或`pip install` 都无法安装包。只好使用本地安装的方法去安装Github开发版。这很像R语言的`devtools::install_local`函数。下面是具体的做法。
