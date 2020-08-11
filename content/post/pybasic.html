@@ -140,6 +140,12 @@ div.output_area img, div.output_area svg {
 }
 &lt;/style&gt;</code></pre>
 </div>
+<div id="历史记录" class="section level1">
+<h1>历史记录</h1>
+<p>在Jupyter Notebook中用以下代码可以输出最近输入的代码：</p>
+<pre class="python"><code>for line in locals()[&#39;In&#39;]:
+    print(line)</code></pre>
+</div>
 <div id="anaconda-或python-从本地离线安装第三方包" class="section level1">
 <h1>Anaconda 或Python 从本地离线安装第三方包</h1>
 <p>很多时候使用<code>conda install</code> 或<code>pip install</code> 都无法安装包。只好使用本地安装的方法去安装Github开发版。这很像R语言的<code>devtools::install_local</code>函数。下面是具体的做法。</p>

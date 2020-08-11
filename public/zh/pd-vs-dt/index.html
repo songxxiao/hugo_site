@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <base target="_blank">
+    <meta name="baidu-site-verification" content="XQ7m1PA0VK" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.64.0" />
+
+
+<title>data.table与pandas语法对比 - 宋骁</title>
+<meta property="og:title" content="data.table与pandas语法对比 - 宋骁">
+
+
+  <link href='../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="fixed-top">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../" class="nav-logo">
+    <img src="../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../">首页</a></li>
+    
+    <li><a href="../../zh/zhresume/">简历</a></li>
+    
+    <li><a href="../../zh/post/">文章</a></li>
+    
+    <li><a href="https://www.kaggle.com/rikdifos">Kaggle</a></li>
+    
+    <li><a href="https://github.com/songxxiao">Github</a></li>
+    
+    <li><a href="../../en">English</a></li>
+    
+  </ul>
+</nav>
+      </header>
+
+<link rel="stylesheet">
+
+<main class="content" role="main">
+
+  <article class="article">
+
+    <h1 class="article-title">data.table与pandas语法对比</h1>
+
+    
+    <span class="article-date">2020-08-11</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>本文基于谢士晨<a href="http://shichen.name/post/dt-pd/">博客文章</a>进行修改和增添。</p>
+<div id="行选择与排序" class="section level1">
+<h1>行选择与排序</h1>
+<pre class="r"><code>dt[c(3,1,2)]
+
+# 单条件筛选
+dt[Hair == &#39;Red&#39;]
+
+# 多条件筛选
+dt[Hair == &#39;Black&#39; &amp; 
+   Freq &gt;= 10 &amp; 
+   Eye %in% c(&#39;Brown&#39;, &#39;Blue&#39;)]</code></pre>
+<pre class="python"><code>df.iloc[[2,0,1]] # python序数从0开始，2代表第三行
+df.loc[[2,0,1]] # 如果index未修改，效果与iloc的一致
+
+# 单条件筛选，去掉.loc效果一致
+df.loc[df[&#39;Hair&#39;] == &#39;Red&#39;] 
+
+# pandas 多条件筛选时要用 |, &amp;, ~分别代表or, and, not; 
+# 且每个条件用括号区分 
+df.loc[(df[&#39;Hair&#39;] == &#39;Black&#39;) &amp; 
+       (df[&#39;Freq&#39;] &gt;= 10) &amp; 
+       (df[&#39;Eye&#39;].isin([&#39;Brown&#39;, &#39;Blue&#39;]))]</code></pre>
+<p>排序</p>
+<pre class="r"><code>dt[order(Sex, -Freq)]
+
+setorder(DT, A, -B) # 行排序
+
+setcolorder(DT, c(&quot;C&quot;, &quot;A&quot;, &quot;B&quot;)) # 列排序</code></pre>
+<pre class="python"><code>df.sort_values(
+  [&#39;Sex&#39;, &#39;Freq&#39;], 
+  ascending = [True, False] )
+  
+df = df[[&#39;user_id&#39;,&#39;book_id&#39;,&#39;rating&#39;,&#39;mark_date&#39;]]  # 列排序</code></pre>
+<p>列选择</p>
+<pre class="r"><code>dt[,.(Hair, Freq)]
+# or 
+dt[,c(&#39;Eye&#39;, &#39;Sex&#39;), with=FALSE]</code></pre>
+<pre class="python"><code>df[[&#39;Hair&#39;, &#39;Freq&#39;]]
+# or 
+df.loc[:,[&#39;Eye&#39;, &#39;Sex&#39;]] # 选一列时也要保留[]，否则与df.Eye一样为series</code></pre>
+<p>列计算</p>
+<pre class="r"><code># 新建一列
+dt[, nc := .I] # .I .N .SD为特殊符号,查看帮助?`.I`
+dt[,&#39;nc0&#39;] = 1:32
+
+# 新建多列
+dt[, `:=`(
+  nc1 = 1:32,
+  nc2 = paste(Hair, Eye, sep=&#39;,&#39;)
+)]
+
+# 基于条件新建列
+dt[, nc3 := ifelse(Freq &gt;= 10, 1, 0)]
+dt[Freq &gt;= 20, nc4 := 2]
+
+# 基于函数新建列
+ncols = c(&#39;nc&#39;, &#39;nc0&#39;) 
+dt[, 
+   (ncols) := lapply(.SD, function(x) x^0.5 + 1), 
+   .SDcols = ncols]
+
+# 删除列
+dt[, nc := NULL]
+dt[, (c(&#39;nc0&#39;,&#39;nc1&#39;,&#39;nc2&#39;,&#39;nc3&#39;,&#39;nc4&#39;)) := NULL]
+dt[,!c(&#39;C&#39;,&#39;A&#39;)]</code></pre>
+<pre class="python"><code># 新建一列
+df = df.assign(nc = pd.Series(range(32)))
+df.loc[:,&#39;nc0&#39;] = pd.Series(range(32), index=df.index)
+
+# 新建多列
+df = df.assign(
+  nc1 = pd.Series(range(32)),
+  nc2 = df.Hair + &#39;,&#39; + df.Eye
+)
+
+# 基于条件新建列
+df = df.assign(nc3 = df.Freq.apply(lambda x: 1 if x &gt;= 10 else 0))
+df.loc[df.Freq &gt;= 20, &#39;nc4&#39;] = 2
+
+# 基于函数新建列
+ncols = [&#39;nc&#39;, &#39;nc0&#39;]
+df.loc[:, ncols] = df[ncols].apply(lambda x: x**0.5 + 1)
+
+# 删除列
+df = df.drop(&#39;nc&#39;, axis=1)
+df.drop([&#39;nc0&#39;,&#39;nc1&#39;,&#39;nc2&#39;,&#39;nc3&#39;,&#39;nc4&#39;], axis=1, inplace=True)</code></pre>
+</div>
+<div id="列汇总" class="section level1">
+<h1>列汇总</h1>
+<pre class="r"><code># 对一列进行计算
+dt[, unique(Eye)]
+dt[, table(Eye)]
+
+dt[, max(Freq)]
+
+# 对多列进行计算
+## 所有列的最大值
+dt[, lapply(.SD, max)] 
+## 所有列的缺失率
+dt[, lapply(.SD, function(x) mean(is.na(x)))] 
+
+## 对部分列计算缺失率，且可扩展到其他函数
+sel_cols = c(&#39;Hair&#39;, &#39;Sex&#39;, &#39;Freq&#39;)
+dt[, lapply(.SD, function(x) mean(is.na(x))), .SDcols = sel_cols]</code></pre>
+<pre class="python"><code># 基于列的计算
+df.Eye.unique()
+df.Eye.value_counts()
+
+df.Freq.max()
+
+# 对多列进行计算
+## 所有列的最大值
+df.max() 
+## 所有列的缺失率 
+df.isnull().mean() 
+
+## 对部分列计算缺失率，且可扩展到其他函数
+sel_cols = [&#39;Hair&#39;, &#39;Sex&#39;, &#39;Freq&#39;]
+df[sel_cols].apply(lambda x: x.isnull().mean())</code></pre>
+</div>
+<div id="分组汇总" class="section level1">
+<h1>分组汇总</h1>
+<pre class="r"><code># max freq
+dt[, .(freq_max = max(Freq)), by = &#39;Sex&#39;]
+
+# count
+dt[, .(freq_count = .N), keyby = c(&#39;Hair&#39;, &#39;Sex&#39;)]</code></pre>
+<pre class="python"><code># max freq # pandas的groupby会自动删除缺失变量
+df.groupby(&#39;Sex&#39;).agg({&#39;Freq&#39;:&#39;max&#39;}).
+  rename(columns={&#39;Freq&#39;:&#39;freq_max&#39;}).
+  reset_index()
+
+# count
+df.groupby([&#39;Hair&#39;,&#39;Sex&#39;]).agg({&#39;Freq&#39;:&#39;count&#39;}).
+  rename(columns={&#39;Freq&#39;:&#39;freq_count&#39;}).
+  reset_index()</code></pre>
+</div>
+<div id="分组新建列" class="section level1">
+<h1>分组新建列</h1>
+<pre class="r"><code># 基于sex分组，新建一列等于freq的最大值
+dt[, freq_max := max(Freq), by = &#39;Sex&#39;]
+
+# 基于sex分组，选取freq最大的行
+dt[order(Freq)][, .SD[.N], by = &#39;Sex&#39;][]</code></pre>
+<pre class="python"><code># 基于sex分组，新建一列等于freq的最大值
+df.loc[:,&#39;freq_max&#39;] = df.groupby(&#39;Sex&#39;)[&#39;Freq&#39;].transform(max)
+
+# 基于sex分组，选取freq最大的行
+df.sort_values(&#39;Freq&#39;).groupby(&#39;Sex&#39;).tail(1)</code></pre>
+</div>
+<div id="长宽表转换" class="section level1">
+<h1>长宽表转换</h1>
+<pre class="r"><code># 长表转宽表
+dt_w = dcast(dt, Hair+Sex~Eye, value.var = &#39;Freq&#39;, fun.aggregate = sum)
+
+# 宽表转长表
+dt_l = melt(dt_w, id = c(&#39;Hair&#39;,&#39;Sex&#39;), variable.name = &#39;Eye&#39;, value.name = &#39;Freq&#39;)</code></pre>
+<pre class="python"><code># 长表转宽表
+df_w = df.pivot(index=[&#39;Hair&#39;,&#39;Sex&#39;], columns=&#39;Eye&#39;, values=&#39;Freq&#39;)
+
+# 宽表转长表
+df_l = df_w.melt(id_vars = [&#39;Hair&#39;,&#39;Sex&#39;], var_name=&#39;Freq&#39;)</code></pre>
+</div>
+<div id="行列合并切割" class="section level1">
+<h1>行列合并切割</h1>
+<pre class="r"><code># 一行切割为多行
+dtr = dt[, paste0(Eye, collapse = &#39;,&#39;), keyby = c(&#39;Hair&#39;, &#39;Sex&#39;)]
+dtr[, .(Eye = unlist(strsplit(V1, &#39;,&#39;))), by = c(&#39;Hair&#39;, &#39;Sex&#39;)]
+
+# 一列切割为多列
+dtc = dt[, .(Hair, eye_sex = paste(Eye, Sex, sep = &#39;,&#39;))]
+dtc[, c(&#39;Eye&#39;, &#39;Sex&#39;) := tstrsplit(eye_sex, &#39;,&#39;)]</code></pre>
+<pre class="python"><code># 一行切割为多行
+dfr = df.groupby([&#39;Hair&#39;,&#39;Sex&#39;])[&#39;Eye&#39;].apply(lambda x: &#39;,&#39;.join(x)).reset_index()
+dfr.assign(Eye = dfr[&#39;Eye&#39;].str.split(&#39;,&#39;)).explode(&#39;Eye&#39;)
+
+# 一列切割为多列
+dfc = df[[&#39;Hair&#39;]].assign(eye_sex = df.Eye+&#39;,&#39;+df.Sex)
+dfc[&#39;Eye&#39;], dfc[&#39;Sex&#39;]= dfc[&#39;eye_sex&#39;].str.split(&#39;,&#39;, 1).str</code></pre>
+</div>
+<div id="数据框合并" class="section level1">
+<h1>数据框合并</h1>
+<pre class="r"><code># 合并两个数据框
+dtr1 = rbind(dt[sample(.N,2)], dt[sample(.N,3)])
+# 如果两个数据框的列名不一致，需要添加fill为TRUE
+dtr2 = rbind(dt[sample(.N,2)], dt[sample(.N,3), .(Hair)], fill=TRUE)
+
+# 直接合并多个数据框组成的 list
+dt_lst = list(
+  dt1 = dt[sample(.N,2)], 
+  dt2 = dt[sample(.N,3)], 
+  dt3 = dt[sample(.N,4)])
+dt_bind = rbindlist(dt_lst, idcol = &#39;dt&#39;)</code></pre>
+<pre class="python"><code># 合并两个数据框
+dfr1 = pd.concat([df.sample(n=2), df.sample(n=3)])
+# 如果两个数据框的列名不一致
+dfr2 = pd.concat([df.sample(n=2), df.sample(n=3)[[&#39;Hair&#39;]]], sort=False)
+
+# 直接合并多个数据框组成的 list
+df_lst = [
+  df.sample(2), 
+  df.sample(3), 
+  df.sample(4)]
+df_con = pd.concat(df_lst, axis=0)</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//Xiao Song.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://xiao-song.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  <center>
+   <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
+  </center>
+
+<footer class="footer">
+        <ul class="footer-links">
+            <a href="https://github.com/songxxiao" class="footer-links-kudos"> <img src="../../images/git.svg" alt=" " width="15" height="15"></a>
+            <a href="https://www.linkedin.com/in/xiao-song-a1ab5318b/" class="footer-links-kudos"> <img src="../../images/linkedin.svg" alt=" " width="15" height="15"></a>
+            <a href="https://www.kaggle.com/rikdifos" class="footer-links-kudos"> <img src="../../images/kaggle.png" alt=" " width="15.2" height="14.5"></a>
+            <a href="../../archives/subscribe" class="footer-links-kudos"> <img src="../../images/rss.svg" alt=" " width="14.5" height="15"></a>
+        </ul>
+</footer>
+
+
+</main>
+
+  <center>
+   <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=1660be&w=180&t=n&d=bLbRVCl6hpPrG3ydeBPnss5Icv_ZJXbokniqNe34m4M&co=f1f3ec&ct=808080&cmo=3acc3a&cmn=ff5353'></script>
+  </center>
+
+<footer class="footer">
+
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-144652310-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+</html>

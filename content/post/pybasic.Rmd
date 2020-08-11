@@ -109,6 +109,15 @@ div.output_area img, div.output_area svg {
 </style>
 ```
 
+# 历史记录
+
+在Jupyter Notebook中用以下代码可以输出最近输入的代码：
+
+```python
+for line in locals()['In']:
+    print(line)
+```
+
 # Anaconda 或Python 从本地离线安装第三方包
 
 很多时候使用`conda install` 或`pip install` 都无法安装包。只好使用本地安装的方法去安装Github开发版。这很像R语言的`devtools::install_local`函数。下面是具体的做法。

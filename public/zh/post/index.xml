@@ -6,10 +6,37 @@
     <description>Recent content in Posts on 宋骁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/zh/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>data.table与pandas语法对比</title>
+      <link>/zh/pd-vs-dt/</link>
+      <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/pd-vs-dt/</guid>
+      <description>本文基于谢士晨博客文章进行修改和增添。
+行选择与排序dt[c(3,1,2)]# 单条件筛选dt[Hair == &amp;#39;Red&amp;#39;]# 多条件筛选dt[Hair == &amp;#39;Black&amp;#39; &amp;amp; Freq &amp;gt;= 10 &amp;amp; Eye %in% c(&amp;#39;Brown&amp;#39;, &amp;#39;Blue&amp;#39;)]df.iloc[[2,0,1]] # python序数从0开始，2代表第三行df.loc[[2,0,1]] # 如果index未修改，效果与iloc的一致# 单条件筛选，去掉.loc效果一致df.loc[df[&amp;#39;Hair&amp;#39;] == &amp;#39;Red&amp;#39;] # pandas 多条件筛选时要用 |, &amp;amp;, ~分别代表or, and, not; # 且每个条件用括号区分 df.loc[(df[&amp;#39;Hair&amp;#39;] == &amp;#39;Black&amp;#39;) &amp;amp; (df[&amp;#39;Freq&amp;#39;] &amp;gt;= 10) &amp;amp; (df[&amp;#39;Eye&amp;#39;].isin([&amp;#39;Brown&amp;#39;, &amp;#39;Blue&amp;#39;]))]排序
+dt[order(Sex, -Freq)]setorder(DT, A, -B) # 行排序setcolorder(DT, c(&amp;quot;C&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;B&amp;quot;)) # 列排序df.sort_values([&amp;#39;Sex&amp;#39;, &amp;#39;Freq&amp;#39;], ascending = [True, False] )df = df[[&amp;#39;user_id&amp;#39;,&amp;#39;book_id&amp;#39;,&amp;#39;rating&amp;#39;,&amp;#39;mark_date&amp;#39;]] # 列排序列选择</description>
+    </item>
+    
+    <item>
+      <title>Kaggle M5时间序列竞赛银牌方案分享</title>
+      <link>/zh/m5-compete/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/zh/m5-compete/</guid>
+      <description>6月下旬我大部分时间耗在了Kaggle举办的两个赛事上。
+待到7月1日开奖时，我发现自己很幸运地都冲入了银牌区。
+其实自己也没做啥原创性的工作。刚开始大部分时间是理解赛题逻辑并且读别人的Kernel。读了大约10天左右才搞明白数据结构什么的。后面就是抄个代码风格好的Baseline改一改。虽说是抄，但不懂内部逻辑很难做出自己的修改。
+总之比赛结束还是做了很多总结，两篇文章都写成了微信公众号，现在贴到这里吧：
+Kaggle M5沃尔玛时间序列预测竞赛Baseline分享
+Kaggle M5 沃尔玛销量时间序列预测 竞赛总结
+比赛代码repo(居然获得了5个星标，截至2020-08-11)：
+https://github.com/songxxiao/m5_compete</description>
+    </item>
     
     <item>
       <title>大学不应该讲授任何商业统计软件</title>
