@@ -70,18 +70,6 @@ https://github.com/songxxiao/m5_compete</description>
     </item>
     
     <item>
-      <title>Keras入门示范</title>
-      <link>/zh/keras_example/</link>
-      <pubDate>Sat, 16 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/keras_example/</guid>
-      <description>Xiao Song
-https://xsong.ltd/
-As a beginner, it’s necessary to write some simple guides using simple data.
-import warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)import numpy as np import pandas as pdX_train = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/train1.csv&amp;#39;) # prepare dataX_test = pd.read_csv(&amp;#39;E:/some_code/py_basic/house_price/data/test1.csv&amp;#39;)Y_train = np.array(X_train[&amp;#39;SalePrice&amp;#39;])Y_train = np.log1p(Y_train)X_train.drop([&amp;#39;SalePrice&amp;#39;],axis = 1, inplace = True)Y_train#&amp;gt; array([12.24769912, 12.10901644, 12.31717117, ..., 12.25486757,#&amp;gt; 12.49313327, 11.86446927])X_train.shape#&amp;gt; (1436, 109)X_test.shape#&amp;gt; (1459, 109)Feature StandardizationStandardize features by removing the mean and scaling to unit variance:\[z = {{x - u} \over s}\]</description>
-    </item>
-    
-    <item>
       <title>stringr 与 regex 函数对应关系</title>
       <link>/zh/stringr/</link>
       <pubDate>Tue, 14 Apr 2020 00:00:00 +0000</pubDate>
@@ -90,26 +78,6 @@ import warningswarnings.filterwarnings(&amp;#39;ignore&amp;#39;)import numpy a
       <description>转载自谢士晨个人博客
 stringr 是 Hadley 大神写的 tidyverse 系列数据处理包中专门用于处理文本数据的，其函数命名统一易于记忆。而 R 基础包中的文本处理函数(regex)的命名规则不是特别统一。下表给出了主要函数之间的映射关系，便于以后查看。
 stringr包中函数功能说明R Base 中对应函数使用正则表达式的函数str_extract()提取首个匹配模式的字符regmatches()str_extract_all()提取所有匹配模式的字符regmatches()str_locate()返回首个匹配模式的字符的位置regexpr()str_locate_all()返回所有匹配模式的字符的位置gregexpr()str_replace()替换首个匹配模式sub()str_replace_all()替换所有匹配模式gsub()str_split()按照模式分割字符串strsplit()str_split_fixed()按照模式将字符串分割成指定个数-str_detect()检测字符是否存在某些指定模式grepl()str_count()返回指定模式出现的次数-其他重要函数str_sub()提取指定位置的字符regmatches()str_dup()丢弃指定位置的字符-str_length()返回字符的长度nchar()str_pad()填补字符-str_trim()丢弃填充，如去掉字符前后的空格-str_c()连接字符paste(),paste0()stringr网站也给出了两者的映射关系</description>
-    </item>
-    
-    <item>
-      <title>计量统计和说唱音乐的神秘联系</title>
-      <link>/zh/rap_metrics/</link>
-      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/rap_metrics/</guid>
-      <description>请点击：
-https://mp.weixin.qq.com/s/SueKxPibp4f74QFaYWUwdA</description>
-    </item>
-    
-    <item>
-      <title>使用Python爬取B站的土味视频标题！</title>
-      <link>/zh/bilispy/</link>
-      <pubDate>Fri, 31 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/bilispy/</guid>
-      <description>请点击：
-https://mp.weixin.qq.com/s/eVgs3NWPMQRKDzgmnA6T9g</description>
     </item>
     
     <item>
@@ -201,7 +169,7 @@ https://pan.baidu.com/s/1-y_EQgrZq_EBTYzM3G5cdQ
       <guid>/zh/rssuse/</guid>
       <description>我出生第22年才知道有RSS这东西。是的，你没看错。我猜大多数人也不知道它是啥。当你拥有了一个feedly账户。点击喜欢的博客，找到订阅页面，将链接复制、粘贴。哐！你就能持续收到它们的推送了！而且可以方便地在手机上观看。
 自从我得到了第一个智能手机以来。我被迫接受微博、微信公众号、抖音、快手等等各种信息的喂养。事实是，我对这些社交媒体与公号的评价并不高。尤其是微信公众号。一般那些抓人眼球的推送套路是：先充分强调一个东西的重要性(比如学Python的重要性)。然后猝不及防给你来段广告(Python 999课程。不拿到offer不要钱)。实际上，这种套路不过是在贩卖焦虑，使人徒生烦恼。其次呢，由于本人的拖延症，我喜欢把之前文章改了又改，我博客列表里的文章都是一直在修改的。有些则是随着经验的增长持续更新。通过这种方式，尽管我写的东西(尤其是带代码的东西)现在看来还很不完善，它们也能够随着我知识的增长而提升质量。微信公众号则不给你修改的机会。这就使我不得不为了使一篇东西看上去完整而付出不必要的劳动。
-微博靠大量色情擦边球、短视频、明星绯闻八卦破事儿来吸引人们的眼球。这导致我间歇性地要卸载微博。事实是，色情信息是网络第一生产力。我承认这一点。但微博完全不看也不成，因为它好歹是个大网络对吧？有时候得关注关注作为娱乐对吧？
+---微博靠大量色情擦边球、短视频、明星绯闻八卦破事儿来吸引人们的眼球。这导致我间歇性地要卸载微博。事实是，色情信息是网络第一生产力。我承认这一点。但微博完全不看也不成，因为它好歹是个大网络对吧？有时候得关注关注作为娱乐对吧？
 那么微信朋友圈呢？可能是我不会拍照吧。我常常在编辑朋友圈的时候丧失发朋友圈的冲动。首先，在编辑朋友圈“文案”的时候我会想：“这个有发的意义吗？”、“有人给我点赞吗？”、“会不会有人误解我的意思？”、“别人看到我发的东西会不会觉得我是个沙雕？？”。其次，因为朋友圈的复制粘贴导致文字选择不全的功能，假如在其他平台编辑好复制就会只显示一行文字。这也很令人抓狂。我陷入的另一个发朋友圈的怪圈是：如果需要太认真地编辑大段文字，我往往会丧失发朋友圈的兴趣。如果顺着发朋友圈的劲头发下去，则我发的东西实在低劣。这导致日后花大把时间删朋友圈。害，发朋友圈主要是娱乐自我、建立人脉，想那么多干啥？再次，微信系统的另一个缺点是，没有夜间模式。这简直对人的眼睛是种摧残。
 好吧。什么是好什么是差我还是知道的。我虽然混不了学术圈也进不了码农圈，但技术博客和学术博客倒是看得一手。这些博客有趣、实用。有时还能看到一些真知灼见。比如之前看到的一篇博客关于练车的看法，对我有极大的参考价值(我正在学车)。那么，或许可以清算以往的信息来源，重新分配自己的精力了？
 我并不指望有人订阅我的博客。我的博客尽量以有代码的技术分享为主。至于自己的生活吐槽。应该以有感而发为主(aka 好久更新一篇)。这可能是我的懒癌导致的。也源于自己不喜欢写文字和不喜欢无感而发。不过我倒是非常欢迎评论的。我想听到大家对我的反馈。如果你有啥想法，无论是夸是骂，还是文章发表的几十年后都欢迎评论。我会尽量回复。就酱。</description>
@@ -413,15 +381,6 @@ R Markdown: The Definitive Guide
     </item>
     
     <item>
-      <title>排序和查找算法(Python实现)</title>
-      <link>/zh/suanfa/</link>
-      <pubDate>Thu, 09 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/suanfa/</guid>
-      <description>排序算法冒泡排序法def bubble(List):for j in range(len(List)-1,0,-1):print(List)for i in range(0,j):if List[i]&amp;gt;List[i+1]:List[i],List[i+1] = List[i+1],List[i]return List testlist = [49,38,65,97,76,13,27,49]print(&amp;#39;结果：&amp;#39;,bubble(testlist))[49, 38, 65, 97, 76, 13, 27, 49][38, 49, 65, 76, 13, 27, 49, 97][38, 49, 65, 13, 27, 49, 76, 97][38, 49, 13, 27, 49, 65, 76, 97][38, 13, 27, 49, 49, 65, 76, 97][13, 27, 38, 49, 49, 65, 76, 97][13, 27, 38, 49, 49, 65, 76, 97]结果： [13, 27, 38, 49, 49, 65, 76, 97]选择排序算法#选择排序算法：程序填空def selection_sort(L):N = len(L) #提取列表长度Nexchange_count = 0for i in range(0, N-1): #从0开始循环min_index = i #排序序列的末尾位置for j in range(i+1,N): #嵌套循环if L[min_index] &amp;gt; L[j]: #第一次循环L[0]&amp;gt;L[1] min_index = j #第一次循环min_index=1 j是二者最小值的列表索引。 #min_index永远等于最小值索引#以下是移动程序if min_index!</description>
-    </item>
-    
-    <item>
       <title>如何查看R包中的小品文? </title>
       <link>/zh/vignette/</link>
       <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
@@ -451,24 +410,22 @@ vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot
     </item>
     
     <item>
-      <title>一份不正经的自我介绍</title>
+      <title>关于</title>
       <link>/zh/selfintro/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/zh/selfintro/</guid>
-      <description>呃，大家好，我叫宋骁。一个出生于新疆(不是少数民族)，居住于上海的数据民工。
-自大二开始，我对数据分析产生了浓厚兴趣。因此在今后的几年本科生涯中，我依次学习了统计模型、机器学习算法(调包侠)、数据可视化(现代统计图形)、SQL(操纵数据的“真香”语言)。
-由于专业原因，我几乎只处理社会科学数据，但我对小样本的调查数据持谨慎态度。
-操纵数据工具千万条，操纵第一条。我前前后后学的数据操纵工具大概不下10种(如果硬要算上Excel这类的话)，它们居然都是用来操纵数据的。增删改查等等。真的很心累啊。为啥要重复学习这么多呢。最早是Stata，SPSS。后来发现这两种工具的局限性(不好装逼)后果断弃坑开始学习开源软件。总体来说，我还是Python，R两手抓的。
-自己比较熟悉的还是基于R的极乐净土dplyr工具，尤其是近些年dtplyr，dbplyr，sparklyr的出现使它成为了通用性接口语言，前景巨大。甚至Python中也出现了与它对标的dplython。然鹅，它也有局限性不是。
-所以data.table也不得不抓起来。
-R的老对手Python这边机器学习这么强，也得兼顾不是。pandas这个库是很好用的。其中我觉得最好用的黑科技就是pandas.Series.apply这个方法。配合自编函数及其好用。
-SQL就不用说了。以我目前的经验来看最适合初学者的是SQLite。SQL最坑爹的就是不同平台语法有细微的区别。目前RStudio出的DBI, dbplyr这两个似乎有一统江湖的趋势。需要分析一连接，就可以用净土那一套直接操作了。
-机器学习机器学习我几乎只用Python，原因就不用多说了。sklearn的各种方法都非常好用，推荐入门的同学好好试试。目前我正在学习Keras这个库，深度学习这一块得好好整，虽然我觉得进公司了也不会让我做这个。
-写作受益辉的影响，我用基于RStudio RMarkdown的那套knitr，bookdown设备。写起东西来好用得一腿。尤其配合RStudio的黑色背景，保护视力哈哈哈。
-操作系统我会点Linux命令，用Ubuntu几乎只是放狗搜的节奏。不过目前学Keras需要多用了。
-前端做网页、爬虫之类的肯定要懂点前端技能来着。html/css尚能掌握，使用chrome调css颜色布局非常让人上瘾，乐此不疲。本站就是长期调的结果。另外我正在学习JavaScript。
-IDEPython Jupyter Lab, VS Code, Jupyter Notebook 混用R语言 RStudio VS Code 混用</description>
+      <description>我叫宋骁，现居住于上海。对数据分析感兴趣。
+领域结构化数据
+时间序列
+文本数据
+联系微信公众号ApocalypseNow。
+我大量使用Kaggle发布数据科学Notebook、获取/分享数据。
+使用github储存、管理代码。
+我常逛统计之都论坛。
+偏好向量化编程
+工具R语言data.tablePython的pandasPython Jupyter Notebook, VS Code, Jupyter Lab,
+R语言 RStudio, VSCode…</description>
     </item>
     
     <item>
@@ -479,7 +436,7 @@ SQL就不用说了。以我目前的经验来看最适合初学者的是SQLite�
       <guid>/zh/zhresume/</guid>
       <description>English Version
 PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里微信公众号 : ApocalypseNow编程/软件技能Python, R, SQL (包括但不限于MySQL、SQL Sever、SQLite)SPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
+联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里微信公众号 : ApocalypseNow编程/软件技能Python, R, SQLSPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
 使用Python的pandas库进行数据清理、探索性数据分析和可视化。使用IV和WOE方法分析各个特征对于因变量的预测能力。使用Logistic回归、CART决策树、随机森林、KNN、GBDT、Xgboost等方法建立信用卡评分模型。使用sklearn库的交叉验证(Cross-Validation)的方法训练模型并调参，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
 北京大学-密歇根大学学院 暑期课程 2018年8月
 课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)

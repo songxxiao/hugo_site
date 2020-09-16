@@ -114,8 +114,13 @@ os.getcwd()    </code></pre>
 <div id="让图片说中文" class="section level1">
 <h1>让图片说中文</h1>
 <pre class="python"><code>import matplotlib.pyplot as plt
-plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
-plt.rcParams[&#39;axes.unicode_minus&#39;]=False</code></pre>
+plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]
+plt.rcParams[&#39;axes.unicode_minus&#39;] = False</code></pre>
+</div>
+<div id="将图片边缘背景改为白色" class="section level1">
+<h1>将图片边缘背景改为白色</h1>
+<p>默认透明</p>
+<pre class="python"><code>plt.rcParams[&#39;figure.facecolor&#39;] = &#39;white&#39;</code></pre>
 </div>
 <div id="jupyter-notebook-更换主题背景" class="section level1">
 <h1>Jupyter Notebook 更换主题背景</h1>

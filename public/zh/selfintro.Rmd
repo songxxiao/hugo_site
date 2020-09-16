@@ -1,5 +1,5 @@
 ---
-title: '一份不正经的自我介绍'
+title: '关于'
 author: ' '
 slug: selfintro
 disable_comments: true
@@ -7,13 +7,48 @@ comments: false
 comment: false
 ---
 
-呃，大家好，我叫宋骁。一个出生于新疆(不是少数民族)，居住于上海的~~数据民工~~。
+我叫宋骁，现居住于上海。对数据分析感兴趣。
 
-自大二开始，我对数据分析产生了浓厚兴趣。因此在今后的几年本科生涯中，我依次学习了统计模型、机器学习算法(~~调包侠~~)、数据可视化(~~现代统计图形~~)、SQL(操纵数据的“真香”语言)。
+### 领域
 
-由于专业原因，我几乎只处理社会科学数据，但我对小样本的调查数据持谨慎态度。
+结构化数据
+
+时间序列
+
+文本数据
 
 
+### 联系
+
+微信公众号[ApocalypseNow](https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&album_id=1476290412947554309&__biz=Mzg4NjA2NTUzNg==#wechat_redirect)。
+
+我大量使用[Kaggle](https://www.kaggle.com/rikdifos)发布数据科学Notebook、获取/分享数据。
+
+使用[github](https://github.com/songxxiao)储存、管理代码。
+
+我常逛[统计之都](https://d.cosx.org/)论坛。
+
+### 偏好
+
+向量化编程
+
+
+### 工具
+
++ R语言`data.table`
++ Python的`pandas`
++ Python Jupyter Notebook, VS Code, Jupyter Lab,   
++ R语言 RStudio, VSCode 
++ ...
+
+
+
+
+
+
+
+
+<!---
 ### 操纵数据
 
 工具千万条，操纵第一条。我前前后后学的数据操纵工具大概不下10种(如果硬要算上Excel这类的话)，它们居然都是用来操纵数据的。增删改查等等。真的很心累啊。为啥要重复学习这么多呢。最早是Stata，SPSS。后来发现这两种工具的局限性(~~不好装逼~~)后果断弃坑开始学习开源软件。总体来说，我还是Python，R两手抓的。
@@ -33,7 +68,7 @@ SQL就不用说了。以我目前的经验来看最适合初学者的是`SQLite`
 
 ### 写作
 
-受益辉的影响，我用基于RStudio RMarkdown的那套knitr，bookdown设备。写起东西来好用得一腿。尤其配合RStudio的黑色背景，保护视力哈哈哈。
+受益辉的影响，我用基于RStudio RMarkdown的那套knitr，bookdown设备。写起东西来特别。尤其配合RStudio的黑色背景，保护视力哈哈哈。
 
 ### 操作系统
 
@@ -48,7 +83,7 @@ SQL就不用说了。以我目前的经验来看最适合初学者的是`SQLite`
 
 + Python Jupyter Lab, VS Code, Jupyter Notebook 混用
 + R语言 RStudio VS Code 混用
-+ 
+--->
 
 
 

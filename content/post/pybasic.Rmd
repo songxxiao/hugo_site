@@ -73,9 +73,19 @@ os.chdir('./mynotebook')
 
 ```python
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif']=['SimHei']
-plt.rcParams['axes.unicode_minus']=False
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 ```
+
+# 将图片边缘背景改为白色
+
+默认透明
+
+```python
+plt.rcParams['figure.facecolor'] = 'white'
+```
+
+
 # Jupyter Notebook 更换主题背景
 
 长时间编程会导致眼睛疲劳，深色编程背景不可或缺，下面的代码提供了Jupyter Notebook 的深色主题。直接在Anaconda Prompt中输入就好：

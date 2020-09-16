@@ -48,33 +48,8 @@
   </url>
   
   <url>
-    <loc>/zh/keras_example/</loc>
-    <lastmod>2020-05-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/en/keras_example/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="/zh/keras_example/"
-                />
-  </url>
-  
-  <url>
     <loc>/zh/stringr/</loc>
     <lastmod>2020-04-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/zh/rap_metrics/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/zh/bilispy/</loc>
-    <lastmod>2020-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -230,11 +205,6 @@
   <url>
     <loc>/zh/pyobject/</loc>
     <lastmod>2019-05-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/zh/suanfa/</loc>
-    <lastmod>2019-05-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
