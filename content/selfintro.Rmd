@@ -11,12 +11,15 @@ comment: false
 
 ### 领域
 
-结构化数据
+Saas用户增长数据分析
 
+关系型数据库 / OLAP数据仓库 
+
+<!--
+关系数据
 时间序列
-
 文本数据
-
+-->
 
 ### 联系
 
@@ -33,13 +36,14 @@ comment: false
 向量化编程
 
 
-### 工具
+### 工具/技能
 
++ Apache Doris / TiDB / Clickhouse / MySQL等关系型数据库
 + R语言`data.table`
 + Python的`pandas`
 + Python Jupyter Notebook, VS Code, Jupyter Lab,   
 + R语言 RStudio, VSCode 
-+ ...
++ Shell脚本编程
 
 
 

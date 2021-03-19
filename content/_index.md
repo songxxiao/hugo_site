@@ -6,13 +6,12 @@ title: ' '
 
 &emsp;
 
-宋骁，一个左手Python右手R的数据分析者。我期望从表格和文本数据挖掘出有价值的信息。我乐于使用编程语言实现数据分析想法。我常出没于[Kaggle](https://www.kaggle.com/rikdifos)和[Github](https://github.com/songxxiao)。我对数据和web技术充满好奇。业余时间里，我喜欢听摇滚和说唱音乐。我推崇好玩有用的数据分析。目前，基于结构化和文本数据的分析、挖掘、可视化和最能吸引我。我的中文简历请点击[这里](/zh/zhresume/)，英文简历请点击[这里](/en/enresume/)。这里是一份[简短的自我介绍](/zh/selfintro/)。
+宋骁，一个左手Python右手R的数据分析师，平常更多使用SQL进行工作，目前在上海泛为科技从事Saas领域的用户增长数据分析。我主要监控用户的使用情况，同时参与一些产品研发工作。我对数据库和可视化充满好奇。我常出没于[Kaggle](https://www.kaggle.com/rikdifos)和[Github](https://github.com/songxxiao)。业余时间我喜欢听摇滚和说唱音乐。我的中文简历请点击[这里](/zh/zhresume/)，英文简历请点击[这里](/en/enresume/)。这里是一份[简短的自我介绍](/zh/selfintro/)。
 
 
 &emsp;
 
-Xiao Song. I am a junior student from  [East China Normal University](http://english.ecnu.edu.cn/) (ECNU).  
-During my study at ECNU, I have mastered advanced statistical analysis and programming skills and am able to apply these skills in solving real world problems. In addition, I had solid research projects utilizing econometric knowledge. I can independently complete an integral data analysis report using statistical software such as Python and R. As hobbies, I love listening Rock and hip-hop music.
+Yo! This is Xiao Song from Shanghai, I'm a data analyst, usually use SQL for work. Currently, I'm working in FancyDigital for user growth data analysis in the Saas field. My works includes monitoring the health of the system and churn rate. I also engage in development work. I am curious about databases tech and visualization. I frequently use Kaggle and Github. I can independently complete an integral data analysis report using statistical software such as Python and R. As hobbies, I love listening Rock and hip-hop music.
 
 You can find my English CV attached [here](/en/enresume/), and my Chinese CV [here](/zh/zhresume/).
 

@@ -4,7 +4,7 @@
 <font size=4.5>**Xiao Song**</font>
 -->
 
-My name is Xiao Song. I am a junior student from  [East China Normal University](http://english.ecnu.edu.cn/) (ECNU). During my study at ECNU, I have mastered advanced statistical analysis and programming skills and am able to apply these skills in solving real world problems. In addition, I had solid research projects utilizing econometric knowledge. I can independently complete an integral data analysis report using statistical software such as Python and R. As hobbies, I love listening Rock and hip-hop music.
+Yo! This is Xiao Song from Shanghai, I'm a data analyst, usually use SQL for work. Currently, I'm working in FancyDigital for user growth data analysis in the Saas field. My works includes monitoring the health of the system and churn rate. I also engage in development work. I am curious about databases tech and visualization. I frequently use Kaggle and Github. I can independently complete an integral data analysis report using statistical software such as Python and R. As hobbies, I love listening Rock and hip-hop music.
 
 You can find my CV attached [here](/en/enresume/).
 
