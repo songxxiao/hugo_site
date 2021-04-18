@@ -1,109 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Xiao Song</title>
-    <link>/en/</link>
-    <description>Recent content on Xiao Song</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/en/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Avoid Nested for-loop</title>
-      <link>/en/avoidnested/</link>
-      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/en/avoidnested/</guid>
-      <description>I’m trying to avoid writting nested for-loops, cause they are hard to read:
-from bs4 import BeautifulSoup import requestsimport timeimport jsonclass bs_spider: def __init__(self,url):&amp;#39;&amp;#39;&amp;#39;define a class named bs_spider&amp;#39;&amp;#39;&amp;#39;self.url = urldef get_title_list(self, number, tag1, tag2): &amp;#39;&amp;#39;&amp;#39;define a method&amp;#39;&amp;#39;&amp;#39;title_list = []for c in range(1,number+1):time.sleep(3)print(&amp;#39;正在抓取第&amp;#39;,str(c),&amp;#39;页&amp;#39;)url1 = self.url + str(c)try:wb = requests.get(url1)soup = BeautifulSoup(wb.text,&amp;#39;lxml&amp;#39;)for i in soup.find_all(tag1):term = i.</description>
-    </item>
-    
-    <item>
-      <title>Outliers and Other Fragmented Works</title>
-      <link>/en/march_works/</link>
-      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/en/march_works/</guid>
-      <description>Practice builds experience. A few weeks ago, I finished several very fragmented works, which needs to be summerized.First is outliers detection. Until joining in House Prediction Competiton did I realized how important outliers handling is! At first I recode outliers (I define outliers by histogram) to a high quantile. I gradually found this is wrong. It will generate accumulation of special values. Then, it does no good to prediction.</description>
-    </item>
-    
-    <item>
-      <title>Rap Lyrics Text Mining</title>
-      <link>/en/rap-lyrics-text-mining/</link>
-      <pubDate>Fri, 27 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/rap-lyrics-text-mining/</guid>
-      <description>A Kaggle Version
-A website Version
-As a rap listener and a data analyst, I’m willing to combine my hobbies. Until I found suitable data, I could achieve it.
-I found a github repo contains famous rappers’ lyrics, shout out to the author. I know and listened 90% of them. They are all widely accepted greatest rappers. Notice that those lyrics mostly are relatively old rappers, and you could go to figure 5 to check full rappers list.</description>
-    </item>
-    
-    <item>
-      <title>Geographic Data Visualization Methods</title>
-      <link>/en/geomd/</link>
-      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/geomd/</guid>
-      <description>Python MapsA very simple example to show how to plot a scatter map using Python geopandas library. The data is from this link. Attention that some columns’ names are Chinese characters. I give methods to change those names below.
-import osimport pandas as pd import numpy as npimport seaborn as snsimport matplotlib.pyplot as pltimport geopandas as gpsns.set_style(&amp;quot;whitegrid&amp;quot;)%matplotlib inline%config InlineBackend.figure_format = &amp;#39;svg&amp;#39;world = gp.</description>
-    </item>
-    
-    <item>
-      <title>2018-2019 NBA Champion Toronto Raptors Analysis</title>
-      <link>/en/raptors/</link>
-      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/raptors/</guid>
-      <description>A Kaggle version is here
-Toronto Raptors won the 2018-2019 NBA Championship, which is really exciting. I watched the playoffs even months after the season was over. As a data analyst, I found datas of Raptors and did this analysis. Since tree methods could apperantly display the relations between the feature variables and the response variable, it is appropriate to use them to reveal the factors of wining.
-Figure 1: Kawhi Leonard versus KD, who was injured during G5library(readr)library(dplyr)library(tidyr)library(magrittr)library(party)library(rpart)library(rpart.</description>
-    </item>
-    
-    <item>
-      <title>R Model Visualization</title>
-      <link>/en/modelen/</link>
-      <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/modelen/</guid>
-      <description>Loading …
-window.location.replace(&#34;https://www.kaggle.com/rikdifos/r-model-visualization&#34;)</description>
-    </item>
-    
-    <item>
-      <title>Credit Card Approval Prediction Using Sklearn</title>
-      <link>/en/pyscore/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/pyscore/</guid>
-      <description>Loading …
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/scorecard_en&#34;)</description>
-    </item>
-    
-    <item>
-      <title>NBA Player Salary Prediction</title>
-      <link>/en/nbasalary/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/en/nbasalary/</guid>
-      <description>Loading …
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/nbasalary_en&#34;)</description>
-    </item>
-    
-    <item>
-      <title>Curriculum Vitae - Xiao Song</title>
-      <link>/en/enresume/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/en/enresume/</guid>
-      <description>Chinese version
-PDF
-CONTACTEmail: malcolm@xsong.ltdGithub: https://github.com/songxxiaoWebsite: https://xsong.ltd/enKaggle: https://www.kaggle.com/rikdifosLinkedin: Click HereWechat Offcial Account : ApocalypseNowSOFTWARE &amp;amp; PROGRAMMING SKILLSPython, R, SQL (Including MySQL, SQL Sever, SQLite)SPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)EDUCATIONEast China Normal University 2016-09~Today
-School of Social DevelopmentSun Yat-Sun University Exchange Student 2018-02~2018-07TRAINING EXPERIENCEGouxionghui 2019-05</description>
-    </item>
-    
-  </channel>
-</rss>

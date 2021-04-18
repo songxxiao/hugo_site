@@ -1,0 +1,117 @@
+baseurl: "https://xsong.ltd/"
+languageCode: "en-us"
+title: "宋骁"
+theme: "hugo-ivy"
+disqusShortname: "Painkiller"
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
+hasCJKLanguage: true
+enableEmoji: true
+footnotereturnlinkcontents: "↩"
+rssLimit: 100
+
+permalinks:
+  cn: "/:sections/:year/:month/:slug/"
+  en: "/:sections/:year/:month/:slug/"
+
+menu:
+  main:
+    - name: "简历"
+      url: "/cn/resume/"
+      weight: 1
+    - name: "文章"
+      url: "/cn/"
+      weight: 2
+    - name: "Github"
+      url: "https://github.com/songxxiao"
+      weight: 3
+    - name: "Kaggle"
+      url: "https://www.kaggle.com/rikdifos"
+      weight: 4
+  en:
+    - name: "Home"
+      url: "/"
+      weight: 1
+    - name: "résumé"
+      url: "/en/resume/"
+      weight: 2
+    - name: "Blog"
+      url: "/en/"
+      weight: 3
+    - name: "Github"
+      url: "https://github.com/songxxiao"
+      weight: 4
+    - name: "Kaggle"
+      url: "https://www.kaggle.com/rikdifos"
+      weight: 5
+    - name: "中文"
+      url: "/cn/"
+      weight: 6
+  cn:
+    - name: "首页"
+      url: "/"
+      weight: 1
+    - name: "简历"
+      url: "/cn/resume/"
+      weight: 2
+    - name: "文章"
+      url: "/cn/"
+      weight: 3
+    - name: "English"
+      url: "/en/"
+      weight: 4
+    - name: "Github"
+      url: "https://github.com/songxxiao"
+      weight: 5
+    - name: "Kaggle"
+      url: "https://www.kaggle.com/rikdifos"
+      weight: 6
+params:
+  description: "Painkiller"
+  footer: "&copy; Xiao Song 2021"
+  disqusURL: "/"
+  customJS:
+    - "js/fix-toc.js"
+    - "js/center-img.js"
+    - "js/right-quote.js"
+    - "js/no-highlight.js"
+    - "js/fix-footnote.js"
+    - "js/math-code.js"
+    - "js/external-link.js"
+    - "js/alt-title.js"
+    - "js/header-link.js"
+  githubContentURL: "https://github.com/rbind/yihui/edit/master/content/"
+  twitterImage: "/images/logo.png"
+
+  # options for highlight.js (version, additional languages, and theme)
+  highlightjsVersion: "9.12.0"
+  highlightjsCDN: "//cdnjs.cloudflare.com/ajax/libs"
+  highlightjsLang: ["r", "yaml", "tex"]
+  highlightjsTheme: "github"
+
+  logo:
+    en:
+      img: "/images/logo.png"
+      url: "/"
+      alt: "Painkiller"
+      tag: ""
+
+  author:
+    en: "Xiao Song"
+    cn: "宋骁"
+
+  lang:
+    edit:
+      cn: "编辑"
+    license:
+      cn: "版权"
+    subscribe:
+      cn: "订阅"
+
+blackfriday:
+    extensionsmask: ["noIntraEmphasis"]
+    fractions: false
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

@@ -1,451 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>  on 宋骁</title>
-    <link>/zh/</link>
-    <description>Recent content in   on 宋骁</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 11 Aug 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/zh/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>data.table与pandas语法对比</title>
-      <link>/zh/pd-vs-dt/</link>
-      <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/pd-vs-dt/</guid>
-      <description>本文基于谢士晨博客文章进行修改和增添。
-行选择与排序dt[c(3,1,2)]# 单条件筛选dt[Hair == &amp;#39;Red&amp;#39;]# 多条件筛选dt[Hair == &amp;#39;Black&amp;#39; &amp;amp; Freq &amp;gt;= 10 &amp;amp; Eye %in% c(&amp;#39;Brown&amp;#39;, &amp;#39;Blue&amp;#39;)]df.iloc[[2,0,1]] # python序数从0开始，2代表第三行df.loc[[2,0,1]] # 如果index未修改，效果与iloc的一致# 单条件筛选，去掉.loc效果一致df.loc[df[&amp;#39;Hair&amp;#39;] == &amp;#39;Red&amp;#39;] # pandas 多条件筛选时要用 |, &amp;amp;, ~分别代表or, and, not; # 且每个条件用括号区分 df.loc[(df[&amp;#39;Hair&amp;#39;] == &amp;#39;Black&amp;#39;) &amp;amp; (df[&amp;#39;Freq&amp;#39;] &amp;gt;= 10) &amp;amp; (df[&amp;#39;Eye&amp;#39;].isin([&amp;#39;Brown&amp;#39;, &amp;#39;Blue&amp;#39;]))]排序
-dt[order(Sex, -Freq)]setorder(DT, A, -B) # 行排序setcolorder(DT, c(&amp;quot;C&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;B&amp;quot;)) # 列排序df.sort_values([&amp;#39;Sex&amp;#39;, &amp;#39;Freq&amp;#39;], ascending = [True, False] )df = df[[&amp;#39;user_id&amp;#39;,&amp;#39;book_id&amp;#39;,&amp;#39;rating&amp;#39;,&amp;#39;mark_date&amp;#39;]] # 列排序列选择</description>
-    </item>
-    
-    <item>
-      <title>Kaggle M5时间序列竞赛银牌方案分享</title>
-      <link>/zh/m5-compete/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/m5-compete/</guid>
-      <description>6月下旬我大部分时间耗在了Kaggle举办的两个赛事上。
-待到7月1日开奖时，我发现自己很幸运地都冲入了银牌区。
-其实自己也没做啥原创性的工作。刚开始大部分时间是理解赛题逻辑并且读别人的Kernel。读了大约10天左右才搞明白数据结构什么的。后面就是抄个代码风格好的Baseline改一改。虽说是抄，但不懂内部逻辑很难做出自己的修改。
-总之比赛结束还是做了很多总结，两篇文章都写成了微信公众号，现在贴到这里吧：
-Kaggle M5沃尔玛时间序列预测竞赛Baseline分享
-Kaggle M5 沃尔玛销量时间序列预测 竞赛总结
-比赛代码repo(居然获得了5个星标，截至2020-08-11)：
-https://github.com/songxxiao/m5_compete</description>
-    </item>
-    
-    <item>
-      <title>大学不应该讲授任何商业统计软件</title>
-      <link>/zh/should-not-teach-business-software/</link>
-      <pubDate>Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/should-not-teach-business-software/</guid>
-      <description>前一阵子在统计之都看到了《matlab取消中国高校授权》的帖子，具体是围绕着哈工大发现学校购买的matlab授权被取消了。这其实是美国对华科技限制的体现。这只是个开端，今天matlab不能用，明天Mathematica，SAS，SPSS，Stata，EViews也危在旦夕。
-我没有学过Matlab，只是有一次选课差点学了Mathematica，但当时看是个收费的软件都退了。商业统计类软件我只学过SPSS和Stata(现在几乎全忘了)。这两个软件的性能真是一言难尽，就不说了。我还是比较介意收费这一点的。记得学SPSS的时候需要下载学校数据库提供的正版授权软件，然后还必须连接校园网才能用。这个就把我劝退了，导致我现在不咋会用SPSS。
-但收费也好，禁用授权也好对大部分学生和老师来说没有啥影响。毕竟他们用盗版软件。
-学Stata的时候是老师直接提供盗版软件用。唉。其实盗版软件和正版没有任何区别。反正有盗版大家都用了，默认这一点是理所应当的。严格来说发表论文是不能用盗版软件的，但我很怀疑这是否能限制科研人员用盗版软件写论文。
-其实封了正版授权不可怕，真正可怕的是像Matlab这种工具已经渗透到工业的方方面面了，或者说在某个学科中某个软件几乎成为了一家独大。这样的话你不用这个软件就没法加入游戏，因为整个系统的考核标准都基于它。你用其他再好的软件别人也没学过，你只能自命清高。
-而促使这种情况发生的，正是盗版软件的盛行。使用商业软件的成本降为0。有的不用安装就能用。反而是Python，R这些开源编程语言安装起来要花点时间配置环境变量、安装IDE、安装扩展包等等。
-我内心非常同意吴喜之老师的观点，即使用商业软件会导致国家安全问题。而且我自己也是开源软件的坚定支持者，理由如下：
-开源软件源代码完全公开，不用担心不懂程序内部原理的黑盒问题
-开源软件扩展性更好，可以自己编程序定制功能
-开源软件免费(虽然没啥用，用商业软件的有几个缴费了？)
-用商业软件者的理由是：
-我没想辣么多，学校教啥我就用啥(这条无法反驳，归根结底是学校及教育系统的问题)
-商业软件好用(我承认，商业软件的API都是包装好的，输入几个变量就出来结果，但是你懂内部的原理吗？)
-商业软件免费(盗版)
-我觉得商业软件的基本套路是：
-制造好看实用的用户界面(这个倒没什么，RStudio、Jupyter都是这样的)
-利用用户的“偷懒”心理，将复杂的计算封装成简单好用的api给用户，让用户轻松“驾驭”复杂分析方法，从而对它形成依赖。
-将产品推销给高校、企业，促进形成盗版产业链，形成根本性的依赖(所以吴喜之老师说他们不怕你盗版，就怕你不上瘾)。
-商业软件的流行其实就如同目前我们广泛使用的QWER键盘一样(详见这里)。这种键盘排列的打字效率是十分低下的(因为它将高频字母的距离移得很远)，远不如正常排列的ABCD键盘。但是当初的打字机厂商为了推销打字机，配备了免费的培训服务。因此通过用户的惯性依赖，逐渐抢占了100%的市场份额。
-而开源软件永远比较佛系，不可能会有如此精妙的市场营销策略。所以开源软件的推广永远是个麻烦。你几乎永远无法向商业软件说明开源软件的优势。扭转目前的使用局面也无异于让所有人将自己的QWER键盘替换为ABCD键盘。
-不过我还是想对不满于商业软件的有志青年/数据分析者/学术研究者/教育部门相关决策者说一句：
-大学不应该讲授任何商业统计软件
-</description>
-    </item>
-    
-    <item>
-      <title>stringr 与 regex 函数对应关系</title>
-      <link>/zh/stringr/</link>
-      <pubDate>Tue, 14 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/stringr/</guid>
-      <description>转载自谢士晨个人博客
-stringr 是 Hadley 大神写的 tidyverse 系列数据处理包中专门用于处理文本数据的，其函数命名统一易于记忆。而 R 基础包中的文本处理函数(regex)的命名规则不是特别统一。下表给出了主要函数之间的映射关系，便于以后查看。
-stringr包中函数功能说明R Base 中对应函数使用正则表达式的函数str_extract()提取首个匹配模式的字符regmatches()str_extract_all()提取所有匹配模式的字符regmatches()str_locate()返回首个匹配模式的字符的位置regexpr()str_locate_all()返回所有匹配模式的字符的位置gregexpr()str_replace()替换首个匹配模式sub()str_replace_all()替换所有匹配模式gsub()str_split()按照模式分割字符串strsplit()str_split_fixed()按照模式将字符串分割成指定个数-str_detect()检测字符是否存在某些指定模式grepl()str_count()返回指定模式出现的次数-其他重要函数str_sub()提取指定位置的字符regmatches()str_dup()丢弃指定位置的字符-str_length()返回字符的长度nchar()str_pad()填补字符-str_trim()丢弃填充，如去掉字符前后的空格-str_c()连接字符paste(),paste0()stringr网站也给出了两者的映射关系</description>
-    </item>
-    
-    <item>
-      <title>英国之行的几个瞬间</title>
-      <link>/zh/en_moments/</link>
-      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/en_moments/</guid>
-      <description>  本来想在泰晤士河边散步的时候打开网易云收听《London Calling》这首歌。发现网易云有版权限制。
-  在湖区遇到了一个会说中文的公交车司机爷爷。
-  住一个带有公共厨房的旅舍多么重要。出门一定要记得带好购物袋，不然付费使用的塑料袋贵死你。
-  感觉英国人衣品很好并且很有礼貌。虽然只是对陌生人的日常礼仪，但总让人感觉不舒服。
-  自己的口语并不好但足够应付日常对话。
-  从伦敦回国的航班非常适合观看《Spider-Man: Far From Home》这部电影。伦敦塔桥被关闭了2年，我十分怀疑是被剧组租用了。
-  爱丁堡旅游区商店中的服务员都是和我一般大的中国大学生。
-  一直不喜欢旅游。觉得又累又贵。后来发现旅游不是为了看风景，是为了探索和你一同出游的人的共同生活方式。
-  Jet lag需要好几天才能调整过来。
-  旅游期间鼓捣了我的Ubuntu 18.04 系统，从此陷入Ubuntu 和Windows不停切换的怪圈。不过，有时候命令行工具真的挺好用的（不论是cmd还是terminal）。git脱胎于Linux，也是继承了这种特点。
-  在英国感冒了。买了感冒药。我发现感冒药一定要坚持吃到症状完全消失而不是好转了就停药。
-  </description>
-    </item>
-    
-    <item>
-      <title>垃圾短信过滤程序</title>
-      <link>/zh/sms/</link>
-      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/sms/</guid>
-      <description>使用文本分类的方法判别垃圾短信的方法是NLP领域的一个非常经典的应用。其实简单来讲就是让人类的自然语言转化成模型能够“读懂”的矩阵语言。其次，数据集必须有标签，这样才能使用SVM等方法进行有监督学习。
-这篇文章是我为了熟悉NLP基本概念进行的练习。训练模型的步骤很简单。稍微有点困难的是将任何一个新的数据代入训练好的模型进行判别。这需要一定的编程技巧来解决。
-更困难的是将训练结果产品化，做成一个交互式的用户界面，部署在网络上。让所有用户登上网页直接就能用这个模型。这就涉及到Shiny App的知识。
-世上无难事只怕有心人。我还真把这两个功能都做出来了。其实并不需要很多的编程知识。只需要深入了解一点R就可以了。Shiny App的部署方法在文末。实际上本篇对自己也仅仅是个抛砖引玉。更强算力、更多功能的程序还需要更精深的编程知识，只会R就不够啦。这个分析我也使用同样的数据用Python做了一遍，可以做个比较。
-还有，我以前习惯用&amp;lt;-赋值，最近开始用=赋值，是因为=不仅方便还能和其他语言保持一致。于是，使用RStudio自带的Replace功能，一家伙替换掉了。
-首先…使用read_csv读取数据后无需使用tibble函数转化。read_csv能够直接得到tibble对象。不然会报错。
-R在构建文档-词语矩阵的有许多实现方式。下面使用了tm::DocumentTermMatrix函数实现。在此之前，我尝试了quanteda::dfm_weight函数，但是在我的本地R软件中总是报错（在Kaggle上的R Notebook能够运行）。另一个可能的路径是使用tidytext::unnest_tokens等函数进行去除停止词、去除数字和标点符号、提取词干等一系列操作；再通过tidytext::cast_dtm转化成DocumentTermMatrix对象。但这么做会导致因变量和特征矩阵行数不一致的问题。由于我无法解决它，我采用了下面的方案。当然使用Python是非常好的选择，我在这里给出了基于Python的做法。相比R，Python的可视化能力略显不足。
-我认为tidytext十分适合对文本信息进行探索和可视化，而tm则适合构建矩阵进行建模。如果将二者混用则可能导致问题。
-上代码library(magrittr)library(quanteda)library(tidytext)library(ggplot2)library(dplyr)library(tm)library(readr)library(stringr)sms = read_csv(&amp;quot;E:/MaLearning/SPAM text message 20170820 - Data.csv&amp;quot;)原数据共两列，其中一列记录了是否为垃圾短信的标签。垃圾邮件记为spam，非垃圾邮件记为ham。另一列是短信文本内容。其中，非垃圾邮件的比例约为0.87，垃圾邮件的比例为0.13。
-#因变量比例sms %&amp;gt;% count(Category)# # A tibble: 2 x 2# Category n# &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;# 1 ham 4825# 2 spam 747#sms %$% prop.table(table(Category))[1]数据概览如下，数据共2列，第1列为标签，第2列为文本内容：
-smswd = sms %&amp;gt;%rename(message = Message,tag=Category) %&amp;gt;% mutate(ID = row_number())head(smswd)# # A tibble: 6 x 3# tag message ID# &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;# 1 ham Go until jurong point, crazy.</description>
-    </item>
-    
-    <item>
-      <title>第十二届中国R会议小记(附会议幻灯片下载)</title>
-      <link>/zh/r_twelve/</link>
-      <pubDate>Wed, 25 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/r_twelve/</guid>
-      <description>言归正传。
-2019年12月21日。华东师范大学中北校区举办了第十二届中国R会议。R会议一年一次。北京上海广州都有。某大佬曰过：
- 没有记录下来的事情就没有发生
- 本着这种精神，也因为信息接收过多，我决定写篇小文总结一下。这里需要说一下的是，我去年阅读了这篇关于第十一届R会的小文，从而对R会感兴趣。本文也是效仿着它的写作风格。
-因为会议是9点开始。因此我7点多起床，吃饭然后提前到。直奔中北校区科学会堂。整个大会非常朴素，处处体现出民间论坛的“草根”性质。
-首先是华东师范大学统计系汤银才教授简单介绍了华师大统计系。他的讲座讨论了统计学习与机器学习的关系。实际上，人们通常并不区分这两个术语的细微差异。但传统统计与机器学习的争论由来已久。这点在Leo Breiman 《Two Cultures》论文中有所体现。总之，这两个领域总是在用不同的术语讨论相同的东西。如“变量”与“特征”。而Logistic模型也不过是神经元模型非常相似。只不过一个说“连接函数”，一个说“激活函数”等等。剩下的都是老生常谈啦。
-第二位讲者是来自香港中文大学的成生辉。他分享了他所在研究院的一款BI产品。具体就是输入数据进行无代码可视化的交互界面。这个我可能用不到。
-第三位比较印象深刻。是饿了么的李哲。他带来了一个有趣的工业应用案例：使用知识图谱优化餐饮产品的构建。这位大佬令我印象最深刻的是他讲清楚了知识图谱的概念。知识图谱比深度学习的模式识别更为高级的AI应用。它能够回答诸如“饿了么的公司名称叫什么？”、“阿里投资了哪些公司？”这种需要人类经验积累的问题。
-下一位是来自云筏科技。这个公司类似R Studio，是为广大的R个体用户提供服务的商业公司。它向我们介绍的是开源软件的基本服务免费，高级服务付费的模式。
-后面是统计之都李舰的演讲。之前我读过舰哥的一本R语言教程和他的《统计之美》。这回总算见到真人了。舰哥的演讲介绍了一个国产的操作系统。以及基于它之上的数据科学平台。
-下一个是中科院的刘心广博士。他介绍了人工智能在工业中的应用。类似于R对机器焊点的实时监测和分析。其他内容太专业了听不懂。
-后面的讲座比较有趣。讲的是我比较感兴趣的NLP。讲者李翛然分享了他所在公司对吉林大学第一医院的病历数据进行分析的业务，以及相关的经验。这个数据库号称全中国(也许是全球)最大的肺癌结构化知识数据库。作为商业公司，最重要的是一开始和甲方确定工程的标准，如正确率多少以上。下一步便是具体实施了。实际业务场景的数据不同于竞赛、示例数据。数据的预处理是非常令人头疼的问题。李翛然说数据的读取阶段就遇到了困难(xml文件无法解析)。而后，基本的分词也很令人头疼。原因是医学语料库与通常的分词工具(如Jieba)的不兼容。于是需要自己整理词典。其中提到了一个中文数字提取工具挺好玩的。
-来自美团点评的朱俊辉分享了基于Tidyverse包的应用。其中主要是进行风控工作。如观测被破坏的共享单车的运动轨迹等。这里面涉及了很多Spark和Hadoop等大数据架构的技术。他推荐了 Mastering Spark with R 一书。
-e成科技的刘洋分享了基于招聘App的AI技术。招聘软件需要能够实现对用户上传的各种奇怪格式的简历文件进行识别和分析。如命名实体识别等等。客观评判一个求职者的能力和技能点。这样就可以进行人岗匹配等工作。他提到了不同的业务场景对算法准确性的要求不同。如抖音短视频推荐可以推错。但职位匹配可能就事关重大。这一点我深为赞同。
-下一个演讲者是华师大博士周世荣。他分享的是较为传统的可靠性统计。比如分析华为手机的电池寿命问题(这不就是生存分析嘛！我感觉我也能做)。重要的是要将整个分析过程产品化，这就需要Shiny App了。好好学Shiny App吧！
-来自微软中国的赵明杰介绍了微软研发的一款产品: Azure。它也是一款对各种格式文档内容进行分析的软件。这个软件的使用说明、软件下载、示例都在网上可以找到。因此不详细介绍了。
-第一天的会议到此结束。
- 第二天来自中科院的张先轶分享了如何在用户端部署模型和算法。相当多的机器学习任务。如美颜、滤镜效果都在本地设备端进行算法运行。但是更多的设备端智能化部署需求仍然没有满足。比如驾驶技能考试的智能检测系统。这些技术涉及到很多的硬件知识。我也没有能够听懂。
-和鲸科技的高朋介绍了SQLFlow。这是一个将机器学习训练纳入SQL语句的工具。一般而言，SQL用于数据的清理和查询。而它对机器学习训练的支持并不十分出色。
-让机器学习像SQL一样简单，降低数据分析与机器学习的门槛，提高工程师应用机器学习的效率。我感觉这个工具是比较有应用前景的。只是不知道能不能流行起来。
-接下来是一个非常学术的关于机器学习最优化方法的研究。来自华东师范大学统计学博士练勇强。之后是本次R会议组织成员车轮互联张强的演讲。从个人简介中看，他是我之前的实习公司艾瑞咨询数据挖掘部门的创始人。很尴尬的是他讲的内容我完全没有听懂也没留下什么印象。
-之后是前华东师大硕士、现复旦大学博士黄天元带来的关于极乐净土包的介绍。这位讲者还写了本关于R的著作。他还进行了R base、dplyr 和 data.table的对比。嗯，总之我越来越体会到了学习data.table的重要性了。接下来是真大佬任坤带来的关于VSCode 和RStudio的演讲。任坤是data.table的贡献者之一。嗯，在我看来真是太厉害了。
-之后是复旦大学统计系的米汶权带来的智能电梯：故障预测建模分析。这是一个纯应用统计的项目。这个项目主要是数据难获取吧。此外还需要充实的业务数据基础。
-陈堰平带来的则是关于机器学习可解释性的问题。他讲了关于如何让机器学习模型更容易解释的主题。这显然是非常具有研究价值的问题。其中一个方法是Local Interpretable Model-Agnostic Explanations。基本方法就是对一个弯弯曲曲的(非线性)算法的决策边界进行线性回归拟合，使得模型更好解释。另一个方法是在CV(Computer Vision)任务中，找到影响分类的像素区域。这里他举了2个例子。一个是样本攻击的例子。一个是区分数码宝贝和神奇宝贝的图像数据集。在这个问题中，即便分类达到了很高的准确率，也不可能掉以轻心，因为解释分类像素区域之后，发现它们集中在卡通形象的外侧。原来神奇宝贝的PNG图片背景是透明的，读入后背景变成了黑色。因此造成了如此高的准确率。因为可解释性方法的存在，我们才能找到问题背后真正的原因。
-两天的会议开下来，眼界开阔大大地有。然而相当多的东西我没有听懂。没听懂的东西里又分为将来可能会涉及到的和永远也涉及不到的。前者很重要，后者需要战略性忽略。而从前者中找到方向是个难题。
-总之，听完这一系列报告，我愈发感觉到自己决定从社科转到DS是正确的选择。毕竟，社科的领域更为传统、保守，离工业界更远。同时，关于Shiny App、Docker、Spark、Linux等知识是很好的触发点。未来应该补全自己在这些方面的空白。当然重中之重是学好NLP技术。
-附：第十二届中国R会议 幻灯片 公开合集
- 链接1:
-https://pan.baidu.com/s/1hAU9C1wdnrzYrJfawMFLaw
-提取码：vtyf
-链接2:
-https://pan.baidu.com/s/1-y_EQgrZq_EBTYzM3G5cdQ
-提取码：0994
- 注：2个链接内容一致。其中空缺的属于材料敏感无法共享。</description>
-    </item>
-    
-    <item>
-      <title>还有人用RSS吗？</title>
-      <link>/zh/rssuse/</link>
-      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/rssuse/</guid>
-      <description>我出生第22年才知道有RSS这东西。是的，你没看错。我猜大多数人也不知道它是啥。当你拥有了一个feedly账户。点击喜欢的博客，找到订阅页面，将链接复制、粘贴。哐！你就能持续收到它们的推送了！而且可以方便地在手机上观看。
-自从我得到了第一个智能手机以来。我被迫接受微博、微信公众号、抖音、快手等等各种信息的喂养。事实是，我对这些社交媒体与公号的评价并不高。尤其是微信公众号。一般那些抓人眼球的推送套路是：先充分强调一个东西的重要性(比如学Python的重要性)。然后猝不及防给你来段广告(Python 999课程。不拿到offer不要钱)。实际上，这种套路不过是在贩卖焦虑，使人徒生烦恼。其次呢，由于本人的拖延症，我喜欢把之前文章改了又改，我博客列表里的文章都是一直在修改的。有些则是随着经验的增长持续更新。通过这种方式，尽管我写的东西(尤其是带代码的东西)现在看来还很不完善，它们也能够随着我知识的增长而提升质量。微信公众号则不给你修改的机会。这就使我不得不为了使一篇东西看上去完整而付出不必要的劳动。
----微博靠大量色情擦边球、短视频、明星绯闻八卦破事儿来吸引人们的眼球。这导致我间歇性地要卸载微博。事实是，色情信息是网络第一生产力。我承认这一点。但微博完全不看也不成，因为它好歹是个大网络对吧？有时候得关注关注作为娱乐对吧？
-那么微信朋友圈呢？可能是我不会拍照吧。我常常在编辑朋友圈的时候丧失发朋友圈的冲动。首先，在编辑朋友圈“文案”的时候我会想：“这个有发的意义吗？”、“有人给我点赞吗？”、“会不会有人误解我的意思？”、“别人看到我发的东西会不会觉得我是个沙雕？？”。其次，因为朋友圈的复制粘贴导致文字选择不全的功能，假如在其他平台编辑好复制就会只显示一行文字。这也很令人抓狂。我陷入的另一个发朋友圈的怪圈是：如果需要太认真地编辑大段文字，我往往会丧失发朋友圈的兴趣。如果顺着发朋友圈的劲头发下去，则我发的东西实在低劣。这导致日后花大把时间删朋友圈。害，发朋友圈主要是娱乐自我、建立人脉，想那么多干啥？再次，微信系统的另一个缺点是，没有夜间模式。这简直对人的眼睛是种摧残。
-好吧。什么是好什么是差我还是知道的。我虽然混不了学术圈也进不了码农圈，但技术博客和学术博客倒是看得一手。这些博客有趣、实用。有时还能看到一些真知灼见。比如之前看到的一篇博客关于练车的看法，对我有极大的参考价值(我正在学车)。那么，或许可以清算以往的信息来源，重新分配自己的精力了？
-我并不指望有人订阅我的博客。我的博客尽量以有代码的技术分享为主。至于自己的生活吐槽。应该以有感而发为主(aka 好久更新一篇)。这可能是我的懒癌导致的。也源于自己不喜欢写文字和不喜欢无感而发。不过我倒是非常欢迎评论的。我想听到大家对我的反馈。如果你有啥想法，无论是夸是骂，还是文章发表的几十年后都欢迎评论。我会尽量回复。就酱。</description>
-    </item>
-    
-    <item>
-      <title>R模型可视化</title>
-      <link>/zh/model/</link>
-      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/model/</guid>
-      <description>PDF版本下载
-English Version
-模型可视化是应用统计学的重要内容。任何模型都离不开结果的可视化。所谓模型，不过是将一堆散点简化为一条线。结果的可视化需要预测值。Hadley Wickham的modelr包提供用于预测的函数。预测的结果可以直接被ggplot2使用并画图。modelr支持管道操作，是将数据分析流程化的利器。
-modelr包的主要函数有：
-data_grid: 生成预测数据
-add_predictions: 加入预测值
-crossv_kfold、crossv_mc、crossv_loo: 交叉验证
-library(dplyr)library(tidyr)library(ggplot2)library(modelr)library(cowplot)library(stargazer)`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`基础回归hatdt为作者个人整理的中国家庭追踪调查(CFPS)收入数据1。
-library(readr)hatdt = read_csv(&amp;#39;E:/some_code/capplot/aggregrate.csv&amp;#39;, locale = readr::locale(encoding = &amp;quot;gb18030&amp;quot;))hatdt &amp;lt;- hatdt %&amp;gt;% filter(`type` == &amp;#39;个人收入（元）&amp;#39;) %&amp;gt;% drop_na(agem,inc,fswt_nat)set.seed(20191001)sample &amp;lt;- sample(1:nrow(hatdt),600,replace = F)sampled &amp;lt;- hatdt[sample,]plota &amp;lt;- ggplot(hatdt,aes(agem,inc,weight=fswt_nat)) +geom_jitter(data=sampled,height=550,width=5,size =1.5,alpha=1/3) +geom_smooth(span =10,size=1) + geom_smooth(method=&amp;#39;lm&amp;#39;,size=1,color=&amp;#39;red&amp;#39;) +ylim(0, 20000) +labs(x = &amp;quot;年龄&amp;quot;,y = &amp;quot;人民币(元）&amp;quot;) +theme_bw()plotb &amp;lt;- ggplot() +geom_jitter(data=sampled,aes(agem,inc),height=550,width=5,size =1.</description>
-    </item>
-    
-    <item>
-      <title>实用学习资源链接(持续更新)</title>
-      <link>/zh/resource/</link>
-      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/resource/</guid>
-      <description>RR for Data Science
-ggplot2: Elegant Graphics for Data Analysis
-Advanced R
-现代统计图形
-现代统计图形之极乐净土
-Introduction to Econometrics with R
-Text Mining with R:A Tidy Approach
-caret
-Glmnet Vignette
-统计学与R读书笔记(第六版)
-Mastering Spark with R
-R包开发9分钟写个R语言包：菜鸟致简速成
-开发 R 程序包之忍者篇
-R语言忍者秘笈
-R packages
-PythonA Byte of Python
-一本Python书
-Python数据分析小抄
-Python帮助系统
-Python机器学习
-Python3网络爬虫开发实战
-Python 文本数据分析初学指南
-TextBlob
-Python -WordCloud 修改色调
-Python中WordCloud各参数的含义
-超详细：Python(wordcloud+jieba)生成中文词云图
-杂七杂八的链接Tidyverse vs. Non-Tidyverse: To be or Not To be擂台赛</description>
-    </item>
-    
-    <item>
-      <title>Python奇技淫巧</title>
-      <link>/zh/pybasic/</link>
-      <pubDate>Wed, 11 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/pybasic/</guid>
-      <description>下面是我积累的Python 实用小技巧。会根据经验增长持续更新，给自己也给可能需要的人做个备份。
-从文件中读取数据文件类提供了三种方法读取文本文件的内容，分别是：
-f.read(size)返回一个字符串，内容为长度为size的文本。参数size可以省略。如果省略size参数，则表示读取文件所有内容，作为一个字符串返回。
-f.readline()返回一个字符串，内容为文件当前一行的文本。
-f.readlines()返回一个列表，列表的数据项为一行的文本[linel, line2, ···,lineN] 。再通过循环操作可以逐行访问列表中每一行的内容。
-mode解释r以只读方式打开w以写方式打开一个文件，当这个文件存在时，覆盖原来的内容。当这个文件不存在时，创建这个文件x创建一个新文件，以写方式打开，当文件已存在， 报错FileExistsErrora以写方式打开，写人内容追加在文件的末尾b表示二进制文件，添加在其他控制字符后t表示文本文件，默认值+以修改方式打开，支持读写设置工作目录获取当前工作目录：import osos.</description>
-    </item>
-    
-    <item>
-      <title>徐导发片了</title>
-      <link>/zh/xudao/</link>
-      <pubDate>Fri, 06 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/xudao/</guid>
-      <description>徐正阳是我的小学和初中同学。初中毕业后，我们都没留在原本的学校。我去了一所擅长虐待学生的高中，他则去了另一所高中。没想到这小子又参加艺考最终高中北京电影学院了！
-在故宫和Tom Cruise、Steven Spielberg谈笑风生之后 ，他在大二后自愿成为丘八。临走时填写的入伍志愿地点的是“边远艰苦地区”。在几次失意的网恋，并得到著名相声演员牛群老师的耳提面命之后，他在军队中留下的最后一件大事是拍摄了一部军旅题材的微电影。
-Figure 1: 徐导和Tom Cruise、Steven Spielberg谈笑风生以上照片有点搞笑哈。为了保护徐导的个人隐私，和牛老师的照片我就不放了。
-和他之前拍摄的作品相比。这部电影故事是原创的。布景也更加宏大。
-以下是徐导以往的作品，如向《喜剧之王》致敬的《外卖》：
-演绎了武侠爱情的《一世安》：
-以及，异常青涩的处女作《寻》：
-徐导在不断进步呢。对于我这种半吊子鉴赏者来说。看着朋友一部部推出新作，是件有意思的事情。作为有多年交情的铁子，希望他的作品能早日登录院线:D
-这里有一波狗粮。想看的看看吧。</description>
-    </item>
-    
-    <item>
-      <title>日不日记是个问题</title>
-      <link>/zh/diary/</link>
-      <pubDate>Tue, 27 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/diary/</guid>
-      <description>网站建成有一段时间了。一直在考虑写不写博客的事情。
-我在高中时期是写日记的。所记大多是意识流。换句话说，是将学业之苦一五一十倾倒出来。后来发现此法常常使痛苦加倍。遂放弃。后来受《邪不压正》台词的影响：“一个写日记的人能可靠吗，正经人谁写日记啊？”，“心里话谁写日记里啊，写出来的能叫心里话吗？下贱！”总觉得心里话写出来有种贩卖隐私的做作感。我对个人网站的定位是作为技术分享和个人备忘之用，获得别人的关注只是bonus。
-但是，
-  我修改这个网站外观浪费了大量时间（固定导航栏还参考了Rolling Stone网站）。不写点啥有点说不过去。
-  购买域名还花了钱。
-  有点宣传效应增加正反馈
-  以上三条理由导致这个网站还会存活下去。</description>
-    </item>
-    
-    <item>
-      <title>SQL增删改查</title>
-      <link>/zh/sql/</link>
-      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/sql/</guid>
-      <description>MySQL安装(基于Windows)
-MySQL 教程
-廖雪峰SQL教程
-W3school SQL教程
-数据：NBA技术统计和球员薪酬数据，如果一名球员在同一个赛季辗转多只球队，就会产生多行记录。
-本文基于MySQL。此外建议尝试使用SQLite。SQLite是长期以来被低估的数据库：它开源、体积小、和Python与R等编程语言的交互性好。它不需要设置数据驱动。而且SQLite数据的储存只使用一个数据库文件，适用于多表管理。但是不同的SQL数据库语法略有区别。
-SQLite文件见这里
-变量排序SELECT salary17_18,Player FROM salary ORDER BY salary17_18 DESC;删除 &amp;amp; 增添列ALTER TABLE salary DROP COLUMN TmADD COLUMN Team VARCHAR;重编码新变量ALTER TABLE salary ADD salary17_18 FLOAT;UPDATE salary SET salary17_18 = season17_18/1000000.tg {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}f1PlayerTmseason17_18salary17_181Stephen CurryGSW3468255034.</description>
-    </item>
-    
-    <item>
-      <title>使用Python开发信用卡申请评分模型</title>
-      <link>/zh/pyscore/</link>
-      <pubDate>Sat, 10 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/pyscore/</guid>
-      <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/scorecard&#34;)</description>
-    </item>
-    
-    <item>
-      <title>NBA球员薪资分析</title>
-      <link>/zh/nbasalary/</link>
-      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/nbasalary/</guid>
-      <description>页面跳转中···
-window.location.replace(&#34;https://xsong.ltd/archives/pandas/nbasalary&#34;)</description>
-    </item>
-    
-    <item>
-      <title>使用RStudio写作</title>
-      <link>/zh/rmarkdown/</link>
-      <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/rmarkdown/</guid>
-      <description>一些对理解本文有用的链接谢益辉: Sweave：打造一个可重复的统计研究流程
-knitr 与可重复的统计研究（花絮篇）
-knitr中文介绍
-knitr选项函数
-R Markdown: The Definitive Guide
-宋春林：用LaTeX写学位论文
-用 knitr 写作业
-在R Markdown文档中使用中文
-我一开始使用\(\rm{\LaTeX}\) 写论文。我一直以来用的是MikTeX。
-而之所以不使用TeXmaker或是CTeX是因为它们容易出Bug而且不简约（主要是因为懒得花时间学）。个人认为MikTeX是最轻量级的TeX了。然而，MikTeX的界面过于简单粗暴，并且无法更换背景颜色（我喜欢使用深色界面保护视力，但MikTeX无法修改）。
-Figure 1: MikTeX界面然而，RStudio的界面漂亮简单。也可以选择保护视力的深色主题。况且作为R用户，将写作、制作幻灯片、统计分析等工作整合到RStudio也大大提升了工作效率。如何做到这一点呢？
-首先要安装\(\rm{\LaTeX}\) 环境。安装后R会自动识别这个环境。Windows用户请注意，MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！ MikTeX一定要安装在全英文路径下！
-后续需要安装一些R包，如Knitr，tinytex等（具体的R包我就不列出了，如果你没有安装，R会提示你的）。
-然后需要配置一下RStudio的环境:
-Figure 2: 依次点击Tools - Global Options - Sweave配置Sweave环境其中，R Sweave Rnw files using选knitr。想要写中文\(\rm{\LaTeX}\) 文档必须选XeLaTeX环境。
-我们点击Open File打开一个\(\rm{\LaTeX}\) 文档：
-Figure 3: 点击Open File打开一个LaTeX文档打开后，可以直接在RStudio中进行编辑写作。完成后，点击上方Complie PDF编译\(\rm{\LaTeX}\) 文档，如图：
-Figure 4: 点击Complie PDF编译LaTeX文档编译成功的PDF文档如图：</description>
-    </item>
-    
-    <item>
-      <title>交叉验证：基于caret包</title>
-      <link>/zh/cross/</link>
-      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/cross/</guid>
-      <description>Cross-validation: evaluating estimator performance
-基本概念交叉验证是机器学习中的常用模型选择方法。其中最常用的方法是K折交叉验证(k-fold cross validation)。K折交叉验证重复使用数据，把给定的数据切分为K个互斥子集，每次使用1个子集作为测试集，使用余下k-1个子集的并集作为训练集。其中，训练集用于模型的训练，测试集用于模型的评估和选择。在样本量不够充足的情况下，交叉验证法通过重复使用数据能够减少样本划分不同导致的差别，并且选择测试误差最小的模型，增强模型的泛化能力。
-划分测试集和训练集同样有助于更加客观地评价模型的泛化能力。交叉验证也是模型调节超参数的评价过程。
-交叉验证主要有以下种类：
-简单交叉验证 (hold-out cross validation)
-k折交叉验证 (K-fold cross-validation)
-留一交叉验证(leave-one-out cross validation)
-Figure 1: K折交叉验证原理：所有数据被划分为训练集和测试集。其中，训练集被划分为K份，循环使用其中的K-1份充当训练集，使用剩下的1分充当验证集。波士顿房价预测输入?mlbench::BostonHousing查看数据集解释。下面主要使用caret包(classification and regression training)进行交叉验证。
-`%&amp;gt;%` &amp;lt;- magrittr::`%&amp;gt;%`library(caret)library(readr)library(tidyr)library(dplyr)library(ggplot2)library(pROC)library(stargazer)library(ROSE)R示例10折交叉验证 (K-fold cross-validation)rfControl &amp;lt;-trainControl( #10折交叉验证method =&amp;quot;cv&amp;quot;, number =10 )library(mlbench) #加载数据集data(BostonHousing)head(BostonHousing)#&amp;gt; crim zn indus chas nox rm age dis rad tax ptratio b lstat#&amp;gt; 1 0.</description>
-    </item>
-    
-    <item>
-      <title>生存分析云笔记</title>
-      <link>/zh/survival/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/survival/</guid>
-      <description>本文系复旦大学人口学系张震老师和华东师范大学人口研究所李强老师的数据分析课程笔记。
-一个R生存分析应用的介绍网页Survival Analysis with R
-生存分析应用：移动通讯运营商的用户流失问题分析
-两篇中文文献：
-李强, 张震. (2009). 生存分析中时间变量的选择[J]. 中国人口科学(6), 88-95.
-李强, 徐刚, 陈丽梅.(2019) 生存分析的应用误区[J]. 中国人口科学(01):101-112.
-基本概念社会调查只能观察到状态。人口学关心从一个状态到另一个状态转移的风险。试想每一种状态是一个格子，格子内部是人口频数。人口学能通过数频数的方式估计状态转移的风险。在一个状态内待的时间和风险有着密切的关系。\(T\)为随机变量，上帝也不知道
-生存函数：\(S(t) = P(T &amp;gt; t)\)。是存活概率也是存活百分比。
-失效函数(Failure Function)：\(F(t)\),\(S(t) = 1 - F(t)\), \(F(t)\)是T的累积分布函数。
-\(f(t) = \frac{{dF(t)}}{{dt}}\)，即\(S(t)\)的斜率。等价于生存时间的概率密度函数(直方图)。是无条件的风险。
-风险函数: \[h(t) = \mathop {\lim }\limits_{\Delta t \to 0} \frac{{P(t \le T &amp;lt; t + \Delta t|T \ge t)}}{{\Delta t}},0 &amp;lt; h(t) &amp;lt; + \infty \]</description>
-    </item>
-    
-    <item>
-      <title>Python面向对象基础</title>
-      <link>/zh/pyobject/</link>
-      <pubDate>Sat, 11 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/pyobject/</guid>
-      <description>class Dog:def bark(self):print(&amp;quot;woo woo woo&amp;quot;)dog1=Dog()dog1.bark()woo woo wooclass Dog:def bark(self,xm):self.name = xmprint(&amp;quot;woo woo woo, I am &amp;quot;+self.name)dog1=Dog()dog1.bark(&amp;quot;Lulu&amp;quot;) woo woo woo, I am Lulu##__init__()方法class Dog:def __init__(self,name,color):self.name = nameself.color = colordef bark(self):print(&amp;quot;woo,woo,woo,我是&amp;quot;+ self.name +&amp;quot;!&amp;quot;)dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;)dog1.bark()#print(&amp;quot;刚才创建了一个狗对象，名叫：&amp;quot;+dog1.name+&amp;quot;!&amp;quot;)#bark()woo,woo,woo,我是阿黄!dog1 = Dog(&amp;quot;阿黄&amp;quot;,&amp;quot;黄色&amp;quot;)class Dog:number = 0def __init__(self,name):self.name = nameDog.</description>
-    </item>
-    
-    <item>
-      <title>如何查看R包中的小品文? </title>
-      <link>/zh/vignette/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/vignette/</guid>
-      <description>用R实现各种分析任务需要学习不同的R包。学习R包的同时需要结合统计理论。因此仅仅看帮助文档和用户手册（Reference manual）是不够的。作为学习R包的重要资源，小品文（Vignettes，或翻译为简介）将统计理论、代码与示例相结合，是学习R包和其中思想的好材料。下文讲解如何使用vignette和browseVignettes两个函数获取R包的官方小品文。
-在CRAN上发布的R包往往会有一个官方主页。在搜索引擎中键入R rpart或CRAN rpart便能够找到此包主页。
-rpart的官方主页如下所示：
-其中，Downloads一栏下便有用户手册和小品文的下载按钮，点击即可下载。
-这种方法其实多此一举了！
-由于R在下载程序包时，已将小品文下载下来。我们可以使用utils包(这个包含许多有用函数的包，不需要加载)中的vignette函数自动提取小品文。但首先我们需要提取R包的小品文名称，代码如下：
-vignette(, package = &amp;quot;rpart&amp;quot;)输出结果如下所示：
-Vignettes in package ‘rpart’:longintro Introduction to Rpart (source, pdf)usercode User Written SplitFunctions (source, pdf)可以发现，rpart包有两篇小品文，《Introduction to Rpart》和《User Written Split Functions》。分别简称为“longintro”和“usercode”。现在，就可以根据简称提取小品文了，输入：
-vignette(&amp;quot;longintro&amp;quot;, package = &amp;quot;rpart&amp;quot;)第一篇《Introduction to Rpart》的pdf便会自动跳出：
-然后便可以阅读了。这里更推荐使用browseVignettes函数，操作更为简单，弹出的小品文列表直接点击就可以阅读：
-browseVignettes(package = &amp;quot;rpart&amp;quot;)很多R包的小品文是PDF版本，当然还有的是html形式的，如ggplot2的小品文：
-vignette(&amp;quot;ggplot2-specs&amp;quot;, package = &amp;quot;ggplot2&amp;quot;)</description>
-    </item>
-    
-    <item>
-      <title>Reward</title>
-      <link>/zh/reward/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/reward/</guid>
-      <description>赞赏支付宝 (Alipay)微信 (Wechat)</description>
-    </item>
-    
-    <item>
-      <title>关于</title>
-      <link>/zh/selfintro/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/selfintro/</guid>
-      <description>我叫宋骁，现居住于上海。对数据分析感兴趣。
-领域结构化数据
-时间序列
-文本数据
-联系微信公众号ApocalypseNow。
-我大量使用Kaggle发布数据科学Notebook、获取/分享数据。
-使用github储存、管理代码。
-我常逛统计之都论坛。
-偏好向量化编程
-工具R语言data.tablePython的pandasPython Jupyter Notebook, VS Code, Jupyter Lab,
-R语言 RStudio, VSCode…</description>
-    </item>
-    
-    <item>
-      <title>宋 骁 简 历</title>
-      <link>/zh/zhresume/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/zh/zhresume/</guid>
-      <description>English Version
-PDF
-联系方式邮箱：malcolm@xsong.ltdGithub：https://github.com/songxxiao个人主页：https://xsong.ltdKaggle：https://www.kaggle.com/rikdifosLinkedin: 点击这里微信公众号 : ApocalypseNow编程/软件技能Python, R, SQLSPSS, Stata, Git, MS Office, \(\rm{\LaTeX}\)教育背景华东师范大学 社会发展学院 2016年09月-至今中山大学 学期交换 2018年2月-2018年7月培训经历狗熊会 在线实习项目 2019年5月 课程：信用卡申请评分模型
-使用Python的pandas库进行数据清理、探索性数据分析和可视化。使用IV和WOE方法分析各个特征对于因变量的预测能力。使用Logistic回归、CART决策树、随机森林、KNN、GBDT、Xgboost等方法建立信用卡评分模型。使用sklearn库的交叉验证(Cross-Validation)的方法训练模型并调参，预测信用卡申请者拖欠账单的概率。最终形成完整的数据分析报告。
-北京大学-密歇根大学学院 暑期课程 2018年8月
-课程：因果推论方法的研究设计和敏感性分析 (总成绩：94/100)
-上海大学 第6届·应用社会科学研究方法研修班 2017年7月
-课程：Stata与应用回归分析基础，类别数据分析
-项目经历垃圾信息判别网页应用
-2020年
-本程序使用5567条英文短信数据作为训练集，训练了Logistic回归、朴素贝叶斯、决策树、随机森林、支持向量机等算法。训练好的模型被编写成基于R 语言的Shiny App。用户输入一段短信内容文本，并选择一个分类器，就能得到该文本的分类结果。考虑到用户的语言习惯，特别设置了中英双语界面的切换功能。在线app源代码科研经历机器学习在社会科学实证研究中的应用:以中国教育追踪调查数据为例 2020年</description>
-    </item>
-    
-  </channel>
-</rss>

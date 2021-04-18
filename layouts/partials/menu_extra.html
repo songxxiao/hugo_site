@@ -1,0 +1,24 @@
+{{ if and (not .IsHome) .Content }}
+{{ $section := default .Section ($.Scratch.Get "section") }}
+
+<li class="menu-extra"></li>
+{{ with .Site.Params.githubContentURL }}
+{{ $.Scratch.Set "filePath" $.File.Path }}
+{{ if $.Params.from_Rmd }}
+{{ $.Scratch.Set "filePath" (replaceRE "[.]md$" ".Rmd" $.File.Path) }}
+{{ $.Scratch.Set "filePath" (replace ($.Scratch.Get "filePath") "\\" "/") }}
+{{ end }}
+
+<!--
+<li><a href=" " target="_blank">{{ default "Edit this page" (index $.Site.Params.lang.edit $section) }}</a></li>
+-->
+{{ end }}
+{{ with .Section }}
+<!--
+<li><a href=" " type="application/rss+xml" title=" ">{{ default "Subscribe" (index $.Site.Params.lang.subscribe $section) }}</a></li>
+-->
+{{ end }}
+<!--
+<li><a href=" " title="Attribution-NonCommercial-ShareAlike 4.0 International">{{ default "License" (index $.Site.Params.lang.license $section) }}</a></li>
+-->
+{{ end }}
