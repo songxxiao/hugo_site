@@ -1,6 +1,6 @@
 ---
 title: '宋 骁'
-date: '2021-05-22'
+date: ' '
 author: ''
 slug: 'cn/resume'
 disable_comments: true
@@ -9,7 +9,7 @@ comment: false
 disable_mathjax: false
 ---
 
-### 联系方式
+## 联系方式
 
 + 邮箱：<xsong@stu.ecnu.edu.cn>
 + Github：<https://github.com/songxxiao>
@@ -19,23 +19,31 @@ disable_mathjax: false
 + 微信公众号 : ApocalypseNow
 
 
-### 教育经历
+## 教育经历
 
-+ [华东师范大学](https://www.ecnu.edu.cn/)   社会发展学院 &emsp;2016年09月-至今
++ [华东师范大学](https://www.ecnu.edu.cn/)   社会发展学院 &emsp;2016年09月-2020年7月
 + [中山大学](http://www.sysu.edu.cn/2012/cn/index.htm)  学期交换 &emsp;2018年2月-2018年7月
 
 
-### 工作经历
+## 工作经历
 
 + 泛为科技&emsp;数据分析师&emsp;2020年9月-2021年5月
 
-### 编程/软件技能
+## 编程/软件技能
 
 
 + SQL (MySQL/TiDB/Apache Doris/Clickhouse)
 + Python, R
 + Shell, Linux, Git
 + SPSS, Stata
+
+## 获奖情况 
+
++ Kaggle M5 [沃尔玛销量时间序列预测 - Accuracy](https://www.kaggle.com/c/m5-forecasting-accuracy)&emsp;2020年  
+103rd/5558 Top2%&emsp;银牌
+
++ Kaggle M5 [沃尔玛销量时间序列预测 - Uncertainty](https://www.kaggle.com/c/m5-forecasting-uncertainty)&emsp;2020年  
+18th/909 Top2%&emsp;银牌
 
 <!--
 [English Version](/en/resume/)  
@@ -124,8 +132,6 @@ disable_mathjax: false
 现场宣读  
 论坛主持人：[吴愈晓](https://sociology.nju.edu.cn/99/2b/c17737a301355/page.htm)、[李煜](http://www.ssdpp.fudan.edu.cn/portal/f02f3f0f152247628e5e173df9bcecfd/orotsd.html)
 
-
-
 &nbsp;   
 
 + [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362)&emsp;校园经理&emsp;2017年9月-2018年1月  
@@ -147,21 +153,13 @@ disable_mathjax: false
   + **[托福](https://www.ets.org/toefl)**&emsp;103  
   
 <center>  
-<table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 292px" class="tg"><colgroup><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"></colgroup><tr><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Reading</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Listening</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Speaking</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">Writing</th></tr><tr><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">29</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">27</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">21</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">26</td></tr></table>   
-
+<table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 292px" class="tg"><colgroup><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"></colgroup><tr><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Reading</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Listening</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Speaking</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">Writing</th></tr><tr><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">29</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">27</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">21</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">26</td></tr></table>
 </center>
 
   + **[大学6级](http://cet.neea.edu.cn/)**&emsp;549
-  + **[大学4级](http://cet.neea.edu.cn/)**&emsp;614  
-
-
+  + **[大学4级](http://cet.neea.edu.cn/)**&emsp;614 
 ### 其他经历
 
 + 2019 华东师范大学 助教 
 回归分析与Stata应用(教师：[卿石松](https://faculty.ecnu.edu.cn/s/2136/main.jspy)副教授)
 -->
-
-
-
-
-

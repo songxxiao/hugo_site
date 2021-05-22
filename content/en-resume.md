@@ -1,6 +1,6 @@
 ---
 title: 'Xiao Song'
-date: '2021-05-22'
+date: ' '
 author: 
 slug: 'en/resume'
 disable_comments: true
@@ -9,7 +9,7 @@ comment: false
 disable_mathjax: true
 ---
 
-### CONTACT
+## Contact
 
 + Email: <xsong@stu.ecnu.edu.cn>
 + Github: <https://github.com/songxxiao>
@@ -17,23 +17,34 @@ disable_mathjax: true
 + Kaggle: <https://www.kaggle.com/rikdifos>
 + Linkedin: [Click Here](https://www.linkedin.com/in/xiaosongmalcolm/)
 
-### EDUCATION
+## Education
 
-+ [East China Normal University](http://english.ecnu.edu.cn/)&emsp;2016-09~Today    
++ [East China Normal University](http://english.ecnu.edu.cn/)&emsp;2016-09~2020-07    
 School of Social Development
 
 + [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;Exchange Student&emsp;2018-02~2018-07
 
 
-### WORK EXPERIENCE
+## Work Experience
 
 + FancyDigital&emsp;Data Analyst&emsp;2020-09~2021-05
 
-### SOFTWARE & PROGRAMMING SKILLS
+## Software & Programming Skills
 
 + SQL (MySQL/TiDB/Apache Doris/Clickhouse)
 + Python, R
-+ Shell, Linux, Git, SPSS, Stata
++ Shell, Linux, Git
++ SPSS, Stata
+
+## Honors & Awards
+
++ Kaggle  [M5 Forecasting - Accuracy](https://www.kaggle.com/c/m5-forecasting-accuracy)&emsp;2020  
+Estimate the unit sales of Walmart retail goods   
+103rd/5558 Top2%&emsp;Silver Medal
+
++ Kaggle [M5 Forecasting - Uncertainty](https://www.kaggle.com/c/m5-forecasting-uncertainty)&emsp;2020  
+Estimate the uncertainty distribution of Walmart unit sales  
+18th/909 Top2%&emsp;Silver Medal
 
 
 <!--
@@ -46,11 +57,7 @@ School of Social Development
 + SPSS Application
 + Categorical Data Analysis
 + Social Simulation and [NetLogo](http://ccl.northwestern.edu/netlogo/) Application
--->
-
-
-
-<!--
+ 
 + Zhongnan University of Economics and Law&emsp;Data Consultant&emsp;2020-02~2020-04 
    Remote internship. Use Xgboost, CatBoost, LightGBM and other algorithms to classify (multiclass) legal text data. The word frequency method is used to construct the feature matrix. I Used reverse-translation method to augment training data, and the cross-validation training model (sklearn) is used to obtain the cross-validation accuracy of 0.75. I write a program to make predictions on new data, so that the prediction results can be applied to any new data set.
 
@@ -168,7 +175,4 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 + 2018-2019 East China Normal University   
 Regression Analysis and Stata Application&emsp;([Shisong Qing](https://faculty.ecnu.edu.cn/s/2136/main.jspy))  
 Teaching Assistant
-
 --->
-
-

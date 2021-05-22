@@ -31,21 +31,18 @@ menu:
     - name: "Home"
       url: "/"
       weight: 1
-    - name: "résumé"
+    - name: "Résumé"
       url: "/en/resume/"
       weight: 2
-    - name: "Blog"
-      url: "/en/"
-      weight: 3
     - name: "Github"
       url: "https://github.com/songxxiao"
-      weight: 4
+      weight: 3
     - name: "Kaggle"
       url: "https://www.kaggle.com/rikdifos"
-      weight: 5
+      weight: 4
     - name: "中文"
       url: "/cn/"
-      weight: 6
+      weight: 5
   cn:
     - name: "首页"
       url: "/"
@@ -56,8 +53,8 @@ menu:
     - name: "文章"
       url: "/cn/"
       weight: 3
-    - name: "English"
-      url: "/en/"
+    - name: "Résumé"
+      url: "/en/resume/"
       weight: 4
     - name: "Github"
       url: "https://github.com/songxxiao"
