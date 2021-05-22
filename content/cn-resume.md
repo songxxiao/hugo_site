@@ -1,15 +1,13 @@
 ---
 title: '宋 骁'
-author: ' '
+date: '2021-05-22'
+author: ''
 slug: 'cn/resume'
 disable_comments: true
 comments: false
 comment: false
-disable_mathjax: true
+disable_mathjax: false
 ---
-
-[English Version](/en/resume/)  
-[PDF](/chnxsong.pdf)
 
 ### 联系方式
 
@@ -20,7 +18,29 @@ disable_mathjax: true
 + Linkedin: [点击这里](<https://www.linkedin.com/in/xiaosongmalcolm/?locale=zh_CN>)
 + 微信公众号 : ApocalypseNow
 
+
+### 教育经历
+
++ [华东师范大学](https://www.ecnu.edu.cn/)   社会发展学院 &emsp;2016年09月-至今
++ [中山大学](http://www.sysu.edu.cn/2012/cn/index.htm)  学期交换 &emsp;2018年2月-2018年7月
+
+
+### 工作经历
+
++ 泛为科技&emsp;数据分析师&emsp;2020年9月-2021年5月
+
+### 编程/软件技能
+
+
++ SQL (MySQL/TiDB/Apache Doris/Clickhouse)
++ Python, R
++ Shell, Linux, Git
++ SPSS, Stata
+
 <!--
+[English Version](/en/resume/)  
+[PDF](/chnxsong.pdf)
+
 + 微信公众号：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
  
 ### 相关课程
@@ -32,35 +52,16 @@ disable_mathjax: true
 + 类别数据分析
 + 概率与统计导论
 + 社会模拟与[NetLogo](http://ccl.northwestern.edu/netlogo/)应用
--->
-
-### 教育背景
-
-+ [华东师范大学](https://www.ecnu.edu.cn/)   社会发展学院 &emsp;2016年09月-至今
-+ [中山大学](http://www.sysu.edu.cn/2012/cn/index.htm)  学期交换 &emsp;2018年2月-2018年7月
-
-
-### 工作经历
-
-+ 泛为科技&emsp;数据分析师&emsp;2020年9月-现在
 
 + 中南财经政法大学&emsp;数据分析实习&emsp;2020年2月-4月 
    使用Xgboost，Catboost，LightGBM等高性能算法对中文法律文本数据进行分类(multiclass)。对文本数据进行清洗，使用词频法构建特征矩阵，使用反向翻译法对训练数据进行扩增，并利用交叉验证训练模型(Sklearn)。最后，编写程序封装训练好的算法。
+
 
 + [艾瑞咨询](https://www.iresearch.com.cn/)&emsp;数据分析实习&emsp;2019年7月-10月 
    + 使用R、SPSS软件对汽车用户进行用户画像分析工作。使用主成分分析、聚类分析法对线下数据进行无监督学习，研究不同车系用户态度区分。对汽车生产商决策提供重要参考意见，最终使用Python将结果进行数据可视化描述
    + 使用MySQL数据库协助数据分析、清理
    + 使用Hive SQL访问数据库集群，并进行取数工作
-   
-   
-### 编程/软件技能
 
-
-+ SQL (包括MySQL/TiDB/Apache Doris/Clickhouse等)
-+ Python, R
-+ Shell, Linux, Git, SPSS, Stata, MS Office, $\rm{\LaTeX}$
-
-<!--
 ### 培训经历
 
 + [狗熊会](http://www.xiong99.com.cn/about.php) 在线实习项目 &emsp;2019年5月&emsp;      
@@ -129,7 +130,7 @@ disable_mathjax: true
 
 + [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362)&emsp;校园经理&emsp;2017年9月-2018年1月  
 负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。在华东师范大学内招募约10 位校园兼职早餐配送员。完成每位配送员平均每月1000 订单的目标。
---->
+
 
 ### 标准化成绩
 
@@ -158,6 +159,7 @@ disable_mathjax: true
 
 + 2019 华东师范大学 助教 
 回归分析与Stata应用(教师：[卿石松](https://faculty.ecnu.edu.cn/s/2136/main.jspy)副教授)
+-->
 
 
 

@@ -1,5 +1,6 @@
 ---
 title: 'Xiao Song'
+date: '2021-05-22'
 author: 
 slug: 'en/resume'
 disable_comments: true
@@ -8,15 +9,33 @@ comment: false
 disable_mathjax: true
 ---
 
-
 ### CONTACT
 
 + Email: <xsong@stu.ecnu.edu.cn>
 + Github: <https://github.com/songxxiao>
-+ Website: <https://xsong.ltd/en>
++ Website: <https://xsong.ltd/>
 + Kaggle: <https://www.kaggle.com/rikdifos>
 + Linkedin: [Click Here](https://www.linkedin.com/in/xiaosongmalcolm/)
-+ Wechat Offcial Account : ApocalypseNow
+
+### EDUCATION
+
++ [East China Normal University](http://english.ecnu.edu.cn/)&emsp;2016-09~Today    
+School of Social Development
+
++ [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;Exchange Student&emsp;2018-02~2018-07
+
+
+### WORK EXPERIENCE
+
++ FancyDigital&emsp;Data Analyst&emsp;2020-09~2021-05
+
+### SOFTWARE & PROGRAMMING SKILLS
+
++ SQL (MySQL/TiDB/Apache Doris/Clickhouse)
++ Python, R
++ Shell, Linux, Git, SPSS, Stata
+
+
 <!--
 + Wechat Official Account：[ApocalypseNow](https://mp.weixin.qq.com/s/yyJ3l7RTImYTKDrIynwmPA)
  
@@ -29,19 +48,9 @@ disable_mathjax: true
 + Social Simulation and [NetLogo](http://ccl.northwestern.edu/netlogo/) Application
 -->
 
-### EDUCATION
-
-+ [East China Normal University](http://english.ecnu.edu.cn/)&emsp;2016-09~Today    
-School of Social Development
-
-+ [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;Exchange Student&emsp;2018-02~2018-07
 
 
-### WORK EXPERIENCE
-
-+ FancyDigital&emsp;Data Analyst&emsp;2020-09~Present
-
-
+<!--
 + Zhongnan University of Economics and Law&emsp;Data Consultant&emsp;2020-02~2020-04 
    Remote internship. Use Xgboost, CatBoost, LightGBM and other algorithms to classify (multiclass) legal text data. The word frequency method is used to construct the feature matrix. I Used reverse-translation method to augment training data, and the cross-validation training model (sklearn) is used to obtain the cross-validation accuracy of 0.75. I write a program to make predictions on new data, so that the prediction results can be applied to any new data set.
 
@@ -52,13 +61,7 @@ School of Social Development
    
 &nbsp; 
 
-### SOFTWARE & PROGRAMMING SKILLS
 
-+ SQL (MySQL/TiDB/Apache Doris/Clickhouse)
-+ Python, R
-+ Shell, Linux, Git, SPSS, Stata, MS Office, $\rm{\LaTeX}$
-
-<!--
 &emsp;(Overall GPA：3.64 /4 | Top 10%)
 
 ### TRAINING EXPERIENCE
@@ -77,7 +80,7 @@ Summer Workshop
 + Shanghai University&emsp;2017-07  
 [6th Training Workshop on Applied Social Science Research Methods](http://caser.ust.hk/?act=course_main&id=16)  
 Course: Regression Analysis and Stata Application,  Categorical Data Analysis
--->
+
 
 ### WORKS & PROJECTS
 
@@ -86,8 +89,6 @@ Course: Regression Analysis and Stata Application,  Categorical Data Analysis
 This program uses 5567 pieces of English short message data as a training set and trains algorithms such as Logistic Regression, Naive Bayes, Decision Tree, Random Forest, and Support Vector Machine. The trained model is written as a Shiny App based on the R language. The user can enter a text message and select a classifier to get the classification result of the text. Considering the user's language habits, a Chinese-English bilingual interface switching function is specially set up.   
 [url](https://xiaosong.shinyapps.io/spam_text/)&emsp;[github](https://github.com/songxxiao/txtnb)
 
-
-<!--
 ### ACADEMIC RESEARCH
 
 + Machine Learning in Social Sciences: Based on China Education Panel Survey&emsp;2020   
@@ -138,7 +139,7 @@ Forum hosts：[Yu Xiao Wu](https://sociology.nju.edu.cn/99/2b/c17737a301355/page
 + [Anlaiye](http://www.anlaiye.com.cn/index.html) · [Xiyou Breakfast](https://www.sohu.com/a/166510488_259362)&emsp;Campus Manager&emsp;2017-09~2018-01  
 Responsible for coordinating the business of breakfast campus manager in East China Normal University, including coordinating distribution, post-sale, business contacts, and recruitment of distributors. 
 Achieve the target of 1000 orders per month on average. About 10 part-time breakfast distributors were recruited in East China Normal University.
---->
+
 
 ### STANDARDIZED TEST
 
@@ -160,7 +161,6 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 + **[CET-4](http://cet.neea.edu.cn/)**&emsp;614
 
 
-
 [^cet]: [College English Test](http://www.cet.edu.cn/)
 
 ### OTHER EXPERIENCE
@@ -169,6 +169,6 @@ Achieve the target of 1000 orders per month on average. About 10 part-time break
 Regression Analysis and Stata Application&emsp;([Shisong Qing](https://faculty.ecnu.edu.cn/s/2136/main.jspy))  
 Teaching Assistant
 
-
+--->
 
 
