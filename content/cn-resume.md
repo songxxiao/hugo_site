@@ -95,7 +95,6 @@ disable_mathjax: false
 + **机器学习在社会科学实证研究中的应用:以中国教育追踪调查数据为例**&emsp;2020年  
 学士学位论文  ([PDF](/mlinss.pdf))  
 
-
 + **土地流转的福利效应与社会不平等:基于中国家庭追踪调查面板数据的分析**&emsp;2018年-2019年   
 国家大学生创新训练项目&emsp;独立作者  
 使用[中国家庭追踪调查(CFPS)](http://www.isss.pku.edu.cn/cfps/)数据，通过Stata和R进行数据清理和计量经济分析。使用无条件分位数回归和固定效应模型估计土地流转行为的福利效应和对社会不平等的影响。使用`ggplot2`软件包进行地理信息可视化。([PDF](/land.pdf))  
@@ -109,8 +108,6 @@ disable_mathjax: false
 
 + 2020年 Kaggle M5 [沃尔玛销量时间序列预测 - Uncertainty](https://www.kaggle.com/c/m5-forecasting-uncertainty)  
 18th/909 Top2%&emsp;银牌
-
-
 
 + 2019年 华东师范大学优秀学生三等奖学金
 + 2019年 华东师范大学第二十七届 **大夏杯** 大学生课外学术科技作品竞赛&emsp;三等奖  
@@ -137,7 +134,6 @@ disable_mathjax: false
 + [俺来也](http://www.anlaiye.com.cn/index.html) · [西游早餐](https://www.sohu.com/a/166510488_259362)&emsp;校园经理&emsp;2017年9月-2018年1月  
 负责统筹华东师范大学区域西游早餐校园经理业务, 包括统筹配送，售后处理，商户联络，兼职配送员招募。在华东师范大学内招募约10 位校园兼职早餐配送员。完成每位配送员平均每月1000 订单的目标。
 
-
 ### 标准化成绩
 
 + 学术
@@ -151,7 +147,6 @@ disable_mathjax: false
 + 英语
 
   + **[托福](https://www.ets.org/toefl)**&emsp;103  
-  
 <center>  
 <table style="border-collapse:collapse;border-spacing:0;table-layout: fixed; width: 292px" class="tg"><colgroup><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"><col style="width: 73px"></colgroup><tr><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Reading</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Listening</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">Speaking</th><th style="font-family:Georgia, serif !important;;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">Writing</th></tr><tr><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">29</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">27</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:middle">21</td><td style="font-family:Georgia, serif !important;;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;text-align:center;vertical-align:top">26</td></tr></table>
 </center>
