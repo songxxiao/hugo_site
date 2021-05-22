@@ -6,5 +6,5 @@
 A hugo webiste
 
 ```bash
-git clone git@github.com:songxxiao/Mysite.git
+git clone git@github.com:songxxiao/hugo_site.git
 ```
