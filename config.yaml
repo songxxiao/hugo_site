@@ -64,7 +64,7 @@ menu:
       weight: 6
 params:
   description: "Painkiller"
-  footer: "&copy; Xiao Song 2021"
+  footer: "&copy; Xiao Song 2022"
   disqusURL: "/"
   customJS:
     - "js/fix-toc.js"
