@@ -41,7 +41,7 @@ menu:
       url: "https://www.kaggle.com/rikdifos"
       weight: 4
     - name: "中文"
-      url: "/cn/"
+      url: "/cn/resume/"
       weight: 5
   cn:
     - name: "首页"
