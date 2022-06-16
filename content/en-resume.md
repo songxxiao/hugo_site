@@ -15,7 +15,7 @@ disable_mathjax: true
 + Github: <https://github.com/songxxiao>
 + Website: <https://xsong.ltd/>
 + Kaggle: <https://www.kaggle.com/rikdifos>
-+ Linkedin: [Click Here](https://www.linkedin.com/in/xiaosongmalcolm/)
++ Linkedin: [Click Here](https://www.linkedin.com/in/seannysong/)
 
 ## Education
 

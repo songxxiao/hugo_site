@@ -15,7 +15,7 @@ disable_mathjax: false
 + Github：<https://github.com/songxxiao>
 + 个人主页：<https://xsong.ltd>
 + Kaggle：<https://www.kaggle.com/rikdifos>
-+ Linkedin: [点击这里](<https://www.linkedin.com/in/xiaosongmalcolm/?locale=zh_CN>)
++ Linkedin: [点击这里](<https://www.linkedin.com/in/seannysong/>)
 + 微信公众号 : ApocalypseNow
 
 
