@@ -23,6 +23,7 @@ disable_mathjax: false
 
 + [华东师范大学](https://www.ecnu.edu.cn/)   社会发展学院 &emsp;2016年09月-2020年7月
 + [中山大学](http://www.sysu.edu.cn/2012/cn/index.htm)  学期交换 &emsp;2018年2月-2018年7月
++ University of Maryland&emsp;MS in Business Analytics &emsp;2021年8月-现在
 
 
 ## 工作经历

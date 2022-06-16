@@ -22,12 +22,16 @@ disable_mathjax: true
 + [East China Normal University](http://english.ecnu.edu.cn/)&emsp;2016-09~2020-07    
 School of Social Development
 
-+ [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;Exchange Student&emsp;2018-02~2018-07
++ [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;2018-02~2018-07  
+Exchange Student
 
++ University of Maryland&emsp;2021-08~Present   
+MS in Business Analytics
 
 ## Work Experience
 
-+ FancyDigital&emsp;Data Analyst&emsp;2020-09~2021-05
++ FancyDigital&emsp;2020-09~2021-05  
+Data Analyst
 
 ## Software & Programming Skills
 
