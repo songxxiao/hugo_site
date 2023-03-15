@@ -14,7 +14,6 @@ disable_mathjax: false
 + 邮箱：<xsong@stu.ecnu.edu.cn>
 + Linkedin: [点击这里](<https://www.linkedin.com/in/seannysong/>)
 
-
 ## 教育经历
 
 + 华东师范大学   社会发展学院 &emsp;2016年9月-2020年7月
