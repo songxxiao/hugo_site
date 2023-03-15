@@ -12,9 +12,6 @@ disable_mathjax: true
 ## Contact
 
 + Email: <xsong@stu.ecnu.edu.cn>
-+ Github: <https://github.com/songxxiao>
-+ Website: <https://xsong.ltd/>
-+ Kaggle: <https://www.kaggle.com/rikdifos>
 + Linkedin: [Click Here](https://www.linkedin.com/in/seannysong/)
 
 ## Education
@@ -25,10 +22,13 @@ School of Social Development
 + [Sun Yat-Sun University](http://www.sysu.edu.cn/2012/en/about/about01/index.htm)&emsp;2018-02~2018-07  
 Exchange Student
 
-+ University of Maryland&emsp;2021-08~Present   
++ University of Maryland&emsp;2021-08~2022-12  
 MS in Business Analytics
 
 ## Work Experience
+
++ Leidos&emsp;2023-02~Present  
+Data Engineer
 
 + FancyDigital&emsp;2020-09~2021-05  
 Data Analyst

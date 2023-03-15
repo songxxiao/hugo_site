@@ -18,8 +18,8 @@ menu:
     - name: "简历"
       url: "/cn/resume/"
       weight: 1
-    - name: "文章"
-      url: "/cn/"
+    - name: "Résumé"
+      url: "/en/resume/"
       weight: 2
     - name: "Github"
       url: "https://github.com/songxxiao"
@@ -50,21 +50,18 @@ menu:
     - name: "简历"
       url: "/cn/resume/"
       weight: 2
-    - name: "文章"
-      url: "/cn/"
-      weight: 3
     - name: "Résumé"
       url: "/en/resume/"
-      weight: 4
+      weight: 3
     - name: "Github"
       url: "https://github.com/songxxiao"
-      weight: 5
+      weight: 4
     - name: "Kaggle"
       url: "https://www.kaggle.com/rikdifos"
-      weight: 6
+      weight: 5
 params:
   description: "Painkiller"
-  footer: "&copy; Xiao Song 2022"
+  footer: "&copy; Xiao Song 2023"
   disqusURL: "/"
   customJS:
     - "js/fix-toc.js"

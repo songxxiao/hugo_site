@@ -12,21 +12,19 @@ disable_mathjax: false
 ## 联系方式
 
 + 邮箱：<xsong@stu.ecnu.edu.cn>
-+ Github：<https://github.com/songxxiao>
-+ 个人主页：<https://xsong.ltd>
-+ Kaggle：<https://www.kaggle.com/rikdifos>
 + Linkedin: [点击这里](<https://www.linkedin.com/in/seannysong/>)
-+ 微信公众号 : ApocalypseNow
 
 
 ## 教育经历
 
-+ [华东师范大学](https://www.ecnu.edu.cn/)   社会发展学院 &emsp;2016年9月-2020年7月
-+ [中山大学](http://www.sysu.edu.cn/2012/cn/index.htm)  学期交换 &emsp;2018年2月-2018年7月
-+ University of Maryland&emsp;MS in Business Analytics &emsp;2021年8月-现在
++ 华东师范大学   社会发展学院 &emsp;2016年9月-2020年7月
++ 中山大学 学期交换 &emsp;2018年2月-2018年7月
++ University of Maryland&emsp;MS in Business Analytics &emsp;2021年8月-2022年12月
 
 
 ## 工作经历
+
++ Leidos&emsp;数据工程师&emsp;2023年2月-现在
 
 + 泛为科技&emsp;数据分析师&emsp;2020年9月-2021年5月
 
