@@ -30,7 +30,7 @@ disable_mathjax: false
 ## 编程/软件技能
 
 
-+ SQL (MySQL/TiDB/Apache Doris/Clickhouse)
++ SQL (MySQL/Greenplum/PostgreSQL/TiDB/Apache Doris/Clickhouse)
 + Python, R
 + Shell, Linux, Git
 + SPSS, Stata

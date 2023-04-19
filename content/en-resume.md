@@ -35,7 +35,7 @@ Data Analyst
 
 ## Software & Programming Skills
 
-+ SQL (MySQL/TiDB/Apache Doris/Clickhouse)
++ SQL (MySQL/Greenplum/PostgreSQL/TiDB/Apache Doris/Clickhouse)
 + Python, R
 + Shell, Linux, Git
 + SPSS, Stata
