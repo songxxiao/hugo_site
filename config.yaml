@@ -21,12 +21,7 @@ menu:
     - name: "Résumé"
       url: "/en/resume/"
       weight: 2
-    - name: "Github"
-      url: "https://github.com/songxxiao"
-      weight: 3
-    - name: "Kaggle"
-      url: "https://www.kaggle.com/rikdifos"
-      weight: 4
+
   en:
     - name: "Home"
       url: "/"
@@ -34,15 +29,9 @@ menu:
     - name: "Résumé"
       url: "/en/resume/"
       weight: 2
-    - name: "Github"
-      url: "https://github.com/songxxiao"
-      weight: 3
-    - name: "Kaggle"
-      url: "https://www.kaggle.com/rikdifos"
-      weight: 4
     - name: "中文"
       url: "/cn/resume/"
-      weight: 5
+      weight: 3
   cn:
     - name: "首页"
       url: "/"
@@ -53,12 +42,7 @@ menu:
     - name: "Résumé"
       url: "/en/resume/"
       weight: 3
-    - name: "Github"
-      url: "https://github.com/songxxiao"
-      weight: 4
-    - name: "Kaggle"
-      url: "https://www.kaggle.com/rikdifos"
-      weight: 5
+
 params:
   description: "Painkiller"
   footer: "&copy; Xiao Song 2023"

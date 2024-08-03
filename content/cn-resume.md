@@ -1,5 +1,5 @@
 ---
-title: '宋 骁'
+title: ' '
 date: ' '
 author: ''
 slug: 'cn/resume'
@@ -9,6 +9,7 @@ comment: false
 disable_mathjax: false
 ---
 
+<!--
 ## 联系方式
 
 + 邮箱：<xsong@stu.ecnu.edu.cn>
@@ -43,7 +44,7 @@ disable_mathjax: false
 + Kaggle M5 [沃尔玛销量时间序列预测 - Uncertainty](https://www.kaggle.com/c/m5-forecasting-uncertainty)&emsp;2020年  
 18th/909 Top2%&emsp;银牌
 
-<!--
+
 [English Version](/en/resume/)  
 [PDF](/chnxsong.pdf)
 
