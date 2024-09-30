@@ -45,7 +45,7 @@ menu:
 
 params:
   description: "Painkiller"
-  footer: "&copy; Xiao Song 2023"
+  footer: "&copy; Xiao Song 2024"
   disqusURL: "/"
   customJS:
     - "js/fix-toc.js"
